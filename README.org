@@ -1,0 +1,9 @@
+* kemdict
+
+A space for me to experiment with 教育部重編國語字典 data.
+
+** License
+
+教育部重編國語字典 is CC-BY-ND. It is being used through [[https://github.com/g0v/moedict-data][moedict-data]].
+
+I (Kisaragi Hiu) release everything else in this repository (that I might have the copyright to) with CC0.
