@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "tailwindcss": "^3.1.8"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
