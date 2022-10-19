@@ -9,7 +9,7 @@
     @apply font-bold;
   }
   pos {
-    @apply font-bold;
+    @apply font-bold mt-2 block;
   }
   h1 {
     @apply text-2xl;

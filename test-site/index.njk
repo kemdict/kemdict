@@ -1,0 +1,47 @@
+---
+layout: base.njk
+---
+<!-- Contents -->
+{% set word = moedict[2000] %}
+<div class="max-w-lg m-auto mt-12">
+<input type="text" class="border-2 px-1 w-full mb-4" placeholder="搜尋"  />
+  <div>
+    <div class="border-b-4 border-black font-sans-serif mb-2">
+      教育部重編國語辭典
+    </div>
+    <div>
+      <h1>{{word.title}}</h1>
+      {% for het in word.heteronyms %}
+        {% if het.bopomofo %}
+        <p>讀音：<span>{{ het.bopomofo }}</span></p>
+        {% endif %}
+        {# Treat this as an iterative program, not a template. #}
+        {% set lasttype = "" %}
+        {% set first = true %}
+        {% for def in het.definitions %}
+          {% if def.type %}
+            {% if lasttype == def.type %}
+            {% else %}
+              {% if not first %}
+              </ol>
+              {% endif %}
+              {% set first = false %}
+              <pos>{{ def.type }}</pos>
+              <ol class="list-decimal">
+            {% endif %}
+            {% set lasttype = def.type %}
+          {% endif %}
+          <li>
+            <p>{{ def.def }}</p>
+            {% for ex in def.example %}
+            <p>{{ ex }}</p>
+            {% endfor %}
+            {% for quote in def.quote %}
+            <p>{{ quote }}</p>
+            {% endfor %}
+          </li>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
