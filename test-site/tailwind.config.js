@@ -8,7 +8,7 @@ let cjkFallback = [
 
 module.exports = {
   // darkMode: "class",
-  content: ["./layouts/**/*.html", "./content/**/*.md"],
+  content: ["./_site/**/*.html"],
   theme: {
     fontFamily: {
       // This should be called "default".

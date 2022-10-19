@@ -4,17 +4,17 @@ export LANG=en_US.UTF-8
 
 .PHONY: clean zip css dev
 
-dev-hugo:
-	hugo server
+dev-11ty:
+	npx "@11ty/eleventy" --serve
 
 dev-tailwind:
-	npx tailwindcss --postcss -i css/src.css -o static/css/built.css --watch
+	npx tailwindcss --postcss -i css/src.css -o _site/css/built.css --watch
 
 dev:
-	npx concurrently "make dev-hugo" "make dev-tailwind"
+	npx concurrently "make dev-11ty" "make dev-tailwind"
 
 static/css/built.css: css/src.css
 	npx tailwindcss --minify --postcss -i css/src.css -o static/css/built.css
 
-public: static/css/built.css
-	hugo --minify
+_site: static/css/built.css
+	npx "@11ty/eleventy"
