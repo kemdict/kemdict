@@ -39,20 +39,24 @@ Keys are compared with `equal'.
 (defvar k/all-titles (list))
 
 (let ((moedict-zh (with-temp-buffer
+                    (message "%s" "Parsing (1/2)...")
                     (insert-file-contents "moedict-data/dict-revised.json")
                     (goto-char (point-min))
                     (json-parse-buffer :array-type 'list)))
       (moedict-twblg (with-temp-buffer
+                       (message "%s" "Parsing (2/2)...")
                        (insert-file-contents "moedict-data-twblg/dict-twblg.json")
                        (goto-char (point-min))
                        (json-parse-buffer :array-type 'list))))
-  (message "%s" "Finished parsing")
+  (message "%s" "Collecting titles...")
   (dolist (entry moedict-zh)
     (push (gethash "title" entry) k/all-titles))
   (dolist (entry moedict-twblg)
     (push (gethash "title" entry) k/all-titles))
-  (setq k/all-titles (cl-remove-duplicates k/all-titles))
-  (message "%s" "Finished collecting all titles")
+  (message "%s" "Removing duplicate titles...")
+  (setq k/all-titles
+        (cl-remove-duplicates k/all-titles :test #'equal))
+  (message "%s" "Shaping dictionary data (1/2)...")
   (dolist (entry moedict-zh)
     (let ((title (gethash "title" entry)))
       (puthash title
@@ -60,7 +64,7 @@ Keys are compared with `equal'.
                 ("title" title)
                 ("moedict_zh" (ht ("heteronyms" (gethash "heteronyms" entry)))))
                k/tmp1)))
-  (message "%s" "Finished reforming dictionary (1/2)")
+  (message "%s" "Shaping dictionary data (2/2)...")
   (dolist (entry moedict-twblg)
     (let ((title (gethash "title" entry)))
       (puthash title
@@ -68,7 +72,7 @@ Keys are compared with `equal'.
                 ("title" title)
                 ("moedict_twblg" (ht ("heteronyms" (gethash "heteronyms" entry)))))
                k/tmp2)))
-  (message "%s" "Finished reforming dictionary (2/2)")
+  (message "%s" "Merging...")
   (dolist (title k/all-titles)
     (let ((hash-table (ht ("title" title))))
       (when-let (v (gethash title k/tmp1))
@@ -76,7 +80,7 @@ Keys are compared with `equal'.
       (when-let (v (gethash title k/tmp2))
         (puthash "moedict_twblg" v hash-table))
       (push hash-table k/merged-result)))
-  (message "%s" "Finished merging")
+  (message "%s" "Writing result out to disk...")
   (make-directory "src/_data" t)
   (with-temp-file "src/_data/combined.json"
     (insert (json-encode k/merged-result)))
