@@ -16,6 +16,9 @@ _site/css/built.css: css/src.css
 _site: src/_data _site/css/built.css
 	npx "@11ty/eleventy" --input=./src --output=./_site
 
+.eleventy.js: .eleventy.tsx rollup.config.mjs .babelrc.js
+	npx rollup -c
+
 src/_data: src/_data/dict-moe-revised.json src/_data/dict-moe-twblg.json
 
 src/_data/dict-moe-revised.json:
@@ -26,7 +29,9 @@ src/_data/dict-moe-twblg.json:
 	mkdir -p src/_data
 	cp moedict-data-twblg/dict-twblg.json src/_data/dict-moe-twblg.json
 
-dev: src/_data
+dev: src/_data .eleventy.js
 	npx concurrently "make dev-11ty" "make dev-tailwind"
 
 build: _site
+
+x: .eleventy.js

@@ -28,7 +28,15 @@
   /* Yes, normally you put this in the HTML when using Tailwind. */
   /* We have 163088 pages from Moedict (zh_TW) alone. */
   .dictionary {
-    @apply border-b-4 border-black font-sans-serif mb-2;
+    @apply border-b-4 border-black font-sans-serif mb-2 my-6;
+  }
+  .toc {
+    a {
+      @apply text-blue-400;
+      &:hover {
+        @apply underline;
+      }
+    }
   }
   .word {
     ol {

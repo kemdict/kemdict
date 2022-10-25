@@ -2,3 +2,5 @@ node_modules/
 *.lock
 _site/
 _data/
+.eleventy.js
+*.js.map

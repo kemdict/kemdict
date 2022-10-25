@@ -1,22 +1,75 @@
 ---
 layout: base.njk
 pagination:
-  data: dict-moe-revised
+  data: combined
   size: 1
   alias: word
 permalink: "word/{{ word.title }}/index.html"
 ---
-
 <input type="text" class="border-2 px-1 w-full mb-4" placeholder="搜尋"  />
+
+<ul class="toc">
+{% if word.moedict_zh %}
+  <li><a href="#moedict_zh">教育部重編國語辭典</a></li>
+{% endif %}
+{% if word.moedict_twblg %}
+  <li><a href="#moedict_twblg">教育部臺灣閩南語常用詞辭典</a></li>
+{% endif %}
+</ul>
+
+{% if word.moedict_zh %}
 <div>
-  <div class="dictionary">
+  <div id="moedict_zh" class="dictionary">
     教育部重編國語辭典
   </div>
+  {% word_moedict_zh word.moedict_zh %}
   <div class="word">
-    <h1>{{word.title}}</h1>
-    {% for het in word.heteronyms %}
+    <h1>{{word.moedict_zh.title}}</h1>
+    {% for het in word.moedict_zh.heteronyms %}
       {% if het.bopomofo %}
       <p>讀音：<span>{{ het.bopomofo }}</span></p>
+      {% endif %}
+      {# Treat this as an iterative program, not a template. #}
+      {% set lasttype = "" %}
+      {% set first = true %}
+      {% for def in het.definitions %}
+        {% if def.type %}
+          {% if lasttype == def.type %}
+          {% else %}
+            {% if not first %}
+            </ol>
+            {% endif %}
+            {% set first = false %}
+            <p class="pos">{{ def.type }}</p>
+            <ol>
+          {% endif %}
+          {% set lasttype = def.type %}
+        {% endif %}
+        <li>
+          <p class="def">
+          <span>{{ def.def }}</span>
+          {% for ex in def.example %}
+          <span>{{ ex }}</span>
+          {% endfor %}
+          {% for quote in def.quote %}
+          <span>{{ quote }}</span>
+          {% endfor %}</p>
+        </li>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% if word.moedict_twblg %}
+<div>
+  <div id="moedict_twblg" class="dictionary">
+    教育部臺灣閩南語常用詞辭典
+  </div>
+  <div class="word">
+    <h1>{{word.moedict_twblg.title}}</h1>
+    {% for het in word.moedict_twblg.heteronyms %}
+      {% if het.trs %}
+      <p>讀音：<span>{{ het.trs }}</span></p>
       {% endif %}
       {# Treat this as an iterative program, not a template. #}
       {% set lasttype = "" %}
@@ -47,3 +100,4 @@ permalink: "word/{{ word.title }}/index.html"
     {% endfor %}
   </div>
 </div>
+{% endif %}
