@@ -1,22 +1,8 @@
 ;; -*- lexical-binding: t; -*-
 
 (require 'json)
-
-;; Copied from ht.el, Copyright (C) 2013 Wilfred Hughes
-;; https://github.com/Wilfred/ht.el
-(defmacro ht (&rest pairs)
-  "Create a hash table with the key-value pairs given.
-Keys are compared with `equal'.
-
-\(fn (KEY-1 VALUE-1) (KEY-2 VALUE-2) ...)"
-  (let* ((table-symbol (make-symbol "ht-temp"))
-         (assignments
-          (mapcar
-           (lambda (pair) `(ht-set! ,table-symbol ,@pair))
-           pairs)))
-    `(let ((,table-symbol (ht-create)))
-       ,@assignments
-       ,table-symbol)))
+(require 'ht)
+(require 'dash)
 
 (defvar k/tmp1 (make-hash-table))
 (defvar k/tmp2 (make-hash-table))

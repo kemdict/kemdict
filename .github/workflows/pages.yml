@@ -32,11 +32,19 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
+      - name: Set up Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: "28.2"
+      - name: Set up Cask
+        uses: conao3/setup-cask@master
       - name: Set up Pages
         id: pages
         uses: actions/configure-pages@v2
       - name: Packages
-        run: npm install
+        run: |
+          cask
+          npm install
       - name: Build
         run: make _site
       - name: Upload artifact

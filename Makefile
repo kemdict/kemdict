@@ -19,7 +19,7 @@ _site: src/_data _site/css/built.css
 src/_data: src/_data/combined.json
 
 src/_data/combined.json: src/_data/dict-moe-revised.json src/_data/dict-moe-twblg.json
-	emacs -Q --load ht --load process-data.el
+	cask emacs --script process-data.el
 
 src/_data/dict-moe-revised.json:
 	mkdir -p src/_data
