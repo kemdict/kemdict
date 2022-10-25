@@ -16,7 +16,10 @@ _site/css/built.css: css/src.css
 _site: src/_data _site/css/built.css
 	npx "@11ty/eleventy" --input=./src --output=./_site --quiet
 
-src/_data: src/_data/dict-moe-revised.json src/_data/dict-moe-twblg.json
+src/_data: src/_data/combined.json
+
+src/_data/combined.json: src/_data/dict-moe-revised.json src/_data/dict-moe-twblg.json
+	emacs -Q --load ht --load process-data.el
 
 src/_data/dict-moe-revised.json:
 	mkdir -p src/_data
