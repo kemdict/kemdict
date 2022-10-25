@@ -9,10 +9,10 @@ permalink: "word/{{ word.title }}/index.html"
 
 <input type="text" class="border-2 px-1 w-full mb-4" placeholder="搜尋"  />
 <div>
-  <div class="border-b-4 border-black font-sans-serif mb-2">
+  <div class="dictionary">
     教育部重編國語辭典
   </div>
-  <div>
+  <div class="word">
     <h1>{{word.title}}</h1>
     {% for het in word.heteronyms %}
       {% if het.bopomofo %}
@@ -29,13 +29,13 @@ permalink: "word/{{ word.title }}/index.html"
             </ol>
             {% endif %}
             {% set first = false %}
-            <pos>{{ def.type }}</pos>
-            <ol class="list-decimal">
+            <p class="pos">{{ def.type }}</p>
+            <ol>
           {% endif %}
           {% set lasttype = def.type %}
         {% endif %}
         <li>
-          <p>{{ def.def }}</p>
+          <p class="def">{{ def.def }}</p>
           {% for ex in def.example %}
           <p>{{ ex }}</p>
           {% endfor %}

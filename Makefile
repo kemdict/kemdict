@@ -13,20 +13,20 @@ dev-tailwind:
 _site/css/built.css: css/src.css
 	npx tailwindcss --minify --postcss -i css/src.css -o _site/css/built.css
 
-_site: _data _site/css/built.css
+_site: src/_data _site/css/built.css
 	npx "@11ty/eleventy" --input=./src --output=./_site
 
-_data: _data/dict-moe-revised.json _data/dict-moe-twblg.json
+src/_data: src/_data/dict-moe-revised.json src/_data/dict-moe-twblg.json
 
-_data/dict-moe-revised.json:
-	mkdir -p _data
-	cp moedict-data/dict-revised.json _data/dict-moe-revised.json
+src/_data/dict-moe-revised.json:
+	mkdir -p src/_data
+	cp moedict-data/dict-revised.json src/_data/dict-moe-revised.json
 
-_data/dict-moe-twblg.json:
-	mkdir -p _data
-	cp moedict-data-twblg/dict-twblg.json _data/dict-moe-twblg.json
+src/_data/dict-moe-twblg.json:
+	mkdir -p src/_data
+	cp moedict-data-twblg/dict-twblg.json src/_data/dict-moe-twblg.json
 
-dev: _data
+dev: src/_data
 	npx concurrently "make dev-11ty" "make dev-tailwind"
 
 build: _site

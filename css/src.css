@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    line-height: 1.6;
+    font-size: 14pt;
+  }
   h1,
   h2,
   h3 {
     @apply font-bold;
-  }
-  pos {
-    @apply font-bold mt-2 block;
   }
   h1 {
     @apply text-2xl;
@@ -18,9 +19,34 @@
   h3 {
     @apply text-xl;
   }
+  ol {
+    @apply pl-4;
+  }
 }
 
 @layer components {
+  /* Yes, normally you put this in the HTML when using Tailwind. */
+  /* We have 163088 pages from Moedict (zh_TW) alone. */
+  .dictionary {
+    @apply border-b-4 border-black font-sans-serif mb-2;
+  }
+  .word {
+    ol {
+      @apply list-decimal;
+    }
+    li {
+      @apply mt-2;
+    }
+    li:first-child {
+      @apply mt-0;
+    }
+    .pos {
+      @apply font-bold mt-2 block;
+    }
+    .def {
+      @apply block mb-2;
+    }
+  }
 }
 
 @layer utilities {
