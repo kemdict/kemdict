@@ -35,15 +35,6 @@ jobs:
       - name: Set up Pages
         id: pages
         uses: actions/configure-pages@v2
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            _site
-            .cache
-          key: ${{ runner.os }}-build-${{ hashFiles("_site") }}
-          restore-keys: |
-            ${{ runner.os }}-build-
       - name: Packages
         run: npm install
       - name: Build
