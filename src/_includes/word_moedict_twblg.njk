@@ -1,0 +1,34 @@
+<div class="word">
+  <h1>{{word.moedict_twblg.title}}</h1>
+  {% for het in word.moedict_twblg.heteronyms %}
+    {% if het.trs %}
+    <p>讀音：<span>{{ het.trs }}</span></p>
+    {% endif %}
+    {# Treat this as an iterative program, not a template. #}
+    {% set lasttype = "" %}
+    {% set first = true %}
+    {% for def in het.definitions %}
+      {% if def.type %}
+        {% if lasttype == def.type %}
+        {% else %}
+          {% if not first %}
+          </ol>
+          {% endif %}
+          {% set first = false %}
+          <p class="pos">{{ def.type }}</p>
+          <ol>
+        {% endif %}
+        {% set lasttype = def.type %}
+      {% endif %}
+      <li>
+        <p class="def">{{ def.def }}</p>
+        {% for ex in def.example %}
+        <p>{{ ex }}</p>
+        {% endfor %}
+        {% for quote in def.quote %}
+        <p>{{ quote }}</p>
+        {% endfor %}
+      </li>
+    {% endfor %}
+  {% endfor %}
+</div>

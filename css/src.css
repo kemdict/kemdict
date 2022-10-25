@@ -27,12 +27,16 @@
 @layer components {
   /* Yes, normally you put this in the HTML when using Tailwind. */
   /* We have 163088 pages from Moedict (zh_TW) alone. */
-  .dictionary {
-    @apply border-b-4 border-black font-sans-serif mb-2 my-6;
+  .base {
+    @apply max-w-xl m-auto mt-12;
   }
-  .toc {
+  .dictionary {
+    @apply border-b-4 border-black font-sans-serif mb-2 my-8;
+  }
+  .toc,
+  .def {
     a {
-      @apply text-blue-400;
+      @apply text-blue-500;
       &:hover {
         @apply underline;
       }

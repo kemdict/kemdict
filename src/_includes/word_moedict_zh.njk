@@ -1,0 +1,36 @@
+{# It's ugly but it's less ugly than doing this in JS #}
+<div class="word">
+  <h1>{{word.moedict_zh.title}}</h1>
+  {% for het in word.moedict_zh.heteronyms %}
+    {% if het.bopomofo %}
+    <p>讀音：<span>{{ het.bopomofo }}</span></p>
+    {% endif %}
+    {# Treat this as an iterative program, not a template. #}
+    {% set lasttype = "" %}
+    {% set first = true %}
+    {% for def in het.definitions %}
+      {% if def.type %}
+        {% if lasttype == def.type %}
+        {% else %}
+          {% if not first %}
+          </ol>
+          {% endif %}
+          {% set first = false %}
+          <p class="pos">{{ def.type }}</p>
+          <ol>
+        {% endif %}
+        {% set lasttype = def.type %}
+      {% endif %}
+      <li>
+        <p class="def">
+        <span>{{ def.def | moedict_zh_process_def | safe }}</span>
+        {% for ex in def.example %}
+        <span>{{ ex | moedict_zh_process_def | safe }}</span>
+        {% endfor %}
+        {% for quote in def.quote %}
+        <span>{{ quote }}</span>
+        {% endfor %}</p>
+      </li>
+    {% endfor %}
+  {% endfor %}
+</div>
