@@ -2,9 +2,23 @@
 
 (require 'json)
 (require 'cl-lib)
+(require 'inline)
 
 ;; Copied from ht.el, Copyright (C) 2013 Wilfred Hughes
 ;; https://github.com/Wilfred/ht.el
+(define-inline ht-set! (table key value)
+  "Associate KEY in TABLE with VALUE."
+  (inline-quote
+   (prog1 nil
+     (puthash ,key ,value ,table))))
+(define-inline ht-create (&optional test)
+  "Create an empty hash table.
+
+TEST indicates the function used to compare the hash
+keys.  Default is `equal'.  It can be `eq', `eql', `equal' or a
+user-supplied test created via `define-hash-table-test'."
+  (declare (side-effect-free t))
+  (inline-quote (make-hash-table :test (or ,test 'equal))))
 (defmacro ht (&rest pairs)
   "Create a hash table with the key-value pairs given.
 Keys are compared with `equal'.
