@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (require 'json)
+(require 'cl-lib)
 
 ;; Copied from ht.el, Copyright (C) 2013 Wilfred Hughes
 ;; https://github.com/Wilfred/ht.el
