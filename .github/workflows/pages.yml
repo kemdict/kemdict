@@ -53,7 +53,7 @@ jobs:
       - name: Prepare data files
         run: make src/_data
       - name: Build
-        run: prlimit --nofile=400000 make _site
+        run: sudo prlimit --nofile=400000 make _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
