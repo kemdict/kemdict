@@ -8,6 +8,8 @@ permalink: "word/{{ word.title }}/index.html"
 ---
 <input type="text" class="border-2 px-1 w-full mb-4" placeholder="搜尋"  />
 
+{% import "macros.njk" as macros %}
+
 <ul class="toc">
 {% if word.moedict_zh %}
   <li><a href="#moedict_zh">教育部重編國語辭典</a></li>
@@ -22,7 +24,7 @@ permalink: "word/{{ word.title }}/index.html"
   <div id="moedict_zh" class="dictionary">
     教育部重編國語辭典
   </div>
-  {% include "word_moedict_zh.njk" %}
+  {% macros.word_moedict_zh(word) %}
 </div>
 {% endif %}
 {% if word.moedict_twblg %}
@@ -30,6 +32,6 @@ permalink: "word/{{ word.title }}/index.html"
   <div id="moedict_twblg" class="dictionary">
     教育部臺灣閩南語常用詞辭典
   </div>
-  {% include "word_moedict_twblg.njk" %}
+  {% macros.word_moedict_twblg(word) %}
 </div>
 {% endif %}
