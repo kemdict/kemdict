@@ -48,13 +48,12 @@ jobs:
       - name: Raise file limits
         run: |
           sudo sysctl -w fs.file-max=500000
-          sudo prlimit --pid $$ --nofile=300000:500000
         # These steps are split to get them to display in different
         # sections. make _site alone also builds src/_data.
       - name: Prepare data files
         run: make src/_data
       - name: Build
-        run: make _site
+        run: prlimit --nofile=400000 make _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
