@@ -1,5 +1,44 @@
 [
   {
+    "title": "丼",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄥˋ",
+        "definitions": [
+          {
+            "etymology": "讀音引自日語「丼」（どんぶり）。",
+            "type": "名",
+            "def": "一種日式料理，在碗中盛飯後上添配菜。同「丼飯」。"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ㄐㄧㄥˇ",
+        "definitions": [
+          {
+            "type": "名",
+            "def": "「井」的異體字。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "丼飯",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄥˋ ㄈㄢˋ",
+        "definitions": [
+          {
+            "etymology": "讀音引自日語「丼」（どんぶり）。「丼」原指一種碗，而「丼飯」原指裝在其中的飯。",
+            "type": "名",
+            "def": "一種日式料理，在碗中盛飯後上添配菜。同「丼」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "伴手禮",
     "heteronyms": [
       {
@@ -27,6 +66,20 @@
           {
             "type": "名",
             "def": "一種可攜式的瓦斯爐。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "友誼",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄡˇ ㄧˊ",
+        "definitions": [
+          {
+            "type": "名",
+            "def": "友好的關係。作為朋友的關係。"
           }
         ]
       }
@@ -67,20 +120,6 @@
     ]
   },
   {
-    "title": "骰子",
-    "heteronyms": [
-      {
-        "pronunciation": "ㄕㄞˇ ㄗ˙",
-        "definitions": [
-          {
-            "type": "名",
-            "def": "各面皆有標示的多面形物體，用以隨機取得數字。一般為六面。"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "title": "拖曳",
     "heteronyms": [
       {
@@ -89,20 +128,6 @@
           {
             "type": "動",
             "def": "在有阻力時移動物品。"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "親子丼",
-    "heteronyms": [
-      {
-        "pronunciation": "ㄑㄧㄣˉ ㄗˇ ㄉㄨㄥˋ",
-        "definitions": [
-          {
-            "type": "名",
-            "def": "一種含有雞蛋和雞肉的日式料理。「親」指雞，「子」指雞蛋。"
           }
         ]
       }
@@ -123,53 +148,28 @@
     ]
   },
   {
-    "title": "丼飯",
+    "title": "親子丼",
     "heteronyms": [
       {
-        "pronunciation": "ㄉㄨㄥˋ ㄈㄢˋ",
+        "pronunciation": "ㄑㄧㄣˉ ㄗˇ ㄉㄨㄥˋ",
         "definitions": [
           {
-            "etymology": "讀音引自日語「丼」（どんぶり）。「丼」原指一種碗，而「丼飯」原指裝在其中的飯。",
             "type": "名",
-            "def": "一種日式料理，在碗中盛飯後上添配菜。同「丼」。"
+            "def": "一種含有雞蛋和雞肉的日式料理。「親」指雞，「子」指雞蛋。"
           }
         ]
       }
     ]
   },
   {
-    "title": "丼",
+    "title": "骰子",
     "heteronyms": [
       {
-        "pronunciation": "ㄉㄨㄥˋ",
-        "definitions": [
-          {
-            "etymology": "讀音引自日語「丼」（どんぶり）。",
-            "type": "名",
-            "def": "一種日式料理，在碗中盛飯後上添配菜。同「丼飯」。"
-          }
-        ]
-      },
-      {
-        "pronunciation": "ㄐㄧㄥˇ",
+        "pronunciation": "ㄕㄞˇ ㄗ˙",
         "definitions": [
           {
             "type": "名",
-            "def": "「井」的異體字。"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "友誼",
-    "heteronyms": [
-      {
-        "pronunciation": "ㄧㄡˇ ㄧˊ",
-        "definitions": [
-          {
-            "type": "名",
-            "def": "友好的關係。作為朋友的關係。"
+            "def": "各面皆有標示的多面形物體，用以隨機取得數字。一般為六面。"
           }
         ]
       }
