@@ -28,6 +28,7 @@
   /* Yes, normally you put this in the HTML when using Tailwind. */
   /* We have 163088 pages from Moedict (zh_TW) alone. */
   .base {
+    width: 95%;
     @apply max-w-xl m-auto mt-12;
   }
   .dictionary {
