@@ -14,10 +14,10 @@ _site/css/built.css: css/src.css
 	npx tailwindcss --minify --postcss -i css/src.css -o _site/css/built.css
 
 _site: src/_data _site/css/built.css
-	npx "@11ty/eleventy" --input=./src --output=./_site --quiet
+	npx "@11ty/eleventy" --quiet
 
 gh-pages: src/_data _site/css/built.css
-	npx "@11ty/eleventy" --input=./src --output=./_site --pathprefix "kemdict" --quiet
+	npx "@11ty/eleventy" --pathprefix "kemdict" --quiet
 
 src/_data: src/_data/combined.json
 
