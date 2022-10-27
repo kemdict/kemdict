@@ -9,18 +9,6 @@
     line-height: 1.6;
     /* font-size: 14pt; */
   }
-  h1,
-  h2,
-  h3 {
-    @apply font-bold;
-  }
-  h1 {
-    @apply text-2xl;
-  }
-  h2,
-  h3 {
-    @apply text-xl;
-  }
   ol {
     @apply pl-4;
   }
@@ -32,6 +20,12 @@
   .base {
     width: 95%;
     @apply max-w-xl m-auto mt-12;
+  }
+  .h {
+    @apply flex space-x-2;
+    input {
+      @apply border-2 px-1 w-full mb-4;
+    }
   }
   .dictionary {
     @apply border-b-2 border-black font-sans-serif mb-2 my-8;
@@ -47,6 +41,18 @@
     }
   }
   .word {
+    h1,
+    h2,
+    h3 {
+      @apply font-bold;
+    }
+    h1 {
+      @apply text-2xl;
+    }
+    h2,
+    h3 {
+      @apply text-xl;
+    }
     ol {
       @apply list-decimal;
     }

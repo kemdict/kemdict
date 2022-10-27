@@ -6,7 +6,10 @@ pagination:
   alias: word
 permalink: "word/{{ word.title }}/index.html"
 ---
-<input type="text" class="border-2 px-1 w-full mb-4" placeholder="搜尋"  />
+<div class="h">
+  <a href="{{ "/" | url }}/">kemdict(β)</h1>
+  <input type="text" class="" placeholder="搜尋"  />
+</div>
 
 {% import "macros.njk" as macros %}
 {% if word.moedict_zh %}
