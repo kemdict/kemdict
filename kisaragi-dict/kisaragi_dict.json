@@ -1,5 +1,38 @@
 [
   {
+    "title": "伴手禮",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄢˋ ㄕㄡˇ ㄌㄧˇ",
+        "definitions": [
+          {
+            "type": "名",
+            "def": "旅遊歸後帶回給親友的禮物。"
+          },
+          {
+            "example": "如：「春節伴手禮」。",
+            "type": "名",
+            "def": "拜訪他人時待在手邊的禮物。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "卡式爐",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄚˇ ㄕˋ ㄌㄨˊ",
+        "definitions": [
+          {
+            "type": "名",
+            "def": "一種可攜式的瓦斯爐。"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "喬",
     "heteronyms": [
       {
