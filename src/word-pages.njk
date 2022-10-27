@@ -28,3 +28,11 @@ permalink: "word/{{ word.title }}/index.html"
   {{ macros.word_moedict_twblg(word) }}
 </div>
 {% endif %}
+{% if word.kisaragi_dict %}
+<div>
+  <div id="kisaragi_dict" class="dictionary">
+    Kisaragi's extras (beta)
+  </div>
+  {{ macros.word_kisaragi(word) }}
+</div>
+{% endif %}

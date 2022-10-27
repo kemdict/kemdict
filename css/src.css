@@ -60,7 +60,7 @@
       @apply font-bold;
     }
     h1 {
-      @apply text-2xl;
+      @apply text-2xl mt-4;
     }
     h2,
     h3 {

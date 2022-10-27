@@ -21,7 +21,7 @@ gh-pages: src/_data _site/b.css
 
 src/_data: src/_data/combined.json
 
-src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json
+src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json kisaragi-dict/kisaragi_dict.json
 	cask eval "(load \"process-data\")"
 
 dev: src/_data

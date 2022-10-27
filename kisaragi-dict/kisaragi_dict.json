@@ -1,0 +1,140 @@
+[
+  {
+    "title": "喬",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄠˊ / tshiâu",
+        "definitions": [
+          {
+            "def": "平衡多方需求進行商討、研議。",
+            "etymology": "來自台語「撨」。",
+            "type": "動",
+            "example": "如：「喬事情」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "喬事情",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄠˊ ㄕˋ ㄑㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "討論事情。進行交涉。",
+            "type": "動"
+          },
+          {
+            "def": "隱射指暴力談判。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "骰子",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄞˇ ㄗ˙",
+        "definitions": [
+          {
+            "def": "各面皆有標示的多面形物體，用以隨機取得數字。一般為六面。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "拖曳",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄨㄛˉ ㄧˋ",
+        "definitions": [
+          {
+            "def": "在有阻力時移動物品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "親子丼",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄣˉ ㄗˇ ㄉㄨㄥˋ",
+        "definitions": [
+          {
+            "def": "一種含有雞蛋和雞肉的日式料理。「親」指雞，「子」指雞蛋。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "熟悉",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˊ ㄒㄧˉ",
+        "definitions": [
+          {
+            "def": "親近。瞭解。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "丼飯",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄥˋ ㄈㄢˋ",
+        "definitions": [
+          {
+            "def": "一種日式料理，在碗中盛飯後上添配菜。同「丼」。",
+            "etymology": "讀音引自日語「丼」（どんぶり）。「丼」原指一種碗，而「丼飯」原指裝在其中的飯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "友誼",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄡˇ ㄧˊ",
+        "definitions": [{ "def": "友好的關係。作為朋友的關係。", "type": "名" }]
+      }
+    ]
+  },
+  {
+    "title": "丼",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄥˋ",
+        "definitions": [
+          {
+            "def": "一種日式料理，在碗中盛飯後上添配菜。同「丼飯」。",
+            "etymology": "讀音引自日語「丼」（どんぶり）。",
+            "type": "名"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ㄐㄧㄥˇ",
+        "definitions": [
+          {
+            "def": "「井」的異體字。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  }
+]
