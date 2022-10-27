@@ -71,6 +71,12 @@
     h3 {
       /* @apply text-xl; */
     }
+    ol {
+      @apply list-decimal;
+    }
+    ul {
+      @apply list-disc;
+    }
   }
   .word {
     h1,
