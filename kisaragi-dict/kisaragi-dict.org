@@ -1,0 +1,128 @@
+* Doc
+** 這個檔案
+=kisaragi_dict.json= 我會用這個檔案來生成。這是因為 JSON 實在很難寫。
+[[Words]] 是實際的資料。在 Words 以下的：
+
+- 第一層是 title
+- 第二層是 [[https://en.wiktionary.org/wiki/heteronym][heteronyms]]（破音詞）
+- 第三層是 definitions（各個發音的不同定義）。其中詞性寫在最前面，用 =|= 分開。
+- 如果有 example 的話，第四層會有「例」，內容寫在內文裡
+- 如果有 etymology 的話，第四層會有「語源」，內容寫在內文裡
+** 詞性
+目前有看到的詞性：
+- 形 :: 形容詞
+- 名 :: 名詞
+- 動 :: 動詞
+** 生成腳本
+
+#+begin_src elisp :results none
+(require 'cl-lib)
+(require 'org-element)
+(require 'json)
+
+(defun k/elem-title (elem)
+  "Return the only title of ELEM."
+  (org-no-properties
+   (car
+    (org-element-property :title elem))))
+
+(defun k/elements-to-json (elems)
+  "Process ELEMS to JSON for kisaragi-dict."
+  (cl-loop
+   for elem in elems
+   collect
+   ;; title
+   (list
+    (cons "title" (k/elem-title elem))
+    (cons "heteronyms"
+          (cl-loop
+           for het in (org-element-contents elem)
+           collect
+           ;; pronunciation
+           (list (cons "pronunciation" (k/elem-title het))
+                 (cons "definitions"
+                       (cl-loop
+                        for definition in (org-element-contents het)
+                        collect
+                        (let* ((type+def
+                                (split-string (k/elem-title definition) "|"))
+                               (def
+                                (list (cons "type" (elt type+def 0))
+                                      (cons "def" (elt type+def 1)))))
+                          (dolist (prop-headline (org-element-contents definition))
+                            (pcase (k/elem-title prop-headline)
+                              ("例"
+                               (push (cons "example"
+                                           (string-trim
+                                            (org-element-interpret-data
+                                             (org-element-contents prop-headline))))
+                                     def))
+                              ("語源"
+                               (push (cons "etymology"
+                                           (string-trim
+                                            (org-element-interpret-data
+                                             (org-element-contents prop-headline))))
+                                     def))))
+                          def)))))))))
+
+(defun k/parse-elements ()
+  "Parse elements in this buffer."
+  (with-current-buffer "kisaragi-dict.org"
+    (save-excursion
+      (save-restriction
+        (goto-char (point-min))
+        (re-search-forward (rx bol "* Words") nil t)
+        (forward-line)
+        (beginning-of-line)
+        (narrow-to-region (point) (point-max))
+        (org-element-contents (org-element-parse-buffer))))))
+
+(native-compile #'k/elements-to-json)
+(native-compile #'k/parse-elements)
+(let ((json-encoding-pretty-print t))
+  (with-temp-file "kisaragi_dict.json"
+    (insert (json-encode
+             (k/elements-to-json
+              (k/parse-elements)))
+            "\n")))
+#+end_src
+
+* Words
+** 喬
+*** ㄑㄧㄠˊ / tshiâu
+**** 動|平衡多方需求進行商討、研議。
+***** 語源
+來自台語「撨」。
+***** 例
+如：「喬事情」。
+** 喬事情
+*** ㄑㄧㄠˊ ㄕˋ ㄑㄧㄥˊ
+**** 動|討論事情。進行交涉。
+**** 動|隱射指暴力談判。
+** 骰子
+*** ㄕㄞˇ ㄗ˙
+**** 名|各面皆有標示的多面形物體，用以隨機取得數字。一般為六面。
+** 拖曳
+*** ㄊㄨㄛˉ ㄧˋ
+**** 動|在有阻力時移動物品。
+** 親子丼
+*** ㄑㄧㄣˉ ㄗˇ ㄉㄨㄥˋ
+**** 名|一種含有雞蛋和雞肉的日式料理。「親」指雞，「子」指雞蛋。
+** 熟悉
+*** ㄕㄡˊ ㄒㄧˉ
+**** 形|親近。瞭解。
+** 丼飯
+*** ㄉㄨㄥˋ ㄈㄢˋ
+**** 名|一種日式料理，在碗中盛飯後上添配菜。同「丼」。
+***** 語源
+讀音引自日語「丼」（どんぶり）。「丼」原指一種碗，而「丼飯」原指裝在其中的飯。
+** 丼
+*** ㄉㄨㄥˋ
+**** 名|一種日式料理，在碗中盛飯後上添配菜。同「丼飯」。
+***** 語源
+讀音引自日語「丼」（どんぶり）。
+*** ㄐㄧㄥˇ
+**** 名|「井」的異體字。
+** 友誼
+*** ㄧㄡˇ ㄧˊ
+**** 名|友好的關係。作為朋友的關係。
