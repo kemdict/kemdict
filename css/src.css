@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap");
+
 @layer base {
   html {
     line-height: 1.6;

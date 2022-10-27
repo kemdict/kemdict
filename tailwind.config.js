@@ -14,14 +14,15 @@ module.exports = {
       // This should be called "default".
       sans: [
         "'Equity A'",
-        "'Noto Serif CJK JP'",
-        "'Fira Sans'",
+        "'Noto Serif CJK TW'",
+        "'Noto Serif TC'",
         ...cjkFallback,
         "sans-serif",
       ],
       "sans-serif": [
-        "'Fira Sans'",
+        "'M PLUS 1p'",
         "'Noto Sans CJK TW'",
+        "'Noto Sans TC'",
         ...cjkFallback,
         "sans-serif",
       ],
