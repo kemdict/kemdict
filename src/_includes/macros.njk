@@ -2,6 +2,7 @@
 {# It's ugly but it's less ugly than doing this in JS #}
 <div class="word">
   {% for het in word.moedict_zh.heteronyms %}
+    </ol>
     <h1>{{word.title}}</h1>
     {% if het.bopomofo %}
     <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>

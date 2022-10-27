@@ -9,6 +9,10 @@
     line-height: 1.6;
     /* font-size: 14pt; */
   }
+  .base {
+    width: 95%;
+    @apply max-w-xl m-auto mt-12;
+  }
   ol {
     @apply pl-4;
   }
@@ -17,10 +21,6 @@
 @layer components {
   /* Yes, normally you put this in the HTML when using Tailwind. */
   /* We have 163088 pages from Moedict (zh_TW) alone. */
-  .base {
-    width: 95%;
-    @apply max-w-xl m-auto mt-12;
-  }
   .h {
     @apply w-1/2 min-w-[15ch];
     h1 {
@@ -73,9 +73,6 @@
     }
     ol {
       @apply list-decimal;
-    }
-    ul {
-      @apply list-disc;
     }
   }
   .word {
