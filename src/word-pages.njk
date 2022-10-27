@@ -7,8 +7,8 @@ pagination:
 permalink: "word/{{ word.title }}/index.html"
 ---
 <div class="h">
-  <a href="{{ "/" | url }}/">kemdict (β)</a>
-  <input type="text" placeholder="搜尋"  />
+  <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>
+  {% include "searchBar.njk" %}
 </div>
 
 {% import "macros.njk" as macros %}

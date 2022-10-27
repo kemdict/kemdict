@@ -22,9 +22,21 @@
     @apply max-w-xl m-auto mt-12;
   }
   .h {
+    @apply w-1/2 min-w-[15ch];
+    h1 {
+      @apply font-sans-serif mt-2;
+    }
+    a {
+      @apply link;
+    }
+  }
+  #searchForm {
     @apply flex space-x-2;
     input {
-      @apply border-2 px-1 w-full mb-4;
+      @apply border-2 px-1 mb-4;
+    }
+    input[type="text"] {
+      @apply w-full;
     }
   }
   .dictionary {
@@ -34,10 +46,7 @@
   .toc,
   .def {
     a {
-      @apply text-blue-500;
-      &:hover {
-        @apply underline;
-      }
+      @apply link;
     }
   }
   .word {
@@ -72,4 +81,10 @@
 }
 
 @layer utilities {
+  .link {
+    @apply text-blue-500;
+    &:hover {
+      @apply underline;
+    }
+  }
 }
