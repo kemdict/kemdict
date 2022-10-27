@@ -16,6 +16,9 @@ _site/css/built.css: css/src.css
 _site: src/_data _site/css/built.css
 	npx "@11ty/eleventy" --input=./src --output=./_site --quiet
 
+gh-pages: src/_data _site/css/built.css
+	npx "@11ty/eleventy" --input=./src --output=./_site --pathprefix "kemdict" --quiet
+
 src/_data: src/_data/combined.json
 
 src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json
