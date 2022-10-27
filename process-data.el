@@ -6,8 +6,8 @@
 (require 'dash)
 
 (defun main ()
-  (let ((moedict-zh-shaped (make-hash-table))
-        (moedict-twblg-shaped (make-hash-table))
+  (let ((moedict-zh-shaped (make-hash-table :test #'equal))
+        (moedict-twblg-shaped (make-hash-table :test #'equal))
         (all-titles (list))
         (merged-result (list))
         (moedict-zh (with-temp-buffer
