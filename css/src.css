@@ -5,6 +5,9 @@
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap");
 
 @layer base {
+  blockquote {
+    @apply px-4 py-1 bg-gray-200 rounded;
+  }
   html {
     line-height: 1.6;
     /* font-size: 14pt; */
@@ -33,7 +36,7 @@
   #searchForm {
     @apply flex space-x-2;
     input {
-      @apply border-2 px-1;
+      @apply border-2 px-1 rounded;
     }
     input[type="text"] {
       @apply w-full;
@@ -111,7 +114,7 @@
 
 @layer utilities {
   .link {
-    @apply text-blue-500;
+    @apply text-indigo-500;
     &:hover {
       @apply underline;
     }
