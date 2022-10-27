@@ -2,6 +2,21 @@
 
 A space for me to experiment with 教育部重編國語字典 and 教育部臺灣閩南語常用詞辭典 data.
 
+** Build
+
+Requirements:
+
+- Emacs (preferably 28), to combine the data sources
+- Node / npm
+- [[https://github.com/cask/cask][Cask]], to get Emacs Lisp dependencies
+
+#+begin_src shell
+git submodule update --init moedict-data moedict-data-twblg
+cask install
+npm install
+make _site
+#+end_src
+
 ** License
 
 教育部重編國語字典 is CC-BY-ND (TW 3.0). It is being used through [[https://github.com/g0v/moedict-data][moedict-data]].
