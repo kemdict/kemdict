@@ -19,10 +19,12 @@ if ((searchForm = document.getElementById("searchForm"))) {
       // customized, but that customization is global across the entire
       // project.
       // I'll just do this instead.
-      if (location.href.indexOf("word")) {
-        location.href = "../" + word;
-      } else {
+      if (location.href.indexOf("word") == -1) {
         location.href = "word/" + word;
+        console.log("b");
+      } else {
+        location.href = "../" + word;
+        console.log("a");
       }
     }
   });
