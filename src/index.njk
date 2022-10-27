@@ -1,15 +1,48 @@
 ---
 layout: base.njk
+title: kemdict
 ---
 
-<div class="mt-12 w-3/4 mx-auto max-w-full font-sans-serif">
-  <h1>kemdict (β)</h1>
-  <p>There will be an explanation of what this is here.</p>
-  {% include "searchBar.njk" %}
+<div class="prose mt-12 font-sans-serif">
+  <h1 class="font-bold text-3xl">kemdict (β)</h1>
+  <div class="w-1/2 mt-4">{% include "searchBar.njk" %}</div>
+  <p>我希望能夠有個地方能夠開始收錄日常使用但卻沒有人寫下定義的詞。</p>
+  <h2 class="my-4 font-bold text-2xl">授權與致謝</h2>
+  <ol class="list-disc">
+    <li>
+      <p>
+        <a href="https://dict.revised.moe.edu.tw/">《教育部重編國語辭典》</a
+        >著作權屬中華民國教育部，<a
+          href="https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html"
+          >採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出</a
+        >。資料透過<a href="https://github.com/g0v/moedict-data"
+          >萌典的原始資料檔</a
+        >取得，原始資料來自<a
+          href="https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html"
+          >教育部國語辭典公眾授權網</a
+        >。
+      </p>
+    </li>
+    <li>
+      <p>
+        <a href="https://twblg.dict.edu.tw/">《教育部臺灣閩南語常用詞辭典》</a
+        >著作權屬中華民國教育部，<a
+          href="https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp"
+          >採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出</a
+        >。資料也是透過<a href="https://github.com/g0v/moedict-data-twblg"
+          >萌典的原始資料檔</a
+        >取得，原始資料為萌典向教育部申請後取得。
+      </p>
+    </li>
+  </ol>
   <p>
-    <a
-      class="text-blue-500"
-      href="https://github.com/kisaragi-hiu/kemdict"
-    >https://github.com/kisaragi-hiu/kemdict</a>
+    原始資料來源為教育部《重編國語辭典修訂本》（CC BY-ND 3.0
+    臺灣授權）、《臺灣閩南語常用詞辭典》（CC BY-ND 3.0
+    臺灣授權）及《臺灣客家語常用詞辭典》（授權聲明），辭典本文的著作權仍為教育部所有。
+  </p>
+  <p>
+    <a class="text-blue-500" href="https://github.com/kisaragi-hiu/kemdict"
+      >https://github.com/kisaragi-hiu/kemdict</a
+    >
   </p>
 </div>
