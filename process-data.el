@@ -1,8 +1,28 @@
 ;; -*- lexical-binding: t; -*-
 
 (require 'json)
-(require 'cl-lib)
-(require 'dash)
+(require 'seq)
+
+(defun uniq (sequence)
+  "Return a list of the elements of SEQUENCE with duplicates removed.
+
+This is a copy of dash.el's `-uniq', except that the fallback
+case delegates to `seq-uniq' and it works with any sequence.
+
+<rant>Really, considering dash.el is part of GNU ELPA and thus
+part of GNU Emacs, seq-uniq should just copy the optimization
+over.</rant>"
+  (let* ((len (length sequence))
+         (lookup-table (and (> len 32)
+                            (make-hash-table :test #'equal
+                                             :size len))))
+    (if lookup-table
+        (seq-filter
+         (lambda (it)
+           (or (gethash it lookup-table)
+               (and (puthash it t lookup-table) nil)))
+         lookup-table)
+      (seq-uniq sequence))))
 
 (defun main ()
   (let* ((all-titles (list))
@@ -26,7 +46,7 @@
       (dolist (entry (aref raw-dicts i))
         (push (gethash "title" entry) all-titles)))
     (message "Removing duplicate titles...")
-    (setq all-titles (-uniq all-titles))
+    (setq all-titles (uniq all-titles))
     ;; [{:title "title"
     ;;   :heteronyms (...)
     ;;   ... ...}
@@ -59,9 +79,12 @@
         (insert (json-encode merged-result))))
     (message "Done")))
 
-(if (featurep 'comp)
-    (native-compile #'main)
-  (byte-compile #'main))
+(cond ((featurep 'comp)
+       (native-compile #'uniq)
+       (native-compile #'main))
+      (t
+       (byte-compile #'uniq)
+       (byte-compile #'main)))
 (main)
 (when noninteractive
   (kill-emacs))
