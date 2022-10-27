@@ -21,7 +21,7 @@ over.</rant>"
          (lambda (it)
            (or (gethash it lookup-table)
                (and (puthash it t lookup-table) nil)))
-         lookup-table)
+         sequence)
       (seq-uniq sequence))))
 
 (defun main ()
