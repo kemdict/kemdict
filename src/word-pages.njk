@@ -31,7 +31,7 @@ permalink: "word/{{ word.title }}/index.html"
 {% if word.kisaragi_dict %}
 <div>
   <div id="kisaragi_dict" class="dictionary">
-    Kisaragi's extras (beta)
+    <a href="{{ "/dict-kisaragi" | url }}">Kisaragi's extras (beta)</a>
   </div>
   {{ macros.word_kisaragi(word) }}
 </div>

@@ -3,14 +3,22 @@ layout: base.njk
 title: kemdict
 ---
 
-<div class="prose mt-12 font-sans-serif">
+<div class="prose mt-12">
   <h1 class="font-bold text-3xl">kemdict (β)</h1>
-  <div class="w-1/2 mt-4">{% include "searchBar.njk" %}</div>
-  <p>我希望能夠有個地方能夠開始收錄日常使用但卻沒有人寫下定義的詞。</p>
+  <p>
+    我希望能夠有個地方能夠收錄日常使用但卻沒有人依實際使用狀況記錄下來的詞。
+  </p>
   <p>
     當一個語言的絕大部分使用者使用一種讀音，而字典卻標註另一種，錯誤的是不正視現實的字典，不是說話的人。見：「骰子」、「收件匣」、「丼」、「熟悉」、「拖曳」。
   </p>
-  <h2 class="my-4 font-bold text-2xl">授權與致謝</h2>
+  <h2 class="">收錄內容</h2>
+  <div class="w-1/2 mt-2 mb-0">{% include "searchBar.njk" %}</div>
+  <ol class="list-disc">
+    <li>
+      <p><a href="about">關於 Kemdict</a></p>
+    </li>
+  </ol>
+  <h2 class="">授權與致謝</h2>
   <ol class="list-disc">
     <li>
       <p>
@@ -38,14 +46,4 @@ title: kemdict
       </p>
     </li>
   </ol>
-  <p>
-    原始資料來源為教育部《重編國語辭典修訂本》（CC BY-ND 3.0
-    臺灣授權）、《臺灣閩南語常用詞辭典》（CC BY-ND 3.0
-    臺灣授權）及《臺灣客家語常用詞辭典》（授權聲明），辭典本文的著作權仍為教育部所有。
-  </p>
-  <p>
-    <a class="text-blue-500" href="https://github.com/kisaragi-hiu/kemdict"
-      >https://github.com/kisaragi-hiu/kemdict</a
-    >
-  </p>
 </div>

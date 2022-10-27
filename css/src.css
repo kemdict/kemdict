@@ -33,7 +33,7 @@
   #searchForm {
     @apply flex space-x-2;
     input {
-      @apply border-2 px-1 mb-4;
+      @apply border-2 px-1;
     }
     input[type="text"] {
       @apply w-full;
@@ -42,15 +42,34 @@
   .dictionary {
     @apply border-b-2 border-black font-sans-serif mb-2 my-8;
     @apply text-right;
+    a {
+      @apply link;
+    }
   }
   .toc,
-  .def,
+  .def {
+    a {
+      @apply link;
+    }
+  }
   .prose {
     a {
       @apply link;
     }
     p {
       @apply my-2;
+    }
+    h1,
+    h2,
+    h3 {
+      @apply font-bold;
+    }
+    h1 {
+      @apply text-2xl mt-4;
+    }
+    h2,
+    h3 {
+      /* @apply text-xl; */
     }
   }
   .word {

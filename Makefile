@@ -19,7 +19,8 @@ _site: src/_data _site/b.css .eleventy.js
 gh-pages: src/_data _site/b.css
 	npx "@11ty/eleventy" --pathprefix "kemdict" --quiet
 
-src/_data: src/_data/combined.json
+src/_data: src/_data/combined.json kisaragi-dict/kisaragi_dict.json
+	cp kisaragi-dict/kisaragi_dict.json src/_data/
 
 src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json kisaragi-dict/kisaragi_dict.json
 	cask eval "(load \"process-data\")"

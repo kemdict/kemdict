@@ -13,7 +13,9 @@
   <body>
     <div class="base">
       <!-- Contents -->
-      {{ content | safe }}
+      {% block main %}
+        {{ content | safe }}
+      {% endblock %}
     </div>
     <script src="{{"/s.js" | url}}"></script>
   </body>

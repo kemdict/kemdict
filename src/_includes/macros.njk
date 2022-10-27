@@ -4,7 +4,7 @@
   {% for het in word.moedict_zh.heteronyms %}
     <h1>{{word.title}}</h1>
     {% if het.bopomofo %}
-    <p>讀音：<span>{{ het.bopomofo }}</span></p>
+    <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
     {% endif %}
     {# Treat this as an iterative program, not a template. #}
     {% set lasttype = "" %}
