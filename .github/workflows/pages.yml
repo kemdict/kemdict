@@ -20,6 +20,39 @@ defaults:
     shell: bash
 
 jobs:
+  "build-macos":
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+      # - name: Set up Emacs
+      #   uses: purcell/setup-emacs@master
+      #   with:
+      #     version: "28.2"
+      # - name: Set up Cask
+      #   uses: conao3/setup-cask@master
+      - name: Install packages
+        run: |
+          brew install cask make emacs
+          cask install
+          npm install
+        # These steps are split to get them to display in different
+        # sections. make _site alone also builds src/_data.
+      - name: Prepare data files
+        run: make src/_data
+      - name: Build
+        run: gmake _site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./_site
   "build":
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +74,7 @@ jobs:
       - name: Set up Pages
         id: pages
         uses: actions/configure-pages@v2
-      - name: Packages
+      - name: Install packages
         run: |
           cask
           npm install
