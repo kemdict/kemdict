@@ -8,15 +8,15 @@ dev-11ty:
 	npx "@11ty/eleventy" --input=./src --output=./_site --serve
 
 dev-tailwind:
-	npx tailwindcss --postcss -i css/src.css -o _site/css/built.css --watch
+	npx tailwindcss --postcss -i css/src.css -o _site/b.css --watch
 
-_site/css/built.css: css/src.css
-	npx tailwindcss --minify --postcss -i css/src.css -o _site/css/built.css
+_site/b.css: css/src.css
+	npx tailwindcss --minify --postcss -i css/src.css -o _site/b.css
 
-_site: src/_data _site/css/built.css
+_site: src/_data _site/b.css
 	npx "@11ty/eleventy" --quiet
 
-gh-pages: src/_data _site/css/built.css
+gh-pages: src/_data _site/b.css
 	npx "@11ty/eleventy" --pathprefix "kemdict" --quiet
 
 src/_data: src/_data/combined.json
