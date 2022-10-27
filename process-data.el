@@ -32,16 +32,14 @@
       (let ((title (gethash "title" entry)))
         (puthash title
                  (ht
-                  ("title" title)
-                  ("moedict_zh" (ht ("heteronyms" (gethash "heteronyms" entry)))))
+                  ("heteronyms" (gethash "heteronyms" entry)))
                  moedict-zh-shaped)))
     (message "%s" "Shaping dictionary data (2/2)...")
     (dolist (entry moedict-twblg)
       (let ((title (gethash "title" entry)))
         (puthash title
                  (ht
-                  ("title" title)
-                  ("moedict_twblg" (ht ("heteronyms" (gethash "heteronyms" entry)))))
+                  ("heteronyms" (gethash "heteronyms" entry)))
                  moedict-twblg-shaped)))
     (message "%s" "Merging...")
     (dolist (title all-titles)
