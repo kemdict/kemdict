@@ -1,6 +1,6 @@
 module.exports = (cfg) => {
   cfg.addFilter("moedict_zh_process_def", (def) => {
-    return def.replace(/「(.*?)」/g, "「<a href='../$1'>$1</a>」");
+    return def.replace(/參見「(.*?)」/g, "參見「<a href='../$1'>$1</a>」");
   });
 
   cfg.addPassthroughCopy("src/s.js");
