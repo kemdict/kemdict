@@ -50,14 +50,16 @@
     (message "%s" "Writing result out to disk...")
     (make-directory "src/_data" t)
     (with-temp-file "src/_data/combined.json"
-      (insert (json-encode merged-result)))
+      (let ((json-encoding-pretty-print (not noninteractive)))
+        (insert (json-encode merged-result))))
     (message "%s" "Done")))
 
 (if (featurep 'comp)
     (native-compile #'main)
   (byte-compile #'main))
 (main)
-(kill-emacs)
+(when noninteractive
+  (kill-emacs))
 
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
