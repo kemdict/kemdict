@@ -1,7 +1,7 @@
 {% macro word_moedict_zh(word) %}
 {# It's ugly but it's less ugly than doing this in JS #}
 <div class="word">
-  <h1>{{word.moedict_zh.title}}</h1>
+  <h1>{{word.title}}</h1>
   {% for het in word.moedict_zh.heteronyms %}
     {% if het.bopomofo %}
     <p>讀音：<span>{{ het.bopomofo }}</span></p>
@@ -39,7 +39,7 @@
 
 {% macro word_moedict_twblg(word) %}
 <div class="word">
-  <h1>{{word.moedict_twblg.title}}</h1>
+  <h1>{{word.title}}</h1>
   {% for het in word.moedict_twblg.heteronyms %}
     {% if het.trs %}
     <p>讀音：<span>{{ het.trs }}</span></p>

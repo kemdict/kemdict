@@ -7,7 +7,7 @@
 @layer base {
   html {
     line-height: 1.6;
-    font-size: 14pt;
+    /* font-size: 14pt; */
   }
   h1,
   h2,
@@ -34,7 +34,8 @@
     @apply max-w-xl m-auto mt-12;
   }
   .dictionary {
-    @apply border-b-4 border-black font-sans-serif mb-2 my-8;
+    @apply border-b-2 border-black font-sans-serif mb-2 my-8;
+    @apply text-right;
   }
   .toc,
   .def {
