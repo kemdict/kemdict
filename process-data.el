@@ -2,7 +2,6 @@
 
 (require 'json)
 (require 'cl-lib)
-(require 'ht)
 (require 'dash)
 
 (defun main ()
@@ -30,20 +29,19 @@
     (message "%s" "Shaping dictionary data (1/2)...")
     (dolist (entry moedict-zh)
       (let ((title (gethash "title" entry)))
-        (puthash title
-                 (ht
-                  ("heteronyms" (gethash "heteronyms" entry)))
-                 moedict-zh-shaped)))
+        (let ((tmp (make-hash-table :test #'equal)))
+          (puthash "heteronyms" (gethash "heteronyms" entry) tmp)
+          (puthash title tmp moedict-zh-shaped))))
     (message "%s" "Shaping dictionary data (2/2)...")
     (dolist (entry moedict-twblg)
       (let ((title (gethash "title" entry)))
-        (puthash title
-                 (ht
-                  ("heteronyms" (gethash "heteronyms" entry)))
-                 moedict-twblg-shaped)))
+        (let ((tmp (make-hash-table :test #'equal)))
+          (puthash "heteronyms" (gethash "heteronyms" entry) tmp)
+          (puthash title tmp moedict-twblg-shaped))))
     (message "%s" "Merging...")
     (dolist (title all-titles)
-      (let ((hash-table (ht ("title" title))))
+      (let ((hash-table (make-hash-table :test #'equal)))
+        (puthash "title" title hash-table)
         (when-let (v (gethash title moedict-zh-shaped))
           (puthash "moedict_zh" v hash-table))
         (when-let (v (gethash title moedict-twblg-shaped))
