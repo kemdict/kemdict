@@ -100,6 +100,9 @@
     .pos {
       @apply font-bold mt-2 block;
     }
+    p {
+      @apply prose;
+    }
     .def {
       @apply block mb-2;
     }

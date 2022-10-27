@@ -102,9 +102,13 @@
         {% set lasttype = def.type %}
       {% endif %}
       <li>
-        <p class="def">{{ def.def | kisaragi_process_ref | safe }}</p>
-        {{ def.etymology }}
+        <p class="def">
+        {{ def.def | kisaragi_process_def | safe }}
         {{ def.example }}
+        </p>
+        <p>
+        {{ def.etymology | kisaragi_process_def | safe }}
+        </p>
         {% for quote in def.quote %}
         <p>{{ quote }}</p>
         {% endfor %}

@@ -13,12 +13,18 @@ module.exports = (cfg) => {
     return def.replace(/　/g, " ");
   });
   cfg.addFilter("moedict_zh_process_def", (def) => {
-    def = def.replace(/參見「(.*?)」/g, `參見「${linkToWord("$1")}」`);
-    def = def.replace(/「(.*?)」一詞/g, `參見「${linkToWord("$1")}」`);
+    if (def) {
+      def = def.replace(/參見「(.*?)」/g, `參見「${linkToWord("$1")}」`);
+      def = def.replace(/「(.*?)」一詞/g, `「${linkToWord("$1")}」一詞`);
+    }
     return def;
   });
-  cfg.addFilter("kisaragi_process_ref", (def) => {
-    return def.replace(/(同)「(.*?)」/g, `$1「${linkToWord("$2")}」`);
+  cfg.addFilter("kisaragi_process_def", (def) => {
+    if (def) {
+      def = def.replace(/「(.*?)」一詞/g, `「${linkToWord("$1")}」一詞`);
+      def = def.replace(/(同|參見)「(.*?)」/g, `$1「${linkToWord("$2")}」`);
+    }
+    return def;
   });
 
   cfg.addPassthroughCopy("src/s.js");
