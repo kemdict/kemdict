@@ -18,16 +18,8 @@ _site: src/_data _site/css/built.css
 
 src/_data: src/_data/combined.json
 
-src/_data/combined.json: src/_data/dict-moe-revised.json src/_data/dict-moe-twblg.json process-data.el
+src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json
 	cask eval "(load \"process-data\")"
-
-src/_data/dict-moe-revised.json:
-	mkdir -p src/_data
-	cp moedict-data/dict-revised.json src/_data/dict-moe-revised.json
-
-src/_data/dict-moe-twblg.json:
-	mkdir -p src/_data
-	cp moedict-data-twblg/dict-twblg.json src/_data/dict-moe-twblg.json
 
 dev: src/_data
 	npx concurrently "make dev-11ty" "make dev-tailwind"
