@@ -31,7 +31,7 @@ function interlinear_annotation_to_ruby(defs) {
           defs[i] = defs[i]
             .replace(/\ufff9/g, "<ruby>")
             .replace(/\ufffa/g, "<rp>(</rp><rt>")
-            .replace(/\ufffb/g, "<rp>)</rp></rt>");
+            .replace(/\ufffb/g, "<rp>)</rp></rt></ruby><br>");
         }
       }
     }
