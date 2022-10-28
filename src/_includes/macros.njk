@@ -43,7 +43,7 @@
   {% for het in word.moedict_twblg.heteronyms %}
     {# HACK lol #}
     </ol>
-    <h1>{{word.title}}</h1>
+    <h1>{{word.title | replace("？", "?")}}</h1>
     {% if het.trs %}
     <p>讀音：<span>{{ het.trs }}</span></p>
     {% endif %}
