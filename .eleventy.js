@@ -1,4 +1,7 @@
-const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
+let EleventyServerlessBundlerPlugin;
+if (!process.env["DEV"]) {
+  ({ EleventyServerlessBundlerPlugin } = require("@11ty/eleventy"));
+}
 
 /* Return a string of an HTML link to `target`. */
 /* If `target` already contains an <a> tag, return it unchanged. */
@@ -65,11 +68,13 @@ module.exports = (cfg) => {
 
   cfg.addPassthroughCopy("src/s.js");
 
-  cfg.addPlugin(EleventyServerlessBundlerPlugin, {
-    name: "serverless",
-    functionsDir: "./netlify/functions/",
-    redirects: "netlify-toml-builders",
-  });
+  if (EleventyServerlessBundlerPlugin) {
+    cfg.addPlugin(EleventyServerlessBundlerPlugin, {
+      name: "serverless",
+      functionsDir: "./netlify/functions/",
+      redirects: "netlify-toml-builders",
+    });
+  }
 
   return {
     dir: {

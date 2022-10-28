@@ -25,7 +25,9 @@ src/_data: src/_data/combined.json kisaragi-dict/kisaragi_dict.json
 src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json kisaragi-dict/kisaragi_dict.json
 	cask eval "(load \"process-data\")"
 
-dev: src/_data
+dev:
+	export DEV=true
+	make src/_data
 	npx concurrently "make dev-11ty" "make dev-tailwind"
 
 build: _site

@@ -7,12 +7,16 @@
 (defun main ()
   (let* ((all-titles (list))
          (merged-result (make-hash-table :test #'equal))
-         (dictionaries [("moedict_zh" . "moedict-data/dict-revised.json")
-                        ("moedict_twblg" . "moedict-data-twblg/dict-twblg.json")
-                        ("kisaragi_dict" . "kisaragi-dict/kisaragi_dict.json")])
-         ;; (dictionaries [("moedict_zh" . "a.json")
-         ;;                ("moedict_twblg" . "b.json")
-         ;;                ("kisaragi_dict" . "kisaragi-dict/kisaragi_dict.json")])
+         (dictionaries
+          (if (and (getenv "DEV")
+                   (file-exists-p "a.json")
+                   (file-exists-p "b.json"))
+              [("moedict_zh" . "a.json")
+               ("moedict_twblg" . "b.json")
+               ("kisaragi_dict" . "kisaragi-dict/kisaragi_dict.json")]
+            [("moedict_zh" . "moedict-data/dict-revised.json")
+             ("moedict_twblg" . "moedict-data-twblg/dict-twblg.json")
+             ("kisaragi_dict" . "kisaragi-dict/kisaragi_dict.json")]))
          (dict-count (length dictionaries))
          ;; A list of the original parsed dictionary data
          (raw-dicts (make-vector dict-count nil))
