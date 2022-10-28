@@ -7,12 +7,13 @@ pagination:
   resolve: values
 permalink: "word/{{ word.title }}/index.html"
 ---
+{% import "macros.njk" as macros %}
+
 <div class="h">
   <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>
   {% include "searchBar.njk" %}
 </div>
 
-{% import "macros.njk" as macros %}
 {% if word.moedict_zh %}
 <div>
   <div id="moedict_zh" class="dictionary">

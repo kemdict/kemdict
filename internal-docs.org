@@ -1,4 +1,7 @@
 * Rendering pages at first request instead of at build time
+:PROPERTIES:
+:ID:       df677ea0-0d20-4f07-bed2-df3d56fe4d45
+:END:
 I'd like to not render millions of files, I guess. Right now I'm at like 170000.
 
 I want pages to be rendered at first request, then cached on a CDN. This can be achieved with a serverless function, which is vender-agnostic; the caching part is provided by Netlify as a Netlify specific feature (it calls this “On-demand builders”).
