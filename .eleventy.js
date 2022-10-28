@@ -21,6 +21,21 @@ module.exports = (cfg) => {
     }
     return def;
   });
+  cfg.addFilter("moedict_twblg_process_def", (defs) => {
+    if (typeof defs === "string") {
+      defs = [defs];
+    }
+    for (let i = 0; i < defs.length; i++) {
+      if (defs[i]) {
+        let strs = defs[i].split("\uFFF9");
+        for (let j = 0; j < strs.length; j++) {
+          strs[j] = `<p>${strs[j]}</p>`;
+        }
+        defs[i] = strs;
+      }
+    }
+    return defs.join("\n");
+  });
   cfg.addFilter("kisaragi_process_def", (def) => {
     if (def) {
       def = def.replace(/<(.*?)>/g, `${linkToWord("$1")}`);
