@@ -3,3 +3,5 @@
 - The word rendering is still broken.
 - (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - A 404 page
+- Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
+- Consider using Eleventy Serverless because we're on track to a million files in one folder at this rate. Although, who knows, maybe that's actually fine: https://stackoverflow.com/questions/197162/ntfs-performance-and-large-volumes-of-files-and-directories
