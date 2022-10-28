@@ -28,7 +28,7 @@ module.exports = (cfg) => {
       }
       for (let i = 0; i < defs.length; i++) {
         if (defs[i]) {
-          let strs = defs[i].split("\uFFF9");
+          let strs = defs[i].split("\uFFFA");
           for (let j = 0; j < strs.length; j++) {
             strs[j] = `<p>${strs[j]}</p>`;
           }
