@@ -4,8 +4,9 @@ pagination:
   data: combined
   size: 1
   alias: word
+  serverless: eleventy.serverless.path.slug
 permalink:
-  "serverless": "word/{{ word.title }}/index.html"
+  "serverless": "/word/:slug"
 ---
 <div class="h">
   <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>

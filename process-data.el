@@ -6,7 +6,7 @@
 
 (defun main ()
   (let* ((all-titles (list))
-         (merged-result (list))
+         (merged-result (make-hash-table :test #'equal))
          (dictionaries [("moedict_zh" . "moedict-data/dict-revised.json")
                         ("moedict_twblg" . "moedict-data-twblg/dict-twblg.json")
                         ("kisaragi_dict" . "kisaragi-dict/kisaragi_dict.json")])
@@ -53,7 +53,7 @@
           (when-let (v (gethash title (aref shaped-dicts i)))
             (puthash (car (aref dictionaries i)) v
                      hash-table)))
-        (push hash-table merged-result)))
+        (puthash title hash-table merged-result)))
     (message "Writing result out to disk...")
     (make-directory "src/_data" t)
     (with-temp-file "src/_data/combined.json"
