@@ -13,7 +13,7 @@ dev-tailwind:
 _site/b.css: css/src.css
 	npx tailwindcss --minify --postcss -i css/src.css -o _site/b.css
 
-_site: src/_data _site/b.css .eleventy.js
+_site: src/*.njk src/_data _site/b.css .eleventy.js
 	npx "@11ty/eleventy" --quiet
 
 gh-pages: src/_data _site/b.css
