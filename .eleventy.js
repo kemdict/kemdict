@@ -22,19 +22,22 @@ module.exports = (cfg) => {
     return def;
   });
   cfg.addFilter("moedict_twblg_process_defs", (defs) => {
-    if (typeof defs === "string") {
-      defs = [defs];
-    }
-    for (let i = 0; i < defs.length; i++) {
-      if (defs[i]) {
-        let strs = defs[i].split("\uFFF9");
-        for (let j = 0; j < strs.length; j++) {
-          strs[j] = `<p>${strs[j]}</p>`;
-        }
-        defs[i] = strs;
+    if (defs) {
+      if (typeof defs === "string") {
+        defs = [defs];
       }
+      for (let i = 0; i < defs.length; i++) {
+        if (defs[i]) {
+          let strs = defs[i].split("\uFFF9");
+          for (let j = 0; j < strs.length; j++) {
+            strs[j] = `<p>${strs[j]}</p>`;
+          }
+          defs[i] = strs;
+        }
+      }
+      defs = defs.join("\n");
     }
-    return defs.join("\n");
+    return defs;
   });
   cfg.addFilter("kisaragi_process_def", (def) => {
     if (def) {
