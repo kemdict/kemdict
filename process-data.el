@@ -8,7 +8,8 @@
   (let* ((all-titles (list))
          (merged-result (make-hash-table :test #'equal))
          (dictionaries
-          (if (and (getenv "DEV")
+          (if (and (or (not noninteractive)
+                       (getenv "DEV"))
                    (file-exists-p "a.json")
                    (file-exists-p "b.json"))
               [("moedict_zh" . "a.json")
