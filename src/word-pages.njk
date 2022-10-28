@@ -4,7 +4,8 @@ pagination:
   data: combined
   size: 1
   alias: word
-permalink: "word/{{ word.title }}/index.html"
+permalink:
+  "serverless": "word/{{ word.title }}/index.html"
 ---
 <div class="h">
   <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>

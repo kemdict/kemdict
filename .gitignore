@@ -5,3 +5,4 @@ _data/
 *.js.map
 .cask
 *.elc
+eleventy-bundler-modules.js
