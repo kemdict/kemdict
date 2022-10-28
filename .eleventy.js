@@ -21,7 +21,7 @@ module.exports = (cfg) => {
     }
     return def;
   });
-  cfg.addFilter("moedict_twblg_process_def", (defs) => {
+  cfg.addFilter("moedict_twblg_process_defs", (defs) => {
     if (typeof defs === "string") {
       defs = [defs];
     }

@@ -65,12 +65,8 @@
       {% endif %}
       <li>
         <p class="def">{{ def.def }}</p>
-        {% for ex in def.example %}
-        <p>{{ ex | moedict_twblg_process_def | safe }}</p>
-        {% endfor %}
-        {% for quote in def.quote %}
-        <p>{{ quote | moedict_twblg_process_def | safe }}</p>
-        {% endfor %}
+        {{ def.example | moedict_twblg_process_defs | safe }}
+        {{ def.quote | moedict_twblg_process_defs | safe }}
       </li>
     {% endfor %}
   {% endfor %}
