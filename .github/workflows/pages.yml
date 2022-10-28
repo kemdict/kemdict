@@ -85,9 +85,12 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        # run: |
+        #   make public.zip
+        #   curl -H "Content-Type: application/zip" \
+        #        -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+        #        --data-binary "@public.zip" \
+        #        https://api.netlify.com/api/v1/sites/"$NETLIFY_SITE_ID"/deploys
         run: |
-          make public.zip
-          curl -H "Content-Type: application/zip" \
-               -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
-               --data-binary "@public.zip" \
-               https://api.netlify.com/api/v1/sites/"$NETLIFY_SITE_ID"/deploys
+          npm install netlify-cli
+          netlify deploy --dir=_site --prod

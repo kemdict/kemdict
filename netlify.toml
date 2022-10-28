@@ -1,3 +1,4 @@
-# This is how I'm disabling functions without actually moving the functions elsewhere.
 [functions]
-  directory = "disabled"
+  # This is how I'm disabling functions without actually moving the functions elsewhere.
+  # directory = "disabled"
+  directory = "netlify/functions"
