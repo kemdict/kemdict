@@ -4,6 +4,10 @@
 (require 'cl-lib)
 (require 'dash)
 
+(defun k/process-title (title)
+  "Process TITLE to replace problematic characters, and so on."
+  (replace-regexp-in-string "'" "’" title))
+
 (defun main ()
   (let* ((all-titles (list))
          (merged-result (make-hash-table :test #'equal))
@@ -28,12 +32,6 @@
         (insert-file-contents (cdr (aref dictionaries i)))
         (goto-char (point-min))
         (aset raw-dicts i (json-parse-buffer :array-type 'list))))
-    (dotimes (i dict-count)
-      (message "Collecting titles (%s/%s)..." (1+ i) dict-count)
-      (dolist (entry (aref raw-dicts i))
-        (push (gethash "title" entry) all-titles)))
-    (message "Removing duplicate titles...")
-    (setq all-titles (-uniq all-titles))
     ;; [{:title "title"
     ;;   :heteronyms (...)
     ;;   ... ...}
@@ -45,11 +43,18 @@
       (message "Shaping dictionary data (%s/%s)..." (1+ i) dict-count)
       (let ((shaped (make-hash-table :test #'equal)))
         (dolist (entry (aref raw-dicts i))
-          (let ((title (gethash "title" entry)))
+          (let ((title (k/process-title (gethash "title" entry))))
             (let ((tmp (make-hash-table :test #'equal)))
               (puthash "heteronyms" (gethash "heteronyms" entry) tmp)
               (puthash title tmp shaped))))
         (aset shaped-dicts i shaped)))
+    (dotimes (i dict-count)
+      (message "Collecting titles (%s/%s)..." (1+ i) dict-count)
+      (cl-loop
+       for k being the hash-keys of (aref shaped-dicts i)
+       do (push k all-titles)))
+    (message "Removing duplicate titles...")
+    (setq all-titles (-uniq all-titles))
     (message "Merging...")
     (dolist (title all-titles)
       (let ((hash-table (make-hash-table :test #'equal)))
