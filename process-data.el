@@ -61,6 +61,9 @@
         (puthash title hash-table merged-result)))
     (message "Writing result out to disk...")
     (make-directory "src/_data" t)
+    (with-temp-file "src/_data/titles.json"
+      (let ((json-encoding-pretty-print (not noninteractive)))
+        (insert (json-encode all-titles))))
     (with-temp-file "src/_data/combined.json"
       (let ((json-encoding-pretty-print (not noninteractive)))
         (insert (json-encode merged-result))))

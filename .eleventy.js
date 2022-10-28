@@ -5,14 +5,18 @@ let EleventyServerlessBundlerPlugin;
 //   ({ EleventyServerlessBundlerPlugin } = require("@11ty/eleventy"));
 // }
 
+const fs = require("node:fs");
+const all_titles = JSON.parse(fs.readFileSync("src/_data/titles.json"));
+
 /* Return a string of an HTML link to `target`. */
 /* If `target` already contains an <a> tag, return it unchanged. */
 function linkToWord(target, desc = target) {
   if (target.indexOf("<a") === -1) {
-    return `<a href='/word/${target}'>${desc}</a>`;
-  } else {
-    return target;
+    if (target in all_titles) {
+      return `<a href='/word/${target}'>${desc}</a>`;
+    }
   }
+  return target;
 }
 
 function process_def_moedict_zh(def) {
