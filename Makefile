@@ -34,3 +34,6 @@ dev:
 	npx concurrently "make dev-11ty" "make dev-tailwind"
 
 build: _site
+
+public.zip: _site
+	cd _site/ && 7z a ../public.zip .
