@@ -25,9 +25,9 @@
       {% endif %}
       <li>
         <p class="def">
-        <span>{{ def.def | moedict_zh_process_def | safe }}</span>
+        <span>{{ def.def | process_def_moedict_zh | safe }}</span>
         {% for ex in def.example %}
-        <span>{{ ex | moedict_zh_process_def | safe }}</span>
+        <span>{{ ex | process_def_moedict_zh | safe }}</span>
         {% endfor %}
         {% for quote in def.quote %}
         <span>{{ quote }}</span>
@@ -65,8 +65,8 @@
       {% endif %}
       <li>
         <p class="def">{{ def.def }}</p>
-        {{ def.example | moedict_twblg_process_defs | safe }}
-        {{ def.quote | moedict_twblg_process_defs | safe }}
+        {{ def.example | interlinear_annotation_to_ruby | safe }}
+        {{ def.quote | interlinear_annotation_to_ruby | safe }}
       </li>
     {% endfor %}
   {% endfor %}
@@ -99,11 +99,11 @@
       {% endif %}
       <li>
         <p class="def">
-        {{ def.def | kisaragi_process_def | safe }}
+        {{ def.def | process_def_kisaragi | safe }}
         {{ def.example }}
         </p>
         <p>
-        {{ def.etymology | kisaragi_process_def | safe }}
+        {{ def.etymology | process_def_kisaragi | safe }}
         </p>
         {% for quote in def.quote %}
         <p>{{ quote }}</p>
