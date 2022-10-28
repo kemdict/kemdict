@@ -2,7 +2,7 @@ export LANG=en_US.UTF-8
 
 .DEFAULT_GOAL := build
 
-.PHONY: dev-11ty dev-tailwind dev
+.PHONY: dev-11ty dev-tailwind dev process-data
 
 dev-11ty:
 	npx "@11ty/eleventy" --input=./src --output=./_site --serve
@@ -23,6 +23,9 @@ src/_data: src/_data/combined.json kisaragi-dict/kisaragi_dict.json
 	cp kisaragi-dict/kisaragi_dict.json src/_data/
 
 src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json kisaragi-dict/kisaragi_dict.json
+	make process-data
+
+process-data:
 	cask eval "(load \"process-data\")"
 
 dev:

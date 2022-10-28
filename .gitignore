@@ -7,4 +7,3 @@ _data/
 *.elc
 netlify/functions/serverless/*
 !netlify/functions/serverless/index.js
-/netlify.toml
