@@ -135,6 +135,20 @@
     ]
   },
   {
+    "title": "姦撟",
+    "heteronyms": [
+      {
+        "pronunciation": "kàn-kiāu",
+        "definitions": [
+          {
+            "type": "動",
+            "def": "罵。亦寫做「幹譙」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "寄件備份",
     "heteronyms": [
       {
@@ -157,6 +171,21 @@
           {
             "type": "名",
             "def": "在<電子郵件>系統裡，儲存準備寄出但尚未寄出的信件的資料夾。參見：「<收件匣>」、「<寄件備份>」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "幹譙",
+    "heteronyms": [
+      {
+        "pronunciation": "kàn-kiāu",
+        "definitions": [
+          {
+            "etymology": "來自台語「姦撟」一詞。",
+            "type": "動",
+            "def": "罵。"
           }
         ]
       }

@@ -25,7 +25,10 @@ module.exports = (cfg) => {
     if (def) {
       def = def.replace(/<(.*?)>/g, `${linkToWord("$1")}`);
       def = def.replace(/「(.*?)」一詞/g, `「${linkToWord("$1")}」一詞`);
-      def = def.replace(/(同|參見)「(.*?)」/g, `$1「${linkToWord("$2")}」`);
+      def = def.replace(
+        /(同|參見|亦寫做)「(.*?)」/g,
+        `$1「${linkToWord("$2")}」`
+      );
     }
     return def;
   });
