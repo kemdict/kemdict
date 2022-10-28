@@ -6,7 +6,9 @@
 
 (defun k/process-title (title)
   "Process TITLE to replace problematic characters, and so on."
-  (replace-regexp-in-string "'" "’" title))
+  ;; Mainly to normalize to half-width characters.
+  (ucs-normalize-NFKC-string
+   (replace-regexp-in-string "'" "’" title)))
 
 (defun main ()
   (let* ((all-titles (list))

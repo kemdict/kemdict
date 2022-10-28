@@ -22,7 +22,7 @@ gh-pages: src/_data _site/b.css
 src/_data: src/_data/combined.json kisaragi-dict/kisaragi_dict.json
 	cp kisaragi-dict/kisaragi_dict.json src/_data/
 
-src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json kisaragi-dict/kisaragi_dict.json
+src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json kisaragi-dict/kisaragi_dict.json process-data.el
 	make process-data
 
 process-data:

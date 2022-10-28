@@ -1,5 +1,6 @@
 - [X] All titles should be written out as a file.
 - [X] References should only be linked if it is available.
+- [ ] Figure out how to decode the ={[xxxx]}= thing
 - [ ] More dynamic search bar (which already requires JS)
   - We can avoid including titles.json in every file by just copying it to the output. We then have to do a request for it every time though. This is another case for rendering on first request.
 - [ ] The word rendering is still broken.
