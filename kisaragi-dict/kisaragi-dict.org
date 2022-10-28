@@ -24,7 +24,7 @@
 (defun k/elem-title (elem)
   "Return the only title of ELEM."
   (org-no-properties
-   (car
+   (org-element-interpret-data
     (org-element-property :title elem))))
 
 (defun k/elements-to-json (elems)
@@ -78,8 +78,11 @@
         (narrow-to-region (point) (point-max))
         (org-element-contents (org-element-parse-buffer))))))
 
-(native-compile #'k/elements-to-json)
-(native-compile #'k/parse-elements)
+(when (and (fboundp #'native-comp-available-p)
+           (native-comp-available-p))
+  (native-compile #'k/elements-to-json)
+  (native-compile #'k/parse-elements))
+
 (let ((json-encoding-pretty-print t))
   (with-temp-file "kisaragi_dict.json"
     (insert (json-encode
@@ -89,6 +92,11 @@
 #+end_src
 
 * Words
+** care
+*** /kɛ(ə)ɹ/
+**** 動|在意。
+***** 例
+如：「你根本就不care嘛！」
 ** 電子郵件
 *** ㄉㄧㄢˋ ㄗˇ ㄧㄡˊ ㄐㄧㄢˋ
 **** 名|參見：「<收件匣>」、「<寄件匣>」、「<寄件備份>」。
