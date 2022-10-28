@@ -1,7 +1,9 @@
 let EleventyServerlessBundlerPlugin;
-if (!process.env["DEV"]) {
-  ({ EleventyServerlessBundlerPlugin } = require("@11ty/eleventy"));
-}
+// Do full builds for now until we really, *actually* need to avoid
+// building everything
+// if (!process.env["DEV"]) {
+//   ({ EleventyServerlessBundlerPlugin } = require("@11ty/eleventy"));
+// }
 
 /* Return a string of an HTML link to `target`. */
 /* If `target` already contains an <a> tag, return it unchanged. */
