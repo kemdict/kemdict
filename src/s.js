@@ -21,10 +21,8 @@ if ((searchForm = document.getElementById("searchForm"))) {
       // I'll just do this instead.
       if (location.href.indexOf("word") == -1) {
         location.href = "word/" + word;
-        console.log("b");
       } else {
         location.href = "" + word;
-        console.log("a");
       }
     }
   });

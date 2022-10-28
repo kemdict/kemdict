@@ -4,7 +4,7 @@ const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 /* If `target` already contains an <a> tag, return it unchanged. */
 function linkToWord(target, desc = target) {
   if (target.indexOf("<a") === -1) {
-    return `<a href='../${target}'>${desc}</a>`;
+    return `<a href='${target}'>${desc}</a>`;
   } else {
     return target;
   }
