@@ -23,7 +23,7 @@ if ((searchForm = document.getElementById("searchForm"))) {
         location.href = "word/" + word;
         console.log("b");
       } else {
-        location.href = "../" + word;
+        location.href = "" + word;
         console.log("a");
       }
     }
