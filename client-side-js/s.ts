@@ -13,13 +13,14 @@ function loadTitles(cb: (titles: string[]) => void) {
     cb(titles as string[]);
   } else {
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "./titles.json", true);
+    xhr.open("GET", "/titles.json", true);
     xhr.responseType = "json";
     xhr.addEventListener("loadend", (_event) => {
       if (xhr.status === 200) {
         titles = xhr.response;
         cb(titles as string[]);
       }
+      // TODO: add a callback for failure
     });
     xhr.send();
   }
