@@ -7,6 +7,10 @@ pagination:
   serverless: eleventy.serverless.path.slug
 permalink:
   "serverless": "/word/:slug"
+# Undocumented...
+# I learned this usage from https://github.com/5t3ph/objectfit-focalpoint
+eleventyComputed:
+  title: "「{{ eleventy.serverless.path.slug }}」- kemdict"
 ---
 {% import "macros.njk" as macros %}
 
