@@ -13,7 +13,7 @@ dev-tailwind:
 _site/b.css: css/src.css
 	npx tailwindcss --minify --postcss -i css/src.css -o _site/b.css
 
-_site/%.js: client-side-js/%.ts
+_site/%.js: client-side-js/%.ts .babelrc.json
 	npx babel "$<" --out-file "$@"
 
 _site: src/*.njk src/_data _site/b.css _site/s.js .eleventy.js

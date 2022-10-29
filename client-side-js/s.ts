@@ -1,6 +1,12 @@
-// Implementation for the searchBar element.
-let searchForm: HTMLFormElement;
-if ((searchForm = document.getElementById("searchForm") as HTMLFormElement)) {
+/**
+ * @file Implementation for the searchBar element.
+ * @name s.ts
+ */
+
+// Using let here will *sometimes* make TypeScript complain about
+// redeclaring a block scoped variable. ...sure.
+var searchForm = document.getElementById("searchForm");
+if (searchForm) {
   let searchBar = document.getElementById("searchBar") as HTMLInputElement;
   searchForm.addEventListener("submit", (event) => {
     let word = searchBar.value;
