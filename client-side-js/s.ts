@@ -1,12 +1,9 @@
-"use strict";
-
 // Implementation for the searchBar element.
-
-var searchForm;
-if ((searchForm = document.getElementById("searchForm"))) {
-  var searchBar = document.getElementById("searchBar");
-  searchForm.addEventListener("submit", function (event) {
-    var word = searchBar.value;
+let searchForm: HTMLFormElement;
+if ((searchForm = document.getElementById("searchForm") as HTMLFormElement)) {
+  let searchBar = document.getElementById("searchBar") as HTMLInputElement;
+  searchForm.addEventListener("submit", (event) => {
+    let word = searchBar.value;
     event.preventDefault();
     if (word.trim() !== "") {
       // HACK around the fact that we can't access Eleventy's
