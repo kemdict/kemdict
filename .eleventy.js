@@ -80,6 +80,7 @@ module.exports = (cfg) => {
       name: "serverless",
       functionsDir: "./netlify/functions/",
       redirects: "netlify-toml-builders",
+      copy: ["./src/titles.json"],
     });
   }
 
