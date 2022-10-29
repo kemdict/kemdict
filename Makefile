@@ -31,7 +31,7 @@ src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-
 process-data:
 	cask eval "(load \"process-data\")"
 
-dev:
+dev: _site/s.js
 	export DEV=true
 	make src/_data
 	npx concurrently "make dev-11ty" "make dev-tailwind"

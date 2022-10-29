@@ -8,3 +8,4 @@ _data/
 netlify/functions/serverless/*
 !netlify/functions/serverless/index.js
 *.zip
+src/titles.json

@@ -1,4 +1,9 @@
 [functions]
-  # This is how I'm disabling functions without actually moving the functions elsewhere.
-  # directory = "disabled"
-  directory = "netlify/functions"
+directory = "netlify/functions"
+
+[[redirects]]
+from = "/word/:slug"
+to = "/.netlify/builders/serverless"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "serverless"

@@ -10,11 +10,6 @@ permalink:
 ---
 {% import "macros.njk" as macros %}
 
-<div class="h">
-  <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>
-  {% include "searchBar.njk" %}
-</div>
-
 {% if word.moedict_zh %}
 <div>
   <div id="moedict_zh" class="dictionary">
@@ -39,3 +34,9 @@ permalink:
   {{ macros.word_kisaragi(word) }}
 </div>
 {% endif %}
+
+<hr>
+<div class="h">
+  <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>
+  {% include "searchBar.njk" %}
+</div>

@@ -6,7 +6,7 @@ if (!process.env["DEV"]) {
 }
 
 const fs = require("node:fs");
-const all_titles = JSON.parse(fs.readFileSync("src/_data/titles.json"));
+const all_titles = JSON.parse(fs.readFileSync("src/titles.json"));
 
 /* Return a string of an HTML link to `target`. */
 /* If `target` already contains an <a> tag, return it unchanged. */
@@ -73,6 +73,7 @@ module.exports = (cfg) => {
   cfg.addFilter("process_def_kisaragi", process_def_kisaragi);
 
   cfg.addPassthroughCopy("src/s.js");
+  cfg.addPassthroughCopy("src/titles.json");
 
   if (EleventyServerlessBundlerPlugin) {
     cfg.addPlugin(EleventyServerlessBundlerPlugin, {

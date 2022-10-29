@@ -10,7 +10,13 @@
   }
   html {
     line-height: 1.6;
-    /* font-size: 14pt; */
+    font-size: 18px;
+  }
+  rt {
+    font-size: 70%;
+  }
+  hr {
+    @apply mt-8;
   }
   .base {
     width: 95%;
@@ -25,9 +31,8 @@
   /* Yes, normally you put this in the HTML when using Tailwind. */
   /* We have 163088 pages from Moedict (zh_TW) alone. */
   .h {
-    @apply w-1/2 min-w-[15ch];
     h1 {
-      @apply font-sans-serif mt-2;
+      @apply font-sans-serif my-2;
     }
     a {
       @apply link;
@@ -36,10 +41,15 @@
   #searchForm {
     @apply flex space-x-2;
     input {
-      @apply border-2 px-1 rounded;
+      @apply px-2 py-1 rounded shadow;
     }
     input[type="text"] {
-      @apply w-full;
+      @apply w-full bg-white;
+    }
+  }
+  #sr {
+    a {
+      @apply w-full block px-2 py-1 my-1 shadow bg-white;
     }
   }
   .dictionary {
