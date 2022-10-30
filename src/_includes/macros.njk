@@ -13,7 +13,7 @@
       {% set pronunciation = het.trs %}
     {% endif %}
     {% if pronunciation %}
-    <p>讀音：<span>{{ pronunciation }}</span></p>
+    <p>讀音：<span>{{ pronunciation | spc }}</span></p>
     {% endif %}
     {% set lasttype = "" %}
     {% set first = true %}
