@@ -7,7 +7,7 @@
 var searchForm = document.getElementById("searchForm") as HTMLElement;
 var resultsList = document.getElementById("sr") as HTMLUListElement;
 
-let loading: false;
+let loading = false;
 let titles: false | string[] = false;
 function loadTitles(cb: (titles: string[]) => void) {
   if (titles) {
