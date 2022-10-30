@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap");
 
 @layer base {
   blockquote {
@@ -20,7 +20,8 @@
   }
   .base {
     width: 95%;
-    @apply max-w-xl m-auto mt-12 mb-24;
+    @apply max-w-2xl m-auto mt-12 mb-24;
+    @apply relative;
   }
   ol {
     @apply pl-4;
