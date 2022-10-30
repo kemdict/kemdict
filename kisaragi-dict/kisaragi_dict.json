@@ -54,6 +54,20 @@
     ]
   },
   {
+    "title": "伴手",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄢˋ ㄕㄡˇ",
+        "definitions": [
+          {
+            "type": "名",
+            "def": "亦稱做「伴手禮」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "伴手禮",
     "heteronyms": [
       {
@@ -64,9 +78,28 @@
             "def": "旅遊歸後帶回給親友的禮物。"
           },
           {
-            "example": "如：「春節伴手禮」。",
             "type": "名",
             "def": "拜訪他人時待在手邊的禮物。"
+          },
+          {
+            "example": "如：「春節伴手禮」。",
+            "type": "名",
+            "def": "同「伴手」一詞。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "卡",
+    "heteronyms": [
+      {
+        "pronunciation": "khê",
+        "definitions": [
+          {
+            "etymology": "來自台語「㧎」一詞。",
+            "type": "動",
+            "def": "無法動彈。"
           }
         ]
       }
