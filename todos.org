@@ -1,11 +1,14 @@
+* done
 - [X] All titles should be written out as a file.
 - [X] References should only be linked if it is available.
-- [ ] Figure out how to decode the ={[xxxx]}= thing
 - [X] More dynamic search bar (which already requires JS)
   - We can avoid including titles.json in every file by just copying it to the output. We then have to do a request for it every time though. This is another case for rendering on first request.
-- [ ] The word rendering is still broken.
-- [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [X] A 404 page
-- [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 - [X] Consider using Eleventy Serverless because we're on track to a million files in one folder at this rate. Although, who knows, maybe that's actually fine: https://stackoverflow.com/questions/197162/ntfs-performance-and-large-volumes-of-files-and-directories
   See [[file:internal-docs.org::df677ea0-0d20-4f07-bed2-df3d56fe4d45][Internal Docs: Rendering pages at first request instead of at build time]].
+* todos
+- [ ] Figure out how to decode the ={[xxxx]}= thing
+- [ ] Fix stray uls for words with only one definition
+- [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
+- [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
+- [ ] Add links to search word in Moedict, Wiktionary, etc.
