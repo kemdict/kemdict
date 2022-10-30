@@ -30,7 +30,10 @@
         {% endif %}
         {% set lasttype = def.type %}
       {% else %}
-        <ol>
+        {% if first %}
+          <ol>
+          {% set first = false %}
+        {% endif %}
       {% endif %}
       {% if dict == "kisaragi_dict" %}
         <li>
