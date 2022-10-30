@@ -12,7 +12,7 @@ const all_titles = JSON.parse(fs.readFileSync("src/titles.json"));
 /* If `target` already contains an <a> tag, return it unchanged. */
 function linkToWord(target, desc = target) {
   if (target.indexOf("<a") === -1) {
-    if (target in all_titles) {
+    if (all_titles.includes(target)) {
       return `<a href='/word/${target}'>${desc}</a>`;
     }
   }
@@ -21,8 +21,18 @@ function linkToWord(target, desc = target) {
 
 function process_def_moedict_zh(def) {
   if (def) {
-    def = def.replace(/參見「(.*?)」/g, `參見「${linkToWord("$1")}」`);
-    def = def.replace(/「(.*?)」一詞/g, `「${linkToWord("$1")}」一詞`);
+    def = def.replace(
+      /參見「(.*?)」/g,
+      // "$1" is a normal variable here. This is a function that
+      // passes its second argument to linkToWord. We do this because
+      // linkToWord needs to know the word at invocation to decide
+      // whether to actually link.
+      (_m, $1) => `參見「${linkToWord($1)}」`
+    );
+    def = def.replace(
+      /「(.*?)」一詞/g,
+      (_m, $1) => `「${linkToWord($1)}」一詞`
+    );
   }
   return def;
 }
@@ -51,11 +61,14 @@ function interlinear_annotation_to_ruby(defs) {
 
 function process_def_kisaragi(def) {
   if (def) {
-    def = def.replace(/<(.*?)>/g, `${linkToWord("$1")}`);
-    def = def.replace(/「(.*?)」一詞/g, `「${linkToWord("$1")}」一詞`);
+    def = def.replace(/<(.*?)>/g, (_m, $1) => `${linkToWord($1)}`);
+    def = def.replace(
+      /「(.*?)」一詞/g,
+      (_m, $1) => `「${linkToWord($1)}」一詞`
+    );
     def = def.replace(
       /(同|參見|亦寫做)「(.*?)」/g,
-      `$1「${linkToWord("$2")}」`
+      (_m, $1, $2) => `${$1}「${linkToWord($2)}」`
     );
   }
   return def;
