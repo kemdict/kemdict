@@ -15,3 +15,15 @@
 - [ ] Make the search bar appear as if it's another window
 - [ ] Copyright information for each dictionary like Weblio's footer
 - [ ] Dictionary header should link to the original dictionary
+* Updating data
+
+moedict-data and moedict-data-hakka are out of date. So is moedict-process. (moedict-data-twblg isn't.)
+
+We can:
+
+- Update moedict-process and such so that Moedict itself is updated
+- Just process the files from Ministry of Education directly
+
+I kind of prefer the latter because Moedict splits the definition up too much, in my opinion.
+
+You can convert the .xlsx into CSV then use [[https://www.npmjs.com/package/csv-parse][csv-parse]] to parse it, then process each item accordingly.

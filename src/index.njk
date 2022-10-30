@@ -3,32 +3,34 @@ layout: base.njk
 title: kemdict
 ---
 
-<div class="prose mt-12 md:ml-[12rem]">
-  <div class="md:absolute md:top-4 md:left-4">
-    <div class="md:fixed">
-      <h1 class="font-bold text-3xl">kemdict (β)</h1>
-      <p><a href="https://github.com/kisaragi-hiu/kemdict/">原始碼</a></p>
+<div class="relative">
+  <div class="prose mt-12 md:ml-[12rem]">
+    <div class="md:absolute md:top-4 md:left-4">
+      <div class="md:fixed">
+        <h1 class="font-bold text-3xl">kemdict (β)</h1>
+        <p><a href="https://github.com/kisaragi-hiu/kemdict/">原始碼</a></p>
+      </div>
     </div>
+    <h2>前言</h2>
+    <ul>
+      <li>
+        <p><a href="about">關於 Kemdict</a></p>
+        <p><a href="thanks">致謝</a></p>
+      </li>
+    </ul>
+    <h2>收錄字典</h2>
+    <ul>
+      <li>
+        <p><a href="dict-kisaragi">Kisaragi's extras</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部重編國語字典</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部臺灣閩南語常用詞辭典</a></p>
+      </li>
+    </ul>
+    <h2>搜尋</h2>
+    {% include "searchBar.njk" %}
   </div>
-  <h2>前言</h2>
-  <ul>
-    <li>
-      <p><a href="about">關於 Kemdict</a></p>
-      <p><a href="thanks">致謝</a></p>
-    </li>
-  </ul>
-  <h2>收錄字典</h2>
-  <ul>
-    <li>
-      <p><a href="dict-kisaragi">Kisaragi's extras</a></p>
-    </li>
-    <li>
-      <p><a href="dict-moe">教育部重編國語字典</a></p>
-    </li>
-    <li>
-      <p><a href="dict-moe">教育部臺灣閩南語常用詞辭典</a></p>
-    </li>
-  </ul>
-  <h2>搜尋</h2>
-  <div class="mt-2 mb-0">{% include "searchBar.njk" %}</div>
 </div>

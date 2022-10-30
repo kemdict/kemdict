@@ -11,17 +11,21 @@
   html {
     line-height: 1.6;
     font-size: 18px;
+    @apply bg-gray-100;
   }
   rt {
     font-size: 70%;
   }
   hr {
-    @apply mt-8;
+    @apply mt-16 w-[95%] mx-auto;
+    @apply border-gray-400;
+  }
+  body {
+    @apply relative;
   }
   .base {
     width: 95%;
     @apply max-w-2xl m-auto mt-12 mb-24;
-    @apply relative;
   }
   ol {
     @apply pl-4;
@@ -38,6 +42,9 @@
     a {
       @apply link;
     }
+  }
+  #sbc {
+    @apply mt-2 mb-0;
   }
   #searchForm {
     @apply flex space-x-2;
