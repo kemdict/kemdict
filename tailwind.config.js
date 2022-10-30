@@ -11,18 +11,18 @@ module.exports = {
   content: ["./src/**/*.{njk,html,hbs}"],
   theme: {
     fontFamily: {
-      // This should be called "default".
       sans: [
-        "'Equity A'",
-        "'Noto Serif CJK TC'",
-        "'Noto Serif TC'",
+        "'Source Sans 3'",
+        "'Source Sans Pro'",
+        "'Noto Sans CJK TC'",
+        "'Noto Sans TC'",
         ...cjkFallback,
         "sans-serif",
       ],
-      "sans-serif": [
-        "'M PLUS 1p'",
-        "'Noto Sans CJK TC'",
-        "'Noto Sans TC'",
+      serif: [
+        "'Source Serif Pro'",
+        "'Noto Serif CJK TC'",
+        "'Noto Serif TC'",
         ...cjkFallback,
         "sans-serif",
       ],
