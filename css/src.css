@@ -116,6 +116,10 @@
     .pos {
       @apply font-bold mt-2 block;
     }
+    /* This makes up for the mt-2 in .pos if .pos is not present. */
+    :not(.pos) + ol {
+      @apply mt-2;
+    }
     p {
       @apply prose;
     }

@@ -1,13 +1,20 @@
-{% macro word_moedict_zh(word) %}
-{# It's ugly but it's less ugly than doing this in JS #}
+{# Treat this as an iterative program, not a template. #}
+{% macro render_word(word, dict) %}
 <div class="word">
-  {% for het in word.moedict_zh.heteronyms %}
+  {% for het in word[dict].heteronyms %}
     </ol>
     <h1>{{word.title}}</h1>
-    {% if het.bopomofo %}
-    <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
+    {% set pronunciation = false %}
+    {% if dict == "kisaragi_dict" %}
+      {% set pronunciation = het.pronunciation %}
+    {% elif dict == "moedict_zh" %}
+      {% set pronunciation = het.bopomofo %}
+    {% elif dict == "moedict_twblg" %}
+      {% set pronunciation = het.trs %}
     {% endif %}
-    {# Treat this as an iterative program, not a template. #}
+    {% if pronunciation %}
+    <p>讀音：<span>{{ pronunciation }}</span></p>
+    {% endif %}
     {% set lasttype = "" %}
     {% set first = true %}
     {% for def in het.definitions %}
@@ -22,93 +29,40 @@
           <ol>
         {% endif %}
         {% set lasttype = def.type %}
+      {% else %}
+        <ol>
       {% endif %}
-      <li>
-        <p class="def">
-        <span>{{ def.def | process_def_moedict_zh | safe }}</span>
-        {% for ex in def.example %}
-        <span>{{ ex | process_def_moedict_zh | safe }}</span>
-        {% endfor %}
-        {% for quote in def.quote %}
-        <span>{{ quote }}</span>
-        {% endfor %}</p>
-      </li>
-    {% endfor %}
-  {% endfor %}
-</div>
-{% endmacro %}
-
-{% macro word_moedict_twblg(word) %}
-<div class="word">
-  {% for het in word.moedict_twblg.heteronyms %}
-    {# HACK lol #}
-    </ol>
-    <h1>{{word.title | replace("？", "?")}}</h1>
-    {% if het.trs %}
-    <p>讀音：<span>{{ het.trs }}</span></p>
-    {% endif %}
-    {# Treat this as an iterative program, not a template. #}
-    {% set lasttype = "" %}
-    {% set first = true %}
-    {% for def in het.definitions %}
-      {% if def.type %}
-        {% if lasttype == def.type %}
-        {% else %}
-          {% if not first %}
-          </ol>
-          {% endif %}
-          {% set first = false %}
-          <p class="pos">{{ def.type }}</p>
-          <ol>
-        {% endif %}
-        {% set lasttype = def.type %}
+      {% if dict == "kisaragi_dict" %}
+        <li>
+          <p class="def">
+          {{ def.def | process_def_kisaragi | safe }}
+          {{ def.example }}
+          </p>
+          <p>
+          {{ def.etymology | process_def_kisaragi | safe }}
+          </p>
+          {% for quote in def.quote %}
+          <p>{{ quote }}</p>
+          {% endfor %}
+        </li>
+      {% elif dict == "moedict_zh" %}
+        <li>
+          <p class="def">
+          <span>{{ def.def | process_def_moedict_zh | safe }}</span>
+          {% for ex in def.example %}
+          <span>{{ ex | process_def_moedict_zh | safe }}</span>
+          {% endfor %}
+          {% for quote in def.quote %}
+          <span>{{ quote }}</span>
+          {% endfor %}</p>
+        </li>
+      {% elif dict == "moedict_twblg" %}
+        <li>
+          <p class="def">{{ def.def }}</p>
+          {{ def.example | interlinear_annotation_to_ruby | safe }}
+          {{ def.quote | interlinear_annotation_to_ruby | safe }}
+        </li>
       {% endif %}
-      <li>
-        <p class="def">{{ def.def }}</p>
-        {{ def.example | interlinear_annotation_to_ruby | safe }}
-        {{ def.quote | interlinear_annotation_to_ruby | safe }}
-      </li>
-    {% endfor %}
-  {% endfor %}
-</div>
-{% endmacro %}
-
-{% macro word_kisaragi(word) %}
-<div class="word">
-  {% for het in word.kisaragi_dict.heteronyms %}
-    </ol>
-    <h1>{{word.title}}</h1>
-    {% if het.pronunciation %}
-    <p>讀音：<span>{{ het.pronunciation }}</span></p>
-    {% endif %}
-    {# Treat this as an iterative program, not a template. #}
-    {% set lasttype = "" %}
-    {% set first = true %}
-    {% for def in het.definitions %}
-      {% if def.type %}
-        {% if lasttype == def.type %}
-        {% else %}
-          {% if not first %}
-          </ol>
-          {% endif %}
-          {% set first = false %}
-          <p class="pos">{{ def.type }}</p>
-          <ol>
-        {% endif %}
-        {% set lasttype = def.type %}
-      {% endif %}
-      <li>
-        <p class="def">
-        {{ def.def | process_def_kisaragi | safe }}
-        {{ def.example }}
-        </p>
-        <p>
-        {{ def.etymology | process_def_kisaragi | safe }}
-        </p>
-        {% for quote in def.quote %}
-        <p>{{ quote }}</p>
-        {% endfor %}
-      </li>
     {% endfor %}
   {% endfor %}
 </div>

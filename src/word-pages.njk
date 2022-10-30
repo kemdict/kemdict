@@ -19,7 +19,7 @@ eleventyComputed:
   <div id="moedict_zh" class="dictionary">
     教育部重編國語辭典
   </div>
-  {{ macros.word_moedict_zh(word) }}
+  {{ macros.render_word(word, "moedict_zh") }}
 </div>
 {% endif %}
 {% if word.moedict_twblg %}
@@ -27,7 +27,7 @@ eleventyComputed:
   <div id="moedict_twblg" class="dictionary">
     教育部臺灣閩南語常用詞辭典
   </div>
-  {{ macros.word_moedict_twblg(word) }}
+  {{ macros.render_word(word, "moedict_twblg") }}
 </div>
 {% endif %}
 {% if word.kisaragi_dict %}
@@ -35,7 +35,7 @@ eleventyComputed:
   <div id="kisaragi_dict" class="dictionary">
     <a href="{{ "/dict-kisaragi" | url }}">Kisaragi's extras (beta)</a>
   </div>
-  {{ macros.word_kisaragi(word) }}
+  {{ macros.render_word(word, "kisaragi_dict") }}
 </div>
 {% endif %}
 
