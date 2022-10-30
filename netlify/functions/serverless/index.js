@@ -21,12 +21,18 @@ async function handler(event) {
       body: await elev.render(),
     };
   } catch (error) {
-    return {
-      statusCode: error.httpStatusCode || 500,
-      body: JSON.stringify({
-        error: error,
-      }),
-    };
+    if (error.message?.startsWith("Could not find pagination data")) {
+      return {
+        statusCode: 404,
+      };
+    } else {
+      return {
+        statusCode: error.httpStatusCode || 500,
+        body: JSON.stringify({
+          error: error.message,
+        }),
+      };
+    }
   }
 }
 
