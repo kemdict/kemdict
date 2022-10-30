@@ -39,7 +39,9 @@ function updateSearch(needle: string) {
   while (resultsList.firstChild) {
     resultsList.removeChild(resultsList.firstChild);
   }
-  resultsList.textContent = "載入中…";
+  let loading = document.createElement("p");
+  loading.textContent = "載入中…";
+  resultsList.appendChild(loading);
   if (needle.length > 0) {
     loadTitles((titles) => {
       while (resultsList.firstChild) {
