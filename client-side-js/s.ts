@@ -7,15 +7,21 @@
 var searchForm = document.getElementById("searchForm") as HTMLElement;
 var resultsList = document.getElementById("sr") as HTMLUListElement;
 
+let loading: false;
 let titles: false | string[] = false;
 function loadTitles(cb: (titles: string[]) => void) {
   if (titles) {
     cb(titles as string[]);
+  } else if (loading) {
+    // A load is already happening. Don't do another.
+    return;
   } else {
+    loading = true;
     let xhr = new XMLHttpRequest();
     xhr.open("GET", "/titles.json", true);
     xhr.responseType = "json";
     xhr.addEventListener("loadend", (_event) => {
+      loading = false;
       if (xhr.status === 200) {
         titles = xhr.response;
         cb(titles as string[]);
