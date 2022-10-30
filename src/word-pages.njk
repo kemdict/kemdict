@@ -40,6 +40,11 @@ eleventyComputed:
 {% endif %}
 
 <hr>
+<ul class="prose">
+  <li><a href="https://google.com/search?q={{word.title}}">在 Google 搜尋「{{word.title}}」</a></li>
+  <li><a href="https://zh.wiktionary.org/w/index.php?search={{word.title}}">在維基詞典搜尋「{{word.title}}」</a></li>
+  <li><a href="https://moedict.tw/{{word.title}}">在萌典搜尋「{{word.title}}」</a></li>
+</ul>
 <div class="h">
   <h1><a href="{{ "/" | url }}">kemdict (β)</a></h1>
   {% include "searchBar.njk" %}
