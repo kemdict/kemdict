@@ -16,6 +16,8 @@ title: 關於 Kemdict
 
 Kemdict 一方面是我記錄沒有被收錄的詞的地方，另一方面我也希望它是一個新的教育部字典的前端。
 
+Kemdict 會對同一個詞列出所有收錄字典的定義。
+
 ---
 
 Kemdict 原始碼：<https://github.com/kisaragi-hiu/kemdict/>
