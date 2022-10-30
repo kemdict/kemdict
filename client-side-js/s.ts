@@ -62,7 +62,7 @@ function updateSearch(needle: string) {
 
 if (searchForm) {
   let searchBar = document.getElementById("searchBar") as HTMLInputElement;
-  searchBar.addEventListener("change", (_event) => {
+  searchBar.addEventListener("input", (_event) => {
     updateSearch(searchBar.value);
   });
   searchForm.addEventListener("submit", (event) => {
