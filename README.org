@@ -19,9 +19,8 @@ make _site
 
 ** License
 
-教育部重編國語字典 is CC-BY-ND (TW 3.0). It is being used through [[https://github.com/g0v/moedict-data][moedict-data]].
+教育部重編國語字典著作權為中華民國教育部所有，[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][使用「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」]]。資料透過 [[https://github.com/g0v/moedict-data][moedict-data]] 使用。
 
-教育部臺灣閩南語常用詞辭典 is also CC-BY-ND (TW 3.0). It is being used
-through [[https://github.com/g0v/moedict-data-twblg][moedict-data-twblg]].
+教育部臺灣閩南語常用詞辭典著作權亦為中華民國教育部所有，[[https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp][使用「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」]]。資料透過 [[https://github.com/g0v/moedict-data-twblg][moedict-data-twblg]] 使用。
 
-I (Kisaragi Hiu) release everything else in this repository (that I might have the copyright to) with CC0.
+本專案其餘著作權由我（如月飛羽）以 CC0 釋出，內文見[[./LICENSE-CC0][LICENSE-CC0]]。
