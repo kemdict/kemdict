@@ -19,20 +19,17 @@ function linkToWord(target, desc = target) {
   return target;
 }
 
+function linkify_brackets(str) {
+  // "$1" is a normal variable here. This is a function that
+  // passes its second argument to linkToWord. We do this because
+  // linkToWord needs to know the word at invocation to decide
+  // whether to actually link.
+  return str.replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`);
+}
+
 function process_def_moedict_zh(def) {
   if (def) {
-    def = def.replace(
-      /參見「(.*?)」/g,
-      // "$1" is a normal variable here. This is a function that
-      // passes its second argument to linkToWord. We do this because
-      // linkToWord needs to know the word at invocation to decide
-      // whether to actually link.
-      (_m, $1) => `參見「${linkToWord($1)}」`
-    );
-    def = def.replace(
-      /「(.*?)」一詞/g,
-      (_m, $1) => `「${linkToWord($1)}」一詞`
-    );
+    def = linkify_brackets(def);
   }
   return def;
 }
@@ -62,14 +59,7 @@ function interlinear_annotation_to_ruby(defs) {
 function process_def_kisaragi(def) {
   if (def) {
     def = def.replace(/<(.*?)>/g, (_m, $1) => `${linkToWord($1)}`);
-    def = def.replace(
-      /「(.*?)」一詞/g,
-      (_m, $1) => `「${linkToWord($1)}」一詞`
-    );
-    def = def.replace(
-      /(同|參見|亦寫做)「(.*?)」/g,
-      (_m, $1, $2) => `${$1}「${linkToWord($2)}」`
-    );
+    def = linkify_brackets(def);
   }
   return def;
 }

@@ -14,7 +14,7 @@
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 - [ ] Make the search bar appear as if it's another window
 - [ ] Copyright information for each dictionary like Weblio's footer
-- [ ] Dictionary header should link to the original dictionary
+- [ ] Dictionary header should link to the original dictionary, preferably to the same term
 * Updating data
 
 moedict-data and moedict-data-hakka are out of date. So is moedict-process. (moedict-data-twblg isn't.)
