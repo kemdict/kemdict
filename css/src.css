@@ -60,7 +60,7 @@
       @apply w-full block px-2 py-1 my-1 shadow bg-white;
     }
   }
-  .dictionary {
+  .dict {
     @apply border-b-2 border-black mb-2 my-8;
     @apply text-right;
     a {

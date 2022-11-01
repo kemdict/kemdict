@@ -8,13 +8,13 @@
   See [[file:internal-docs.org::df677ea0-0d20-4f07-bed2-df3d56fe4d45][Internal Docs: Rendering pages at first request instead of at build time]].
 - [X] Fix stray <li>s for words without a type
 - [X] Add links to search word in Moedict, Wiktionary, etc.
+- [X] Copyright information for each dictionary like Weblio's footer
+- [X] Dictionary header should link to the original dictionary, preferably to the same term
 * todos
 - [ ] Figure out how to decode the ={[xxxx]}= thing
 - [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 - [ ] Make the search bar appear as if it's another window
-- [ ] Copyright information for each dictionary like Weblio's footer
-- [ ] Dictionary header should link to the original dictionary, preferably to the same term
 * Updating data
 
 moedict-data and moedict-data-hakka are out of date. So is moedict-process. (moedict-data-twblg isn't.)

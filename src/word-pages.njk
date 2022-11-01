@@ -13,23 +13,34 @@ eleventyComputed:
   title: "「{{ eleventy.serverless.path.slug }}」- kemdict"
 ---
 
+{% import "macros.njk" as macros %}
+
 <div class="h">
   <h1><a href="/">kemdict (β)</a></h1>
 </div>
 
-{% import "macros.njk" as macros %} {% if word.moedict_zh %}
+{% if word.moedict_zh %}
 <div>
-  <div id="moedict_zh" class="dictionary">教育部重編國語辭典</div>
+  <div id="moedict_zh" class="dict">
+    <a href="https://dict.revised.moe.edu.tw/search.jsp?word={{word.title}}"
+      >教育部重編國語辭典</a
+    >
+  </div>
   {{ macros.render_word(word, "moedict_zh") }}
 </div>
 {% endif %} {% if word.moedict_twblg %}
 <div>
-  <div id="moedict_twblg" class="dictionary">教育部臺灣閩南語常用詞辭典</div>
+  <div id="moedict_twblg" class="dict">
+    <a
+      href="https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample={{word.title}}"
+      >教育部臺灣閩南語常用詞辭典</a
+    >
+  </div>
   {{ macros.render_word(word, "moedict_twblg") }}
 </div>
 {% endif %} {% if word.kisaragi_dict %}
 <div>
-  <div id="kisaragi_dict" class="dictionary">
+  <div id="kisaragi_dict" class="dict">
     <a href="/dict-kisaragi">Kisaragi's extras (beta)</a>
   </div>
   {{ macros.render_word(word, "kisaragi_dict") }}
