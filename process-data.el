@@ -13,17 +13,47 @@
     (replace-regexp-in-string "'" "’")
     (replace-regexp-in-string (rx "?") (rx "？"))))
 
+(defun k/extract-development-version (file output-path)
+  "Read FILE and write a simplified single-word version of it to OUTPUT-PATH.
+
+This allows for not having to load everything when I'm only
+iterating on one page.
+
+Does nothing if OUTPUT-PATH already exists as a file."
+  (unless (file-exists-p output-path)
+    (let (parsed)
+      (with-temp-buffer
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (setq parsed (json-parse-buffer :array-type 'list)))
+      (with-temp-file output-path
+        (insert
+         (let ((json-encoding-pretty-print t))
+           (json-encode
+            (list
+             (--first (equal "水" (gethash "title" it))
+                      parsed)))))))))
+
+(progn
+  (k/extract-development-version
+   "dicts/moedict-data/dict-revised.json" "dev-dict-revised.json")
+  (k/extract-development-version
+   "dicts/moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
+  (k/extract-development-version
+   "dicts/ministry-of-education/dict_concised.json" "dev-dict_concised.json"))
+
 (defun main ()
   (let* ((all-titles (list))
          (merged-result (make-hash-table :test #'equal))
          (dictionaries
           (if (and (or (not noninteractive)
                        (getenv "DEV"))
-                   (file-exists-p "a.json")
-                   (file-exists-p "b.json"))
-              [("moedict_zh" . "a.json")
-               ("moedict_twblg" . "b.json")
-               ("dict_concised" . "c.json")
+                   (file-exists-p "dev-dict-revised.json")
+                   (file-exists-p "dev-dict-twblg.json")
+                   (file-exists-p "dev-dict_concised.json"))
+              [("moedict_zh" . "dev-dict-revised.json")
+               ("moedict_twblg" . "dev-dict-twblg.json")
+               ("dict_concised" . "dev-dict_concised.json")
                ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]
             [("moedict_zh" . "dicts/moedict-data/dict-revised.json")
              ("moedict_twblg" . "dicts/moedict-data-twblg/dict-twblg.json")

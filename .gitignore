@@ -10,3 +10,4 @@ netlify/functions/serverless/*
 *.zip
 src/titles.json
 dicts/kisaragi/*.json
+dev-*.json
