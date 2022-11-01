@@ -48,6 +48,15 @@ eleventyComputed:
   </div>
   {{ macros.render_word(word, "moedict_twblg") }}
 </div>
+{% endif %} {% if word.dict_idioms %}
+<div>
+  <div id="dict_idioms" class="dict">
+    <a href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={{word.title}}"
+      >教育部成語典</a
+    >
+  </div>
+  {{ macros.render_word_dict_idioms(word["dict_idioms"]) }}
+</div>
 {% endif %} {% if word.kisaragi_dict %}
 <div>
   <div id="kisaragi_dict" class="dict">
@@ -81,7 +90,8 @@ eleventyComputed:
       >
     </li>
   </ul>
-  {% if word.moedict_zh or word.moedict_twblg or word.dict_concised %}
+  {% if word.moedict_zh or word.moedict_twblg or word.dict_concised or
+  word.dict_idioms %}
   <h2 class="mt-2">本頁的著作權</h2>
   {% if word.moedict_zh %}
   <p>
@@ -97,6 +107,11 @@ eleventyComputed:
   <p>
     《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a>》©
     中華民國教育部（版本編號：20190610）
+  </p>
+  {% endif %} {% if word.dict_idioms %}
+  <p>
+    《<a href="https://dict.idioms.moe.edu.tw">成語典</a>》©
+    中華民國教育部（版本編號：2020_20220928）
   </p>
   {% endif %} {% endif %}
 </div>

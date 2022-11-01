@@ -1,3 +1,39 @@
+{% macro render_word_dict_idioms(entry) %}
+<div class="word">
+  <h1>{{entry.title}}</h1>
+  {% if entry.bopomofo %}
+  <p>讀音：<span>{{ entry.bopomofo | spc }}</span></p>
+  {% endif %}
+  <p class="def">{{ entry.definition }}</p>
+  <h2>用法</h2>
+  <p>{{ entry.用法語意說明 }}</p>
+  <p>{{ entry.用法使用類別}}</p>
+  <h3>例句</h3>
+  <p>{{ entry.用法例句 | newline_string_to_ol | safe }}</p>
+  <h2>辨識</h2>
+  <p>近義：{{ entry.近義同 | comma_word_list | safe }}</p>
+  <p>反義：{{ entry.近義反 | comma_word_list | safe }}</p>
+  <p>參考詞語：「{{ entry.word_ref | linkToWord | safe }}」</p>
+  <p>{{ entry.辨識同 }}{{ entry.辨識異 }}</p>
+  {% if entry.辨識例句 %}
+  {{ entry.辨識例句 | idioms_nuance | safe }}
+  {% endif %}
+  <p>{{ entry.形音辨誤 }}</p>
+  {% if entry.source_name %}
+  <h2 id="isc">典源</h2>
+  <p>{{ entry.source_name }}</p>
+  <p>{{ entry.source_content | idioms_source | safe }}</p>
+  <h3>注解</h3>
+  <p>{{ entry.source_comment | idioms_source_comment | safe }}</p>
+  <p>{{ entry.source_reference }}</p>
+  {% endif %}
+  <h2>典故說明</h2>
+  <p>{{ entry.典故說明 }}</p>
+  <h2>書證</h2>
+  {{ entry.書證 | newline_string_to_ol | safe }}
+</div>
+{% endmacro %}
+
 {% macro render_word_dict_concised(word) %}
 <div class="word">
   <h1>{{word.title}}</h1>

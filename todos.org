@@ -14,6 +14,7 @@
 * todos
 - [ ] Fix input text alignment in Chromium
 - [ ] =dict_concised=: add links to [例]A、B、C
+- [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
   - Or maybe checkboxes to hide a dictionary temporarily
 - [ ] Figure out how to decode the ={[xxxx]}= thing
