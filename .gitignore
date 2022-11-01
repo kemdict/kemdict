@@ -9,4 +9,5 @@ netlify/functions/serverless/*
 !netlify/functions/serverless/index.js
 *.zip
 src/titles.json
-kisaragi-dict/*.json
+dicts/kisaragi/*.json
+dev-*.json

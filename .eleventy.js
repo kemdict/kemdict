@@ -24,7 +24,94 @@ function linkify_brackets(str) {
   // passes its second argument to linkToWord. We do this because
   // linkToWord needs to know the word at invocation to decide
   // whether to actually link.
-  return str.replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`);
+  if (str) {
+    return str.replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`);
+  } else {
+    return str;
+  }
+}
+
+/**
+ * Take a word list like "a,b,c" and format it with links.
+ */
+function comma_word_list(str) {
+  return str
+    .split(",")
+    .map((x) => `「${linkToWord(x)}」`)
+    .join("、");
+}
+
+function idioms_nuance(str) {
+  /* Sure... */
+  return `<table>${str
+    .split("\n")
+    .map((line) => {
+      let s = line.split(",");
+      if (s.length == 2) {
+        return `<tr>${s
+          .map((x) => `<th>${x.replace("ㄨ", "☓")}</th>`)
+          .join("")}<th>例句</th></tr>`;
+      } else {
+        return `<tr>${s
+          .map((x) => `<td>${x.replace("ㄨ", "☓")}</td>`)
+          .join("")}</tr>`;
+      }
+    })
+    .join("")}</table>`;
+}
+
+function idioms_source(str) {
+  return str
+    .split("\n")
+    .map((x) => x.replace(/^\*(\d)\*(.*)/, `$2<a href="#sc$1">$1</a>`))
+    .join("");
+}
+
+function idioms_source_comment(str) {
+  if (str) {
+    return linkify_brackets(
+      `<ol>
+    ${str
+      .split("\n")
+      .map(
+        (d, i) =>
+          `<li id="sc${i + 1}">${d.replace(
+            /^\d+\./,
+            ""
+          )}<a href="#isc">↩</a></li>`
+      )
+      .join("")}
+</ol>`
+    );
+  } else {
+    return str;
+  }
+}
+
+function newline_string_to_ol(str) {
+  if (str) {
+    return `<ol>
+    ${str
+      .split("\n")
+      .map((s) => `<li>${s.replace(/^\d+\./, "")}</li>`)
+      .join("")}
+</ol>`;
+  } else {
+    return str;
+  }
+}
+
+function process_def_concised(def) {
+  if (def) {
+    return `<ol>
+    ${def
+      .split("\n")
+      .map((d) => `<li><p class="def">${d.replace(/^\d+\./, "")}</p></li>`)
+      .join("")}
+</ol>`;
+  } else {
+    return def;
+  }
 }
 
 function process_def_moedict_zh(def) {
@@ -69,6 +156,13 @@ module.exports = (cfg) => {
     return def.replace(/　/g, " ");
   });
   cfg.addFilter("process_def_moedict_zh", process_def_moedict_zh);
+  cfg.addFilter("idioms_nuance", idioms_nuance);
+  cfg.addFilter("comma_word_list", comma_word_list);
+  cfg.addFilter("idioms_source", idioms_source);
+  cfg.addFilter("idioms_source_comment", idioms_source_comment);
+  cfg.addFilter("newline_string_to_ol", newline_string_to_ol);
+  cfg.addFilter("process_def_concised", process_def_concised);
+  cfg.addFilter("linkToWord", linkToWord);
   cfg.addFilter(
     "interlinear_annotation_to_ruby",
     interlinear_annotation_to_ruby

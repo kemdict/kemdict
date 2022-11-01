@@ -119,12 +119,17 @@
     h3 {
       @apply font-bold;
     }
+    a {
+      @apply link;
+    }
     h1 {
       @apply text-2xl mt-4;
     }
-    h2,
+    h2 {
+      @apply text-xl mt-4;
+    }
     h3 {
-      @apply text-xl;
+      @apply mb-0 mt-2;
     }
     ol {
       @apply list-decimal;
@@ -139,7 +144,8 @@
       @apply font-bold mt-2 block;
     }
     /* This makes up for the mt-2 in .pos if .pos is not present. */
-    :not(.pos) + ol {
+    :not(.pos) + ol,
+    :not(.pos) + .def {
       @apply mt-2;
     }
     p {
