@@ -10,11 +10,11 @@
 - [X] Add links to search word in Moedict, Wiktionary, etc.
 - [X] Copyright information for each dictionary like Weblio's footer
 - [X] Dictionary header should link to the original dictionary, preferably to the same term
+- [X] Make the search bar appear as if it's another window
 * todos
 - [ ] Figure out how to decode the ={[xxxx]}= thing
 - [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
-- [ ] Make the search bar appear as if it's another window
 * Updating data
 
 moedict-data and moedict-data-hakka are out of date. So is moedict-process. (moedict-data-twblg isn't.)

@@ -43,21 +43,33 @@
       @apply link;
     }
   }
+
   #sbc {
-    @apply mt-2 mb-0;
-  }
-  #searchForm {
-    @apply flex space-x-2;
-    input {
-      @apply px-2 py-1 rounded shadow;
+    /* Search Bar Container */
+    @apply mt-2 mb-2;
+    /* This gets search results to use this element to calculate its
+     * relative units. */
+    position: relative;
+
+    #sr {
+      /* Search Results */
+      @apply absolute;
+      @apply w-full rounded shadow-lg bg-white z-10;
+      @apply mt-2;
+      a {
+        @apply w-full block px-2 py-1 my-1 bg-white;
+      }
     }
-    input[type="text"] {
-      @apply w-full bg-white;
-    }
-  }
-  #sr {
-    a {
-      @apply w-full block px-2 py-1 my-1 shadow bg-white;
+    #sf {
+      /* Search Form */
+      @apply flex space-x-2;
+      input {
+        @apply px-2 py-1 rounded shadow bg-white;
+      }
+      /* input[type="search"] { */
+      #sb {
+        @apply w-full;
+      }
     }
   }
   .dict {

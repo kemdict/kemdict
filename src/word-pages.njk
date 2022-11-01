@@ -17,6 +17,7 @@ eleventyComputed:
 
 <div class="h">
   <h1><a href="/">kemdict (β)</a></h1>
+  {% include "searchBar.njk" %}
 </div>
 
 {% if word.moedict_zh %}
@@ -84,6 +85,4 @@ eleventyComputed:
     中華民國教育部（版本編號：20190610）
   </p>
   {% endif %} {% endif %}
-  <h2>搜尋</h2>
-  {% include "searchBar.njk" %}
 </div>

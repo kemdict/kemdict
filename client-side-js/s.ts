@@ -4,8 +4,9 @@
  */
 // Using let here will *sometimes* make TypeScript complain about
 // redeclaring a block scoped variable. ...sure.
-var searchForm = document.getElementById("searchForm") as HTMLElement;
+var searchForm = document.getElementById("sf") as HTMLElement;
 var resultsList = document.getElementById("sr") as HTMLUListElement;
+var sbc = document.getElementById("sbc") as HTMLElement;
 
 let loading = false;
 let titles: false | string[] = false;
@@ -31,6 +32,20 @@ function loadTitles(cb: (titles: string[]) => void) {
     xhr.send();
   }
 }
+
+/**
+ * If `hidden` is true, hide `elem`. Otherwise show it.
+ */
+function setHidden(elem: HTMLElement, hide: boolean) {
+  if (hide) {
+    elem.classList.remove("visible");
+    elem.classList.add("invisible");
+  } else {
+    elem.classList.remove("invisible");
+    elem.classList.add("visible");
+  }
+}
+
 /**
  * Update the list of search results to show those matching `needle`.
  * @param needle
@@ -40,6 +55,7 @@ function updateSearch(needle: string) {
     resultsList.removeChild(resultsList.firstChild);
   }
   if (needle.length > 0) {
+    setHidden(resultsList, false);
     let loading = document.createElement("p");
     loading.textContent = "載入中…";
     resultsList.appendChild(loading);
@@ -63,9 +79,12 @@ function updateSearch(needle: string) {
 }
 
 if (searchForm) {
-  let searchBar = document.getElementById("searchBar") as HTMLInputElement;
+  let searchBar = document.getElementById("sb") as HTMLInputElement;
   searchBar.addEventListener("input", (_event) => {
     updateSearch(searchBar.value);
+  });
+  searchBar.addEventListener("focus", (_event) => {
+    setHidden(resultsList, false);
   });
   searchForm.addEventListener("submit", (event) => {
     let word = searchBar.value;
@@ -89,3 +108,22 @@ if (searchForm) {
     }
   });
 }
+
+// Modal dismissal logic:
+// https://stackoverflow.com/a/54441029/6927814
+//
+// Have a full-size parent element which, when clicked, hides the
+// modal. Here we use the root element as the parent element.
+// Then we get the modal itself (the search form's parent container)
+// to block click events from going through to the root document.
+// Now the search result list hides when we click away.
+sbc.addEventListener("click", (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  return false;
+});
+
+document.addEventListener("click", (_event) => {
+  setHidden(resultsList, true);
+});
