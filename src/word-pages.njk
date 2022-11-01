@@ -39,6 +39,15 @@ eleventyComputed:
   </div>
   {{ macros.render_word(word, "moedict_twblg") }}
 </div>
+{% endif %} {% if word.dict_concised %}
+<div>
+  <div id="dict_concised" class="dict">
+    <a href="https://dict.concised.moe.edu.tw/search.jsp?word={{word.title}}"
+      >教育部國語辭典簡編本</a
+    >
+  </div>
+  {{ macros.render_word_dict_concised(word) }}
+</div>
 {% endif %} {% if word.kisaragi_dict %}
 <div>
   <div id="kisaragi_dict" class="dict">
@@ -72,17 +81,22 @@ eleventyComputed:
       >
     </li>
   </ul>
-  {% if word.moedict_zh or word.moedict_twblg %}
+  {% if word.moedict_zh or word.moedict_twblg or word.dict_concised %}
   <h2 class="mt-2">本頁的著作權</h2>
   {% if word.moedict_zh %}
   <p>
-    《<a href="https://dict.revised.moe.edu.tw/">重編國語辭典修訂本</a>》©
+    《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
     中華民國教育部（版本編號：2015_20160523）
   </p>
   {% endif %} {% if word.moedict_twblg %}
   <p>
-    《<a href="https://twblg.dict.edu.tw/">臺灣閩南語常用詞辭典</a>》©
+    《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a>》©
     中華民國教育部（版本編號：20190610）
+  </p>
+  {% endif %} {% if word.dict_concised %}
+  <p>
+    《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a>》©
+    中華民國教育部（版本編號：2014_20220928）
   </p>
   {% endif %} {% endif %}
 </div>

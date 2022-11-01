@@ -1,3 +1,13 @@
+{% macro render_word_dict_concised(word) %}
+<div class="word">
+  <h1>{{word.title}}</h1>
+  {% if word["dict_concised"].bopomofo %}
+  <p>讀音：<span>{{ word["dict_concised"].bopomofo | spc }}</span></p>
+  {% endif %}
+  {{ word["dict_concised"].definition | process_def_concised | safe }}
+</div>
+{% endmacro %}
+
 {# Treat this as an iterative program, not a template. #}
 {% macro render_word(word, dict) %}
 <div class="word">

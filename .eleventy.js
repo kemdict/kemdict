@@ -24,7 +24,24 @@ function linkify_brackets(str) {
   // passes its second argument to linkToWord. We do this because
   // linkToWord needs to know the word at invocation to decide
   // whether to actually link.
-  return str.replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`);
+  if (str) {
+    return str.replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`);
+  } else {
+    return str;
+  }
+}
+
+function process_def_concised(def) {
+  if (def) {
+    return `<ol><p class="def">
+    ${def
+      .split("\n")
+      .map((d) => `<li><p class="def">${d.replace(/^\d+\./, "")}</p></li>`)
+      .join("")}
+</p></ol>`;
+  } else {
+    return def;
+  }
 }
 
 function process_def_moedict_zh(def) {
@@ -69,6 +86,7 @@ module.exports = (cfg) => {
     return def.replace(/　/g, " ");
   });
   cfg.addFilter("process_def_moedict_zh", process_def_moedict_zh);
+  cfg.addFilter("process_def_concised", process_def_concised);
   cfg.addFilter(
     "interlinear_annotation_to_ruby",
     interlinear_annotation_to_ruby

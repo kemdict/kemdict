@@ -23,10 +23,12 @@
                    (file-exists-p "b.json"))
               [("moedict_zh" . "a.json")
                ("moedict_twblg" . "b.json")
-               ("kisaragi_dict" . "dicts/kisaragi-dict/kisaragi_dict.json")]
+               ("dict_concised" . "c.json")
+               ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]
             [("moedict_zh" . "dicts/moedict-data/dict-revised.json")
              ("moedict_twblg" . "dicts/moedict-data-twblg/dict-twblg.json")
-             ("kisaragi_dict" . "dicts/kisaragi-dict/kisaragi_dict.json")]))
+             ("dict_concised" . "dicts/ministry-of-education/dict_concised.json")
+             ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]))
          (dict-count (length dictionaries))
          ;; A list of the original parsed dictionary data
          (raw-dicts (make-vector dict-count nil))
@@ -42,16 +44,26 @@
     ;;   ... ...}
     ;;  ...]
     ;; -> {"title" {heteronyms (...)}
-    ;;     "title2" {heteronyms (...)
+    ;;     ...}
+    ;;
+    ;; For entries without heteronyms:
+    ;; [{:title "title"
+    ;;   :definition "def"
+    ;;   ... ...}
+    ;;  ...]
+    ;; -> {"title" {definition "def" ...}}
     ;;     ...}
     (dotimes (i dict-count)
       (message "Shaping dictionary data (%s/%s)..." (1+ i) dict-count)
       (let ((shaped (make-hash-table :test #'equal)))
         (dolist (entry (aref raw-dicts i))
-          (let ((title (k/process-title (gethash "title" entry))))
-            (let ((tmp (make-hash-table :test #'equal)))
-              (puthash "heteronyms" (gethash "heteronyms" entry) tmp)
-              (puthash title tmp shaped))))
+          (let* ((title (k/process-title (gethash "title" entry)))
+                 (heteronyms (gethash "heteronyms" entry)))
+            (if heteronyms
+                (let ((tmp (make-hash-table :test #'equal)))
+                  (puthash "heteronyms" heteronyms tmp)
+                  (puthash title tmp shaped))
+              (puthash title entry shaped))))
         (aset shaped-dicts i shaped)))
     (dotimes (i dict-count)
       (message "Collecting titles (%s/%s)..." (1+ i) dict-count)
