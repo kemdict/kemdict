@@ -12,6 +12,10 @@
 - [X] Dictionary header should link to the original dictionary, preferably to the same term
 - [X] Make the search bar appear as if it's another window
 * todos
+- [ ] Fix input text alignment in Chromium
+- [ ] =dict_concised=: add links to [例]A、B、C
+- [ ] Add list of dictionaries at top of word page to quickly navigate to
+  - Or maybe checkboxes to hide a dictionary temporarily
 - [ ] Figure out how to decode the ={[xxxx]}= thing
 - [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
