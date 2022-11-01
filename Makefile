@@ -7,7 +7,7 @@ export LANG=en_US.UTF-8
 # * Processing dictionary data into one combined file
 src/_data: src/_data/combined.json src/_data/kisaragi_dict.json
 
-src/_data/combined.json: moedict-data/dict-revised.json moedict-data-twblg/dict-twblg.json src/_data/kisaragi_dict.json process-data.el
+src/_data/combined.json: dicts/moedict-data/dict-revised.json dicts/moedict-data-twblg/dict-twblg.json dicts/kisaragi/kisaragi_dict.json process-data.el
 	cask eval "(load \"process-data\")"
 
 src/_data/kisaragi_dict.json: dicts/kisaragi/kisaragi_dict.json
@@ -16,10 +16,10 @@ src/_data/kisaragi_dict.json: dicts/kisaragi/kisaragi_dict.json
 dicts/kisaragi/kisaragi_dict.json: dicts/kisaragi/kisaragi-dict.org dicts/kisaragi/generate.el
 	cask eval "(load \"dicts/kisaragi/generate\")"
 
-moedict-data/dict-revised.json:
+dicts/moedict-data/dict-revised.json:
 	git submodule update --init -- moedict-data
 
-moedict-data-twblg/dict-twblg.json:
+dicts/moedict-data-twblg/dict-twblg.json:
 	git submodule update --init -- moedict-data-twblg
 
 # * Development tasks

@@ -1,11 +1,9 @@
-[submodule "moedict-data"]
-	path = moedict-data
-	url = https://github.com/g0v/moedict-data
-	shallow = true
-[submodule "moedict-data-twblg"]
-	path = moedict-data-twblg
-	url = https://github.com/g0v/moedict-data-twblg
-	shallow = true
 [submodule "dicts/ministry-of-education"]
 	path = dicts/ministry-of-education
 	url = https://github.com/kisaragi-hiu/kemdict-data-ministry-of-education.git
+[submodule "dicts/moedict-data"]
+	path = dicts/moedict-data
+	url = https://github.com/g0v/moedict-data
+[submodule "dicts/moedict-data-twblg"]
+	path = dicts/moedict-data-twblg
+	url = https://github.com/g0v/moedict-data-twblg
