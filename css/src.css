@@ -59,6 +59,9 @@
       a {
         @apply w-full block px-2 py-1 my-1 bg-white;
       }
+      p {
+        @apply px-2 py-1;
+      }
     }
     #sf {
       /* Search Form */

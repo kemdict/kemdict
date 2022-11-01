@@ -74,6 +74,7 @@ function updateSearch(needle: string) {
         c.appendChild(a);
         resultsList.appendChild(c);
       });
+      setHidden(resultsList, false);
     });
   }
 }
