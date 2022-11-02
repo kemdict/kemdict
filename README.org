@@ -1,21 +1,45 @@
 * kemdict
 
-A space for me to experiment with 教育部重編國語字典 and 教育部臺灣閩南語常用詞辭典 data.
+Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。
+
+目前整合的辭典：
+
+- 重編國語辭典
+- 臺灣閩南語常用詞辭典
+- 成語典
+- 國語辭典簡編本
+- [[Kisaragi's Extras]]
+
+我希望整合的辭典：
+
+- 客家語常用詞辭典
+
+我不計劃整合的辭典：
+
+- 維基詞典 (太大、重編國語辭典就夠了)
+
+** Kisaragi's Extras
+
+現代台灣華語有些詞教育部沒有收。我生活中遇到時總會覺得缺一角。這個「字典」是我記錄的詞。
+
+詳細說明：https://kemdict.kisaragi-hiu.com/dict-kisaragi
 
 ** Build
 
 Requirements:
 
-- Emacs (preferably 28), to combine the data sources
-- Node / npm
+- Emacs (tested on 27 and 28), to combine the data sources
+- Make
+- Node, npm
 - [[https://github.com/cask/cask][Cask]], to get Emacs Lisp dependencies
 
 #+begin_src shell
-git submodule update --init moedict-data moedict-data-twblg
 cask install
 npm install
 make _site
 #+end_src
+
+Dictionary sources are used through git submodules, fetched automatically by Make if not present.
 
 ** License
 

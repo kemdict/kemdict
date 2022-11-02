@@ -9,6 +9,8 @@ title: 致謝
 
 [《教育部臺灣閩南語常用詞辭典》](https://twblg.dict.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp)。資料也是透過[萌典的原始資料檔](https://github.com/g0v/moedict-data-twblg)取得，原始資料為萌典向教育部申請後取得。
 
-十二萬分感謝萌典 / g0v 整理教育部字典的原始資料。
+感謝萌典 / g0v 整理教育部字典的原始資料。
 
-Kemdict 使用 Eleventy 架製，透過 GitHub Actions 建置後寄存於 Netlify。
+感謝教育部釋出教育部各辭典的原始資料。
+
+Kemdict 透過 GitHub Actions 建置後寄存於 GitHub Pages。
