@@ -78,10 +78,13 @@
     (narrow-to-region (point) (point-max))
     (org-element-contents (org-element-parse-buffer))))
 
-(when (and (fboundp #'native-comp-available-p)
-           (native-comp-available-p))
-  (native-compile #'kisaragi-dict/elements-to-json)
-  (native-compile #'kisaragi-dict/parse-elements))
+(cond ((and (fboundp #'native-comp-available-p)
+            (native-comp-available-p))
+       (native-compile #'kisaragi-dict/elements-to-json)
+       (native-compile #'kisaragi-dict/parse-elements))
+      (t
+       (byte-compile #'kisaragi-dict/elements-to-json)
+       (byte-compile #'kisaragi-dict/parse-elements)))
 
 (let ((json-encoding-pretty-print t))
   (with-temp-file "kisaragi_dict.json"
