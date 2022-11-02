@@ -47,6 +47,15 @@ function setHidden(elem: HTMLElement, hide: boolean) {
 }
 
 /**
+ * A wrapper over string matching methods to call them more easily
+ */
+const Match = {
+  includes: (str: string, needle: string) => str.indexOf(needle) === -1,
+  startsWith: (str: string, needle: string) => str.startsWith(needle),
+  endsWith: (str: string, needle: string) => str.endsWith(needle),
+};
+
+/**
  * Update the list of search results to show those matching `needle`.
  * @param needle
  */
@@ -59,21 +68,23 @@ function updateSearch(needle: string) {
     let loading = document.createElement("p");
     loading.textContent = "載入中…";
     resultsList.appendChild(loading);
+    // startsWith, endsWith, indexOf
+    // TODO:
+    const matchFunc = Match["startsWith"];
     loadTitles((titles) => {
       while (resultsList.firstChild) {
         resultsList.removeChild(resultsList.firstChild);
       }
-      let matching = titles.filter((title) => {
-        return title.startsWith(needle);
-      });
-      matching.forEach((title) => {
-        let c = document.createElement("li");
-        let a = document.createElement("a");
-        a.href = `/word/${title}`;
-        a.textContent = title;
-        c.appendChild(a);
-        resultsList.appendChild(c);
-      });
+      for (const title of titles) {
+        if (matchFunc(title, needle)) {
+          let c = document.createElement("li");
+          let a = document.createElement("a");
+          a.href = `/word/${title}`;
+          a.textContent = title;
+          c.appendChild(a);
+          resultsList.appendChild(c);
+        }
+      }
       setHidden(resultsList, false);
     });
   }

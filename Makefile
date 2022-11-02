@@ -2,7 +2,7 @@ export LANG=en_US.UTF-8
 
 .DEFAULT_GOAL := build
 
-.PHONY: dev-11ty dev-tailwind dev process-data
+.PHONY: dev-11ty dev-tailwind dev dev-js process-data
 
 # * Processing dictionary data into one combined file
 src/_data: src/_data/combined.json src/_data/kisaragi_dict.json
@@ -31,6 +31,11 @@ dev-11ty:
 
 dev-tailwind:
 	npx tailwindcss --postcss -i css/src.css -o _site/b.css --watch
+
+# This is for unconditionally updating the client side JS during
+# development.
+dev-js:
+	make _site/s.js
 
 dev: _site/s.js
 	export DEV=true
