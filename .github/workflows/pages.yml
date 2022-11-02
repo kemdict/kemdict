@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
@@ -18,38 +20,6 @@ defaults:
     shell: bash
 
 jobs:
-  # "build-macos":
-  #   runs-on: macos-12
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #       with:
-  #         submodules: recursive
-  #     - name: Set up Node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "18"
-  #         cache: "npm"
-  #     # - name: Set up Emacs
-  #     #   uses: purcell/setup-emacs@master
-  #     #   with:
-  #     #     version: "28.2"
-  #     # - name: Set up Cask
-  #     #   uses: conao3/setup-cask@master
-  #     - name: Install packages
-  #       run: |
-  #         brew install cask make emacs
-  #         cask install
-  #         npm install
-  #     - name: Raise file limits
-  #       run: |
-  #         sudo launchctl limit maxfiles 500000 500000
-  #       # These steps are split to get them to display in different
-  #       # sections. make _site alone also builds src/_data.
-  #     - name: Prepare data files
-  #       run: make src/_data
-  #     - name: Build
-  #       run: gmake _site
   "build":
     runs-on: ubuntu-latest
     steps:
@@ -68,6 +38,9 @@ jobs:
           version: "28.2"
       - name: Set up Cask
         uses: conao3/setup-cask@master
+      - name: Set up Pages
+        id: pages
+        uses: actions/configure-pages@v2
       - name: Install packages
         run: |
           cask
@@ -81,16 +54,24 @@ jobs:
         run: make src/_data
       - name: Build
         run: sudo prlimit --nofile=400000 make _site
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        # run: |
-        #   make public.zip
-        #   curl -H "Content-Type: application/zip" \
-        #        -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
-        #        --data-binary "@public.zip" \
-        #        https://api.netlify.com/api/v1/sites/"$NETLIFY_SITE_ID"/deploys
-        run: |
-          npm install netlify-cli
-          netlify deploy --dir=_site --prod
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./_site
+      # - name: Deploy to Netlify
+      #   env:
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #   run: |
+      #     npm install netlify-cli
+      #     netlify deploy --dir=_site --prod
+  "deploy":
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: "build"
+    steps:
+      - name: "Deploy to GitHub Pages"
+        id: deployment
+        uses: actions/deploy-pages@v1

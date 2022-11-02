@@ -1,9 +1,9 @@
 let EleventyServerlessBundlerPlugin;
 // Do full builds for now until we really, *actually* need to avoid
 // building everything
-if (!process.env["DEV"]) {
-  ({ EleventyServerlessBundlerPlugin } = require("@11ty/eleventy"));
-}
+// if (!process.env["DEV"]) {
+//   ({ EleventyServerlessBundlerPlugin } = require("@11ty/eleventy"));
+// }
 
 const fs = require("node:fs");
 const all_titles = JSON.parse(fs.readFileSync("src/titles.json"));

@@ -4,13 +4,9 @@ pagination:
   data: combined
   size: 1
   alias: word
-  serverless: eleventy.serverless.path.slug
-permalink:
-  "serverless": "/word/:slug"
-# Undocumented...
-# I learned this usage from https://github.com/5t3ph/objectfit-focalpoint
-eleventyComputed:
-  title: "「{{ eleventy.serverless.path.slug }}」- kemdict"
+  resolve: values
+permalink: "word/{{ word.title }}/index.html"
+title: "「{{ word.title }}」- kemdict"
 ---
 
 {% import "macros.njk" as macros %}
