@@ -55,8 +55,6 @@ jobs:
       - name: Prepare data files
         run: make src/_data
       - name: Build
-        env:
-          NODE_OPTIONS: --max-old-space-size=8000
         run: sudo prlimit --nofile=400000 make _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

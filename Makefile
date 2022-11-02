@@ -39,10 +39,7 @@ dev: _site/s.js
 
 # * Making the site itself
 _site: src/*.njk src/_data _site/b.css _site/s.js .eleventy.js
-	npx "@11ty/eleventy" --quiet
-
-gh-pages: src/_data _site/b.css
-	npx "@11ty/eleventy" --pathprefix "kemdict" --quiet
+	npx "@11ty/eleventy" --node-options='--max-old-space-size=7168' --quiet
 
 build: _site
 
