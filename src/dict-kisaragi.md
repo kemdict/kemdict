@@ -20,5 +20,5 @@ title: 字典 | Kisaragi's Extras
 以下是裡面的所有詞：
 
 {% for x in kisaragi_dict %}
-- [{{ x.title }}]({{ x.title | prepend: "/word/" | url}})
+- [{{ x.title }}](/word/{{ x.title }})
 {% endfor %}

@@ -2,21 +2,19 @@
 <html lang="zh_TW">
   <head>
     <meta charset="utf-8" />
-    <meta name="referrer" content="no-referrer" >
+    <meta name="referrer" content="no-referrer" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="{{"/b.css" | url}}" />
+    <link rel="stylesheet" href="/b.css" />
     <title>{{ title }}</title>
   </head>
   <body>
     <div class="base">
       <!-- Contents -->
-      {% block main %}
-        {{ content | safe }}
-      {% endblock %}
+      {% block main %} {{ content | safe }} {% endblock %}
     </div>
-    <script src="{{"/s.js" | url}}"></script>
+    <script src="/s.js"></script>
   </body>
 </html>
