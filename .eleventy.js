@@ -6,6 +6,7 @@ let EleventyServerlessBundlerPlugin;
 // }
 
 const fs = require("node:fs");
+const { spawnSync } = require("node:child_process");
 const all_titles = JSON.parse(fs.readFileSync("src/titles.json"));
 
 /* Return a string of an HTML link to `target`. */
@@ -151,6 +152,22 @@ function process_def_kisaragi(def) {
   return def;
 }
 
+const getVersion = (() => {
+  let version;
+  return () => {
+    if (!version) {
+      version = spawnSync("git", ["show", "-s", "--format=%ci", "HEAD"])
+        .stdout.toString()
+        .trim()
+        .replace("-", "年")
+        .replace("-", "月")
+        .replace(" ", "日")
+        .substring(0, 11);
+    }
+    return version;
+  };
+})();
+
 module.exports = (cfg) => {
   cfg.addFilter("spc", (def) => {
     return def.replace(/　/g, " ");
@@ -168,6 +185,8 @@ module.exports = (cfg) => {
     interlinear_annotation_to_ruby
   );
   cfg.addFilter("process_def_kisaragi", process_def_kisaragi);
+
+  cfg.addShortcode("getVersion", getVersion);
 
   cfg.addPassthroughCopy("src/s.js");
   cfg.addPassthroughCopy("src/titles.json");
