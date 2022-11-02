@@ -129,7 +129,8 @@ Does nothing if OUTPUT-PATH already exists as a file."
         (insert (json-encode merged-result))))
     (message "Done")))
 
-(if (featurep 'comp)
+(if (and (fboundp #'native-comp-available-p)
+         (native-comp-available-p))
     (native-compile #'main)
   (byte-compile #'main))
 (main)

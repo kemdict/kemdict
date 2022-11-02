@@ -21,7 +21,7 @@ defaults:
 
 jobs:
   "build":
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -33,9 +33,9 @@ jobs:
           node-version: "18"
           cache: "npm"
       - name: Set up Emacs
-        uses: purcell/setup-emacs@master
-        with:
-          version: "28.2"
+        # This is Emacs 27.1
+        run: |
+          sudo apt-get install emacs-nox
       - name: Set up Cask
         uses: conao3/setup-cask@master
       - name: Set up Pages
