@@ -171,6 +171,9 @@ module.exports = (cfg) => {
 
   cfg.addPassthroughCopy("src/s.js");
   cfg.addPassthroughCopy("src/titles.json");
+  cfg.addPassthroughCopy({
+    "dicts/ministry-of-education/license": "l",
+  });
 
   if (EleventyServerlessBundlerPlugin) {
     cfg.addPlugin(EleventyServerlessBundlerPlugin, {

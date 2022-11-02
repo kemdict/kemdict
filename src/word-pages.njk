@@ -93,25 +93,40 @@ eleventyComputed:
   {% if word.moedict_zh or word.moedict_twblg or word.dict_concised or
   word.dict_idioms %}
   <h2 class="mt-2">本頁的著作權</h2>
+  <p>
+    中華民國教育部《重編國語辭典修訂本》、《國語辭典簡編本》、《國語小字典》與《成語典》相關資料採「創用CC-姓名標示-禁止改作
+    3.0 臺灣授權條款」釋出。
+  </p>
   {% if word.moedict_zh %}
   <p>
     《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
-    中華民國教育部（版本編號：2015_20160523）
+    中華民國教育部（版本編號：2015_20160523）。<a
+      href="/l/reviseddict_10312.pdf"
+      >使用說明</a
+    >
   </p>
   {% endif %} {% if word.dict_concised %}
   <p>
     《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a>》©
-    中華民國教育部（版本編號：2014_20220928）
+    中華民國教育部（版本編號：2014_20220928）。<a
+      href="/l/concisedict_10312.pdf"
+      >使用說明</a
+    >
   </p>
   {% endif %} {% if word.moedict_twblg %}
   <p>
     《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a>》©
-    中華民國教育部（版本編號：20190610）
+    中華民國教育部（版本編號：20190610）。見<a
+      href="https://github.com/g0v/moedict-data-twblg"
+      >moedict-data-twblg</a
+    >
   </p>
   {% endif %} {% if word.dict_idioms %}
   <p>
     《<a href="https://dict.idioms.moe.edu.tw">成語典</a>》©
-    中華民國教育部（版本編號：2020_20220928）
+    中華民國教育部（版本編號：2020_20220928）。<a href="/l/idiomsdict_10409.pdf"
+      >使用說明</a
+    >
   </p>
   {% endif %} {% endif %}
 </div>
