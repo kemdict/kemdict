@@ -50,9 +50,13 @@ jobs:
           sudo sysctl -w fs.file-max=500000
         # These steps are split to get them to display in different
         # sections. make _site alone also builds src/_data.
+      - name: Check memory limits
+        run: free -h
       - name: Prepare data files
         run: make src/_data
       - name: Build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8000
         run: sudo prlimit --nofile=400000 make _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
