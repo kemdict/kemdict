@@ -119,7 +119,7 @@ if (searchForm) {
 // to block click events from going through to the root document.
 // Now the search result list hides when we click away.
 sbc.addEventListener("click", (event) => {
-  event.preventDefault();
+  // event.preventDefault();
   event.stopPropagation();
   event.stopImmediatePropagation();
   return false;

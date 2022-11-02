@@ -12,6 +12,9 @@
 - [X] Dictionary header should link to the original dictionary, preferably to the same term
 - [X] Make the search bar appear as if it's another window
 * todos
+- [ ] Fix search results not clickable
+- [ ] =dict_idioms=: fix showing missing fields
+- [ ] =dict_idioms=: fix description in 一枕南柯
 - [ ] Fix input text alignment in Chromium
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
