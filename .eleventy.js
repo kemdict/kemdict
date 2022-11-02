@@ -102,6 +102,30 @@ function newline_string_to_ol(str) {
   }
 }
 
+function process_def_revised(def) {
+  if (def) {
+    let x = "";
+    let match;
+    for (const d of def.split("\n")) {
+      if ((match = d.match(/^\[(.*)\]$/))) {
+        if (x.length > 0) {
+          x += `</ol>`;
+        }
+        x += `<p class="pos">${match[1]}</p><ol>`;
+      } else {
+        if (x.length == 0) {
+          x += `<ol>`;
+        }
+        x += `<li><p class="def">${d.replace(/^\d+\./, "")}</p></li>`;
+      }
+    }
+    x += "</ol>";
+    return linkify_brackets(x);
+  } else {
+    return def;
+  }
+}
+
 function process_def_concised(def) {
   if (def) {
     return `<ol>
@@ -113,13 +137,6 @@ function process_def_concised(def) {
   } else {
     return def;
   }
-}
-
-function process_def_moedict_zh(def) {
-  if (def) {
-    def = linkify_brackets(def);
-  }
-  return def;
 }
 
 function interlinear_annotation_to_ruby(defs) {
@@ -176,13 +193,13 @@ module.exports = (cfg) => {
   cfg.addFilter("spc", (def) => {
     return def.replace(/　/g, " ");
   });
-  cfg.addFilter("process_def_moedict_zh", process_def_moedict_zh);
   cfg.addFilter("idioms_nuance", idioms_nuance);
   cfg.addFilter("comma_word_list", comma_word_list);
   cfg.addFilter("idioms_source", idioms_source);
   cfg.addFilter("idioms_source_comment", idioms_source_comment);
   cfg.addFilter("newline_string_to_ol", newline_string_to_ol);
   cfg.addFilter("process_def_concised", process_def_concised);
+  cfg.addFilter("process_def_revised", process_def_revised);
   cfg.addFilter("linkToWord", linkToWord);
   cfg.addFilter("linkify_brackets", linkify_brackets);
   cfg.addFilter("process_def_idioms", process_def_idioms);

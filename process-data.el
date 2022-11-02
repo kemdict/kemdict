@@ -39,7 +39,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
 
 (unless noninteractive
   (k/extract-development-version "水"
-    "dicts/moedict-data/dict-revised.json" "dev-dict-revised.json")
+    "dicts/ministry-of-education/dict_revised.json" "dev-dict_revised.json")
   (k/extract-development-version "水"
     "dicts/moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
   (k/extract-development-version "水"
@@ -53,17 +53,17 @@ Does nothing if OUTPUT-PATH already exists as a file."
          (dictionaries
           (if (and (or (not noninteractive)
                        (getenv "DEV"))
-                   (file-exists-p "dev-dict-revised.json")
+                   (file-exists-p "dev-dict_revised.json")
                    (file-exists-p "dev-dict-twblg.json")
                    (file-exists-p "dev-dict_concised.json")
                    (file-exists-p "dev-dict_idioms.json"))
-              [("moedict_zh" . "dev-dict-revised.json")
-               ("moedict_twblg" . "dev-dict-twblg.json")
+              [("moedict_twblg" . "dev-dict-twblg.json")
+               ("dict_revised" . "dev-dict_revised.json")
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
                ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]
-            [("moedict_zh" . "dicts/moedict-data/dict-revised.json")
-             ("moedict_twblg" . "dicts/moedict-data-twblg/dict-twblg.json")
+            [("moedict_twblg" . "dicts/moedict-data-twblg/dict-twblg.json")
+             ("dict_revised" . "dicts/ministry-of-education/dict_revised.json")
              ("dict_concised" . "dicts/ministry-of-education/dict_concised.json")
              ("dict_idioms" . "dicts/ministry-of-education/dict_idioms.json")
              ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]))

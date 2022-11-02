@@ -44,6 +44,16 @@
 </div>
 {% endmacro %}
 
+{% macro render_word_dict_revised(word) %}
+<div class="word">
+  <h1>{{word.title}}</h1>
+  {% if word["dict_revised"].bopomofo %}
+  <p>讀音：<span>{{ word["dict_revised"].bopomofo | spc }}</span></p>
+  {% endif %}
+  {{ word["dict_revised"].definition | process_def_revised | safe }}
+</div>
+{% endmacro %}
+
 {% macro render_word_dict_concised(word) %}
 <div class="word">
   <h1>{{word.title}}</h1>
@@ -63,8 +73,6 @@
     {% set pronunciation = false %}
     {% if dict == "kisaragi_dict" %}
       {% set pronunciation = het.pronunciation %}
-    {% elif dict == "moedict_zh" %}
-      {% set pronunciation = het.bopomofo %}
     {% elif dict == "moedict_twblg" %}
       {% set pronunciation = het.trs %}
     {% endif %}
@@ -103,17 +111,6 @@
           {% for quote in def.quote %}
           <p>{{ quote }}</p>
           {% endfor %}
-        </li>
-      {% elif dict == "moedict_zh" %}
-        <li>
-          <p class="def">
-          <span>{{ def.def | process_def_moedict_zh | safe }}</span>
-          {% for ex in def.example %}
-          <span>{{ ex | process_def_moedict_zh | safe }}</span>
-          {% endfor %}
-          {% for quote in def.quote %}
-          <span>{{ quote }}</span>
-          {% endfor %}</p>
         </li>
       {% elif dict == "moedict_twblg" %}
         <li>

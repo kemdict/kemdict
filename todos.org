@@ -12,9 +12,10 @@
 - [X] Dictionary header should link to the original dictionary, preferably to the same term
 - [X] Make the search bar appear as if it's another window
 - [X] =dict_idioms=: fix description in 一枕南柯
-* todos
 - [X] Fix search results not clickable
 - [X] =dict_idioms=: fix showing missing fields
+- [X] 更新重編國語辭典到最新
+* todos
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
@@ -23,15 +24,3 @@
 - [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 - [ ] Incorporate other Ministry of Education dictionaries: Hakka, Idioms, 簡編本, 國語小字典
-* Updating data
-
-moedict-data and moedict-data-hakka are out of date. So is moedict-process. (moedict-data-twblg isn't.)
-
-We can:
-
-- Update moedict-process and such so that Moedict itself is updated
-- Just process the files from Ministry of Education directly
-
-I kind of prefer the latter because Moedict splits the definition up too much, in my opinion.
-
-You can convert the .xlsx into CSV then use [[https://www.npmjs.com/package/csv-parse][csv-parse]] to parse it, then process each item accordingly.
