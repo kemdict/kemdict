@@ -173,13 +173,17 @@ const getVersion = (() => {
   let version;
   return () => {
     if (!version) {
-      version = spawnSync("git", ["show", "-s", "--format=%ci", "HEAD"])
+      let tag = spawnSync("git", ["describe", "--tags"])
+        .stdout.toString()
+        .trim();
+      let date = spawnSync("git", ["show", "-s", "--format=%ci", "HEAD"])
         .stdout.toString()
         .trim()
         .replace("-", "年")
         .replace("-", "月")
         .replace(" ", "日")
         .substring(0, 11);
+      version = `<p>${tag}</p><p>${date}</p>`;
     }
     return version;
   };
