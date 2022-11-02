@@ -4,7 +4,7 @@
   {% if entry.bopomofo %}
   <p>讀音：<span>{{ entry.bopomofo | spc }}</span></p>
   {% endif %}
-  <p class="def">{{ entry.definition | linkify_brackets | safe }}</p>
+  <p class="def">{{ entry.definition | process_def_idioms | safe }}</p>
   {% if entry.用法語意說明 or entry.用法使用類別 or entry.用法例句 %}
   <h2>用法</h2>
   <p>{{ entry.用法語意說明 }}</p>
@@ -38,7 +38,7 @@
   <p>{{ entry.source_reference }}</p>
   {% endif %}
   <h2>典故說明</h2>
-  <p>{{ entry.典故說明 }}</p>
+  <p>{{ entry.典故說明 | linkify_brackets | safe }}</p>
   <h2>書證</h2>
   {{ entry.書證 | newline_string_to_ol | safe }}
 </div>

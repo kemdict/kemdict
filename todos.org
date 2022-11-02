@@ -11,11 +11,10 @@
 - [X] Copyright information for each dictionary like Weblio's footer
 - [X] Dictionary header should link to the original dictionary, preferably to the same term
 - [X] Make the search bar appear as if it's another window
+- [X] =dict_idioms=: fix description in 一枕南柯
 * todos
-- [ ] Fix search results not clickable
-- [ ] =dict_idioms=: fix showing missing fields
-- [ ] =dict_idioms=: fix description in 一枕南柯
-- [ ] Fix input text alignment in Chromium
+- [X] Fix search results not clickable
+- [X] =dict_idioms=: fix showing missing fields
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to

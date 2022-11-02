@@ -168,6 +168,10 @@ const getVersion = (() => {
   };
 })();
 
+function process_def_idioms(def) {
+  return linkify_brackets(def.replace(/<.*/, ""));
+}
+
 module.exports = (cfg) => {
   cfg.addFilter("spc", (def) => {
     return def.replace(/　/g, " ");
@@ -180,6 +184,8 @@ module.exports = (cfg) => {
   cfg.addFilter("newline_string_to_ol", newline_string_to_ol);
   cfg.addFilter("process_def_concised", process_def_concised);
   cfg.addFilter("linkToWord", linkToWord);
+  cfg.addFilter("linkify_brackets", linkify_brackets);
+  cfg.addFilter("process_def_idioms", process_def_idioms);
   cfg.addFilter(
     "interlinear_annotation_to_ruby",
     interlinear_annotation_to_ruby

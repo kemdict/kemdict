@@ -44,7 +44,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
     "dicts/moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
   (k/extract-development-version "水"
     "dicts/ministry-of-education/dict_concised.json" "dev-dict_concised.json")
-  (k/extract-development-version "一毛不拔"
+  (k/extract-development-version "一枕南柯"
     "dicts/ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
 
 (defun main ()
