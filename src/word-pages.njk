@@ -6,7 +6,8 @@ pagination:
   alias: word
   resolve: values
 permalink: "word/{{ word.title }}/index.html"
-title: "「{{ word.title }}」- kemdict"
+eleventyComputed:
+  title: "「{{ word.title }}」- kemdict"
 ---
 
 {% import "macros.njk" as macros %}
