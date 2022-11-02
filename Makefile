@@ -39,7 +39,7 @@ dev: _site/s.js
 
 # * Making the site itself
 _site: src/*.njk src/_data _site/b.css _site/s.js .eleventy.js
-	npx "@11ty/eleventy" --node-options='--max-old-space-size=7168' --quiet
+	npx --node-options='--max-old-space-size=7168' "@11ty/eleventy" --quiet
 
 build: _site
 
