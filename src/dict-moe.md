@@ -3,8 +3,6 @@ layout: md.njk
 title: 字典 | 教育部
 ---
 
-**需要更新**
-
 # 教育部字典
 
 我透過萌典的資料（[moedict-data-twblg](https://github.com/g0v/moedict-data-twblg)）引入了《臺灣閩南語常用詞辭典》的內容。
