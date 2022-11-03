@@ -89,19 +89,26 @@ Does nothing if OUTPUT-PATH already exists as a file."
     ;;   :definition "def"
     ;;   ... ...}
     ;;  ...]
-    ;; -> {"title" {definition "def" ...}}
+    ;; -> {"title" {heteronyms [{definition "def" ...}]}
     ;;     ...}
     (dotimes (i dict-count)
       (message "Shaping dictionary data (%s/%s)..." (1+ i) dict-count)
       (let ((shaped (make-hash-table :test #'equal)))
         (dolist (entry (aref raw-dicts i))
           (let* ((title (k/process-title (gethash "title" entry)))
-                 (heteronyms (gethash "heteronyms" entry)))
-            (if heteronyms
-                (let ((tmp (make-hash-table :test #'equal)))
-                  (puthash "heteronyms" heteronyms tmp)
-                  (puthash title tmp shaped))
-              (puthash title entry shaped))))
+                 (heteronyms (gethash "heteronyms" entry))
+                 (tmp (make-hash-table :test #'equal)))
+            ;; If there are no heteronyms, we might see duplocate
+            ;; entries. Create the heteronyms list or append into the
+            ;; existing heteronyms list accordingly.
+            (unless heteronyms
+              (if-let (existing (gethash title shaped))
+                  (setq heteronyms
+                        (append (gethash "heteronyms" existing)
+                                entry))
+                (setq heteronyms (list entry))))
+            (puthash "heteronyms" heteronyms tmp)
+            (puthash title tmp shaped)))
         (aset shaped-dicts i shaped)))
     (dotimes (i dict-count)
       (message "Collecting titles (%s/%s)..." (1+ i) dict-count)
