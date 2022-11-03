@@ -75,15 +75,23 @@ function updateSearch(needle: string) {
       while (resultsList.firstChild) {
         resultsList.removeChild(resultsList.firstChild);
       }
+      let matching: string[] = [];
       for (const title of titles) {
         if (matchFunc(title, needle)) {
-          let c = document.createElement("li");
-          let a = document.createElement("a");
-          a.href = `/word/${title}`;
-          a.textContent = title;
-          c.appendChild(a);
-          resultsList.appendChild(c);
+          matching.push(title);
         }
+      }
+      let total = document.createElement("p");
+      total.textContent = `共 ${matching.length} 條相符條目`;
+      resultsList.appendChild(total);
+      matching.sort();
+      for (const w of matching) {
+        let c = document.createElement("li");
+        let a = document.createElement("a");
+        a.href = `/word/${w}`;
+        a.textContent = w;
+        c.appendChild(a);
+        resultsList.appendChild(c);
       }
       setHidden(resultsList, false);
     });
