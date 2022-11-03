@@ -27,6 +27,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
+      - name: Fetch tags for release purposes
+        run: |
+          git fetch --depth=1 --tags
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -45,17 +48,12 @@ jobs:
         run: |
           cask
           npm install
-      - name: Raise file limits
-        run: |
-          sudo sysctl -w fs.file-max=500000
-        # These steps are split to get them to display in different
-        # sections. make _site alone also builds src/_data.
-      - name: Check memory limits
-        run: free -h
       - name: Prepare data files
         run: make src/_data
       - name: Build
-        run: sudo prlimit --nofile=400000 make _site
+        run: |
+          sudo sysctl -w fs.file-max=500000
+          sudo prlimit --nofile=400000 make _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
