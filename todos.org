@@ -16,7 +16,7 @@
 - [X] =dict_idioms=: fix showing missing fields
 - [X] 更新重編國語辭典到最新
 * todos
-- Check 挨
+- taigi: don't use ruby to display POJ
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
