@@ -105,7 +105,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
               (if-let (existing (gethash title shaped))
                   (setq heteronyms
                         (append (gethash "heteronyms" existing)
-                                entry))
+                                (list entry)))
                 (setq heteronyms (list entry))))
             (puthash "heteronyms" heteronyms tmp)
             (puthash title tmp shaped)))
