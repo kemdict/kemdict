@@ -121,8 +121,16 @@
       {% elif dict == "moedict_twblg" %}
         <li>
           <p class="def">{{ def.def }}</p>
-          {{ def.example | interlinear_annotation_to_ruby | safe }}
-          {{ def.quote | interlinear_annotation_to_ruby | safe }}
+          {% if def.example %}
+          <blockquote>
+          {{ def.example | interlinear_annotation | safe }}
+          </blockquote>
+          {% endif %}
+          {% if def.quote %}
+          <blockquote>
+          {{ def.quote | interlinear_annotation | safe }}
+          </blockquote>
+          {% endif %}
         </li>
       {% endif %}
     {% endfor %}

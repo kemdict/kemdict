@@ -15,13 +15,14 @@
 - [X] Fix search results not clickable
 - [X] =dict_idioms=: fix showing missing fields
 - [X] 更新重編國語辭典到最新
+- [X] taigi: don't use ruby to display POJ
+- [X] Figure out how to decode the ={[xxxx]}= thing
+     No longer applicable as we don't use moedict-data anymore.
 * todos
-- taigi: don't use ruby to display POJ
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
   - Or maybe checkboxes to hide a dictionary temporarily
-- [ ] Figure out how to decode the ={[xxxx]}= thing
 - [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
-- [ ] Incorporate other Ministry of Education dictionaries: Hakka, Idioms, 簡編本, 國語小字典
+- [ ] Incorporate Ministry of Education's Hakka dictionary?

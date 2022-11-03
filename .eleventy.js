@@ -139,7 +139,7 @@ function process_def_concised(def) {
   }
 }
 
-function interlinear_annotation_to_ruby(defs) {
+function interlinear_annotation(defs) {
   if (defs) {
     if (typeof defs === "string") {
       defs = [defs];
@@ -150,9 +150,16 @@ function interlinear_annotation_to_ruby(defs) {
         let matches = [...defs[i].matchAll("\ufff9|\ufffa|\ufffb")];
         if (matches.length !== 0 && matches.length % 3 === 0) {
           defs[i] = defs[i]
-            .replace(/\ufff9/g, "<ruby>")
-            .replace(/\ufffa/g, "<rp>(</rp><rt>")
-            .replace(/\ufffb/g, "<rp>)</rp></rt></ruby><br>");
+            .replace(/\ufff9/g, "<p>")
+            .replace(/\ufffa/g, "</p><p>")
+            .replace(/\ufffb/g, "</p>");
+          // This is more "correct" i.r.t. interpreting the characters
+          // as marking ruby, but I don't think POJ / TL should be
+          // treated as just pronunciation annotation of Han
+          // characters.
+          // .replace(/\ufff9/g, "<ruby>")
+          // .replace(/\ufffa/g, "<rp>(</rp><rt>")
+          // .replace(/\ufffb/g, "<rp>)</rp></rt></ruby><br>");
         }
       }
     }
@@ -207,10 +214,7 @@ module.exports = (cfg) => {
   cfg.addFilter("linkToWord", linkToWord);
   cfg.addFilter("linkify_brackets", linkify_brackets);
   cfg.addFilter("process_def_idioms", process_def_idioms);
-  cfg.addFilter(
-    "interlinear_annotation_to_ruby",
-    interlinear_annotation_to_ruby
-  );
+  cfg.addFilter("interlinear_annotation", interlinear_annotation);
   cfg.addFilter("process_def_kisaragi", process_def_kisaragi);
 
   cfg.addShortcode("getVersion", getVersion);
