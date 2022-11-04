@@ -73,7 +73,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
          (shaped-dicts (make-vector dict-count nil)))
     (dotimes (i dict-count)
       (with-temp-buffer
-        (message "Parsing (%s/%s)..." (1+ i) dict-count)
+        (message "Parsing %s (%s/%s)..."
+                 (car (aref dictionaries i))
+                 (1+ i) dict-count)
         (let ((files (cdr (aref dictionaries i))))
           (when (stringp files)
             (setq files (list files)))
@@ -99,7 +101,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
     ;; -> {"title" {heteronyms [{definition "def" ...}]}
     ;;     ...}
     (dotimes (i dict-count)
-      (message "Shaping dictionary data (%s/%s)..." (1+ i) dict-count)
+      (message "Shaping data for %s (%s/%s)..."
+               (car (aref dictionaries i))
+               (1+ i) dict-count)
       (let ((shaped (make-hash-table :test #'equal)))
         (dolist (entry (aref raw-dicts i))
           (let* ((title (k/process-title (gethash "title" entry)))
