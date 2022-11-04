@@ -33,9 +33,8 @@ Does nothing if OUTPUT-PATH already exists as a file."
         (insert
          (let ((json-encoding-pretty-print t))
            (json-encode
-            (list
-             (--first (equal word (gethash "title" it))
-                      parsed)))))))))
+            (--filter (equal word (gethash "title" it))
+                      parsed))))))))
 
 (unless noninteractive
   (k/extract-development-version "挨"
