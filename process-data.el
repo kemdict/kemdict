@@ -38,11 +38,11 @@ Does nothing if OUTPUT-PATH already exists as a file."
                       parsed)))))))))
 
 (unless noninteractive
-  (k/extract-development-version "水"
+  (k/extract-development-version "挨"
     "dicts/ministry-of-education/dict_revised.json" "dev-dict_revised.json")
-  (k/extract-development-version "水"
+  (k/extract-development-version "挨"
     "dicts/moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
-  (k/extract-development-version "水"
+  (k/extract-development-version "挨"
     "dicts/ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
     "dicts/ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))

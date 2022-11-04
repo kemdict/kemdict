@@ -21,7 +21,7 @@ dicts/ministry-of-education/dict_idioms.json:
 	git submodule update --init -- dicts/ministry-of-education
 
 # * Development tasks
-.PHONY: dev-11ty dev-tailwind dev dev-js kisaragi-dict-rebuild
+.PHONY: dev-11ty dev-tailwind dev dev-js kisaragi-dict-rebuild clear-dev-dicts
 
 dev-11ty:
 	npx "@11ty/eleventy" --input=./src --output=./_site --serve
@@ -30,6 +30,8 @@ dev-tailwind:
 	npx tailwindcss --postcss -i css/src.css -o _site/b.css --watch
 
 kisaragi-dict-rebuild: dicts/kisaragi/kisaragi_dict.json
+clear-dev-dicts:
+	rm dev-dict*.json
 
 # This is for unconditionally updating the client side JS during
 # development.
