@@ -9,6 +9,6 @@ Kemdict 提供對數本教育部辭典的一次搜尋。同時它包含了[kisar
 
 ---
 
-Kemdict 原始碼：<https://github.com/kisaragi-hiu/kemdict/>
+Kemdict {% getVersion %}。原始碼：<https://github.com/kisaragi-hiu/kemdict/>
 
 如果 Kemdict 有幫助到您，請考慮[贊助我一餐飯](https://www.buymeacoffee.com/kisaragihiu)。謝謝。

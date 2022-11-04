@@ -190,7 +190,7 @@ const getVersion = (() => {
         .replace("-", "月")
         .replace(" ", "日")
         .substring(0, 11);
-      version = `<p>${tag}</p><p>${date}</p>`;
+      version = `${tag} (${date})`;
     }
     return version;
   };
