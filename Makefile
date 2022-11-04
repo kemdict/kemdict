@@ -2,8 +2,6 @@ export LANG=en_US.UTF-8
 
 .DEFAULT_GOAL := build
 
-.PHONY: dev-11ty dev-tailwind dev dev-js process-data
-
 # * Processing dictionary data into one combined file
 src/_data: src/_data/combined.json src/_data/kisaragi_dict.json
 
@@ -26,11 +24,15 @@ dicts/ministry-of-education/dict_idioms.json:
 	git submodule update --init -- dicts/ministry-of-education
 
 # * Development tasks
+.PHONY: dev-11ty dev-tailwind dev dev-js kisaragi-dict-rebuild
+
 dev-11ty:
 	npx "@11ty/eleventy" --input=./src --output=./_site --serve
 
 dev-tailwind:
 	npx tailwindcss --postcss -i css/src.css -o _site/b.css --watch
+
+kisaragi-dict-rebuild: dicts/kisaragi/kisaragi_dict.json
 
 # This is for unconditionally updating the client side JS during
 # development.
