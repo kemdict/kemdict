@@ -61,7 +61,8 @@ Does nothing if OUTPUT-PATH already exists as a file."
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
                ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]
-            [("moedict_twblg" . "dicts/moedict-data-twblg/dict-twblg.json")
+            [("moedict_twblg" . ("dicts/moedict-data-twblg/dict-twblg.json"
+                                 "dicts/moedict-data-twblg/dict-twblg-ext.json"))
              ("dict_revised" . "dicts/ministry-of-education/dict_revised.json")
              ("dict_concised" . "dicts/ministry-of-education/dict_concised.json")
              ("dict_idioms" . "dicts/ministry-of-education/dict_idioms.json")
@@ -73,9 +74,16 @@ Does nothing if OUTPUT-PATH already exists as a file."
     (dotimes (i dict-count)
       (with-temp-buffer
         (message "Parsing (%s/%s)..." (1+ i) dict-count)
-        (insert-file-contents (cdr (aref dictionaries i)))
-        (goto-char (point-min))
-        (aset raw-dicts i (json-parse-buffer :array-type 'list))))
+        (let ((files (cdr (aref dictionaries i))))
+          (when (stringp files)
+            (setq files (list files)))
+          (->> (cl-loop for f in files
+                        nconc
+                        (progn
+                          (erase-buffer)
+                          (insert-file-contents f)
+                          (json-parse-buffer :array-type 'list)))
+               (aset raw-dicts i)))))
     ;; [{:title "title"
     ;;   :heteronyms (...)
     ;;   ... ...}
