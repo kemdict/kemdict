@@ -19,6 +19,11 @@
 - [X] Figure out how to decode the ={[xxxx]}= thing
      No longer applicable as we don't use moedict-data anymore.
 * todos
+
+- [ ] kisaragi-dict: use HTML in text content freely
+- [ ] kisaragi-dict: transform Org links to HTML links during the data process step
+- [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
+- [ ] Backlinks lol
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
