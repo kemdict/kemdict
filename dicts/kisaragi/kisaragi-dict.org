@@ -8,6 +8,7 @@
 相挨 (siòng-e)
 踩踏
 嵌入
+黑歷史
 * Doc
 ** 這個檔案
 =kisaragi_dict.json= 我會用這個檔案來生成。這是因為 JSON 實在很難寫。
