@@ -1,12 +1,14 @@
 * Rendering pages at first request instead of at build time
 :PROPERTIES:
 :ID:       df677ea0-0d20-4f07-bed2-df3d56fe4d45
+:date:   2022-10-28T23:56:35+0900
 :END:
+
+/Note: this no longer applies as each page took way too long (like 5 seconds or so) to build, and I couldn't figure out how to do 404 pages. Unless we *actually* can't generate all files, I will not be using this approach./
+
 I'd like to not render millions of files, I guess. Right now I'm at like 170000.
 
 I want pages to be rendered at first request, then cached on a CDN. This can be achieved with a serverless function, which is vender-agnostic; the caching part is provided by Netlify as a Netlify specific feature (it calls this “On-demand builders”).
-
-I'm switching back for now though. The individual page build takes surprisingly long.
 
 To render pages at first request:
 
@@ -44,7 +46,7 @@ To render pages at first request:
 6. That should… be it?
 ** Half-complete development mode
 *** what
-For now, I do not want to use Netlify functions to reduce the amount of data rendered during development. I instead use a simplified version of =moedict-data= and =moedict-data-twblg=, and then turn off the serverless plugin.
+For now, I do not want to use Netlify functions to reduce the amount of data rendered during development. I instead use simplified versions of the dictionaries and then turn off the serverless plugin.
 
 I have set it up so that when the environment variable =DEV= is set:
 
