@@ -96,17 +96,18 @@ Does nothing if OUTPUT-PATH already exists as a file."
       (let ((shaped (make-hash-table :test #'equal)))
         (dolist (entry (aref raw-dicts i))
           (let* ((title (k/process-title (gethash "title" entry)))
-                 (heteronyms (gethash "heteronyms" entry))
+                 ;; If the dictionary does not declare heteronyms in a
+                 ;; key, we set the heteronyms to a list with the
+                 ;; entry itself.
+                 (heteronyms (or (gethash "heteronyms" entry)
+                                 (list entry)))
                  (tmp (make-hash-table :test #'equal)))
-            ;; If there are no heteronyms, we might see duplocate
-            ;; entries. Create the heteronyms list or append into the
-            ;; existing heteronyms list accordingly.
-            (unless heteronyms
-              (if-let (existing (gethash title shaped))
-                  (setq heteronyms
-                        (append (gethash "heteronyms" existing)
-                                (list entry)))
-                (setq heteronyms (list entry))))
+            ;; If an entry with the title already exists, insert into
+            ;; its heteronyms.
+            (when-let (existing (gethash title shaped))
+              (setq heteronyms
+                    (append (gethash "heteronyms" existing)
+                            heteronyms)))
             (puthash "heteronyms" heteronyms tmp)
             (puthash title tmp shaped)))
         (aset shaped-dicts i shaped)))
