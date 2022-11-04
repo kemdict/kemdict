@@ -119,6 +119,20 @@ Does nothing if OUTPUT-PATH already exists as a file."
               (setq heteronyms
                     (append (gethash "heteronyms" existing)
                             heteronyms)))
+            ;; Sort the heteronyms according to the het_sort key.
+            (when (and
+                   ;; Skip checking the rest if the first already
+                   ;; doesn't have it.
+                   (gethash "het_sort" (car heteronyms))
+                   (--all? (gethash "het_sort" it)
+                           (cdr heteronyms)))
+              (setq heteronyms
+                    (--sort
+                     (< (string-to-number
+                         (gethash "het_sort" it))
+                        (string-to-number
+                         (gethash "het_sort" other)))
+                     heteronyms)))
             (puthash "heteronyms" heteronyms tmp)
             (puthash title tmp shaped)))
         (aset shaped-dicts i shaped)))
