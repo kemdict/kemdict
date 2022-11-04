@@ -197,7 +197,7 @@ const getVersion = (() => {
 })();
 
 function process_def_idioms(def) {
-  return linkify_brackets(def.replace(/<.*/, ""));
+  return linkify_brackets(def.replace(/<a name.*/, ""));
 }
 
 module.exports = (cfg) => {
