@@ -10,9 +10,6 @@
 ;; Essentially entries are headings under the "Words" heading,
 ;; structured in a particular way, and this file converts that to JSON
 ;; in a schema similar to that used by Moedict.
-;;
-;; TODO: use HTML in text content freely
-;; TODO: transform Org links to HTML links during the data process step
 
 ;;; Code:
 
