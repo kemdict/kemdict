@@ -19,7 +19,6 @@
 - [X] Figure out how to decode the ={[xxxx]}= thing
      No longer applicable as we don't use moedict-data anymore.
 * todos
-
 - [ ] kisaragi-dict: use HTML in text content freely
 - [ ] kisaragi-dict: transform Org links to HTML links during the data process step
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
