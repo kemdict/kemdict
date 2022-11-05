@@ -37,6 +37,7 @@ clear-dev-dicts:
 # development.
 dev-js:
 	make _site/s.js
+	make _site/render-not-found.js
 
 dev: _site/s.js
 	export DEV=true

@@ -3,9 +3,12 @@ layout: base.njk
 permalink: "404.html"
 ---
 
-<p>找不到這個詞。</p>
-<hr />
 <div class="h mb-4">
   <h1><a href="/">kemdict (β)</a></h1>
   {% include "searchBar.njk" %}
 </div>
+
+<noscript>
+  <p>找不到這個詞。</p>
+</noscript>
+<script src="/render-not-found.js"></script>
