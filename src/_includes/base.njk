@@ -7,14 +7,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    {% block extra_head %}{% endblock %}
     <link rel="stylesheet" href="/b.css" />
     <title>{{ title }}</title>
   </head>
   <body>
-    <div class="base">
-      <!-- Contents -->
-      {% block main %} {{ content | safe }} {% endblock %}
-    </div>
+    <div class="base">{% block main %}{{ content | safe }}{% endblock %}</div>
     <script src="/s.js"></script>
   </body>
 </html>
