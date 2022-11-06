@@ -35,9 +35,9 @@ function renderNotFound(term: string): string {
 
 let term = decodeURI(location.href).match(/\/word\/(.*)\/?/);
 if (term) {
-  let body = document.getElementsByTagName("body")[0];
+  let base = document.getElementsByClassName("base")[0];
   let container = document.createElement("div");
   container.classList.add("prose");
   container.innerHTML = renderNotFound(term[1]);
-  body.appendChild(container);
+  base.appendChild(container);
 }
