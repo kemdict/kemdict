@@ -136,6 +136,8 @@ Does nothing if OUTPUT-PATH already exists as a file."
                          (gethash "het_sort" other)))
                      heteronyms)))
             (puthash "heteronyms" heteronyms tmp)
+            (when-let (added (gethash "added" entry))
+              (puthash "added" added tmp))
             (puthash title tmp shaped)))
         (aset shaped-dicts i shaped)))
     (dotimes (i dict-count)
