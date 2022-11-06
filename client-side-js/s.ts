@@ -60,6 +60,7 @@ const Match = {
  * @param needle
  */
 function updateSearch(needle: string) {
+  needle = needle.trim()
   while (resultsList.firstChild) {
     resultsList.removeChild(resultsList.firstChild);
   }
