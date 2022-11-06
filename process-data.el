@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Package-Requires: ((emacs "25.1"))
+
 (require 'json)
 (require 'cl-lib)
 (require 'dash)
@@ -28,7 +30,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
       (with-temp-buffer
         (insert-file-contents file)
         (goto-char (point-min))
-        (setq parsed (json-parse-buffer :array-type 'list)))
+        (let ((json-array-type 'list)
+              (json-object-type 'hash-table))
+          (setq parsed (json-read))))
       (with-temp-file output-path
         (insert
          (let ((json-encoding-pretty-print t))
@@ -84,7 +88,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
                         (progn
                           (erase-buffer)
                           (insert-file-contents f)
-                          (json-parse-buffer :array-type 'list)))
+                          (let ((json-array-type 'list)
+                                (json-object-type 'hash-table))
+                            (json-read))))
                (aset raw-dicts i)))))
     ;; [{:title "title"
     ;;   :heteronyms (...)
