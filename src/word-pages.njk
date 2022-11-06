@@ -18,49 +18,15 @@ eleventyComputed:
 </div>
 
 {% if word.dict_revised %}
-<div>
-  <div id="dict_revised" class="dict">
-    <a href="https://dict.revised.moe.edu.tw/search.jsp?word={{word.title}}"
-      >教育部重編國語辭典</a
-    >
-  </div>
-  {{ macros.render_word_dict_revised(word) }}
-</div>
+<div>{{ macros.render_word(word, "dict_revised") }}</div>
 {% endif %} {% if word.dict_concised %}
-<div>
-  <div id="dict_concised" class="dict">
-    <a href="https://dict.concised.moe.edu.tw/search.jsp?word={{word.title}}"
-      >教育部國語辭典簡編本</a
-    >
-  </div>
-  {{ macros.render_word_dict_concised(word) }}
-</div>
+<div>{{ macros.render_word(word, "dict_concised") }}</div>
 {% endif %} {% if word.moedict_twblg %}
-<div>
-  <div id="moedict_twblg" class="dict">
-    <a
-      href="https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample={{word.title}}"
-      >教育部臺灣閩南語常用詞辭典</a
-    >
-  </div>
-  {{ macros.render_word(word, "moedict_twblg") }}
-</div>
+<div>{{ macros.render_word(word, "moedict_twblg") }}</div>
 {% endif %} {% if word.dict_idioms %}
-<div>
-  <div id="dict_idioms" class="dict">
-    <a href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={{word.title}}"
-      >教育部成語典</a
-    >
-  </div>
-  {{ macros.render_word_dict_idioms(word) }}
-</div>
+<div>{{ macros.render_word(word, "dict_idioms") }}</div>
 {% endif %} {% if word.kisaragi_dict %}
-<div>
-  <div id="kisaragi_dict" class="dict">
-    <a href="/dict-kisaragi">Kisaragi's extras (beta)</a>
-  </div>
-  {{ macros.render_word(word, "kisaragi_dict") }}
-</div>
+<div>{{ macros.render_word(word, "kisaragi_dict") }}</div>
 {% endif %}
 
 <hr />

@@ -1,7 +1,8 @@
 /**
- * @file Implementation for the searchBar element.
+ * @file Implementation for the searchBar and collapsibles.
  * @name s.ts
  */
+
 // Using let here will *sometimes* make TypeScript complain about
 // redeclaring a block scoped variable. ...sure.
 var searchForm = document.getElementById("sf") as HTMLElement;
@@ -135,4 +136,34 @@ if (sbc) {
   document.addEventListener("click", (_event) => {
     setHidden(resultsList, true);
   });
+}
+
+let collapsibles = document.getElementsByClassName(
+  "c"
+) as HTMLCollectionOf<HTMLElement>;
+let words = document.getElementsByClassName(
+  "word"
+) as HTMLCollectionOf<HTMLElement>;
+
+if (collapsibles && words) {
+  // Assign max height to allow transitions to work.
+  for (const w of words) {
+    if (!w.style.height) {
+      w.style.height = `${w.scrollHeight}px`;
+      w.style.maxHeight = `${w.scrollHeight}px`;
+    }
+  }
+  for (const c of collapsibles) {
+    c.addEventListener("click", (_event) => {
+      c.classList.toggle("active");
+      let content = c.parentElement?.nextElementSibling as HTMLElement;
+      if (content) {
+        if (content.style.maxHeight == "0px") {
+          content.style.maxHeight = content.style.height;
+        } else {
+          content.style.maxHeight = "0px";
+        }
+      }
+    });
+  }
 }

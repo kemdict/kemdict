@@ -8,142 +8,158 @@
 </ul>
 {% endmacro %}
 
-{% macro render_word_dict_idioms(word) %}
-<div class="word">
-  {% for het in word["dict_idioms"].heteronyms %}
-  <h1>{{word.title}}</h1>
-  {% if het.bopomofo %}
-  <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
-  {% endif %}
-  <p class="def">{{ het.definition | process_def_idioms | safe }}</p>
-  {% if het.用法語意說明 or het.用法使用類別 or het.用法例句 %}
-  <h2>用法</h2>
-  <p>{{ het.用法語意說明 }}</p>
-  <p>{{ het.用法使用類別}}</p>
-  {% if het.用法例句 %}
-  <h3>例句</h3>
-  <p>{{ het.用法例句 | newline_string_to_ol | safe }}</p>
-  {% endif %}
-  {% endif %}
-  <h2>辨識</h2>
-  {% if het.近義同 %}
-  <p>近義：{{ het.近義同 | comma_word_list | safe }}</p>
-  {% endif %}
-  {% if het.近義反 %}
-  <p>反義：{{ het.近義反 | comma_word_list | safe }}</p>
-  {% endif %}
-  {% if het.word_ref %}
-  <p>參考詞語：「{{ het.word_ref | linkToWord | safe }}」</p>
-  {% endif %}
-  <p>{{ het.辨識同 }}{{ het.辨識異 }}</p>
-  {% if het.辨識例句 %}
-  {{ het.辨識例句 | idioms_nuance | safe }}
-  {% endif %}
-  <p>{{ het.形音辨誤 }}</p>
-  {% if het.source_name %}
-  <h2 id="isc">典源</h2>
-  <p>{{ het.source_name }}</p>
-  <p>{{ het.source_content | idioms_source | safe }}</p>
-  <h3>注解</h3>
-  <p>{{ het.source_comment | idioms_source_comment | safe }}</p>
-  <p>{{ het.source_reference }}</p>
-  {% endif %}
-  <h2>典故說明</h2>
-  <p>{{ het.典故說明 | linkify_brackets | safe }}</p>
-  <h2>書證</h2>
-  {{ het.書證 | newline_string_to_ol | safe }}
-  {% endfor %}
-</div>
+{% macro _dict_idioms(entry, title) %}
+{% for het in entry.heteronyms %}
+<h1>{{title}}</h1>
+{% if het.bopomofo %}
+<p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
+{% endif %}
+<p class="def">{{ het.definition | process_def_idioms | safe }}</p>
+{% if het.用法語意說明 or het.用法使用類別 or het.用法例句 %}
+<h2>用法</h2>
+<p>{{ het.用法語意說明 }}</p>
+<p>{{ het.用法使用類別}}</p>
+{% if het.用法例句 %}
+<h3>例句</h3>
+<p>{{ het.用法例句 | newline_string_to_ol | safe }}</p>
+{% endif %}
+{% endif %}
+<h2>辨識</h2>
+{% if het.近義同 %}
+<p>近義：{{ het.近義同 | comma_word_list | safe }}</p>
+{% endif %}
+{% if het.近義反 %}
+<p>反義：{{ het.近義反 | comma_word_list | safe }}</p>
+{% endif %}
+{% if het.word_ref %}
+<p>參考詞語：「{{ het.word_ref | linkToWord | safe }}」</p>
+{% endif %}
+<p>{{ het.辨識同 }}{{ het.辨識異 }}</p>
+{% if het.辨識例句 %}
+{{ het.辨識例句 | idioms_nuance | safe }}
+{% endif %}
+<p>{{ het.形音辨誤 }}</p>
+{% if het.source_name %}
+<h2 id="isc">典源</h2>
+<p>{{ het.source_name }}</p>
+<p>{{ het.source_content | idioms_source | safe }}</p>
+<h3>注解</h3>
+<p>{{ het.source_comment | idioms_source_comment | safe }}</p>
+<p>{{ het.source_reference }}</p>
+{% endif %}
+<h2>典故說明</h2>
+<p>{{ het.典故說明 | linkify_brackets | safe }}</p>
+<h2>書證</h2>
+{{ het.書證 | newline_string_to_ol | safe }}
+{% endfor %}
 {% endmacro %}
 
-{% macro render_word_dict_revised(word) %}
-<div class="word">
-  {% for het in word["dict_revised"].heteronyms %}
-  <h1>{{word.title}}</h1>
+{% macro _dict_revised(entry, title) %}
+  {% for het in entry.heteronyms %}
+  <h1>{{title}}</h1>
   {% if het.bopomofo %}
   <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
   {% endif %}
   {{ het.definition | process_def_revised | safe }}
   {% endfor %}
-</div>
 {% endmacro %}
 
-{% macro render_word_dict_concised(word) %}
-<div class="word">
-  {% for het in word["dict_concised"].heteronyms %}
-  <h1>{{word.title}}</h1>
+{% macro _dict_concised(entry, title) %}
+  {% for het in entry.heteronyms %}
+  <h1>{{title}}</h1>
   {% if het.bopomofo %}
   <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
   {% endif %}
   {{ het.definition | process_def_concised | safe }}
   {% endfor %}
-</div>
 {% endmacro %}
 
 {# Treat this as an iterative program, not a template. #}
 {% macro render_word(word, dict) %}
+<div id="{{dict}}" class="dict">
+  <button class="c"></button>
+  {% if dict == "kisaragi_dict" %}
+  <a href="/dict-kisaragi">Kisaragi's extras (beta)</a>
+  {% elif dict == "dict_idioms" %}
+  <a href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={{word.title}}">教育部成語典</a>
+  {% elif dict == "moedict_twblg" %}
+  <a href="https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample={{word.title}}">教育部臺灣閩南語常用詞辭典</a>
+  {% elif dict == "dict_concised" %}
+  <a href="https://dict.concised.moe.edu.tw/search.jsp?word={{word.title}}">教育部國語辭典簡編本</a>
+  {% elif dict == "dict_revised" %}
+  <a href="https://dict.revised.moe.edu.tw/search.jsp?word={{word.title}}">教育部重編國語辭典</a>
+  {% endif %}
+</div>
 <div class="word">
-  {% for het in word[dict].heteronyms %}
-    </ol>
-    <h1>{{word.title}}</h1>
-    {% set pronunciation = false %}
-    {% if dict == "kisaragi_dict" %}
-      {% set pronunciation = het.pronunciation %}
-    {% elif dict == "moedict_twblg" %}
-      {% set pronunciation = het.trs %}
-    {% endif %}
-    {% if pronunciation %}
-    <p>讀音：<span>{{ pronunciation | spc }}</span></p>
-    {% endif %}
-    {% set lasttype = "" %}
-    {% set first = true %}
-    {% for def in het.definitions %}
-      {% if def.type %}
-        {% if lasttype == def.type %}
-        {% else %}
-          {% if not first %}
-          </ol>
-          {% endif %}
-          {% set first = false %}
-          <p class="pos">{{ def.type }}</p>
-          <ol>
-        {% endif %}
-        {% set lasttype = def.type %}
-      {% else %}
-        {% if first %}
-          <ol>
-          {% set first = false %}
-        {% endif %}
-      {% endif %}
+  {% if dict == "dict_concised" %}
+    {{ _dict_concised(word[dict], word.title) }}
+  {% elif dict == "dict_revised" %}
+    {{ _dict_revised(word[dict], word.title) }}
+  {% elif dict == "dict_idioms" %}
+    {{ _dict_idioms(word[dict], word.title) }}
+  {% else %}
+    {% for het in word[dict].heteronyms %}
+      </ol>
+      <h1>{{word.title}}</h1>
+      {% set pronunciation = false %}
       {% if dict == "kisaragi_dict" %}
-        <li>
-          <p class="def">
-          {{ def.def | process_def_kisaragi | safe }}
-          {{ def.example }}
-          </p>
-          <p>
-          {{ def.etymology | process_def_kisaragi | safe }}
-          </p>
-          {% for quote in def.quote %}
-          <p>{{ quote }}</p>
-          {% endfor %}
-        </li>
+        {% set pronunciation = het.pronunciation %}
       {% elif dict == "moedict_twblg" %}
-        <li>
-          <p class="def">{{ def.def }}</p>
-          {% if def.example %}
-          <blockquote>
-          {{ def.example | interlinear_annotation | safe }}
-          </blockquote>
-          {% endif %}
-          {% if def.quote %}
-          <blockquote>
-          {{ def.quote | interlinear_annotation | safe }}
-          </blockquote>
-          {% endif %}
-        </li>
+        {% set pronunciation = het.trs %}
       {% endif %}
+      {% if pronunciation %}
+      <p>讀音：<span>{{ pronunciation | spc }}</span></p>
+      {% endif %}
+      {% set lasttype = "" %}
+      {% set first = true %}
+      {% for def in het.definitions %}
+        {% if def.type %}
+          {% if lasttype == def.type %}
+          {% else %}
+            {% if not first %}
+            </ol>
+            {% endif %}
+            {% set first = false %}
+            <p class="pos">{{ def.type }}</p>
+            <ol>
+          {% endif %}
+          {% set lasttype = def.type %}
+        {% else %}
+          {% if first %}
+            <ol>
+            {% set first = false %}
+          {% endif %}
+        {% endif %}
+        {% if dict == "kisaragi_dict" %}
+          <li>
+            <p class="def">
+            {{ def.def | process_def_kisaragi | safe }}
+            {{ def.example }}
+            </p>
+            <p>
+            {{ def.etymology | process_def_kisaragi | safe }}
+            </p>
+            {% for quote in def.quote %}
+            <p>{{ quote }}</p>
+            {% endfor %}
+          </li>
+        {% elif dict == "moedict_twblg" %}
+          <li>
+            <p class="def">{{ def.def }}</p>
+            {% if def.example %}
+            <blockquote>
+            {{ def.example | interlinear_annotation | safe }}
+            </blockquote>
+            {% endif %}
+            {% if def.quote %}
+            <blockquote>
+            {{ def.quote | interlinear_annotation | safe }}
+            </blockquote>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
+  {% endif %}
 </div>
 {% endmacro %}
