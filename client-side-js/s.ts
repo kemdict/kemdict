@@ -6,7 +6,7 @@
 // redeclaring a block scoped variable. ...sure.
 var searchForm = document.getElementById("sf") as HTMLElement;
 var resultsList = document.getElementById("sr") as HTMLUListElement;
-var sbc = document.getElementById("sbc") as HTMLElement;
+var sbc = document.getElementById("sbc");
 
 let loading = false;
 let titles: false | string[] = false;
@@ -60,7 +60,7 @@ const Match = {
  * @param needle
  */
 function updateSearch(needle: string) {
-  needle = needle.trim()
+  needle = needle.trim();
   while (resultsList.firstChild) {
     resultsList.removeChild(resultsList.firstChild);
   }
@@ -124,13 +124,15 @@ if (searchForm) {
 // Then we get the modal itself (the search form's parent container)
 // to block click events from going through to the root document.
 // Now the search result list hides when we click away.
-sbc.addEventListener("click", (event) => {
-  // event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-  return false;
-});
+if (sbc) {
+  sbc.addEventListener("click", (event) => {
+    // event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    return false;
+  });
 
-document.addEventListener("click", (_event) => {
-  setHidden(resultsList, true);
-});
+  document.addEventListener("click", (_event) => {
+    setHidden(resultsList, true);
+  });
+}
