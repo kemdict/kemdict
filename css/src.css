@@ -88,6 +88,12 @@
       @apply link;
     }
   }
+  .index {
+    ul,
+    input {
+      @apply ml-1;
+    }
+  }
   .prose {
     p {
       @apply my-2;
@@ -110,7 +116,7 @@
       /* @apply text-xl; */
     }
     h2 {
-      @apply mt-2;
+      @apply mt-6;
     }
     ol {
       @apply list-decimal;

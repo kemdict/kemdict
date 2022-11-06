@@ -9,10 +9,10 @@ title: kemdict
 <meta property="og:description" content="{{description}}" />
 {% endblock %}
 
-<div class="relative">
+<div class="index relative">
   <div class="prose mt-12 md:ml-[14rem]">
     <div class="max-md:mb-6 md:absolute md:top-4 md:left-4">
-      <div class="md:fixed">
+      <div class="md:fixed md:w-[10rem]">
         <h1 class="font-bold text-3xl">kemdict (β)</h1>
       </div>
     </div>
@@ -24,6 +24,11 @@ title: kemdict
         <p><a href="thanks">致謝</a></p>
       </li>
     </ul>
+    <h2>搜尋</h2>
+    {% include "searchBar.njk" %}
+    <h2>新增加的詞</h2>
+    {{ macros.wordlist(kisaragi_dict | sort(true, false, "added") | batch(10) |
+    first) }}
     <h2>收錄字典</h2>
     <ul>
       <li>
@@ -42,10 +47,5 @@ title: kemdict
         <p><a href="dict-moe">教育部成語典</a></p>
       </li>
     </ul>
-    <h2>新增加的詞</h2>
-    {{ macros.wordlist(kisaragi_dict | sort(true, false, "added") | batch(10) |
-    first) }}
-    <h2>搜尋</h2>
-    {% include "searchBar.njk" %}
   </div>
 </div>
