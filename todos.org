@@ -19,6 +19,7 @@
 - [X] Figure out how to decode the ={[xxxx]}= thing
      No longer applicable as we don't use moedict-data anymore.
 * todos
+- [ ] Add metadata
 - [ ] List (10) new words from kisaragi-dict at home page
      (Listing new words from MOE dictionaries requires keeping a record of all words from a previous version and comparing them with the current list. Doable but not relevant right now.)
 - [ ] Include information for when an entry was added in kisaragi-dict
