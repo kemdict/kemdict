@@ -234,6 +234,15 @@ module.exports = (cfg) => {
     });
   }
 
+  for (const [k, v] of Object.entries({
+    description:
+      "Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。",
+    author: "如月飛羽",
+    sitename: "Kemdict",
+  })) {
+    cfg.addGlobalData(k, v);
+  }
+
   return {
     dir: {
       input: "src",

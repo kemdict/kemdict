@@ -3,6 +3,12 @@ layout: base.njk
 title: kemdict
 ---
 
+{% block extra_head %}
+<meta property="og:type" content="website" />
+<meta name="description" content="{{description}}" />
+<meta property="og:description" content="{{description}}" />
+{% endblock %}
+
 <div class="relative">
   <div class="prose mt-12 md:ml-[14rem]">
     <div class="max-md:mb-6 md:absolute md:top-4 md:left-4">

@@ -9,7 +9,12 @@
     />
     {% block extra_head %}{% endblock %}
     <link rel="stylesheet" href="/b.css" />
-    <title>{{ title }}</title>
+    <title>{{title}}</title>
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:sitename" content="{{sitename}}" />
+    <meta property="twitter:title" content="{{title}}" />
+    <meta property="twitter:creator:id" content="kisaragi_hiu" />
+    <meta name="keywords" content="dictionary" />
   </head>
   <body>
     <div class="base">{% block main %}{{ content | safe }}{% endblock %}</div>
