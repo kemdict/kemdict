@@ -33,19 +33,21 @@ kisaragi-dict-rebuild: dicts/kisaragi/kisaragi_dict.json
 clear-dev-dicts:
 	rm dev-dict*.json
 
+JS := _site/s.js _site/render-not-found.js
+
 # This is for unconditionally updating the client side JS during
 # development.
 dev-js:
 	make _site/s.js
 	make _site/render-not-found.js
 
-dev: _site/s.js
+dev: $(JS)
 	export DEV=true
 	make src/_data
 	npx concurrently "make dev-11ty" "make dev-tailwind"
 
 # * Making the site itself
-_site: src/*.njk src/_data _site/b.css _site/s.js .eleventy.js
+_site: src/*.njk src/_data _site/b.css $(JS) .eleventy.js
 	npx --node-options='--max-old-space-size=7168' "@11ty/eleventy" --quiet
 
 build: _site
