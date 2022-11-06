@@ -219,7 +219,6 @@ module.exports = (cfg) => {
 
   cfg.addShortcode("getVersion", getVersion);
 
-  cfg.addPassthroughCopy("src/s.js");
   cfg.addPassthroughCopy("src/titles.json");
   cfg.addPassthroughCopy({
     "dicts/ministry-of-education/license": "l",

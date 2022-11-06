@@ -26,7 +26,7 @@ title: kemdict
     </ul>
     <h2>搜尋</h2>
     {% include "searchBar.njk" %}
-    <h2>新增加的詞</h2>
+    <h2>最近新增的詞</h2>
     {{ macros.wordlist(kisaragi_dict | sort(true, false, "added") | batch(10) |
     first) }}
     <h2>收錄字典</h2>
