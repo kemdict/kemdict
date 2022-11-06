@@ -15,6 +15,7 @@
 
 (require 'cl-lib)
 (require 'org-element)
+(require 'parse-time)
 (require 'json)
 (require 'dash)
 
@@ -27,6 +28,10 @@
    (org-element-interpret-data
     (org-element-property :title elem))))
 
+(defun kisaragi-dict/timestamp-to-unix (timestamp)
+  "Convert TIMESTAMP (in yyyy-mm-ddThh:mm:ssZ) to unix time."
+  (float-time (parse-iso8601-time-string timestamp)))
+
 (defun kisaragi-dict/elements-to-json (elems)
   "Process ELEMS to JSON for kisaragi-dict."
   (cl-loop
@@ -35,15 +40,20 @@
    ;; title
    (list
     (cons "title" (kisaragi-dict/elem-title elem))
+    ;; Use unix time so it's easier to compare
+    (cons "added" (kisaragi-dict/timestamp-to-unix
+                   (org-element-property :ADDED elem)))
     (cons "heteronyms"
           (cl-loop
            for het in (org-element-contents elem)
+           when (eq 'headline (org-element-type het))
            collect
            ;; pronunciation
            (list (cons "pronunciation" (kisaragi-dict/elem-title het))
                  (cons "definitions"
                        (cl-loop
                         for definition in (org-element-contents het)
+                        when (eq 'headline (org-element-type definition))
                         collect
                         (let* ((type+def
                                 (split-string (kisaragi-dict/elem-title definition) "|"))
