@@ -23,6 +23,4 @@ title: 字典 | 教育部
 >
 > — https://github.com/g0v/moedict-data
 
-我希望 Kemdict 不算是改作原始文字資料。
-
 更新版的資料置於<https://github.com/kisaragi-hiu/kemdict-data-ministry-of-education>。

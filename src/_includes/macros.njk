@@ -1,3 +1,13 @@
+{% macro wordlist(lst) %}
+<ul class="flex flex-wrap">
+  {% for word in lst %}
+  <li class="py-2 mr-2">
+    <a class="wordlink" href="/word/{{word.title}}">{{word.title}}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
 {% macro render_word_dict_idioms(word) %}
 <div class="word">
   {% for het in word["dict_idioms"].heteronyms %}

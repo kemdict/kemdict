@@ -248,5 +248,6 @@ module.exports = (cfg) => {
       input: "src",
       output: "_site",
     },
+    markdownTemplateEngine: "njk",
   };
 };

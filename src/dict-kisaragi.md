@@ -15,8 +15,7 @@ title: 字典 | Kisaragi's Extras
 
 因此我嘗試製作這個「字典」，裡面包含了我所寫的定義。
 
-目前共有 {{ kisaragi_dict | size }} 條：
+目前共有 {{ kisaragi_dict | length }} 條：
 
-{% for x in kisaragi_dict %}
-- [{{ x.title }}](/word/{{ x.title }})
-{% endfor %}
+{% import "macros.njk" as macros %}
+{{ macros.wordlist(kisaragi_dict | sort(true, false, "added")) }}

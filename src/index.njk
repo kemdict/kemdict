@@ -3,7 +3,7 @@ layout: base.njk
 title: kemdict
 ---
 
-{% block extra_head %}
+{% import "macros.njk" as macros %} {% block extra_head %}
 <meta property="og:type" content="website" />
 <meta name="description" content="{{description}}" />
 <meta property="og:description" content="{{description}}" />
@@ -42,6 +42,9 @@ title: kemdict
         <p><a href="dict-moe">教育部成語典</a></p>
       </li>
     </ul>
+    <h2>新增加的詞</h2>
+    {{ macros.wordlist(kisaragi_dict | sort(true, false, "added") | batch(10) |
+    first) }}
     <h2>搜尋</h2>
     {% include "searchBar.njk" %}
   </div>
