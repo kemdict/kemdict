@@ -2,18 +2,17 @@
 
 ;; Package-Requires: ((emacs "27.1"))
 
-(require 'json)
 (require 'cl-lib)
 (require 'dash)
+(require 'seq)
 
 (defun k/process-title (title)
   "Process TITLE to replace problematic characters, and so on."
   ;; Mainly to normalize to half-width characters.
-  (thread-last
-    title
-    ucs-normalize-NFKC-string
-    (replace-regexp-in-string "'" "’")
-    (replace-regexp-in-string (rx "?") (rx "？"))))
+  (->> title
+       ucs-normalize-NFKC-string
+       (replace-regexp-in-string "'" "’")
+       (replace-regexp-in-string (rx "?") (rx "？"))))
 
 (defun k/extract-development-version (word file output-path)
   "Read FILE and write its definition of WORD to OUTPUT-PATH.
@@ -30,13 +29,15 @@ Does nothing if OUTPUT-PATH already exists as a file."
       (with-temp-buffer
         (insert-file-contents file)
         (goto-char (point-min))
-        (setq parsed (json-parse-buffer :array-type 'list)))
+        (setq parsed (json-parse-buffer)))
       (with-temp-file output-path
         (insert
-         (let ((json-encoding-pretty-print t))
-           (json-encode
-            (--filter (equal word (gethash "title" it))
-                      parsed))))))))
+         (json-serialize
+          (vconcat
+           (seq-filter
+            (lambda (it)
+              (equal word (gethash "title" it)))
+            parsed))))))))
 
 (unless noninteractive
   (k/extract-development-version "挨"
@@ -82,11 +83,11 @@ Does nothing if OUTPUT-PATH already exists as a file."
           (when (stringp files)
             (setq files (list files)))
           (->> (cl-loop for f in files
-                        nconc
+                        vconcat
                         (progn
                           (erase-buffer)
                           (insert-file-contents f)
-                          (json-parse-buffer :array-type 'list)))
+                          (json-parse-buffer)))
                (aset raw-dicts i)))))
     ;; [{:title "title"
     ;;   :heteronyms (...)
@@ -107,28 +108,29 @@ Does nothing if OUTPUT-PATH already exists as a file."
                (car (aref dictionaries i))
                (1+ i) dict-count)
       (let ((shaped (make-hash-table :test #'equal)))
-        (dolist (entry (aref raw-dicts i))
+        (seq-doseq (entry (aref raw-dicts i))
           (let* ((title (k/process-title (gethash "title" entry)))
                  ;; If the dictionary does not declare heteronyms in a
                  ;; key, we set the heteronyms to a list with the
                  ;; entry itself.
                  (heteronyms (or (gethash "heteronyms" entry)
-                                 (list entry)))
+                                 (vector entry)))
                  (tmp (make-hash-table :test #'equal)))
             ;; If an entry with the title already exists, insert into
             ;; its heteronyms.
             (when-let (existing (gethash title shaped))
               (setq heteronyms
-                    (append (gethash "heteronyms" existing)
-                            heteronyms)))
+                    (vconcat (gethash "heteronyms" existing)
+                             heteronyms)))
             ;; Sort the heteronyms according to the het_sort key.
             (when (and
                    ;; Skip checking the rest if the first already
                    ;; doesn't have it.
-                   (gethash "het_sort" (car heteronyms))
-                   (--all? (gethash "het_sort" it)
-                           (cdr heteronyms)))
+                   (gethash "het_sort" (elt heteronyms 0))
+                   (seq-every-p (lambda (it) (gethash "het_sort" it))
+                                heteronyms))
               (setq heteronyms
+                    ;; This happens to work on vectors.
                     (--sort
                      (< (string-to-number
                          (gethash "het_sort" it))
@@ -159,11 +161,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
     (message "Writing result out to disk...")
     (make-directory "src/_data" t)
     (with-temp-file "src/titles.json"
-      (let ((json-encoding-pretty-print (not noninteractive)))
-        (insert (json-encode all-titles))))
+      (insert (json-serialize (vconcat all-titles))))
     (with-temp-file "src/_data/combined.json"
-      (let ((json-encoding-pretty-print (not noninteractive)))
-        (insert (json-encode merged-result))))
+      (insert (json-serialize merged-result)))
     (message "Done")))
 
 (if (and (fboundp #'native-comp-available-p)
