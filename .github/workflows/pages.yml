@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   pages: write
+  deployments: write
   id-token: write
 
 concurrency:
@@ -41,9 +42,9 @@ jobs:
           sudo apt-get install emacs-nox
       - name: Set up Cask
         uses: conao3/setup-cask@master
-      - name: Set up Pages
-        id: pages
-        uses: actions/configure-pages@v2
+      # - name: Set up Pages
+      #   id: pages
+      #   uses: actions/configure-pages@v2
       - name: Install packages
         run: |
           cask
@@ -54,24 +55,25 @@ jobs:
         run: |
           sudo sysctl -w fs.file-max=500000
           sudo prlimit --nofile=400000 make _site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v1
+      #   with:
+      #     path: ./_site
+      - name: Deploy to Cloudflare
+        uses: cloudflare/pages-action@1
         with:
-          path: ./_site
-      # - name: Deploy to Netlify
-      #   env:
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #   run: |
-      #     npm install netlify-cli
-      #     netlify deploy --dir=_site --prod
-  "deploy":
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: "build"
-    steps:
-      - name: "Deploy to GitHub Pages"
-        id: deployment
-        uses: actions/deploy-pages@v1
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: kemdict
+          directory: _site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+  # "deploy":
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   needs: "build"
+  #   steps:
+  #     - name: "Deploy to GitHub Pages"
+  #       id: deployment
+  #       uses: actions/deploy-pages@v1
