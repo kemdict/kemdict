@@ -126,7 +126,9 @@
           {% set lasttype = def.type %}
         {% else %}
           {% if first %}
+            {% if def.def %}
             <ol>
+            {% endif %}
             {% set first = false %}
           {% endif %}
         {% endif %}
@@ -144,6 +146,7 @@
             {% endfor %}
           </li>
         {% elif dict == "moedict_twblg" %}
+          {% if def.def or def.example or def.quote %}
           <li>
             <p class="def">{{ def.def }}</p>
             {% if def.example %}
@@ -157,6 +160,7 @@
             </blockquote>
             {% endif %}
           </li>
+          {% endif %}
         {% endif %}
       {% endfor %}
     {% endfor %}
