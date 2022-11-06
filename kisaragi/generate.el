@@ -56,10 +56,13 @@
                         when (eq 'headline (org-element-type definition))
                         collect
                         (let* ((type+def
-                                (split-string (kisaragi-dict/elem-title definition) "|"))
+                                (-> (kisaragi-dict/elem-title definition)
+                                    (split-string "|")))
                                (def
-                                (list (cons "type" (elt type+def 0))
-                                      (cons "def" (elt type+def 1)))))
+                                (if (elt type+def 1)
+                                    (list (cons "type" (elt type+def 0))
+                                          (cons "def" (elt type+def 1)))
+                                  (list (cons "def" (elt type+def 0))))))
                           (dolist (prop-headline (org-element-contents definition))
                             (pcase (kisaragi-dict/elem-title prop-headline)
                               ("例"
