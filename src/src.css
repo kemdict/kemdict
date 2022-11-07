@@ -81,10 +81,10 @@
     .c {
       @apply flex-grow text-left relative;
       &.active::after {
-        @apply -rotate-45;
+        @apply rotate-45;
       }
       &::after {
-        @apply rotate-45 -translate-y-full;
+        @apply -rotate-45 -translate-y-full;
         @apply transition-all;
         @apply absolute;
         bottom: 1px;

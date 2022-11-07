@@ -58,6 +58,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
          (dictionaries
           (if (and (or (not noninteractive)
                        (getenv "DEV"))
+                   nil
                    (file-exists-p "dev-dict_revised.json")
                    (file-exists-p "dev-dict-twblg.json")
                    (file-exists-p "dev-dict_concised.json")

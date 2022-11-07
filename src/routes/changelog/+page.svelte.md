@@ -1,7 +1,6 @@
----
-layout: md.njk
-title: 版本紀錄
----
+<svelte:head>
+  <title>版本紀錄</title>
+</svelte:head>
 
 # 0.5.1 (2022-11-08)
 

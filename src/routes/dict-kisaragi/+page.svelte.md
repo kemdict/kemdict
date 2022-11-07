@@ -1,7 +1,11 @@
----
-layout: md.njk
-title: 字典 | Kisaragi's Extras
----
+<script>
+  import kisaragi_dict from "$lib/kisaragi_dict.json"
+  import RecentWordList from "$lib/components/RecentWordList.svelte"
+</script>
+
+<svelte:head>
+  <title>字典 | Kisaragi's Extras</title>
+</svelte:head>
 
 # 字典：Kisaragi's extras
 
@@ -15,7 +19,6 @@ title: 字典 | Kisaragi's Extras
 
 因此我嘗試製作這個「字典」，裡面包含了我所寫的定義。
 
-目前共有 {{ kisaragi_dict | length }} 條：
+目前共有 {kisaragi_dict.length} 條：
 
-{% import "macros.njk" as macros %}
-{{ macros.wordlist(kisaragi_dict | sort(true, false, "added")) }}
+<RecentWordList />

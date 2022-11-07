@@ -8,7 +8,7 @@ let cjkFallback = [
 
 module.exports = {
   // darkMode: "class",
-  content: ["./src/**/*.{njk,html,hbs,md}"],
+  content: ["./src/**/*.{svelte,md,ts,js,html}"],
   safelist: ["visible", "invisible"],
   theme: {
     fontFamily: {
@@ -28,12 +28,7 @@ module.exports = {
         "sans-serif",
       ],
       // serif: ["Equity"],
-      mono: [
-        "Inconsolata",
-        "Noto Sans Mono CJK TC",
-        ...cjkFallback,
-        "monospace",
-      ],
+      mono: ["Inconsolata", "Noto Sans Mono CJK TC", ...cjkFallback, "monospace"],
     },
     extend: {
       // https://github.com/tailwindlabs/tailwindcss/discussions/1361

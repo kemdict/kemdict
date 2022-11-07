@@ -1,14 +1,20 @@
----
-layout: base.njk
-title: kemdict
----
+<script>
+  import RecentWordList from "$lib/components/RecentWordList.svelte";
+  import SearchBar from "$lib/components/SearchBar.svelte";
+  const title = "kemdict";
+  const sitename = "sitename";
+  const description = "Dummy description.";
+</script>
 
-{% import "macros.njk" as macros %} {% block extra_head %}
-<meta property="og:type" content="website" />
-<meta name="description" content="{{description}}" />
-<meta property="og:description" content="{{description}}" />
-<meta name="twitter:card" content="summary" />
-{% endblock %}
+<svelte:head>
+  <meta property="og:type" content="website" />
+  <meta name="description" content={description} />
+  <meta property="og:description" content={description} />
+  <meta name="twitter:card" content="summary" />
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+  <meta property="og:sitename" content={sitename} />
+</svelte:head>
 
 <div class="index relative">
   <div class="prose mt-12 md:ml-[14rem]">
@@ -26,10 +32,9 @@ title: kemdict
       </li>
     </ul>
     <h2>搜尋</h2>
-    {% include "searchBar.njk" %}
+    <SearchBar />
     <h2>最近新增的詞</h2>
-    {{ macros.wordlist(kisaragi_dict | sort(true, false, "added") | batch(12) |
-    first) }}
+    <RecentWordList limit={12} />
     <h2>收錄字典</h2>
     <ul>
       <li>

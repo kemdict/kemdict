@@ -1,7 +1,6 @@
----
-layout: md.njk
-title: 「借詞」和「借字」的差別
----
+<svelte:head>
+  <title>「借詞」和「借字」的差別</title>
+</svelte:head>
 
 「借詞」，又稱「外來語」，是從另一個語言「借用」詞彙進到一個語言裡。
 

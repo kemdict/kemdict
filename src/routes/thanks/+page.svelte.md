@@ -1,7 +1,6 @@
----
-layout: md.njk
-title: 致謝
----
+<svelte:head>
+<title>致謝</title>
+</svelte:head>
 
 # 授權與致謝
 
