@@ -1,0 +1,10 @@
+* 收錄字典
+
+- ministry-of-education ::
+  - 重編國語辭典修訂本
+  - 國語辭典簡編本
+  - 成語典
+- moedict-data-twblg ::
+  - 教育部臺灣閩南語常用詞辭典
+- kisaragi ::
+  - Kisaragi's Extras (之後應該會改名)
