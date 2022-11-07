@@ -14,7 +14,7 @@ Javascript meant to run in the browser are written in TypeScript then transpiled
 
 Currently there is no bundler in use, and Make is used as both the task runner and the build system.
 
-Builds are initiated on GitHub Actions when I push to the `main` branch. The workflow mostly does the usual stuff: install dependencies, build, deploy. Some notes:
+Builds are initiated on GitHub Actions when I create a release. The workflow mostly does the usual stuff: install dependencies, build, deploy. Some notes:
 
 - A `git fetch --depth=1 --tags` is initiated to get tag information, which is used for a page.
 - Emacs is installed from Ubuntu repositories because it's faster.
