@@ -1,9 +1,0 @@
-[functions]
-directory = "netlify/functions"
-
-[[redirects]]
-from = "/word/:slug"
-to = "/.netlify/builders/serverless"
-status = 200
-force = true
-_generated_by_eleventy_serverless = "serverless"

@@ -1,0 +1,11 @@
+= Eleventy 的輸入檔
+
+每個 Markdown 檔案 (`.md`) 都是一個頁面。每個 `.njk` 檔案也都是一個頁面。（有例外。）
+
+`_data` 是特殊的。Eleventy 會讀取裡面的 JSON 檔案，讓它們能在各個頁面被使用。
+
+`_includes` 也是特殊的。這是放 `{% extends base.njk %}` 中提到的 `base.njk` 等等檔案的位置。
+
+Markdown 檔案會先經過 Nunjucks 的處理再轉成 HTML。（Eleventy 的預設是用 Liquid；因為我主要是用 Nunjucks 所以我調整成用 Nunjucks。）處理好的 HTML 會再經過 ``layout:`` 屬性的檔案再合併成輸出的檔案。
+
+這個檔案 (`README.adoc`) 因為是用 Eleventy 不支援的格式寫的，所以不會變成一個頁面。（就算用它支援的格式https://www.11ty.dev/docs/ignores/[也還是可以再告訴 Eleventy 要忽略掉]。）

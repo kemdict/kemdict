@@ -27,4 +27,3 @@ Builds are initiated on GitHub Actions when I push to the `main` branch. The wor
 - Prettier is configured to treat Nunjucks files as normal HTML.
 - Tailwind CSS is configured with `tailwind.config.js` and `postcss.config.js`. This is a consequence of Tailwind's build tool utilizing PostCSS's ecosystem.
 - Babel is set up in `.babelrc.json` to transpile TypeScript to ES5.
-- `netlify.toml` and `netlify/` are set up for Eleventy Serverless, as part of an experiment to use that instead of prerendering pages for each and every word. That was not successful because for some reason each page would take almost 10 seconds to render.
