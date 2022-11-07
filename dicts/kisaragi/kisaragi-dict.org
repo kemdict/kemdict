@@ -43,7 +43,6 @@ Hub / USB Hub
 人道處置
 萌 (2022 and the “cute” definition is still not here)
 同人 (as in "doujin")
-二次創作 / 二創
 立棋 (流行語)
 
 * Doc
@@ -65,6 +64,21 @@ Hub / USB Hub
 - 動 :: 動詞
 
 * Words
+** 二創
+:PROPERTIES:
+:added:    2022-11-07T23:32:32+0900
+:END:
+*** ㄦˋ ㄔㄨㄤˋ
+**** 名|「二次創作」的簡稱。衍生作品。
+** 二次創作
+:PROPERTIES:
+:added:    2022-11-07T23:31:22+0900
+:END:
+*** ㄦˋ ㄘˋ ㄔㄨㄤˋ ㄗㄨㄛˋ
+**** 名|一個著作物的衍生作品。
+**** 名|製作衍生作品的動作。
+***** 例
+如：「進行二次創作」
 ** 扣打
 :PROPERTIES:
 :added:    2022-11-07T03:11:57+0900
