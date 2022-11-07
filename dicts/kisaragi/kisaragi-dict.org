@@ -44,6 +44,7 @@ Hub / USB Hub
 萌 (2022 and the “cute” definition is still not here)
 同人 (as in "doujin")
 二次創作 / 二創
+立棋 (流行語)
 
 * Doc
 ** 這個檔案
@@ -78,7 +79,9 @@ Hub / USB Hub
 :added:    2022-11-05T00:00:08Z
 :END:
 *** ㄘㄞˇ ㄊㄚˋ ㄕˋ ㄐㄧㄢˋ
-**** 名|因人群密度過高，互相踩踏、擠壓，造成傷亡的<事件>。又稱「人踩人事件」。
+**** 名|因人群密度過高，互相擠壓造成窒息傷亡的<事件>。Crowd surge。
+**** 名|因人群恐慌而開始互相衝撞、踩踏，造成傷亡的事件。Stampede。
+**** 名|又稱「人踩人事件」。
 ** 新增
 :PROPERTIES:
 :added:    2022-11-05T00:00:07Z
