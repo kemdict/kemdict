@@ -36,5 +36,5 @@
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 - [-] Incorporate Ministry of Education's Hakka dictionary
      [[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=ChLpKc/description?id=MSA00000041&opt=opt2][It's also CC-BY-ND 3.0 TW]].
-  - [X] Add it to [[https://github.com/kisaragi-hiu/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]
+  - [X] Add it to [[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]
   - [ ] Write the word template code for it

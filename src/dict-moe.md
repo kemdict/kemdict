@@ -23,4 +23,4 @@ title: 字典 | 教育部
 >
 > — https://github.com/g0v/moedict-data
 
-更新版的資料置於<https://github.com/kisaragi-hiu/kemdict-data-ministry-of-education>。
+更新版的資料置於<https://github.com/kemdict/kemdict-data-ministry-of-education>。
