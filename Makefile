@@ -5,22 +5,14 @@ export LANG=en_US.UTF-8
 # * Processing dictionary data into one combined file
 src/_data: src/_data/combined.json src/_data/kisaragi_dict.json
 
-src/_data/combined.json: dicts/moedict-data-twblg/dict-twblg.json dicts/kisaragi/kisaragi_dict.json dicts/ministry-of-education/dict_idioms.json dicts/process-data.el
-	cask eval "(load \"dicts/process-data\")"
+src/_data/combined.json:
+	cd dicts && make combined.json
 	mkdir -p src/_data
 	cp dicts/combined.json dicts/titles.json src/_data/
 
-src/_data/kisaragi_dict.json: dicts/kisaragi/kisaragi_dict.json
+src/_data/kisaragi_dict.json:
+	cd dicts && make kisaragi/kisaragi_dict.json
 	cp dicts/kisaragi/kisaragi_dict.json src/_data/
-
-dicts/kisaragi/kisaragi_dict.json: dicts/kisaragi/kisaragi-dict.org dicts/kisaragi/generate.el
-	cask eval "(load \"dicts/kisaragi/generate\")"
-
-dicts/moedict-data-twblg/dict-twblg.json:
-	git submodule update --init -- dicts/moedict-data-twblg
-
-dicts/ministry-of-education/dict_idioms.json:
-	git submodule update --init -- dicts/ministry-of-education
 
 # * Development tasks
 .PHONY: dev-11ty dev-tailwind dev dev-js kisaragi-dict-rebuild clear-dev-dicts
