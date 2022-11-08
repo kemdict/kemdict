@@ -1,3 +1,25 @@
+* The SvelteKit branch
+
+The goal is to produce something that could be packaged up in an app. By relying on a smart client side, we wouldn't have to render 170000 pages (and get to gigabytes in size).
+
+Things are already at the point where basically the entire thing looks the same as the Eleventy version.
+
+Problems:
+
+- Reading a 100MB JSON in its entirety has predictable results.
+  Spoilers: Eleventy Serverless taking forever is not an Eleventy
+  problem. The file is just too big.
+- This of course raises the minimum browser version by a ton.
+- The 404 page is not yet implemented.
+
+For this approach to work we need to be storing data in SQLite.
+
+To use SQLite we need to change the shape of the data to rely less on nested properties. …or we could just store nested objects as JSON strings.
+
+- Convert dictionaries to SQLite
+- Get the frontend code working with data from SQLite (fetch through better-sqlite3)
+- Package into an app with Cordova or Capacitor; also see https://github.com/capacitor-community/sqlite/issues/61
+
 * kemdict
 
 Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。
