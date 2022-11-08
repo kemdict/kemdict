@@ -30,7 +30,7 @@
 <div id="sbc">
   <form
     on:submit|preventDefault={() => {
-      goto(`/word/?word=${needle}`);
+      goto(`/word/${needle}`);
     }}
     id="sf"
   >
@@ -49,7 +49,7 @@
     {#if matching}
       <p>共 {matching.length} 條相符條目</p>
       {#each matching as w}
-        <li><a href="/word/?word={w}">{w}</a></li>
+        <li><a href="/word/{w}">{w}</a></li>
       {/each}
     {/if}
   </ul>

@@ -21,7 +21,7 @@ import titles from "./titles.json";
 export function linkToWord(target, desc = target) {
   if (target.indexOf("<a") === -1) {
     if (titles.includes(target)) {
-      return `<a href='/word/?word=${target}'>${desc}</a>`;
+      return `<a href='/word/${target}'>${desc}</a>`;
     }
   }
   return target;
