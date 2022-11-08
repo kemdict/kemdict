@@ -6,6 +6,9 @@
 (require 'dash)
 (require 'seq)
 
+(when load-file-name
+  (setq default-directory (file-name-directory load-file-name)))
+
 (defun k/process-title (title)
   "Process TITLE to replace problematic characters, and so on."
   ;; Mainly to normalize to half-width characters.
@@ -41,13 +44,13 @@ Does nothing if OUTPUT-PATH already exists as a file."
 
 (unless noninteractive
   (k/extract-development-version "挨"
-    "dicts/ministry-of-education/dict_revised.json" "dev-dict_revised.json")
+    "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
   (k/extract-development-version "挨"
-    "dicts/moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
+    "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
   (k/extract-development-version "挨"
-    "dicts/ministry-of-education/dict_concised.json" "dev-dict_concised.json")
+    "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
-    "dicts/ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
+    "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
 
 (defun main ()
   (let* ((all-titles (list))
@@ -63,13 +66,13 @@ Does nothing if OUTPUT-PATH already exists as a file."
                ("dict_revised" . "dev-dict_revised.json")
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
-               ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]
-            [("moedict_twblg" . ("dicts/moedict-data-twblg/dict-twblg.json"
-                                 "dicts/moedict-data-twblg/dict-twblg-ext.json"))
-             ("dict_revised" . "dicts/ministry-of-education/dict_revised.json")
-             ("dict_concised" . "dicts/ministry-of-education/dict_concised.json")
-             ("dict_idioms" . "dicts/ministry-of-education/dict_idioms.json")
-             ("kisaragi_dict" . "dicts/kisaragi/kisaragi_dict.json")]))
+               ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
+            [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
+                                 "moedict-data-twblg/dict-twblg-ext.json"))
+             ("dict_revised" . "ministry-of-education/dict_revised.json")
+             ("dict_concised" . "ministry-of-education/dict_concised.json")
+             ("dict_idioms" . "ministry-of-education/dict_idioms.json")
+             ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
          (dict-count (length dictionaries))
          ;; A list of the original parsed dictionary data
          (raw-dicts (make-vector dict-count nil))
@@ -159,10 +162,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
                      hash-table)))
         (puthash title hash-table merged-result)))
     (message "Writing result out to disk...")
-    (make-directory "src/_data" t)
-    (with-temp-file "src/titles.json"
+    (with-temp-file "titles.json"
       (insert (json-serialize (vconcat all-titles))))
-    (with-temp-file "src/_data/combined.json"
+    (with-temp-file "combined.json"
       (insert (json-serialize merged-result)))
     (message "Done")))
 
