@@ -3,7 +3,7 @@ import { error } from "@sveltejs/kit";
 export const prerender = false;
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
+export async function load({ params, fetch }) {
   // This uses /word/<word>.
   //
   // If we want /word/?word=<word>:

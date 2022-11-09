@@ -34,6 +34,7 @@
     }}
     id="sf"
   >
+    <!-- FIXME: this does not allow clicking on search results -->
     <input
       id="sb"
       on:focus={setHidden(resultsList, false)}
