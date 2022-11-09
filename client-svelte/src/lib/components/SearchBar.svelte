@@ -1,5 +1,6 @@
 <script>
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
   import titles from "$lib/titles.json";
   const Match = {
     includes: (str, needle) => str.indexOf(needle) === -1,
@@ -25,20 +26,33 @@
       elem.classList.add("visible");
     }
   }
+ onMount(() => {
+   const esc = (event) => {
+     if (event.key === "Escape") {
+       setHidden(resultsList, true);
+     }
+   }
+   const outsideClick = () => {
+     setHidden(resultsList, true);
+   }
+   document.addEventListener("click", outsideClick);
+   document.addEventListener("keyup", esc);
+   return () => {
+     document.removeEventListener("click", outsideClick)
+     document.removeEventListener("keyup", esc)
+   }
+ })
 </script>
 
-<div id="sbc">
+<div id="sbc" on:click|stopPropagation>
   <form
     on:submit|preventDefault={() => {
       goto(`/word/${needle}`);
     }}
     id="sf"
   >
-    <!-- FIXME: this does not allow clicking on search results -->
     <input
       id="sb"
-      on:focus={setHidden(resultsList, false)}
-      on:blur={setHidden(resultsList, true)}
       type="search"
       autocomplete="off"
       placeholder="輸入詞彙"

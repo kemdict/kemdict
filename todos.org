@@ -22,8 +22,9 @@
 - [X] List (10) new words from kisaragi-dict at home page
      (Listing new words from MOE dictionaries requires keeping a record of all words from a previous version and comparing them with the current list. Doable but not relevant right now.)
 - [X] Include information for when an entry was added in kisaragi-dict
+- [X] Figure out an icon
 * todos
-- [ ] Figure out an icon
+- [ ] gzip titles.json during build & decode in JS
 - [ ] kisaragi-dict: use HTML in text content freely
 - [ ] kisaragi-dict: transform Org links to HTML links during the data process step
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
