@@ -219,8 +219,8 @@ module.exports = (cfg) => {
 
   cfg.addShortcode("getVersion", getVersion);
 
-  cfg.addPassthroughCopy("static/*", "");
   cfg.addPassthroughCopy({
+    "src/static": "./",
     "dicts/ministry-of-education/license": "l",
   });
 

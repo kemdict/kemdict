@@ -46,7 +46,6 @@ jobs:
         uses: actions/configure-pages@v2
       - name: Install packages
         run: |
-          cask
           npm install
       - name: Prepare data files
         run: make src/_data
