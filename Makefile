@@ -9,6 +9,7 @@ src/_data/combined.json:
 	cd dicts && make combined.json
 	mkdir -p src/_data
 	cp dicts/combined.json dicts/titles.json src/_data/
+	cp dicts/titles.json src/static/
 
 src/_data/kisaragi_dict.json:
 	cd dicts && make kisaragi/kisaragi_dict.json

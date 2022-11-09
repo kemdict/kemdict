@@ -7,7 +7,7 @@ let EleventyServerlessBundlerPlugin;
 
 const fs = require("node:fs");
 const { spawnSync } = require("node:child_process");
-const all_titles = JSON.parse(fs.readFileSync("src/titles.json"));
+const all_titles = JSON.parse(fs.readFileSync("dicts/titles.json"));
 
 /* Return a string of an HTML link to `target`. */
 /* If `target` already contains an <a> tag, return it unchanged. */
@@ -219,7 +219,7 @@ module.exports = (cfg) => {
 
   cfg.addShortcode("getVersion", getVersion);
 
-  cfg.addPassthroughCopy("src/titles.json");
+  cfg.addPassthroughCopy("static/*", "");
   cfg.addPassthroughCopy({
     "dicts/ministry-of-education/license": "l",
   });
