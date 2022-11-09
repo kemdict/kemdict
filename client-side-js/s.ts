@@ -136,6 +136,11 @@ if (sbc) {
   document.addEventListener("click", (_event) => {
     setHidden(resultsList, true);
   });
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "Escape") {
+      setHidden(resultsList, true);
+    }
+  });
 }
 
 let collapsibles = document.getElementsByClassName(
