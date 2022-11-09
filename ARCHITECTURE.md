@@ -2,11 +2,17 @@
 
 This document describes this code base.
 
-Kemdict is an Eleventy project. It is both an alternative interface to several dictionaries, as well as an attempt to create my own dictionary — I refer to the latter as `kisaragi_dict`.
+Kemdict is both an alternative interface to several dictionaries, as well as an attempt to create my own dictionary — I refer to the latter as `kisaragi_dict`.
 
 Dictionaries are combined beforehand before being fed to Eleventy. This combination step is done with Emacs Lisp.
 
 `kisaragi_dict` is an Org Mode file, and it is turned into JSON through Emacs Lisp.
+
+Kemdict currently has two frontends. One uses SvelteKit, the other uses Eleventy.
+
+The SvelteKit version is meant to possibly be packaged for mobile (via, perhaps, Capacitor). It avoids generating 170000+ files, but it loads a 150MB JSON instead, which is fine if it's present locally (it would be in Capacitor), but unacceptable as a website. (This could be worked around by creating a server endpoint to be served through a serverless function or on a server, but I also want the app to be offline.)
+
+Text below describes the Eleventy version.
 
 Kemdict uses Tailwind CSS. During build, Tailwind is called on the input file and placed into Eleventy's output directory.
 
