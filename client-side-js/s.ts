@@ -90,7 +90,7 @@ function updateSearch(needle: string) {
       for (const w of matching) {
         let c = document.createElement("li");
         let a = document.createElement("a");
-        a.href = `/word/${w}`;
+        a.href = `/word/${w.toLowerCase()}`;
         a.textContent = w;
         c.appendChild(a);
         resultsList.appendChild(c);
@@ -112,7 +112,7 @@ if (searchForm) {
     let word = searchBar.value;
     event.preventDefault();
     if (word.trim() !== "") {
-      location.href = "/word/" + word;
+      location.href = `/word/${word.toLowerCase()}`;
     }
   });
 }

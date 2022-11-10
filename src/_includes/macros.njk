@@ -2,7 +2,7 @@
 <ul class="flex flex-wrap">
   {% for word in lst %}
   <li class="py-2 mr-2">
-    <a class="wordlink" href="/word/{{word.title}}">{{word.title}}</a>
+    <a class="wordlink" href="/word/{{word.title|lower}}">{{word.title}}</a>
   </li>
   {% endfor %}
 </ul>

@@ -5,7 +5,7 @@ pagination:
   size: 1
   alias: word
   resolve: values
-permalink: "word/{{ word.title }}/index.html"
+permalink: "word/{{ word.title | lower }}/index.html"
 eleventyComputed:
   title: "「{{ word.title }}」- kemdict"
 ---

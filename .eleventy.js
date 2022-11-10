@@ -13,8 +13,10 @@ const all_titles = JSON.parse(fs.readFileSync("dicts/titles.json"));
 /* If `target` already contains an <a> tag, return it unchanged. */
 function linkToWord(target, desc = target) {
   if (target.indexOf("<a") === -1) {
+    // yes, we want a case-Sensitive check here.
+    // We don't want 「line」 to link to LINE.
     if (all_titles.includes(target)) {
-      return `<a href='/word/${target}'>${desc}</a>`;
+      return `<a href='/word/${target.toLowerCase()}'>${desc}</a>`;
     }
   }
   return target;

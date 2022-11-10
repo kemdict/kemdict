@@ -34,7 +34,7 @@ To render pages at first request:
    - Set permalink to an object mapping function names to URLs instead. If there is a variable in there, you'll have to convert it to a template in the URL. As in:
      #+begin_src yaml
      # Instead of:
-     permalink: "/word/{{ word.title }}/index.html"
+     permalink: "/word/{{ word.title | lower }}/index.html"
 
      # Use:
      permalink:
