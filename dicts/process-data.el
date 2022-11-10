@@ -52,6 +52,68 @@ Does nothing if OUTPUT-PATH already exists as a file."
   (k/extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
 
+(defun k/parse-and-shape (&rest files)
+  "Parse FILES and return a shaped version of it.
+
+Parsed arrays from FILES are concatenated before shaping."
+  (let ((shaped (make-hash-table :test #'equal))
+        (raw-dict
+         (with-temp-buffer
+           (cl-loop for f in files
+                    vconcat
+                    (progn
+                      (erase-buffer)
+                      (insert-file-contents f)
+                      (json-parse-buffer))))))
+    ;; [{:title "title"
+    ;;   :heteronyms (...)
+    ;;   ... ...}
+    ;;  ...]
+    ;; -> {"title" {heteronyms (...)}
+    ;;     ...}
+    ;;
+    ;; For entries without heteronyms:
+    ;; [{:title "title"
+    ;;   :definition "def"
+    ;;   ... ...}
+    ;;  ...]
+    ;; -> {"title" {heteronyms [{definition "def" ...}]}
+    ;;     ...}
+    (seq-doseq (entry raw-dict)
+      (let* ((title (k/process-title (gethash "title" entry)))
+             ;; If the dictionary does not declare heteronyms in a
+             ;; key, we set the heteronyms to a list with the
+             ;; entry itself.
+             (heteronyms (or (gethash "heteronyms" entry)
+                             (vector entry)))
+             (tmp (make-hash-table :test #'equal)))
+        ;; If an entry with the title already exists, insert into
+        ;; its heteronyms.
+        (when-let (existing (gethash title shaped))
+          (setq heteronyms
+                (vconcat (gethash "heteronyms" existing)
+                         heteronyms)))
+        ;; Sort the heteronyms according to the het_sort key.
+        (when (and
+               ;; Skip checking the rest if the first already
+               ;; doesn't have it.
+               (gethash "het_sort" (elt heteronyms 0))
+               (seq-every-p (lambda (it) (gethash "het_sort" it))
+                            heteronyms))
+          (setq heteronyms
+                ;; This happens to work on vectors.
+                (--sort
+                 (< (string-to-number
+                     (gethash "het_sort" it))
+                    (string-to-number
+                     (gethash "het_sort" other)))
+                 heteronyms)))
+        (puthash "heteronyms" heteronyms tmp)
+        (when-let (added (gethash "added" entry))
+          (puthash "added" added tmp))
+        (puthash title tmp shaped)))
+    shaped))
+
 (defun main ()
   (let* ((all-titles (list))
          (merged-result (make-hash-table :test #'equal))
@@ -78,73 +140,14 @@ Does nothing if OUTPUT-PATH already exists as a file."
          (raw-dicts (make-vector dict-count nil))
          (shaped-dicts (make-vector dict-count nil)))
     (dotimes (i dict-count)
-      (with-temp-buffer
-        (message "Parsing %s (%s/%s)..."
-                 (car (aref dictionaries i))
-                 (1+ i) dict-count)
-        (let ((files (cdr (aref dictionaries i))))
-          (when (stringp files)
-            (setq files (list files)))
-          (->> (cl-loop for f in files
-                        vconcat
-                        (progn
-                          (erase-buffer)
-                          (insert-file-contents f)
-                          (json-parse-buffer)))
-               (aset raw-dicts i)))))
-    ;; [{:title "title"
-    ;;   :heteronyms (...)
-    ;;   ... ...}
-    ;;  ...]
-    ;; -> {"title" {heteronyms (...)}
-    ;;     ...}
-    ;;
-    ;; For entries without heteronyms:
-    ;; [{:title "title"
-    ;;   :definition "def"
-    ;;   ... ...}
-    ;;  ...]
-    ;; -> {"title" {heteronyms [{definition "def" ...}]}
-    ;;     ...}
-    (dotimes (i dict-count)
-      (message "Shaping data for %s (%s/%s)..."
+      (message "Parsing and shaping %s (%s/%s)..."
                (car (aref dictionaries i))
                (1+ i) dict-count)
-      (let ((shaped (make-hash-table :test #'equal)))
-        (seq-doseq (entry (aref raw-dicts i))
-          (let* ((title (k/process-title (gethash "title" entry)))
-                 ;; If the dictionary does not declare heteronyms in a
-                 ;; key, we set the heteronyms to a list with the
-                 ;; entry itself.
-                 (heteronyms (or (gethash "heteronyms" entry)
-                                 (vector entry)))
-                 (tmp (make-hash-table :test #'equal)))
-            ;; If an entry with the title already exists, insert into
-            ;; its heteronyms.
-            (when-let (existing (gethash title shaped))
-              (setq heteronyms
-                    (vconcat (gethash "heteronyms" existing)
-                             heteronyms)))
-            ;; Sort the heteronyms according to the het_sort key.
-            (when (and
-                   ;; Skip checking the rest if the first already
-                   ;; doesn't have it.
-                   (gethash "het_sort" (elt heteronyms 0))
-                   (seq-every-p (lambda (it) (gethash "het_sort" it))
-                                heteronyms))
-              (setq heteronyms
-                    ;; This happens to work on vectors.
-                    (--sort
-                     (< (string-to-number
-                         (gethash "het_sort" it))
-                        (string-to-number
-                         (gethash "het_sort" other)))
-                     heteronyms)))
-            (puthash "heteronyms" heteronyms tmp)
-            (when-let (added (gethash "added" entry))
-              (puthash "added" added tmp))
-            (puthash title tmp shaped)))
-        (aset shaped-dicts i shaped)))
+      (let ((files (cdr (aref dictionaries i))))
+        (when (stringp files)
+          (setq files (list files)))
+        (aset shaped-dicts i
+              (apply #'k/parse-and-shape files))))
     (dotimes (i dict-count)
       (message "Collecting titles (%s/%s)..." (1+ i) dict-count)
       (cl-loop
@@ -154,13 +157,13 @@ Does nothing if OUTPUT-PATH already exists as a file."
     (setq all-titles (-uniq all-titles))
     (message "Merging...")
     (dolist (title all-titles)
-      (let ((hash-table (make-hash-table :test #'equal)))
-        (puthash "title" title hash-table)
+      (let ((entry (make-hash-table :test #'equal)))
+        (puthash "title" title entry)
         (dotimes (i dict-count)
           (when-let (v (gethash title (aref shaped-dicts i)))
             (puthash (car (aref dictionaries i)) v
-                     hash-table)))
-        (puthash title hash-table merged-result)))
+                     entry)))
+        (puthash title entry merged-result)))
     (message "Writing result out to disk...")
     (with-temp-file "titles.json"
       (insert (json-serialize (vconcat all-titles))))
