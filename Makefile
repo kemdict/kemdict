@@ -5,13 +5,13 @@ export LANG=en_US.UTF-8
 # * Processing dictionary data into one combined file
 src/_data: src/_data/combined.json src/_data/kisaragi_dict.json
 
-src/_data/combined.json:
+src/_data/combined.json: dicts
 	cd dicts && make combined.json
 	mkdir -p src/_data
 	cp dicts/combined.json dicts/titles.json src/_data/
 	cp dicts/titles.json src/static/
 
-src/_data/kisaragi_dict.json:
+src/_data/kisaragi_dict.json: dicts
 	cd dicts && make kisaragi/kisaragi_dict.json
 	cp dicts/kisaragi/kisaragi_dict.json src/_data/
 
