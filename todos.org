@@ -24,6 +24,9 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
+- [ ] mobile: include fonts (or use system fonts)
+- [ ] Use SvelteKit version as main version
+     - We could then do the searching on the server side and avoid having to build 170000+ pages
 - [ ] gzip titles.json during build & decode in JS
 - [ ] kisaragi-dict: use HTML in text content freely
 - [ ] kisaragi-dict: transform Org links to HTML links during the data process step
