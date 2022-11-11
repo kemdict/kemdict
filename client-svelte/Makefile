@@ -14,7 +14,12 @@ src/lib/kisaragi_dict.json:
 dev: static/combined.json src/lib/kisaragi_dict.json
 	npx vite dev
 
+# This refers to a folder here.
 build: static/combined.json
 	npx vite build
 
-.PHONY: build dev
+build-android: build
+	npx cap sync
+	cd android && ./gradlew "assmebleRelease"
+
+.PHONY: dev build-android
