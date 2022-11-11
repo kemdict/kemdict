@@ -136,8 +136,6 @@ Parsed arrays from FILES are concatenated before shaping."
              ("dict_idioms" . "ministry-of-education/dict_idioms.json")
              ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
          (dict-count (length dictionaries))
-         ;; A list of the original parsed dictionary data
-         (raw-dicts (make-vector dict-count nil))
          (shaped-dicts (make-vector dict-count nil)))
     (dotimes (i dict-count)
       (message "Parsing and shaping %s (%s/%s)..."
