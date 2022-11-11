@@ -15,6 +15,9 @@
     "tailwindcss": "^3.2.1",
     "vite": "^3.1.0"
   },
+  "devDependencies": {
+    "@capacitor/assets": "^2.0.0"
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
