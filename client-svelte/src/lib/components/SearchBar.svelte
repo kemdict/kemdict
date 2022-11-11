@@ -26,25 +26,25 @@
       elem.classList.add("visible");
     }
   }
- onMount(() => {
-   const esc = (event) => {
-     if (event.key === "Escape") {
-       setHidden(resultsList, true);
-     }
-   }
-   const outsideClick = () => {
-     setHidden(resultsList, true);
-   }
-   document.addEventListener("click", outsideClick);
-   document.addEventListener("keyup", esc);
-   return () => {
-     document.removeEventListener("click", outsideClick)
-     document.removeEventListener("keyup", esc)
-   }
- })
+  const esc = (event) => {
+    if (event.key === "Escape") {
+      setHidden(resultsList, true);
+    }
+  };
+  const outsideClick = () => {
+    setHidden(resultsList, true);
+  };
+  onMount(() => {
+    document.addEventListener("click", outsideClick);
+    document.addEventListener("keyup", esc);
+    return () => {
+      document.removeEventListener("click", outsideClick);
+      document.removeEventListener("keyup", esc);
+    };
+  });
 </script>
 
-<div id="sbc" on:click|stopPropagation>
+<div id="sbc" on:click|stopPropagation on:keyup={esc}>
   <form
     on:submit|preventDefault={() => {
       goto(`/word/${needle}`);
