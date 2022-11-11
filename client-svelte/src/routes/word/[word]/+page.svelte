@@ -35,7 +35,9 @@
 <div class="prose">
   <ul class="my-10">
     <li>
-      <a href="https://google.com/search?q={word.title}">在 Google 搜尋「{word.title}」</a>
+      <a href="https://google.com/search?q={word.title}"
+        >在 Google 搜尋「{word.title}」</a
+      >
     </li>
     <li>
       <a href="https://zh.wiktionary.org/w/index.php?search={word.title}"
@@ -66,28 +68,41 @@
     {#if word.dict_revised}
       <p>
         《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
-        中華民國教育部（版本編號：2015_20220922）。<a href="/l/reviseddict_10312.pdf">使用說明</a>
+        中華民國教育部（版本編號：2015_20220922）。<a
+          href="/l/reviseddict_10312.pdf">使用說明</a
+        >
       </p>
     {/if}
     {#if word.dict_concised}
       <p>
         《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a>》©
-        中華民國教育部（版本編號：2014_20220928）。<a href="/l/concisedict_10312.pdf">使用說明</a>
+        中華民國教育部（版本編號：2014_20220928）。<a
+          href="/l/concisedict_10312.pdf">使用說明</a
+        >
       </p>
     {/if}
     {#if word.moedict_twblg}
       <p>
         《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a>》©
-        中華民國教育部（版本編號：20190610）。見<a href="https://github.com/g0v/moedict-data-twblg"
-          >moedict-data-twblg</a
+        中華民國教育部（版本編號：20190610）。見<a
+          href="https://github.com/g0v/moedict-data-twblg">moedict-data-twblg</a
         >
       </p>
     {/if}
     {#if word.dict_idioms}
       <p>
         《<a href="https://dict.idioms.moe.edu.tw">成語典</a>》©
-        中華民國教育部（版本編號：2020_20220928）。<a href="/l/idiomsdict_10409.pdf">使用說明</a>
+        中華民國教育部（版本編號：2020_20220928）。<a
+          href="/l/idiomsdict_10409.pdf">使用說明</a
+        >
       </p>
     {/if}
   {/if}
 </div>
+
+<hr />
+<p>
+  如果 Kemdict 有幫助到您，請考慮<a
+    href="https://www.buymeacoffee.com/kisaragihiu">贊助我一餐飯</a
+  >。謝謝。
+</p>
