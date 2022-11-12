@@ -17,10 +17,10 @@ eleventyComputed:
   {% include "searchBar.njk" %}
 </div>
 
-{% if word.dict_revised %}
-<div>{{ macros.render_word(word, "dict_revised") }}</div>
-{% endif %} {% if word.dict_concised %}
+{% if word.dict_concised %}
 <div>{{ macros.render_word(word, "dict_concised") }}</div>
+{% endif %} {% if word.dict_revised %}
+<div>{{ macros.render_word(word, "dict_revised") }}</div>
 {% endif %} {% if word.moedict_twblg %}
 <div>{{ macros.render_word(word, "moedict_twblg") }}</div>
 {% endif %} {% if word.dict_idioms %}
@@ -66,19 +66,19 @@ eleventyComputed:
     中華民國教育部《重編國語辭典修訂本》、《國語辭典簡編本》、《國語小字典》與《成語典》相關資料採「創用CC-姓名標示-禁止改作
     3.0 臺灣授權條款」釋出。
   </p>
-  {% if word.dict_revised %}
-  <p>
-    《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
-    中華民國教育部（版本編號：2015_20220922）。<a
-      href="/l/reviseddict_10312.pdf"
-      >使用說明</a
-    >
-  </p>
-  {% endif %} {% if word.dict_concised %}
+  {% if word.dict_concised %}
   <p>
     《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a>》©
     中華民國教育部（版本編號：2014_20220928）。<a
       href="/l/concisedict_10312.pdf"
+      >使用說明</a
+    >
+  </p>
+  {% endif %} {% if word.dict_revised %}
+  <p>
+    《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
+    中華民國教育部（版本編號：2015_20220922）。<a
+      href="/l/reviseddict_10312.pdf"
       >使用說明</a
     >
   </p>

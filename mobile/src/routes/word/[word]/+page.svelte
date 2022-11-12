@@ -15,11 +15,11 @@
   <SearchBar />
 </div>
 
-{#if word.dict_revised}
-  <Word {word} dict="dict_revised" />
-{/if}
 {#if word.dict_concised}
   <Word {word} dict="dict_concised" />
+{/if}
+{#if word.dict_revised}
+  <Word {word} dict="dict_revised" />
 {/if}
 {#if word.moedict_twblg}
   <Word {word} dict="moedict_twblg" />
@@ -65,19 +65,19 @@
       中華民國教育部《重編國語辭典修訂本》、《國語辭典簡編本》、《國語小字典》與《成語典》相關資料採「創用CC-姓名標示-禁止改作
       3.0 臺灣授權條款」釋出。
     </p>
-    {#if word.dict_revised}
-      <p>
-        《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
-        中華民國教育部（版本編號：2015_20220922）。<a
-          href="/l/reviseddict_10312.pdf">使用說明</a
-        >
-      </p>
-    {/if}
     {#if word.dict_concised}
       <p>
         《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a>》©
         中華民國教育部（版本編號：2014_20220928）。<a
           href="/l/concisedict_10312.pdf">使用說明</a
+        >
+      </p>
+    {/if}
+    {#if word.dict_revised}
+      <p>
+        《<a href="https://dict.revised.moe.edu.tw">重編國語辭典修訂本</a>》©
+        中華民國教育部（版本編號：2015_20220922）。<a
+          href="/l/reviseddict_10312.pdf">使用說明</a
         >
       </p>
     {/if}
