@@ -13,8 +13,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "'Source Sans 3'",
-        "'Source Sans Pro'",
+        "'Overpass'",
         "'Noto Sans CJK TC'",
         "'Noto Sans TC'",
         ...cjkFallback,
