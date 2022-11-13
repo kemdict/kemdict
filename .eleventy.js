@@ -22,6 +22,23 @@ function linkToWord(target, desc = target) {
   return target;
 }
 
+const hakkadict_p_names = ["四縣", "海陸", "大埔", "饒平", "詔安", "南四縣"];
+/**
+ * Collect all pronunciations for hakkadict.
+ * @param {string[]} pronunciations
+ */
+function hakkadict_p(...pronunciations) {
+  // 四縣 海陸 大埔 饒平 詔安 南四縣
+  // het.p_四縣, het.p_海陸, het.p_大埔, het.p_饒平, het.p_詔安, het.p_南四縣
+  let ret = "";
+  pronunciations.map((p, i) => {
+    if (p) {
+      ret += `<p>${p}（${hakkadict_p_names[i]}）</p>`;
+    }
+  });
+  return ret;
+}
+
 function linkify_brackets(str) {
   // "$1" is a normal variable here. This is a function that
   // passes its second argument to linkToWord. We do this because
@@ -203,6 +220,7 @@ function process_def_idioms(def) {
 }
 
 module.exports = (cfg) => {
+  cfg.addShortcode("hakkadict_p", hakkadict_p);
   cfg.addFilter("spc", (def) => {
     return def.replace(/　/g, " ");
   });

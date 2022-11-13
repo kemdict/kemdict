@@ -57,8 +57,11 @@
 {% macro _hakkadict(entry, title) %}
   {% for het in entry.heteronyms %}
   <h1>{{title}}</h1>
-  {% if het.p_四縣 %}
-  <p>讀音：<span>{{ het.p_四縣 | spc }}</span></p>
+  {% set p %}
+  {% hakkadict_p het.p_四縣, het.p_海陸, het.p_大埔, het.p_饒平, het.p_詔安, het.p_南四縣 %}
+  {% endset %}
+  {% if p %}
+  <div class="flex"><span>讀音：</span><span>{{ p | spc | safe }}</span></div>
   {% endif %}
   {{ het.definition | process_def_revised | safe }}
   {% endfor %}
@@ -81,6 +84,12 @@
   <p>讀音：<span>{{ het.bopomofo | spc }}</span></p>
   {% endif %}
   {{ het.definition | process_def_concised | safe }}
+  {% if het.antonyms %}
+  {{ het.antonyms }}
+  {% endif %}
+  {% if het.synonyms %}
+  {{ het.synonyms }}
+  {% endif %}
   {% endfor %}
 {% endmacro %}
 
@@ -95,7 +104,7 @@
   {% elif dict == "moedict_twblg" %}
   <a href="https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample={{word.title}}">教育部臺灣閩南語常用詞辭典</a>
   {% elif dict == "hakkadict" %}
-  <a href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id=\"{{word[dict].id}}\".">教育部臺灣客家語常用詞辭典</a>
+  <a href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id=%22{{word[dict].id}}%22.">教育部臺灣客家語常用詞辭典</a>
   {% elif dict == "dict_concised" %}
   <a href="https://dict.concised.moe.edu.tw/search.jsp?word={{word.title}}">教育部國語辭典簡編本</a>
   {% elif dict == "dict_revised" %}
