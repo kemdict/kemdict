@@ -54,6 +54,16 @@
 {% endfor %}
 {% endmacro %}
 
+{% macro _hakkadict(entry, title) %}
+  {% for het in entry.heteronyms %}
+  <h1>{{title}}</h1>
+  {% if het.p_四縣 %}
+  <p>讀音：<span>{{ het.p_四縣 | spc }}</span></p>
+  {% endif %}
+  {{ het.definition | process_def_revised | safe }}
+  {% endfor %}
+{% endmacro %}
+
 {% macro _dict_revised(entry, title) %}
   {% for het in entry.heteronyms %}
   <h1>{{title}}</h1>
@@ -84,6 +94,8 @@
   <a href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={{word.title}}">教育部成語典</a>
   {% elif dict == "moedict_twblg" %}
   <a href="https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample={{word.title}}">教育部臺灣閩南語常用詞辭典</a>
+  {% elif dict == "hakkadict" %}
+  <a href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id=\"{{word[dict].id}}\".">教育部臺灣客家語常用詞辭典</a>
   {% elif dict == "dict_concised" %}
   <a href="https://dict.concised.moe.edu.tw/search.jsp?word={{word.title}}">教育部國語辭典簡編本</a>
   {% elif dict == "dict_revised" %}
@@ -95,6 +107,8 @@
     {{ _dict_concised(word[dict], word.title) }}
   {% elif dict == "dict_revised" %}
     {{ _dict_revised(word[dict], word.title) }}
+  {% elif dict == "hakkadict" %}
+    {{ _hakkadict(word[dict], word.title) }}
   {% elif dict == "dict_idioms" %}
     {{ _dict_idioms(word[dict], word.title) }}
   {% else %}

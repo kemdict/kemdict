@@ -1,4 +1,8 @@
 * done
+- [X] Incorporate Ministry of Education's Hakka dictionary
+     [[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=ChLpKc/description?id=MSA00000041&opt=opt2][It's also CC-BY-ND 3.0 TW]].
+  - [X] Add it to [[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]
+  - [X] Write the word template code for it
 - [X] All titles should be written out as a file.
 - [X] References should only be linked if it is available.
 - [X] More dynamic search bar (which already requires JS)
@@ -26,7 +30,7 @@
 * todos
 - [ ] mobile: include fonts (or use system fonts)
 - [ ] Use SvelteKit version as main version
-     - We could then do the searching on the server side and avoid having to build 170000+ pages
+  - We could then do the searching on the server side and avoid having to build 170000+ pages
 - [ ] gzip titles.json during build & decode in JS
 - [ ] kisaragi-dict: use HTML in text content freely
 - [ ] kisaragi-dict: transform Org links to HTML links during the data process step
@@ -38,7 +42,3 @@
   - Or maybe checkboxes to hide a dictionary temporarily
 - [ ] (This might blow up file count even more) pronunciation search: collect all pronunciations, then list all words with a given pronunciation for all pronunciations
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
-- [-] Incorporate Ministry of Education's Hakka dictionary
-     [[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=ChLpKc/description?id=MSA00000041&opt=opt2][It's also CC-BY-ND 3.0 TW]].
-  - [X] Add it to [[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]
-  - [ ] Write the word template code for it
