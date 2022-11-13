@@ -4,6 +4,7 @@
 
 (require 'cl-lib)
 (require 'dash)
+(require 'json)
 (require 'seq)
 
 (when load-file-name
@@ -167,9 +168,9 @@ Parsed arrays from FILES are concatenated before shaping."
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
     (with-temp-file "titles.json"
-      (insert (json-serialize (vconcat all-titles))))
+      (insert (json-encode (vconcat all-titles))))
     (with-temp-file "combined.json"
-      (insert (json-serialize merged-result)))
+      (insert (json-encode merged-result)))
     (message "Done")))
 
 (if (and (fboundp #'native-comp-available-p)
