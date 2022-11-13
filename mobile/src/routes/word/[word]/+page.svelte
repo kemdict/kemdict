@@ -101,7 +101,7 @@
 </div>
 
 <hr />
-<p>
+<p class="prose">
   如果 Kemdict 有幫助到您，請考慮<a
     href="https://www.buymeacoffee.com/kisaragihiu">贊助我一餐飯</a
   >。謝謝。
