@@ -13,22 +13,12 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "'Source Sans 3'",
-        "'Source Sans Pro'",
         "'Noto Sans CJK TC'",
         "'Noto Sans TC'",
         ...cjkFallback,
         "sans-serif",
       ],
-      serif: [
-        "'Source Serif Pro'",
-        "'Noto Serif CJK TC'",
-        "'Noto Serif TC'",
-        ...cjkFallback,
-        "sans-serif",
-      ],
-      // serif: ["Equity"],
-      mono: ["Inconsolata", "Noto Sans Mono CJK TC", ...cjkFallback, "monospace"],
+      mono: ["Noto Sans Mono CJK TC", ...cjkFallback, "monospace"],
     },
     extend: {
       // https://github.com/tailwindlabs/tailwindcss/discussions/1361
