@@ -147,12 +147,18 @@ function process_def_revised(def) {
 
 function process_def_concised(def) {
   if (def) {
-    return `<ol>
-    ${def
-      .split("\n")
-      .map((d) => `<li><p class="def">${d.replace(/^\d+\./, "")}</p></li>`)
-      .join("")}
-</ol>`;
+    let ret = "<ol>";
+    for (const d of def.split("\n")) {
+      ret += `<li><p class="def">${d
+        .replace(/^\d+\./, "")
+        // These are the only types that exist.
+        // ...plus CJK COMPATIBILITY IDEOGRAPH-F9B5.
+        .replace(/\[([例似反])\]/, `<br><m>$1</m>`)
+        .replace(/§(英)([a-zA-Z ]+)/, `<br><m>$1</m>$2`)
+        .replace("△", `<br><m title="同">△</m>`)}</p></li>`;
+    }
+    ret += "</ol>";
+    return ret;
   } else {
     return def;
   }

@@ -180,6 +180,10 @@
     li:first-child {
       @apply mt-0;
     }
+    /* m for Mark. The "例" "英" "反" sort of marker */
+    m {
+      @apply font-bold px-1 mr-1 inline-block w-6;
+    }
     .pos {
       @apply font-bold mt-2 block;
     }
