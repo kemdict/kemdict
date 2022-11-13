@@ -27,27 +27,28 @@ iterating on one page.
 
 Does nothing if OUTPUT-PATH already exists as a file."
   (declare (indent 1))
-  (unless (file-exists-p output-path)
-    (let (parsed)
-      (with-temp-buffer
-        (insert-file-contents file)
-        (goto-char (point-min))
-        (setq parsed (json-parse-buffer)))
-      (with-temp-file output-path
-        (insert
-         (json-serialize
-          (vconcat
-           (seq-filter
-            (lambda (it)
-              (equal word (gethash "title" it)))
-            parsed))))))))
+  (let (parsed)
+    (with-temp-buffer
+      (insert-file-contents file)
+      (goto-char (point-min))
+      (setq parsed (json-parse-buffer)))
+    (with-temp-file output-path
+      (insert
+       (json-serialize
+        (vconcat
+         (seq-filter
+          (lambda (it)
+            (equal word (gethash "title" it)))
+          parsed)))))))
 
-(unless noninteractive
-  (k/extract-development-version "挨"
+(when nil
+  (k/extract-development-version "勁"
     "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
-  (k/extract-development-version "挨"
+  (k/extract-development-version "勁"
     "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
-  (k/extract-development-version "挨"
+  (k/extract-development-version "勁"
+    "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")
+  (k/extract-development-version "勁"
     "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
@@ -122,9 +123,11 @@ Parsed arrays from FILES are concatenated before shaping."
                        (getenv "DEV"))
                    (file-exists-p "dev-dict_revised.json")
                    (file-exists-p "dev-dict-twblg.json")
+                   (file-exists-p "dev-dict-twblg-ext.json")
                    (file-exists-p "dev-dict_concised.json")
                    (file-exists-p "dev-dict_idioms.json"))
-              [("moedict_twblg" . "dev-dict-twblg.json")
+              [("moedict_twblg" . ("dev-dict-twblg.json"
+                                   "dev-dict-twblg-ext.json"))
                ("dict_revised" . "dev-dict_revised.json")
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
