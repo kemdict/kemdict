@@ -106,18 +106,27 @@ export function comma_word_list(str) {
 
 /**
  * Return a new array which is `arr` whose objects are grouped by `property`.
+ *
+ * Items without `property` are grouped under `fallback`. (More
+ * accurately, they are grouped under the string representation of
+ * `fallback`, so eg. `false` and "false" are equivalent.)
+ *
  * @param {Array<object>} arr
  * @param {string} property
  */
-// This is more or less seq-group-by ported over.
-export function groupBy(arr, property) {
+// This is more or less seq-group-by ported over, except the fallback part.
+export function groupByProp(arr, property, fallback) {
   return arr.reduce((acc, elt) => {
     let key = elt[property];
     let cell = acc[key];
     if (cell) {
       cell.push(elt);
     } else {
-      acc[key] = [elt];
+      if (key) {
+        acc[key] = [elt];
+      } else {
+        acc[fallback] = [elt];
+      }
     }
     return acc;
   }, {});

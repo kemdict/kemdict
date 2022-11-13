@@ -2,9 +2,9 @@ export LANG=en_US.UTF-8
 
 .DEFAULT_GOAL := build
 
-static/combined.json:
+static/combined.json: ../dicts
 	cd ../dicts && make combined.json
-	cp ../dicts/combined.json ../dicts/titles.json src/static/
+	cp ../dicts/combined.json ../dicts/titles.json static/
 	cp ../dicts/titles.json src/lib/
 
 src/lib/kisaragi_dict.json:

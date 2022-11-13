@@ -1,9 +1,18 @@
 <script>
-  import { spc, groupBy, interlinear_annotation, linkify_brackets, linkToWord } from "$lib/common";
+  import {
+    spc,
+    groupByProp,
+    interlinear_annotation,
+    linkify_brackets,
+    linkToWord,
+  } from "$lib/common";
   export let word;
   export let dict;
   const entry = word[dict];
-  const pronunciation_key_mapping = { kisaragi_dict: "pronunciation", moedict_twblg: "trs" };
+  const pronunciation_key_mapping = {
+    kisaragi_dict: "pronunciation",
+    moedict_twblg: "trs",
+  };
   const pronunciation_key = pronunciation_key_mapping[dict];
 
   function process_def_kisaragi(def) {
@@ -22,8 +31,8 @@
   {#if het[pronunciation_key]}
     <p>讀音：<span>{spc(het[pronunciation_key])}</span></p>
   {/if}
-  {#each Object.entries(groupBy(het.definitions, "type")) as [type, defs]}
-    {#if type}
+  {#each Object.entries(groupByProp(het.definitions, "type", "none")) as [type, defs]}
+    {#if type !== "none"}
       <p class="pos">{type}</p>
     {/if}
     <ol>
