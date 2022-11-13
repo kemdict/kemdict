@@ -43,13 +43,15 @@ Does nothing if OUTPUT-PATH already exists as a file."
           parsed)))))))
 
 (when nil
-  (k/extract-development-version "勁"
+  (k/extract-development-version "出"
     "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
-  (k/extract-development-version "勁"
+  (k/extract-development-version "出"
+    "ministry-of-education/hakkadict.json" "dev-hakkadict.json")
+  (k/extract-development-version "出"
     "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
-  (k/extract-development-version "勁"
+  (k/extract-development-version "出"
     "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")
-  (k/extract-development-version "勁"
+  (k/extract-development-version "出"
     "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
@@ -122,22 +124,26 @@ Parsed arrays from FILES are concatenated before shaping."
          (dictionaries
           (if (and (or (not noninteractive)
                        (getenv "DEV"))
-                   (file-exists-p "dev-dict_revised.json")
-                   (file-exists-p "dev-dict-twblg.json")
-                   (file-exists-p "dev-dict-twblg-ext.json")
-                   (file-exists-p "dev-dict_concised.json")
-                   (file-exists-p "dev-dict_idioms.json"))
+                   (-all? #'file-exists-p
+                          '("dev-dict_revised.json"
+                            "dev-dict-twblg.json"
+                            "dev-dict-twblg-ext.json"
+                            "dev-dict_concised.json"
+                            "dev-dict_idioms.json"
+                            "dev-hakkadict.json")))
               [("moedict_twblg" . ("dev-dict-twblg.json"
                                    "dev-dict-twblg-ext.json"))
                ("dict_revised" . "dev-dict_revised.json")
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
+               ("hakkadict" . "dev-hakkadict.json")
                ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
             [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                                  "moedict-data-twblg/dict-twblg-ext.json"))
              ("dict_revised" . "ministry-of-education/dict_revised.json")
              ("dict_concised" . "ministry-of-education/dict_concised.json")
              ("dict_idioms" . "ministry-of-education/dict_idioms.json")
+             ("hakkadict" . "ministry-of-education/hakkadict.json")
              ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
          (dict-count (length dictionaries))
          (shaped-dicts (make-vector dict-count nil)))
