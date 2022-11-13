@@ -51,7 +51,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
     "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
   (k/extract-development-version "出"
     "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")
-  (k/extract-development-version "出"
+  (k/extract-development-version "赫茲"
     "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
