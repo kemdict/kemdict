@@ -17,7 +17,7 @@
     font-size: 70%;
   }
   hr {
-    @apply mt-16 w-[95%] mx-auto;
+    @apply my-8 w-[95%] mx-auto;
     @apply border-gray-400;
   }
   body {
@@ -73,6 +73,12 @@
       #sb {
         @apply w-full;
       }
+    }
+  }
+  .wordlink {
+    @apply py-1 px-2 rounded-lg bg-gray-100 transition;
+    &:hover {
+      @apply no-underline bg-gray-200;
     }
   }
   .dict {
@@ -202,13 +208,8 @@
       @apply list-decimal;
     }
     ul {
-      @apply list-disc pl-4;
-    }
-  }
-  .wordlink {
-    @apply py-1 px-2 rounded-lg bg-gray-200 transition;
-    &:hover {
-      @apply no-underline bg-gray-300;
+      list-style-type: "– ";
+      @apply pl-4;
     }
   }
 }

@@ -33,31 +33,28 @@ eleventyComputed:
 
 <hr />
 <div class="prose">
-  <ul class="my-10">
+  <h2>在其他地方搜尋「{{word.title}}」</h2>
+  <ul>
     <li>
-      <a href="https://google.com/search?q={{word.title}}"
-        >在 Google 搜尋「{{word.title}}」</a
-      >
+      <a href="https://google.com/search?q={{word.title}}">Google</a>
     </li>
     <li>
       <a href="https://zh.wiktionary.org/w/index.php?search={{word.title}}"
-        >在維基詞典搜尋「{{word.title}}」</a
+        >維基詞典</a
       >
     </li>
     <li>
-      <a href="https://moedict.tw/{{word.title}}"
-        >在萌典搜尋「{{word.title}}」</a
-      >
+      <a href="https://moedict.tw/{{word.title}}">萌典</a>
     </li>
     <li>
       <a
         href="https://terms.naer.edu.tw/search/?match_type=phrase&query_op=&query_field=title&query_term={{word.title}}"
-        >在學術名詞資料庫搜尋「{{word.title}}」</a
+        >學術名詞資料庫</a
       >
     </li>
     <li>
       <a href="https://www.weblio.jp/content_find?query={{word.title}}"
-        >在 Weblio 搜尋「{{word.title}}」</a
+        >Weblio</a
       >
     </li>
   </ul>
