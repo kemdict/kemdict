@@ -11,6 +11,7 @@
     "concurrently": "^7.4.0"
   },
   "workspaces": [
-    "mobile"
+    "mobile",
+    "dicts"
   ]
 }
