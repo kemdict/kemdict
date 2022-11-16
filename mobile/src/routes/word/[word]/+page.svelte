@@ -40,6 +40,11 @@
       >
     </li>
     <li>
+      <a href="https://zh.wikipedia.org/w/index.php?search={word.title}"
+        >在維基百科搜尋「{word.title}」</a
+      >
+    </li>
+    <li>
       <a href="https://zh.wiktionary.org/w/index.php?search={word.title}"
         >在維基詞典搜尋「{word.title}」</a
       >
