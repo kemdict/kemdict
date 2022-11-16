@@ -1,3 +1,4 @@
 .cask
 *.json
-entries.db
+*.db
+*.gz
