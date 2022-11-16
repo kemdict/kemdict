@@ -2,3 +2,6 @@ overrides:
   - files: "*.njk"
     options:
       parser: "html"
+  - files: "*.svelte"
+    options:
+      parser: "svelte"

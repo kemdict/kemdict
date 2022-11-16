@@ -1,0 +1,15 @@
+
+This will not build with adapter-cloudflare due to the use of builtin Node modules in my server modules.
+
+* SvelteKit-based experiment
+
+The goal of this version is to do the data access on the server (probably with Cloudflare Pages) so that we don't have to build 170000+ pages or download (and load in memory) 130MB worth of data.
+
+As it's still experimental, the deploy is all manual.
+
+The problems right now:
+
+- We can't exactly ship a 130MB JSON to Cloudflare. (The limit is around 24MB.)
+- Loading the entire JSON in a serverless function is going to be slow anyways.
+
+We could just go back to building 170000+ pages and give up on that point. This can still be better than staying on Eleventy: at least now when we duplicate code between the app and the web versions it's more like a copy-paste and less like porting between Nunjucks and Svelte.
