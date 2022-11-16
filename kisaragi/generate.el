@@ -35,7 +35,9 @@
 (defun kisaragi-dict/elements-to-json (elems)
   "Process ELEMS to JSON for kisaragi-dict."
   (cl-loop
-   for elem in (-sort (-on #'string< #'kisaragi-dict/elem-title) elems)
+   for elem in (->> elems
+                    (--sort (string< (kisaragi-dict/elem-title it)
+                                     (kisaragi-dict/elem-title other))))
    collect
    ;; title
    (list
@@ -58,31 +60,30 @@
                         (let* ((type+def
                                 (-> (kisaragi-dict/elem-title definition)
                                     (split-string "|")))
-                               (def
-                                (if (elt type+def 1)
-                                    (list (cons "type" (elt type+def 0))
-                                          (cons "def" (elt type+def 1)))
-                                  (list (cons "def" (elt type+def 0))))))
-                          (dolist (prop-headline (org-element-contents definition))
-                            (pcase (kisaragi-dict/elem-title prop-headline)
-                              ("例"
-                               (push (cons "example"
-                                           (string-trim
-                                            (org-element-interpret-data
-                                             (org-element-contents prop-headline))))
-                                     def))
-                              ("語源"
-                               (push (cons "etymology"
-                                           (string-trim
-                                            (org-element-interpret-data
-                                             (org-element-contents prop-headline))))
-                                     def))))
-                          def)))))))))
+                               ;; type+def is (def) or (type def ...)
+                               ;; so to detect if type is present we
+                               ;; check if the second element exists
+                               ;; or not.
+                               (has-type (and (cadr type+def) t))
+                               (type (and has-type (car type+def)))
+                               (def (if has-type
+                                        (cadr type+def)
+                                      (car type+def)))
+                               (content (string-trim
+                                         (org-element-interpret-data
+                                          (org-element-contents definition))))
+                               definition)
+                          (when type
+                            (push (cons "type" type) definition))
+                          (unless (equal content "")
+                            (setq def (format "%s\n%s" def content)))
+                          (push (cons "def" def) definition)
+                          definition)))))))))
 
-(defun kisaragi-dict/parse-elements ()
-  "Parse elements in this buffer."
+(defun kisaragi-dict/parse-elements (file)
+  "Return the word elements from FILE."
   (with-temp-buffer
-    (insert-file-contents "kisaragi-dict.org")
+    (insert-file-contents file)
     (org-mode)
     (goto-char (point-min))
     (re-search-forward (rx bol "* Words") nil t)
@@ -104,7 +105,7 @@
     (message "Generating kisaragi_dict.json...")
     (insert (json-encode
              (kisaragi-dict/elements-to-json
-              (kisaragi-dict/parse-elements)))
+              (kisaragi-dict/parse-elements "kisaragi-dict.org")))
             "\n")
     (message "Generating kisaragi_dict.json...done")))
 
