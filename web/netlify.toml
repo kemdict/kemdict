@@ -1,3 +1,13 @@
 [build]
 command = "make build"
 publish = "build"
+
+[functions]
+included_files = ["src/lib/entries.db.gz"]
+
+[dev]
+framework = "#custom"
+command = "make dev"
+port = 8080
+targetPort = 5173
+publish = "build"

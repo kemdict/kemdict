@@ -10,3 +10,4 @@ netlify/functions/serverless/*
 *.zip
 src/static/titles.json
 dev-*.json
+.netlify
