@@ -27,20 +27,25 @@ Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。
 
 ** Build
 
+各個資料夾之後會有更新的說明。
+
 Requirements:
 
-- Emacs (tested on 27 and 28), to combine the data sources
+- Emacs (tested on 26 to 28), to combine the data sources
 - Make
 - Node, npm
 - [[https://github.com/cask/cask][Cask]], to get Emacs Lisp dependencies
 
 #+begin_src shell
-cask install
+# also installs dependencies for all subprojects thanks to workspaces
 npm install
-make _site
+# This handles building the dictionaries as part of its dependencies
+cd web && make build
 #+end_src
 
 Dictionary sources are used through git submodules, fetched automatically by Make if not present.
+
+The output directory is at =web/build=.
 
 ** License
 
