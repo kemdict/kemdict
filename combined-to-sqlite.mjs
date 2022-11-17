@@ -75,15 +75,17 @@ const doInsert = db.transaction(() => {
   let last = { time: new Date().getTime(), i: i };
   let diff = 0;
   for (i = 0; i < length; i++) {
-    let now = new Date().getTime();
-    if (now - last.time > 1000) {
-      diff = i - last.i;
-      last.time = now;
-      last.i = i;
+    if (!process.env.CI) {
+      let now = new Date().getTime();
+      if (now - last.time > 1000) {
+        diff = i - last.i;
+        last.time = now;
+        last.i = i;
+      }
+      let progress = Math.floor(((i + 1) / length) * 100);
+      readline.cursorTo(process.stdout, 0);
+      process.stdout.write(`${i + 1} / ${length} (${progress}%, ${diff}/s)`);
     }
-    let progress = Math.floor(((i + 1) / length) * 100);
-    readline.cursorTo(process.stdout, 0);
-    process.stdout.write(`${i + 1} / ${length} (${progress}%, ${diff}/s)`);
     insert.run(stringifyFields(entries[i]));
   }
   process.stdout.write("\n");
