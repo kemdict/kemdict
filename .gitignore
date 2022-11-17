@@ -1,4 +1,5 @@
 .cask
 *.json
+!package.json
 *.db
 *.gz
