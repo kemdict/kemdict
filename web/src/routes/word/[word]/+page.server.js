@@ -11,6 +11,8 @@ let db;
   // Seems like the path copying doesn't work well with the project
   // being at a subdirectory, so during build we get src/... but
   // during serverless function runtime we get web/src/...
+  //
+  // TODO: write this down in an article
   try {
     raw = fs.readFileSync("./src/lib/entries.db.gz");
   } catch (e) {
