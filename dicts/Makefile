@@ -7,7 +7,6 @@ combined.json: moedict-data-twblg kisaragi/kisaragi_dict.json ministry-of-educat
 	cask eval "(load \"process-data\")"
 
 entries.db: combined.json
-	npm install
 	node combined-to-sqlite.mjs
 
 entries.db.gz: entries.db
