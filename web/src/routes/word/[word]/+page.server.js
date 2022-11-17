@@ -7,7 +7,7 @@ import Database from "better-sqlite3";
 // Do this dance in order to not retain a reference to rawdb.
 let db;
 {
-  console.log(`word page: cwd is ${process.cwd()}`);
+  console.log(`cwd is ${process.cwd()}`);
   let raw = fs.readFileSync("src/lib/entries.db.gz");
   let rawdb = zlib.gunzipSync(raw);
   db = new Database(rawdb);
