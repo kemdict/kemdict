@@ -7,8 +7,19 @@ import Database from "better-sqlite3";
 // Do this dance in order to not retain a reference to rawdb.
 let db;
 {
-  console.log(`cwd is ${process.cwd()}`);
-  let raw = fs.readFileSync("src/lib/entries.db.gz");
+  let raw;
+  // Seems like the path copying doesn't work well with the project
+  // being at a subdirectory, so during build we get src/... but
+  // during serverless function runtime we get web/src/...
+  try {
+    raw = fs.readFileSync("./src/lib/entries.db.gz");
+  } catch (e) {
+    if (e instanceof Error && e.code === "ENOENT") {
+      raw = fs.readFileSync("./web/src/lib/entries.db.gz");
+    } else {
+      throw e;
+    }
+  }
   let rawdb = zlib.gunzipSync(raw);
   db = new Database(rawdb);
 }
