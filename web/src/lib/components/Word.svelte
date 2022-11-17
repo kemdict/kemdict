@@ -1,7 +1,8 @@
 <script>
-  import WordDictRevised from "$lib/components/WordDictRevised.svelte";
-  import WordDictIdioms from "$lib/components/WordDictIdioms.svelte";
   import WordDictConcised from "$lib/components/WordDictConcised.svelte";
+  import WordDictIdioms from "$lib/components/WordDictIdioms.svelte";
+  import WordDictRevised from "$lib/components/WordDictRevised.svelte";
+  import WordHakkadict from "$lib/components/WordHakkadict.svelte";
   import WordMoedictish from "$lib/components/WordMoedictish.svelte";
   import collapse from "svelte-collapse";
   export let word;
@@ -67,6 +68,8 @@
       <WordDictConcised entry={word[dict]} title={word.title} />
     {:else if dict == "moedict_twblg"}
       <WordMoedictish {word} {dict} />
+    {:else if dict == "hakkadict"}
+      <WordHakkadict entry={word[dict]} title={word.title} />
     {:else if dict == "dict_idioms"}
       <WordDictIdioms entry={word[dict]} title={word.title} />
     {:else if dict == "kisaragi_dict"}

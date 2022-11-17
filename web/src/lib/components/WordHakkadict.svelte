@@ -7,7 +7,7 @@
   function has_pronunciations(het) {
     // If `het` has a truthy `p_四縣` prop, for example.
     // p stands for pronunciation.
-    p_names.some((name) => het[`p_${name}`]);
+    return p_names.some((name) => het[`p_${name}`]);
   }
   /**
    * Collect all pronunciations for hakkadict.
@@ -57,7 +57,7 @@
 {#each entry.heteronyms as het}
   <h1>{title}</h1>
   {#if has_pronunciations(het)}
-    <div class="flex"><span>讀音：</span><span>{@html het_p(p)}</span></div>
+    <div class="flex"><span>讀音：</span><span>{@html het_p(het)}</span></div>
   {/if}
   {@html process_def(het.definition)}
 {/each}
