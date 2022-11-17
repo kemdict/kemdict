@@ -1,7 +1,41 @@
-import { error } from "@sveltejs/kit";
-import * as db from "$lib/server/db.js";
-
 export const prerender = false;
+
+import { error } from "@sveltejs/kit";
+import * as fs from "node:fs";
+import * as zlib from "node:zlib";
+import Database from "better-sqlite3";
+// Do this dance in order to not retain a reference to rawdb.
+let db;
+{
+  let path;
+  if (import.meta.env.DEV) {
+    path = "src/lib/entries.db.gz";
+  } else {
+    path = "../../../../../../src/lib/entries.db.gz";
+  }
+  let raw = fs.readFileSync(path);
+  let rawdb = zlib.gunzipSync(raw);
+  db = new Database(rawdb);
+}
+
+const statement_word = db.prepare("select * from entries where title = ?");
+/**
+ * Return the word object from the DB.
+ * @param {string} title
+ * @returns {object}
+ */
+function getWord(title) {
+  // If the word doesn't exist it'll simply return `undefined`.
+  let ret = statement_word.get(title);
+  if (ret) {
+    for (let prop in ret) {
+      if (prop !== "title") {
+        ret[prop] = JSON.parse(ret[prop]);
+      }
+    }
+  }
+  return ret;
+}
 
 /** @type {import('./$types').PageServerLoad} */
 export function load({ params }) {
@@ -15,7 +49,7 @@ export function load({ params }) {
   //
   // And remember to update links pointing here elsewhere.
   const w = params.word;
-  const word = db.getWord(w);
+  const word = getWord(w);
 
   if (word) {
     return { word: word };
