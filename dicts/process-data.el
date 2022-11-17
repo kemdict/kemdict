@@ -32,7 +32,8 @@ Does nothing if OUTPUT-PATH already exists as a file."
     (with-temp-buffer
       (insert-file-contents file)
       (goto-char (point-min))
-      (setq parsed (json-read)))
+      (let ((json-object-type 'hash-table))
+        (setq parsed (json-read))))
     (with-temp-file output-path
       (insert
        (json-encode
@@ -68,7 +69,8 @@ Parsed arrays from FILES are concatenated before shaping."
                     (progn
                       (erase-buffer)
                       (insert-file-contents f)
-                      (json-read))))))
+                      (let ((json-object-type 'hash-table))
+                        (json-read)))))))
     ;; [{:title "title"
     ;;   :heteronyms (...)
     ;;   ... ...}
