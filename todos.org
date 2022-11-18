@@ -1,4 +1,8 @@
 * done
+- sveltekit version release checklist
+  - [X] Make sure it works on ancient browsers (probably)
+  - [X] Make sure it works on browsers without JS (EWW, for instance)
+  - [X] Switch DNS to point to Netlify instead of GitHub Pages
 - [X] Some hakkadict entries, like =後生毋肯學,老來無安樂=, do not have ids
 - [X] Use SvelteKit version as main version
   - We could then do the searching on the server side and avoid having to build 170000+ pages
@@ -32,10 +36,6 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
-- sveltekit version release checklist
-  - [ ] Make sure it works on ancient browsers
-  - [X] Make sure it works on browsers without JS (EWW, for instance)
-  - [ ] Switch DNS to point to Netlify instead of GitHub Pages
 - [ ] kisaragi-dict: use HTML in text content freely
 - [ ] kisaragi-dict: transform Org links to HTML links during the data process step
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
