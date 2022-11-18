@@ -42,21 +42,33 @@ jobs:
           sudo apt-get install emacs-nox
       - name: Set up Cask
         uses: conao3/setup-cask@master
+      - name: Install packages
+        run: |
+          npm install
+          (cd dicts && npm install)
+          (cd dicts && cask)
+          (cd web && npm install)
+          (cd web && npm install netlify-cli)
+      - name: Cache data files
+        uses: actions/cache@v3
+        with:
+          path: "dicts/entries.db.gz"
+          # key: dicts-${{ github.ref_name }}
+          key: "dicts-${{ hashFiles('dicts/**') }}"
+          restore-keys: |
+            dicts-
       - name: Prepare data files
         run: |
           cd dicts
-          npm install
           make entries.db.gz
       - name: Build
         run: |
           cd web
-          npm install
           make build
       - name: Deploy to Netlify
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: |
-          npm install netlify-cli
           cd web
           netlify deploy --dir=build --prod
