@@ -9,8 +9,9 @@ combined.json: moedict-data-twblg kisaragi/kisaragi_dict.json ministry-of-educat
 entries.db: combined.json
 	node combined-to-sqlite.mjs
 
-entries.db.gz: entries.db
-	gzip --best --stdout entries.db > entries.db.gz
+entries.db.br: entries.db
+	brotli --best entries.db -o entries.db.br
+	touch entries.db.br # brotli keeps mtime and Make wouldn't skip it
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .cask
 	cask eval "(load \"kisaragi/generate\")"

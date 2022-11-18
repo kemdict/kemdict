@@ -14,15 +14,15 @@ let db;
   //
   // TODO: write this down in an article
   try {
-    raw = fs.readFileSync("./src/lib/entries.db.gz");
+    raw = fs.readFileSync("./src/lib/entries.db.br");
   } catch (e) {
     if (e instanceof Error && e.code === "ENOENT") {
-      raw = fs.readFileSync("./web/src/lib/entries.db.gz");
+      raw = fs.readFileSync("./web/src/lib/entries.db.br");
     } else {
       throw e;
     }
   }
-  let rawdb = zlib.gunzipSync(raw);
+  let rawdb = zlib.brotliDecompressSync(raw);
   db = new Database(rawdb);
 }
 

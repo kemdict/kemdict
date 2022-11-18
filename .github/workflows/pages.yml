@@ -49,7 +49,7 @@ jobs:
       - name: Cache data files
         uses: actions/cache@v3
         with:
-          path: "dicts/entries.db.gz"
+          path: "dicts/entries.db.br"
           # key: dicts-${{ github.ref_name }}
           key: "dicts-${{ hashFiles('dicts/**') }}"
           restore-keys: |
@@ -57,7 +57,7 @@ jobs:
       - name: Prepare data files
         run: |
           cd dicts
-          make entries.db.gz
+          make entries.db.br
       - name: Build
         run: |
           cd web
