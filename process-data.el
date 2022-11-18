@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
-;; Package-Requires: ((emacs "26.1"))
+;; Package-Requires: ((emacs "27.1"))
 
 (require 'cl-lib)
 (require 'dash)
@@ -30,8 +30,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
     (with-temp-buffer
       (insert-file-contents file)
       (goto-char (point-min))
-      (let ((json-object-type 'hash-table))
-        (setq parsed (json-read))))
+      (setq parsed (json-parse-buffer)))
     (with-temp-file output-path
       (insert
        (json-encode
@@ -67,8 +66,7 @@ Parsed arrays from FILES are concatenated before shaping."
                     (progn
                       (erase-buffer)
                       (insert-file-contents f)
-                      (let ((json-object-type 'hash-table))
-                        (json-read)))))))
+                      (json-parse-buffer))))))
     ;; [{:title "title"
     ;;   :heteronyms (...)
     ;;   ... ...}
