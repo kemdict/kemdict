@@ -24,7 +24,8 @@
       >
     {:else if dict == "hakkadict"}
       <a
-        href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0={word.title}">教育部臺灣客家語常用詞辭典</a
+        href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0={word.title}"
+        >教育部臺灣客家語常用詞辭典</a
       >
     {:else if dict == "dict_concised"}
       <a href="https://dict.concised.moe.edu.tw/search.jsp?word={word.title}"
