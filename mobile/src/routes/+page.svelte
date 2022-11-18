@@ -43,7 +43,7 @@
     <h2>收錄字典</h2>
     <ul>
       <li>
-        <p><a href="dict-kisaragi">Kisaragi's extras</a></p>
+        <p><a href="dict-kisaragi">如月的現代台灣華語補足典</a></p>
       </li>
       <li>
         <p><a href="dict-moe">教育部重編國語辭典修訂本</a></p>

@@ -4,10 +4,10 @@
 </script>
 
 <svelte:head>
-  <title>字典 | Kisaragi's Extras</title>
+  <title>字典 | 如月的現代台灣華語補足典</title>
 </svelte:head>
 
-# 字典：Kisaragi's extras
+# 字典：如月的現代台灣華語補足典
 
 我希望能夠有個地方能夠收錄日常使用但卻沒有人依實際使用狀況記錄下來的詞。
 

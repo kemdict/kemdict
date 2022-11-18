@@ -12,7 +12,7 @@
 <div>
   <div id={dict} class="dict">
     {#if dict == "kisaragi_dict"}
-      <a href="/dict-kisaragi">Kisaragi's extras (beta)</a>
+      <a href="/dict-kisaragi">如月的現代台灣華語補足典</a>
     {:else if dict == "dict_idioms"}
       <a href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={word.title}"
         >教育部成語典</a
