@@ -10,8 +10,8 @@
         .replace(/^\d+\./, "")
         // These are the only types that exist.
         // ...plus CJK COMPATIBILITY IDEOGRAPH-F9B5.
-        .replace(/\[([例似反])\]/, `<br><m>$1</m>`)
-        .replace(/§(英)([a-zA-Z ]+)/, `<br><m>$1</m>$2`)
+        .replace(/\[([例似反])\]/g, `<br><m>$1</m>`)
+        .replace(/§(英)([a-zA-Z ]+)/g, `<br><m>$1</m>$2`)
         .replace("△", `<br><m title="同">△</m>`)
     );
   }
@@ -30,9 +30,9 @@
     </ol>
   {/if}
   {#if het.antonyms}
-    {het.antonyms}
+    {@html process_def(het.antonyms)}
   {/if}
   {#if het.synonyms}
-    {het.synonyms}
+    {@html process_def(het.synonyms)}
   {/if}
 {/each}
