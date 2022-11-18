@@ -35,9 +35,7 @@
 (defun kisaragi-dict/elements-to-json (elems)
   "Process ELEMS to JSON for kisaragi-dict."
   (cl-loop
-   for elem in (->> elems
-                    (--sort (string< (kisaragi-dict/elem-title it)
-                                     (kisaragi-dict/elem-title other))))
+   for elem in elems
    collect
    ;; title
    (list
@@ -103,9 +101,11 @@
 (let ((json-encoding-pretty-print t))
   (with-temp-file "kisaragi_dict.json"
     (message "Generating kisaragi_dict.json...")
-    (insert (json-encode
-             (kisaragi-dict/elements-to-json
-              (kisaragi-dict/parse-elements "kisaragi-dict.org")))
+    (insert (->> (kisaragi-dict/parse-elements "kisaragi-dict.org")
+                 kisaragi-dict/elements-to-json
+                 (--sort (> (cdr (assoc "added" it))
+                            (cdr (assoc "added" other))))
+                 json-encode)
             "\n")
     (message "Generating kisaragi_dict.json...done")))
 
