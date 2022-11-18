@@ -7,4 +7,4 @@
 - moedict-data-twblg ::
   - 教育部臺灣閩南語常用詞辭典
 - kisaragi ::
-  - Kisaragi's Extras (之後應該會改名)
+  - 如月的現代台灣華語補足典
