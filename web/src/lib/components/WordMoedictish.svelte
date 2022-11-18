@@ -17,9 +17,7 @@
 
   function process_def_kisaragi(def) {
     if (def) {
-      def = def
-        .replace("\n", "<br/>")
-        .replace(/<(.*?)>/g, (_m, $1) => `${linkToWord($1)}`);
+      def = def.replace("\n", "<br/>");
       def = linkify_brackets(def);
     } else {
       def = "";
