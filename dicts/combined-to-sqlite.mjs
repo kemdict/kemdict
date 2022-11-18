@@ -75,7 +75,7 @@ const doInsert = db.transaction(() => {
   let last = { time: new Date().getTime(), i: i };
   let diff = 0;
   for (i = 0; i < length; i++) {
-    if (!process.env.CI) {
+    if (!(process.env.CI || process.env.INSIDE_EMACS?.includes("eshell"))) {
       let now = new Date().getTime();
       if (now - last.time > 1000) {
         diff = i - last.i;
