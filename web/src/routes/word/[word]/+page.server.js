@@ -1,5 +1,4 @@
 export const prerender = false;
-export const csr = false;
 
 import { error } from "@sveltejs/kit";
 import * as fs from "node:fs";
