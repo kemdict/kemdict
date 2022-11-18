@@ -8,6 +8,7 @@
 
 <svelte:head>
   <title>「{word.title}」 - kemdict</title>
+  <meta name="description" content="「{word.title}」的定義">
 </svelte:head>
 
 <div class="h">
