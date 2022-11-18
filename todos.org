@@ -1,4 +1,5 @@
 * done
+- [X] Some hakkadict entries, like =後生毋肯學,老來無安樂=, do not have ids
 - [X] Use SvelteKit version as main version
   - We could then do the searching on the server side and avoid having to build 170000+ pages
 - [X] mobile: include fonts (or use system fonts)

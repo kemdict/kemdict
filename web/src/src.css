@@ -84,26 +84,6 @@
   .dict {
     @apply border-b-2 border-black mb-2 my-8;
     @apply flex justify-between;
-    .c {
-      @apply flex-grow text-left relative;
-      &.active::after {
-        @apply rotate-45;
-      }
-      &::after {
-        @apply -rotate-45 -translate-y-full;
-        @apply transition-all;
-        @apply absolute;
-        bottom: 1px;
-        left: 0;
-        display: block;
-        height: 0.5rem;
-        width: 0.5rem;
-        content: "";
-        transform-origin: 75% 75%;
-        box-shadow: 2px 2px;
-        pointer-events: none;
-      }
-    }
     a {
       @apply link;
     }

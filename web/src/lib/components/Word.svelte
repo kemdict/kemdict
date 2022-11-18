@@ -7,33 +7,10 @@
   import collapse from "svelte-collapse";
   export let word;
   export let dict;
-  let active = true;
-  let wordElem;
-  $: if (wordElem) {
-    wordElem.style.height = `${wordElem.scrollHeight}px`;
-    wordElem.style.maxHeight = `${wordElem.scrollHeight}px`;
-  }
-  function toggleHeight(elem) {
-    if (elem) {
-      if (elem.style.maxHeight == "0px") {
-        elem.style.maxHeight = elem.style.height;
-      } else {
-        elem.style.maxHeight = "0px";
-      }
-    }
-  }
 </script>
 
 <div>
   <div id={dict} class="dict">
-    <button
-      on:click={() => {
-        active = !active;
-        toggleHeight(wordElem);
-      }}
-      class:active
-      class="c"
-    />
     {#if dict == "kisaragi_dict"}
       <a href="/dict-kisaragi">Kisaragi's extras (beta)</a>
     {:else if dict == "dict_idioms"}
@@ -47,9 +24,7 @@
       >
     {:else if dict == "hakkadict"}
       <a
-        href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id=%22{word[
-          dict
-        ].id}%22.">教育部臺灣客家語常用詞辭典</a
+        href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0={word.title}">教育部臺灣客家語常用詞辭典</a
       >
     {:else if dict == "dict_concised"}
       <a href="https://dict.concised.moe.edu.tw/search.jsp?word={word.title}"
@@ -61,7 +36,7 @@
       >
     {/if}
   </div>
-  <div bind:this={wordElem} class="word">
+  <div class="word">
     {#if dict == "dict_revised"}
       <WordDictRevised entry={word[dict]} title={word.title} />
     {:else if dict == "dict_concised"}
