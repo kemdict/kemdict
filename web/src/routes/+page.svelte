@@ -2,8 +2,9 @@
   import RecentWordList from "$lib/components/RecentWordList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   const title = "kemdict";
-  const sitename = "sitename";
-  const description = "Dummy description.";
+  const sitename = "kemdict";
+  const description =
+    "Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 </script>
 
 <svelte:head>
