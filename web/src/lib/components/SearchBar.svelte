@@ -64,7 +64,7 @@
     {#if matching}
       <p>共 {matching.length} 條相符條目</p>
       {#each matching as w}
-        <li><a href="/word/{w}">{w}</a></li>
+        <li><a data-sveltekit-reload href="/word/{w}">{w}</a></li>
       {/each}
     {/if}
   </ul>

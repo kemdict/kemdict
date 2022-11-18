@@ -4,7 +4,6 @@
   import WordDictRevised from "$lib/components/WordDictRevised.svelte";
   import WordHakkadict from "$lib/components/WordHakkadict.svelte";
   import WordMoedictish from "$lib/components/WordMoedictish.svelte";
-  import collapse from "svelte-collapse";
   export let word;
   export let dict;
 </script>

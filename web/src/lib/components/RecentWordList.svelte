@@ -9,7 +9,9 @@
 <ul class="flex flex-wrap">
   {#each words as word (word.title)}
     <li class="py-2 mr-2">
-      <a class="wordlink" href="/word/{word.title}">{word.title}</a>
+      <a data-sveltekit-reload class="wordlink" href="/word/{word.title}"
+        >{word.title}</a
+      >
     </li>
   {/each}
 </ul>
