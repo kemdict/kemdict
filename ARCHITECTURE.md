@@ -14,4 +14,4 @@ Kemdict is both an alternative interface to several dictionaries, as well as an 
 
 Make is used as the task runner.
 
-The project is built on Netlify's CI to ensure we try to run the SQLite interface (`better-sqlite3`) on the same Node version.
+The project is built on GitHub Pages. The Node version during build is set to 16 to match what the serverless function will run on, as this is necessary to run the SQLite interface (`better-sqlite3`).

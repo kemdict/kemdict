@@ -35,7 +35,6 @@
   - [ ] Make sure it works on ancient browsers
   - [X] Make sure it works on browsers without JS (EWW, for instance)
   - [ ] Switch DNS to point to Netlify instead of GitHub Pages
-  - [ ] Consider getting rid of the GitHub Pages action
 - [ ] kisaragi-dict: use HTML in text content freely
 - [ ] kisaragi-dict: transform Org links to HTML links during the data process step
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
