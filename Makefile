@@ -4,3 +4,6 @@ export LANG=en_US.UTF-8
 
 build:
 	cd web && make build
+
+dev:
+	cd web && make dev

@@ -65,6 +65,11 @@ CREATE TABLE entries (
 ).run();
 
 const doInsert = db.transaction(() => {
+  // Whether we should print progress.
+  const verbose =
+    // Never verbose in CI; never verbose in Emacs except when in vterm
+    !process.env.CI &&
+    !(process.env.INSIDE_EMACS && !process.env.INSIDE_EMACS.includes("vterm"));
   const insert = db.prepare(`
   INSERT INTO
     entries (title,${dicts.join(",")})
@@ -75,7 +80,7 @@ const doInsert = db.transaction(() => {
   let last = { time: new Date().getTime(), i: i };
   let diff = 0;
   for (i = 0; i < length; i++) {
-    if (!process.env.CI || process.env.INSIDE_EMACS?.includes("vterm")) {
+    if (verbose) {
       let now = new Date().getTime();
       if (now - last.time > 1000) {
         diff = i - last.i;

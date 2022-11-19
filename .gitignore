@@ -11,3 +11,5 @@ netlify/functions/serverless/*
 src/static/titles.json
 dev-*.json
 .netlify
+*.db.br
+*.db.gz
