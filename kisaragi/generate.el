@@ -151,7 +151,7 @@ This is a copy of `org-element-link-interpreter'."
     (message "Generating kisaragi_dict.json...")
     (insert (->> (kisaragi-dict/parse-elements "kisaragi-dict.org")
                  kisaragi-dict/elements-to-json
-                 (--sort (< (cdr (assoc "added" it))
+                 (--sort (> (cdr (assoc "added" it))
                             (cdr (assoc "added" other))))
                  json-encode)
             "\n")
