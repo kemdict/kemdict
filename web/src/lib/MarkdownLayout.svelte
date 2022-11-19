@@ -1,6 +1,8 @@
-<div class="h">
-  <h1><a href="/">kemdict (β)</a></h1>
-</div>
+<script>
+  import Header from "$lib/components/Header.svelte";
+</script>
+
+<Header />
 <div class="prose">
   <slot />
 </div>

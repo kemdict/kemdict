@@ -2,7 +2,7 @@
   /** @type {import('./$types').PageData} */
   import Word from "$lib/components/Word.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
-  import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
+  import Header from "$lib/components/Header.svelte";
   export let data;
   $: word = data.word;
 </script>
@@ -12,11 +12,9 @@
   <meta name="description" content="「{word.title}」的定義" />
 </svelte:head>
 
-<DarkModeToggle />
-<div class="h">
-  <h1><a href="/">kemdict (β)</a></h1>
+<Header>
   <SearchBar />
-</div>
+</Header>
 
 {#if word.dict_concised}
   <Word {word} dict="dict_concised" />

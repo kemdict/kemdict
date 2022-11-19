@@ -1,13 +1,11 @@
 <script>
   import { page } from "$app/stores";
   import SearchBar from "$lib/components/SearchBar.svelte";
+  import Header from "$lib/components/Header.svelte";
   const term = $page.params.word;
 </script>
 
-<div class="h mb-4">
-  <h1><a href="/">kemdict (β)</a></h1>
-  <SearchBar />
-</div>
+<Header />
 
 <div class="prose bullets">
   <h1>{term}</h1>

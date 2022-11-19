@@ -36,17 +36,6 @@
 }
 
 @layer components {
-  /* Yes, normally you put this in the HTML when using Tailwind. */
-  /* We have 163088 pages from Moedict (zh_TW) alone. */
-  .h {
-    h1 {
-      @apply my-2;
-    }
-    a {
-      @apply link;
-    }
-  }
-
   #sbc {
     /* Search Bar Container */
     @apply mt-2 mb-2;
