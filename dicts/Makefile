@@ -10,8 +10,7 @@ entries.db: combined.json
 	node combined-to-sqlite.mjs
 
 entries.db.br: entries.db
-	brotli --best entries.db -o entries.db.br
-	touch entries.db.br # brotli keeps mtime and Make wouldn't skip it
+	brotli --no-copy-stat entries.db
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .cask
 	cask eval "(load \"kisaragi/generate\")"
