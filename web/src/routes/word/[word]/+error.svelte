@@ -9,7 +9,7 @@
   <SearchBar />
 </div>
 
-<div class="prose">
+<div class="prose bullets">
   <h1>{term}</h1>
   <p>Kemdict 收錄字典裡找不到這個詞。</p>
   <p />

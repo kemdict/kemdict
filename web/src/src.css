@@ -187,6 +187,8 @@
     ol {
       @apply list-decimal;
     }
+  }
+  .bullets {
     ul {
       list-style-type: "– ";
       @apply pl-4;

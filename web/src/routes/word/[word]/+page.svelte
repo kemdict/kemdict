@@ -36,7 +36,7 @@
 {/if}
 
 <hr />
-<div class="prose">
+<div class="prose bullets">
   <h2>在其他地方搜尋「{word.title}」</h2>
   <ul>
     <li>
