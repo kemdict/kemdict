@@ -5,6 +5,10 @@
   const term = $page.params.word;
 </script>
 
+<svelte:head>
+  <title>找不到「{term}」 - Kemdict</title>
+</svelte:head>
+
 <Header />
 
 <div class="prose bullets">
