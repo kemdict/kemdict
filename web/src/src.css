@@ -46,10 +46,10 @@
     #sr {
       /* Search Results */
       @apply absolute;
-      @apply w-full rounded shadow-lg bg-white z-10;
+      @apply w-full rounded shadow-lg bg-white dark:bg-black z-10;
       @apply mt-2;
       a {
-        @apply w-full block px-2 py-1 my-1 bg-white;
+        @apply w-full block px-2 py-1 my-1;
       }
       p {
         @apply px-2 py-1;
