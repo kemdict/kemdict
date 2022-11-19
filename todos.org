@@ -38,6 +38,8 @@
 * todos
 - Retrieve definition from Wiktionary API? (during request? client side?)
 - Search page; searchbar should submit to search page; server side prefix suffix infix (fuzzy?) search, ideally instant when switching modes
+- Do not send all words to client side
+  - This contributes to a lot of the jank
 - [ ] kisaragi-dict: use HTML in text content freely
 - [X] kisaragi-dict: transform Org links to HTML links during the data process step
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)

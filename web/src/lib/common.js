@@ -143,4 +143,4 @@ export function groupByProp(arr, property, fallback) {
 //   return `${tag} (${date})`;
 // })();
 
-export const version = "0.7.0";
+export const version = "0.7.1";
