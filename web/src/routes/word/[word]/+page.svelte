@@ -4,7 +4,7 @@
   import SearchBar from "$lib/components/SearchBar.svelte";
   import Header from "$lib/components/Header.svelte";
   export let data;
-  $: word = data.word;
+  let word = data.word;
 </script>
 
 <svelte:head>
