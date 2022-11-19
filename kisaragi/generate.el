@@ -32,10 +32,15 @@
   "Convert TIMESTAMP (in yyyy-mm-ddThh:mm:ssZ) to unix time."
   (float-time (parse-iso8601-time-string timestamp)))
 
+(defun kisaragi-dict/quote-block-interpreter (_ contents)
+  "Interpret a quote block in the syntax we want.
+CONTENTS is the element contents."
+  (format "<blockquote>%s</blockquote>" contents))
+
 (defun kisaragi-dict/link-interpreter (link contents)
   "Interpret LINK object as the syntax we want.
-
-This is a copy of `org-element-link-interpreter'."
+This is a copy of `org-element-link-interpreter'.
+CONTENTS is the element contents."
   (let* ((type (org-element-property :type link))
          (path (org-element-property :path link))
          ;; Hacky support for both internal and external links. Yes.
@@ -74,13 +79,18 @@ This is a copy of `org-element-link-interpreter'."
 
 (defun kisaragi-dict/elements-to-json (elems)
   "Process ELEMS to JSON for kisaragi-dict."
-  (let ((original (symbol-function #'org-element-link-interpreter)))
+  (let ((original (--map
+                   (cons it (symbol-function it))
+                   '(org-element-link-interpreter
+                     org-element-quote-block-interpreter))))
     ;; I don't know why `cl-letf' doesn't work for me. But this does.
     ;;
     ;; This would be terrible if this code is supposed to run in an
     ;; existing Emacs, but it's not. It's a one-time script.
     (fset #'org-element-link-interpreter
           (symbol-function #'kisaragi-dict/link-interpreter))
+    (fset #'org-element-quote-block-interpreter
+          (symbol-function #'kisaragi-dict/quote-block-interpreter))
     (prog1 (cl-loop
             for elem in elems
             collect
@@ -124,7 +134,8 @@ This is a copy of `org-element-link-interpreter'."
                                      (setq def (format "%s\n%s" def content)))
                                    (push (cons "def" def) definition)
                                    definition))))))))
-      (fset #'org-element-link-interpreter original))))
+      (cl-loop for (sym . orig) in original
+               do (fset sym orig)))))
 
 (defun kisaragi-dict/parse-elements (file)
   "Return the word elements from FILE."
