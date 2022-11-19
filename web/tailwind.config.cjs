@@ -7,7 +7,7 @@ let cjkFallback = [
 ];
 
 module.exports = {
-  // darkMode: "class",
+  darkMode: "class",
   content: ["./src/**/*.{svelte,md,ts,js,html}"],
   safelist: ["visible", "invisible"],
   theme: {

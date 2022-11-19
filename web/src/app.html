@@ -11,6 +11,17 @@
     <!-- <link rel="stylesheet" href="/b.css" /> -->
     <meta name="twitter:creator" content="@kisaragi_hiu" />
     <meta name="keywords" content="dictionary" />
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        ((!localStorage.theme || localStorage.theme === "auto") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
     <link rel="icon" href="%sveltekit.assets%/favicon.ico?v=1" />
     <link
       rel="icon"

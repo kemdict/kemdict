@@ -13,3 +13,5 @@ dev-*.json
 .netlify
 *.db.br
 *.db.gz
+*.db
+*.db-journal

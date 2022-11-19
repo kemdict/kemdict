@@ -1,6 +1,7 @@
 <script>
   import RecentWordList from "$lib/components/RecentWordList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
+  import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
   const title = "kemdict";
   const sitename = "kemdict";
   const description =
@@ -21,12 +22,9 @@
   <div class="prose mt-12 md:ml-[14rem]">
     <div class="max-md:mb-6 md:absolute md:top-4 md:left-4">
       <div class="md:fixed md:w-[10rem]">
-        <img
-          class="max-md:inline max-md:align-baseline max-md:max-h-[1.5rem] max-md:max-w-[1.5rem] md:min-w-[10rem] md:min-h-[10rem]"
-          src="/logo.png"
-          alt="logo"
-        />
-        <h1 class="max-md:inline font-bold text-3xl">kemdict (β)</h1>
+        <img class="h-[10rem] w-[10rem]" src="/logo.png" />
+        <h1 class="font-bold text-3xl">kemdict (β)</h1>
+        <DarkModeToggle />
       </div>
     </div>
     <h2>前言</h2>

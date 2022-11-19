@@ -18,6 +18,8 @@
 
 感謝教育部編撰各辭典，並以開放授權條款釋出原始資料。
 
+Kemdict 使用來自 [Ionicons](https://github.com/ionic-team/ionicons) 的圖示。
+
 Kemdict 使用 [SvelteKit](https://kit.svelte.dev) 框架，透過 GitHub Actions 建置後寄存於 Netlify。
 
 >Copyright (c) 2016-22 [these people](https://github.com/sveltejs/svelte/graphs/contributors)
