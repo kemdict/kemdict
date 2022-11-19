@@ -14,9 +14,13 @@
 
 [《教育部臺灣閩南語常用詞辭典》](https://twblg.dict.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp)。資料透過[萌典的原始資料檔](https://github.com/g0v/moedict-data-twblg)取得，原始資料為萌典向教育部申請後取得。
 
+[《教育部臺灣客家語常用詞辭典》](https://hakkadict.moe.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=zXiQtS/description?id=MSA00000041&opt=opt2)。原始資料依說明取自其[訊息公告處](https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=zXiQtS/newsearch?&menuid=gsnews)。
+
 感謝萌典 / g0v 整理教育部字典的原始資料。
 
 感謝教育部編撰各辭典，並以開放授權條款釋出原始資料。
+
+感謝 [Shawn Wang](https://www.swyx.io/) 的 [Airbyte Connector Metadata Service](https://airbyte-metadata.netlify.app/)，它的[原始碼](https://github.com/airbytehq/mvp-cms/)是我學習 SvelteKit 的一大助力。
 
 Kemdict 使用來自 [Ionicons](https://github.com/ionic-team/ionicons) 的圖示。
 
