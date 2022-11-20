@@ -17,7 +17,8 @@ const config = {
 
   kit: {
     adapter: adapterNetlify(),
-    trailingSlash: "always",
+    // We don't need this on Netlify.
+    // trailingSlash: "always",
   },
 };
 

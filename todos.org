@@ -1,4 +1,10 @@
 * done
+- [X] kisaragi-dict: use HTML in text content freely
+     (sort of: Org content can be used freely, but I have to override parts of org-element-interpret-data to make it emit HTML)
+- [X] kisaragi-dict: transform Org links to HTML links during the data process step
+- [X] Search page; searchbar should submit to search page; server side prefix suffix infix (fuzzy?) search, ideally instant when switching modes
+- [X] Do not send all words to client side
+  - This contributes to a lot of the jank
 - sveltekit version release checklist
   - [X] Make sure it works on ancient browsers (probably)
   - [X] Make sure it works on browsers without JS (EWW, for instance)
@@ -37,13 +43,8 @@
 - [X] Figure out an icon
 * todos
 - Retrieve definition from Wiktionary API? (during request? client side?)
-- Search page; searchbar should submit to search page; server side prefix suffix infix (fuzzy?) search, ideally instant when switching modes
-- Do not send all words to client side
-  - This contributes to a lot of the jank
-- [ ] kisaragi-dict: use HTML in text content freely
-- [X] kisaragi-dict: transform Org links to HTML links during the data process step
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
-- [ ] Backlinks lol
+- [ ] Backlinks
 - [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to

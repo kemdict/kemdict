@@ -1,11 +1,11 @@
-export const dicts = [
-  "dict_concised",
-  "dict_revised",
-  "moedict_twblg",
-  "hakkadict",
-  "dict_idioms",
-  "kisaragi_dict",
-];
+export const dicts = {
+  dict_concised: "教育部國語辭典簡編本",
+  dict_revised: "教育部重編國語辭典",
+  moedict_twblg: "教育部臺灣閩南語常用詞辭典",
+  hakkadict: "教育部臺灣客家語常用詞辭典",
+  dict_idioms: "教育部成語典",
+  kisaragi_dict: "如月的現代台灣華語補足典",
+};
 
 /**
  * Normalize spaces in `str`.
@@ -14,7 +14,9 @@ export const dicts = [
  * @returns {string}
  */
 export function spc(str) {
-  return str.replace(/　/g, " ");
+  if (str) {
+    return str.replace(/　/g, " ");
+  }
 }
 
 import titles from "../../../dicts/titles.json";

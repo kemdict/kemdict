@@ -50,7 +50,7 @@
 </script>
 
 <button
-  class="btn"
+  class="btn p-1"
   type="button"
   role="switch"
   title="切換暗色模式"

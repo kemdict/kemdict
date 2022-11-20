@@ -5,7 +5,6 @@ export LANG=en_US.UTF-8
 src/lib/entries.db.br: ../dicts
 	cd ../dicts && make entries.db.br
 	cp ../dicts/entries.db.br src/lib/
-	cp ../dicts/titles.json static/
 	cp ../dicts/titles.json src/lib/
 
 src/lib/kisaragi_dict.json:

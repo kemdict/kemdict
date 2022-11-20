@@ -6,9 +6,18 @@
   import WordMoedictish from "$lib/components/WordMoedictish.svelte";
   import { dicts } from "$lib/common.js";
   export let word;
+  export let dict;
+  // This allows us to also pass in which dictionary we want and only
+  // render for it.
+  let dictionaries;
+  if (dict) {
+    dictionaries = [dict];
+  } else {
+    dictionaries = Object.keys(dicts);
+  }
 </script>
 
-{#each dicts as dict}
+{#each dictionaries as dict}
   <div>
     {#if word[dict]}
       <div id={dict} class="dict">
