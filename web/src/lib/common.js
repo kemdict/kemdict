@@ -1,3 +1,12 @@
+export const dicts = [
+  "dict_concised",
+  "dict_revised",
+  "moedict_twblg",
+  "hakkadict",
+  "dict_idioms",
+  "kisaragi_dict",
+];
+
 /**
  * Normalize spaces in `str`.
  *

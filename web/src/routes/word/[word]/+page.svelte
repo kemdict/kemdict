@@ -16,24 +16,7 @@
   <SearchBar />
 </Header>
 
-{#if word.dict_concised}
-  <Word {word} dict="dict_concised" />
-{/if}
-{#if word.dict_revised}
-  <Word {word} dict="dict_revised" />
-{/if}
-{#if word.moedict_twblg}
-  <Word {word} dict="moedict_twblg" />
-{/if}
-{#if word.hakkadict}
-  <Word {word} dict="hakkadict" />
-{/if}
-{#if word.dict_idioms}
-  <Word {word} dict="dict_idioms" />
-{/if}
-{#if word.kisaragi_dict}
-  <Word {word} dict="kisaragi_dict" />
-{/if}
+<Word {word} />
 
 <hr />
 <div class="prose bullets">
