@@ -9,7 +9,9 @@
   <title>找不到「{term}」 - Kemdict</title>
 </svelte:head>
 
-<Header />
+<Header>
+  <SearchBar />
+</Header>
 
 <div class="prose bullets">
   <h1>{term}</h1>
