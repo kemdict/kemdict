@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import { redirect } from "@sveltejs/kit";
 import { db, processWord } from "$lib/server/db.js";
 
