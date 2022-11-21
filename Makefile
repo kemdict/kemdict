@@ -10,7 +10,7 @@ entries.db: combined.json
 	node combined-to-sqlite.mjs
 
 entries.db.br: entries.db
-	brotli --no-copy-stat entries.db
+	brotli --no-copy-stat --force entries.db
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .cask
 	cask eval "(load \"kisaragi/generate\")"
