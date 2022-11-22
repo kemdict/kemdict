@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sqlite3 entries.db <<HERE
+.beaders on
+.mode csv
+.output entries.csv
+select * from entries
+HERE
