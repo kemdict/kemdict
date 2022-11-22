@@ -4,7 +4,7 @@ import { redirect } from "@sveltejs/kit";
 import { db, processWord } from "$lib/server/db.js";
 
 export function load({ url }) {
-  const needle = url.searchParams.get("s");
+  const needle = url.searchParams.get("q");
   if (typeof needle !== "string") {
     throw redirect(301, "/");
   }

@@ -52,7 +52,7 @@
       type="search"
       autocomplete="off"
       placeholder="輸入詞彙"
-      name="s"
+      name="q"
       bind:value={needle}
     />
     <!-- /search?s=<...>, like search engines -->
