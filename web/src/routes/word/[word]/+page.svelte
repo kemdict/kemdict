@@ -13,7 +13,7 @@
 </svelte:head>
 
 <Header>
-  <SearchBar />
+  <SearchBar initialInput={word.title} />
 </Header>
 
 <Word {word} />
