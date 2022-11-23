@@ -57,8 +57,8 @@ CONTENTS is the element contents."
                         `nil
                         (guard (member type '("coderef" "custom-id" "fuzzy"))))
                     (if url?
-                        "<a href=\"%1$s\">%1$s</a> "
-                      "<a href=\"/word/%1$s\">%1$s</a> "))
+                        "<a href=\"%1$s\">%1$s</a>"
+                      "<a href=\"/word/%1$s\">%1$s</a>"))
                    (`angle "<%s>")
                    (`plain "%s")
                    (f (error "Wrong `:format' value: %s" f)))))
