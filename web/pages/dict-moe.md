@@ -16,10 +16,6 @@
 
 ## 授權條款
 
-依萌典 / g0v 所言，
-
-> 依教育部之解釋，「創用CC-姓名標示- 禁止改作 臺灣3.0版授權條款」之改作限制標的為文字資料本身，不限制格式轉換及後續應用。
->
-> — https://github.com/g0v/moedict-data
+見[致謝與授權](/thanks)。
 
 更新版的資料置於 <https://github.com/kemdict/kemdict-data-ministry-of-education>。

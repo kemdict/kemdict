@@ -1,7 +1,7 @@
 <script>
   export let entry;
   export let title;
-  import { spc } from "$lib/common";
+  import { spc, linkToWord, linkify_brackets } from "$lib/common";
 
   function split(str) {
     // Some lines contain just a Tab. Get rid of them.
@@ -10,15 +10,22 @@
 
   // This only processes one item in the definitions.
   function process_def(d) {
-    return (
-      d
-        .replace(/^\d+\./, "")
-        // These are the only types that exist.
-        // ...plus CJK COMPATIBILITY IDEOGRAPH-F9B5.
-        .replace(/\[([例似反])\]/g, `<br><m>$1</m>`)
-        .replace(/§(英)([a-zA-Z ]+)/g, `<br><m>$1</m>$2`)
-        .replace("△", `<br><m title="同">△</m>`)
-    );
+    d = d
+      // This means "this definition has an image".
+      .replace("　◎", "")
+      .replace(/^\d+\./, "")
+      .replace(/(△|]|、)([^、。]+)/g, (_m, $1, $2) => {
+        return `${$1}${linkToWord($2)}`;
+      })
+      // These are the only types that exist.
+      // ...plus CJK COMPATIBILITY IDEOGRAPH-F9B5. (Fixed in upstream
+      // already, should be available next time concised dict makes a
+      // data release.)
+      .replace(/\[([例似反])\]/g, `<br><m>$1</m>`)
+      .replace(/§(英)([a-zA-Z ]+)/g, `<br><m>$1</m>$2`)
+      .replace("△", `<br><m title="參考詞">△</m>`);
+    d = linkify_brackets(d);
+    return d;
   }
 </script>
 

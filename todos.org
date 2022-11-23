@@ -1,4 +1,5 @@
 * done
+- [X] =dict_concised=: add links to [例]A、B、C
 - [X] kisaragi-dict: use HTML in text content freely
      (sort of: Org content can be used freely, but I have to override parts of org-element-interpret-data to make it emit HTML)
 - [X] kisaragi-dict: transform Org links to HTML links during the data process step
@@ -47,7 +48,6 @@
 - Retrieve definition from Wiktionary API? (during request? client side?)
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 - [ ] Backlinks
-- [ ] =dict_concised=: add links to [例]A、B、C
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
   - Or maybe checkboxes to hide a dictionary temporarily
