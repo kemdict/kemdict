@@ -43,6 +43,7 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
+- A way to copy anchored links from the word page
 - Search sort button needs to be styled
 - Add sitemap
 - Add robots.txt
@@ -56,3 +57,10 @@
   - For Mandarin, do we want to support pinyin?
   - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
+* MOE dictionary stuff
+
+簡編本 / 重編本 「閩南方言：…」常不寫台語正字，如「材」提到「閩南方言。量詞。」，但台語辭典是寫「[[https://kemdict.kisaragi-hiu.com/word/才#moedict_twblg][才]]」。
+
+或是借詞時還是寫「閩南方言。」
+
+或是「打拼」：記沒人用的音、不寫借自台語哪個詞。
