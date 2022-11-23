@@ -6,11 +6,16 @@ import { dicts, WordSort } from "$lib/common";
 
 export function load({ url }) {
   const query = url.searchParams.get("q");
+  // Hopefully this stops the query from going into the /word/ page
+  url.searchParams.delete("q");
   const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
   let words = stmt.all(`${query}%`);
   // Redirect on the only exact match
   if (words && words.length === 1 && words[0]?.title === query) {
     throw redirect(301, encodeURI(`/word/${words[0].title}`));
+  } else if (words.length === 0) {
+    // Use /word/'s error page
+    throw redirect(301, encodeURI(`/word/${query}`));
   } else {
     let sort = url.searchParams.get("s");
     let sortFn;
