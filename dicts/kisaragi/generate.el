@@ -50,15 +50,15 @@ CONTENTS is the element contents."
       (let ((fmt (pcase (org-element-property :format link)
                    ((guard contents)
                     (format (if url?
-                                "<a data-sveltekit-reload href=\"%%s\">%s</a>"
-                              "<a data-sveltekit-reload href=\"/word/%%s\">%s</a>")
+                                "<a href=\"%%s\">%s</a>"
+                              "<a href=\"/word/%%s\">%s</a>")
                             (replace-regexp-in-string "%" "%%" contents)))
                    ((or `bracket
                         `nil
                         (guard (member type '("coderef" "custom-id" "fuzzy"))))
                     (if url?
-                        "<a data-sveltekit-reload href=\"%1$s\">%1$s</a> "
-                      "<a data-sveltekit-reload href=\"/word/%1$s\">%1$s</a> "))
+                        "<a href=\"%1$s\">%1$s</a> "
+                      "<a href=\"/word/%1$s\">%1$s</a> "))
                    (`angle "<%s>")
                    (`plain "%s")
                    (f (error "Wrong `:format' value: %s" f)))))

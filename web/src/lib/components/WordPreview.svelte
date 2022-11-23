@@ -12,7 +12,7 @@
 {#each presentDicts as dict}
   {#each word[dict].heteronyms as het}
     <li>
-      <a data-sveltekit-reload href="/word/{word.title}">
+      <a href="/word/{word.title}">
         <div
           class="text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800 p-1 -mx-1 my-2"
         >

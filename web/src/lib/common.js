@@ -30,7 +30,7 @@ import titles from "../../../dicts/titles.json";
 export function linkToWord(target, desc = target) {
   if (target.indexOf("<a") === -1) {
     if (titles.includes(target)) {
-      return `<a data-sveltekit-reload href='/word/${target}'>${desc}</a>`;
+      return `<a href='/word/${target}'>${desc}</a>`;
     }
   }
   return target;
