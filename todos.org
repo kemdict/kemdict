@@ -43,6 +43,7 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
+- Search sort button needs to be styled
 - Add sitemap
 - Add robots.txt
 - Retrieve definition from Wiktionary API? (during request? client side?)
@@ -51,7 +52,7 @@
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
   - Or maybe checkboxes to hide a dictionary temporarily
-- [ ] Search by pronunciation
+- [ ] Search by pronunciation (non-Han character search)
   - For Mandarin, do we want to support pinyin?
   - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
 - [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
