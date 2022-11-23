@@ -61,7 +61,7 @@
   {#if loading}
     <div class="h-5 w-5" />
   {:else if isDark}
-    <!-- ionicons moon-outline, help-outline, and sunny-outline. -->
+    <!-- ionicons moon-outline and sunny-outline. -->
     <svg
       class="h-5 w-5"
       xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,7 @@
         cx="256"
         cy="256"
         r="80"
-        fill="none"
+        fill="yellow"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-miterlimit="10"
