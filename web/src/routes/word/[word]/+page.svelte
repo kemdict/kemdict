@@ -19,7 +19,7 @@
 <Word {word} />
 
 <hr />
-<div class="prose bullets">
+<div class="prose">
   <h2>在其他地方搜尋「{word.title}」</h2>
   <ul>
     <li>

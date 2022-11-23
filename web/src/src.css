@@ -69,7 +69,7 @@
     }
   }
   .wordlink {
-    @apply btn py-1 px-2;
+    @apply btn py-1 px-2 link;
     &:hover {
       @apply no-underline;
     }
@@ -178,17 +178,15 @@
     :where(a):not(:where([class~="not-prose"] *)) {
       @apply link;
     }
+    :where(ul):not(:where([class~="not-prose"] *)) {
+      list-style-type: "– ";
+      @apply pl-4;
+    }
     h2 {
       @apply mt-6;
     }
     ol {
       @apply list-decimal;
-    }
-  }
-  .bullets {
-    ul {
-      list-style-type: "– ";
-      @apply pl-4;
     }
   }
   .fade {

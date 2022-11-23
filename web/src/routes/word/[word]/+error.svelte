@@ -13,10 +13,11 @@
   <SearchBar />
 </Header>
 
-<div class="prose bullets">
+<div class="prose">
   <h1>{term}</h1>
   <p>Kemdict 收錄字典裡找不到這個詞。</p>
   <p />
+  <hr />
   <ul class="my-10">
     <li>
       <a href="https://google.com/search?q={term}">在 Google 搜尋「{term}」</a>
