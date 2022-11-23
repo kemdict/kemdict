@@ -3,6 +3,11 @@
   export let title;
   import { spc } from "$lib/common";
 
+  function split(str) {
+    // Some lines contain just a Tab. Get rid of them.
+    return str.split("\n").filter((x) => x.trim().length > 0);
+  }
+
   // This only processes one item in the definitions.
   function process_def(d) {
     return (
@@ -24,7 +29,7 @@
   {/if}
   {#if het.definition}
     <ol>
-      {#each het.definition.split("\n") as d}
+      {#each split(het.definition) as d}
         <li><p class="def">{@html process_def(d)}</p></li>
       {/each}
     </ol>
