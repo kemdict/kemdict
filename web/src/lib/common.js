@@ -7,6 +7,23 @@ export const dicts = {
   kisaragi_dict: "如月的現代台灣華語補足典",
 };
 
+export const WordSort = {
+  ascend: (a, b) => {
+    if (a.title > b.title) {
+      return 1;
+    } else {
+      return -1;
+    }
+  },
+  descend: (a, b) => {
+    if (a.title < b.title) {
+      return 1;
+    } else {
+      return -1;
+    }
+  },
+};
+
 /**
  * Normalize spaces in `str`.
  *

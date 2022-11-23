@@ -1,44 +1,67 @@
 <script>
+  import { browser } from "$app/environment";
   import Header from "$lib/components/Header.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import WordPreview from "$lib/components/WordPreview.svelte";
   import Word from "$lib/components/Word.svelte";
   export let data;
-  import { groupByProp, dicts } from "$lib/common.js";
-  let words = data.words;
-  for (let w of words) {
-    w.dict = Object.keys(dicts).find((x) => w[x]);
+  import { groupByProp, dicts, WordSort } from "$lib/common.js";
+  let sortFn;
+  let sort = data.sort;
+  let urlParams;
+  $: if (sort === "desc") {
+    sortFn = WordSort.descend;
+  } else {
+    sortFn = WordSort.ascend;
   }
-  let count = false;
-  let increment = () => {
-    if (!count) {
-      count = 0;
-    }
-    count++;
-  };
-  let lst;
 </script>
 
 <svelte:head>
-  <title>「{data.needle}」 - kemdict 搜尋結果</title>
+  <title>「{data.query}」 - kemdict 搜尋結果</title>
   <meta name="description" content="搜尋 kemdict" />
 </svelte:head>
 
 <Header>
-  <SearchBar initialInput={data.needle} />
+  <SearchBar initialInput={data.query} />
 </Header>
 
-<h1 class="font-bold mt-8 text-2xl">以「{data.needle}」開頭的詞</h1>
+<h1 class="font-bold mt-8 text-2xl">以「{data.query}」開頭的詞</h1>
 <h2 class="text-sm">
-  {#if lst}
-    共 {lst.childElementCount} 個定義
-  {:else}
-    …
-  {/if}
+  共 {data.count} 個定義
 </h2>
 
-<ul bind:this={lst}>
-  {#each data.words as word}
+<form action="/search" method="GET">
+  <label>
+    <input
+      type="radio"
+      bind:group={sort}
+      value="asc"
+      id="ascend"
+      name="s"
+      checked={sort !== "desc"}
+    />
+    遞增</label
+  >
+  <label>
+    <input
+      type="radio"
+      bind:group={sort}
+      value="desc"
+      id="descend"
+      name="s"
+      checked={sort === "desc"}
+    />
+    遞減</label
+  >
+  <!-- With this, this even works with EWW. -->
+  <noscript>
+    <input type="hidden" name="q" value={data.query} />
+    <input type="submit" value="重新搜尋" />
+  </noscript>
+</form>
+
+<ul>
+  {#each data.words.sort(sortFn) as word}
     <WordPreview {word} />
   {/each}
 </ul>
