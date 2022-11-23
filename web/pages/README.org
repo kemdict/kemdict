@@ -1,3 +1,23 @@
 * pages: 我放 .md 頁面的地方
 
-SvelteKit 的 =url/+page.svelte.md= 寫起來很麻煩，所以我想把用 Markdown 寫的頁面丟在這裡然後在 SvelteKit 建構前用 Make 丟到對的地方。
+SvelteKit 的 =url/+page.svelte.md= 寫起來很麻煩，所以我把用 Markdown 寫的頁面丟在這裡然後在 SvelteKit 建構前用 Make 丟到對的地方。
+
+實現的方式是在 =web= 的 Makefile 裡這樣寫：
+
+#+begin_src makefile
+MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(wildcard pages/*.md))
+
+$(MD): src/routes/%/+page.svelte.md: pages/%.md
+	mkdir -p "$(dir $@)"
+	cp "$<" "$@"
+
+markdown: $(MD)
+#+end_src
+
+1. 首先 Make 先取得 pages/*.md，例如 =pages/a.md pages/b.md=
+2. 從 =pages/<名稱>.md= 改寫成 =src/routes/<名稱>/+page.svelte.md= ，這些是我們的目標檔案
+3. 告訴 Make 要怎麽建構每一個目標檔案：
+   - =pages/<名稱>.md= 是我們的來源檔案
+   - =$@= 是目標路徑， =$<= 是來源路徑，
+   - 建立目標資料夾 (=dir= 會取得路徑的資料夾部分： =$(dir a/b/c.md)= → =a/b=)
+   - 然後從來源複製到目標
