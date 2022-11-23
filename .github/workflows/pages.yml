@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            dicts/entries.db.br
+            dicts/entries.db.gz
             dicts/entries.db
             dicts/combined.json
             dicts/kisaragi/*.json
@@ -61,7 +61,7 @@ jobs:
       - name: Prepare data files
         run: |
           cd dicts
-          make entries.db.br
+          make entries.db.gz
       - name: Build
         run: |
           cd web

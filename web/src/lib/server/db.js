@@ -10,7 +10,7 @@ import Database from "better-sqlite3";
  */
 function readDB(path) {
   let data = fs.readFileSync(path);
-  let decompressed = zlib.brotliDecompressSync(data);
+  let decompressed = zlib.gunzipSync(data);
   return new Database(decompressed);
 }
 
@@ -21,10 +21,10 @@ export const db = (() => {
   //
   // Just, like, work around that.
   try {
-    return readDB("./src/lib/entries.db.br");
+    return readDB("./src/lib/entries.db.gz");
   } catch (e) {
     if (e instanceof Error && e.code === "ENOENT") {
-      return readDB("./web/src/lib/entries.db.br");
+      return readDB("./web/src/lib/entries.db.gz");
     } else {
       throw e;
     }

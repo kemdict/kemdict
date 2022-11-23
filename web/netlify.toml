@@ -1,5 +1,5 @@
 [functions]
-included_files = ["./src/lib/entries.db.br"]
+included_files = ["./src/lib/entries.db.gz"]
 
 [dev]
 framework = "#custom"
