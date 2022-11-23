@@ -42,6 +42,8 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
+- Add sitemap
+- Add robots.txt
 - Retrieve definition from Wiktionary API? (during request? client side?)
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 - [ ] Backlinks

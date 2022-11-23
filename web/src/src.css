@@ -1,13 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap");
 
 @tailwind base;
-@tailwind utilities;
 @tailwind components;
+@tailwind utilities;
 
 @layer base {
   html {
     line-height: 1.6;
-    font-size: 18px;
   }
   rt {
     font-size: 70%;
@@ -17,14 +16,17 @@
     @apply bg-gray-200 dark:bg-stone-700;
   }
   hr {
-    @apply my-8 w-[95%] mx-auto;
     @apply border-gray-400;
+    @apply my-8 w-[95%] mx-auto;
   }
   body {
     @apply relative mt-12;
     @apply bg-white dark:bg-stone-900;
     @apply dark:text-white;
     @apply fade;
+    &:focus-visible {
+      outline: none;
+    }
   }
   .base {
     width: 95%;
@@ -69,7 +71,7 @@
     }
   }
   .wordlink {
-    @apply btn py-1 px-2 link;
+    @apply btn py-1 px-2 font-bold;
     &:hover {
       @apply no-underline;
     }
@@ -111,7 +113,7 @@
       @apply link;
     }
     h1 {
-      @apply text-2xl mt-4;
+      @apply text-xl mt-4;
     }
     h2 {
       @apply text-xl mt-4;
