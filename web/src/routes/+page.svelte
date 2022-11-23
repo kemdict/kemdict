@@ -33,7 +33,6 @@
         <p><a href="about">關於 Kemdict</a></p>
         <p><a href="changelog">版本紀錄</a></p>
         <p><a href="thanks">致謝與授權</a></p>
-        <p><a href="known-issues">已知問題</a></p>
       </li>
     </ul>
     <h2>搜尋</h2>
