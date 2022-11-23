@@ -1,0 +1,6 @@
+* =src/=: SvelteKit 的程式碼路徑
+
+- =app.html=: 所有頁面的骨架
+- =src.css=: 主要的 CSS；因為有安裝 Tailwind，所以 Vite 會自動用 Tailwind 處理
+- =lib=: JS import 時可以用 =$lib= 來指定這個資料夾，不然會必須要用相對路徑
+- =routes=: 這下面的檔案路徑會對應到應用程式的 URL

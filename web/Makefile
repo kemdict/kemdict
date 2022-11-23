@@ -6,7 +6,7 @@ MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(wildcard pages/*.md))
 
 $(MD): src/routes/%/+page.svelte.md: pages/%.md
 	@mkdir -p "$(dir $@)"
-	cp "$<" "$@"
+	ln -T "$<" "$@"
 
 markdown: $(MD)
 
@@ -15,7 +15,7 @@ src/lib/entries.db.gz: ../dicts
 	cp ../dicts/entries.db.gz src/lib/
 	cp ../dicts/titles.json src/lib/
 
-src/lib/kisaragi_dict.json:
+src/lib/kisaragi_dict.json: ../dicts
 	cd ../dicts && make kisaragi/kisaragi_dict.json
 	cp ../dicts/kisaragi/kisaragi_dict.json src/lib/
 
