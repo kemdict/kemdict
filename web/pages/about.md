@@ -8,9 +8,7 @@ import { version } from "$lib/common"
 
 # 關於 Kemdict
 
-Kemdict 提供對數本教育部辭典的一次搜尋。同時它包含了 [kisaragi-dict](/dict-kisaragi)，一個我記錄教育部辭典沒有收錄的詞的地方。
-
-像是 [Weblio](https://weblio.jp/) 一樣，同一個詞會列出所有收錄字典的定義，並且每個定義有標明是哪個字典來的。
+Kemdict 提供對數本教育部辭典的一次搜尋。像是 [Weblio](https://weblio.jp/) 一樣，同一個詞會列出所有收錄字典的定義，並且每個定義有標明是哪個字典來的。
 
 Kemdict [{version}](/changelog)。原始碼：<https://github.com/kemdict/kemdict/>
 
