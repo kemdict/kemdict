@@ -3,13 +3,13 @@
   import { onMount } from "svelte";
   /* import titles from "../../../../dicts/titles.json"; */
   export let initialInput;
-  const Match = {
-    includes: (str, needle) => str.indexOf(needle) === -1,
-    startsWith: (str, needle) => str.startsWith(needle),
-    endsWith: (str, needle) => str.endsWith(needle),
-  };
-  let matchFunc = Match.startsWith;
-  let needle = initialInput || "";
+ /* const Match = {
+  *   includes: (str, needle) => str.indexOf(needle) === -1,
+  *   startsWith: (str, needle) => str.startsWith(needle),
+  *   endsWith: (str, needle) => str.endsWith(needle),
+  * }; */
+ /* let matchFunc = Match.startsWith; */
+ /* let needle = initialInput || ""; */
   /* $: matching = (() => {
    *   if (needle.trim().length > 0) {
    *     return titles.filter((title) => matchFunc(title, needle.trim()));
@@ -53,8 +53,9 @@
       autocomplete="off"
       placeholder="輸入詞彙"
       name="q"
-      bind:value={needle}
+      value={initialInput}
     />
+    <!-- FIXME: Adding bind above broke Zhuyin IME on an iphone!-->
     <!-- /search?s=<...>, like search engines -->
     <input type="submit" value="搜尋" />
   </form>
