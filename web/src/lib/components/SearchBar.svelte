@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   /* import titles from "../../../../dicts/titles.json"; */
-  export let initialInput;
+  export let initialInput = "";
  /* const Match = {
   *   includes: (str, needle) => str.indexOf(needle) === -1,
   *   startsWith: (str, needle) => str.startsWith(needle),
