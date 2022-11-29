@@ -106,7 +106,7 @@ These are not compiled because only words under the Words heading are.
 :added:    2022-11-29T21:31:40+0900
 :END:
 *** ㄏㄚˊ ㄇㄚˋ
-**** 名|蛤蠣。音借自台語「ham-á」(「蚶仔」)。
+**** 名|蛤蠣。音借自台語「ham-á（[[蚶仔]]）」。
 ** 雖
 :PROPERTIES:
 :added:    2022-11-29T21:14:41+0900
