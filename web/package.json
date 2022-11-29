@@ -18,7 +18,7 @@
     "lodash-es": "^4.17.21"
   },
   "scripts": {
-    "run": "npm install --omit=dev && node index.js"
+    "prod": "npm install --omit=dev && node index.js"
   },
   "type": "module"
 }

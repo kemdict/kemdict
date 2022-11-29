@@ -73,3 +73,29 @@ jobs:
         run: |
           cd web
           netlify deploy --dir=build --prod
+      - name: Set up SSH
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_SECRET: ${{ secrets.SSH_SECRET }}
+        run: |
+          mkdir -p ~/.ssh
+          printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
+          printenv SSH_SECRET > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Build and deploy node
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          cd web
+          make built-node
+          tar -czf built-node.tar.gz -a built-node
+          rsync built-node.tar.gz "$SSH_HOST":/home/kisaragi
+          ssh "$SSH_HOST" bash << HERE
+            tar -xf built-node.tar.gz
+            rm built-node.tar.gz
+            mkdir -p deployed
+            test -d deployed/kemdict && rm -r deployed/kemdict
+            mv built-node deployed/kemdict
+            systemctl restart --user kemdict
+          HERE
+        shell: bash

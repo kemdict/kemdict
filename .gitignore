@@ -12,6 +12,6 @@ src/static/titles.json
 dev-*.json
 .netlify
 *.db.br
-*.db.gz
+*.gz
 *.db
 *.db-journal

@@ -1,3 +1,64 @@
 * Sveltekit-based frontend
 
 This will not build with adapter-cloudflare due to the use of builtin Node modules in my server modules.
+
+* Building for Node
+
+#+begin_src shell
+make built-node
+#+end_src
+
+This makes =svelte.config.js= use =adapter-node= and output to =built-node=. Other required files, namely =package.json=, =package-lock.json=, and the SQLite database of dictionaries, are all copied in as well.
+
+** Deploying to a server
+Copy the folder to a server, perhaps through =tar= and =scp=:
+
+#+begin_src shell
+tar -cf built-node.tar -a built-node
+scp built-node.tar user@example.com:/home/user
+#+end_src
+
+Then, on the server:
+
+#+begin_src shell
+ssh user@example.com
+tar -x built-node.tar
+rm built-node.tar
+test -f kemdict && rm -r kemdict
+mv built-node kemdict
+#+end_src
+
+Note that =better-sqlite3= currently will fail to install on Node 19 (which the Arch =nodejs= package is on), so you'll have to make sure to use Node 18.
+
+Now run it:
+
+#+begin_src shell
+cd kemdict || exit 1
+env PORT=1234 npm run prod # I've made this task run npm install as well
+#+end_src
+
+*** Running as a systemd service
+
+Like this, I guess:
+
+#+begin_src systemd
+[Unit]
+Description=An interface for some dictionaries
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+WorkingDirectory=/home/user/kemdict
+Environment="PORT=1234"
+ExecStart=npm run prod
+
+[Install]
+WantedBy=default.target
+#+end_src
+
+Put this in =~/.config/systemd/user/<name>.service=, do a user daemon-reload, then make sure to mark the user as lingering (see =enable-linger= in [[https://man.archlinux.org/man/loginctl.1.en.html][loginctl(1)]]):
+
+#+begin_src shell
+loginctl enable-linger $USER
+#+end_src
