@@ -50,7 +50,9 @@
         {/if}
       </div>
       <div class="word">
-        {#if dict == "dict_revised"}
+        {#if dict == "kisaragi_dict"}
+          <WordMoedictish {word} {dict} />
+        {:else if dict == "dict_revised"}
           <WordDictRevised entry={word[dict]} title={word.title} />
         {:else if dict == "dict_concised"}
           <WordDictConcised entry={word[dict]} title={word.title} />
@@ -60,8 +62,6 @@
           <WordHakkadict entry={word[dict]} title={word.title} />
         {:else if dict == "dict_idioms"}
           <WordDictIdioms entry={word[dict]} title={word.title} />
-        {:else if dict == "kisaragi_dict"}
-          <WordMoedictish {word} {dict} />
         {/if}
       </div>
     {/if}
