@@ -33,20 +33,12 @@ jobs:
         with:
           node-version: "16"
           cache: "npm"
-      - name: Set up Emacs
-        # This is Emacs 27.1
-        run: |
-          sudo apt-get install emacs-nox
-      - name: Set up Cask
-        uses: conao3/setup-cask@master
       - name: Install packages
         run: |
           npm install
-          (cd dicts && npm install)
-          (cd dicts && cask)
           (cd web && npm install)
-          (cd web && npm install netlify-cli)
       - name: Cache data files
+        id: cache
         uses: actions/cache@v3
         with:
           path: |
@@ -58,21 +50,33 @@ jobs:
           key: "dicts-${{ hashFiles('dicts/**') }}"
           restore-keys: |
             dicts-
+      - name: Set up Emacs
+        if: steps.cache.outputs.cache-hit != "true"
+        # This is Emacs 27.1
+        run: |
+          sudo apt-get install emacs-nox
+      - name: Set up Cask
+        if: steps.cache.outputs.cache-hit != "true"
+        uses: conao3/setup-cask@master
       - name: Prepare data files
+        if: steps.cache.outputs.cache-hit != "true"
         run: |
           cd dicts
+          npm install
+          cask
           make entries.db.gz
-      - name: Build
-        run: |
-          cd web
-          make build
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: |
-          cd web
-          netlify deploy --dir=build --prod
+      # - name: Build
+      #   run: |
+      #     cd web
+      #     make build
+      # - name: Deploy to Netlify
+      #   env:
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #   run: |
+      #     cd web
+      #     npm install netlify-cli
+      #     netlify deploy --dir=build --prod
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
