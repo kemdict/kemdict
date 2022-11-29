@@ -11,11 +11,7 @@
 
 ## iTaigi, ChhoeTaigi
 
-Kemdict also covers modern Taiwanese Mandarin.
-
-iTaigi is still the place to go for crowdsourced modern Taigi.
-
-Right now Kemdict absolutely cannot replace ChhoeTaigi due to only supporting Han character-based search.
+Kemdict also covers modern Taiwanese Mandarin. Actually, Kemdict has more of a focus on Taiwanese Mandarin, and does not at all replace iTaigi or ChhoeTaigi.
 
 ## Moedict
 

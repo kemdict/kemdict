@@ -5,4 +5,5 @@ src/lib/*.json
 +page.svelte.md
 static/*.json
 /build
+/built-node
 static/l/
