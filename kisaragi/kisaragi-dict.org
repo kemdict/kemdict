@@ -74,7 +74,33 @@ Hub / USB Hub
 流行語用 :vogue: 標籤。
 
 我的流行語的“標準”是新興 + 感覺可能會退流行。像○好○滿雖然新 (2016) 但是已經根深蒂固、同溫層大概也是，但「狂」或「斗內」感覺是比較容易退流行的。
+* Staging
+These are not compiled because only words under the Words heading are.
 * Words
+** 948794狂                                                           :vogue:
+:PROPERTIES:
+:added:    2022-11-29T21:51:19+0900
+:END:
+*** ㄐㄧㄡˇ ㄙˋ ㄅㄚ ㄑㄧ ㄐㄧㄡˇ ㄙˋ ㄎㄨㄤˊ
+**** 「就是白痴就是狂」。用來諷刺人笨。
+** 87                                                                 :vogue:
+:PROPERTIES:
+:added:    2022-11-29T21:51:16+0900
+:END:
+*** ㄅㄚ ㄑㄧ
+**** 「白痴」的另類寫法。
+** 北七
+:PROPERTIES:
+:added:    2022-11-29T21:51:15+0900
+:END:
+*** ㄅㄟˇ ㄑㄧ
+**** 同「白痴」。台語「[[白痴#moedict_twblg][白痴]]」的假借字。
+** 白癡
+:PROPERTIES:
+:added:    2022-11-29T21:51:13+0900
+:END:
+*** ㄅㄞˊ ㄔ
+**** 「白痴」的另一種寫法。
 ** 蛤蜊
 :PROPERTIES:
 :added:    2022-11-29T21:31:40+0900
