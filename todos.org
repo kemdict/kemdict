@@ -50,6 +50,16 @@
 - Retrieve definition from Wiktionary API? (during request? client side?)
 - [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 - [ ] Backlinks
+  - Go through every definition to find links
+    - Requires a common shape for the definition text
+    - Right now it's either =word.heteronyms[n].definitions= or =word.heteronyms[n].definition= (n ∈ 0+)
+    - The former is moedict-twblg and kisaragi-dict, the latter is kemdict/kemdict-data-ministry-of-education
+    - We should flatten moedict-twblg and kisaragi-dict.
+  - Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
+- Use a persistent database instead of spinning up an SQLite DB on every request
+  - Supabase should… work?
+    - Find a way to get the dictionaries in there first
+  - Or just, you know, adapter-node on a VPS and cache with Cloudflare. We really don't need the infinite scaling.
 - [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 - [ ] Add list of dictionaries at top of word page to quickly navigate to
   - Or maybe checkboxes to hide a dictionary temporarily

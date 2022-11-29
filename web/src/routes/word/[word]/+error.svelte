@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-  <title>找不到「{term}」 - Kemdict</title>
+  <title>找不到「{term}」 - Kemdict 國語整合典</title>
 </svelte:head>
 
 <Header>
@@ -15,7 +15,7 @@
 
 <div class="prose">
   <h1>{term}</h1>
-  <p>Kemdict 收錄字典裡找不到這個詞。</p>
+  <p>找不到這個詞。</p>
   <p />
   <hr />
   <ul class="my-10">

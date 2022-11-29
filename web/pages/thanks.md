@@ -24,7 +24,7 @@
 
 Kemdict 使用來自 [Ionicons](https://github.com/ionic-team/ionicons) 的圖示。
 
-Kemdict 使用 [SvelteKit](https://kit.svelte.dev) 框架，透過 GitHub Actions 建置後寄存於 Netlify。
+Kemdict 使用 [SvelteKit](https://kit.svelte.dev) 框架，透過 GitHub Actions 建置後寄存於 Linode。
 
 >Copyright (c) 2016-22 [these people](https://github.com/sveltejs/svelte/graphs/contributors)
 >

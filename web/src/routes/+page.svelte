@@ -2,10 +2,10 @@
   import RecentWordList from "$lib/components/RecentWordList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
-  const title = "kemdict";
-  const sitename = "kemdict";
+  const title = "Kemdict 國語整合典";
+  const sitename = "Kemdict 國語整合典";
   const description =
-    "Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
+    "《Kemdict 國語整合典》整合多本教育部的辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 </script>
 
 <svelte:head>
@@ -23,7 +23,7 @@
     <div class="max-sm:mb-6 sm:absolute sm:top-4 sm:left-4">
       <div class="sm:fixed sm:w-[10rem]">
         <img class="h-[10rem] w-[10rem]" src="/logo.png" />
-        <h1 class="font-bold text-3xl">kemdict (β)</h1>
+        <h1 class="font-bold text-3xl">Kemdict 國語整合典 (β)</h1>
         <DarkModeToggle />
       </div>
     </div>
