@@ -30,8 +30,6 @@ AI = 人工智慧 / 機器學習
 疫情 (2020 ~ 2022 年間單用時指 COVID)
 確診 (2020 ~ 2022 年間單用時指 COVID)
 SARS
-COVID-19
-武漢肺炎
 造勢 (形容詞)
 路殺 / 路死 ([[https://www.facebook.com/groups/roadkilled]])
 情緒勒索 (+ 情勒)
@@ -77,6 +75,48 @@ Hub / USB Hub
 * Staging
 These are not compiled because only words under the Words heading are.
 * Words
+** 課金                                                               :vogue:
+:PROPERTIES:
+:added:    2022-11-30T23:18:25+0900
+:END:
+*** ㄎㄜˋ ㄐㄧㄣ
+**** 動|在遊戲內花錢購買虛擬商品。
+** 長新冠
+:PROPERTIES:
+:added:    2022-11-30T23:02:14+0900
+:END:
+*** ㄔㄤˊ ㄒㄧㄣ ㄍㄨㄢˋ
+**** 名|英語「Long COVID」的意譯。指 [[COVID-19]] 痊癒後常見的後遺症。
+** 新冠肺炎
+:PROPERTIES:
+:added:    2022-11-30T22:36:37+0900
+:END:
+*** ㄒㄧㄣ ㄍㄨㄢˋ ㄈㄟˋ ㄧㄢˊ
+**** 名|[[COVID-19]]。定名自「新型冠狀病毒所引起的肺炎」。
+** 武漢肺炎
+:PROPERTIES:
+:added:    2022-11-30T22:33:47+0900
+:END:
+*** ㄨˇ ㄏㄢˋ ㄈㄟˋ ㄧㄢˊ
+**** 名|COVID-19 疫情初期對「來自武漢的不明原因肺炎」的簡稱。後定名為「COVID-19」或「新冠肺炎」。一說為此詞對中國武漢市有貶義。
+** 大流行
+:PROPERTIES:
+:added:    2022-11-30T22:32:23+0900
+:END:
+*** ㄉㄚˋ ㄌㄧㄡˊ ㄒㄧㄥˊ
+**** 見「大流行病」。
+** COVID-19
+:PROPERTIES:
+:added:    2022-11-30T22:07:31+0900
+:END:
+*** /ˈkoʊ.vɪd naɪnˈtin/
+**** 名|「2019 年冠狀病毒病」(Coronavirus Disease 2019)。由 SARS-CoV-2 冠狀病毒引起的病症。首先於 2019 年於中國武漢市發現，其後於 2020 年擴散至中國全境，造成世界疫情[[大流行]]。同「武漢肺炎」、「新冠肺炎」，也見「長新冠」。
+** 腦霧
+:PROPERTIES:
+:added:    2022-11-30T21:58:10+0900
+:END:
+*** ㄋㄠˇ ㄨˋ
+**** 名|來自英語「brain fog」。指大腦思考力、理解能力等下降的現象。造成腦霧的常見因素有睡眠不足、壓力過大、[[COVID-19]] 後遺症等等。
 ** 948794狂                                                           :vogue:
 :PROPERTIES:
 :added:    2022-11-29T21:51:19+0900
