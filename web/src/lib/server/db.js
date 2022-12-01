@@ -16,7 +16,7 @@ function readDB(path) {
     let decompressed = zlib.gunzipSync(data);
     return new Database(decompressed);
   } else {
-    return new Database(path);
+    return new Database(path, { readonly: true, fileMustExist: true });
   }
 }
 
