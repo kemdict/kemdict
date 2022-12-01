@@ -66,6 +66,8 @@ Chhoetaigi dropdown → Taigi, equivalent zh
 Wiktionary dropdown → zh, en, ja
 
 ** TODO A way to copy anchored links from the word page
+  - See, for instance, NodeJS docs as a reference https://nodejs.org/api/esm.html#enabling
+  - Or Svelte's docs: https://svelte.dev/docs#compile-time-svelte-preprocess
 ** TODO Search sort button needs to be styled
 ** TODO Add sitemap
 ** TODO Add robots.txt
