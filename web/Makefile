@@ -42,7 +42,7 @@ build: $(DEPS)
 built-node: $(DEPS)
 	env ADAPTER=node npx vite build
 	cp package.json package-lock.json built-node/
-	cp --parents src/lib/entries.db.gz built-node/
+	cp --parents src/lib/entries.db built-node/
 
 static/l: ../dicts
 	cd ../dicts && make ministry-of-education

@@ -48,26 +48,33 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
-- A way to copy anchored links from the word page
-- Search sort button needs to be styled
-- Add sitemap
-- Add robots.txt
-- Retrieve definition from Wiktionary API? (during request? client side?)
-- [ ] kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
-- [ ] Backlinks
-  - Go through every definition to find links
-    - Requires a common shape for the definition text
-    - Right now it's either =word.heteronyms[n].definitions= or =word.heteronyms[n].definition= (n ∈ 0+)
-    - The former is moedict-twblg and kisaragi-dict, the latter is kemdict/kemdict-data-ministry-of-education
-    - We should flatten moedict-twblg and kisaragi-dict.
-  - Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
-- [ ] =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
-- [ ] Add list of dictionaries at top of word page to quickly navigate to
-  - Or maybe checkboxes to hide a dictionary temporarily
-- [ ] Search by pronunciation (non-Han character search)
-  - For Mandarin, do we want to support pinyin?
-  - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
-- [ ] Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
+** TODO [#A] Search by pronunciation (non-Han character search)
+- For Mandarin, do we want to support pinyin?
+- We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
+** TODO [#A] Backlinks
+- Go through every definition to find links
+  - Requires a common shape for the definition text
+  - Right now it's either =word.heteronyms[n].definitions= or =word.heteronyms[n].definition= (n ∈ 0+)
+  - The former is moedict-twblg and kisaragi-dict, the latter is kemdict/kemdict-data-ministry-of-education
+  - We should flatten moedict-twblg and kisaragi-dict.
+- Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
+** TODO [#A] Investigate memory leaks
+** TODO varied links to moedict and chhoetaigi
+
+Moedict dropdown → zh, nan, hakka
+Chhoetaigi dropdown → Taigi, equivalent zh
+Wiktionary dropdown → zh, en, ja
+
+** TODO A way to copy anchored links from the word page
+** TODO Search sort button needs to be styled
+** TODO Add sitemap
+** TODO Add robots.txt
+** TODO Retrieve definition from Wiktionary API? (during request? client side?)
+** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
+** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
+** TODO Add list of dictionaries at top of word page to quickly navigate to
+- Or maybe checkboxes to hide a dictionary temporarily
+** TODO Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 * MOE dictionary stuff
 
 簡編本 / 重編本 「閩南方言：…」常不寫台語正字，如「材」提到「閩南方言。量詞。」，但台語辭典是寫「[[https://kemdict.kisaragi-hiu.com/word/才#moedict_twblg][才]]」。
