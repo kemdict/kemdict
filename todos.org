@@ -50,6 +50,7 @@
 - [X] Include information for when an entry was added in kisaragi-dict
 - [X] Figure out an icon
 * todos
+** TODO there should be a separate “no search result” page
 ** TODO [#A] Search by pronunciation (non-Han character search)
 - For Mandarin, do we want to support pinyin?
 - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
