@@ -1,4 +1,6 @@
 * done
+- [X] Investigate memory leaks
+  It was being OOM killed because of other services on the same machine, (probably) not because of memory leaks.
 - [X] Use a persistent database instead of spinning up an SQLite DB on every request
   - Supabase should… work?
     - Find a way to get the dictionaries in there first
@@ -58,7 +60,9 @@
   - The former is moedict-twblg and kisaragi-dict, the latter is kemdict/kemdict-data-ministry-of-education
   - We should flatten moedict-twblg and kisaragi-dict.
 - Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
-** TODO [#A] Investigate memory leaks
+** TODO link to share on Twitter, Facebook, or just copy the URL
+** TODO soke way for the user to complain about or contribute kisaragi-dict definitions
+Might require moving to YAML
 ** TODO varied links to moedict and chhoetaigi
 
 Moedict dropdown → zh, nan, hakka
