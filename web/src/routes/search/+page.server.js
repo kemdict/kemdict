@@ -15,7 +15,8 @@ export function load({ url }) {
     throw redirect(301, encodeURI(`/word/${words[0].title}`));
   } else if (words.length === 0) {
     // Use /word/'s error page
-    throw redirect(301, encodeURI(`/word/${query}`));
+    // throw redirect(301, encodeURI(`/word/${query}`));
+    return { query: query, words: words, count: 0 };
   } else {
     let sort = url.searchParams.get("s");
     let sortFn;

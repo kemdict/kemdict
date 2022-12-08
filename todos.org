@@ -1,4 +1,5 @@
 * done
+** DONE there should be a separate “no search result” page
 ** DONE Add sitemap
 ** DONE Add robots.txt
 ** DONE Investigate memory leaks
@@ -51,7 +52,11 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
-** TODO there should be a separate “no search result” page
+** TODO search: prefix, suffix, infix
+
+- [ ] Add a dropdown to select “begins with”, “ends with”, “includes”
+- [ ] Hook it up to the search view
+
 ** TODO [#A] Search by pronunciation (non-Han character search)
 - For Mandarin, do we want to support pinyin?
 - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
@@ -63,7 +68,7 @@ No longer applicable as we don't use moedict-data anymore.
   - We should flatten moedict-twblg and kisaragi-dict.
 - Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
 ** TODO link to share on Twitter, Facebook, or just copy the URL
-** TODO soke way for the user to complain about or contribute kisaragi-dict definitions
+** TODO some way for the user to complain about or contribute kisaragi-dict definitions
 Might require moving to YAML
 ** TODO varied links to moedict and chhoetaigi
 
