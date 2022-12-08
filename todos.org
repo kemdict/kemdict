@@ -1,54 +1,55 @@
 * done
-- [X] Investigate memory leaks
-  It was being OOM killed because of other services on the same machine, (probably) not because of memory leaks.
-- [X] Use a persistent database instead of spinning up an SQLite DB on every request
-  - Supabase should… work?
-    - Find a way to get the dictionaries in there first
-  - Or just, you know, adapter-node on a VPS and cache with Cloudflare. We really don't need the infinite scaling.
-    - This is what I'm using now.
-- [X] =dict_concised=: add links to [例]A、B、C
-- [X] kisaragi-dict: use HTML in text content freely
-     (sort of: Org content can be used freely, but I have to override parts of org-element-interpret-data to make it emit HTML)
-- [X] kisaragi-dict: transform Org links to HTML links during the data process step
-- [X] Search page; searchbar should submit to search page; server side prefix suffix infix (fuzzy?) search, ideally instant when switching modes
-- [X] Do not send all words to client side
-  - This contributes to a lot of the jank
-- sveltekit version release checklist
-  - [X] Make sure it works on ancient browsers (probably)
-  - [X] Make sure it works on browsers without JS (EWW, for instance)
-  - [X] Switch DNS to point to Netlify instead of GitHub Pages
-- [X] Some hakkadict entries, like =後生毋肯學,老來無安樂=, do not have ids
-- [X] Use SvelteKit version as main version
-  - We could then do the searching on the server side and avoid having to build 170000+ pages
-- [X] mobile: include fonts (or use system fonts)
-- [X] Incorporate Ministry of Education's Hakka dictionary
-     [[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=ChLpKc/description?id=MSA00000041&opt=opt2][It's also CC-BY-ND 3.0 TW]].
-  - [X] Add it to [[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]
-  - [X] Write the word template code for it
-- [X] All titles should be written out as a file.
-- [X] References should only be linked if it is available.
-- [X] More dynamic search bar (which already requires JS)
-  - We can avoid including titles.json in every file by just copying it to the output. We then have to do a request for it every time though. This is another case for rendering on first request.
-- [X] A 404 page
-- [X] Consider using Eleventy Serverless because we're on track to a million files in one folder at this rate. Although, who knows, maybe that's actually fine: https://stackoverflow.com/questions/197162/ntfs-performance-and-large-volumes-of-files-and-directories
-  See [[file:internal-docs.org::df677ea0-0d20-4f07-bed2-df3d56fe4d45][Internal Docs: Rendering pages at first request instead of at build time]].
-- [X] Fix stray <li>s for words without a type
-- [X] Add links to search word in Moedict, Wiktionary, etc.
-- [X] Copyright information for each dictionary like Weblio's footer
-- [X] Dictionary header should link to the original dictionary, preferably to the same term
-- [X] Make the search bar appear as if it's another window
-- [X] =dict_idioms=: fix description in 一枕南柯
-- [X] Fix search results not clickable
-- [X] =dict_idioms=: fix showing missing fields
-- [X] 更新重編國語辭典到最新
-- [X] taigi: don't use ruby to display POJ
-- [X] Figure out how to decode the ={[xxxx]}= thing
-     No longer applicable as we don't use moedict-data anymore.
-- [X] Add metadata
-- [X] List (10) new words from kisaragi-dict at home page
-     (Listing new words from MOE dictionaries requires keeping a record of all words from a previous version and comparing them with the current list. Doable but not relevant right now.)
-- [X] Include information for when an entry was added in kisaragi-dict
-- [X] Figure out an icon
+** DONE Add sitemap
+** DONE Add robots.txt
+** DONE Investigate memory leaks
+It was being OOM killed because of other services on the same machine, (probably) not because of memory leaks.
+** DONE Use a persistent database instead of spinning up an SQLite DB on every request
+- Supabase should… work?
+  - Find a way to get the dictionaries in there first
+- Or just, you know, adapter-node on a VPS and cache with Cloudflare. We really don't need the infinite scaling.
+  - This is what I'm using now.
+** DONE =dict_concised=: add links to [例]A、B、C
+** DONE kisaragi-dict: use HTML in text content freely
+(sort of: Org content can be used freely, but I have to override parts of org-element-interpret-data to make it emit HTML)
+** DONE kisaragi-dict: transform Org links to HTML links during the data process step
+** DONE Search page; searchbar should submit to search page; server side prefix suffix infix (fuzzy?) search, ideally instant when switching modes
+** DONE Do not send all words to client side
+- This contributes to a lot of the jank
+** sveltekit version release checklist
+- [X] Make sure it works on ancient browsers (probably)
+- [X] Make sure it works on browsers without JS (EWW, for instance)
+- [X] Switch DNS to point to Netlify instead of GitHub Pages
+** DONE Some hakkadict entries, like =後生毋肯學,老來無安樂=, do not have ids
+** DONE Use SvelteKit version as main version
+- We could then do the searching on the server side and avoid having to build 170000+ pages
+** DONE mobile: include fonts (or use system fonts)
+** DONE Incorporate Ministry of Education's Hakka dictionary
+[[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=ChLpKc/description?id=MSA00000041&opt=opt2][It's also CC-BY-ND 3.0 TW]].
+- [X] Add it to [[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]
+- [X] Write the word template code for it
+** DONE All titles should be written out as a file.
+** DONE References should only be linked if it is available.
+** DONE More dynamic search bar (which already requires JS)
+- We can avoid including titles.json in every file by just copying it to the output. We then have to do a request for it every time though. This is another case for rendering on first request.
+** DONE A 404 page
+** DONE Consider using Eleventy Serverless because we're on track to a million files in one folder at this rate. Although, who knows, maybe that's actually fine: https://stackoverflow.com/questions/197162/ntfs-performance-and-large-volumes-of-files-and-directories
+** DONE Fix stray <li>s for words without a type
+** DONE Add links to search word in Moedict, Wiktionary, etc.
+** DONE Copyright information for each dictionary like Weblio's footer
+** DONE Dictionary header should link to the original dictionary, preferably to the same term
+** DONE Make the search bar appear as if it's another window
+** DONE =dict_idioms=: fix description in 一枕南柯
+** DONE Fix search results not clickable
+** DONE =dict_idioms=: fix showing missing fields
+** DONE 更新重編國語辭典到最新
+** DONE taigi: don't use ruby to display POJ
+** DONE Figure out how to decode the ={[xxxx]}= thing
+No longer applicable as we don't use moedict-data anymore.
+** DONE Add metadata
+** DONE List (10) new words from kisaragi-dict at home page
+(Listing new words from MOE dictionaries requires keeping a record of all words from a previous version and comparing them with the current list. Doable but not relevant right now.)
+** DONE Include information for when an entry was added in kisaragi-dict
+** DONE Figure out an icon
 * todos
 ** TODO there should be a separate “no search result” page
 ** TODO [#A] Search by pronunciation (non-Han character search)
@@ -74,8 +75,6 @@ Wiktionary dropdown → zh, en, ja
   - See, for instance, NodeJS docs as a reference https://nodejs.org/api/esm.html#enabling
   - Or Svelte's docs: https://svelte.dev/docs#compile-time-svelte-preprocess
 ** TODO Search sort button needs to be styled
-** TODO Add sitemap
-** TODO Add robots.txt
 ** TODO Retrieve definition from Wiktionary API? (during request? client side?)
 ** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 ** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]

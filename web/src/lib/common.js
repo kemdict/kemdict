@@ -8,6 +8,8 @@ export const dicts = {
   dict_idioms: "教育部成語典",
 };
 
+export const baseURL = "https://kemdict.kisaragi-hiu.com";
+
 export const WordSort = {
   ascend: (a, b) => {
     if (a.title > b.title) {
