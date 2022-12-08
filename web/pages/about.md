@@ -1,11 +1,11 @@
+---
+title: 關於 Kemdict
+---
+
 <script>
 import { version } from "$lib/common"
 import SearchBar from "$lib/components/SearchBar.svelte";
 </script>
-
-<svelte:head>
-<title>關於 Kemdict</title>
-</svelte:head>
 
 # 關於 Kemdict
 

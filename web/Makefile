@@ -6,7 +6,7 @@ MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(wildcard pages/*.md))
 
 $(MD): src/routes/%/+page.svelte.md: pages/%.md
 	@mkdir -p "$(dir $@)"
-	test -f "$@" || ln -T "$<" "$@"
+	ln -f -T "$<" "$@"
 
 markdown: $(MD)
 

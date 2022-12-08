@@ -1,6 +1,6 @@
-<svelte:head>
-  <title>字典 | 教育部</title>
-</svelte:head>
+---
+title: 字典 | 教育部
+---
 
 # 教育部字典
 

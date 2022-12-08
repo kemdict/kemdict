@@ -1,6 +1,6 @@
-<svelte:head>
-<title>致謝與授權</title>
-</svelte:head>
+---
+title: 致謝與授權
+---
 
 # 致謝與授權
 

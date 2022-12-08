@@ -1,6 +1,6 @@
-<svelte:head>
-  <title>版本紀錄</title>
-</svelte:head>
+---
+title: 版本紀錄
+---
 
 # 版本紀錄
 

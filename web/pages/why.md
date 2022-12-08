@@ -1,6 +1,6 @@
-<svelte:head>
-  <title>Why</title>
-</svelte:head>
+---
+title: Why
+---
 
 # Why should Kemdict exist
 
