@@ -1,15 +1,12 @@
 <script>
-  import { browser } from "$app/environment";
   import Header from "$lib/components/Header.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import WordPreview from "$lib/components/WordPreview.svelte";
   import Elsewhere from "$lib/components/Elsewhere.svelte";
-  import Word from "$lib/components/Word.svelte";
   export let data;
-  import { groupByProp, dicts, WordSort } from "$lib/common.js";
+  import { WordSort } from "$lib/common.js";
   let sortFn;
   let sort = data.sort;
-  let urlParams;
   $: if (sort === "desc") {
     sortFn = WordSort.descend;
   } else {

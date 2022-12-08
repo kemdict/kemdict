@@ -1,5 +1,4 @@
 <script>
-  import Word from "$lib/components/Word.svelte";
   import truncate from "lodash-es/truncate";
   import { dicts, spc } from "$lib/common.js";
   export let word;

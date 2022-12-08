@@ -4,7 +4,6 @@
     groupByProp,
     interlinear_annotation,
     linkify_brackets,
-    linkToWord,
   } from "$lib/common";
   export let word;
   export let dict;

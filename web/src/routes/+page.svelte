@@ -22,7 +22,12 @@
   <div class="prose mt-12 sm:ml-[12rem] md:ml-[14rem]">
     <div class="max-sm:mb-6 sm:absolute sm:top-4 sm:left-4">
       <div class="sm:fixed sm:w-[10rem]">
-        <img class="h-[10rem] w-[10rem]" src="/logo.png" />
+        <img
+          decoding="sync"
+          alt="logo"
+          class="h-[10rem] w-[10rem]"
+          src="/logo.png"
+        />
         <h1 class="font-bold text-3xl">Kemdict 國語整合典 (β)</h1>
         <DarkModeToggle />
       </div>
