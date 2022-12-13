@@ -41,7 +41,9 @@
       </li>
     </ul>
     <h2>搜尋</h2>
-    <SearchBar />
+    <div class="ml-1">
+      <SearchBar />
+    </div>
     <h2>最近新增的詞</h2>
     <RecentWordList limit={12} />
     <h2>收錄字典</h2>

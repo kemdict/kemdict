@@ -38,11 +38,12 @@
 }
 
 @layer components {
+  /* Search Form */
   #sf {
-    /* Search Form */
-    input {
-      @apply px-2 py-1 rounded shadow;
-      @apply bg-white dark:bg-stone-700 fade;
+    input,
+    select {
+      @apply px-2 py-1;
+      @apply fade;
     }
   }
   .wordlink {
@@ -66,8 +67,7 @@
     }
   }
   .index {
-    ul,
-    input {
+    ul {
       @apply ml-1;
     }
     ul {
@@ -125,8 +125,11 @@
       @apply block mb-2;
     }
   }
+  .btnColor {
+    @apply bg-gray-200 hover:bg-gray-300 dark:bg-stone-800 dark:hover:bg-stone-700;
+  }
   .btn {
-    @apply bg-gray-200 hover:bg-gray-300 dark:bg-stone-800 dark:hover:bg-stone-700 rounded-md fade;
+    @apply btnColor rounded-md fade;
   }
 }
 

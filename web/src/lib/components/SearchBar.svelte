@@ -4,8 +4,8 @@
 </script>
 
 <div class="relative mt-2 mb-2">
-  <form action="/search" class="flex space-x-2" id="sf">
-    <select class="rounded pl-2" name="m">
+  <form action="/search" class="flex" id="sf">
+    <select class="btnColor rounded-l" name="m">
       <option selected={initialMatchSelection == "prefix"} value="prefix"
         >開頭為</option
       >
@@ -17,7 +17,7 @@
       >
     </select>
     <input
-      class="w-full fade"
+      class="w-full fade bg-white dark:bg-stone-900 border-b-2 border-gray-200 hover:border-gray-300 dark:border-stone-800 dark:hover:border-stone-700"
       type="search"
       autocomplete="off"
       placeholder="輸入欲搜尋的詞彙"
@@ -25,6 +25,6 @@
       value={initialInput}
     />
     <!-- /search?q=<...>, like search engines -->
-    <input type="submit" value="搜尋" />
+    <input class="btnColor rounded-r" type="submit" value="搜尋" />
   </form>
 </div>
