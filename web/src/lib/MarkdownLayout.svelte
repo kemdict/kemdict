@@ -5,11 +5,19 @@
   // to this component.
   export let title;
   export let date;
+  export let desc;
 </script>
 
 <svelte:head>
   {#if title}
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="twitter:title" content={title} />
+  {/if}
+  {#if desc}
+    <meta name="description" content={desc} />
+    <meta property="og:description" content={desc} />
+    <meta property="twitter:description" content={desc} />
   {/if}
   <meta property="og:type" content="article" />
   {#if date}
