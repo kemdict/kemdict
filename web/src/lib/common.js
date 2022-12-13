@@ -10,7 +10,8 @@ export const dicts = {
 
 export const baseURL = "https://kemdict.kisaragi-hiu.com";
 
-export const WordSort = {
+export const WordSortFns = {
+  // These return numbers because that's what Array.sort wants.
   ascend: (a, b) => {
     if (a.title > b.title) {
       return 1;

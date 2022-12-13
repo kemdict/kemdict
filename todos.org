@@ -1,4 +1,9 @@
 * done
+** DONE search: prefix, suffix, infix
+
+- [X] Add a dropdown to select “begins with”, “ends with”, “includes”
+- [X] Hook it up to the search view
+
 ** DONE there should be a separate “no search result” page
 ** DONE Add sitemap
 ** DONE Add robots.txt
@@ -52,11 +57,6 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
-** TODO search: prefix, suffix, infix
-
-- [ ] Add a dropdown to select “begins with”, “ends with”, “includes”
-- [ ] Hook it up to the search view
-
 ** TODO [#A] Search by pronunciation (non-Han character search)
 - For Mandarin, do we want to support pinyin?
 - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
