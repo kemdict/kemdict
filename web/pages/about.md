@@ -4,13 +4,29 @@ title: 關於 Kemdict
 
 <script>
 import { version } from "$lib/common"
+const kemdict = "《Kemdict 國語整合典》"
 </script>
 
-# 關於 Kemdict
+# 關於{kemdict}
 
-《Kemdict 國語整合典》 提供對數本教育部辭典的一次搜尋。像是 [Weblio](https://weblio.jp/) 一樣，同一個詞會列出所有收錄字典的定義，並且每個定義有標明是哪個字典來的。
+{kemdict}提供對數本教育部辭典的一次搜尋。像是 [Weblio](https://weblio.jp/) 一樣，同一個詞會列出所有收錄字典的定義，並且每個定義有標明是哪個字典來的。
 
 - 版本：[{version}](/changelog)
 - 原始碼：<https://github.com/kemdict/kemdict/>
 
 如果 Kemdict 有幫助到您，請考慮[贊助我一餐飯](https://www.buymeacoffee.com/kisaragihiu)。謝謝。
+
+# {kemdict}的存在意義
+
+線上華語字典已經有很多了；以下是{kemdict}跟其他字典的比較。
+
+## 維基詞典
+
+- 英文維基詞典其實還蠻不錯的，也包含很多華語、粵語、閩南語等等的定義。但不是每個人都會英文。
+- 維基詞典基本上把閩南語、粵語、華語等等全部都當成「中文」的不同方言。{kemdict}目前也還是把華語、台語和客語都放在一起……這部分之後會修改。
+
+## 萌典
+
+- 萌典的華語資料有好幾年沒更新了。
+- 萌典的華語部分只有用重編本，而不包含成語典或簡編本。簡編本，不論它的名字，其實不是只是重編本的簡化版：有些詞或是定義只有簡編本有，像是「[智慧型手機](/word/智慧型手機)」。
+- {kemdict}把同一個詞在所有收錄字典的定義都顯示出來，方便相互參照。
