@@ -5,6 +5,8 @@
 來自台語的借詞也會列。
 
 * Todo
+
+聖筊
 新生代
 直擊
 Q版
@@ -75,7 +77,19 @@ Hub / USB Hub
 我的流行語的“標準”是新興 + 感覺可能會退流行。像○好○滿雖然新 (2016) 但是已經根深蒂固、同溫層大概也是，但「狂」或「斗內」感覺是比較容易退流行的。
 * Staging
 These are not compiled because only words under the Words heading are.
+** りしれ供さ小                                                       :vogue:
+:PROPERTIES:
+:added:    2022-12-05T16:08:38+0900
+:END:
+*** lí sī teh kóng sann siáu
+**** 你是在講什麼鬼話。台語「你是咧講啥痟」的假借字。
 * Words
+** 浮水印
+:PROPERTIES:
+:added:    2022-12-06T18:55:25+0900
+:END:
+*** ㄈㄨˊ ㄕㄨㄟˇ ㄧㄣˋ
+**** 名|以數位方式與圖片或文件合併的印記。[英]watermark
 ** 軟性封城
 :PROPERTIES:
 :added:    2022-12-04T03:45:48+0900
