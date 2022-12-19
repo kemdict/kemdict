@@ -1,6 +1,3 @@
 {
-  "workspaces": [
-    "mobile",
-    "dicts"
-  ]
+  "workspaces": ["dicts"]
 }
