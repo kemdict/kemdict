@@ -75,6 +75,7 @@
       <WordPreview {word} />
     {/each}
   </ul>
+  <!-- FIXME: pronunciation match should have its own title -->
   {#if data.wordsPn.length > 0}
     <h2 class="my-4 font-bold">測試：讀音符合{data.query}的詞</h2>
     <ul>

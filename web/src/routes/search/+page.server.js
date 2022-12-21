@@ -32,13 +32,7 @@ export function load({ url }) {
     const stmtPn = db.prepare(
       `SELECT * FROM entries WHERE pronunciations LIKE ?`
     );
-    if (mtch === "prefix") {
-      wordsPn = stmtPn.all(`${query}%`);
-    } else if (mtch === "suffix") {
-      wordsPn = stmtPn.all(`%${query}`);
-    } else if (mtch === "contains") {
-      wordsPn = stmtPn.all(`%${query}%`);
-    }
+    wordsPn = stmtPn.all(`%${query}%`);
   }
 
   // This stops the query from going into the /word/ page when redirecting
@@ -47,9 +41,9 @@ export function load({ url }) {
   if (words && words.length === 1 && words[0]?.title === query) {
     throw redirect(301, encodeURI(`/word/${words[0].title}`));
   }
-  if (words.length === 0) {
-    return { query: query, words: words, count: 0 };
-  }
+  // if (words.length === 0) {
+  //   return { query: query, words: words, count: 0 };
+  // }
 
   words = words.map(processWord);
   wordsPn = wordsPn.map(processWord);
