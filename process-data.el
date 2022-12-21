@@ -6,9 +6,21 @@
 (require 'dash)
 (require 'json)
 (require 'seq)
+(require 's)
 
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
+
+(defun k/normalize-pronunciation (p)
+  "Normalize pronunciation string P.
+
+Return a list of normalized strings. This is because some
+pronunciation strings include multiple pronunciations."
+  (--> p
+       (s-replace "　" " " it)
+       (s-replace "（變）" "/" it)
+       (s-split "/" it t)
+       (-map #'s-trim it)))
 
 (defun k/process-title (title)
   "Process TITLE to replace problematic characters, and so on."
@@ -163,18 +175,37 @@ Parsed arrays from FILES are concatenated before shaping."
     (setq all-titles (-uniq all-titles))
     (message "Merging...")
     (dolist (title all-titles)
-      (let ((entry (make-hash-table :test #'equal)))
+      (let ((entry (make-hash-table :test #'equal))
+            (pronunciations nil))
         (puthash "title" title entry)
         (dotimes (i dict-count)
-          (when-let (v (gethash title (aref shaped-dicts i)))
-            (puthash (car (aref dictionaries i)) v
-                     entry)))
+          ;; each individual entry becomes the value of the main
+          ;; entry, with the key being the dictionary name
+          (when-let (idv-entry (gethash title (aref shaped-dicts i)))
+            ;; collect pronunciations
+            (let ((heteronyms (gethash "heteronyms" idv-entry)))
+              (seq-doseq (het heteronyms)
+                (dolist (key (list
+                              ;; kemdict-data-ministry-of-education
+                              "bopomofo" "pinyin"
+                              ;; moedict-twblg
+                              "trs"
+                              ;; kisaragi-dict
+                              "pronunciation"))
+                  (when-let (p (gethash key het))
+                    (dolist (p (k/normalize-pronunciation p))
+                      (cl-pushnew p pronunciations :test #'equal)))))
+              (puthash (car (aref dictionaries i)) ; dictionary name
+                       idv-entry
+                       entry))))
+        (puthash "pronunciations" pronunciations entry)
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
-    (with-temp-file "titles.json"
-      (insert (json-encode (vconcat all-titles))))
-    (with-temp-file "combined.json"
-      (insert (json-encode merged-result)))
+    (let ((json-encoding-pretty-print t))
+      (with-temp-file "titles.json"
+        (insert (json-encode (vconcat all-titles))))
+      (with-temp-file "combined.json"
+        (insert (json-encode merged-result))))
     (message "Done")))
 
 (if (and (fboundp #'native-comp-available-p)
