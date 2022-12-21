@@ -5,6 +5,7 @@
  * written in YAML:
  *
  *     - title: word
+ *       pronunciations: [...]
  *       dict_revised:
  *         heteronyms: [...]
  *       hakkadict:
@@ -52,6 +53,9 @@ function stringifyFields(thing) {
       thing[dict] = JSON.stringify(thing[dict]);
     }
   }
+  if (typeof thing["pronunciations"] !== "string") {
+    thing["pronunciations"] = JSON.stringify(thing["pronunciations"]);
+  }
   return thing;
 }
 
@@ -59,6 +63,7 @@ db.prepare(
   `
 CREATE TABLE entries (
   title NOT NULL,
+  pronunciations,
   ${dicts.join(",")}
 )
 `
@@ -72,8 +77,8 @@ const doInsert = db.transaction(() => {
     !(process.env.INSIDE_EMACS && !process.env.INSIDE_EMACS.includes("vterm"));
   const insert = db.prepare(`
   INSERT INTO
-    entries (title,${dicts.join(",")})
-    values (@title,${dicts.map((x) => `@${x}`).join(",")})`);
+    entries (title,pronunciations,${dicts.join(",")})
+    values (@title,@pronunciations,${dicts.map((x) => `@${x}`).join(",")})`);
 
   let i = 0;
   const length = entries.length;

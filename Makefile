@@ -6,7 +6,7 @@ export LANG=en_US.UTF-8
 combined.json: moedict-data-twblg kisaragi/kisaragi_dict.json ministry-of-education process-data.el .cask
 	cask eval "(load \"process-data\")"
 
-entries.db: combined.json
+entries.db: combined.json combined-to-sqlite.mjs
 	node combined-to-sqlite.mjs
 
 entries.db.gz: entries.db
