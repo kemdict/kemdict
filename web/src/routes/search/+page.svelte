@@ -75,4 +75,12 @@
       <WordPreview {word} />
     {/each}
   </ul>
+  {#if data.wordsPn.length > 0}
+    <h2 class="my-4 font-bold">測試：讀音符合{data.query}的詞</h2>
+    <ul>
+      {#each data.wordsPn.sort(sortFn) as word}
+        <WordPreview {word} />
+      {/each}
+    </ul>
+  {/if}
 {/if}

@@ -8,19 +8,37 @@ export function load({ url }) {
   const query = url.searchParams.get("q");
   const mtch = url.searchParams.get("m") || "prefix";
   const sort = url.searchParams.get("s") || "asc";
+  let words;
+  let wordsPn;
 
   if (typeof query !== "string") {
     throw redirect(301, "/");
   }
 
-  const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
-  let words;
-  if (mtch === "prefix") {
-    words = stmt.all(`${query}%`);
-  } else if (mtch === "suffix") {
-    words = stmt.all(`%${query}`);
-  } else if (mtch === "contains") {
-    words = stmt.all(`%${query}%`);
+  {
+    const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
+    if (mtch === "prefix") {
+      words = stmt.all(`${query}%`);
+    } else if (mtch === "suffix") {
+      words = stmt.all(`%${query}`);
+    } else if (mtch === "contains") {
+      words = stmt.all(`%${query}%`);
+    }
+  }
+
+  {
+    // FIXME: this is matching a JSON array as a string.
+    // Pronunciations should be stored in another title -> pronunciation table.
+    const stmtPn = db.prepare(
+      `SELECT * FROM entries WHERE pronunciations LIKE ?`
+    );
+    if (mtch === "prefix") {
+      wordsPn = stmtPn.all(`${query}%`);
+    } else if (mtch === "suffix") {
+      wordsPn = stmtPn.all(`%${query}`);
+    } else if (mtch === "contains") {
+      wordsPn = stmtPn.all(`%${query}%`);
+    }
   }
 
   // This stops the query from going into the /word/ page when redirecting
@@ -34,6 +52,7 @@ export function load({ url }) {
   }
 
   words = words.map(processWord);
+  wordsPn = wordsPn.map(processWord);
 
   let sortFn;
   if (sort === "desc") {
@@ -42,14 +61,22 @@ export function load({ url }) {
     sortFn = WordSortFns.ascend;
   }
   words.sort(sortFn);
+  wordsPn.sort(sortFn);
 
   let count = 0;
-  for (const word of words) {
+  for (const word of [...words, ...wordsPn]) {
     for (const dict of Object.keys(dicts)) {
       if (word[dict]?.heteronyms) {
         count += word[dict].heteronyms.length;
       }
     }
   }
-  return { match: mtch, sort: sort, query: query, words: words, count: count };
+  return {
+    match: mtch,
+    sort: sort,
+    query: query,
+    words: words,
+    count: count,
+    wordsPn: wordsPn,
+  };
 }
