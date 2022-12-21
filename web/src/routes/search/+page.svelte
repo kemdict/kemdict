@@ -3,14 +3,22 @@
   import SearchBar from "$lib/components/SearchBar.svelte";
   import WordPreview from "$lib/components/WordPreview.svelte";
   import Elsewhere from "$lib/components/Elsewhere.svelte";
+  import SortBtn from "SortBtn.svelte";
   export let data;
   import { WordSortFns } from "$lib/common.js";
   let sortFn;
+  let sortPnFn;
   let sort = data.sort;
+  let sortPn = data.sort;
   $: if (sort === "desc") {
     sortFn = WordSortFns.descend;
   } else {
     sortFn = WordSortFns.ascend;
+  }
+  $: if (sortPn === "desc") {
+    sortPnFn = WordSortFns.descend;
+  } else {
+    sortPnFn = WordSortFns.ascend;
   }
   function matchType(mtch, word) {
     if (mtch === "prefix") {
@@ -32,56 +40,32 @@
   <SearchBar initialMatchSelection={data.match} initialInput={data.query} />
 </Header>
 
-{#if data.count === 0}
+{#if data.count === 0 && data.countPn === 0}
   <p class="mt-8">找不到{matchType(data.match, data.query)}</p>
   <Elsewhere term={data.query} />
 {:else}
+  {#if data.count !== 0}
   <h1 class="font-bold mt-8 text-2xl">{matchType(data.match, data.query)}</h1>
   <h2 class="text-sm">
     共 {data.count} 個定義
   </h2>
-  <form action="/search" method="GET">
-    <label>
-      <input
-        type="radio"
-        bind:group={sort}
-        value="asc"
-        id="ascend"
-        name="s"
-        checked={sort !== "desc"}
-      />
-      遞增</label
-    >
-    <label>
-      <input
-        type="radio"
-        bind:group={sort}
-        value="desc"
-        id="descend"
-        name="s"
-        checked={sort === "desc"}
-      />
-      遞減</label
-    >
-    <!-- With this, this even works with EWW. -->
-    <noscript>
-      <input type="hidden" name="q" value={data.query} />
-      <input type="submit" value="重新搜尋" />
-    </noscript>
-  </form>
-
+  <SortForm bind:sort={sort} {query} />
   <ul>
     {#each data.words.sort(sortFn) as word}
       <WordPreview {word} />
     {/each}
   </ul>
-  <!-- FIXME: pronunciation match should have its own title -->
-  {#if data.wordsPn.length > 0}
-    <h2 class="my-4 font-bold">測試：讀音符合{data.query}的詞</h2>
-    <ul>
-      {#each data.wordsPn.sort(sortFn) as word}
-        <WordPreview {word} />
-      {/each}
-    </ul>
+  {/if}
+  {#if data.countPn !== 0}
+  <h1 class="font-bold mt-8 text-2xl">讀音包含「{data.query}」的詞</h1>
+  <h2 class="text-sm">
+    共 {data.countPn} 個定義
+  </h2>
+  <SortForm bind:sort={sortPn} {query} />
+  <ul>
+    {#each data.wordsPn.sort(sortPnFn) as word}
+      <WordPreview {word} />
+    {/each}
+  </ul>
   {/if}
 {/if}

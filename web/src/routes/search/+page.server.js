@@ -32,6 +32,8 @@ export function load({ url }) {
     const stmtPn = db.prepare(
       `SELECT * FROM entries WHERE pronunciations LIKE ?`
     );
+    // Because pronunciations is just a JSON string, we can only use
+    // "contains". Otherwise this should also adhere to match type.
     wordsPn = stmtPn.all(`%${query}%`);
   }
 
@@ -57,11 +59,21 @@ export function load({ url }) {
   words.sort(sortFn);
   wordsPn.sort(sortFn);
 
+  // FIXME: after match type works with pronunciations both should
+  // be combined.
   let count = 0;
-  for (const word of [...words, ...wordsPn]) {
+  let countPn = 0;
+  for (const word of words) {
     for (const dict of Object.keys(dicts)) {
       if (word[dict]?.heteronyms) {
         count += word[dict].heteronyms.length;
+      }
+    }
+  }
+  for (const word of wordsPn) {
+    for (const dict of Object.keys(dicts)) {
+      if (word[dict]?.heteronyms) {
+        countPn += word[dict].heteronyms.length;
       }
     }
   }
@@ -72,5 +84,6 @@ export function load({ url }) {
     words: words,
     count: count,
     wordsPn: wordsPn,
+    countPn: countPn,
   };
 }
