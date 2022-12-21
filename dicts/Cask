@@ -2,4 +2,5 @@
 (source gnu)
 
 (development
- (depends-on "dash"))
+ (depends-on "dash")
+ (depends-on "s"))
