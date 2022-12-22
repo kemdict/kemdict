@@ -1,4 +1,5 @@
 export LANG=en_US.UTF-8
+export KEMDICT_VERSION=$(shell git describe --tags)
 
 .DEFAULT_GOAL := build
 

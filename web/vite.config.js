@@ -1,9 +1,8 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 
-const config = {
+export default {
   plugins: [sveltekit()],
   server: { fs: { allow: [".."] } },
   clearScreen: false,
+  envPrefix: "KEMDICT_",
 };
-
-export default config;

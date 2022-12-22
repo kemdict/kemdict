@@ -175,4 +175,4 @@ export function groupByProp(arr, property, fallback) {
 //   return `${tag} (${date})`;
 // })();
 
-export const version = "0.7.4";
+export const version = import.meta.env.KEMDICT_VERSION;
