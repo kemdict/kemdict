@@ -1,7 +1,7 @@
 <script>
   export let entry;
   export let title;
-  import { spc, linkToWord, linkify_brackets } from "$lib/common";
+  import { spc, linkToWord, linkify_brackets } from "$lib/processing";
 
   function split(str) {
     // Some lines contain just a Tab. Get rid of them.

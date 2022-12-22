@@ -7,7 +7,7 @@
     linkify_brackets,
     linkToWord,
     newline_string_to_ol,
-  } from "$lib/common";
+  } from "$lib/processing";
 
   function idioms_nuance(str) {
     /* Sure... */
@@ -20,7 +20,9 @@
             .map((x) => `<th>${x.replace("ㄨ", "☓")}</th>`)
             .join("")}<th>例句</th></tr>`;
         } else {
-          return `<tr>${s.map((x) => `<td>${x.replace("ㄨ", "☓")}</td>`).join("")}</tr>`;
+          return `<tr>${s
+            .map((x) => `<td>${x.replace("ㄨ", "☓")}</td>`)
+            .join("")}</tr>`;
         }
       })
       .join("")}</table>`;
@@ -39,7 +41,13 @@
         `<ol>
     ${str
       .split("\n")
-      .map((d, i) => `<li id="sc${i + 1}">${d.replace(/^\d+\./, "")}<a href="#isc">↩</a></li>`)
+      .map(
+        (d, i) =>
+          `<li id="sc${i + 1}">${d.replace(
+            /^\d+\./,
+            ""
+          )}<a href="#isc">↩</a></li>`
+      )
       .join("")}
 </ol>`
       );

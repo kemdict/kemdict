@@ -1,7 +1,7 @@
 <script>
   export let entry;
   export let title;
-  import { spc, linkify_brackets } from "$lib/common";
+  import { spc, linkify_brackets } from "$lib/processing";
 
   function process_def(def) {
     if (def) {

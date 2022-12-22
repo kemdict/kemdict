@@ -1,10 +1,10 @@
 <script>
+  import { groupByProp } from "$lib/common";
   import {
     spc,
-    groupByProp,
     interlinear_annotation,
     linkify_brackets,
-  } from "$lib/common";
+  } from "$lib/processing";
   export let word;
   export let dict;
   const entry = word[dict];

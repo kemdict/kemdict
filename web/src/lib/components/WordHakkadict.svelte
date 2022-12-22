@@ -1,7 +1,7 @@
 <script>
   export let entry;
   export let title;
-  import { spc, linkify_brackets } from "$lib/common";
+  import { spc, linkify_brackets } from "$lib/processing";
 
   const p_names = ["四縣", "海陸", "大埔", "饒平", "詔安", "南四縣"];
   function has_pronunciations(het) {
