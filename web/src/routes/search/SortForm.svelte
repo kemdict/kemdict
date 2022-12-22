@@ -1,5 +1,6 @@
 <script>
-  export let sort
+  export let sort;
+  export let query;
 </script>
 
 <form action="/search" method="GET">

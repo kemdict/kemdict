@@ -3,7 +3,7 @@
   import SearchBar from "$lib/components/SearchBar.svelte";
   import WordPreview from "$lib/components/WordPreview.svelte";
   import Elsewhere from "$lib/components/Elsewhere.svelte";
-  import SortBtn from "SortBtn.svelte";
+  import SortForm from "./SortForm.svelte";
   export let data;
   import { WordSortFns } from "$lib/common.js";
   let sortFn;
@@ -45,27 +45,27 @@
   <Elsewhere term={data.query} />
 {:else}
   {#if data.count !== 0}
-  <h1 class="font-bold mt-8 text-2xl">{matchType(data.match, data.query)}</h1>
-  <h2 class="text-sm">
-    共 {data.count} 個定義
-  </h2>
-  <SortForm bind:sort={sort} {query} />
-  <ul>
-    {#each data.words.sort(sortFn) as word}
-      <WordPreview {word} />
-    {/each}
-  </ul>
+    <h1 class="font-bold mt-8 text-2xl">{matchType(data.match, data.query)}</h1>
+    <h2 class="text-sm">
+      共 {data.count} 個定義
+    </h2>
+    <SortForm bind:sort query={data.query} />
+    <ul>
+      {#each data.words.sort(sortFn) as word}
+        <WordPreview {word} />
+      {/each}
+    </ul>
   {/if}
   {#if data.countPn !== 0}
-  <h1 class="font-bold mt-8 text-2xl">讀音包含「{data.query}」的詞</h1>
-  <h2 class="text-sm">
-    共 {data.countPn} 個定義
-  </h2>
-  <SortForm bind:sort={sortPn} {query} />
-  <ul>
-    {#each data.wordsPn.sort(sortPnFn) as word}
-      <WordPreview {word} />
-    {/each}
-  </ul>
+    <h1 class="font-bold mt-8 text-2xl">讀音包含「{data.query}」的詞</h1>
+    <h2 class="text-sm">
+      共 {data.countPn} 個定義
+    </h2>
+    <SortForm bind:sort={sortPn} query={data.query} />
+    <ul>
+      {#each data.wordsPn.sort(sortPnFn) as word}
+        <WordPreview {word} />
+      {/each}
+    </ul>
   {/if}
 {/if}
