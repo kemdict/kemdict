@@ -1,4 +1,7 @@
 * done
+** DONE [#A] Search by pronunciation (non-Han character search)
+- For Mandarin, do we want to support pinyin?
+- We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
 ** DONE search: prefix, suffix, infix
 
 - [X] Add a dropdown to select “begins with”, “ends with”, “includes”
@@ -57,9 +60,10 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
-** TODO [#A] Search by pronunciation (non-Han character search)
-- For Mandarin, do we want to support pinyin?
-- We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
+** pronunciation search
+- Search without tones
+- Prefix and suffix search
+- Fix the “matching on JSON string” atrocity
 ** TODO [#A] Backlinks
 - Go through every definition to find links
   - Requires a common shape for the definition text

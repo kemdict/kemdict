@@ -73,6 +73,7 @@ export function load({ url }) {
   for (const word of wordsPn) {
     for (const dict of Object.keys(dicts)) {
       if (word[dict]?.heteronyms) {
+        // Eww.
         word[dict].heteronyms = word[dict].heteronyms.filter(
           (het) =>
             het?.pronunciation?.includes(query) ||
@@ -80,8 +81,6 @@ export function load({ url }) {
             het?.bopomofo?.includes(query) ||
             het?.pinyin?.includes(query)
         );
-      }
-      if (word[dict]?.heteronyms.length > 0) {
         countPn += word[dict].heteronyms.length;
       }
     }
