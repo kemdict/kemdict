@@ -38,7 +38,9 @@ export function linkify_brackets(str) {
   // linkToWord needs to know the word at invocation to decide
   // whether to actually link.
   if (str) {
-    return str.replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`);
+    return str
+      .replace(/「(.*?)」/g, (_m, $1) => `「${linkToWord($1)}」`)
+      .replace(/【(.*?)】/g, (_m, $1) => `【${linkToWord($1)}】`);
   } else {
     return str;
   }
