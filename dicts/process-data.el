@@ -192,7 +192,8 @@ Parsed arrays from FILES are concatenated before shaping."
                          "<br><m>\\1</m>")
        (s-replace-regexp (rx "§" (group "英") (group (+ (any "a-zA-Z "))))
                          "<br><m>\\1</m>\\2")
-       (s-replace "△" "<br><m title=\"參考詞\">△</m>")
+       (s-replace-regexp (rx (opt "　") "△")
+                         "<br><m title=\"參考詞\">△</m>")
        d/links/linkify-brackets))
 
 (defun k/process-heteronym (het dict)
