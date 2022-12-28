@@ -208,6 +208,11 @@ This is a separate step from shaping."
       #'d/links/comma-word-list))
   (k/hash-update het "word_ref"
     #'d/links/link-to-word)
+  (k/hash-update het "definitions"
+    (lambda (defs)
+      (seq-doseq (def defs)
+        (k/hash-update def "def"
+          #'d/links/linkify-brackets))))
   (pcase dict
     ("dict_concised" (k/hash-update het "definition"
                        #'d/process-def/dict_concised))
