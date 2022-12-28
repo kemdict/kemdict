@@ -22,9 +22,9 @@
     </ol>
   {/if}
   {#if het.antonyms}
-    {@html process_def(het.antonyms)}
+    {@html het.antonyms}
   {/if}
   {#if het.synonyms}
-    {@html process_def(het.synonyms)}
+    {@html het.synonyms}
   {/if}
 {/each}
