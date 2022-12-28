@@ -15,6 +15,7 @@
     auto: "auto",
     light: "light",
     dark: "dark",
+    isAuto: (obj) => !obj || obj === "auto",
   });
   let theme = states.auto;
   let system = states.auto;
@@ -30,13 +31,13 @@
   }
   function rotateDarkMode() {
     if (system === states.dark) {
-      if (theme === states.auto) {
+      if (states.isAuto(theme)) {
         theme = states.light;
       } else {
         theme = states.auto;
       }
     } else {
-      if (theme === states.auto) {
+      if (states.isAuto(theme)) {
         theme = states.dark;
       } else {
         theme = states.auto;
@@ -45,8 +46,8 @@
     localStorage.theme = theme;
     setDarkMode();
   }
-  $: isDark = theme === "dark" || (theme === "auto" && system === "dark");
-  $: loading = system === states.auto;
+  $: isDark = theme === "dark" || (states.isAuto(theme) && system === "dark");
+  $: loading = states.isAuto(system);
 </script>
 
 <button
