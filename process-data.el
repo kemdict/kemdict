@@ -48,7 +48,9 @@ Writes into TABLE. Returns the new value associated with KEY."
                   ;; moedict-twblg
                   "trs"
                   ;; kisaragi-dict
-                  "pronunciation"))
+                  "pronunciation"
+                  ;; hakkadict
+                  "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"))
       (when-let (p (gethash key het))
         (dolist (p (k/normalize-pronunciation p))
           (push p ret))))
