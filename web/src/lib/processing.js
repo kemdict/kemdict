@@ -102,6 +102,6 @@ export function interlinear_annotation(defs) {
 export function comma_word_list(str) {
   return str
     .split(",")
-    .map((x) => `「${linkToWord(x)}」`)
+    .map((x) => `${linkToWord(x)}`)
     .join("、");
 }
