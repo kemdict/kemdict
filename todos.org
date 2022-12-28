@@ -60,9 +60,13 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
+** TODO Fix concised dict formatting
+Check the entry for 上
 ** pronunciation search
 - Search without tones
-- implement for hakkadict
+- Merge “pronunciation search” and Han character search
+  - It's not necessarily just “pronunciations”
+- [X] implement for hakkadict
 - [X] Prefix and suffix search
 - [X] Fix the “matching on JSON string” atrocity
 ** TODO [#A] Backlinks
