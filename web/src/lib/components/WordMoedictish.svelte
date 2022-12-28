@@ -1,10 +1,6 @@
 <script>
   import { groupByProp } from "$lib/common";
-  import {
-    spc,
-    interlinear_annotation,
-    linkify_brackets,
-  } from "$lib/processing";
+  import { spc, interlinear_annotation } from "$lib/processing";
   export let word;
   export let dict;
   const entry = word[dict];
@@ -17,7 +13,6 @@
   function process_def_kisaragi(def) {
     if (def) {
       def = def.replace(/\n/g, "<br/>");
-      def = linkify_brackets(def);
     } else {
       def = "";
     }

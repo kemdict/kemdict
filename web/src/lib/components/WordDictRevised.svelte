@@ -1,7 +1,7 @@
 <script>
   export let entry;
   export let title;
-  import { spc, linkify_brackets } from "$lib/processing";
+  import { spc } from "$lib/processing";
 
   function process_def(def) {
     if (def) {
@@ -21,7 +21,7 @@
         }
       }
       x += "</ol>";
-      return linkify_brackets(x);
+      return x;
     } else {
       return "";
     }

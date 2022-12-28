@@ -1,13 +1,7 @@
 <script>
   export let entry;
   export let title;
-  import {
-    comma_word_list,
-    spc,
-    linkify_brackets,
-    linkToWord,
-    newline_string_to_ol,
-  } from "$lib/processing";
+  import { spc, newline_string_to_ol } from "$lib/processing";
 
   function idioms_nuance(str) {
     /* Sure... */
@@ -37,8 +31,7 @@
 
   function idioms_source_comment(str) {
     if (str) {
-      return linkify_brackets(
-        `<ol>
+      return `<ol>
     ${str
       .split("\n")
       .map(
@@ -49,15 +42,10 @@
           )}<a href="#isc">↩</a></li>`
       )
       .join("")}
-</ol>`
-      );
+</ol>`;
     } else {
       return str;
     }
-  }
-
-  function process_def(def) {
-    return linkify_brackets(def.replace(/<a name.*/, ""));
   }
 </script>
 
@@ -66,7 +54,7 @@
   {#if het.bopomofo}
     <p>讀音：<span>{spc(het.bopomofo)}</span></p>
   {/if}
-  <p class="def">{@html process_def(het.definition)}</p>
+  <p class="def">{@html het.definition}</p>
   {#if het.用法語意說明 || het.用法使用類別 || het.用法例句}
     <h2>用法</h2>
     <p>{het.用法語意說明}</p>
@@ -78,13 +66,13 @@
   {/if}
   <h2>辨識</h2>
   {#if het.近義同}
-    <p>近義：{@html comma_word_list(het.近義同)}</p>
+    <p>近義：{@html het.近義同}</p>
   {/if}
   {#if het.近義反}
-    <p>反義：{@html comma_word_list(het.近義反)}</p>
+    <p>反義：{@html het.近義反}</p>
   {/if}
   {#if het.word_ref}
-    <p>參考詞語：「{@html linkToWord(het.word_ref)}」</p>
+    <p>參考詞語：「{@html het.word_ref}」</p>
   {/if}
   <p>{het.辨識同}{het.辨識異}</p>
   {#if het.辨識例句}
@@ -100,7 +88,7 @@
     <p>{het.source_reference}</p>
   {/if}
   <h2>典故說明</h2>
-  <p>{@html linkify_brackets(het.典故說明)}</p>
+  <p>{@html het.典故說明}</p>
   <h2>書證</h2>
   {@html newline_string_to_ol(het.書證)}
 {/each}
