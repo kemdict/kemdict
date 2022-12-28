@@ -21,7 +21,7 @@
         }
       }
       x += "</ol>";
-      return x;
+      return x.replace(/(\(\d+\))/g, "<br>$1");
     } else {
       return "";
     }
