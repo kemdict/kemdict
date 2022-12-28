@@ -11,6 +11,34 @@
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
 
+(defvar d/titles/look-up-table (make-hash-table :test #'equal)
+  "A look up table for titles.")
+
+(defun d/titles/to-look-up-table (titles)
+  "Turn TITLES, a sequence of strings, into a look up table."
+  (let ((lut (make-hash-table :test #'equal
+                              :size (length titles))))
+    (seq-doseq (title titles)
+      (puthash title t lut))
+    lut))
+
+(defun k/hash-update (table key fn &optional inexistence)
+  "Update the value of KEY in TABLE with FN.
+
+If KEY is not associated with anything, do nothing. This is
+normally done by checking that the value is non-nil, but if nil
+is a valid value in TABLE, pass a value guaranteed to not be in
+TABLE as INEXISTENCE. This is equivalent to the DFLT argument of
+`gethash'.
+
+Writes into TABLE. Returns the new value associated with KEY."
+  (declare (indent 2))
+  (let ((v (gethash key table inexistence)))
+    (unless (equal v inexistence)
+      (puthash key
+               (funcall fn v)
+               table))))
+
 (defun k/collect-pronunciations (het)
   "Collect pronunciations from heteronym object HET."
   (let ((ret nil))
@@ -68,7 +96,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
           parsed)))))))
 
 (when nil
-  (k/extract-development-version "出"
+  (k/extract-development-version "入"
     "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
   (k/extract-development-version "出"
     "ministry-of-education/hakkadict.json" "dev-hakkadict.json")
@@ -144,9 +172,107 @@ Parsed arrays from FILES are concatenated before shaping."
           (puthash title tmp shaped))
      finally return shaped)))
 
+(defun d/process-def/dict_concised (def)
+  "Process DEF for dict_concised."
+  (->> def
+       (s-replace-regexp (rx (or (seq bol (+ digit) ".")
+                                 ;; This means "this definition has an image".
+                                 "　◎"))
+                         "")
+       (s-replace-regexp (rx (group (or "△" "]" "、"))
+                             (group (+ (not (any "、。")))))
+                         (lambda (str)
+                           (concat (match-string 1 str)
+                                   (d/links/link-to-word (match-string 2 str)))))
+       ;; These are the only types that exist.
+       ;; ...plus CJK COMPATIBILITY IDEOGRAPH-F9B5. (Fixed in
+       ;; upstream already, should be available next time concised
+       ;; dict makes a data release.)
+       (s-replace-regexp (rx "[" (group (any "例似反")) "]")
+                         "<br><m>\\1</m>")
+       (s-replace-regexp (rx "§" (group "英") (group (+ (any "a-zA-Z "))))
+                         "<br><m>\\1</m>\\2")
+       (s-replace "△" "<br><m title=\"參考詞\">△</m>")
+       d/links/linkify-brackets))
+
+(defun k/process-heteronym (het dict)
+  "Process the heteronym object HET that belongs to DICT.
+
+This is a separate step from shaping."
+  (dolist (key (list "definition" "source_comment" "典故說明"))
+    (k/hash-update het key
+      #'d/links/linkify-brackets))
+  (dolist (key (list "近義同" "近義反"))
+    (k/hash-update het key
+      #'d/links/comma-word-list))
+  (k/hash-update het "word_ref"
+    #'d/links/link-to-word)
+  (pcase dict
+    ("dict_concised" (k/hash-update het "definition"
+                       #'d/process-def/dict_concised))
+    ("dict_idioms" (k/hash-update het "definition"
+                     (lambda (def)
+                       ;; There is often an anchor at the end of
+                       ;; dict_idioms definitions that's not
+                       ;; displayed. Getting rid of it here allows
+                       ;; shredding them from the database.
+                       (s-replace-regexp "<a name.*" "" def)))))
+  het)
+
+(cl-defun d/links/link-to-word (target &optional (desc target))
+  "Create an HTML link with DESC to TARGET when appropriate.
+
+Just return TARGET if TARGET does not exist in `d/titles/look-up-table', or
+if TARGET already looks like an HTML link."
+  ;; This is /way/ faster than using `member' to test a list.
+  (if (and (gethash target d/titles/look-up-table)
+           (not (s-contains? "<a" target t)))
+      (s-lex-format "<a href=\"/word/${target}\">${desc}</a>")
+    target))
+
+(defun d/links/linkify-brackets (str)
+  "Create links in STR for all brackets."
+  (when str
+    (->> str
+         (s-replace-regexp
+          (rx (group (or "「" "【"))
+              (group (*? any))
+              (group (or "」" "】")))
+          (lambda (str)
+            (concat
+             (match-string 1 str)
+             (d/links/link-to-word
+              (match-string 2 str))
+             (match-string 3 str)))))))
+
+(ert-deftest d/links/linkify-brackets ()
+  (should
+   (let ((d/titles/look-up-table
+          (d/titles/to-look-up-table (list "a"))))
+     (and (equal (d/links/linkify-brackets "「a」、「b」")
+                 "「<a href=\"/word/a\">a</a>」、「b」")
+          (equal (d/links/linkify-brackets "a, b")
+                 "a, b")))))
+
+(defun d/links/comma-word-list (str)
+  "Add links to a string STR containing a comma-separated list of words."
+  (->> (split-string str "[,、]" t)
+       (-map #'d/links/link-to-word)
+       (s-join "、")))
+
+(ert-deftest d/links/comma-word-list ()
+  (should
+   (let ((d/titles/look-up-table
+          (d/titles/to-look-up-table (list "敵意"))))
+     (and (equal (d/links/comma-word-list "敵意、仇隙")
+                 "<a href=\"/word/敵意\">敵意</a>、仇隙")
+          (equal (d/links/comma-word-list "敵意,仇隙")
+                 "<a href=\"/word/敵意\">敵意</a>、仇隙")
+          (equal (d/links/comma-word-list "交情。")
+                 "交情。")))))
+
 (defun main ()
-  (let* ((all-titles (list))
-         (merged-result (make-hash-table :test #'equal))
+  (let* ((merged-result (make-hash-table :test #'equal))
          (dictionaries
           (if (and (or (not noninteractive)
                        (getenv "DEV"))
@@ -172,7 +298,9 @@ Parsed arrays from FILES are concatenated before shaping."
              ("hakkadict" . "ministry-of-education/hakkadict.json")
              ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
          (dict-count (length dictionaries))
-         (shaped-dicts (make-vector dict-count nil)))
+         (shaped-dicts (make-vector dict-count nil))
+         (het-number 0)
+         (all-titles nil))
     (dotimes (i dict-count)
       (message "Parsing and shaping %s (%s/%s)..."
                (car (aref dictionaries i))
@@ -188,25 +316,38 @@ Parsed arrays from FILES are concatenated before shaping."
        for k being the hash-keys of (aref shaped-dicts i)
        do (push k all-titles)))
     (message "Removing duplicate titles...")
-    (setq all-titles (-uniq all-titles))
+    (setq d/titles/look-up-table (d/titles/to-look-up-table all-titles))
+    (setq all-titles (hash-table-keys d/titles/look-up-table))
     (message "Merging...")
-    (dolist (title all-titles)
+    (seq-doseq (title all-titles)
       (let ((entry (make-hash-table :test #'equal))
             (pronunciations nil))
         (puthash "title" title entry)
         (dotimes (i dict-count)
-          ;; each individual entry becomes the value of the main
-          ;; entry, with the key being the dictionary name
-          (when-let (idv-entry (gethash title (aref shaped-dicts i)))
-            ;; collect pronunciations
-            (let ((heteronyms (gethash "heteronyms" idv-entry)))
-              (seq-doseq (het heteronyms)
-                (dolist (p (k/collect-pronunciations het))
-                  (push p pronunciations))))
-            ;; put the individual entry into the main entry
-            (puthash (car (aref dictionaries i)) ; dictionary name
-                     idv-entry
-                     entry)))
+          (let ((dict-name (car (aref dictionaries i))))
+            ;; each individual entry becomes the value of the main
+            ;; entry, with the key being the dictionary name
+            (when-let (idv-entry (gethash title (aref shaped-dicts i)))
+              ;; collect pronunciations
+              (let ((heteronyms (gethash "heteronyms" idv-entry)))
+                (seq-doseq (het heteronyms)
+                  (dolist (p (k/collect-pronunciations het))
+                    (push p pronunciations))))
+              ;; Process heteronyms
+              (k/hash-update idv-entry "heteronyms"
+                (lambda (heteronyms)
+                  (--> heteronyms
+                       (seq-map (lambda (het)
+                                  (cl-incf het-number)
+                                  (when (or (= het-number 1)
+                                            (= 0 (% het-number 1000)))
+                                    (message "Processing heteronym (#%s)"
+                                             het-number))
+                                  (k/process-heteronym het dict-name))
+                                it)
+                       (seq-into it 'vector))))
+              ;; put the individual entry into the main entry
+              (puthash dict-name idv-entry entry))))
         (puthash "pronunciations" pronunciations entry)
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
@@ -217,10 +358,19 @@ Parsed arrays from FILES are concatenated before shaping."
         (insert (json-encode merged-result))))
     (message "Done")))
 
-(if (and (fboundp #'native-comp-available-p)
-         (native-comp-available-p))
-    (native-compile #'main)
-  (byte-compile #'main))
+(let ((comp (if (and (fboundp #'native-comp-available-p)
+                     (native-comp-available-p))
+                #'native-compile
+              #'byte-compile)))
+  (mapc comp (list #'main
+                   #'d/links/comma-word-list
+                   #'d/links/link-to-word
+                   #'d/links/linkify-brackets
+                   #'d/titles/to-look-up-table
+                   #'k/hash-update
+                   #'k/parse-and-shape
+                   #'k/process-heteronym)))
+
 (main)
 (when noninteractive
   (kill-emacs))
