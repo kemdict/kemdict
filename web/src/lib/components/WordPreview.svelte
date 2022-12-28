@@ -1,4 +1,5 @@
 <script>
+  import { browser } from "$app/environment";
   import truncate from "lodash-es/truncate";
   import { dicts } from "$lib/common";
   import { spc } from "$lib/processing";
@@ -8,6 +9,22 @@
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.
   const pron_keys = ["bopomofo", "trs", "pronunciation", "p_四縣"];
+  let DOMParser;
+  function strip(html) {
+    let parser;
+    if (browser) {
+      parser = new DOMParser();
+      return parser.parseFromString(html, "text/html").body.textContent || "";
+    } else {
+      // https://stackoverflow.com/a/822464/6927814
+      // This doesn't have to be perfect. We're not handling untrusted
+      // input either.
+      return html.replace(/<[^>]*>?/gm, "");
+    }
+  }
+  function processPreview(def) {
+    return truncate(strip(def));
+  }
 </script>
 
 {#each presentDicts as dict}
@@ -21,7 +38,7 @@
             {word.title}（{spc(het[pron_keys.find((pron) => het[pron])])}）
           </h2>
           <p class="text-gray-500 dark:text-stone-300">
-            {truncate(
+            {processPreview(
               het.definition || het.definitions.map((x) => x.def).join(""),
               { length: 40, omission: "……" }
             )}
