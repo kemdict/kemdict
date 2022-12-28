@@ -53,9 +53,6 @@ function stringifyFields(thing) {
       thing[dict] = JSON.stringify(thing[dict]);
     }
   }
-  if (typeof thing["pronunciations"] !== "string") {
-    thing["pronunciations"] = JSON.stringify(thing["pronunciations"]);
-  }
   return thing;
 }
 
@@ -63,8 +60,15 @@ db.prepare(
   `
 CREATE TABLE entries (
   title NOT NULL,
-  pronunciations,
   ${dicts.join(",")}
+)`
+).run();
+
+db.prepare(
+  `
+CREATE TABLE pronunciations (
+  title NOT NULL,
+  pronunciation NOT NULL
 )
 `
 ).run();
@@ -75,10 +79,14 @@ const doInsert = db.transaction(() => {
     // Never verbose in CI; never verbose in Emacs except when in vterm
     !process.env.CI &&
     !(process.env.INSIDE_EMACS && !process.env.INSIDE_EMACS.includes("vterm"));
-  const insert = db.prepare(`
+  const insertEntry = db.prepare(`
   INSERT INTO
-    entries (title,pronunciations,${dicts.join(",")})
-    values (@title,@pronunciations,${dicts.map((x) => `@${x}`).join(",")})`);
+    entries (title,${dicts.join(",")})
+    values (@title,${dicts.map((x) => `@${x}`).join(",")})`);
+  const insertPronunciation = db.prepare(`
+  INSERT INTO
+    pronunciations (title,pronunciation)
+    values (?, ?)`);
 
   let i = 0;
   const length = entries.length;
@@ -96,7 +104,12 @@ const doInsert = db.transaction(() => {
       readline.cursorTo(process.stdout, 0);
       process.stdout.write(`${i + 1} / ${length} (${progress}%, ${diff}/s)`);
     }
-    insert.run(stringifyFields(entries[i]));
+    insertEntry.run(stringifyFields(entries[i]));
+    if (entries[i].pronunciations) {
+      for (const pronunciation of entries[i].pronunciations) {
+        insertPronunciation.run(entries[i].title, pronunciation);
+      }
+    }
   }
   process.stdout.write("\n");
 });
