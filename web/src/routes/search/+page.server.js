@@ -27,14 +27,23 @@ export function load({ url }) {
   }
 
   {
-    // FIXME: this is matching a JSON array as a string.
-    // Pronunciations should be stored in another title -> pronunciation table.
     const stmtPn = db.prepare(
-      `SELECT * FROM entries WHERE pronunciations LIKE ?`
+      `SELECT title FROM pronunciations WHERE pronunciation LIKE ?`
     );
-    // Because pronunciations is just a JSON string, we can only use
-    // "contains". Otherwise this should also adhere to match type.
-    wordsPn = stmtPn.all(`%${query}%`);
+    let titlesPn;
+    if (mtch === "prefix") {
+      titlesPn = stmtPn.all(`${query}%`);
+    } else if (mtch === "suffix") {
+      titlesPn = stmtPn.all(`%${query}`);
+    } else if (mtch === "contains") {
+      titlesPn = stmtPn.all(`%${query}%`);
+    }
+    const titleWordStmt = db.prepare(
+      `SELECT * FROM entries WHERE title = @title`
+    );
+    wordsPn = db.transaction(() => {
+      return titlesPn.map((title) => titleWordStmt.get(title));
+    })();
   }
 
   // This stops the query from going into the /word/ page when redirecting

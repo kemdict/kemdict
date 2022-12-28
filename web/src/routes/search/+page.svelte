@@ -20,19 +20,30 @@
   } else {
     sortPnFn = WordSortFns.ascend;
   }
-  function matchType(mtch, word) {
+  $: title = getTitle(data.match, data.query);
+  $: titlePronunciation = getTitleForPronunciation(data.match, data.query);
+  function getTitle(mtch, query) {
     if (mtch === "prefix") {
-      return `以「${word}」開頭的詞`;
+      return `以「${query}」開頭的詞`;
     } else if (mtch === "suffix") {
-      return `以「${word}」結尾的詞`;
+      return `以「${query}」結尾的詞`;
     } else if (mtch === "contains") {
-      return `包含「${word}」的詞`;
+      return `包含「${query}」的詞`;
+    }
+  }
+  function getTitleForPronunciation(mtch, query) {
+    if (mtch === "prefix") {
+      return `讀音以「${query}」開頭的詞`;
+    } else if (mtch === "suffix") {
+      return `讀音以「${query}」結尾的詞`;
+    } else if (mtch === "contains") {
+      return `讀音包含「${query}」的詞`;
     }
   }
 </script>
 
 <svelte:head>
-  <title>{matchType(data.match, data.query)} - kemdict 搜尋結果</title>
+  <title>{title} - kemdict 搜尋結果</title>
   <meta name="description" content="搜尋 kemdict" />
 </svelte:head>
 
@@ -41,11 +52,11 @@
 </Header>
 
 {#if data.count === 0 && data.countPn === 0}
-  <p class="mt-8">找不到{matchType(data.match, data.query)}</p>
+  <p class="mt-8">找不到{title}</p>
   <Elsewhere term={data.query} />
 {:else}
   {#if data.count !== 0}
-    <h1 class="font-bold mt-8 text-2xl">{matchType(data.match, data.query)}</h1>
+    <h1 class="font-bold mt-8 text-2xl">{title}</h1>
     <h2 class="text-sm">
       共 {data.count} 個定義
     </h2>
@@ -57,7 +68,7 @@
     </ul>
   {/if}
   {#if data.countPn !== 0}
-    <h1 class="font-bold mt-8 text-2xl">讀音包含「{data.query}」的詞</h1>
+    <h1 class="font-bold mt-8 text-2xl">{titlePronunciation}</h1>
     <h2 class="text-sm">
       共 {data.countPn} 個定義
     </h2>
