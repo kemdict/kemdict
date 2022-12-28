@@ -15,7 +15,6 @@ src/lib/entries.db.gz: ../dicts
 	cd ../dicts && make entries.db.gz
 	cp ../dicts/entries.db.gz src/lib/
 	cp ../dicts/entries.db src/lib/
-	cp ../dicts/titles.json src/lib/
 
 src/lib/kisaragi_dict.json: ../dicts
 	cd ../dicts && make kisaragi/kisaragi_dict.json

@@ -8,7 +8,6 @@ _data/
 netlify/functions/serverless/*
 !netlify/functions/serverless/index.js
 *.zip
-src/static/titles.json
 dev-*.json
 .netlify
 *.db.br
