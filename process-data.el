@@ -358,8 +358,6 @@ if TARGET already looks like an HTML link."
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
     (let ((json-encoding-pretty-print t))
-      (with-temp-file "titles.json"
-        (insert (json-encode (vconcat all-titles))))
       (with-temp-file "combined.json"
         (insert (json-encode merged-result))))
     (message "Done")))
