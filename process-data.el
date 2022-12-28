@@ -11,6 +11,21 @@
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
 
+(defun k/collect-pronunciations (het)
+  "Collect pronunciations from heteronym object HET."
+  (let ((ret nil))
+    (dolist (key (list
+                  ;; kemdict-data-ministry-of-education
+                  "bopomofo" "pinyin"
+                  ;; moedict-twblg
+                  "trs"
+                  ;; kisaragi-dict
+                  "pronunciation"))
+      (when-let (p (gethash key het))
+        (dolist (p (k/normalize-pronunciation p))
+          (push p ret))))
+    ret))
+
 (defun k/normalize-pronunciation (p)
   "Normalize pronunciation string P.
 
@@ -93,40 +108,41 @@ Parsed arrays from FILES are concatenated before shaping."
     ;;  ...]
     ;; -> {"title" {heteronyms [{definition "def" ...}]}
     ;;     ...}
-    (seq-doseq (entry raw-dict)
-      (let* ((title (k/process-title (gethash "title" entry)))
-             ;; If the dictionary does not declare heteronyms in a
-             ;; key, we set the heteronyms to a list with the
-             ;; entry itself.
-             (heteronyms (or (gethash "heteronyms" entry)
-                             (vector entry)))
-             (tmp (make-hash-table :test #'equal)))
-        ;; If an entry with the title already exists, insert into
-        ;; its heteronyms.
-        (when-let (existing (gethash title shaped))
-          (setq heteronyms
-                (vconcat (gethash "heteronyms" existing)
-                         heteronyms)))
-        ;; Sort the heteronyms according to the het_sort key.
-        (when (and
-               ;; Skip checking the rest if the first already
-               ;; doesn't have it.
-               (gethash "het_sort" (elt heteronyms 0))
-               (seq-every-p (lambda (it) (gethash "het_sort" it))
-                            heteronyms))
-          (setq heteronyms
-                ;; This happens to work on vectors.
-                (--sort
-                 (< (string-to-number
-                     (gethash "het_sort" it))
-                    (string-to-number
-                     (gethash "het_sort" other)))
-                 heteronyms)))
-        (puthash "heteronyms" heteronyms tmp)
-        (when-let (added (gethash "added" entry))
-          (puthash "added" added tmp))
-        (puthash title tmp shaped)))
-    shaped))
+    (cl-loop
+     for entry being the elements of raw-dict
+     do (let* ((title (k/process-title (gethash "title" entry)))
+               ;; If the dictionary does not declare heteronyms in a
+               ;; key, we set the heteronyms to a list with the
+               ;; entry itself.
+               (heteronyms (or (gethash "heteronyms" entry)
+                               (vector entry)))
+               (tmp (make-hash-table :test #'equal)))
+          ;; If an entry with the title already exists, insert into
+          ;; its heteronyms.
+          (when-let (existing (gethash title shaped))
+            (setq heteronyms
+                  (vconcat (gethash "heteronyms" existing)
+                           heteronyms)))
+          ;; Sort the heteronyms according to the het_sort key.
+          (when (and
+                 ;; Skip checking the rest if the first already
+                 ;; doesn't have it.
+                 (gethash "het_sort" (elt heteronyms 0))
+                 (seq-every-p (lambda (it) (gethash "het_sort" it))
+                              heteronyms))
+            (setq heteronyms
+                  ;; This happens to work on vectors.
+                  (--sort
+                   (< (string-to-number
+                       (gethash "het_sort" it))
+                      (string-to-number
+                       (gethash "het_sort" other)))
+                   heteronyms)))
+          (puthash "heteronyms" heteronyms tmp)
+          (when-let (added (gethash "added" entry))
+            (puthash "added" added tmp))
+          (puthash title tmp shaped))
+     finally return shaped)))
 
 (defun main ()
   (let* ((all-titles (list))
@@ -185,19 +201,12 @@ Parsed arrays from FILES are concatenated before shaping."
             ;; collect pronunciations
             (let ((heteronyms (gethash "heteronyms" idv-entry)))
               (seq-doseq (het heteronyms)
-                (dolist (key (list
-                              ;; kemdict-data-ministry-of-education
-                              "bopomofo" "pinyin"
-                              ;; moedict-twblg
-                              "trs"
-                              ;; kisaragi-dict
-                              "pronunciation"))
-                  (when-let (p (gethash key het))
-                    (dolist (p (k/normalize-pronunciation p))
-                      (cl-pushnew p pronunciations :test #'equal)))))
-              (puthash (car (aref dictionaries i)) ; dictionary name
-                       idv-entry
-                       entry))))
+                (dolist (p (k/collect-pronunciations het))
+                  (push p pronunciations))))
+            ;; put the individual entry into the main entry
+            (puthash (car (aref dictionaries i)) ; dictionary name
+                     idv-entry
+                     entry)))
         (puthash "pronunciations" pronunciations entry)
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
