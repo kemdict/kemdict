@@ -346,7 +346,7 @@ if TARGET already looks like an HTML link."
                        (seq-map (lambda (het)
                                   (cl-incf het-number)
                                   (when (or (= het-number 1)
-                                            (= 0 (% het-number 1000)))
+                                            (= 0 (% het-number 10000)))
                                     (message "Processing heteronym (#%s)"
                                              het-number))
                                   (k/process-heteronym het dict-name))
