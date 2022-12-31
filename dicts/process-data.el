@@ -22,6 +22,12 @@
       (puthash title t lut))
     lut))
 
+(defvar d/links/from nil
+  "Used to mark where links are coming from to register to the links table.")
+
+(defvar d/links nil
+  "The links alist.")
+
 (defun k/hash-update (table key fn &optional inexistence)
   "Update the value of KEY in TABLE with FN.
 
@@ -202,30 +208,31 @@ Parsed arrays from FILES are concatenated before shaping."
   "Process the heteronym object HET that belongs to DICT.
 
 This is a separate step from shaping."
-  (dolist (key (list "definition" "source_comment" "典故說明"))
-    (k/hash-update het key
-      #'d/links/linkify-brackets))
-  (dolist (key (list "近義同" "近義反"))
-    (k/hash-update het key
-      #'d/links/comma-word-list))
-  (k/hash-update het "word_ref"
-    #'d/links/link-to-word)
-  (k/hash-update het "definitions"
-    (lambda (defs)
-      (seq-doseq (def defs)
-        (k/hash-update def "def"
-          #'d/links/linkify-brackets))))
-  (pcase dict
-    ("dict_concised" (k/hash-update het "definition"
-                       #'d/process-def/dict_concised))
-    ("dict_idioms" (k/hash-update het "definition"
-                     (lambda (def)
-                       ;; There is often an anchor at the end of
-                       ;; dict_idioms definitions that's not
-                       ;; displayed. Getting rid of it here allows
-                       ;; shredding them from the database.
-                       (s-replace-regexp "<a name.*" "" def)))))
-  het)
+  (let ((d/links/from (gethash "title" het)))
+    (dolist (key (list "definition" "source_comment" "典故說明"))
+      (k/hash-update het key
+        #'d/links/linkify-brackets))
+    (dolist (key (list "近義同" "近義反"))
+      (k/hash-update het key
+        #'d/links/comma-word-list))
+    (k/hash-update het "word_ref"
+      #'d/links/link-to-word)
+    (k/hash-update het "definitions"
+      (lambda (defs)
+        (seq-doseq (def defs)
+          (k/hash-update def "def"
+            #'d/links/linkify-brackets))))
+    (pcase dict
+      ("dict_concised" (k/hash-update het "definition"
+                         #'d/process-def/dict_concised))
+      ("dict_idioms" (k/hash-update het "definition"
+                       (lambda (def)
+                         ;; There is often an anchor at the end of
+                         ;; dict_idioms definitions that's not
+                         ;; displayed. Getting rid of it here allows
+                         ;; shredding them from the database.
+                         (s-replace-regexp "<a name.*" "" def)))))
+    het))
 
 (cl-defun d/links/link-to-word (target &optional (desc target))
   "Create an HTML link with DESC to TARGET when appropriate.
@@ -235,7 +242,12 @@ if TARGET already looks like an HTML link."
   ;; This is /way/ faster than using `member' to test a list.
   (if (and (gethash target d/titles/look-up-table)
            (not (s-contains? "<a" target t)))
-      (s-lex-format "<a href=\"/word/${target}\">${desc}</a>")
+      (progn
+        (when d/links/from
+          (push `((from . ,d/links/from)
+                  (to . ,target))
+                d/links))
+        (s-lex-format "<a href=\"/word/${target}\">${desc}</a>"))
     target))
 
 (defun d/links/linkify-brackets (str)
@@ -280,6 +292,7 @@ if TARGET already looks like an HTML link."
                  "交情。")))))
 
 (defun main ()
+  (setq d/links nil)
   (let* ((merged-result (make-hash-table :test #'equal))
          (dictionaries
           (if (and (or (not noninteractive)
@@ -360,6 +373,8 @@ if TARGET already looks like an HTML link."
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
     (let ((json-encoding-pretty-print t))
+      (with-temp-file "links.json"
+        (insert (json-encode d/links)))
       (with-temp-file "combined.json"
         (insert (json-encode merged-result))))
     (message "Done")))
