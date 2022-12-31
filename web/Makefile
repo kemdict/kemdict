@@ -11,16 +11,15 @@ $(MD): src/routes/%/+page.svelte.md: pages/%.md
 
 markdown: $(MD)
 
-src/lib/entries.db.gz: ../dicts
-	cd ../dicts && make entries.db.gz
-	cp ../dicts/entries.db.gz src/lib/
+src/lib/entries.db: ../dicts
+	cd ../dicts && make entries.db
 	cp ../dicts/entries.db src/lib/
 
 src/lib/kisaragi_dict.json: ../dicts
 	cd ../dicts && make kisaragi/kisaragi_dict.json
 	cp ../dicts/kisaragi/kisaragi_dict.json src/lib/
 
-DEPS = markdown static/l src/lib/kisaragi_dict.json src/lib/entries.db.gz
+DEPS = markdown static/l src/lib/kisaragi_dict.json src/lib/entries.db
 
 dev: $(DEPS)
 	npx vite dev
@@ -34,10 +33,6 @@ check-watch:
 
 .PHONY: check check-watch
 
-# This refers to a folder here.
-build: $(DEPS)
-	npx vite build
-
 # Build as a node application ready to be run after an npm install
 # Runtime tasks are declared in package.json
 built-node: $(DEPS)
@@ -45,9 +40,11 @@ built-node: $(DEPS)
 	cp package.json package-lock.json built-node/
 	cp --parents src/lib/entries.db built-node/
 
+build: built-node
+
 static/l: ../dicts
 	cd ../dicts && make ministry-of-education
 	mkdir -p static/l
 	cp ../dicts/ministry-of-education/license/* static/l/
 
-.PHONY: dev
+.PHONY: dev build
