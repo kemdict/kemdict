@@ -23,7 +23,7 @@ Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。
 
 現代台灣華語有些詞教育部沒有收。我生活中遇到時總會覺得缺一角。這個「字典」是我記錄的詞。
 
-詳細說明：https://kemdict.kisaragi-hiu.com/dict-kisaragi
+詳細說明：https://kemdict.com/dict-kisaragi
 
 ** 建置
 

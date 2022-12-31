@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /word/
 
-Sitemap: https://kemdict.kisaragi-hiu.com/sitemap.xml
+Sitemap: https://kemdict.com/sitemap.xml
