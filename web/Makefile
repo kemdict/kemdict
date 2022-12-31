@@ -36,7 +36,7 @@ check-watch:
 # Build as a node application ready to be run after an npm install
 # Runtime tasks are declared in package.json
 built-node: $(DEPS)
-	env ADAPTER=node npx vite build
+	npx vite build
 	cp package.json package-lock.json built-node/
 	cp --parents src/lib/entries.db built-node/
 
