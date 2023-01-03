@@ -1,10 +1,12 @@
 <script>
   /** @type {import('./$types').PageData} */
   import Word from "$lib/components/Word.svelte";
+  import WordList from "$lib/components/WordList.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import Header from "$lib/components/Header.svelte";
   export let data;
-  let word = data.word;
+  $: word = data.word;
+  $: backlinks = data.backlinks;
 </script>
 
 <svelte:head>
@@ -17,6 +19,13 @@
 </Header>
 
 <Word {word} />
+
+{#if backlinks.length > 0}
+  <div class="prose">
+    <h1>有提到「{word.title}」的條目</h1>
+    <WordList words={backlinks} />
+  </div>
+{/if}
 
 <hr />
 <div class="prose">

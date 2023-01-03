@@ -41,13 +41,20 @@ export const db = (() => {
  * @returns {object}
  */
 export function getWord(title) {
-  const statement_word = db.prepare("SELECT * FROM entries WHERE title = ?");
-  let ret = statement_word.get(title);
+  const stmt = db.prepare("SELECT * FROM entries WHERE title = ?");
+  let ret = stmt.get(title);
   if (ret) {
     return processWord(ret);
   } else {
     return ret;
   }
+}
+
+export function getBacklinks(title) {
+  const stmt = db.prepare(`SELECT "from" FROM links WHERE "to" = ?`);
+  // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
+  stmt.pluck(true);
+  return stmt.all(title);
 }
 
 /**

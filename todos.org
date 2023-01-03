@@ -1,4 +1,11 @@
 * done
+** DONE [#A] Backlinks
+- Go through every definition to find links
+  - Requires a common shape for the definition text
+  - Right now it's either =word.heteronyms[n].definitions= or =word.heteronyms[n].definition= (n ∈ 0+)
+  - The former is moedict-twblg and kisaragi-dict, the latter is kemdict/kemdict-data-ministry-of-education
+  - We should flatten moedict-twblg and kisaragi-dict.
+- Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
 ** DONE an outgoing link component + outgoing indicator
 ** DONE [#A] Search by pronunciation (non-Han character search)
 - For Mandarin, do we want to support pinyin?
@@ -71,13 +78,6 @@ Check the entry for 上
 - [X] implement for hakkadict
 - [X] Prefix and suffix search
 - [X] Fix the “matching on JSON string” atrocity
-** TODO [#A] Backlinks
-- Go through every definition to find links
-  - Requires a common shape for the definition text
-  - Right now it's either =word.heteronyms[n].definitions= or =word.heteronyms[n].definition= (n ∈ 0+)
-  - The former is moedict-twblg and kisaragi-dict, the latter is kemdict/kemdict-data-ministry-of-education
-  - We should flatten moedict-twblg and kisaragi-dict.
-- Store links either as a table of =from, to= rows or in a column (with a JSON array) in the =entries= table?
 ** TODO link to share on Twitter, Facebook, or just copy the URL
 ** TODO some way for the user to complain about or contribute kisaragi-dict definitions
 Might require moving to YAML
