@@ -183,6 +183,11 @@ Parsed arrays from FILES are concatenated before shaping."
 (defun d/process-def/dict_concised (def)
   "Process DEF for dict_concised."
   (->> def
+       (s-replace "。。" "。")
+       ;; A "例" was CJK COMPATIBILITY IDEOGRAPH-F9B5. This has
+       ;; already been fixed in upstream, and should be available next
+       ;; time concised dict makes a data release.
+       (s-replace "例" "例")
        (s-replace-regexp (rx (or (seq bol (+ digit) ".")
                                  ;; This means "this definition has an image".
                                  "　◎"))
@@ -193,9 +198,6 @@ Parsed arrays from FILES are concatenated before shaping."
                            (concat (match-string 1 str)
                                    (d/links/link-to-word (match-string 2 str)))))
        ;; These are the only types that exist.
-       ;; ...plus CJK COMPATIBILITY IDEOGRAPH-F9B5. (Fixed in
-       ;; upstream already, should be available next time concised
-       ;; dict makes a data release.)
        (s-replace-regexp (rx "[" (group (any "例似反")) "]")
                          "<br><m>\\1</m>")
        (s-replace-regexp (rx "§" (group "英") (group (+ (any "a-zA-Z "))))
