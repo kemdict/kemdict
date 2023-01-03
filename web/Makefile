@@ -7,7 +7,7 @@ MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(wildcard pages/*.md))
 
 $(MD): src/routes/%/+page.svelte.md: pages/%.md
 	@mkdir -p "$(dir $@)"
-	ln -f -T "$<" "$@"
+	([ -n "$ANDROID_DATA" ] && cp "$<" "$@") || ln -f -T "$<" "$@"
 
 markdown: $(MD)
 
