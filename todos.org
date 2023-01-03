@@ -1,4 +1,5 @@
 * done
+** DONE an outgoing link component + outgoing indicator
 ** DONE [#A] Search by pronunciation (non-Han character search)
 - For Mandarin, do we want to support pinyin?
 - We want to support searching Taigi or Hakka with or without tones because I assume most speakers have not learned which tone is which…?
@@ -61,11 +62,6 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Figure out an icon
 * todos
 ** TODO split dicts into its own repository
-** TODO an outgoing link component + outgoing indicator
-** 使用說明
-- 語音：點到原本的字典用原本字典的音檔
-- 新詞：編輯 =kisaragi_dict.org= 然後開 PR
-- 其他意見、留言：開 issue
 ** TODO Fix concised dict formatting
 Check the entry for 上
 ** pronunciation search
