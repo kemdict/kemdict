@@ -241,16 +241,16 @@ This is a separate step from shaping."
 
 Just return TARGET if TARGET does not exist in `d/titles/look-up-table', or
 if TARGET already looks like an HTML link."
-  ;; This is /way/ faster than using `member' to test a list.
-  (if (and (gethash target d/titles/look-up-table)
-           (not (s-contains? "<a" target t)))
-      (progn
-        (when d/links/from
-          (push `((from . ,d/links/from)
-                  (to . ,target))
-                d/links))
-        (s-lex-format "<a href=\"/word/${target}\">${desc}</a>"))
-    target))
+  (if (or (equal target d/links/from)
+          ;; This is /way/ faster than using `member' to test a list.
+          (not (gethash target d/titles/look-up-table))
+          (s-contains? "<a" target t))
+      target
+    (when d/links/from
+      (push `((from . ,d/links/from)
+              (to . ,target))
+            d/links))
+    (s-lex-format "<a href=\"/word/${target}\">${desc}</a>")))
 
 (defun d/links/linkify-brackets (str)
   "Create links in STR for all brackets."
