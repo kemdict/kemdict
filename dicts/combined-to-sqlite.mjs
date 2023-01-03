@@ -29,8 +29,6 @@ if (!fs.existsSync("combined.json")) {
   process.exit(1);
 }
 
-const entries = Object.values(JSON.parse(fs.readFileSync("combined.json")));
-
 if (fs.existsSync("entries.db")) {
   fs.rmSync("entries.db");
 }
@@ -60,36 +58,41 @@ db.prepare(
   `
 CREATE TABLE entries (
   title NOT NULL,
-  ${dicts.join(",")}
-)`
+  ${dicts.join(",")})`
 ).run();
 
 db.prepare(
   `
 CREATE TABLE pronunciations (
   title NOT NULL,
-  pronunciation NOT NULL
-)
-`
+  pronunciation NOT NULL)`
 ).run();
 
-const doInsert = db.transaction(() => {
+db.prepare(
+  `
+CREATE TABLE links (
+  "from" NOT NULL,
+  "to" NOT NULL)`
+).run();
+
+/**
+ * Run `func` for each element of `array`, with a progress display, in
+ * a transaction.
+ * @param {array} array - The array to iterate over.
+ * @param {string} message - The message for the progress display.
+ * @param {function} func - Function called for each element.
+ argument, the element.
+ */
+const EachPT = db.transaction((array, message = "", func) => {
   // Whether we should print progress.
   const verbose =
     // Never verbose in CI; never verbose in Emacs except when in vterm
     !process.env.CI &&
     !(process.env.INSIDE_EMACS && !process.env.INSIDE_EMACS.includes("vterm"));
-  const insertEntry = db.prepare(`
-  INSERT INTO
-    entries (title,${dicts.join(",")})
-    values (@title,${dicts.map((x) => `@${x}`).join(",")})`);
-  const insertPronunciation = db.prepare(`
-  INSERT INTO
-    pronunciations (title,pronunciation)
-    values (?, ?)`);
 
+  // Iterate through each entry, with optional verbose output.
   let i = 0;
-  const length = entries.length;
+  const length = array.length;
   let last = { time: new Date().getTime(), i: i };
   let diff = 0;
   for (i = 0; i < length; i++) {
@@ -102,16 +105,45 @@ const doInsert = db.transaction(() => {
       }
       let progress = Math.floor(((i + 1) / length) * 100);
       readline.cursorTo(process.stdout, 0);
-      process.stdout.write(`${i + 1} / ${length} (${progress}%, ${diff}/s)`);
+      process.stdout.write(
+        message + `${i + 1} / ${length} (${progress}%, ${diff}/s)`
+      );
     }
-    insertEntry.run(stringifyFields(entries[i]));
-    if (entries[i].pronunciations) {
-      for (const pronunciation of entries[i].pronunciations) {
-        insertPronunciation.run(entries[i].title, pronunciation);
-      }
-    }
+    func(array[i]);
   }
   process.stdout.write("\n");
 });
 
-doInsert();
+{
+  const entries = Object.values(JSON.parse(fs.readFileSync("combined.json")));
+  const insertEntry = db.prepare(`
+INSERT INTO
+  entries (title,${dicts.join(",")})
+VALUES
+  (@title,${dicts.map((x) => `@${x}`).join(",")})`);
+  const insertPronunciation = db.prepare(`
+INSERT INTO
+  pronunciations (title,pronunciation)
+VALUES
+  (?, ?)`);
+  EachPT(entries, "Inserting entries into DB: ", (entry) => {
+    insertEntry.run(stringifyFields(entry));
+    if (entry.pronunciations) {
+      for (const pronunciation of entry.pronunciations) {
+        insertPronunciation.run(entry.title, pronunciation);
+      }
+    }
+  });
+}
+
+{
+  const links = Object.values(JSON.parse(fs.readFileSync("links.json")));
+  const insertLink = db.prepare(`
+INSERT INTO
+  links ("from","to")
+VALUES
+  (@from,@to)`);
+  EachPT(links, "Inserting links into DB: ", (entry) => {
+    insertLink.run(entry);
+  });
+}
