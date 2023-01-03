@@ -5,6 +5,7 @@
 來自台語的借詞也會列。
 
 * Todo
+串流
 無痕
 聖筊
 新生代
@@ -20,7 +21,6 @@ Q版
 雖 (衰的假借字)
 相揪 = 互相邀約 = 約人一起
 御守 = 日本神社的護身符?
-AI = 人工智慧 / 機器學習
 超馬 = 超級馬拉松 =
 行程 (process) / 程序 / 處理程序
 相挨 (siòng-e)
@@ -83,7 +83,16 @@ These are not compiled because only words under the Words heading are.
 :END:
 *** lí sī teh kóng sann siáu
 **** 你是在講什麼鬼話。台語「你是咧講啥痟」的假借字。
+** 帳號
+*** ㄓㄤˋ ㄏㄠˋ
+**** 名|有多位使用者的系統中，代表其中一個使用者的單位，稱為帳號。
 * Words
+** AI
+:PROPERTIES:
+:added:    2023-01-03T23:29:40+0900
+:END:
+*** /ˈeɪ aɪ/
+**** 名|人工智慧。
 ** 節奏遊戲
 :PROPERTIES:
 :added:    2023-01-03T22:47:15+0900

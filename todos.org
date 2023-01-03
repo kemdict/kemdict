@@ -60,6 +60,12 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
+** TODO split dicts into its own repository
+** TODO an outgoing link component + outgoing indicator
+** 使用說明
+- 語音：點到原本的字典用原本字典的音檔
+- 新詞：編輯 =kisaragi_dict.org= 然後開 PR
+- 其他意見、留言：開 issue
 ** TODO Fix concised dict formatting
 Check the entry for 上
 ** pronunciation search
