@@ -16,7 +16,10 @@
       modifier = "metaKey";
     }
     if (event.key === "k" && event[modifier]) {
-      if (input) input.focus();
+      if (input) {
+        input.focus();
+        event.preventDefault();
+      }
     }
   }}
 />
