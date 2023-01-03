@@ -3,12 +3,14 @@
   import { spc, interlinear_annotation } from "$lib/processing";
   export let word;
   export let dict;
-  const entry = word[dict];
+
   const pronunciation_key_mapping = {
     kisaragi_dict: "pronunciation",
     moedict_twblg: "trs",
   };
-  const pronunciation_key = pronunciation_key_mapping[dict];
+
+  $: entry = word[dict];
+  $: pronunciation_key = pronunciation_key_mapping[dict];
 
   function process_def_kisaragi(def) {
     if (def) {

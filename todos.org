@@ -68,6 +68,9 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
+** TODO [#A] Table of contents
+list of dictionaries at top of word page to quickly navigate to
+plus the backlinks, “elsewhere”, and copyright sections
 ** TODO split dicts into its own repository
 ** TODO Fix concised dict formatting
 Check the entry for 上
@@ -94,8 +97,6 @@ Wiktionary dropdown → zh, en, ja
 ** TODO Retrieve definition from Wiktionary API? (during request? client side?)
 ** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 ** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
-** TODO Add list of dictionaries at top of word page to quickly navigate to
-- Or maybe checkboxes to hide a dictionary temporarily
 ** TODO Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
 * MOE dictionary stuff
 
