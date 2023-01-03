@@ -23,7 +23,9 @@
 {#each entry.heteronyms as het}
   <h1>{word.title}</h1>
   {#if het[pronunciation_key] && het[pronunciation_key] !== word.title}
-    <p>讀音：<span>{spc(het[pronunciation_key])}</span></p>
+    <p id={`${dict}--${spc(het[pronunciation_key]).replace(" ", "")}`}>
+      讀音：<span>{spc(het[pronunciation_key])}</span>
+    </p>
   {/if}
   {#each Object.entries(groupByProp(het.definitions, "type", "none")) as [type, defs]}
     {#if type !== "none"}
