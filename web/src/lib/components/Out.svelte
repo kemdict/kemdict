@@ -6,9 +6,9 @@
      id: id of the anchor element
      href: where the link goes
    */
-  export let href;
-  export let klass;
-  export let id;
+  export let href = undefined;
+  export let klass = undefined;
+  export let id = undefined;
 </script>
 
 <a {href} {id} class={klass} target="_blank" rel="noreferrer"><slot /></a>

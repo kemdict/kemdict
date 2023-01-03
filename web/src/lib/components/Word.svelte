@@ -7,7 +7,7 @@
   import Out from "./Out.svelte";
   import { dicts } from "$lib/common.js";
   export let word;
-  export let dict;
+  export let dict = undefined;
   // This allows us to also pass in which dictionary we want and only
   // render for it.
   let dictionaries;
