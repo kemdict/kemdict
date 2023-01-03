@@ -1,27 +1,13 @@
 <script>
+  export let data;
+
   import Header from "$lib/components/Header.svelte";
   import SearchBar from "$lib/components/SearchBar.svelte";
   import WordPreview from "$lib/components/WordPreview.svelte";
   import Elsewhere from "$lib/components/Elsewhere.svelte";
   import SortForm from "./SortForm.svelte";
-  export let data;
   import { WordSortFns } from "$lib/common.js";
-  let sortFn;
-  let sortPnFn;
-  let sort = data.sort;
-  let sortPn = data.sort;
-  $: if (sort === "desc") {
-    sortFn = WordSortFns.descend;
-  } else {
-    sortFn = WordSortFns.ascend;
-  }
-  $: if (sortPn === "desc") {
-    sortPnFn = WordSortFns.descend;
-  } else {
-    sortPnFn = WordSortFns.ascend;
-  }
-  $: title = getTitle(data.match, data.query);
-  $: titlePronunciation = getTitleForPronunciation(data.match, data.query);
+
   function getTitle(mtch, query) {
     if (mtch === "prefix") {
       return `以「${query}」開頭的詞`;
@@ -40,6 +26,23 @@
       return `讀音包含「${query}」的詞`;
     }
   }
+
+  let sortFn;
+  let sortPnFn;
+  let sort = data.sort;
+  let sortPn = data.sort;
+  $: if (sort === "desc") {
+    sortFn = WordSortFns.descend;
+  } else {
+    sortFn = WordSortFns.ascend;
+  }
+  $: if (sortPn === "desc") {
+    sortPnFn = WordSortFns.descend;
+  } else {
+    sortPnFn = WordSortFns.ascend;
+  }
+  $: title = getTitle(data.match, data.query);
+  $: titlePronunciation = getTitleForPronunciation(data.match, data.query);
 </script>
 
 <svelte:head>
