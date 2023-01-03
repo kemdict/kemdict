@@ -71,6 +71,13 @@ No longer applicable as we don't use moedict-data anymore.
 ** TODO [#A] Table of contents
 list of dictionaries at top of word page to quickly navigate to
 plus the backlinks, “elsewhere”, and copyright sections
+** Incorporate [[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/tree/master/ChhoeTaigiDatabase][iTaigi data]] (CC0)
+
+Thank you Chhoe Taigi and iTaigi
+
+- Data
+- Word rendering
+** Word page: split sections for each language
 ** TODO split dicts into its own repository
 ** TODO Fix concised dict formatting
 Check the entry for 上
