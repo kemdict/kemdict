@@ -1,10 +1,29 @@
 <script>
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
+  let input;
 </script>
+
+<!-- Following the same approach as kit.svelte.dev/src/lib/search/SearchBox.svelte, with some hints from MDN's page about navigator.platform -->
+
+<svelte:window
+  on:keydown={(event) => {
+    let modifier = "ctrlKey";
+    if (
+      navigator.platform.indexOf("Mac") === 0 ||
+      navigator.platform === "iPhone"
+    ) {
+      modifier = "metaKey";
+    }
+    if (event.key === "k" && event[modifier]) {
+      if (input) input.focus();
+    }
+  }}
+/>
 
 <div class="relative mt-2 mb-2">
   <form action="/search" class="flex" id="sf">
+    <!-- TODO: add keybind hint -->
     <select class="btnColor rounded-l" name="m">
       <option selected={initialMatchSelection == "prefix"} value="prefix"
         >開頭為</option
@@ -22,6 +41,7 @@
       autocomplete="off"
       placeholder="輸入欲搜尋的詞彙"
       name="q"
+      bind:this={input}
       value={initialInput}
     />
     <!-- /search?q=<...>, like search engines -->
