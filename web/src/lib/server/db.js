@@ -1,6 +1,8 @@
 import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
+// This already uses ES6 sets when available.
+import uniq from "lodash-es/uniq";
 
 /**
  * Read a gzipped SQLite database and return a Database
@@ -54,7 +56,7 @@ export function getBacklinks(title) {
   const stmt = db.prepare(`SELECT "from" FROM links WHERE "to" = ?`);
   // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
   stmt.pluck(true);
-  return stmt.all(title);
+  return uniq(stmt.all(title));
 }
 
 /**
