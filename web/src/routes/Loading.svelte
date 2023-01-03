@@ -1,9 +1,16 @@
 <script>
-  import { navigating } from "$app/stores";
-  import { tweened } from "svelte/motion";
-  import { cubicOut } from "svelte/easing";
   import { onMount, onDestroy } from "svelte";
-  const progress = tweened(0, { duration: 3000, easing: cubicOut });
+  import { cubicOut } from "svelte/easing";
+  import { tweened } from "svelte/motion";
+  import { navigating } from "$app/stores";
+  import { showLoadingAfterMS } from "$lib/common";
+
+  const progress = tweened(0, {
+    duration: 3000,
+    delay: showLoadingAfterMS,
+    easing: cubicOut,
+  });
+
   const unsubscribe = navigating.subscribe((value) => {
     if (!value) {
       progress.set(1, { duration: 1000 });

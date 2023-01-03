@@ -8,6 +8,9 @@ export const dicts = {
   dict_idioms: "教育部成語典",
 };
 
+// Show loading indicator after this many miliseconds.
+export const showLoadingAfterMS = 250;
+
 export const baseURL = "https://kemdict.com";
 
 export const version = import.meta.env.KEMDICT_VERSION;
