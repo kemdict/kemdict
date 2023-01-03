@@ -72,9 +72,15 @@
   {/if}
   {#if data.countPn !== 0}
     <h1 class="font-bold mt-8 text-2xl">{titlePronunciation}</h1>
-    <h2 class="text-sm">
-      共 {data.countPn} 個定義
-    </h2>
+    {#if data.morePn}
+      <h2 class="text-sm">
+        至少 {data.countPn} 個定義
+      </h2>
+    {:else}
+      <h2 class="text-sm">
+        共 {data.countPn} 個定義
+      </h2>
+    {/if}
     <SortForm bind:sort={sortPn} query={data.query} />
     <ul>
       {#each data.wordsPn.sort(sortPnFn) as word}

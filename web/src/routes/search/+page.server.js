@@ -28,7 +28,11 @@ export function load({ url }) {
 
   {
     const stmtPn = db.prepare(
-      `SELECT title FROM pronunciations WHERE pronunciation LIKE ?`
+      `
+SELECT DISTINCT title
+FROM pronunciations
+WHERE pronunciation LIKE ?
+LIMIT 150`
     );
     let titlesPn;
     if (mtch === "prefix") {
@@ -41,6 +45,10 @@ export function load({ url }) {
     const titleWordStmt = db.prepare(
       `SELECT * FROM entries WHERE title = @title`
     );
+    // HACK: this is very, *very*, slow, when there are lots of titles.
+    // It is still slow even when I tried to do it in one SQL query.
+    // So this can probably only be fixed by switching to a
+    // one-definition-per-row structure in the database.
     wordsPn = db.transaction(() => {
       return titlesPn.map((title) => titleWordStmt.get(title));
     })();
@@ -52,9 +60,6 @@ export function load({ url }) {
   if (words && words.length === 1 && words[0]?.title === query) {
     throw redirect(301, encodeURI(`/word/${words[0].title}`));
   }
-  // if (words.length === 0) {
-  //   return { query: query, words: words, count: 0 };
-  // }
 
   words = words.map(processWord);
   wordsPn = wordsPn.map(processWord);
@@ -102,5 +107,6 @@ export function load({ url }) {
     count: count,
     wordsPn: wordsPn,
     countPn: countPn,
+    morePn: wordsPn.length >= 150,
   };
 }

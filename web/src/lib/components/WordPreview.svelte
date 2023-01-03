@@ -1,5 +1,4 @@
 <script>
-  import { browser } from "$app/environment";
   import truncate from "lodash-es/truncate";
   import { dicts } from "$lib/common";
   import { spc } from "$lib/processing";
