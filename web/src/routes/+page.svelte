@@ -20,7 +20,7 @@
 </svelte:head>
 
 <SplitLayout wantHeader={false}>
-  <div class="prose" slot="left">
+  <div slot="left">
     <div class="sm:fixed">
       <img
         decoding="sync"
@@ -28,7 +28,7 @@
         class="h-[10rem] w-[10rem]"
         src="/logo.png"
       />
-      <h1 class="font-bold text-3xl">Kemdict 國語整合典 (β)</h1>
+      <h1 class="font-bold text-xl mt-6">Kemdict 國語整合典 (β)</h1>
       <DarkModeToggle />
     </div>
   </div>
