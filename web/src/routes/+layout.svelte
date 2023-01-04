@@ -4,7 +4,7 @@
   import { showLoadingAfterMS } from "$lib/common";
   import { navigating } from "$app/stores";
   import { fade } from "svelte/transition";
-  import Loading from "./Loading.svelte";
+  import Loading from "$lib/Loading.svelte";
 </script>
 
 {#if $navigating}
