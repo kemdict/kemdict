@@ -15,7 +15,7 @@
     return html.replace(/<[^>]*>?/gm, "");
   }
   function processPreview(def) {
-    return truncate(strip(def));
+    return truncate(strip(def), { length: 45, omission: "……" });
   }
 </script>
 
@@ -31,8 +31,7 @@
           </h2>
           <p class="text-gray-500 dark:text-stone-300">
             {processPreview(
-              het.definition || het.definitions.map((x) => x.def).join(""),
-              { length: 50, omission: "……" }
+              het.definition || het.definitions.map((x) => x.def).join("")
             )}
           </p>
         </div>
