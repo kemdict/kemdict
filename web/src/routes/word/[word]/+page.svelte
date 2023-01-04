@@ -38,6 +38,7 @@
     {/if}
   </div>
   <svelte:fragment slot="right">
+    <div class="sm:hidden"><TOC term={word.title} {availableDicts} /></div>
     <Word {word} />
   </svelte:fragment>
 </SplitLayout>
