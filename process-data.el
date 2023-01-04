@@ -375,6 +375,7 @@ if TARGET already looks like an HTML link."
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
     (let ((json-encoding-pretty-print t))
+      (setq d/links (append (json-read-file "kisaragi/links.json") d/links))
       (with-temp-file "links.json"
         (insert (json-encode d/links)))
       (with-temp-file "combined.json"
