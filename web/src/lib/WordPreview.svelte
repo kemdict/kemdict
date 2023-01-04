@@ -1,10 +1,10 @@
 <script>
   import truncate from "lodash-es/truncate";
-  import { dicts } from "$lib/common";
   import { spc } from "$lib/processing";
+  import { dictsInWord } from "$lib/common";
   export let word;
   // Needs to be reactive so that it can update dynamically
-  $: presentDicts = Object.keys(dicts).filter((x) => word[x]);
+  $: presentDicts = dictsInWord(word);
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.
   const pron_keys = ["bopomofo", "trs", "pronunciation", "p_四縣"];

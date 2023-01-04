@@ -9,16 +9,11 @@
   import Word from "$lib/Word.svelte";
   import WordList from "$lib/WordList.svelte";
 
-  import { dicts } from "$lib/common";
-  const dictKeys = Object.keys(dicts);
+  import { dictsInWord } from "$lib/common";
 
   $: word = data.word;
   $: backlinks = data.backlinks;
-  $: availableDicts = getDicts(word);
-
-  function getDicts(word) {
-    return dictKeys.filter((key) => word[key]);
-  }
+  $: presentDicts = dictsInWord(word);
 </script>
 
 <svelte:head>
@@ -28,7 +23,7 @@
 
 <SplitLayout leftFirst={false} initialInput={word.title}>
   <div slot="left">
-    <TOC {availableDicts} />
+    <TOC {presentDicts} />
     <Elsewhere term={word.title} />
     {#if backlinks.length > 0}
       <div class="prose">
@@ -38,13 +33,13 @@
     {/if}
   </div>
   <svelte:fragment slot="right">
-    <div class="sm:hidden"><TOC term={word.title} {availableDicts} /></div>
+    <div class="sm:hidden"><TOC term={word.title} {presentDicts} /></div>
     <Word {word} />
   </svelte:fragment>
 </SplitLayout>
 
 <div class="prose">
-  {#if availableDicts.length > 1 || availableDicts[0] !== "kisaragi_dict"}
+  {#if presentDicts.length > 1 || presentDicts[0] !== "kisaragi_dict"}
     <h2 class="mt-2">本頁的著作權</h2>
     <p>
       《重編國語辭典修訂本》、《國語辭典簡編本》、《成語典》、《臺灣客家語常用詞辭典》與《臺灣閩南語常用詞辭典》為中華民國教育部版權所有，依「創用CC-姓名標示-禁止改作

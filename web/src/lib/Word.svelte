@@ -5,11 +5,11 @@
   import WordHakkadict from "./WordHakkadict.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
   import Out from "./Out.svelte";
-  import { dictsB, format } from "$lib/common.js";
+  import { dicts, format } from "$lib/common.js";
   export let word;
 </script>
 
-{#each dictsB as dict}
+{#each dicts as dict}
   <div>
     {#if word[dict.id]}
       <div id={dict.id} class="dict">

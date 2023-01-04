@@ -1,14 +1,5 @@
 // This also defines the order in the word page
-export const dicts = {
-  kisaragi_dict: "如月的現代台灣華語補足典",
-  dict_concised: "教育部國語辭典簡編本",
-  dict_revised: "教育部重編國語辭典",
-  moedict_twblg: "教育部臺灣閩南語常用詞辭典",
-  hakkadict: "教育部臺灣客家語常用詞辭典",
-  dict_idioms: "教育部成語典",
-};
-
-export const dictsB = [
+export const dicts = [
   {
     id: "kisaragi_dict",
     name: "如月的現代台灣華語補足典",
@@ -46,6 +37,12 @@ export const dictsB = [
     lang: "zh",
   },
 ];
+
+export const dictIds = dicts.map((x) => x.id);
+
+export function dictsInWord(word) {
+  return dictIds.filter((id) => word[id]);
+}
 
 // Show loading indicator after this many miliseconds.
 export const showLoadingAfterMS = 250;

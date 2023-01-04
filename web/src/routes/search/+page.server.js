@@ -2,7 +2,7 @@ export const prerender = false;
 
 import { redirect } from "@sveltejs/kit";
 import { db, processWord } from "$lib/server/db.js";
-import { dicts, WordSortFns } from "$lib/common";
+import { dictIds, WordSortFns } from "$lib/common";
 
 export function load({ url }) {
   const query = url.searchParams.get("q");
@@ -78,24 +78,24 @@ LIMIT 150`
   let count = 0;
   let countPn = 0;
   for (const word of words) {
-    for (const dict of Object.keys(dicts)) {
-      if (word[dict]?.heteronyms) {
-        count += word[dict].heteronyms.length;
+    for (const dictId of dictIds) {
+      if (word[dictId]?.heteronyms) {
+        count += word[dictId].heteronyms.length;
       }
     }
   }
   for (const word of wordsPn) {
-    for (const dict of Object.keys(dicts)) {
-      if (word[dict]?.heteronyms) {
+    for (const dictId of dictIds) {
+      if (word[dictId]?.heteronyms) {
         // Eww.
-        word[dict].heteronyms = word[dict].heteronyms.filter(
+        word[dictId].heteronyms = word[dictId].heteronyms.filter(
           (het) =>
             het?.pronunciation?.includes(query) ||
             het?.trs?.includes(query) ||
             het?.bopomofo?.includes(query) ||
             het?.pinyin?.includes(query)
         );
-        countPn += word[dict].heteronyms.length;
+        countPn += word[dictId].heteronyms.length;
       }
     }
   }
