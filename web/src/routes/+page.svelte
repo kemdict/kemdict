@@ -18,7 +18,7 @@
   <meta property="og:sitename" content={sitename} />
 </svelte:head>
 
-<div class="index relative">
+<div class="relative">
   <div class="prose mt-12 sm:ml-[12rem] md:ml-[14rem]">
     <div class="max-sm:mb-6 sm:absolute sm:top-4 sm:left-4">
       <div class="sm:fixed sm:w-[10rem]">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <h2>前言</h2>
-    <ul>
+    <ul class="ml-1 list-none p-0">
       <li>
         <p><a href="about">關於</a></p>
         <p><a href="changelog">版本紀錄</a></p>
@@ -47,7 +47,7 @@
     <h2>最近新增的詞</h2>
     <RecentWordList limit={12} />
     <h2>收錄字典</h2>
-    <ul>
+    <ul class="ml-1 list-none p-0">
       <li>
         <p><a href="dict-kisaragi">如月的現代台灣華語補足典</a></p>
       </li>

@@ -64,14 +64,6 @@
       @apply link;
     }
   }
-  .index {
-    ul {
-      @apply ml-1;
-    }
-    ul {
-      @apply list-none p-0;
-    }
-  }
   .word {
     transition-property: max-height;
     transition-duration: 250ms;
