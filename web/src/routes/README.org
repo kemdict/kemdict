@@ -1,0 +1,16 @@
+* Routes
+
+SvelteKit 的各個頁面和它們的設定。
+
+建置時 Make 會把 =/pages/<名稱>.md= 複製到這裡下面的 =/src/routes/<名稱>/+page.svelte.md=，這樣 =/pages/abc.md= 就會變成 =/abc= 這個 route。這樣我編輯文章比較方便。
+
+這裡大致上有六種頁面：
+
+|                       | 原始檔路徑                   | route        |
+|-----------------------+-----------------------------+--------------|
+| 主頁                   | ./+page.svelte              | /            |
+| 詞彙                   | ./word/[word]/+page.svelte  | /word/[word] |
+| 詞彙 — 不存在         | ./word/[word]/+error.svelte | /word/[word] |
+| 搜尋 — 有結果         | ./search/+page.svelte       | /search?q=…  |
+| 搜尋 — 找不到結果     | ./search/+page.svelte       | /search?q=…  |
+| 文章（關於、致謝等等） | 從 ../../pages/ 複製進來     |              |
