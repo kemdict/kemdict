@@ -1,13 +1,24 @@
 <script>
   /** @type {import('./$types').PageData} */
+  export let data;
+
+  import Elsewhere from "$lib/Elsewhere.svelte";
+  import Out from "$lib/Out.svelte";
+  import SplitLayout from "$lib/SplitLayout.svelte";
+  import TOC from "$lib/TOC.svelte";
   import Word from "$lib/Word.svelte";
   import WordList from "$lib/WordList.svelte";
-  import Out from "$lib/Out.svelte";
-  import Elsewhere from "$lib/Elsewhere.svelte";
-  import SplitLayout from "$lib/SplitLayout.svelte";
-  export let data;
+
+  import { dicts } from "$lib/common";
+  const dictKeys = Object.keys(dicts);
+
   $: word = data.word;
   $: backlinks = data.backlinks;
+  $: availableDicts = getDicts(word);
+
+  function getDicts(word) {
+    return dictKeys.filter((key) => word[key]);
+  }
 </script>
 
 <svelte:head>
@@ -17,6 +28,7 @@
 
 <SplitLayout leftFirst={false} initialInput={word.title}>
   <div slot="left">
+    <TOC {availableDicts} />
     <Elsewhere term={word.title} />
     {#if backlinks.length > 0}
       <div class="prose">
@@ -31,7 +43,7 @@
 </SplitLayout>
 
 <div class="prose">
-  {#if word.hakkadict || word.dict_revised || word.moedict_twblg || word.dict_concised || word.dict_idioms}
+  {#if availableDicts.length > 1 || availableDicts[0] !== "kisaragi_dict"}
     <h2 class="mt-2">本頁的著作權</h2>
     <p>
       《重編國語辭典修訂本》、《國語辭典簡編本》、《成語典》、《臺灣客家語常用詞辭典》與《臺灣閩南語常用詞辭典》為中華民國教育部版權所有，依「創用CC-姓名標示-禁止改作

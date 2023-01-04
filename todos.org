@@ -1,4 +1,7 @@
 * done
+** DONE [#A] Table of contents
+list of dictionaries at top of word page to quickly navigate to
+plus the backlinks, “elsewhere”, and copyright sections
 ** DONE [#A] Backlinks
 - Go through every definition to find links
   - Requires a common shape for the definition text
@@ -68,9 +71,6 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
 * todos
-** TODO [#A] Table of contents
-list of dictionaries at top of word page to quickly navigate to
-plus the backlinks, “elsewhere”, and copyright sections
 ** Incorporate [[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/tree/master/ChhoeTaigiDatabase][iTaigi data]] (CC0)
 
 Thank you Chhoe Taigi and iTaigi
