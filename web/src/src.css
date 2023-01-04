@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* HACK sigh */
+.list-none {
+  list-style: none !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.ml-1 {
+  margin-left: 0.25rem !important;
+}
+
 @layer base {
   html {
     line-height: 1.6;
@@ -28,7 +39,7 @@
   }
   .base {
     width: 95%;
-    @apply max-w-2xl m-auto mb-24;
+    @apply max-w-4xl m-auto mb-24;
   }
   ol {
     @apply pl-4;
@@ -36,6 +47,29 @@
 }
 
 @layer components {
+  /* Put it here for more readable comments. */
+  div.split-layout {
+    @apply relative;
+    /* HACK this works around the left slot clipping into content that
+       comes after the split layout.
+
+       Honestly we should just use a grid.
+    */
+    @apply sm:min-h-[15rem];
+    & > div {
+      /* The gap between the left edge of the container and the right slot */
+      @apply sm:ml-[15rem] md:ml-[18rem];
+      & > div.left {
+        /* The right slot position minus the gap (2rem) we want between left
+           and right */
+        @apply sm:w-[12rem] md:w-[15rem];
+        /* Actually place it on the left */
+        @apply sm:absolute sm:top-4 sm:left-4;
+        /* Style for when it's collapsed */
+        @apply max-sm:mb-6;
+      }
+    }
+  }
   /* Search Form */
   #sf {
     input,

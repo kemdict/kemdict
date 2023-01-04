@@ -2,6 +2,7 @@
   import RecentWordList from "$lib/RecentWordList.svelte";
   import SearchBar from "$lib/SearchBar.svelte";
   import DarkModeToggle from "$lib/DarkModeToggle.svelte";
+  import SplitLayout from "$lib/SplitLayout.svelte";
   const title = "Kemdict 國語整合典";
   const sitename = "Kemdict 國語整合典";
   const description =
@@ -18,25 +19,29 @@
   <meta property="og:sitename" content={sitename} />
 </svelte:head>
 
-<div class="relative">
-  <div class="prose mt-12 sm:ml-[12rem] md:ml-[14rem]">
-    <div class="max-sm:mb-6 sm:absolute sm:top-4 sm:left-4">
-      <div class="sm:fixed sm:w-[10rem]">
-        <img
-          decoding="sync"
-          alt="logo"
-          class="h-[10rem] w-[10rem]"
-          src="/logo.png"
-        />
-        <h1 class="font-bold text-3xl">Kemdict 國語整合典 (β)</h1>
-        <DarkModeToggle />
-      </div>
+<SplitLayout wantHeader={false}>
+  <div class="prose" slot="left">
+    <div class="sm:fixed">
+      <img
+        decoding="sync"
+        alt="logo"
+        class="h-[10rem] w-[10rem]"
+        src="/logo.png"
+      />
+      <h1 class="font-bold text-3xl">Kemdict 國語整合典 (β)</h1>
+      <DarkModeToggle />
     </div>
+  </div>
+  <div class="prose" slot="right">
     <h2>前言</h2>
     <ul class="ml-1 list-none p-0">
       <li>
         <p><a href="about">關於</a></p>
+      </li>
+      <li>
         <p><a href="changelog">版本紀錄</a></p>
+      </li>
+      <li>
         <p><a href="thanks">致謝與授權</a></p>
       </li>
     </ul>
@@ -68,4 +73,4 @@
       </li>
     </ul>
   </div>
-</div>
+</SplitLayout>

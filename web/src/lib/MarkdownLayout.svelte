@@ -1,6 +1,5 @@
 <script>
-  import Header from "$lib/Header.svelte";
-  import SearchBar from "$lib/SearchBar.svelte";
+  import SingleLayout from "$lib/SingleLayout.svelte";
   // mdsvex passes the frontmatter key-value pairs as named arguments
   // to this component.
   export let title;
@@ -24,10 +23,7 @@
     <meta property="og:article:modified_time" content={date} />
   {/if}
 </svelte:head>
-<Header>
-  <SearchBar />
-</Header>
 
-<div class="prose">
+<SingleLayout class="prose">
   <slot />
-</div>
+</SingleLayout>
