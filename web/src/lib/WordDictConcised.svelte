@@ -17,7 +17,8 @@
   {#if het.definition}
     <ol>
       {#each split(het.definition) as d}
-        <li><p class="def">{@html d}</p></li>
+        <!-- TODO: we really need a better way of displaying nested lists. -->
+        <li><p class="def">{@html d.replace(/　(\(\d+\))/g, "<br>$1")}</p></li>
       {/each}
     </ol>
   {/if}
