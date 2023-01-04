@@ -1,7 +1,7 @@
 <script>
-  import RecentWordList from "$lib/components/RecentWordList.svelte";
-  import SearchBar from "$lib/components/SearchBar.svelte";
-  import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
+  import RecentWordList from "$lib/RecentWordList.svelte";
+  import SearchBar from "$lib/SearchBar.svelte";
+  import DarkModeToggle from "$lib/DarkModeToggle.svelte";
   const title = "Kemdict 國語整合典";
   const sitename = "Kemdict 國語整合典";
   const description =

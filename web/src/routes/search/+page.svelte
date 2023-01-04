@@ -1,10 +1,10 @@
 <script>
   export let data;
 
-  import Header from "$lib/components/Header.svelte";
-  import SearchBar from "$lib/components/SearchBar.svelte";
-  import WordPreview from "$lib/components/WordPreview.svelte";
-  import Elsewhere from "$lib/components/Elsewhere.svelte";
+  import Header from "$lib/Header.svelte";
+  import SearchBar from "$lib/SearchBar.svelte";
+  import WordPreview from "$lib/WordPreview.svelte";
+  import Elsewhere from "$lib/Elsewhere.svelte";
   import SortForm from "./SortForm.svelte";
   import { WordSortFns } from "$lib/common.js";
 

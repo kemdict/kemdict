@@ -1,8 +1,8 @@
 <script>
   import { page } from "$app/stores";
-  import SearchBar from "$lib/components/SearchBar.svelte";
-  import Elsewhere from "$lib/components/Elsewhere.svelte";
-  import Header from "$lib/components/Header.svelte";
+  import SearchBar from "$lib/SearchBar.svelte";
+  import Elsewhere from "$lib/Elsewhere.svelte";
+  import Header from "$lib/Header.svelte";
   const term = $page.params.word;
 </script>
 
@@ -19,5 +19,5 @@
   <p>找不到這個詞。</p>
   <p />
   <hr />
-  <Elsewhere {term}/>
+  <Elsewhere {term} />
 </div>

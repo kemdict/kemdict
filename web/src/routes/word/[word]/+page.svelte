@@ -1,10 +1,10 @@
 <script>
   /** @type {import('./$types').PageData} */
-  import Word from "$lib/components/Word.svelte";
-  import WordList from "$lib/components/WordList.svelte";
-  import SearchBar from "$lib/components/SearchBar.svelte";
-  import Header from "$lib/components/Header.svelte";
-  import Out from "$lib/components/Out.svelte";
+  import Word from "$lib/Word.svelte";
+  import WordList from "$lib/WordList.svelte";
+  import SearchBar from "$lib/SearchBar.svelte";
+  import Header from "$lib/Header.svelte";
+  import Out from "$lib/Out.svelte";
   export let data;
   $: word = data.word;
   $: backlinks = data.backlinks;

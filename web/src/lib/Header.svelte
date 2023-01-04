@@ -1,5 +1,5 @@
 <script>
-  import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
+  import DarkModeToggle from "$lib/DarkModeToggle.svelte";
 </script>
 
 <div class="mb-8">
