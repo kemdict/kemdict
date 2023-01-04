@@ -8,6 +8,45 @@ export const dicts = {
   dict_idioms: "教育部成語典",
 };
 
+export const dictsB = [
+  {
+    id: "kisaragi_dict",
+    name: "如月的現代台灣華語補足典",
+    url: "/dict-kisaragi",
+    lang: "zh",
+  },
+  {
+    id: "dict_concised",
+    name: "教育部國語辭典簡編本",
+    url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
+    lang: "zh",
+  },
+  {
+    id: "dict_revised",
+    name: "教育部重編國語辭典",
+    url: "https://dict.revised.moe.edu.tw/search.jsp?word=$1",
+    lang: "zh",
+  },
+  {
+    id: "moedict_twblg",
+    name: "教育部臺灣閩南語常用詞辭典",
+    url: "https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample=$1",
+    lang: "taigi",
+  },
+  {
+    id: "hakkadict",
+    name: "教育部臺灣客家語常用詞辭典",
+    url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0=$1",
+    lang: "hakka",
+  },
+  {
+    id: "dict_idioms",
+    name: "教育部成語典",
+    url: "https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=$1",
+    lang: "zh",
+  },
+];
+
 // Show loading indicator after this many miliseconds.
 export const showLoadingAfterMS = 250;
 
@@ -59,4 +98,14 @@ export function groupByProp(arr, property, fallback) {
     }
     return acc;
   }, {});
+}
+
+/**
+ * Format `str` using `template`.
+ * $1 in `template` stands for `str`.
+ * @param {string} template
+ * @param {string} str
+ */
+export function format(template, str) {
+  return str.replace(RegExp(`(${str})`), template);
 }

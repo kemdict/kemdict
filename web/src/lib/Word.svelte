@@ -5,65 +5,29 @@
   import WordHakkadict from "./WordHakkadict.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
   import Out from "./Out.svelte";
-  import { dicts } from "$lib/common.js";
+  import { dictsB, format } from "$lib/common.js";
   export let word;
-  export let dict = undefined;
-  // This allows us to also pass in which dictionary we want and only
-  // render for it.
-  let dictionaries;
-  if (dict) {
-    dictionaries = [dict];
-  } else {
-    dictionaries = Object.keys(dicts);
-  }
 </script>
 
-{#each dictionaries as dict}
+{#each dictsB as dict}
   <div>
-    {#if word[dict]}
-      <div id={dict} class="dict">
-        {#if dict == "kisaragi_dict"}
-          <Out href="/dict-kisaragi">如月的現代台灣華語補足典</Out>
-        {:else if dict == "dict_idioms"}
-          <Out
-            href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={word.title}"
-            >教育部成語典</Out
-          >
-        {:else if dict == "moedict_twblg"}
-          <Out
-            href="https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample={word.title}"
-            >教育部臺灣閩南語常用詞辭典</Out
-          >
-        {:else if dict == "hakkadict"}
-          <Out
-            href="https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0={word.title}"
-            >教育部臺灣客家語常用詞辭典</Out
-          >
-        {:else if dict == "dict_concised"}
-          <Out
-            href="https://dict.concised.moe.edu.tw/search.jsp?word={word.title}"
-            >教育部國語辭典簡編本</Out
-          >
-        {:else if dict == "dict_revised"}
-          <Out
-            href="https://dict.revised.moe.edu.tw/search.jsp?word={word.title}"
-            >教育部重編國語辭典</Out
-          >
-        {/if}
+    {#if word[dict.id]}
+      <div id={dict.id} class="dict">
+        <Out href={format(dict.url, word.title)}>{dict.name}</Out>
       </div>
       <div class="word">
-        {#if dict == "kisaragi_dict"}
-          <WordMoedictish {word} {dict} />
-        {:else if dict == "dict_revised"}
-          <WordDictRevised entry={word[dict]} title={word.title} />
-        {:else if dict == "dict_concised"}
-          <WordDictConcised entry={word[dict]} title={word.title} />
-        {:else if dict == "moedict_twblg"}
-          <WordMoedictish {word} {dict} />
-        {:else if dict == "hakkadict"}
-          <WordHakkadict entry={word[dict]} title={word.title} />
-        {:else if dict == "dict_idioms"}
-          <WordDictIdioms entry={word[dict]} title={word.title} />
+        {#if dict.id == "kisaragi_dict"}
+          <WordMoedictish {word} dict={dict.id} />
+        {:else if dict.id == "dict_revised"}
+          <WordDictRevised entry={word[dict.id]} title={word.title} />
+        {:else if dict.id == "dict_concised"}
+          <WordDictConcised entry={word[dict.id]} title={word.title} />
+        {:else if dict.id == "moedict_twblg"}
+          <WordMoedictish {word} dict={dict.id} />
+        {:else if dict.id == "hakkadict"}
+          <WordHakkadict entry={word[dict.id]} title={word.title} />
+        {:else if dict.id == "dict_idioms"}
+          <WordDictIdioms entry={word[dict.id]} title={word.title} />
         {/if}
       </div>
     {/if}
