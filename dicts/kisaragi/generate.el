@@ -22,6 +22,9 @@
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
 
+(defvar kisaragi-dict/current-title nil)
+(defvar kisaragi-dict/links nil)
+
 (defun kisaragi-dict/elem-title (elem)
   "Return the only title of ELEM."
   (org-no-properties
@@ -61,21 +64,25 @@ CONTENTS is the element contents."
                       "<a href=\"/word/%1$s\">%1$s</a>"))
                    (`angle "<%s>")
                    (`plain "%s")
-                   (f (error "Wrong `:format' value: %s" f)))))
-        (format fmt
-                (replace-regexp-in-string
-                 (rx bos "/word/") ""
-                 (pcase type
-                   ("coderef" (format "(%s)" path))
-                   ("custom-id" (concat "#" path))
-                   ("file"
-                    (let ((app (org-element-property :application link))
-                          (opt (org-element-property :search-option link)))
-                      (concat type (and app (concat "+" app)) ":"
-                              path
-                              (and opt (concat "::" opt)))))
-                   ("fuzzy" path)
-                   (_ (concat type ":" path)))))))))
+                   (f (error "Wrong `:format' value: %s" f))))
+            (thing (replace-regexp-in-string
+                    (rx bos "/word/") ""
+                    (pcase type
+                      ("coderef" (format "(%s)" path))
+                      ("custom-id" (concat "#" path))
+                      ("file"
+                       (let ((app (org-element-property :application link))
+                             (opt (org-element-property :search-option link)))
+                         (concat type (and app (concat "+" app)) ":"
+                                 path
+                                 (and opt (concat "::" opt)))))
+                      ("fuzzy" path)
+                      (_ (concat type ":" path))))))
+        (unless url?
+          (push `((from . ,kisaragi-dict/current-title)
+                  (to . ,(replace-regexp-in-string "#.*" "" path)))
+                kisaragi-dict/links))
+        (format fmt thing)))))
 
 (defun kisaragi-dict/elements-to-json (elems)
   "Process ELEMS to JSON for kisaragi-dict."
@@ -95,45 +102,46 @@ CONTENTS is the element contents."
             for elem in elems
             collect
             ;; title
-            (list
-             (cons "title" (kisaragi-dict/elem-title elem))
-             ;; Use unix time so it's easier to compare
-             (cons "added" (kisaragi-dict/timestamp-to-unix
-                            (org-element-property :ADDED elem)))
-             (cons "heteronyms"
-                   (cl-loop
-                    for het in (org-element-contents elem)
-                    when (eq 'headline (org-element-type het))
-                    collect
-                    ;; pronunciation
-                    (list (cons "pronunciation" (kisaragi-dict/elem-title het))
-                          (cons "definitions"
-                                (cl-loop
-                                 for definition in (org-element-contents het)
-                                 when (eq 'headline (org-element-type definition))
-                                 collect
-                                 (let* ((type+def
-                                         (-> (kisaragi-dict/elem-title definition)
-                                             (split-string "|")))
-                                        ;; type+def is (def) or (type def ...)
-                                        ;; so to detect if type is present we
-                                        ;; check if the second element exists
-                                        ;; or not.
-                                        (has-type (and (cadr type+def) t))
-                                        (type (and has-type (car type+def)))
-                                        (def (if has-type
-                                                 (cadr type+def)
-                                               (car type+def)))
-                                        (content (string-trim
-                                                  (org-element-interpret-data
-                                                   (org-element-contents definition))))
-                                        definition)
-                                   (when type
-                                     (push (cons "type" type) definition))
-                                   (unless (equal content "")
-                                     (setq def (format "%s\n%s" def content)))
-                                   (push (cons "def" def) definition)
-                                   definition))))))))
+            (let ((kisaragi-dict/current-title (kisaragi-dict/elem-title elem)))
+              (list
+               (cons "title" kisaragi-dict/current-title)
+               ;; Use unix time so it's easier to compare
+               (cons "added" (kisaragi-dict/timestamp-to-unix
+                              (org-element-property :ADDED elem)))
+               (cons "heteronyms"
+                     (cl-loop
+                      for het in (org-element-contents elem)
+                      when (eq 'headline (org-element-type het))
+                      collect
+                      ;; pronunciation
+                      (list (cons "pronunciation" (kisaragi-dict/elem-title het))
+                            (cons "definitions"
+                                  (cl-loop
+                                   for definition in (org-element-contents het)
+                                   when (eq 'headline (org-element-type definition))
+                                   collect
+                                   (let* ((type+def
+                                           (-> (kisaragi-dict/elem-title definition)
+                                               (split-string "|")))
+                                          ;; type+def is (def) or (type def ...)
+                                          ;; so to detect if type is present we
+                                          ;; check if the second element exists
+                                          ;; or not.
+                                          (has-type (and (cadr type+def) t))
+                                          (type (and has-type (car type+def)))
+                                          (def (if has-type
+                                                   (cadr type+def)
+                                                 (car type+def)))
+                                          (content (string-trim
+                                                    (org-element-interpret-data
+                                                     (org-element-contents definition))))
+                                          definition)
+                                     (when type
+                                       (push (cons "type" type) definition))
+                                     (unless (equal content "")
+                                       (setq def (format "%s\n%s" def content)))
+                                     (push (cons "def" def) definition)
+                                     definition)))))))))
       (cl-loop for (sym . orig) in original
                do (fset sym orig)))))
 
@@ -158,6 +166,7 @@ CONTENTS is the element contents."
        (byte-compile #'kisaragi-dict/parse-elements)))
 
 (let ((json-encoding-pretty-print t))
+  (setq kisaragi-dict/links nil)
   (with-temp-file "kisaragi_dict.json"
     (message "Generating kisaragi_dict.json...")
     (insert (->> (kisaragi-dict/parse-elements "kisaragi-dict.org")
@@ -166,6 +175,8 @@ CONTENTS is the element contents."
                             (cdr (assoc "added" other))))
                  json-encode)
             "\n")
-    (message "Generating kisaragi_dict.json...done")))
+    (message "Generating kisaragi_dict.json...done"))
+  (with-temp-file "links.json"
+    (insert (json-encode kisaragi-dict/links))))
 
 ;;; generate.el ends here
