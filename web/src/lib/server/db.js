@@ -33,7 +33,11 @@ export const db = (() => {
     // Just, like, work around that.
     "./web/src/lib/entries.db.gz",
   ].find((f) => fs.existsSync(f));
-  return readDB(path);
+  if (path) {
+    return readDB(path);
+  } else {
+    return;
+  }
 })();
 
 /**
