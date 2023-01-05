@@ -58,7 +58,7 @@
           {#if def.def || def.example || def.quote}
             <li>
               {#if def.def}
-                <p class="def">{def.def}</p>
+                <p class="def">{@html def.def}</p>
               {/if}
               {#if def.example}
                 <blockquote>
