@@ -22,7 +22,8 @@ function readDB(path) {
 }
 
 export const db = (() => {
-  let path = [
+  const path = [
+    "../kemdict.db",
     "./src/lib/entries.db",
     "./src/lib/entries.db.gz",
     // If we build on Netlify, like the path copying doesn't work well
