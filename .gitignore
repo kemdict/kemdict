@@ -1,3 +1,5 @@
 .cask
 *.json
 !package.json
+# This lets us avoid building data in the main repo
+!kisaragi/kisaragi_dict.json
