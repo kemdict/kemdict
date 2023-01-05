@@ -25,6 +25,17 @@ Kemdict 整合了多個教育部的辭典，提供一次搜尋的功能。
 
 詳細說明：https://kemdict.com/dict-kisaragi
 
+** Building
+
+The data will be built at the same time.
+
+Clone submodules recursively, then
+
+#+begin_src shell
+cd dicts
+make entries.db
+#+end_src
+
 ** 建置
 
 各個資料夾之後會有更新的說明。

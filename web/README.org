@@ -5,10 +5,18 @@ This will not build with adapter-cloudflare due to the use of builtin Node modul
 * Building for Node
 
 #+begin_src shell
-make built-node
+make build-with-data
 #+end_src
 
-This makes =svelte.config.js= use =adapter-node= and output to =built-node=. Other required files, namely =package.json=, =package-lock.json=, and the SQLite database of dictionaries, are all copied in as well.
+or
+
+#+begin_src shell
+make build-no-data
+#+end_src
+
+Both make =svelte.config.js= use =adapter-node= and output to =built-node=. Other required files, namely =package.json=, =package-lock.json=, and kisaragi-dict are all copied in as well.
+
+The =with-data= variant builds the SQLite database as well; this requires Cask and Emacs.
 
 ** Deploying to a server
 Copy the folder to a server, perhaps through =tar= and =scp=:

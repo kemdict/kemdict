@@ -33,37 +33,6 @@ jobs:
         with:
           node-version: "16"
           cache: "npm"
-      - name: Install packages
-        run: |
-          npm install
-          (cd web && npm install)
-      - name: Cache data files
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            dicts/entries.db
-            dicts/combined.json
-            dicts/kisaragi/*.json
-          # key: dicts-${{ github.ref_name }}
-          key: "dicts-${{ hashFiles('dicts/**') }}"
-          restore-keys: |
-            dicts-
-      - name: Set up Emacs
-        if: steps.cache.outputs.cache-hit != 'true'
-        # This is Emacs 27.1
-        run: |
-          sudo apt-get install emacs-nox
-      - name: Set up Cask
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: conao3/setup-cask@master
-      - name: Prepare data files
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          cd dicts
-          npm install
-          cask
-          make entries.db
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -73,12 +42,17 @@ jobs:
           printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
           printenv SSH_SECRET > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-      - name: Build and deploy node
+      - name: Install packages
+        run: |
+          cd web && npm install
+      - name: Build
+        run: |
+          cd web
+          make build-no-data
+      - name: Deploy node
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          cd web
-          make built-node
           tar -czf built-node.tar.gz -a built-node
           rsync built-node.tar.gz "$SSH_HOST":/home/kisaragi
           ssh "$SSH_HOST" bash << HERE
