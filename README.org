@@ -1,10 +1,17 @@
-* 收錄字典
+* Kemdict 收錄字典原始資料
 
+- kisaragi ::
+  - 如月的現代台灣華語補足典
 - ministry-of-education ::
   - 重編國語辭典修訂本
   - 國語辭典簡編本
+  - 教育部臺灣客家語常用詞辭典
   - 成語典
 - moedict-data-twblg ::
   - 教育部臺灣閩南語常用詞辭典
-- kisaragi ::
-  - 如月的現代台灣華語補足典
+
+** 授權
+
+《如月的現代台灣華語補足典》著作權由我（如月飛羽）以 CC0 釋出，內文見[[./LICENSE-CC0][LICENSE-CC0]]。
+
+其餘授權請見各 submodule 原本的儲存庫。
