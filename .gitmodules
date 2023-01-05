@@ -1,0 +1,6 @@
+[submodule "ministry-of-education"]
+	path = ministry-of-education
+	url = https://github.com/kemdict/kemdict-data-ministry-of-education
+[submodule "moedict-data-twblg"]
+	path = moedict-data-twblg
+	url = https://github.com/g0v/moedict-data-twblg
