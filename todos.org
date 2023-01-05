@@ -1,4 +1,5 @@
 * done
+** DONE split dicts into its own repository
 ** DONE Fix concised dict formatting
 Check the entry for 上
 ** DONE [#A] Table of contents
@@ -82,7 +83,6 @@ Thank you Chhoe Taigi and iTaigi
 - Word rendering
 ** Word page: split sections for each language
 ** TOC: split sections for each language
-** TODO split dicts into its own repository
 ** pronunciation search
 - Search without tones
 - Merge “pronunciation search” and Han character search
