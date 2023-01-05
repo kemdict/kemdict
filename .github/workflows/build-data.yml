@@ -1,0 +1,53 @@
+name: Build data
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  "build":
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "npm"
+      - name: Install packages
+        run: |
+          npm install
+      - name: Set up Emacs
+        # This is Emacs 27.1
+        run: |
+          sudo apt-get install emacs-nox
+      - name: Set up Cask
+        uses: conao3/setup-cask@master
+      - name: Set up SSH
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_SECRET: ${{ secrets.SSH_SECRET }}
+        run: |
+          mkdir -p ~/.ssh
+          printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
+          printenv SSH_SECRET > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Build data files
+        run: |
+          cask
+          make entries.db.gz
+      - name: Deploy built database
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          rsync entries.db.gz "$SSH_HOST":/home/kisaragi/deployed/kemdict.db.gz
+          ssh "$SSH_HOST" bash << HERE
+            gzip -d deployed/kemdict.db.gz
+            systemctl restart --user kemdict
+          HERE
+        shell: bash
