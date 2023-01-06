@@ -87,6 +87,12 @@ These are not compiled because only words under the Words heading are.
 *** ㄓㄤˋ ㄏㄠˋ
 **** 名|有多位使用者的系統中，代表其中一個使用者的單位，稱為帳號。
 * Words
+** 新冠
+:PROPERTIES:
+:added:    2023-01-06T23:26:19+0900
+:END:
+*** ㄒㄧㄣ ㄍㄨㄢˋ
+**** 名|「新冠肺炎」的簡稱。新型冠狀病毒。[[COVID-19]]。
 ** 快篩
 :PROPERTIES:
 :added:    2023-01-05T22:30:02+0900
