@@ -129,7 +129,7 @@
       @apply link;
     }
     h1 {
-      @apply text-2xl mt-4;
+      @apply text-2xl first:mt-4 mt-8;
     }
     h2 {
       @apply text-2xl mt-4;
