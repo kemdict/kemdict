@@ -2,6 +2,7 @@
   export let entry;
   export let title;
   import { spc, newline_string_to_ol } from "$lib/processing";
+  import Pronunciation from "$lib/Pronunciation.svelte";
 
   function idioms_nuance(str) {
     /* Sure... */
@@ -52,7 +53,7 @@
 {#each entry.heteronyms as het}
   <h1>{title}</h1>
   {#if het.bopomofo}
-    <p>讀音：<span>{spc(het.bopomofo)}</span></p>
+    <Pronunciation>{spc(het.bopomofo)}</Pronunciation>
   {/if}
   <p class="def">{@html het.definition}</p>
   {#if het.用法語意說明 || het.用法使用類別 || het.用法例句}

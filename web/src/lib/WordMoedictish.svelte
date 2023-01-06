@@ -1,4 +1,5 @@
 <script>
+  import Pronunciation from "$lib/Pronunciation.svelte";
   import { groupByProp } from "$lib/common";
   import { spc, interlinear_annotation } from "$lib/processing";
   export let word;
@@ -25,9 +26,10 @@
 {#each entry.heteronyms as het}
   <h1>{word.title}</h1>
   {#if het[pronunciation_key] && het[pronunciation_key] !== word.title}
-    <p id={`${dict}--${spc(het[pronunciation_key]).replace(" ", "")}`}>
-      讀音：<span>{spc(het[pronunciation_key])}</span>
-    </p>
+    <Pronunciation
+      id={`${dict}--${spc(het[pronunciation_key]).replace(" ", "")}`}
+      >{spc(het[pronunciation_key])}</Pronunciation
+    >
   {/if}
   {#each Object.entries(groupByProp(het.definitions, "type", "none")) as [type, defs]}
     {#if type !== "none"}

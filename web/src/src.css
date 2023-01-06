@@ -132,10 +132,10 @@
       @apply link;
     }
     h1 {
-      @apply text-xl mt-4;
+      @apply text-2xl mt-4;
     }
     h2 {
-      @apply text-xl mt-4;
+      @apply text-2xl mt-4;
     }
     h3 {
       @apply mb-0 mt-2;

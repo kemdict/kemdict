@@ -2,6 +2,7 @@
   export let entry;
   export let title;
   import { spc } from "$lib/processing";
+  import Pronunciation from "$lib/Pronunciation.svelte";
 
   function split(str) {
     // Some lines contain just a Tab. Get rid of them.
@@ -12,7 +13,7 @@
 {#each entry.heteronyms as het}
   <h1>{title}</h1>
   {#if het.bopomofo}
-    <p>讀音：<span>{spc(het.bopomofo)}</span></p>
+    <Pronunciation>{spc(het.bopomofo)}</Pronunciation>
   {/if}
   {#if het.definition}
     <ol>

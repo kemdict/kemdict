@@ -2,6 +2,7 @@
   export let entry;
   export let title;
   import { spc } from "$lib/processing";
+  import Pronunciation from "$lib/Pronunciation.svelte";
 
   function process_def(def) {
     if (def) {
@@ -31,7 +32,7 @@
 {#each entry.heteronyms as het}
   <h1>{title}</h1>
   {#if het.bopomofo}
-    <p>讀音：<span>{spc(het.bopomofo)}</span></p>
+    <Pronunciation>{spc(het.bopomofo)}</Pronunciation>
   {/if}
   {@html process_def(het.definition)}
 {/each}
