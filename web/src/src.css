@@ -80,9 +80,6 @@
     @apply border-b mb-2 my-8;
     @apply border-black dark:border-stone-500;
     @apply flex justify-between;
-    a {
-      @apply link;
-    }
   }
   .toc,
   .def {

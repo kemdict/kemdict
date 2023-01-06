@@ -38,7 +38,7 @@
   </svelte:fragment>
 </SplitLayout>
 
-<div class="prose">
+<div class="prose mt-8">
   {#if presentDicts.length > 1 || presentDicts[0] !== "kisaragi_dict"}
     <h2 class="mt-2">本頁的著作權</h2>
     <p>

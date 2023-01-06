@@ -15,6 +15,13 @@
     {#if word[dict.id]}
       <div id={dict.id} class="dict">
         <Out href={format(dict.url, word.title)}>{dict.name}</Out>
+        <span
+          ><a
+            class="hover:link text-gray-400 dark:gray-500"
+            href="#{dict.id}"
+            id={dict.id}>#</a
+          ></span
+        >
       </div>
       <div class="word">
         {#if dict.id == "kisaragi_dict"}

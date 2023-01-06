@@ -7,11 +7,13 @@
      href: where the link goes
    */
   export let href = undefined;
-  export let klass = undefined;
+  let klass = undefined;
+  export { klass as class };
   export let id = undefined;
 </script>
 
-<a {href} {id} class={klass} target="_blank" rel="noreferrer"><slot /></a>
+<a {href} {id} class="link {klass}" target="_blank" rel="noreferrer"><slot /></a
+>
 
 <style>
   a:after {
