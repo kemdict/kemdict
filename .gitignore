@@ -1,7 +1,12 @@
 .cask
+*.elc
 node_modules
 *.json
 !package.json
 !package-lock.json
 # This lets us avoid building data in the main repo
 !kisaragi/kisaragi_dict.json
+*.db.br
+*.gz
+*.db
+*.db-journal
