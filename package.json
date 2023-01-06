@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "better-sqlite3": "^7.6.2"
+    "better-sqlite3": "^7.6.2",
+    "csvtojson": "^2.0.10"
   }
 }
