@@ -25,6 +25,12 @@ export const dicts = [
     lang: "taigi",
   },
   {
+    id: "chhoetaigi_itaigi",
+    name: "iTaigi 華台對照典",
+    url: "https://itaigi.tw/k/$1",
+    lang: "taigi",
+  },
+  {
     id: "hakkadict",
     name: "教育部臺灣客家語常用詞辭典",
     url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0=$1",

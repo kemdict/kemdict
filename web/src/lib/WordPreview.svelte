@@ -7,7 +7,14 @@
   $: presentDicts = dictsInWord(word);
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.
-  const pron_keys = ["bopomofo", "trs", "pronunciation", "p_四縣"];
+  const pron_keys = [
+    "bopomofo",
+    "trs",
+    "pronunciation",
+    "p_四縣",
+    "poj",
+    "kip",
+  ];
   function strip(html) {
     // https://stackoverflow.com/a/822464/6927814
     // This doesn't have to be perfect. We're not handling untrusted

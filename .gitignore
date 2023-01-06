@@ -5,10 +5,7 @@ _data/
 *.js.map
 .cask
 *.elc
-netlify/functions/serverless/*
-!netlify/functions/serverless/index.js
 *.zip
-dev-*.json
 .netlify
 *.db.br
 *.gz
