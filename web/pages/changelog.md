@@ -4,9 +4,12 @@ title: 版本紀錄
 
 # 版本紀錄
 
-## 0.9.2 (尚未釋出)
+## 0.9.2 (2023-01-06)
 
-- 也為 kisaragi-dict 建立反向連結
+- 加入 iTaigi 資料庫的內容（來自 [ChhoeTaigi 的資料](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/blob/master/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv)）
+- 也試著為 kisaragi-dict 建立反向連結
+- 修正《臺灣閩南語常用詞辭典》的連結
+- 更新讀音的風格
 
 ## 0.9.1 (2023-01-05)
 

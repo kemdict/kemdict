@@ -13,6 +13,6 @@
 {#each entry.heteronyms as het}
   <h1>{getTitle(het)}</h1>
   <Pronunciation>{het.kip}</Pronunciation>
-  <p>華語：{@html het.definition}</p>
-  <div class="italic text-sm mt-2">資料提供：{het.DataProvidedBy}</div>
+  <p class="my-2">華語：{@html het.definition}</p>
+  <div class="italic text-sm">資料提供：{het.DataProvidedBy}</div>
 {/each}

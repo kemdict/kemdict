@@ -57,6 +57,9 @@
         <p><a href="dict-kisaragi">如月的現代台灣華語補足典</a></p>
       </li>
       <li>
+        <p><a href="dict-itaigi">iTaigi 華台對照典</a></p>
+      </li>
+      <li>
         <p><a href="dict-moe">教育部重編國語辭典修訂本</a></p>
       </li>
       <li>
