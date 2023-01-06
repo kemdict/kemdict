@@ -43,6 +43,7 @@ const dicts = [
   "dict_concised",
   "dict_idioms",
   "moedict_twblg",
+  "chhoetaigi_itaigi",
 ];
 
 function stringifyFields(thing) {

@@ -1,6 +1,9 @@
 export LANG=en_US.UTF-8
 
-.DEFAULT_GOAL := combined.json
+.DEFAULT_GOAL := build
+
+build: entries.db
+.PHONY: build
 
 .cask: Cask
 	cask install
@@ -26,13 +29,15 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ca
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
 #   a main title and I need to pick one. It's not an ideal assumption.
 # - HuaBun -> definition, again because of Kemdict's assumptions.
+# - HACK: id -> het_sort, to make it work with the code originally
+#   written to deal with dict_revised.
 # - Dropping the Input columns -- which use numbers to represent tones,
 #   not unicode sequences -- because they're not needed.
 # - The original header is (without the newline):
 #     "DictWordID","PojUnicode","PojInput","KipUnicode","KipInput",
 #     "HanLoTaibunPoj","HanLoTaibunKip","HoaBun","DataProvidedBy"
 itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
-	npx csvtojson --ignoreColumns='/Input/' --headers='["id","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input/' --headers='["het_sort","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.

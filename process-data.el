@@ -56,7 +56,10 @@ Writes into TABLE. Returns the new value associated with KEY."
                   ;; kisaragi-dict
                   "pronunciation"
                   ;; hakkadict
-                  "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"))
+                  "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
+                  ;; chhoetaigi-itaigi (keys are defined in Makefile
+                  ;; in this repository)
+                  "poj" "kip"))
       (when-let (p (gethash key het))
         (dolist (p (k/normalize-pronunciation p))
           (push p ret))))
@@ -115,7 +118,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
   (k/extract-development-version "赫茲"
     "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
-    "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json"))
+    "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json")
+  (k/extract-development-version "白漆"
+    "itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json"))
 
 (defun k/parse-and-shape (&rest files)
   "Parse FILES and return a shaped version of it.
@@ -160,10 +165,13 @@ Parsed arrays from FILES are concatenated before shaping."
                   (vconcat (gethash "heteronyms" existing)
                            heteronyms)))
           ;; Sort the heteronyms according to the het_sort key.
+          ;; TODO: sort with the "id" key if het_sort isn't present
           (when (and
                  ;; Skip checking the rest if the first already
                  ;; doesn't have it.
                  (gethash "het_sort" (elt heteronyms 0))
+                 ;; FIXME: do we actually need to check this? The data
+                 ;; we're working with should be well-formed enough.
                  (seq-every-p (lambda (it) (gethash "het_sort" it))
                               heteronyms))
             (setq heteronyms
@@ -225,15 +233,20 @@ This is a separate step from shaping."
           (k/hash-update def "def"
             #'d/links/linkify-brackets))))
     (pcase dict
-      ("dict_concised" (k/hash-update het "definition"
-                         #'d/process-def/dict_concised))
-      ("dict_idioms" (k/hash-update het "definition"
-                       (lambda (def)
-                         ;; There is often an anchor at the end of
-                         ;; dict_idioms definitions that's not
-                         ;; displayed. Getting rid of it here allows
-                         ;; shredding them from the database.
-                         (s-replace-regexp "<a name.*" "" def)))))
+      ("chhoetaigi_itaigi"
+       (k/hash-update het "definition"
+         #'d/links/link-to-word))
+      ("dict_concised"
+       (k/hash-update het "definition"
+         #'d/process-def/dict_concised))
+      ("dict_idioms"
+       (k/hash-update het "definition"
+         (lambda (def)
+           ;; There is often an anchor at the end of
+           ;; dict_idioms definitions that's not
+           ;; displayed. Getting rid of it here allows
+           ;; shredding them from the database.
+           (s-replace-regexp "<a name.*" "" def)))))
     het))
 
 (cl-defun d/links/link-to-word (target &optional (desc target))
@@ -305,9 +318,11 @@ if TARGET already looks like an HTML link."
                             "dev-dict-twblg-ext.json"
                             "dev-dict_concised.json"
                             "dev-dict_idioms.json"
-                            "dev-hakkadict.json")))
+                            "dev-hakkadict.json"
+                            "dev-chhoetaigi-itaigi.json")))
               [("moedict_twblg" . ("dev-dict-twblg.json"
                                    "dev-dict-twblg-ext.json"))
+               ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
                ("dict_revised" . "dev-dict_revised.json")
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
@@ -315,6 +330,7 @@ if TARGET already looks like an HTML link."
                ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
             [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                                  "moedict-data-twblg/dict-twblg-ext.json"))
+             ("chhoetaigi_itaigi" . "itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
              ("dict_revised" . "ministry-of-education/dict_revised.json")
              ("dict_concised" . "ministry-of-education/dict_concised.json")
              ("dict_idioms" . "ministry-of-education/dict_idioms.json")
