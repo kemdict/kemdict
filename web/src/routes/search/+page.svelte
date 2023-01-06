@@ -54,6 +54,7 @@
     <div class="prose">
       <h1>「{data.query}」的搜尋結果</h1>
       <p>找不到{title}。</p>
+      <hr />
       <Elsewhere term={data.query} />
     </div>
   {:else}

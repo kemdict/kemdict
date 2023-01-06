@@ -12,7 +12,6 @@
 <SingleLayout class="prose">
   <h1>{term}</h1>
   <p>找不到這個詞。</p>
-  <p />
   <hr />
   <Elsewhere {term} />
 </SingleLayout>

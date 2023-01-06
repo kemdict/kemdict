@@ -44,7 +44,7 @@
 
        Honestly we should just use a grid.
     */
-    @apply sm:min-h-[28rem];
+    @apply sm:min-h-[32rem];
     & > div {
       /* The gap between the left edge of the container and the right slot */
       @apply sm:ml-[15rem] md:ml-[18rem];
