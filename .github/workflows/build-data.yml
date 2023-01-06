@@ -47,7 +47,7 @@ jobs:
         run: |
           rsync entries.db.gz "$SSH_HOST":/home/kisaragi/deployed/kemdict.db.gz
           ssh "$SSH_HOST" bash << HERE
-            gzip -d deployed/kemdict.db.gz
+            gzip -d -f deployed/kemdict.db.gz
             systemctl restart --user kemdict
           HERE
         shell: bash
