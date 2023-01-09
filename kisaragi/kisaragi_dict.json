@@ -1,5 +1,64 @@
 [
   {
+    "title": "深度學習",
+    "added": 1673289588.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄣ ㄉㄨˋ ㄒㄩㄝˊ ㄒㄧˊ",
+        "definitions": [
+          {
+            "def": "英語deep learning的意譯。<a href=\"/word/機器學習\">機器學習</a>技術的一種，指利用多於三層的神經網路（亦即除了輸入層與輸出層外還有更多「隱藏」的層）進行機器學習的技術。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "機器學習",
+    "added": 1673289296.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧ ㄑㄧˋ ㄒㄩㄝˊ ㄒㄧˊ",
+        "definitions": [
+          {
+            "def": "一種人工智慧技術，利用演算法自動分析大量資訊並進行「學習」，產生出能夠達成過往只有人類能夠進行的工作的工具。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "深偽技術",
+    "added": 1673289204.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄣ ㄨㄟˋ ㄐㄧˋ ㄕㄨˋ",
+        "definitions": [
+          {
+            "def": "見「深偽」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "深偽",
+    "added": 1673288820.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄣ ㄨㄟˋ",
+        "definitions": [
+          {
+            "def": "一種使用機器學習AI將影片或圖片中的臉換成另一張臉的技術。源自英語deepfake，為「深度學習」與「偽裝」二詞合併而成。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "隨身碟",
     "added": 1673274445.0,
     "heteronyms": [

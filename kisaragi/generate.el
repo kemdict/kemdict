@@ -40,6 +40,8 @@
 CONTENTS is the element contents."
   (format "<blockquote>%s</blockquote>" contents))
 
+;; FIXME: We should do the linking during process-data, so all links
+;; are handled at the same place.
 (defun kisaragi-dict/link-interpreter (link contents)
   "Interpret LINK object as the syntax we want.
 This is a copy of `org-element-link-interpreter'.
