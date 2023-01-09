@@ -82,11 +82,23 @@ No longer applicable as we don't use moedict-data anymore.
 (Listing new words from MOE dictionaries requires keeping a record of all words from a previous version and comparing them with the current list. Doable but not relevant right now.)
 ** DONE Include information for when an entry was added in kisaragi-dict
 ** DONE Figure out an icon
+* Adding a dictionary
+- kemdict-data: add code to download the raw data at build time
+- kemdict-data: update process-data.el to merge the new dictionary into the intermediate json file
+- kemdict-data: update combined-to-sqlite to include the new dictionary
+- update Word.svelte to use the right component for the new dictionary
+- most likely, write a new word component for the new dictionary
+- update dictionary list in common.js, README, and root route
+- update copyright information
 * todos
+** Search: put exact match on top
+** Include more from ChhoeTaigi
+** Make copyright information more clear
 ** TODO 服務條款、隱私權條款
 ** TODO Add C-k shortcut display to searchbar
 ** TODO [#A] Word page: split sections for each language
 ** TODO [#A] TOC: split sections for each language
+** TODO build mobile version with Expo
 ** pronunciation search
 - Search without tones
 - Merge “pronunciation search” and Han character search
@@ -104,7 +116,6 @@ Chhoetaigi dropdown → Taigi, equivalent zh
 Wiktionary dropdown → zh, en, ja
 
 ** TODO Search sort button needs to be styled
-** TODO Retrieve definition from Wiktionary API? (during request? client side?)
 ** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 ** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 ** TODO Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
