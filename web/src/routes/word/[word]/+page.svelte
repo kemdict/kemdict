@@ -23,7 +23,9 @@
 
 <SplitLayout leftFirst={false} initialInput={word.title}>
   <div slot="left">
-    <TOC {presentDicts} />
+    <div class="not-sm:hidden">
+      <TOC {presentDicts} />
+    </div>
     <Elsewhere term={word.title} />
     {#if backlinks.length > 0}
       <div class="prose">
