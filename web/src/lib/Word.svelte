@@ -10,8 +10,8 @@
   export let word;
 </script>
 
-{#each dicts as dict}
-  <div>
+<div class="not-sm:mb-8">
+  {#each dicts as dict}
     {#if word[dict.id]}
       <div id={dict.id} class="dict">
         <Out href={format(dict.url, word.title)}>{dict.name}</Out>
@@ -41,5 +41,5 @@
         {/if}
       </div>
     {/if}
-  </div>
-{/each}
+  {/each}
+</div>
