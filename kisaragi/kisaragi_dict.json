@@ -1,5 +1,118 @@
 [
   {
+    "title": "隨身碟",
+    "added": 1673274445.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄙㄨㄟˊ ㄕㄣ ㄉㄧㄝˊ",
+        "definitions": [
+          {
+            "def": "與手指大小相近，用來儲存資料的小型電子裝置。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "USB",
+    "added": 1673274179.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/ˈjuː ɛs biː/",
+        "definitions": [
+          {
+            "def": "Universal Serial Bus（通用序列匯流排）。一種連接硬體裝置間用的協定標準。",
+            "type": "名"
+          },
+          {
+            "def": "<a href=\"/word/隨身碟\">隨身碟</a>。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "實聯制",
+    "added": 1673273114.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄌㄧㄢˊ ㄓˋ",
+        "definitions": [
+          {
+            "def": "<a href=\"/word/實名制\">實名制</a>的變種。必須登記實際聯絡方式才能進入某場所的制度。相較於實名制較為保護個人隱私。\n台灣COVID-19疫情期間，2020年6月「防疫新生活運動」首次提出建議場所實施實聯制以幫助進行接觸者追蹤，後於2021年疫情升溫時要求場所必須實施實聯制，直到<a href=\"https://www.cdc.gov.tw/Category/ListContent/EmXemht4IT-IRAPrAnyG9A?uaid=1UL0SLJm0xCr6fmcN-NzAg\">2022年4月27日隨進入社區傳染階段後取消</a>。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "實名制",
+    "added": 1673273113.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄇㄧㄥˊ ㄓˋ",
+        "definitions": [
+          {
+            "def": "使用某項服務或進入某場所前，必須登記實際姓名（或其他身份識別方式）的制度。如：「中國透過網路服務實名制來監控人民」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "帳密",
+    "added": 1673272952.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄤˋ ㄇㄧˋ",
+        "definitions": [
+          {
+            "def": "<a href=\"/word/帳號\">帳號</a>和密碼。如：「註冊使用者之後將會提供臨時帳密，請用臨時帳密登入後設定新密碼並開通帳號」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "帳號",
+    "added": 1673272925.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄤˋ ㄏㄠˋ",
+        "definitions": [
+          {
+            "def": "有多位使用者的系統中，代表其中一個使用者的單位。同「帳戶」。如：「銀行帳號」、「Google帳號」。",
+            "type": "名"
+          },
+          {
+            "def": "登入與識別帳號用的代碼。如：「帳號和密碼要自己保管好」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新冠",
+    "added": 1673015179.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄍㄨㄢˋ",
+        "definitions": [
+          {
+            "def": "「新冠肺炎」的簡稱。新型冠狀病毒。<a href=\"/word/COVID-19\">COVID-19</a>。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "快篩",
     "added": 1672925402.0,
     "heteronyms": [
