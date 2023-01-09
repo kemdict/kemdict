@@ -13,6 +13,9 @@ DICT_TARGETS += kisaragi/kisaragi_dict.json
 DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 
+dicts: $(DICT_TARGETS)
+.PHONY: dicts
+
 combined.json: $(DICT_TARGETS) process-data.el .cask
 	cask eval "(load \"process-data\")"
 
