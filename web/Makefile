@@ -1,5 +1,5 @@
 export LANG=en_US.UTF-8
-export KEMDICT_VERSION=$(shell git describe --tags)
+export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 .DEFAULT_GOAL := build-no-data
 
