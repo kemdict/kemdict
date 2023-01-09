@@ -10,36 +10,34 @@
   export let word;
 </script>
 
-<div class="not-sm:mb-8">
-  {#each dicts as dict}
-    {#if word[dict.id]}
-      <div id={dict.id} class="dict">
-        <Out href={format(dict.url, word.title)}>{dict.name}</Out>
-        <span
-          ><a
-            class="hover:link text-gray-400 dark:gray-500"
-            href="#{dict.id}"
-            id={dict.id}>#</a
-          ></span
-        >
-      </div>
-      <div class="word">
-        {#if dict.id == "kisaragi_dict"}
-          <WordMoedictish {word} dict={dict.id} />
-        {:else if dict.id == "chhoetaigi_itaigi"}
-          <WordITaigi entry={word[dict.id]} />
-        {:else if dict.id == "dict_revised"}
-          <WordDictRevised entry={word[dict.id]} title={word.title} />
-        {:else if dict.id == "dict_concised"}
-          <WordDictConcised entry={word[dict.id]} title={word.title} />
-        {:else if dict.id == "moedict_twblg"}
-          <WordMoedictish {word} dict={dict.id} />
-        {:else if dict.id == "hakkadict"}
-          <WordHakkadict entry={word[dict.id]} title={word.title} />
-        {:else if dict.id == "dict_idioms"}
-          <WordDictIdioms entry={word[dict.id]} title={word.title} />
-        {/if}
-      </div>
-    {/if}
-  {/each}
-</div>
+{#each dicts as dict}
+  {#if word[dict.id]}
+    <div id={dict.id} class="dict">
+      <Out href={format(dict.url, word.title)}>{dict.name}</Out>
+      <span
+        ><a
+          class="hover:link text-gray-400 dark:gray-500"
+          href="#{dict.id}"
+          id={dict.id}>#</a
+        ></span
+      >
+    </div>
+    <div class="word">
+      {#if dict.id == "kisaragi_dict"}
+        <WordMoedictish {word} dict={dict.id} />
+      {:else if dict.id == "chhoetaigi_itaigi"}
+        <WordITaigi entry={word[dict.id]} />
+      {:else if dict.id == "dict_revised"}
+        <WordDictRevised entry={word[dict.id]} title={word.title} />
+      {:else if dict.id == "dict_concised"}
+        <WordDictConcised entry={word[dict.id]} title={word.title} />
+      {:else if dict.id == "moedict_twblg"}
+        <WordMoedictish {word} dict={dict.id} />
+      {:else if dict.id == "hakkadict"}
+        <WordHakkadict entry={word[dict.id]} title={word.title} />
+      {:else if dict.id == "dict_idioms"}
+        <WordDictIdioms entry={word[dict.id]} title={word.title} />
+      {/if}
+    </div>
+  {/if}
+{/each}

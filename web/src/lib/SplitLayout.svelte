@@ -12,16 +12,22 @@
   </Header>
 {/if}
 
-<div class="split-layout">
-  <div>
-    {#if !leftFirst}
+{#if leftFirst}
+  <div class="split-layout">
+    <div>
+      <div class="left max-sm:mb-6">
+        <slot name="left" />
+      </div>
       <slot name="right" />
-    {/if}
-    <div class="left">
-      <slot name="left" />
     </div>
-    {#if leftFirst}
-      <slot name="right" />
-    {/if}
   </div>
-</div>
+{:else}
+  <div class="split-layout">
+    <div>
+      <slot name="right" />
+      <div class="left max-sm:mt-8">
+        <slot name="left" />
+      </div>
+    </div>
+  </div>
+{/if}

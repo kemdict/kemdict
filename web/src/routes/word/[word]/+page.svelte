@@ -23,7 +23,7 @@
 
 <SplitLayout leftFirst={false} initialInput={word.title}>
   <div slot="left">
-    <div class="not-sm:hidden">
+    <div class="max-sm:hidden">
       <TOC {presentDicts} />
     </div>
     <Elsewhere term={word.title} />

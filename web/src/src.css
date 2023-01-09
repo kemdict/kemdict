@@ -55,7 +55,6 @@
         /* Actually place it on the left */
         @apply sm:absolute sm:top-4 sm:left-4;
         /* Style for when it's collapsed */
-        @apply max-sm:mb-6;
         .fixed {
           @apply sm:w-[12rem] md:w-[15rem];
         }
