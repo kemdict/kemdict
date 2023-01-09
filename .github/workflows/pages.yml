@@ -24,10 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          submodules: recursive
-      - name: Fetch tags for release purposes
-        run: |
-          git fetch --depth=2 --tags
+          fetch-depth: 0
+          # only need dicts for kisaragi_dict.json, not the raw data
+          submodules: true
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
