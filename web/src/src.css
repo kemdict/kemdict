@@ -68,6 +68,9 @@
       @apply px-2 py-1;
       @apply fade;
     }
+    kbd {
+      @apply text-gray-400 font-bold;
+    }
   }
   .wordlink {
     @apply btn py-1 px-2 font-bold;

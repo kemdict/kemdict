@@ -1,11 +1,26 @@
 <script>
+  export let search = false;
+  export let initialInput = undefined;
+  export let initialMatchSelection = undefined;
   import DarkModeToggle from "$lib/DarkModeToggle.svelte";
+  import SearchBar from "$lib/SearchBar.svelte";
 </script>
 
 <div class="mb-8">
-  <h1 class="my-2 justify-between flex items-baseline">
+  <nav class="my-2 justify-between flex items-center">
     <a class="font-bold hover:underline" href="/">Kemdict 國語整合典 (β)</a>
-    <DarkModeToggle />
-  </h1>
-  <slot />
+    <div class="" />
+    <div class="text-right">
+      <DarkModeToggle />
+    </div>
+  </nav>
+  {#if search}
+    <SearchBar {initialInput} {initialMatchSelection} />
+  {/if}
 </div>
+
+<style>
+  nav > * {
+    flex-basis: 20rem;
+  }
+</style>

@@ -5,13 +5,10 @@
   export { klass as class };
   export let initialInput = undefined;
   export let initialMatchSelection = undefined;
-  import SearchBar from "$lib/SearchBar.svelte";
   import Header from "$lib/Header.svelte";
 </script>
 
-<Header>
-  <SearchBar {initialInput} {initialMatchSelection} />
-</Header>
+<Header search={true} {initialInput} {initialMatchSelection} />
 
 <div class="{klass} max-w-2xl mx-auto">
   <slot />

@@ -2,14 +2,11 @@
   export let initialInput = undefined;
   export let wantHeader = true;
   export let leftFirst = true;
-  import SearchBar from "$lib/SearchBar.svelte";
   import Header from "$lib/Header.svelte";
 </script>
 
 {#if wantHeader}
-  <Header>
-    <SearchBar {initialInput} />
-  </Header>
+  <Header search={true} {initialInput} />
 {/if}
 
 {#if leftFirst}
