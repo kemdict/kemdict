@@ -52,7 +52,7 @@
       <!-- /search?q=<...>, like search engines -->
       <input class="btnColor rounded-r" type="submit" value="搜尋" />
       <div
-        class="absolute right-14 top-[calc(50%-0.9rem)] text-right peer-hover:hidden peer-focus:hidden"
+        class="absolute right-14 top-[calc(50%-0.9rem)] text-right peer-hover:hidden peer-focus:hidden max-sm:hidden"
       >
         <kbd>Ctrl</kbd> <kbd>K</kbd>
       </div>
