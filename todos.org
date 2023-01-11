@@ -1,5 +1,4 @@
 * done
-** DONE try duckdb
 ** DONE Don't show keyboard shortcut on mobile (max-sm:hidden)
 ** DONE [#A] TOC: split sections for each language
 ** DONE Add C-k shortcut display to searchbar
@@ -97,6 +96,7 @@ No longer applicable as we don't use moedict-data anymore.
 * todos
 ** fix a-a cham-cham
 ** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
+** try duckdb
 ** about: justify kemdict considering chhoetaigi's existence
 ** update robots.txt to allow =/word/= to be indexed
 ** Search: put exact match on top

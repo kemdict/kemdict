@@ -1,32 +1,40 @@
 import * as fs from "node:fs";
-import * as duckdb from "duckdb";
+import * as zlib from "node:zlib";
+import Database from "better-sqlite3";
+// This already uses ES6 sets when available.
 
 /**
- * Read an SQLite database into a DuckDB in-memory database.
- * Not tested with compressed files.
+ * Read a gzipped SQLite database and return a Database
+ * object for it as an in-memory database.
+ * If `path` does not end in ".gz", try to return a connection instead
+ * (without using an in-memory database).
+ * @param {string} path
+ * @returns {Database}
  */
-async function readDuckDB(path) {
-  let db = new duckdb.Database(":memory:");
-  return new Promise((resolve) => {
-    db.exec(
-      `
-INSTALL sqlite;
-LOAD sqlite;
-SET GLOBAL sqlite_all_varchar=true;
-CALL sqlite_attach('${path}')`,
-      () => {
-        resolve(db);
-      }
-    );
-  });
+function readDB(path) {
+  if (path.endsWith(".db.gz")) {
+    let data = fs.readFileSync(path);
+    let decompressed = zlib.gunzipSync(data);
+    return new Database(decompressed);
+  } else {
+    return new Database(path, { readonly: true, fileMustExist: true });
+  }
 }
 
-export const db = await (() => {
-  const path = ["../kemdict.db", "./src/lib/entries.db"].find((f) =>
-    fs.existsSync(f)
-  );
+export const db = (() => {
+  const path = [
+    "../kemdict.db",
+    "./src/lib/entries.db",
+    "./src/lib/entries.db.gz",
+    // If we build on Netlify, like the path copying doesn't work well
+    // with the project being in a subdirectory, ie. during build we get
+    // src/... but during serverless function runtime we get web/src/...
+    //
+    // Just, like, work around that.
+    "./web/src/lib/entries.db.gz",
+  ].find((f) => fs.existsSync(f));
   if (path) {
-    return readDuckDB(path);
+    return readDB(path);
   } else {
     return;
   }
@@ -38,28 +46,21 @@ export const db = await (() => {
  * @param {string} title
  * @returns {object}
  */
-export async function getWord(title, conn = db) {
-  return new Promise((resolve) => {
-    conn.all("SELECT * FROM entries WHERE title = ?", title, (_err, ret) => {
-      if (ret) {
-        resolve(processWord(ret[0]));
-      } else {
-        resolve(ret[0]);
-      }
-    });
-  });
+export function getWord(title) {
+  const stmt = db.prepare("SELECT * FROM entries WHERE title = ?");
+  let ret = stmt.get(title);
+  if (ret) {
+    return processWord(ret);
+  } else {
+    return ret;
+  }
 }
 
-export async function getBacklinks(title) {
-  return new Promise((resolve) => {
-    db.all(
-      `SELECT DISTINCT "from" FROM links WHERE "to" = ?`,
-      title,
-      (_err, res) => {
-        resolve(res.map((x) => x.from));
-      }
-    );
-  });
+export function getBacklinks(title) {
+  const stmt = db.prepare(`SELECT DISTINCT "from" FROM links WHERE "to" = ?`);
+  // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
+  stmt.pluck(true);
+  return stmt.all(title);
 }
 
 /**
@@ -84,22 +85,15 @@ export function processWord(word) {
  * @param {string} needle
  * @returns {string[]}
  */
-export async function getTitles(mode, needle) {
-  const conn = db.connect();
-  const stmt = conn.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
-
-  let pattern;
+export function getTitles(mode, needle) {
+  const stmt = db.prepare(`SELECT title FROM entries WHERE title LIKE ?`);
   if (mode === "prefix") {
-    pattern = `${needle}%`;
+    return stmt.all(`${needle}%`);
   } else if (mode === "suffix") {
-    pattern = `%${needle}`;
-  } else if (mode === "contains") {
-    pattern = `%${needle}%`;
+    return stmt.all(`%${needle}`);
+  } else if (mode === "infix") {
+    return stmt.all(`%${needle}%`);
+  } else {
+    // TODO: error management
   }
-
-  return new Promise((resolve) => {
-    stmt.all(pattern, (_err, res) => {
-      resolve(res);
-    });
-  });
 }

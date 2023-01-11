@@ -4,10 +4,10 @@ import { error } from "@sveltejs/kit";
 import { getWord, getBacklinks } from "$lib/server/db.js";
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export function load({ params }) {
   const w = params.word;
-  const word = await getWord(w);
-  const backlinks = await getBacklinks(w);
+  const word = getWord(w);
+  const backlinks = getBacklinks(w);
 
   if (word) {
     return { word: word, backlinks: backlinks };

@@ -13,7 +13,7 @@
     "vite": "^4.0.2"
   },
   "dependencies": {
-    "duckdb": "^0.6.1",
+    "better-sqlite3": "^7.6.2",
     "lodash-es": "^4.17.21"
   },
   "scripts": {
