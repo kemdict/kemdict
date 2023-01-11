@@ -79,7 +79,7 @@
     }
   }
   .dict {
-    @apply my-8 mb-2 border-b;
+    @apply mt-12 mb-2 border-b;
     @apply border-black dark:border-stone-500;
     @apply flex justify-between;
   }
@@ -118,6 +118,9 @@
     }
   }
   .word {
+    .copyright {
+      @apply mt-6 text-right text-sm opacity-75;
+    }
     transition-property: max-height;
     transition-duration: 250ms;
     transition-timing-function: ease-in-out;
