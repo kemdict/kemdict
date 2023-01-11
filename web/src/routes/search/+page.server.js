@@ -1,57 +1,68 @@
 export const prerender = false;
 
 import { redirect } from "@sveltejs/kit";
-import { db, processWord } from "$lib/server/db.js";
+import { db, processWord, getTitles } from "$lib/server/db.js";
 import { dictIds, WordSortFns } from "$lib/common";
 
-export function load({ url }) {
+export async function load({ url }) {
   const query = url.searchParams.get("q");
   const mtch = url.searchParams.get("m") || "prefix";
   const sort = url.searchParams.get("s") || "asc";
-  let words;
-  let wordsPn;
+  let words = [];
+  let wordsPn = [];
 
   if (typeof query !== "string") {
     throw redirect(301, "/");
   }
 
-  {
-    const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
-    if (mtch === "prefix") {
-      words = stmt.all(`${query}%`);
-    } else if (mtch === "suffix") {
-      words = stmt.all(`%${query}`);
-    } else if (mtch === "contains") {
-      words = stmt.all(`%${query}%`);
-    }
-  }
+  words = await getTitles(mtch, query);
 
   {
-    const stmtPn = db.prepare(
-      `
+    let titlesPn;
+    let pattern;
+    if (mtch === "prefix") {
+      pattern = `${query}%`;
+    } else if (mtch === "suffix") {
+      pattern = `%${query}`;
+    } else if (mtch === "contains") {
+      pattern = `%${query}%`;
+    }
+    titlesPn = await new Promise((resolve) => {
+      db.all(
+        `
 SELECT DISTINCT title
 FROM pronunciations
-WHERE pronunciation LIKE ?
-LIMIT 150`
-    );
-    let titlesPn;
-    if (mtch === "prefix") {
-      titlesPn = stmtPn.all(`${query}%`);
-    } else if (mtch === "suffix") {
-      titlesPn = stmtPn.all(`%${query}`);
-    } else if (mtch === "contains") {
-      titlesPn = stmtPn.all(`%${query}%`);
-    }
-    const titleWordStmt = db.prepare(
-      `SELECT * FROM entries WHERE title = @title`
-    );
-    // HACK: this is very, *very*, slow, when there are lots of titles.
-    // It is still slow even when I tried to do it in one SQL query.
-    // So this can probably only be fixed by switching to a
-    // one-definition-per-row structure in the database.
-    wordsPn = db.transaction(() => {
-      return titlesPn.map((title) => titleWordStmt.get(title));
-    })();
+WHERE pronunciation LIKE ?::STRING
+LIMIT 100`,
+        pattern,
+        (_err, res) => {
+          resolve(res);
+        }
+      );
+    });
+    titlesPn = titlesPn.map((x) => x.title);
+    // let now = new Date();
+    wordsPn = await new Promise((resolve) => {
+      // This is a LOT faster than looping over titlesPn and using
+      // proper quoting. Like, from 20+ seconds to less than a second
+      // fast.
+      //
+      // It appears that using a parameter for a WHERE IN clause is,
+      // just, not a thing in SQL. emacsql appears to allow you to
+      // do it, but it's also just encoding ELisp vectors or strings into an
+      // SQL string representation, like we're doing with titlesPn here.
+      // (See `emacsql-escape-vector`.)
+      db.all(
+        `SELECT * FROM entries WHERE title IN (${titlesPn
+          .map((x) => `'${x}'`)
+          .join(",")})`,
+        (_err, ret) => {
+          resolve(ret || []);
+        }
+      );
+    });
+    // console.log(`q: ${query}`);
+    // console.log(`took: ${(new Date() - now) / 1000}`);
   }
 
   // This stops the query from going into the /word/ page when redirecting
