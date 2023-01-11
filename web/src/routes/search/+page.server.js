@@ -1,38 +1,28 @@
 export const prerender = false;
 
 import { redirect } from "@sveltejs/kit";
-import { db, processWord } from "$lib/server/db.js";
+import { db, processWord, getTitles } from "$lib/server/db.js";
 import { dictIds, WordSortFns } from "$lib/common";
 
 export function load({ url }) {
   const query = url.searchParams.get("q");
   const mtch = url.searchParams.get("m") || "prefix";
   const sort = url.searchParams.get("s") || "asc";
-  let words;
-  let wordsPn;
+  let words = [];
+  let wordsPn = [];
 
   if (typeof query !== "string") {
     throw redirect(301, "/");
   }
 
-  {
-    const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
-    if (mtch === "prefix") {
-      words = stmt.all(`${query}%`);
-    } else if (mtch === "suffix") {
-      words = stmt.all(`%${query}`);
-    } else if (mtch === "contains") {
-      words = stmt.all(`%${query}%`);
-    }
-  }
+  words = getTitles(mtch, query);
 
   {
     const stmtPn = db.prepare(
       `
 SELECT DISTINCT title
 FROM pronunciations
-WHERE pronunciation LIKE ?
-LIMIT 150`
+WHERE pronunciation LIKE ?`
     );
     let titlesPn;
     if (mtch === "prefix") {
@@ -43,15 +33,11 @@ LIMIT 150`
       titlesPn = stmtPn.all(`%${query}%`);
     }
     const titleWordStmt = db.prepare(
-      `SELECT * FROM entries WHERE title = @title`
+      `SELECT * FROM entries WHERE title IN (${titlesPn
+        .map((x) => `'${x.title}'`)
+        .join(",")})`
     );
-    // HACK: this is very, *very*, slow, when there are lots of titles.
-    // It is still slow even when I tried to do it in one SQL query.
-    // So this can probably only be fixed by switching to a
-    // one-definition-per-row structure in the database.
-    wordsPn = db.transaction(() => {
-      return titlesPn.map((title) => titleWordStmt.get(title));
-    })();
+    wordsPn = db.transaction(() => titleWordStmt.all())();
   }
 
   // This stops the query from going into the /word/ page when redirecting
@@ -107,6 +93,5 @@ LIMIT 150`
     count: count,
     wordsPn: wordsPn,
     countPn: countPn,
-    morePn: wordsPn.length >= 150,
   };
 }

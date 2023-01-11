@@ -86,14 +86,12 @@ export function processWord(word) {
  * @returns {string[]}
  */
 export function getTitles(mode, needle) {
-  const stmt = db.prepare(`SELECT title FROM entries WHERE title LIKE ?`);
+  const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
   if (mode === "prefix") {
     return stmt.all(`${needle}%`);
   } else if (mode === "suffix") {
     return stmt.all(`%${needle}`);
-  } else if (mode === "infix") {
+  } else if (mode === "contains") {
     return stmt.all(`%${needle}%`);
-  } else {
-    // TODO: error management
   }
 }
