@@ -51,7 +51,7 @@
       <p>
         《<Out href="https://dict.concised.moe.edu.tw">國語辭典簡編本</Out>》©
         中華民國教育部（版本編號：2014_20220928，<a
-          href="/l/concisedict_10312.pdf">使用說明</a
+          href="/l/conciseddict_10312.pdf">使用說明</a
         >）
       </p>
     {/if}
