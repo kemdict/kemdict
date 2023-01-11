@@ -340,20 +340,22 @@ if TARGET already looks like an HTML link."
          (shaped-dicts (make-vector dict-count nil))
          (het-number 0)
          (all-titles nil))
-    (dotimes (i dict-count)
-      (message "Parsing and shaping %s (%s/%s)..."
-               (car (aref dictionaries i))
-               (1+ i) dict-count)
-      (let ((files (cdr (aref dictionaries i))))
-        (when (stringp files)
-          (setq files (list files)))
-        (aset shaped-dicts i
-              (apply #'k/parse-and-shape files))))
-    (dotimes (i dict-count)
-      (message "Collecting titles (%s/%s)..." (1+ i) dict-count)
-      (cl-loop
-       for k being the hash-keys of (aref shaped-dicts i)
-       do (push k all-titles)))
+    (cl-loop
+     for (dict . files) being the elements of dictionaries
+     using (index i)
+     do
+     (progn
+       (message "Parsing and shaping %s (%s/%s)..."
+                dict (1+ i) dict-count)
+       (let* ((files (if (stringp files)
+                         (list files)
+                       files))
+              (shaped (apply #'k/parse-and-shape files)))
+         ;; Collect titles
+         (cl-loop
+          for k being the hash-keys of shaped
+          do (push k all-titles))
+         (aset shaped-dicts i shaped))))
     (message "Removing duplicate titles...")
     (setq d/titles/look-up-table (d/titles/to-look-up-table all-titles))
     (setq all-titles (hash-table-keys d/titles/look-up-table))
@@ -362,31 +364,34 @@ if TARGET already looks like an HTML link."
       (let ((entry (make-hash-table :test #'equal))
             (pronunciations nil))
         (puthash "title" title entry)
-        (dotimes (i dict-count)
-          (let ((dict-name (car (aref dictionaries i))))
-            ;; each individual entry becomes the value of the main
-            ;; entry, with the key being the dictionary name
-            (when-let (idv-entry (gethash title (aref shaped-dicts i)))
-              ;; collect pronunciations
-              (let ((heteronyms (gethash "heteronyms" idv-entry)))
-                (seq-doseq (het heteronyms)
-                  (dolist (p (k/collect-pronunciations het))
-                    (push p pronunciations))))
-              ;; Process heteronyms
-              (k/hash-update idv-entry "heteronyms"
-                (lambda (heteronyms)
-                  (--> heteronyms
-                       (seq-map (lambda (het)
-                                  (cl-incf het-number)
-                                  (when (or (= het-number 1)
-                                            (= 0 (% het-number 10000)))
-                                    (message "Processing heteronym (#%s)"
-                                             het-number))
-                                  (k/process-heteronym het dict-name))
-                                it)
-                       (seq-into it 'vector))))
-              ;; put the individual entry into the main entry
-              (puthash dict-name idv-entry entry))))
+        (cl-loop
+         for shaped being the elements of shaped-dicts
+         using (index i)
+         do
+         (let ((dict-name (car (aref dictionaries i))))
+           ;; each individual entry becomes the value of the main
+           ;; entry, with the key being the dictionary name
+           (when-let (idv-entry (gethash title shaped))
+             ;; collect pronunciations
+             (let ((heteronyms (gethash "heteronyms" idv-entry)))
+               (seq-doseq (het heteronyms)
+                 (dolist (p (k/collect-pronunciations het))
+                   (push p pronunciations))))
+             ;; Process heteronyms
+             (k/hash-update idv-entry "heteronyms"
+               (lambda (heteronyms)
+                 (--> heteronyms
+                      (seq-map (lambda (het)
+                                 (cl-incf het-number)
+                                 (when (or (= het-number 1)
+                                           (= 0 (% het-number 10000)))
+                                   (message "Processing heteronym (#%s)"
+                                            het-number))
+                                 (k/process-heteronym het dict-name))
+                               it)
+                      (seq-into it 'vector))))
+             ;; put the individual entry into the main entry
+             (puthash dict-name idv-entry entry))))
         (puthash "pronunciations" pronunciations entry)
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
