@@ -19,7 +19,7 @@
     }
   }
   function splitExample(ex) {
-    if (typeof ex === "string") {
+    if (ex) {
       return (
         ex
           // The "(1)" is a marker for which definition to apply to.
@@ -30,6 +30,8 @@
           .replace(/([^；]\(\d+\))/, "；$1")
           .split("；")
       );
+    } else {
+      return [];
     }
   }
 </script>
