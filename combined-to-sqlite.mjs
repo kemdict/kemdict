@@ -44,6 +44,7 @@ const dicts = [
   "dict_idioms",
   "moedict_twblg",
   "chhoetaigi_itaigi",
+  "chhoetaigi_taijittoasutian",
 ];
 
 function stringifyFields(thing) {

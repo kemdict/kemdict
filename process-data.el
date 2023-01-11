@@ -111,16 +111,18 @@ Does nothing if OUTPUT-PATH already exists as a file."
     "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
   (k/extract-development-version "出"
     "ministry-of-education/hakkadict.json" "dev-hakkadict.json")
-  (k/extract-development-version "出"
+  (k/extract-development-version "無妨"
     "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
-  (k/extract-development-version "出"
+  (k/extract-development-version "無妨"
     "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")
   (k/extract-development-version "赫茲"
     "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (k/extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json")
   (k/extract-development-version "白漆"
-    "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json"))
+    "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json")
+  (k/extract-development-version "無妨"
+    "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json" "dev-chhoetaigi-taijittoasutian.json"))
 
 (defun k/parse-and-shape (&rest files)
   "Parse FILES and return a shaped version of it.
@@ -236,6 +238,17 @@ This is a separate step from shaping."
       ("chhoetaigi_itaigi"
        (k/hash-update het "definition"
          #'d/links/link-to-word))
+      ("chhoetaigi_taijittoasutian"
+       (k/hash-update het "example"
+         ;; This makes it more readable. Is it a good idea though?
+         (lambda (str)
+           (s-replace-regexp (rx (opt " ")
+                                 ;; this is #x223c, TILDE OPERATOR,
+                                 ;; not "~", TILDE.
+                                 (repeat 1 4 "∼")
+                                 (opt " "))
+                             d/links/from
+                             str))))
       ("dict_concised"
        (k/hash-update het "definition"
          #'d/process-def/dict_concised))
@@ -323,6 +336,7 @@ if TARGET already looks like an HTML link."
               [("moedict_twblg" . ("dev-dict-twblg.json"
                                    "dev-dict-twblg-ext.json"))
                ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
+               ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
                ("dict_revised" . "dev-dict_revised.json")
                ("dict_concised" . "dev-dict_concised.json")
                ("dict_idioms" . "dev-dict_idioms.json")
@@ -331,6 +345,7 @@ if TARGET already looks like an HTML link."
             [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                                  "moedict-data-twblg/dict-twblg-ext.json"))
              ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+             ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
              ("dict_revised" . "ministry-of-education/dict_revised.json")
              ("dict_concised" . "ministry-of-education/dict_concised.json")
              ("dict_idioms" . "ministry-of-education/dict_idioms.json")
@@ -392,10 +407,10 @@ if TARGET already looks like an HTML link."
                       (seq-into it 'vector))))
              ;; put the individual entry into the main entry
              (puthash dict-name idv-entry entry))))
-        (puthash "pronunciations" pronunciations entry)
+        (puthash "pronunciations" (-uniq pronunciations) entry)
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
-    (let ((json-encoding-pretty-print t))
+    (let ((json-encoding-pretty-print (not noninteractive)))
       (setq d/links (append (json-read-file "kisaragi/links.json") d/links))
       (with-temp-file "links.json"
         (insert (json-encode d/links)))

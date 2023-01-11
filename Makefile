@@ -12,6 +12,7 @@ DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json
 DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
+DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
@@ -29,6 +30,12 @@ entries.db.gz: entries.db
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .cask
 	cask eval "(load \"kisaragi/generate\")"
 
+# I'm picking kip (department of education) for now because
+# 1. I treat it as just a spelling reform
+# 2. this makes it consistent when MOE's Taigi dictionary is also displayed
+# but this is frankly questionable.
+# TODO: I'll revisit this later.
+#
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
 #   a main title and I need to pick one. It's not an ideal assumption.
 # - HuaBun -> definition, again because of Kemdict's assumptions.
@@ -42,6 +49,16 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ca
 chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
 	npx csvtojson --ignoreColumns='/Input/' --headers='["het_sort","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
+
+# Original header:
+# "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","HanLoTaibunPoj","KaisoehHanLoPoj","LekuHanLoPoj","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"
+# HACK: again, id -> het_sort
+# HanLoTaibunPoj -> title
+# KaisoehHanLoPoj -> definition
+# LekuHanLoKip -> example
+chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
+	mkdir -p chhoetaigi
+	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["het_sort","poj","PojUnicodeOthers","PojInput","PojInputOthers","title","definition","example","kip","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.
