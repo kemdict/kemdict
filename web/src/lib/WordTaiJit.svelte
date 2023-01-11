@@ -27,7 +27,7 @@
           // the semicolon. (See 戶 for an example.)
           // Insert a semicolon so it's easier to split.
           // TODO: put the examples between the definitions instead
-          .replace(/([^；]\(\d+\))/, "；")
+          .replace(/([^；]\(\d+\))/, "；$1")
           .split("；")
       );
     }
