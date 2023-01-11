@@ -1,4 +1,5 @@
 * done
+** DONE [#A] TOC: split sections for each language
 ** DONE Add C-k shortcut display to searchbar
 ** DONE A way to copy anchored links from the word page
   - See, for instance, NodeJS docs as a reference https://nodejs.org/api/esm.html#enabling
@@ -97,7 +98,6 @@ No longer applicable as we don't use moedict-data anymore.
 ** TODO [#A] Make copyright information more clear
 ** TODO 服務條款、隱私權條款
 ** TODO [#A] Word page: split sections for each language
-** TODO [#A] TOC: split sections for each language
 ** TODO build mobile version with Expo
 ** pronunciation search
 - Search without tones

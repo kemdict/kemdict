@@ -1,53 +1,63 @@
+export const langs = { hak_TW: "客語", nan_TW: "台語", zh_TW: "華語" };
+
 // This also defines the order in the word page
 export const dicts = [
   {
     id: "kisaragi_dict",
     name: "如月的現代台灣華語補足典",
     url: "/dict-kisaragi",
-    lang: "zh",
+    lang: "zh_TW",
   },
   {
     id: "dict_concised",
     name: "教育部國語辭典簡編本",
     url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
-    lang: "zh",
+    lang: "zh_TW",
   },
   {
     id: "dict_revised",
     name: "教育部重編國語辭典",
     url: "https://dict.revised.moe.edu.tw/search.jsp?word=$1",
-    lang: "zh",
+    lang: "zh_TW",
   },
   {
     id: "moedict_twblg",
     name: "教育部臺灣閩南語常用詞辭典",
     url: "https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample=$1",
-    lang: "taigi",
+    lang: "nan_TW",
   },
   {
     id: "chhoetaigi_itaigi",
     name: "iTaigi 華台對照典",
     url: "https://itaigi.tw/k/$1",
-    lang: "taigi",
+    lang: "nan_TW",
   },
   {
     id: "hakkadict",
     name: "教育部臺灣客家語常用詞辭典",
     url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0=$1",
-    lang: "hakka",
+    lang: "hak_TW",
   },
   {
     id: "dict_idioms",
     name: "教育部成語典",
     url: "https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=$1",
-    lang: "zh",
+    lang: "zh_TW",
   },
 ];
 
 export const dictIds = dicts.map((x) => x.id);
 
-export function dictsInWord(word) {
-  return dictIds.filter((id) => word[id]);
+/**
+ * Return array of dictionary IDs present in `word`.
+ * If `full` is truthy, return dictionary objects instead.
+ */
+export function dictsInWord(word, full) {
+  if (full) {
+    return dicts.filter((dict) => word[dict.id]);
+  } else {
+    return dictIds.filter((id) => word[id]);
+  }
 }
 
 // Show loading indicator after this many miliseconds.
@@ -87,7 +97,7 @@ export const WordSortFns = {
  */
 // This is more or less seq-group-by ported over, except the fallback part.
 export function groupByProp(arr, property, fallback) {
-  return arr.reduce((acc, elt) => {
+  function reducer(acc, elt) {
     let key = elt[property];
     let cell = acc[key];
     if (cell) {
@@ -100,7 +110,8 @@ export function groupByProp(arr, property, fallback) {
       }
     }
     return acc;
-  }, {});
+  }
+  return Object.entries(arr.reduce(reducer, {}));
 }
 
 /**

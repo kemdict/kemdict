@@ -31,7 +31,7 @@
       >{spc(het[pronunciation_key])}</Pronunciation
     >
   {/if}
-  {#each Object.entries(groupByProp(het.definitions, "type", "none")) as [type, defs]}
+  {#each groupByProp(het.definitions, "type", "none") as [type, defs]}
     {#if type !== "none"}
       <p class="pos">{type}</p>
     {/if}

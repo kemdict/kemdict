@@ -13,7 +13,7 @@
 
   $: word = data.word;
   $: backlinks = data.backlinks;
-  $: presentDicts = dictsInWord(word);
+  $: presentDicts = dictsInWord(word, true);
 </script>
 
 <svelte:head>
@@ -41,7 +41,7 @@
 </SplitLayout>
 
 <div class="prose mt-8">
-  {#if presentDicts.length > 1 || presentDicts[0] !== "kisaragi_dict"}
+  {#if presentDicts.length > 1 || presentDicts[0].id !== "kisaragi_dict"}
     <h2 class="mt-2">本頁的著作權</h2>
     <p>
       《重編國語辭典修訂本》、《國語辭典簡編本》、《成語典》、《臺灣客家語常用詞辭典》與《臺灣閩南語常用詞辭典》為中華民國教育部版權所有，依「創用CC-姓名標示-禁止改作
