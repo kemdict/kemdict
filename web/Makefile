@@ -44,7 +44,7 @@ build-with-data: built-node src/lib/entries.db
 build-no-data: built-node
 
 static/l: ../dicts
-	cd ../dicts && make ministry-of-education
+	cd ../dicts && make ministry-of-education/package.json
 	mkdir -p static/l
 	cp ../dicts/ministry-of-education/license/* static/l/
 

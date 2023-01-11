@@ -6,7 +6,7 @@
   const title = "Kemdict 國語整合典";
   const sitename = "Kemdict 國語整合典";
   const description =
-    "《Kemdict 國語整合典》整合多本教育部的辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
+    "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 </script>
 
 <svelte:head>
