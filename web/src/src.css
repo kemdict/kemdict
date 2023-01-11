@@ -119,7 +119,7 @@
   }
   .word {
     .copyright {
-      @apply mt-6 text-right text-sm opacity-75;
+      @apply mt-6 mb-2 text-right text-sm opacity-75;
     }
     transition-property: max-height;
     transition-duration: 250ms;

@@ -21,6 +21,12 @@ export const dicts = [
     lang: "zh_TW",
   },
   {
+    id: "chhoetaigi_taijittoasutian",
+    name: "台日大辭典台語譯本 (1932)",
+    url: "https://taigi.fhl.net/dict/",
+    lang: "nan_TW",
+  },
+  {
     id: "moedict_twblg",
     name: "教育部臺灣閩南語常用詞辭典",
     url: "https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample=$1",

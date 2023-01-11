@@ -12,6 +12,7 @@
   import WordDictRevised from "$lib/WordDictRevised.svelte";
   import WordHakkadict from "$lib/WordHakkadict.svelte";
   import WordITaigi from "$lib/WordITaigi.svelte";
+  import WordTaiJit from "$lib/WordTaiJit.svelte";
   import WordList from "$lib/WordList.svelte";
   import WordMoedictish from "$lib/WordMoedictish.svelte";
 
@@ -59,6 +60,34 @@
             <WordMoedictish {word} dict={dict.id} />
             <div class="copyright">
               <p>《{dict.name}》採 CC0 釋出。</p>
+            </div>
+          {:else if dict.id == "chhoetaigi_taijittoasutian"}
+            <WordTaiJit entry={word[dict.id]} />
+            <div class="copyright">
+              <p>
+                《{dict.name}》
+              </p>
+              <p>原作者：小川尚義</p>
+              <p>台文翻譯kap編修：Lîm Chùn-io̍k（林俊育）長老</p>
+              <p>
+                <a
+                  href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase#2-1932-台日大辭典台譯版"
+                  >以 姓名標示-非商業性-Sio-kâng方式分享 3.0 台灣 (CC BY-NC-SA
+                  3.0 TW) 授權</a
+                >
+              </p>
+              <p>
+                資料來自 <a
+                  href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase"
+                  >ChhoeTaigi 的字詞資料庫</a
+                >
+              </p>
+              <p>
+                <a href="https://taigi.fhl.net/dict/">台文版原始網站</a>；<a
+                  href="https://github.com/fhl-net/Lim-Chun-iok_2008_Tai-jip-Tua-su-tian"
+                  >台文版原 GitHub 儲存庫</a
+                >
+              </p>
             </div>
           {:else if dict.id == "chhoetaigi_itaigi"}
             <WordITaigi entry={word[dict.id]} />

@@ -62,6 +62,9 @@
         <p><a href="dict-itaigi">iTaigi 華台對照典</a></p>
       </li>
       <li>
+        <p><a href="dict-taijittoasutian">台日大辭典台語譯本 (1932)</a></p>
+      </li>
+      <li>
         <p><a href="dict-moe">教育部重編國語辭典修訂本</a></p>
       </li>
       <li>
