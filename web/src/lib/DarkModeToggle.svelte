@@ -51,7 +51,7 @@
 </script>
 
 <button
-  class="btn p-1 bg-yellow-300 hover:bg-yellow-400 dark:bg-orange-900 dark:hover:bg-orange-800"
+  class="btn bg-yellow-300 p-1 hover:bg-yellow-400 dark:bg-orange-900 dark:hover:bg-orange-800"
   type="button"
   role="switch"
   title="切換暗色模式"

@@ -31,9 +31,9 @@
     <li>
       <a href="/word/{word.title}">
         <div
-          class="text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800 p-1 -mx-1 my-2"
+          class="-mx-1 my-2 p-1 text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800"
         >
-          <h2 class="link hover:no-underline font-bold">
+          <h2 class="link font-bold hover:no-underline">
             {word.title}（{spc(het[pron_keys.find((pron) => het[pron])])}）
           </h2>
           <p class="text-gray-500 dark:text-stone-300">

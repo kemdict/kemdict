@@ -10,12 +10,12 @@
     font-size: 70%;
   }
   blockquote {
-    @apply px-4 py-1 rounded;
+    @apply rounded px-4 py-1;
     @apply bg-gray-200 dark:bg-stone-700;
   }
   hr {
     @apply border-gray-400;
-    @apply my-8 w-[95%] mx-auto;
+    @apply my-8 mx-auto w-[95%];
   }
   body {
     @apply relative mt-12;
@@ -28,7 +28,7 @@
   }
   .base {
     width: 95%;
-    @apply max-w-4xl m-auto mb-24;
+    @apply m-auto mb-24 max-w-4xl;
   }
   ol {
     @apply pl-4;
@@ -69,7 +69,7 @@
       @apply fade;
     }
     kbd {
-      @apply text-gray-400 font-bold;
+      @apply font-bold text-gray-400;
     }
   }
   .wordlink {
@@ -79,7 +79,7 @@
     }
   }
   .dict {
-    @apply border-b mb-2 my-8;
+    @apply my-8 mb-2 border-b;
     @apply border-black dark:border-stone-500;
     @apply flex justify-between;
   }
@@ -101,7 +101,7 @@
       @apply font-bold;
     }
     :where(h1):not(:where([class~="not-prose"] *)) {
-      @apply text-xl mt-8 mb-4;
+      @apply mt-8 mb-4 text-xl;
     }
     :where(h2):not(:where([class~="not-prose"] *)) {
       @apply mt-6;
@@ -131,10 +131,10 @@
       @apply link;
     }
     h1 {
-      @apply text-2xl first:mt-4 mt-8;
+      @apply mt-8 text-2xl first:mt-4;
     }
     h2 {
-      @apply text-2xl mt-4;
+      @apply mt-4 text-2xl;
     }
     h3 {
       @apply mb-0 mt-2;
@@ -151,10 +151,10 @@
     }
     /* m for Mark. The "例" "英" "反" sort of marker */
     m {
-      @apply font-bold px-1 inline-block w-6;
+      @apply inline-block w-6 px-1 font-bold;
     }
     .pos {
-      @apply font-bold mt-2 block;
+      @apply mt-2 block font-bold;
     }
     /* This makes up for the mt-2 in .pos if .pos is not present. */
     :not(.pos) + ol,
@@ -165,14 +165,14 @@
       @apply prose;
     }
     .def {
-      @apply block mb-2;
+      @apply mb-2 block;
     }
   }
   .btnColor {
     @apply bg-gray-200 hover:bg-gray-300 dark:bg-stone-800 dark:hover:bg-stone-700;
   }
   .btn {
-    @apply btnColor rounded-md fade;
+    @apply btnColor fade rounded-md;
   }
 }
 

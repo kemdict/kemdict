@@ -14,5 +14,5 @@
   <h1>{getTitle(het)}</h1>
   <Pronunciation>{het.kip}</Pronunciation>
   <p class="my-2">華語：{@html het.definition}</p>
-  <div class="italic text-sm">資料提供：{het.DataProvidedBy}</div>
+  <div class="text-sm italic">資料提供：{het.DataProvidedBy}</div>
 {/each}

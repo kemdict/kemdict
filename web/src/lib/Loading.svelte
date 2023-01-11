@@ -25,7 +25,7 @@
 </script>
 
 <div class="fixed top-0 left-0 right-0 h-1">
-  <div class="h-1 bg-indigo-500 progress" style="--width:{$progress * 100}%" />
+  <div class="progress h-1 bg-indigo-500" style="--width:{$progress * 100}%" />
 </div>
 
 <style>

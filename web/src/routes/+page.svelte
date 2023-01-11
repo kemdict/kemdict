@@ -22,11 +22,11 @@
 <SplitLayout wantHeader={false}>
   <div slot="left">
     <div class="sm:fixed">
-      <h1 class="max-sm:mb-4 font-bold text-xl mt-6">
+      <h1 class="mt-6 text-xl font-bold max-sm:mb-4">
         <img
           decoding="sync"
           alt="logo"
-          class="h-[1rem] w-[1rem] max-sm:inline sm:h-[10rem] sm:w-[10rem] brightness-0 dark:brightness-100"
+          class="h-[1rem] w-[1rem] brightness-0 dark:brightness-100 max-sm:inline sm:h-[10rem] sm:w-[10rem]"
           src="/logo-white.png"
         />
         Kemdict 國語整合典 (β)

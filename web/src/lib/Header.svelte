@@ -7,7 +7,7 @@
 </script>
 
 <div class="mb-8">
-  <nav class="my-2 justify-between flex items-center">
+  <nav class="my-2 flex items-center justify-between">
     <a class="font-bold hover:underline" href="/">Kemdict 國語整合典 (β)</a>
     <div class="" />
     <div class="text-right">

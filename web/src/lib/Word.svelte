@@ -16,7 +16,7 @@
       <Out href={format(dict.url, word.title)}>{dict.name}</Out>
       <span
         ><a
-          class="hover:link text-gray-400 dark:gray-500"
+          class="hover:link dark:gray-500 text-gray-400"
           href="#{dict.id}"
           id={dict.id}>#</a
         ></span

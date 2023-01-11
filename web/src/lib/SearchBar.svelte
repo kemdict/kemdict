@@ -41,7 +41,7 @@
         >
       </select>
       <input
-        class="w-full fade bg-white dark:bg-stone-900 border-b-2 border-gray-200 hover:border-gray-300 dark:border-stone-800 dark:hover:border-stone-700 peer"
+        class="fade peer w-full border-b-2 border-gray-200 bg-white hover:border-gray-300 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700"
         type="search"
         autocomplete="off"
         placeholder="輸入欲搜尋的詞彙"
@@ -52,7 +52,7 @@
       <!-- /search?q=<...>, like search engines -->
       <input class="btnColor rounded-r" type="submit" value="搜尋" />
       <div
-        class="absolute right-14 text-right top-[calc(50%-0.9rem)] peer-hover:hidden"
+        class="absolute right-14 top-[calc(50%-0.9rem)] text-right peer-hover:hidden"
       >
         <kbd>Ctrl</kbd> <kbd>K</kbd>
       </div>
@@ -60,7 +60,7 @@
   {:else}
     <div class="h-8">
       <svg
-        class="animate-spin inline h-5 w-5 text-gray-700"
+        class="inline h-5 w-5 animate-spin text-gray-700"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

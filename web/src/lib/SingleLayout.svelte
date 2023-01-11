@@ -10,6 +10,6 @@
 
 <Header search={true} {initialInput} {initialMatchSelection} />
 
-<div class="{klass} max-w-2xl mx-auto">
+<div class="{klass} mx-auto max-w-2xl">
   <slot />
 </div>
