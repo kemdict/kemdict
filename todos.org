@@ -93,6 +93,11 @@ No longer applicable as we don't use moedict-data anymore.
 - update dictionary list in common.js, README, and root route
 - update copyright information
 * todos
+** update version & changelog since 0.9.2
+** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
+** Don't show keyboard shortcut on mobile (max-sm:hidden)
+** about: justify kemdict considering chhoetaigi's existence
+** update robots.txt to allow =/word/= to be indexed
 ** Search: put exact match on top
 ** Include more from ChhoeTaigi
 ** TODO [#A] Make copyright information more clear
