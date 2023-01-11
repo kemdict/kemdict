@@ -40,11 +40,13 @@
   <h1>{getTitle(het)}</h1>
   <Pronunciation>{het.kip}</Pronunciation>
   <p class="my-2">{@html process_def(het.definition)}</p>
-  <blockquote>
-    <ul class="list-disc pl-2">
-      {#each splitExample(het.example) as ex}
-        <li>{ex}</li>
-      {/each}
-    </ul>
-  </blockquote>
+  {#if het.example}
+    <blockquote>
+      <ul class="list-disc pl-2">
+        {#each splitExample(het.example) as ex}
+          <li>{ex}</li>
+        {/each}
+      </ul>
+    </blockquote>
+  {/if}
 {/each}
