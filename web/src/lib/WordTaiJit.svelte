@@ -18,6 +18,20 @@
       return x;
     }
   }
+  function splitExample(ex) {
+    if (ex) {
+      return (
+        ex
+          // The "(1)" is a marker for which definition to apply to.
+          // Some examples are delimited by this marker alone, without
+          // the semicolon. (See 戶 for an example.)
+          // Insert a semicolon so it's easier to split.
+          // TODO: put the examples between the definitions instead
+          .replace(/([^；]\(\d+\))/, "；")
+          .split("；")
+      );
+    }
+  }
 </script>
 
 {#each entry.heteronyms as het}
@@ -26,7 +40,7 @@
   <p class="my-2">{@html process_def(het.definition)}</p>
   <blockquote>
     <ul class="list-disc pl-2">
-      {#each het.example.split("；") as ex}
+      {#each splitExample(het.example) as ex}
         <li>{ex}</li>
       {/each}
     </ul>
