@@ -11,7 +11,7 @@ build: entries.db
 DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json
 DICT_TARGETS += ministry-of-education/package.json
-DICT_TARGETS += itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
+DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
@@ -39,8 +39,8 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ca
 # - The original header is (without the newline):
 #     "DictWordID","PojUnicode","PojInput","KipUnicode","KipInput",
 #     "HanLoTaibunPoj","HanLoTaibunKip","HoaBun","DataProvidedBy"
-itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
-	mkdir -p itaigi
+chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
+	mkdir -p chhoetaigi
 	npx csvtojson --ignoreColumns='/Input/' --headers='["het_sort","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to

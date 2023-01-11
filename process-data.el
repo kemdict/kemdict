@@ -120,7 +120,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
   (k/extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json")
   (k/extract-development-version "白漆"
-    "itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json"))
+    "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json"))
 
 (defun k/parse-and-shape (&rest files)
   "Parse FILES and return a shaped version of it.
@@ -330,7 +330,7 @@ if TARGET already looks like an HTML link."
                ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
             [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                                  "moedict-data-twblg/dict-twblg-ext.json"))
-             ("chhoetaigi_itaigi" . "itaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+             ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
              ("dict_revised" . "ministry-of-education/dict_revised.json")
              ("dict_concised" . "ministry-of-education/dict_concised.json")
              ("dict_idioms" . "ministry-of-education/dict_idioms.json")
