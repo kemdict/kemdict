@@ -19,7 +19,7 @@
     // https://stackoverflow.com/a/822464/6927814
     // This doesn't have to be perfect. We're not handling untrusted
     // input either.
-    return html.replace(/<[^>]*>?/gm, "");
+    return html?.replace(/<[^>]*>?/gm, "");
   }
   function processPreview(def) {
     return truncate(strip(def), { length: 45, omission: "……" });
@@ -38,7 +38,7 @@
           </h2>
           <p class="text-gray-500 dark:text-stone-300">
             {processPreview(
-              het.definition || het.definitions.map((x) => x.def).join("")
+              het.definition || het.definitions?.map((x) => x.def).join("")
             )}
           </p>
         </div>

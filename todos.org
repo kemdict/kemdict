@@ -94,6 +94,7 @@ No longer applicable as we don't use moedict-data anymore.
 - update dictionary list in common.js, README, and root route
 - update copyright information
 * todos
+** fix a-a cham-cham
 ** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
 ** try duckdb
 ** about: justify kemdict considering chhoetaigi's existence
