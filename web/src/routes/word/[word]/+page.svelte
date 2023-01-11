@@ -57,8 +57,24 @@
         <div class="word">
           {#if dict.id == "kisaragi_dict"}
             <WordMoedictish {word} dict={dict.id} />
+            <div class="copyright">
+              <p>《{dict.name}》採 CC0 釋出。</p>
+            </div>
           {:else if dict.id == "chhoetaigi_itaigi"}
             <WordITaigi entry={word[dict.id]} />
+            <div class="copyright">
+              <p>
+                《{dict.name}》資料取自
+                <a href="https://itaigi.tw/">iTaigi</a>，採
+                <a href="https://itaigi.tw/hokbu">CC0</a> 釋出。
+              </p>
+              <p>
+                資料來自 <a
+                  href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase"
+                  >ChhoeTaigi 的字詞資料庫</a
+                >。
+              </p>
+            </div>
           {:else if dict.id == "dict_revised"}
             <WordDictRevised entry={word[dict.id]} title={word.title} />
             <div class="copyright">
