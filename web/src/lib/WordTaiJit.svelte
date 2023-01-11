@@ -19,7 +19,7 @@
     }
   }
   function splitExample(ex) {
-    if (ex) {
+    if (typeof ex === "string") {
       return (
         ex
           // The "(1)" is a marker for which definition to apply to.
