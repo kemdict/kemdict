@@ -343,11 +343,11 @@ This is a separate step from shaping."
            (seq-doseq (def defs)
              (d::hash-update def "def"
                (lambda (d)
-                 (-> d
-                     (s-replace "#+begin_quote" "<blockquote>")
-                     (s-replace "#+end_quote" "</blockquote>")
-                     ;; No need to apply linkify-brackets again
-                     d/links/org-style)))))))
+                 (->> d
+                      (s-replace "#+begin_quote" "<blockquote>")
+                      (s-replace "#+end_quote" "</blockquote>")
+                      ;; No need to apply linkify-brackets again
+                      d/links/org-style)))))))
       ("chhoetaigi_itaigi"
        (d::hash-update het "definition"
          #'d/links/link-to-word))
