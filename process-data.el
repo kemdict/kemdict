@@ -210,11 +210,12 @@ Writes into TABLE. Returns the new value associated with KEY."
 
 Return a list of normalized strings. This is because some
 pronunciation strings include multiple pronunciations."
-  (--> p
-       (s-replace "　" " " it)
-       (s-replace "（變）" "/" it)
-       (s-split "/" it t)
-       (-map #'s-trim it)))
+  (->> p
+       (s-replace "　" " ")
+       (s-replace "（變）" "/")
+       (s-split "/")
+       (-map #'s-trim)
+       (remove "")))
 
 (defun d/parse-and-shape (&rest files)
   "Parse FILES and return a shaped version of it.
