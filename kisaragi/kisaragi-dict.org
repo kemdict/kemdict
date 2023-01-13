@@ -13,7 +13,6 @@
 Q版
 魯蛇
 人生勝利組
-打臉
 討拍
 晒恩愛
 黑客松
@@ -38,10 +37,7 @@ SARS
 連接埠 (ㄌㄧㄢˊ ㄐㄧㄝ ㄅㄨˋ；example: [[https://youtu.be/aP-9hr2NyEI?t=348]])
 通訊埠 (ㄊㄨㄥ ㄒㄩㄣˋ ㄅㄨˋ；example: [[https://youtu.be/aP-9hr2NyEI?t=348]])
 客戶端
-內網
-USB (universal serial bus; 也指 usb thumb drive)
 Hub / USB Hub
-分鏡 (沒有人把它叫做「分鏡頭」)
 國家機器
 同人 (as in "doujin")
 立棋 (流行語)
@@ -216,6 +212,30 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** 內網
+:PROPERTIES:
+:added:    2023-01-14T08:05:15+0900
+:END:
+*** ㄋㄟˋ ㄨㄤˇ
+**** 名|內部網路。在一個組織內部讓內部的電腦能夠互相聯繫，但與外部（即[[網際網路]]）分隔開的網路。
+** 分鏡
+:PROPERTIES:
+:added:    2023-01-14T08:02:47+0900
+:END:
+*** ㄈㄣ ㄐㄧㄥˋ
+**** 名|以圖像為影視作品打草稿的方式。也稱「分鏡頭」。[英]storyboard
+** 打臉
+:PROPERTIES:
+:added:    2023-01-14T07:59:23+0900
+:END:
+*** ㄉㄚˇ ㄌㄧㄢˇ
+**** 動|提出強烈的反駁，證明對方錯誤而使對方丟臉。如：「打臉縣長！他提出三點籲回歸民意」
+** 木管
+:PROPERTIES:
+:added:    2023-01-14T07:57:29+0900
+:END:
+*** ㄇㄨˋ ㄍㄨㄢˇ
+**** 見「木管樂器」。
 ** 工具人
 :PROPERTIES:
 :added:    2023-01-14T03:47:45+0900

@@ -1,5 +1,64 @@
 [
   {
+    "title": "內網",
+    "added": 1673651115.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄋㄟˋ ㄨㄤˇ",
+        "definitions": [
+          {
+            "def": "內部網路。在一個組織內部讓內部的電腦能夠互相聯繫，但與外部（即[[網際網路]]）分隔開的網路。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "分鏡",
+    "added": 1673650967.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄣ ㄐㄧㄥˋ",
+        "definitions": [
+          {
+            "def": "以圖像為影視作品打草稿的方式。也稱「分鏡頭」。[英]storyboard",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "打臉",
+    "added": 1673650763.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˇ ㄌㄧㄢˇ",
+        "definitions": [
+          {
+            "def": "提出強烈的反駁，證明對方錯誤而使對方丟臉。如：「打臉縣長！他提出三點籲回歸民意」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "木管",
+    "added": 1673650649.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄨˋ ㄍㄨㄢˇ",
+        "definitions": [
+          {
+            "def": "見「木管樂器」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "工具人",
     "added": 1673635665.0,
     "heteronyms": [
