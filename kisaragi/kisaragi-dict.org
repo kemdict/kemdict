@@ -77,9 +77,6 @@ Hub / USB Hub
 * Staging
 These are not compiled because only words under the Words heading are.
 ** りしれ供さ小  :vogue:
-:PROPERTIES:
-:added:    2022-12-05T16:08:38+0900
-:END:
 *** lí sī teh kóng sann siáu
 **** 你是在講什麼鬼話。台語「你是咧講啥痟」的假借字。
 * Words
@@ -1067,3 +1064,9 @@ These are not compiled because only words under the Words heading are.
 :END:
 *** ㄧㄡˇ ㄧˊ
 **** 名|友好的關係。作為朋友的關係。
+
+* COMMENT Org setup
+
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda () (load-file "generate.el")) nil t)
+# End:

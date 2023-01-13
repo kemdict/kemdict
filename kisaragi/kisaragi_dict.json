@@ -1,5 +1,65 @@
 [
   {
+    "title": "工具人",
+    "added": 1673635665.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄥ ㄐㄩˋ ㄖㄣˊ",
+        "definitions": [
+          {
+            "def": "指只被當工具，沒有被充分同理或情感上依然疏遠的人。如：「不用對他那麼好，他只把你當工具人而已」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "維持社交距離",
+    "added": 1673635355.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄟˊ ㄔˊ ㄕㄜˋ ㄐㄧㄠ ㄐㄩˋ ㄌㄧˊ",
+        "definitions": [
+          {
+            "def": "降低傳染病傳播的一種方式。人與人之間物理上維持距離，以降低病毒傳染。為英語maintain social distance的意譯。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "社交距離",
+    "added": 1673635327.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄜˋ ㄐㄧㄠ ㄐㄩˋ ㄌㄧˊ",
+        "definitions": [
+          {
+            "def": "降低傳染病傳播的一種方式。人與人之間物理上維持距離，以降低病毒傳染。為英語social distance的意譯。見「維持社交距離」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "社交安全距離",
+    "added": 1673635251.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄜˋ ㄐㄧㄠ ㄢ ㄑㄩㄢˊ ㄐㄩˋ ㄌㄧˊ",
+        "definitions": [
+          {
+            "def": "見「社交距離」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "深度學習",
     "added": 1673289588.0,
     "heteronyms": [

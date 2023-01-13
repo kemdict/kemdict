@@ -154,9 +154,14 @@ CONTENTS is the element contents."
     (org-mode)
     (goto-char (point-min))
     (re-search-forward (rx bol "* Words") nil t)
-    (forward-line)
-    (beginning-of-line)
-    (narrow-to-region (point) (point-max))
+    (narrow-to-region
+     (save-excursion
+       (forward-line)
+       (line-beginning-position))
+     (or (save-excursion
+           (re-search-forward (rx bol "* ") nil t)
+           (line-beginning-position))
+         (point-max)))
     (org-element-contents (org-element-parse-buffer))))
 
 (cond ((and (fboundp #'native-comp-available-p)
