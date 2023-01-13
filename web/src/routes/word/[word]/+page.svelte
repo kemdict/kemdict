@@ -60,6 +60,12 @@
             <WordMoedictish {word} dict={dict.id} />
             <div class="copyright">
               <p>《{dict.name}》採 CC0 釋出。</p>
+              <p>
+                這個定義有問題嗎？<a
+                  href="https://github.com/kemdict/kemdict-data/issues"
+                  >回報問題</a
+                >
+              </p>
             </div>
           {:else if dict.id == "chhoetaigi_taijittoasutian"}
             <WordTaiJit entry={word[dict.id]} />
