@@ -314,11 +314,14 @@ Parsed arrays from FILES are concatenated before shaping."
                          "<br><m title=\"參考詞\">△</m> ")
        d/links/linkify-brackets))
 
-(defun d/process-heteronym (het dict)
-  "Process the heteronym object HET that belongs to DICT.
+(defun d/process-heteronym (het title dict)
+  "Process the heteronym object HET.
+
+HET describes TITLE and belongs to DICT. These are needed for
+some processing.
 
 This is a separate step from shaping."
-  (let ((d/links/from (gethash "title" het)))
+  (let ((d/links/from title))
     (dolist (key (list "definition" "source_comment" "典故說明"))
       (d::hash-update het key
         #'d/links/linkify-brackets))
@@ -446,7 +449,7 @@ This is a separate step from shaping."
                                            (= 0 (% het-number 10000)))
                                    (message "Processing heteronym (#%s)"
                                             het-number))
-                                 (d/process-heteronym het dict-name))
+                                 (d/process-heteronym het title dict-name))
                                it)
                       (seq-into it 'vector))))
              ;; put the individual entry into the main entry
