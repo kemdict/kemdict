@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /word/
 
 Sitemap: https://kemdict.com/sitemap.xml

@@ -1,4 +1,5 @@
 * done
+** DONE try duckdb
 ** DONE Don't show keyboard shortcut on mobile (max-sm:hidden)
 ** DONE [#A] TOC: split sections for each language
 ** DONE Add C-k shortcut display to searchbar
@@ -89,14 +90,13 @@ No longer applicable as we don't use moedict-data anymore.
 - kemdict-data: add code to download the raw data at build time
 - kemdict-data: update process-data.el to merge the new dictionary into the intermediate json file
 - kemdict-data: update combined-to-sqlite to include the new dictionary
-- update word page to use the right component for the new dictionary
+- update [[file:./web/src/routes/word/\[word\]/+page.svelte][word page]] to use the right component for the new dictionary
 - most likely, write a new word component for the new dictionary
 - update dictionary list in common.js, README, and root route
 - update copyright information
 * todos
 ** fix a-a cham-cham
 ** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
-** try duckdb
 ** about: justify kemdict considering chhoetaigi's existence
 ** update robots.txt to allow =/word/= to be indexed
 ** Search: put exact match on top
@@ -125,6 +125,3 @@ Wiktionary dropdown → zh, en, ja
 ** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 ** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
 ** TODO Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
-* MOE dictionary stuff
-
-- 赫茲: inconsistent parens
