@@ -3,7 +3,7 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 .DEFAULT_GOAL := build-no-data
 
-MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(wildcard pages/*.md))
+MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(shell find pages/ -name "*.md"))
 
 $(MD): src/routes/%/+page.svelte.md: pages/%.md
 	@mkdir -p "$(dir $@)"
