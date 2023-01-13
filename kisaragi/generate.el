@@ -40,64 +40,15 @@
 CONTENTS is the element contents."
   (format "<blockquote>%s</blockquote>" contents))
 
-;; FIXME: We should do the linking during process-data, so all links
-;; are handled at the same place.
-(defun kisaragi-dict/link-interpreter (link contents)
-  "Interpret LINK object as the syntax we want.
-This is a copy of `org-element-link-interpreter'.
-CONTENTS is the element contents."
-  (let* ((type (org-element-property :type link))
-         (path (org-element-property :path link))
-         ;; Hacky support for both internal and external links. Yes.
-         (url? (string-prefix-p "//" path)))
-    (if (string= type "radio")
-        path
-      (let ((fmt (pcase (org-element-property :format link)
-                   ((guard contents)
-                    (format (if url?
-                                "<a href=\"%%s\">%s</a>"
-                              "<a href=\"/word/%%s\">%s</a>")
-                            (replace-regexp-in-string "%" "%%" contents)))
-                   ((or `bracket
-                        `nil
-                        (guard (member type '("coderef" "custom-id" "fuzzy"))))
-                    (if url?
-                        "<a href=\"%1$s\">%1$s</a>"
-                      "<a href=\"/word/%1$s\">%1$s</a>"))
-                   (`angle "<%s>")
-                   (`plain "%s")
-                   (f (error "Wrong `:format' value: %s" f))))
-            (thing (replace-regexp-in-string
-                    (rx bos "/word/") ""
-                    (pcase type
-                      ("coderef" (format "(%s)" path))
-                      ("custom-id" (concat "#" path))
-                      ("file"
-                       (let ((app (org-element-property :application link))
-                             (opt (org-element-property :search-option link)))
-                         (concat type (and app (concat "+" app)) ":"
-                                 path
-                                 (and opt (concat "::" opt)))))
-                      ("fuzzy" path)
-                      (_ (concat type ":" path))))))
-        (unless url?
-          (push `((from . ,kisaragi-dict/current-title)
-                  (to . ,(replace-regexp-in-string "#.*" "" path)))
-                kisaragi-dict/links))
-        (format fmt thing)))))
-
 (defun kisaragi-dict/elements-to-json (elems)
   "Process ELEMS to JSON for kisaragi-dict."
   (let ((original (--map
                    (cons it (symbol-function it))
-                   '(org-element-link-interpreter
-                     org-element-quote-block-interpreter))))
+                   '(org-element-quote-block-interpreter))))
     ;; I don't know why `cl-letf' doesn't work for me. But this does.
     ;;
     ;; This would be terrible if this code is supposed to run in an
     ;; existing Emacs, but it's not. It's a one-time script.
-    (fset #'org-element-link-interpreter
-          (symbol-function #'kisaragi-dict/link-interpreter))
     (fset #'org-element-quote-block-interpreter
           (symbol-function #'kisaragi-dict/quote-block-interpreter))
     (prog1 (cl-loop
