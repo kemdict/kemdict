@@ -337,8 +337,14 @@ This is a separate step from shaping."
             #'d/links/linkify-brackets))))
     (pcase dict
       ("kisaragi_dict"
-       (d::hash-update het "definition"
-         #'d/links/org-style))
+       (d::hash-update het "definitions"
+         (lambda (defs)
+           (seq-doseq (def defs)
+             (d::hash-update def "def"
+               (lambda (d)
+                 ;; No need to apply linkify-brackets again
+                 (-> d
+                     d/links/org-style)))))))
       ("chhoetaigi_itaigi"
        (d::hash-update het "definition"
          #'d/links/link-to-word))
