@@ -31,6 +31,9 @@
       >{spc(het[pronunciation_key])}</Pronunciation
     >
   {/if}
+  {#if entry.vogue || het.vogue}
+    <div class="text-gray-700 dark:text-gray-300">（流行語）</div>
+  {/if}
   {#each groupByProp(het.definitions, "type", "none") as [type, defs]}
     {#if type !== "none"}
       <p class="pos">{type}</p>
