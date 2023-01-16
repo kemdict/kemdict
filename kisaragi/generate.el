@@ -39,6 +39,10 @@
   (let ((kisaragi-dict/current-title (kisaragi-dict/elem-title elem)))
     (list
      (cons "title" kisaragi-dict/current-title)
+     (cons "vogue" (->> elem
+                        (org-element-property :tags)
+                        (member "vogue")
+                        not not))
      ;; Use unix time so it's easier to compare
      (cons "added" (-> (org-element-property :ADDED elem)
                        parse-iso8601-time-string

@@ -5,6 +5,9 @@
 來自台語的借詞也會列。
 
 * Todo
+掉幀
+幀率
+影格率
 串流
 無痕
 聖筊
@@ -212,6 +215,45 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** 幀數
+:PROPERTIES:
+:added:    2023-01-15T21:02:27+0900
+:END:
+*** ㄓㄣ ㄕㄨˋ
+**** 名|影片中一段時間內的[[畫格]]數量。似「幀率」、「影格率」。較常用於互動式媒體而非靜態觀看的影片。如：「降低遊戲的效能設定可以很有效地提高幀數。」
+** 影片
+:PROPERTIES:
+:added:    2023-01-15T20:59:49+0900
+:END:
+*** ㄧㄥˇ ㄆㄧㄢˋ
+**** 名|藉由大量的靜止畫面快速播出，來產生出的連續影像。
+** 影格
+:PROPERTIES:
+:added:    2023-01-15T20:59:47+0900
+:END:
+*** ㄓㄣ
+**** 名|構成[[影片]]的個別靜止畫面。又稱「幀」、「畫格」。
+** 畫格
+:PROPERTIES:
+:added:    2023-01-15T20:59:44+0900
+:END:
+*** ㄓㄣ
+**** 名|構成[[影片]]的個別靜止畫面。又稱「幀」、「影格」。
+** 幀
+:PROPERTIES:
+:added:    2023-01-15T20:59:42+0900
+:END:
+# ㄓㄣ，對。例子：
+# https://youtu.be/iOBywluOHMQ?t=18
+# https://youtu.be/fka9mZGHCKU?t=20
+*** ㄓㄣ
+**** 名|構成[[影片]]的個別靜止畫面。又稱「畫格」、「影格」。
+** 嗎
+:PROPERTIES:
+:added:    2023-01-15T16:00:57+0900
+:END:
+*** ㄇㄚ
+**** 表達疑問。如：「明天要去吃飯嗎？」
 ** 內網
 :PROPERTIES:
 :added:    2023-01-14T08:05:15+0900
@@ -469,7 +511,7 @@ These are not compiled because only words under the Words heading are.
 :END:
 *** ㄋㄟˋ ㄩㄥˋ
 **** 動|在餐廳內用餐。與「外帶」相對應。如：「請問要內用還是外帶？」
-** 課金                                                               :vogue:
+** 課金
 :PROPERTIES:
 :added:    2022-11-30T23:18:25+0900
 :END:
@@ -769,13 +811,13 @@ These are not compiled because only words under the Words heading are.
 *** /ki/
 **** 名|鑰匙。如：「出門記得要檢查 key 有沒有帶」
 **** 動|輸入資訊到電腦系統裡。如：「小心不要 key 錯資料了。」
-** 抖內                                                               :vogue:
+** 抖內
 :PROPERTIES:
 :added:    2022-11-08T10:13:02+0900
 :END:
 *** ㄉㄡˇ ㄋㄟˋ
 **** 動|「斗內」的另一種寫法。
-** 斗內                                                               :vogue:
+** 斗內
 :PROPERTIES:
 :added:    2022-11-08T10:10:02+0900
 :END:
