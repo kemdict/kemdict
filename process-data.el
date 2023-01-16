@@ -278,8 +278,10 @@ Parsed arrays from FILES are concatenated before shaping."
                        (gethash "het_sort" other)))
                    heteronyms)))
           (puthash "heteronyms" heteronyms tmp)
-          (when-let (added (gethash "added" entry))
-            (puthash "added" added tmp))
+          (dolist (extra-entry-prop (list "added" "vogue"))
+            (when-let (v (gethash extra-entry-prop entry))
+              (message "%s: %s type %s" extra-entry-prop v (type-of v))
+              (puthash extra-entry-prop v tmp)))
           (puthash title tmp shaped))
      finally return shaped)))
 
@@ -466,7 +468,11 @@ This is a separate step from shaping."
         (puthash "pronunciations" (-uniq pronunciations) entry)
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
-    (let ((json-encoding-pretty-print (not noninteractive)))
+    (let ((json-encoding-pretty-print (not noninteractive))
+          ;; This tells `json-encode' to use the same null and false
+          ;; values as `json-parse-buffer''s defaults.
+          (json-null :null)
+          (json-false :false))
       (with-temp-file "links.json"
         (insert (json-encode d/links)))
       (with-temp-file "combined.json"

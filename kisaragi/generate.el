@@ -24,6 +24,10 @@
 
 (defvar kisaragi-dict/current-title nil)
 
+(defun d/to-json-bool (value)
+  "Return `json-false' if VALUE is nil, t otherwise."
+  (if value t json-false))
+
 (defun kisaragi-dict/elem-title (elem)
   "Return the only title of ELEM."
   (org-no-properties
@@ -42,7 +46,7 @@
      (cons "vogue" (->> elem
                         (org-element-property :tags)
                         (member "vogue")
-                        not not))
+                        d/to-json-bool))
      ;; Use unix time so it's easier to compare
      (cons "added" (-> (org-element-property :ADDED elem)
                        parse-iso8601-time-string
