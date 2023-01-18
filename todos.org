@@ -95,7 +95,23 @@ No longer applicable as we don't use moedict-data anymore.
 - update dictionary list in common.js, README, and root route
 - update copyright information
 * todos
+** less han-centric: eg. =/word/in= should show words / heteronyms which have title = in or pronunciation = in
+- Return multiple word objects from word/server
+- Accept multiple word objects in word/page
 ** fix a-a cham-cham
+** Fallback: Noto CJK isn't good enough
+
+𪜶 (for “their” in Taigi), for instance
+(Unicode SIP, #x2A736)
+
+Possible options:
+
+- Unifont?
+- Whatever MOE or moedict is using
+- Justfont's openhuninn
+- https://en.m.wikipedia.org/wiki/Open-source_Unicode_typefaces
+- https://www.babelstone.co.uk/Fonts/Han.html
+- 花園明朝 (it has an extension)
 ** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
 ** about: justify kemdict considering chhoetaigi's existence
 ** update robots.txt to allow =/word/= to be indexed
@@ -104,6 +120,7 @@ No longer applicable as we don't use moedict-data anymore.
 ** TODO [#A] Make copyright information more clear
 ** TODO 服務條款、隱私權條款
 ** TODO [#A] Word page: split sections for each language
+** TODO [#A] Search page: split sections for each language
 ** TODO build mobile version with Expo
 ** pronunciation search
 - Search without tones
