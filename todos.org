@@ -104,11 +104,14 @@ No longer applicable as we don't use moedict-data anymore.
 𪜶 (for “their” in Taigi), for instance
 (Unicode SIP, #x2A736)
 
+Options:
+
+- Iansui (like ChhoeTaigi)
+- openhuninn
+
 Possible options:
 
-- Unifont?
 - Whatever MOE or moedict is using
-- Justfont's openhuninn
 - https://en.m.wikipedia.org/wiki/Open-source_Unicode_typefaces
 - https://www.babelstone.co.uk/Fonts/Han.html
 - 花園明朝 (it has an extension)
