@@ -469,9 +469,11 @@ This is a separate step from shaping."
         (puthash title entry merged-result)))
     (message "Writing result out to disk...")
     (let ((json-encoding-pretty-print (not noninteractive))
-          ;; This tells `json-encode' to use the same null and false
-          ;; values as `json-parse-buffer''s defaults.
-          (json-null :null)
+          ;; This tells `json-encode' to use the same false as
+          ;; `json-parse-buffer''s default, because there are false
+          ;; values from there.
+          ;;
+          ;; I'm using nil as null on the other hand.
           (json-false :false))
       (with-temp-file "links.json"
         (insert (json-encode d/links)))
