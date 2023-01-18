@@ -280,7 +280,6 @@ Parsed arrays from FILES are concatenated before shaping."
           (puthash "heteronyms" heteronyms tmp)
           (dolist (extra-entry-prop (list "added" "vogue"))
             (when-let (v (gethash extra-entry-prop entry))
-              (message "%s: %s type %s" extra-entry-prop v (type-of v))
               (puthash extra-entry-prop v tmp)))
           (puthash title tmp shaped))
      finally return shaped)))
