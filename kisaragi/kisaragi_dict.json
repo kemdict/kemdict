@@ -1,5 +1,21 @@
 [
   {
+    "title": "一份子",
+    "vogue": false,
+    "added": 1674296566.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧ ㄈㄣˋ ㄗ˙",
+        "definitions": [
+          {
+            "def": "團體的成員。同「一分子」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "幀數",
     "vogue": false,
     "added": 1673784147.0,
