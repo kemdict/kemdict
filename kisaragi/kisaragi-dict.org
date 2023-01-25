@@ -215,6 +215,12 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** 喇牙
+:PROPERTIES:
+:added:    2023-01-25T21:21:59+0900
+:END:
+*** lâ-giâ
+**** 名|→「蟧蜈」。
 ** 一份子
 :PROPERTIES:
 :added:    2023-01-21T19:22:46+0900
