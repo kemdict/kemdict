@@ -125,8 +125,8 @@ Possible options:
 ** TODO [#A] Word page: split sections for each language
 ** TODO [#A] Search page: split sections for each language
 ** TODO build mobile version with Expo
+* TODO [#A] Search without tones
 ** pronunciation search
-- Search without tones
 - Merge “pronunciation search” and Han character search
   - It's not necessarily just “pronunciations”
 - [X] implement for hakkadict
