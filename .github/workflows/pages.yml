@@ -1,9 +1,9 @@
 name: Deploy
 
 on:
-  push:
-    branch:
-      - main
+  # push:
+  #   branch:
+  #     - main
   workflow_dispatch:
 
 permissions:

@@ -9,7 +9,6 @@ export function load({ url }) {
   const mtch = url.searchParams.get("m") || "prefix";
   const sort = url.searchParams.get("s") || "asc";
   let words = [];
-  let wordsPn = [];
 
   if (typeof query !== "string") {
     throw redirect(301, "/");
@@ -37,7 +36,7 @@ WHERE pronunciation LIKE ?`
         .map((x) => `'${x.title}'`)
         .join(",")})`
     );
-    wordsPn = db.transaction(() => titleWordStmt.all())();
+    words = [...words, ...db.transaction(() => titleWordStmt.all())()];
   }
 
   // This stops the query from going into the /word/ page when redirecting
@@ -48,7 +47,6 @@ WHERE pronunciation LIKE ?`
   }
 
   words = words.map(processWord);
-  wordsPn = wordsPn.map(processWord);
 
   let sortFn;
   if (sort === "desc") {
@@ -57,20 +55,11 @@ WHERE pronunciation LIKE ?`
     sortFn = WordSortFns.ascend;
   }
   words.sort(sortFn);
-  wordsPn.sort(sortFn);
 
   // FIXME: after match type works with pronunciations both should
   // be combined.
   let count = 0;
-  let countPn = 0;
   for (const word of words) {
-    for (const dictId of dictIds) {
-      if (word[dictId]?.heteronyms) {
-        count += word[dictId].heteronyms.length;
-      }
-    }
-  }
-  for (const word of wordsPn) {
     for (const dictId of dictIds) {
       if (word[dictId]?.heteronyms) {
         // Eww.
@@ -79,9 +68,10 @@ WHERE pronunciation LIKE ?`
             het?.pronunciation?.includes(query) ||
             het?.trs?.includes(query) ||
             het?.bopomofo?.includes(query) ||
-            het?.pinyin?.includes(query)
+            het?.pinyin?.includes(query) ||
+            het?.title?.includes(query)
         );
-        countPn += word[dictId].heteronyms.length;
+        count += word[dictId].heteronyms.length;
       }
     }
   }
@@ -91,7 +81,5 @@ WHERE pronunciation LIKE ?`
     query: query,
     words: words,
     count: count,
-    wordsPn: wordsPn,
-    countPn: countPn,
   };
 }
