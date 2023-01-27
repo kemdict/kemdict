@@ -17,6 +17,13 @@ const kemdict = "《Kemdict 國語整合典》"
 
 如果 Kemdict 有幫助到您，請考慮[贊助我一餐飯](https://www.buymeacoffee.com/kisaragihiu)。謝謝。
 
+# 已知問題
+
+- 詞彙頁面與搜尋頁面中各語言（台語、客語、華語）沒有分開來
+- 詞彙頁面尚未將讀音視為詞彙（應該要像是 Weblio 一樣，例如 [Weblio：わ](https://www.weblio.jp/content/わ)）
+- 混用白話字與教育部羅馬字，難以搜尋
+- 無法使用無聲調搜尋
+
 # {kemdict}的存在意義
 
 線上華語字典已經有很多了；以下是{kemdict}跟其他字典的比較。

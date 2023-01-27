@@ -1,4 +1,6 @@
 * done
+** DONE update robots.txt to allow =/word/= to be indexed
+** DONE update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
 ** DONE Fallback: Noto CJK isn't good enough
 
 𪜶 (for “their” in Taigi), for instance
@@ -112,12 +114,12 @@ No longer applicable as we don't use moedict-data anymore.
 - update copyright information
 * todos
 ** less han-centric: eg. =/word/in= should show words / heteronyms which have title = in or pronunciation = in
+See https://www.weblio.jp/content/わ for what I want
+
 - Return multiple word objects from word/server
 - Accept multiple word objects in word/page
 ** fix a-a cham-cham
-** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
 ** about: justify kemdict considering chhoetaigi's existence
-** update robots.txt to allow =/word/= to be indexed
 ** Search: put exact match on top
 ** Include more from ChhoeTaigi
 ** TODO [#A] Make copyright information more clear
@@ -125,7 +127,7 @@ No longer applicable as we don't use moedict-data anymore.
 ** TODO [#A] Word page: split sections for each language
 ** TODO [#A] Search page: split sections for each language
 ** TODO build mobile version with Expo
-* TODO [#A] Search without tones
+** TODO [#A] Search without tones
 ** pronunciation search
 - Merge “pronunciation search” and Han character search
   - It's not necessarily just “pronunciations”
@@ -133,8 +135,6 @@ No longer applicable as we don't use moedict-data anymore.
 - [X] Prefix and suffix search
 - [X] Fix the “matching on JSON string” atrocity
 ** TODO link to share on Twitter, Facebook, or just copy the URL
-** TODO some way for the user to complain about or contribute kisaragi-dict definitions
-Might require moving to YAML
 ** TODO varied links to moedict and chhoetaigi
 
 Moedict dropdown → zh, nan, hakka
@@ -144,4 +144,3 @@ Wiktionary dropdown → zh, en, ja
 ** TODO Search sort button needs to be styled
 ** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
 ** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
-** TODO Potentially incorporate https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
