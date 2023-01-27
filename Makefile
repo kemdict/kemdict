@@ -7,3 +7,6 @@ build:
 
 dev:
 	cd web && make dev
+
+preview: build
+	cd web && env PORT=5173 node built-node

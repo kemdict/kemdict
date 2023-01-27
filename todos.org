@@ -1,4 +1,20 @@
 * done
+** DONE Fallback: Noto CJK isn't good enough
+
+𪜶 (for “their” in Taigi), for instance
+(Unicode SIP, #x2A736)
+
+Options:
+
+- Iansui (like ChhoeTaigi)
+- openhuninn
+
+Possible options:
+
+- Whatever MOE or moedict is using
+- https://en.m.wikipedia.org/wiki/Open-source_Unicode_typefaces
+- https://www.babelstone.co.uk/Fonts/Han.html
+- 花園明朝 (it has an extension)
 ** DONE try duckdb
 ** DONE Don't show keyboard shortcut on mobile (max-sm:hidden)
 ** DONE [#A] TOC: split sections for each language
@@ -99,22 +115,6 @@ No longer applicable as we don't use moedict-data anymore.
 - Return multiple word objects from word/server
 - Accept multiple word objects in word/page
 ** fix a-a cham-cham
-** Fallback: Noto CJK isn't good enough
-
-𪜶 (for “their” in Taigi), for instance
-(Unicode SIP, #x2A736)
-
-Options:
-
-- Iansui (like ChhoeTaigi)
-- openhuninn
-
-Possible options:
-
-- Whatever MOE or moedict is using
-- https://en.m.wikipedia.org/wiki/Open-source_Unicode_typefaces
-- https://www.babelstone.co.uk/Fonts/Han.html
-- 花園明朝 (it has an extension)
 ** update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
 ** about: justify kemdict considering chhoetaigi's existence
 ** update robots.txt to allow =/word/= to be indexed
