@@ -1,4 +1,5 @@
 * done
+** DONE fix a-a cham-cham
 ** DONE update robots.txt to allow =/word/= to be indexed
 ** DONE update thanks, which is missing attribution to ChhoeTaigi and Taigi dictionaries
 ** DONE Fallback: Noto CJK isn't good enough
@@ -118,7 +119,6 @@ See https://www.weblio.jp/content/わ for what I want
 
 - Return multiple word objects from word/server
 - Accept multiple word objects in word/page
-** fix a-a cham-cham
 ** about: justify kemdict considering chhoetaigi's existence
 ** Search: put exact match on top
 ** Include more from ChhoeTaigi

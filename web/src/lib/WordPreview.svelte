@@ -38,7 +38,9 @@
           </h2>
           <p class="text-gray-500 dark:text-stone-300">
             {processPreview(
-              het.definition || het.definitions?.map((x) => x.def).join("")
+              het.definition ||
+                het.definitions?.map((x) => x.def).join("") ||
+                het.example
             )}
           </p>
         </div>
