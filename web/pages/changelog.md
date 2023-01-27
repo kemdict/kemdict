@@ -5,6 +5,17 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 # 版本紀錄
 
+## 0.10.0 (2023-01-28)
+
+- 修正有些搜尋會因為要求資料裡沒有的欄位而出現錯誤的問題
+- 大幅加快搜尋速度
+- 修正某些 Noto CJK 沒有 cover 到的詞顯示不出來的問題（使用[粉圓體](https://justfont.com/huninn/)作為備用字型）
+- 新增客戶端用量分析
+- 搜尋：合併「讀音搜尋」和漢字搜尋
+- 搜尋：依語言分區塊
+- kisaragi-dict: 增加流行語標記
+- kisaragi-dict: 增加問題回報連結
+
 ## 0.9.3 (2023-01-12)
 
 - 加入台日大辭典台語譯本的內容（來自 [ChhoeTaigi 的資料](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/blob/master/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv)）
