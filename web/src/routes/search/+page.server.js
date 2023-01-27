@@ -2,7 +2,7 @@ export const prerender = false;
 
 import { redirect } from "@sveltejs/kit";
 import { db, processWord, getTitles } from "$lib/server/db.js";
-import { dictIds, WordSortFns } from "$lib/common";
+import { dicts, langs, WordSortFns } from "$lib/common";
 
 export function load({ url }) {
   const query = url.searchParams.get("q");
@@ -36,6 +36,8 @@ WHERE pronunciation LIKE ?`
         .map((x) => `'${x.title}'`)
         .join(",")})`
     );
+    // FIXME: words can be matched with both title and pronunciation
+    // and thus appear twice.
     words = [...words, ...db.transaction(() => titleWordStmt.all())()];
   }
 
@@ -59,11 +61,13 @@ WHERE pronunciation LIKE ?`
   // FIXME: after match type works with pronunciations both should
   // be combined.
   let count = 0;
+  let langSet = new Set();
   for (const word of words) {
-    for (const dictId of dictIds) {
-      if (word[dictId]?.heteronyms) {
+    for (const dict of dicts) {
+      let dictPresent = false;
+      if (word[dict.id]?.heteronyms) {
         // Eww.
-        word[dictId].heteronyms = word[dictId].heteronyms.filter(
+        word[dict.id].heteronyms = word[dict.id].heteronyms.filter(
           (het) =>
             het?.pronunciation?.includes(query) ||
             het?.trs?.includes(query) ||
@@ -71,7 +75,12 @@ WHERE pronunciation LIKE ?`
             het?.pinyin?.includes(query) ||
             het?.title?.includes(query)
         );
-        count += word[dictId].heteronyms.length;
+        let hets = word[dict.id].heteronyms.length;
+        count += hets;
+        if (hets !== 0) dictPresent = true;
+      }
+      if (dictPresent) {
+        langSet.add(dict.lang);
       }
     }
   }
@@ -81,5 +90,6 @@ WHERE pronunciation LIKE ?`
     query: query,
     words: words,
     count: count,
+    langs: Object.entries(langs).filter((l) => langSet.has(l[0])),
   };
 }

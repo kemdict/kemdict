@@ -3,8 +3,12 @@
   import { spc } from "$lib/processing";
   import { dictsInWord } from "$lib/common";
   export let word;
+  // FIXME: the results should be split on the server, not in WordPreview.
+  // This would require flattening word objects into heteronyms during
+  // processing.
+  export let lang;
   // Needs to be reactive so that it can update dynamically
-  $: presentDicts = dictsInWord(word);
+  $: presentDicts = dictsInWord(word, false, lang);
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.
   const pron_keys = [

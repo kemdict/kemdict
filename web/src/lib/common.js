@@ -53,16 +53,39 @@ export const dicts = [
 ];
 
 export const dictIds = dicts.map((x) => x.id);
+export const langIds = Object.keys(langs);
+export const dictsByLang = [
+  {
+    zh_TW: ["kisaragi_dict", "dict_concised", "dict_revised", "dict_idioms"],
+  },
+  {
+    nan_TW: [
+      "chhoetaigi_taijittoasutian",
+      "moedict_twblg",
+      "chhoetaigi_itaigi",
+    ],
+  },
+  {
+    hak_TW: ["hakkadict"],
+  },
+];
 
 /**
  * Return array of dictionary IDs present in `word`.
  * If `full` is truthy, return dictionary objects instead.
  */
-export function dictsInWord(word, full) {
+export function dictsInWord(word, full, lang) {
+  let ds = dicts.filter((dict) => {
+    if (lang) {
+      return word[dict.id] && lang === dict.lang;
+    } else {
+      return word[dict.id];
+    }
+  });
   if (full) {
-    return dicts.filter((dict) => word[dict.id]);
+    return ds;
   } else {
-    return dictIds.filter((id) => word[id]);
+    return ds.map((d) => d.id);
   }
 }
 

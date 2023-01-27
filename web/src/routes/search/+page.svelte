@@ -3,9 +3,9 @@
 
   import Elsewhere from "$lib/Elsewhere.svelte";
   import SingleLayout from "$lib/SingleLayout.svelte";
-  import SortForm from "./SortForm.svelte";
+  import Collapsible from "$lib/Collapsible.svelte";
   import WordPreview from "$lib/WordPreview.svelte";
-  import { WordSortFns } from "$lib/common.js";
+  import { WordSortFns, langs } from "$lib/common.js";
 
   function getTitle(mtch, query) {
     if (mtch === "prefix") {
@@ -42,14 +42,20 @@
     </div>
   {:else if data.count !== 0}
     <h1 class="mt-8 text-2xl font-bold">{title}</h1>
-    <h2 class="text-sm">
+    <p class="text-sm">
       共 {data.count} 個定義
-    </h2>
-    <SortForm bind:sort query={data.query} />
-    <ul>
-      {#each data.words.sort(sortFn) as word}
-        <WordPreview {word} />
-      {/each}
-    </ul>
+    </p>
+    {#each data.langs as [id, lang]}
+      <Collapsible
+        class="mt-6 border-b border-stone-300 text-lg font-bold dark:border-stone-500"
+      >
+        <svelte:fragment slot="header">{lang}</svelte:fragment>
+        <ul slot="body">
+          {#each data.words as word}
+            <WordPreview {word} lang={id} />
+          {/each}
+        </ul>
+      </Collapsible>
+    {/each}
   {/if}
 </SingleLayout>

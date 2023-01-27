@@ -10,11 +10,12 @@
     "svelte-check": "^2.10.2",
     "svelte-preprocess": "^5.0.0",
     "tailwindcss": "^3.2.4",
-    "vite": "^4.0.2"
+    "vite": "^4.0.4"
   },
   "dependencies": {
     "better-sqlite3": "^7.6.2",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "svelte-collapse": "^0.1.1"
   },
   "scripts": {
     "prod": "npm install --omit=dev && node index.js"
