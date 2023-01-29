@@ -205,17 +205,23 @@ Writes into TABLE. Returns the new value associated with KEY."
           (push p ret))))
     ret))
 
+(defvar d/pn-normalize/buffer (get-buffer-create " process-data"))
 (defun d/pn-normalize (p)
   "Normalize pronunciation string P.
 
 Return a list of normalized strings. This is because some
 pronunciation strings include multiple pronunciations."
-  (->> p
-       (s-replace "　" " ")
-       (s-replace "（變）" "/")
-       (s-split "/")
-       (-map #'s-trim)
-       (remove "")))
+  (with-current-buffer d/pn-normalize/buffer
+    (erase-buffer)
+    (insert p)
+    (ucs-normalize-NFC-region
+     (point-min) (point-max))
+    (->> (buffer-string)
+         (s-replace "　" " ")
+         (s-replace "（變）" "/")
+         (s-split "/")
+         (-map #'s-trim)
+         (remove ""))))
 
 (defun d/parse-and-shape (&rest files)
   "Parse FILES and return a shaped version of it.
@@ -327,6 +333,9 @@ This is a separate step from shaping."
     (dolist (key (list "definition" "source_comment" "典故說明"))
       (d::hash-update het key
         #'d/links/linkify-brackets))
+    (dolist (key (list "trs" "poj" "kip"))
+      (d::hash-update het key
+        #'d/pn-normalize))
     (dolist (key (list "近義同" "近義反"))
       (d::hash-update het key
         #'d/links/comma-word-list))
