@@ -98,6 +98,29 @@ this:
             d/links))
     (s-lex-format "<a href=\"/word/${href}\">${desc}</a>")))
 
+(defun d/links/linkify-first-phrase (str)
+  "Try to create a link for the first phrase in STR."
+  (when str
+    (->> str
+         (s-replace-regexp
+          (rx bos
+              (group (+? any))
+              (group (or "，" "。")))
+          (lambda (str)
+            (concat
+             (d/links/link-to-word
+              (match-string 1 str))
+             (match-string 2 str)))))))
+
+(ert-deftest d/links/linkify-first-phrase ()
+  (should
+   (let ((d/titles/look-up-table
+          (d/titles/to-look-up-table (list "a"))))
+     (and (equal (d/links/linkify-first-phrase "a。")
+                 "<a href=\"/word/a\">a</a>。")
+          (equal (d/links/linkify-brackets "b。")
+                 "b。")))))
+
 (defun d/links/linkify-brackets (str)
   "Create links in STR for all brackets."
   (when str
@@ -352,7 +375,9 @@ This is a separate step from shaping."
       (lambda (defs)
         (seq-doseq (def defs)
           (d::hash-update def "def"
-            #'d/links/linkify-brackets))))
+            (-compose
+             #'d/links/linkify-brackets
+             #'d/links/linkify-first-phrase)))))
     (pcase dict
       ("kisaragi_dict"
        (d::hash-update het "definitions"
@@ -371,6 +396,8 @@ This is a separate step from shaping."
       ("chhoetaigi_taijittoasutian"
        (d::hash-update het "example"
          ;; This makes it more readable. Is it a good idea though?
+         ;; Before: "An ~ is red." (in page "apple")
+         ;; After: "An apple is red."
          (lambda (str)
            (s-replace-regexp (rx (opt " ")
                                  ;; this is #x223c, TILDE OPERATOR,
