@@ -23,7 +23,7 @@ export const dicts = [
   {
     id: "chhoetaigi_taijittoasutian",
     name: "台日大辭典台語譯本 (1932)",
-    url: "https://taigi.fhl.net/dict/",
+    url: "https://taigi.fhl.net/dict/search.php?DETAIL=1&LIMIT=id=$1",
     lang: "nan_TW",
   },
   {

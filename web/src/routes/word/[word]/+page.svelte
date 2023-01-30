@@ -46,7 +46,13 @@
     {#each groupByProp(presentDicts, "lang") as [lang, dicts]}
       {#each dicts as dict}
         <div id={dict.id} class="dict">
-          <Out href={format(dict.url, word.title)}>{dict.name}</Out>
+          {#if dict.id === "chhoetaigi_taijittoasutian"}
+            <Out href={format(dict.url, word.heteronyms[0].het_sort)}
+              >{dict.name}</Out
+            >
+          {:else}
+            <Out href={format(dict.url, word.title)}>{dict.name}</Out>
+          {/if}
           <span
             ><a
               class="hover:link dark:gray-500 text-gray-400"
