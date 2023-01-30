@@ -28,6 +28,10 @@
   function processPreview(def) {
     return truncate(strip(def), { length: 45, omission: "……" });
   }
+  function processPn(het) {
+    let pn = het[pron_keys.find((pron) => het[pron])];
+    return spc(pn);
+  }
 </script>
 
 {#each presentDicts as dict}
@@ -38,7 +42,7 @@
           class="-mx-1 my-2 p-1 text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800"
         >
           <h2 class="link font-bold hover:no-underline">
-            {word.title}（{spc(het[pron_keys.find((pron) => het[pron])])}）
+            {word.title}（{processPn(het)}）
           </h2>
           <p class="text-gray-500 dark:text-stone-300">
             {processPreview(

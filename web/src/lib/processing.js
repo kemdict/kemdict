@@ -5,15 +5,11 @@
  * @returns {string}
  */
 export function spc(str) {
-  try {
-    if (str) {
-      return str.replace(/　/g, " ");
-    }
-  } catch (e) {
-    console.log(`spc: str is not a string`);
-    console.log(`str: ${JSON.stringify(str)}`);
-    console.log(`typeof str: ${typeof str}`);
-    throw e;
+  if (typeof str !== "string") {
+    throw new TypeError("str must be a string");
+  }
+  if (str) {
+    return str.replace(/　/g, " ");
   }
 }
 
