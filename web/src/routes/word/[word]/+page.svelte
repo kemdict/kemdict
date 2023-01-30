@@ -47,7 +47,7 @@
       {#each dicts as dict}
         <div id={dict.id} class="dict">
           {#if dict.id === "chhoetaigi_taijittoasutian"}
-            <Out href={format(dict.url, word.heteronyms[0].het_sort)}
+            <Out href={format(dict.url, word[dict.id].heteronyms[0].het_sort)}
               >{dict.name}</Out
             >
           {:else}
