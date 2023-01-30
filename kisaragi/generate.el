@@ -24,9 +24,9 @@
 
 (defvar kisaragi-dict/current-title nil)
 
-(defun d/to-json-bool (value)
-  "Return `json-false' if VALUE is nil, t otherwise."
-  (if value t json-false))
+(defun d/to-bool (value)
+  "Return nil if VALUE is nil, t otherwise."
+  (if value t nil))
 
 (defun kisaragi-dict/elem-title (elem)
   "Return the only title of ELEM."
@@ -41,50 +41,52 @@
 (defun kisaragi-dict/element-to-json (elem)
   "Process ELEM to JSON for kisaragi-dict."
   (let ((kisaragi-dict/current-title (kisaragi-dict/elem-title elem)))
-    (list
-     (cons "title" kisaragi-dict/current-title)
-     (cons "vogue" (->> elem
-                        (org-element-property :tags)
-                        (member "vogue")
-                        d/to-json-bool))
-     ;; Use unix time so it's easier to compare
-     (cons "added" (-> (org-element-property :ADDED elem)
-                       parse-iso8601-time-string
-                       float-time))
-     (cons "heteronyms"
-           (cl-loop
-            for het in (org-element-contents elem)
-            when (eq 'headline (org-element-type het))
-            collect
-            ;; pronunciation
-            (list (cons "pronunciation" (kisaragi-dict/elem-title het))
-                  (cons "definitions"
-                        (cl-loop
-                         for definition in (org-element-contents het)
-                         when (eq 'headline (org-element-type definition))
-                         collect
-                         (let* ((type+def
-                                 (-> (kisaragi-dict/elem-title definition)
-                                     (split-string "|")))
-                                ;; type+def is (def) or (type def ...)
-                                ;; so to detect if type is present we
-                                ;; check if the second element exists
-                                ;; or not.
-                                (has-type (and (cadr type+def) t))
-                                (type (and has-type (car type+def)))
-                                (def (if has-type
-                                         (cadr type+def)
-                                       (car type+def)))
-                                (content (string-trim
-                                          (org-element-interpret-data
-                                           (org-element-contents definition))))
-                                definition)
-                           (when type
-                             (push (cons "type" type) definition))
-                           (unless (equal content "")
-                             (setq def (format "%s\n%s" def content)))
-                           (push (cons "def" def) definition)
-                           definition)))))))))
+    (--filter
+     (cdr it)
+     (list
+      (cons "title" kisaragi-dict/current-title)
+      (cons "vogue" (->> elem
+                         (org-element-property :tags)
+                         (member "vogue")
+                         d/to-bool))
+      ;; Use unix time so it's easier to compare
+      (cons "added" (-> (org-element-property :ADDED elem)
+                        parse-iso8601-time-string
+                        float-time))
+      (cons "heteronyms"
+            (cl-loop
+             for het in (org-element-contents elem)
+             when (eq 'headline (org-element-type het))
+             collect
+             ;; pronunciation
+             (list (cons "pronunciation" (kisaragi-dict/elem-title het))
+                   (cons "definitions"
+                         (cl-loop
+                          for definition in (org-element-contents het)
+                          when (eq 'headline (org-element-type definition))
+                          collect
+                          (let* ((type+def
+                                  (-> (kisaragi-dict/elem-title definition)
+                                      (split-string "|")))
+                                 ;; type+def is (def) or (type def ...)
+                                 ;; so to detect if type is present we
+                                 ;; check if the second element exists
+                                 ;; or not.
+                                 (has-type (and (cadr type+def) t))
+                                 (type (and has-type (car type+def)))
+                                 (def (if has-type
+                                          (cadr type+def)
+                                        (car type+def)))
+                                 (content (string-trim
+                                           (org-element-interpret-data
+                                            (org-element-contents definition))))
+                                 definition)
+                            (when type
+                              (push (cons "type" type) definition))
+                            (unless (equal content "")
+                              (setq def (format "%s\n%s" def content)))
+                            (push (cons "def" def) definition)
+                            definition))))))))))
 
 (defun kisaragi-dict/file-to-json (file)
   "Convert FILE to a structure ready to be written to JSON."
