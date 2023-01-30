@@ -41,7 +41,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
     "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
   (d/extract-development-version "出"
     "ministry-of-education/hakkadict.json" "dev-hakkadict.json")
-  (d/extract-development-version "無妨"
+  (d/extract-development-version "㨻魚"
     "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
   (d/extract-development-version "無妨"
     "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")

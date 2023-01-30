@@ -1,5 +1,50 @@
 [
   {
+    "title": "手孔",
+    "added": 1675064087.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄎㄨㄥˇ",
+        "definitions": [
+          {
+            "def": "在地上，為讓人能伸手到下方進行維護作業的孔洞。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "人孔蓋",
+    "added": 1675064085.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄣˊ ㄎㄨㄥˇ ㄍㄞˋ",
+        "definitions": [
+          {
+            "def": "[[人孔]]上的蓋子。一般為了防止無關人士嘗試進出，會是一整片厚重的金屬製成。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "人孔",
+    "added": 1675064082.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄣˊ ㄎㄨㄥˇ",
+        "definitions": [
+          {
+            "def": "在地上，為讓人能進出下方維護用空間的孔洞。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "喇牙",
     "added": 1674649319.0,
     "heteronyms": [
