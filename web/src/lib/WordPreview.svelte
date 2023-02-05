@@ -30,7 +30,11 @@
   }
   function processPn(het) {
     let pn = het[pron_keys.find((pron) => het[pron])];
-    return spc(pn);
+    if (pn) {
+      return `（${spc(pn)}）`;
+    } else {
+      return "";
+    }
   }
 </script>
 
@@ -42,7 +46,7 @@
           class="-mx-1 my-2 p-1 text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800"
         >
           <h2 class="link font-bold hover:no-underline">
-            {word.title}（{processPn(het)}）
+            {word.title}{processPn(het)}
           </h2>
           <p class="text-gray-500 dark:text-stone-300">
             {processPreview(
