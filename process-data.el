@@ -121,14 +121,21 @@ this:
           (equal (d/links/linkify-brackets "b。")
                  "b。")))))
 
-(defun d/links/linkify-brackets (str)
+(defun d/links/linkify-brackets (str &optional open close)
   "Create links in STR for all brackets."
   (when str
     (->> str
          (s-replace-regexp
-          (rx (group (or "「" "【"))
-              (group (*? any))
-              (group (or "」" "】")))
+          ;; Presumably this is faster. Haven't timed it though.
+          (if (and open close)
+              (rx-to-string
+               `(seq (group (any ,open))
+                     (group (*? any))
+                     (group (any ,close)))
+               :no-group)
+            (rx (group (any "「【"))
+                (group (*? any))
+                (group (any "」】"))))
           (lambda (str)
             (concat
              (match-string 1 str)
@@ -394,6 +401,9 @@ This is a separate step from shaping."
        (d::hash-update het "definition"
          #'d/links/link-to-word))
       ("chhoetaigi_taijittoasutian"
+       (d::hash-update het "definition"
+         (lambda (def)
+           (d/links/linkify-brackets def "[" "]")))
        (d::hash-update het "example"
          ;; This makes it more readable. Is it a good idea though?
          ;; Before: "An ~ is red." (in page "apple")
