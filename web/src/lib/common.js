@@ -1,4 +1,8 @@
-export const langs = { hak_TW: "客語", nan_TW: "台語", zh_TW: "華語" };
+export const langs = {
+  zh_TW: "華語",
+  nan_TW: "台語",
+  hak_TW: "客語",
+};
 
 // This also defines the order in the word page
 export const dicts = [
