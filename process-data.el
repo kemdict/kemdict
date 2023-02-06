@@ -235,7 +235,16 @@ Writes into TABLE. Returns the new value associated with KEY."
           (push p ret))))
     ret))
 
-(defvar d/pn-normalize/buffer (get-buffer-create " process-data"))
+(defvar d/ucs-NFC//buffer (get-buffer-create " process-data"))
+(defun d/ucs-NFC (str)
+  "Like `ucs-normalize-NFC-string' but keeps reusing the same temp buffer."
+  (with-current-buffer d/ucs-NFC//buffer
+    (erase-buffer)
+    (insert str)
+    (ucs-normalize-NFC-region
+     (point-min) (point-max))
+    (buffer-string)))
+
 (defun d/pn-normalize (p &optional one)
   "Normalize pronunciation string P.
 
@@ -243,21 +252,18 @@ Return a list of normalized strings. This is because some
 pronunciation strings include multiple pronunciations. If ONE is
 non-nil, don't do pronunciation splitting and return a string
 instead."
-  (with-current-buffer d/pn-normalize/buffer
-    (erase-buffer)
-    (insert p)
-    (ucs-normalize-NFC-region
-     (point-min) (point-max))
-    (if one
-        (->> (buffer-string)
-             (s-replace "　" " ")
-             s-trim)
-      (->> (buffer-string)
+  (if one
+      (->> p
+           d/ucs-NFC
            (s-replace "　" " ")
-           (s-replace "（變）" "/")
-           (s-split "/")
-           (-map #'s-trim)
-           (remove "")))))
+           s-trim)
+    (->> p
+         d/ucs-NFC
+         (s-replace "　" " ")
+         (s-replace "（變）" "/")
+         (s-split "/")
+         (-map #'s-trim)
+         (remove ""))))
 
 (defun d/parse-and-shape (&rest files)
   "Parse FILES and return a shaped version of it.
@@ -381,6 +387,10 @@ This is a separate step from shaping."
     (d::hash-update het "definitions"
       (lambda (defs)
         (seq-doseq (def defs)
+          (d::hash-update def "quote"
+            #'d/ucs-NFC)
+          (d::hash-update def "example"
+            #'d/ucs-NFC)
           (d::hash-update def "def"
             (-compose
              #'d/links/linkify-brackets

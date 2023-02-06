@@ -216,6 +216,12 @@ These are not compiled because only words under the Words heading are.
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
 ** 拍謝
+** 霧煞煞
+:PROPERTIES:
+:added:    2023-02-06T23:18:57+0900
+:END:
+*** bū-sà-sà
+**** 形|[[一頭霧水]]。亦作「霧嗄嗄」。
 ** 無人機
 :PROPERTIES:
 :added:    2023-01-31T06:34:47+0900
