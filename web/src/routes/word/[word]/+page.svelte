@@ -65,7 +65,7 @@
           {#if dict.id == "kisaragi_dict"}
             <WordMoedictish {word} dict={dict.id} />
             <div class="copyright">
-              <p>《{dict.name}》採 CC0 釋出。</p>
+              <p>《{dict.name}》採 CC0 釋出，可無條件隨意複製，隨意利用。</p>
               <p>
                 這個定義有問題嗎？<a
                   href="https://github.com/kemdict/kemdict-data/issues"
