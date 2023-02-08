@@ -153,7 +153,7 @@ These are not compiled because only words under the Words heading are.
 :added:    2022-11-30T23:02:14+0900
 :END:
 **** ㄔㄤˊ ㄒㄧㄣ ㄍㄨㄢˋ
-***** 名|英語「Long COVID」的意譯。指 [[COVID-19]] 痊癒後常見的後遺症。
+***** 名|英語Long COVID的意譯。指 [[COVID-19]] 痊癒後常見的後遺症。
 *** 新冠肺炎
 :PROPERTIES:
 :added:    2022-11-30T22:36:37+0900
@@ -183,7 +183,7 @@ These are not compiled because only words under the Words heading are.
 :added:    2022-11-30T21:58:10+0900
 :END:
 **** ㄋㄠˇ ㄨˋ
-***** 名|來自英語「brain fog」。指大腦思考力、理解能力等下降的現象。造成腦霧的常見因素有睡眠不足、壓力過大、[[COVID-19]] 後遺症等等。
+***** 名|指大腦思考力、理解能力等下降的現象。造成腦霧的常見因素有睡眠不足、壓力過大、[[COVID-19]] 後遺症等等。英語 brain fog 的意譯。
 ** AI stuff
 *** 深度學習
 :PROPERTIES:
@@ -215,13 +215,38 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** 超級傳播者
+:PROPERTIES:
+:added:    2023-02-08T17:04:14+0900
+:END:
+*** ㄔㄠ ㄐㄧˊ ㄔㄨㄢˊ ㄅㄛˋ ㄓㄜˇ
+**** 名|傳染病流行時，將疾病傳染給非常多人的人。英語superspreader的意譯。
+**** 名|引申指將不好的事物傳播給很多人的人。如：「在社群網站上如果習慣不經大腦就分享，小心變成假訊息超級傳播者」
+** 造勢
+:PROPERTIES:
+:added:    2023-02-08T16:57:35+0900
+:END:
+*** ㄗㄠˋ ㄕˋ
+**** 動|號召支持者舉辦遊行，為候選人營造聲勢、凝聚支持度。
+**** 名|前項遊行本身。如：「這個候選人選舉期間共辦了十場造勢。」
+** 87
+:PROPERTIES:
+:added:    2023-02-08T16:57:32+0900
+:END:
+*** ㄅㄚ ㄑㄧ
+**** 名|「白癡」的諧音。
 ** 拍謝
+:PROPERTIES:
+:added:    2023-02-08T16:57:28+0900
+:END:
+*** pháinn-sè
+**** 嘆|抱歉、對不起。台語「歹勢」的假借字。
 ** 霧煞煞
 :PROPERTIES:
 :added:    2023-02-06T23:18:57+0900
 :END:
 *** bū-sà-sà
-**** 形|[[一頭霧水]]。亦作「霧嗄嗄」。
+**** 形|[[一頭霧水]]。台語「霧嗄嗄」的假借字。
 ** 無人機
 :PROPERTIES:
 :added:    2023-01-31T06:34:47+0900
@@ -270,7 +295,7 @@ These are not compiled because only words under the Words heading are.
 :added:    2023-01-25T21:21:59+0900
 :END:
 *** lâ-giâ
-**** 名|→「蟧蜈」。
+**** 名|一種大型蜘蛛。台語「蟧蜈」的假借字。
 ** 一份子
 :PROPERTIES:
 :added:    2023-01-21T19:22:46+0900
@@ -859,7 +884,7 @@ These are not compiled because only words under the Words heading are.
 :added:    2022-11-08T10:28:46+0900
 :END:
 *** ㄔㄨㄟ ㄕㄠˋ ㄓㄜˇ
-**** 名|從組織內部為了社會公益而流出內情的人。來自英語「whistleblower」。
+**** 名|從組織內部為了社會公益而流出內情的人。英語whistleblower的意譯。
 ** 同溫層
 :PROPERTIES:
 :added:    2022-11-08T10:27:14+0900
@@ -884,7 +909,7 @@ These are not compiled because only words under the Words heading are.
 :added:    2022-11-08T10:10:02+0900
 :END:
 *** ㄉㄡˇ ㄋㄟˋ
-**** 動|捐款贊助。一般用於贊助創作者的場合。英語 donate 的音譯。
+**** 動|捐款贊助。一般用於贊助創作者的場合。英語donate的音譯。
 ** QR碼
 :PROPERTIES:
 :added:    2022-11-08T10:08:06+0900

@@ -1,5 +1,73 @@
 [
   {
+    "title": "超級傳播者",
+    "added": 1675843454.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄠ ㄐㄧˊ ㄔㄨㄢˊ ㄅㄛˋ ㄓㄜˇ",
+        "definitions": [
+          {
+            "def": "傳染病流行時，將疾病傳染給非常多人的人。英語superspreader的意譯。",
+            "type": "名"
+          },
+          {
+            "def": "引申指將不好的事物傳播給很多人的人。如：「在社群網站上如果習慣不經大腦就分享，小心變成假訊息超級傳播者」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "造勢",
+    "added": 1675843055.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗㄠˋ ㄕˋ",
+        "definitions": [
+          {
+            "def": "號召支持者舉辦遊行，為候選人營造聲勢、凝聚支持度。",
+            "type": "動"
+          },
+          {
+            "def": "前項遊行本身。如：「這個候選人選舉期間共辦了十場造勢。」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "87",
+    "added": 1675843052.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄚ ㄑㄧ",
+        "definitions": [
+          {
+            "def": "「白癡」的諧音。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "拍謝",
+    "added": 1675843048.0,
+    "heteronyms": [
+      {
+        "pronunciation": "pháinn-sè",
+        "definitions": [
+          {
+            "def": "抱歉、對不起。台語「歹勢」的假借字。",
+            "type": "嘆"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "霧煞煞",
     "added": 1675693137.0,
     "heteronyms": [
@@ -7,7 +75,7 @@
         "pronunciation": "bū-sà-sà",
         "definitions": [
           {
-            "def": "[[一頭霧水]]。亦作「霧嗄嗄」。",
+            "def": "[[一頭霧水]]。台語「霧嗄嗄」的假借字。",
             "type": "形"
           }
         ]
@@ -131,7 +199,7 @@
         "pronunciation": "lâ-giâ",
         "definitions": [
           {
-            "def": "→「蟧蜈」。",
+            "def": "一種大型蜘蛛。台語「蟧蜈」的假借字。",
             "type": "名"
           }
         ]
@@ -1140,7 +1208,7 @@
         "pronunciation": "ㄔㄤˊ ㄒㄧㄣ ㄍㄨㄢˋ",
         "definitions": [
           {
-            "def": "英語「Long COVID」的意譯。指 [[COVID-19]] 痊癒後常見的後遺症。",
+            "def": "英語Long COVID的意譯。指 [[COVID-19]] 痊癒後常見的後遺症。",
             "type": "名"
           }
         ]
@@ -1214,7 +1282,7 @@
         "pronunciation": "ㄋㄠˇ ㄨˋ",
         "definitions": [
           {
-            "def": "來自英語「brain fog」。指大腦思考力、理解能力等下降的現象。造成腦霧的常見因素有睡眠不足、壓力過大、[[COVID-19]] 後遺症等等。",
+            "def": "指大腦思考力、理解能力等下降的現象。造成腦霧的常見因素有睡眠不足、壓力過大、[[COVID-19]] 後遺症等等。英語 brain fog 的意譯。",
             "type": "名"
           }
         ]
@@ -1895,7 +1963,7 @@
         "pronunciation": "ㄔㄨㄟ ㄕㄠˋ ㄓㄜˇ",
         "definitions": [
           {
-            "def": "從組織內部為了社會公益而流出內情的人。來自英語「whistleblower」。",
+            "def": "從組織內部為了社會公益而流出內情的人。英語whistleblower的意譯。",
             "type": "名"
           }
         ]
@@ -1959,7 +2027,7 @@
         "pronunciation": "ㄉㄡˇ ㄋㄟˋ",
         "definitions": [
           {
-            "def": "捐款贊助。一般用於贊助創作者的場合。英語 donate 的音譯。",
+            "def": "捐款贊助。一般用於贊助創作者的場合。英語donate的音譯。",
             "type": "動"
           }
         ]
