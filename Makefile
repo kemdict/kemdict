@@ -39,8 +39,6 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ca
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
 #   a main title and I need to pick one. It's not an ideal assumption.
 # - HuaBun -> definition, again because of Kemdict's assumptions.
-# - HACK: id -> het_sort, to make it work with the code originally
-#   written to deal with dict_revised.
 # - Dropping the Input columns -- which use numbers to represent tones,
 #   not unicode sequences -- because they're not needed.
 # - The original header is (without the newline):
@@ -48,17 +46,16 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ca
 #     "HanLoTaibunPoj","HanLoTaibunKip","HoaBun","DataProvidedBy"
 chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	npx csvtojson --ignoreColumns='/Input/' --headers='["het_sort","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input/' --headers='["id","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
 
 # Original header:
 # "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","HanLoTaibunPoj","KaisoehHanLoPoj","LekuHanLoPoj","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"
-# HACK: again, id -> het_sort
 # HanLoTaibunPoj -> title
 # KaisoehHanLoPoj -> definition
 # LekuHanLoKip -> example
 chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["het_sort","poj","PojUnicodeOthers","PojInput","PojInputOthers","title","definition","example","kip","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","title","definition","example","kip","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.
