@@ -225,25 +225,31 @@ this:
           (equal (d:links:comma-word-list "交情。")
                  "交情。")))))
 
-(defun d:pn-collect (het)
-  "Collect pronunciations from heteronym object HET."
-  (let ((ret nil))
-    (dolist (key (list
-                  ;; kemdict-data-ministry-of-education
-                  "bopomofo" "pinyin"
-                  ;; moedict-twblg
-                  "trs"
-                  ;; kisaragi-dict
-                  "pronunciation"
-                  ;; hakkadict
-                  "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
-                  ;; chhoetaigi-itaigi (keys are defined in Makefile
-                  ;; in this repository)
-                  "poj" "kip"))
+(defconst d::pn-keys
+  (list
+   ;; kemdict-data-ministry-of-education
+   "bopomofo" "pinyin"
+   ;; moedict-twblg
+   "trs"
+   ;; kisaragi-dict
+   "pronunciation"
+   ;; hakkadict
+   "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
+   ;; chhoetaigi-itaigi (keys are defined in Makefile
+   ;; in this repository)
+   "poj" "kip"))
+
+(defun d:pn-collect (het &optional table?)
+  "Collect pronunciations from heteronym object HET.
+When TABLE? is non-nil, return a hash table mapping the
+pronunciation key to the corresponding value."
+  (let ((ret))
+    (dolist (key d::pn-keys)
       (when-let (p (gethash key het))
         (dolist (p (d:pn-normalize p))
-          (push p ret))))
-    ret))
+          (push (cons key p)
+                ret))))
+    (if table? ret (mapcar #'cdr ret))))
 
 (defun d:pn-normalize (p &optional one)
   "Normalize pronunciation string P.
@@ -264,73 +270,6 @@ instead."
          (s-split "/")
          (-map #'s-trim)
          (remove ""))))
-
-(defun d:parse-and-shape (&rest files)
-  "Parse FILES and return a shaped version of it.
-
-Parsed arrays from FILES are concatenated before shaping."
-  (let ((shaped (make-hash-table :test #'equal))
-        (raw-dict
-         (with-temp-buffer
-           (cl-loop for f in files
-                    vconcat
-                    (progn
-                      (erase-buffer)
-                      (insert-file-contents f)
-                      (json-parse-buffer))))))
-    ;; [{:title "title"
-    ;;   :heteronyms (...)
-    ;;   ... ...}
-    ;;  ...]
-    ;; -> {"title" {heteronyms (...)}
-    ;;     ...}
-    ;;
-    ;; For entries without heteronyms:
-    ;; [{:title "title"
-    ;;   :definition "def"
-    ;;   ... ...}
-    ;;  ...]
-    ;; -> {"title" {heteronyms [{definition "def" ...}]}
-    ;;     ...}
-    (cl-loop
-     for entry being the elements of raw-dict
-     do (let* ((title (d:process-title (gethash "title" entry)))
-               ;; If the dictionary does not declare heteronyms in a
-               ;; key, we set the heteronyms to a list with the
-               ;; entry itself.
-               (heteronyms (or (gethash "heteronyms" entry)
-                               (vector entry)))
-               (tmp (make-hash-table :test #'equal)))
-          ;; If an entry with the title already exists, insert into
-          ;; its heteronyms.
-          (when-let (existing (gethash title shaped))
-            (setq heteronyms
-                  (vconcat (gethash "heteronyms" existing)
-                           heteronyms)))
-          ;; Sort the heteronyms according to the het_sort key.
-          ;; TODO: sort with the "id" key if het_sort isn't present
-          (when (and
-                 ;; Skip checking the rest if the first already
-                 ;; doesn't have it.
-                 (gethash "het_sort" (elt heteronyms 0))
-                 ;; FIXME: do we actually need to check this? The data
-                 ;; we're working with should be well-formed enough.
-                 (seq-every-p (lambda (it) (gethash "het_sort" it))
-                              heteronyms))
-            (setq heteronyms
-                  ;; This happens to work on vectors.
-                  (--sort
-                   (< (string-to-number
-                       (gethash "het_sort" it))
-                      (string-to-number
-                       (gethash "het_sort" other)))
-                   heteronyms)))
-          (puthash "heteronyms" heteronyms tmp)
-          (dolist (extra-entry-prop (list "added" "vogue"))
-            (when-let (v (gethash extra-entry-prop entry))
-              (puthash extra-entry-prop v tmp)))
-          (puthash title tmp shaped))
-     finally return shaped)))
 
 (defun d:process-title (title)
   "Process TITLE to replace problematic characters, and so on."
@@ -364,40 +303,47 @@ Parsed arrays from FILES are concatenated before shaping."
                          "<br><m title=\"參考詞\">△</m> ")
        d:links:linkify-brackets))
 
-(defun d:process-heteronym (het title dict)
-  "Process the heteronym object HET.
+(defun d:process-props (props title dict)
+  "Process the heteronym props object PROPS.
 
-HET describes TITLE and belongs to DICT. These are needed for
+PROPS describes TITLE and belongs to DICT. These are needed for
 some processing.
 
 This is a separate step from shaping."
   (let ((d:links:from title))
     (dolist (key (list "definition" "source_comment" "典故說明"))
-      (d::hash-update het key
+      (d::hash-update props key
         #'d:links:linkify-brackets))
     (dolist (key (list "trs" "poj" "kip"))
-      (d::hash-update het key
+      (d::hash-update props key
         (lambda (pn)
           (d:pn-normalize pn :one))))
     (dolist (key (list "近義同" "近義反"))
-      (d::hash-update het key
+      (d::hash-update props key
         #'d:links:comma-word-list))
-    (d::hash-update het "word_ref"
+    (d::hash-update props "word_ref"
       #'d:links:link-to-word)
-    (d::hash-update het "definitions"
+    (d::hash-update props "definitions"
       (lambda (defs)
         (seq-doseq (def defs)
           (d::hash-update def "quote"
             #'d::ucs-NFC)
           (d::hash-update def "example"
-            #'d::ucs-NFC)
+            (lambda (v)
+              (cond
+               ((stringp v)
+                (d::ucs-NFC v))
+               ((seqp v)
+                (seq-map #'d::ucs-NFC v))
+               (t (error "%s: het.props.definitions.example is neither a string or a sequence"
+                         title)))))
           (d::hash-update def "def"
             (-compose
              #'d:links:linkify-brackets
              #'d:links:linkify-first-phrase)))))
     (pcase dict
       ("kisaragi_dict"
-       (d::hash-update het "definitions"
+       (d::hash-update props "definitions"
          (lambda (defs)
            (seq-doseq (def defs)
              (d::hash-update def "def"
@@ -408,13 +354,13 @@ This is a separate step from shaping."
                       ;; No need to apply linkify-brackets again
                       d:links:org-style)))))))
       ("chhoetaigi_itaigi"
-       (d::hash-update het "definition"
+       (d::hash-update props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taijittoasutian"
-       (d::hash-update het "definition"
+       (d::hash-update props "definition"
          (lambda (def)
            (d:links:linkify-brackets def "[" "]")))
-       (d::hash-update het "example"
+       (d::hash-update props "example"
          ;; This makes it more readable. Is it a good idea though?
          ;; Before: "An ~ is red." (in page "apple")
          ;; After: "An apple is red."
@@ -427,120 +373,168 @@ This is a separate step from shaping."
                              d:links:from
                              str))))
       ("dict_concised"
-       (d::hash-update het "definition"
+       (d::hash-update props "definition"
          #'d:process-def:dict_concised))
       ("dict_idioms"
-       (d::hash-update het "definition"
+       (d::hash-update props "definition"
          (lambda (def)
            ;; There is often an anchor at the end of
            ;; dict_idioms definitions that's not
            ;; displayed. Getting rid of it here allows
            ;; shredding them from the database.
            (s-replace-regexp "<a name.*" "" def)))))
-    het))
+    props))
+
+(defun d::dictionaries (&optional dev?)
+  "Return dictionaries according to DEV?."
+  (if (and dev?
+           (-all? #'file-exists-p
+                  '("dev-dict_revised.json"
+                    "dev-dict-twblg.json"
+                    "dev-dict-twblg-ext.json"
+                    "dev-dict_concised.json"
+                    "dev-dict_idioms.json"
+                    "dev-hakkadict.json"
+                    "dev-chhoetaigi-itaigi.json")))
+      [("moedict_twblg" . ("dev-dict-twblg.json"
+                           "dev-dict-twblg-ext.json"))
+       ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
+       ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
+       ("dict_revised" . "dev-dict_revised.json")
+       ("dict_concised" . "dev-dict_concised.json")
+       ("dict_idioms" . "dev-dict_idioms.json")
+       ("hakkadict" . "dev-hakkadict.json")
+       ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
+    [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
+                         "moedict-data-twblg/dict-twblg-ext.json"))
+     ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+     ("dict_revised" . "ministry-of-education/dict_revised.json")
+     ("dict_concised" . "ministry-of-education/dict_concised.json")
+     ("dict_idioms" . "ministry-of-education/dict_idioms.json")
+     ("hakkadict" . "ministry-of-education/hakkadict.json")
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
+
+;; For entries with heteronyms:
+;;   [{:title "title"
+;;     :heteronyms (...)
+;;     ... ...}
+;;    ...]
+;;   ->
+;;   [{:title "title"
+;;     :from "dictA"
+;;     :pns {...}
+;;     :props ...}])
+;; Also works for entries that are themselves heteronyms
+(defun d:parse-and-shape (dict files)
+  "Return (heteronyms . titles) in FILES.
+DICT is the dictionary ID to associate with them."
+  (let* ((files (-list files))
+         (raw-dict (with-temp-buffer
+                     (cl-loop for f in files
+                              vconcat
+                              (progn
+                                (erase-buffer)
+                                (insert-file-contents f)
+                                (json-parse-buffer)))))
+         (heteronyms nil)
+         (titles nil))
+    (seq-doseq (entry raw-dict)
+      (let ((orig-hets (or (gethash "heteronyms" entry)
+                           (vector entry))))
+        ;; Sort them according to the "het_sort" key, or if that's not
+        ;; present, the "id" key.
+        (when (or (seq-every-p (-partial #'gethash "het_sort")
+                               orig-hets)
+                  (seq-every-p (-partial #'gethash "id")
+                               orig-hets))
+          (setq orig-hets (--sort
+                           (< (string-to-number
+                               (or (gethash "het_sort" it)
+                                   (gethash "id" it)))
+                              (string-to-number
+                               (or (gethash "het_sort" other)
+                                   (gethash "id" other))))
+                           orig-hets)))
+        (seq-doseq (orig-het orig-hets)
+          (let ((shaped-het (make-hash-table :test #'equal))
+                (title (gethash "title" entry)))
+            (puthash "title" title shaped-het)
+            (puthash "from" dict shaped-het)
+            ;; TODO: We can't run d:process-heteronym just yet, as that
+            ;; requires the list of all titles to work correctly.
+            (puthash "props" orig-het shaped-het)
+            (dolist (extra-prop (list "added" "vogue"))
+              ;; These props can be added on the heteronym or on the
+              ;; entire word.
+              (when-let (v (or (gethash extra-prop entry)
+                               (gethash extra-prop orig-het)))
+                (puthash extra-prop v shaped-het)))
+            (puthash "pns"
+                     (-uniq (d:pn-collect orig-het))
+                     shaped-het)
+            (push shaped-het heteronyms)
+            (push title titles)))))
+    (cons heteronyms titles)))
 
 (defun d:main ()
   (setq d:links nil)
-  (let* ((merged-result (make-hash-table :test #'equal))
-         (dictionaries
-          (if (and (or (not noninteractive)
-                       (getenv "DEV"))
-                   (-all? #'file-exists-p
-                          '("dev-dict_revised.json"
-                            "dev-dict-twblg.json"
-                            "dev-dict-twblg-ext.json"
-                            "dev-dict_concised.json"
-                            "dev-dict_idioms.json"
-                            "dev-hakkadict.json"
-                            "dev-chhoetaigi-itaigi.json")))
-              [("moedict_twblg" . ("dev-dict-twblg.json"
-                                   "dev-dict-twblg-ext.json"))
-               ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
-               ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
-               ("dict_revised" . "dev-dict_revised.json")
-               ("dict_concised" . "dev-dict_concised.json")
-               ("dict_idioms" . "dev-dict_idioms.json")
-               ("hakkadict" . "dev-hakkadict.json")
-               ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
-            [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
-                                 "moedict-data-twblg/dict-twblg-ext.json"))
-             ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
-             ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-             ("dict_revised" . "ministry-of-education/dict_revised.json")
-             ("dict_concised" . "ministry-of-education/dict_concised.json")
-             ("dict_idioms" . "ministry-of-education/dict_idioms.json")
-             ("hakkadict" . "ministry-of-education/hakkadict.json")
-             ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
+  (setq d:titles:look-up-table nil)
+  (let* ((dictionaries
+          (d::dictionaries (or (not noninteractive)
+                               (getenv "DEV"))))
          (dict-count (length dictionaries))
-         (shaped-dicts (make-vector dict-count nil))
-         (het-number 0)
+         (heteronyms nil)
          (all-titles nil))
+    ;; Step 1
     (cl-loop
      for (dict . files) being the elements of dictionaries
      using (index i)
      do
      (progn
-       (message "Parsing and shaping %s (%s/%s)..."
+       (message "Collecting heteronyms and titles from %s (%s/%s)..."
                 dict (1+ i) dict-count)
-       (let* ((files (if (stringp files)
-                         (list files)
-                       files))
-              (shaped (apply #'d:parse-and-shape files)))
+       (let ((result (d:parse-and-shape dict files)))
+         (cl-loop
+          for het in (car result)
+          do (push het heteronyms))
          ;; Collect titles
          (cl-loop
-          for k being the hash-keys of shaped
-          do (push k all-titles))
-         (aset shaped-dicts i shaped))))
+          for k in (cdr result)
+          do (push k all-titles)))))
+    ;; Step 2
     (message "Removing duplicate titles...")
     (setq d:titles:look-up-table (d:titles:to-look-up-table all-titles))
     (setq all-titles (hash-table-keys d:titles:look-up-table))
-    (message "Merging...")
-    (seq-doseq (title all-titles)
-      (let ((entry (make-hash-table :test #'equal))
-            (pronunciations nil))
-        (puthash "title" title entry)
-        (cl-loop
-         for shaped being the elements of shaped-dicts
-         using (index i)
-         do
-         (let ((dict-name (car (aref dictionaries i))))
-           ;; each individual entry becomes the value of the main
-           ;; entry, with the key being the dictionary name
-           (when-let (idv-entry (gethash title shaped))
-             ;; collect pronunciations
-             (let ((heteronyms (gethash "heteronyms" idv-entry)))
-               (seq-doseq (het heteronyms)
-                 (dolist (pn (d:pn-collect het))
-                   (push pn pronunciations))))
-             ;; Process heteronyms
-             (d::hash-update idv-entry "heteronyms"
-               (lambda (heteronyms)
-                 (--> heteronyms
-                      (seq-map (lambda (het)
-                                 (cl-incf het-number)
-                                 (when (or (= het-number 1)
-                                           (= 0 (% het-number 10000)))
-                                   (message "Processing heteronym (#%s)"
-                                            het-number))
-                                 (d:process-heteronym het title dict-name))
-                               it)
-                      (seq-into it 'vector))))
-             ;; put the individual entry into the main entry
-             (puthash dict-name idv-entry entry))))
-        (puthash "pronunciations" (-uniq pronunciations) entry)
-        (puthash title entry merged-result)))
+    ;; Step 3
+    (cl-loop
+     for het being the elements of heteronyms
+     using (index i)
+     do
+     (progn
+       (when (or (= (1+ i) 1)
+                 (= 0 (% (1+ i) 10000)))
+         (message "Processing heteronyms (#%s)..." (1+ i)))
+       (d::hash-update het "props"
+         (lambda (props)
+           (d:process-props
+            props
+            (gethash "title" het)
+            (gethash "from" het))))))
+    ;; Step 4
     (message "Writing result out to disk...")
-    (let ((json-encoding-pretty-print (not noninteractive))
+    (let ((json-encoding-pretty-print t)
           ;; This tells `json-encode' to use the same false as
           ;; `json-parse-buffer''s default, because there are false
           ;; values from there.
           ;;
           ;; I'm using nil as null on the other hand.
           (json-false :false))
+      (setq d:links (-uniq d:links))
       (with-temp-file "links.json"
         (insert (json-encode d:links)))
-      (with-temp-file "combined.json"
-        (insert (json-encode merged-result))))
+      (with-temp-file "heteronyms.json"
+        (insert (json-encode heteronyms))))
     (message "Done")))
 
 (let ((comp (if (and (fboundp #'native-comp-available-p)
@@ -553,11 +547,11 @@ This is a separate step from shaping."
                #'d:links:linkify-brackets
                #'d:titles:to-look-up-table
                #'d::hash-update
-               #'d:parse-and-shape
-               #'d:process-heteronym)
+               #'d:process-props)
     comp))
 
 (d:main)
+
 (when noninteractive
   (kill-emacs))
 

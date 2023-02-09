@@ -1,31 +1,35 @@
 /**
- * Turn combined.json into a database.
+ * Turn heteronyms.json into a database.
  *
- * An entry in combined.json looks something like this if it were
- * written in YAML:
+ * Entries in heteronyms.json look like this if they were written in
+ * YAML:
  *
  *     - title: word
  *       pronunciations: [...]
- *       dict_revised:
- *         heteronyms: [...]
- *       hakkadict:
- *         id: ...
- *         heteronyms: [...]
- *       ...
+ *       from: dict_revised
+ *       props:
+ *       - ...
+ *     - title: word
+ *       pronunciations: [...]
+ *       from: hakkadict
+ *       props:
+ *       - ...
+ *     ...
  *
  * In the database, this becomes
  *
- * | title | dict_revised            | hakkadict            |
- * | word  | "{\"heteronyms\": ...}" | "{\"id\": ..., ...}" |
+ * | title | from         | props                      |
+ * | word  | hakkadict    | {"definition": "...", ...} |
+ * | word  | dict_revised | {"definition": "...", ...} |
  *
- * @name combined-to-sqlite.js
+ * @name heteronyms-to-sqlite.js
  */
 
 import fs from "node:fs";
 import readline from "node:readline";
 
-if (!fs.existsSync("combined.json")) {
-  console.log("combined.json should be generated first!");
+if (!fs.existsSync("heteronyms.json")) {
+  console.log("heteronyms.json should be generated first!");
   process.exit(1);
 }
 
@@ -48,19 +52,18 @@ const dicts = [
 ];
 
 function stringifyFields(thing) {
-  for (const dict of dicts) {
-    if (typeof thing[dict] !== "string") {
-      thing[dict] = JSON.stringify(thing[dict]);
-    }
+  if (typeof thing.props !== "string") {
+    thing.props = JSON.stringify(thing.props);
   }
   return thing;
 }
 
 db.prepare(
   `
-CREATE TABLE entries (
-  title NOT NULL,
-  ${dicts.join(",")})`
+CREATE TABLE heteronyms (
+  "title" NOT NULL,
+  "from" NOT NULL,
+  "props" NOT NULL)`
 ).run();
 
 db.prepare(
@@ -117,22 +120,22 @@ const EachPT = db.transaction((array, message = "", func) => {
 });
 
 {
-  const entries = Object.values(JSON.parse(fs.readFileSync("combined.json")));
-  const insertEntry = db.prepare(`
+  const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json"));
+  const insertHet = db.prepare(`
 INSERT INTO
-  entries (title,${dicts.join(",")})
+  heteronyms ("title","from","props")
 VALUES
-  (@title,${dicts.map((x) => `@${x}`).join(",")})`);
+  (@title,@from,@props)`);
   const insertPronunciation = db.prepare(`
 INSERT INTO
   pronunciations (title,pronunciation)
 VALUES
   (?, ?)`);
-  EachPT(entries, "Inserting entries into DB: ", (entry) => {
-    insertEntry.run(stringifyFields(entry));
-    if (entry.pronunciations) {
-      for (const pronunciation of entry.pronunciations) {
-        insertPronunciation.run(entry.title, pronunciation);
+  EachPT(heteronyms, "Inserting heteronyms into DB: ", (het) => {
+    insertHet.run(stringifyFields(het));
+    if (het.pronunciations) {
+      for (const pronunciation of het.pronunciations) {
+        insertPronunciation.run(het.title, pronunciation);
       }
     }
   });

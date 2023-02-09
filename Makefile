@@ -17,11 +17,11 @@ DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
-combined.json: $(DICT_TARGETS) process-data.el .cask
+heteronyms.json: $(DICT_TARGETS) process-data.el .cask
 	cask eval "(load \"process-data\")"
 
-entries.db: combined.json combined-to-sqlite.mjs
-	node combined-to-sqlite.mjs
+entries.db: heteronyms.json heteronyms-to-sqlite.mjs
+	node heteronyms-to-sqlite.mjs
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
