@@ -39,6 +39,14 @@ Writes into TABLE. Returns the new value associated with KEY."
      (point-min) (point-max))
     (buffer-string)))
 
+(defun d:latin-only (str)
+  "Whether STR contains only characters from the latin and symbol scripts."
+  (seq-every-p
+   (lambda (ch)
+     (memq (aref char-script-table ch)
+           '(latin symbol)))
+   str))
+
 (defun d::dev:extract-development-version (word file output-path)
   "Read FILE and write its definition of WORD to OUTPUT-PATH.
 
@@ -272,10 +280,23 @@ instead."
          (remove ""))))
 
 (defun d:process-title (title)
-  "Process TITLE to replace problematic characters, and so on."
-  (->> title
-       (replace-regexp-in-string "'" "’")
-       (replace-regexp-in-string (rx "?") (rx "？"))))
+  "Process TITLE to replace problematic characters, and so on.
+If TITLE is empty, return nil so the call site can decide what to
+do."
+  (let ((title (s-trim title)))
+    (unless (equal "" title)
+      (->> title
+           (replace-regexp-in-string "'"
+                                     "’")
+           (replace-regexp-in-string (rx "?")
+                                     "？")
+           ;; Work around chhoetaigi_taijittoasutian entries like
+           ;; "(**裝)模做樣". I don't think the title is supposed to
+           ;; be like that.
+           (replace-regexp-in-string (rx "(**" (group (+ any)) ")")
+                                     "\\1")
+           (replace-regexp-in-string (rx (any "[" "]"))
+                                     "")))))
 
 (defun d:process-def:dict_concised (def)
   "Process DEF for dict_concised."
@@ -357,6 +378,11 @@ This is a separate step from shaping."
        (d::hash-update props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taijittoasutian"
+       ;; Ensure the entry title and the props title are the same
+       (unless (equal title (gethash "title" props))
+         (d::hash-update props "title"
+           (lambda (_title)
+             title)))
        (d::hash-update props "definition"
          (lambda (def)
            (d:links:linkify-brackets def "[" "]")))
@@ -444,6 +470,10 @@ DICT is the dictionary ID to associate with them."
                            (vector entry))))
         ;; Sort them according to the "het_sort" key, or if that's not
         ;; present, the "id" key.
+        ;; TODO: maybe we want IDs in the DB as well
+        ;; idea: add 1000000 to IDs from the first dict, 2000000 to
+        ;; IDs from the second, and so on, plus ensuring we don't
+        ;; exceed the maximum allowed word count in this scheme
         (when (or (seq-every-p (-partial #'gethash "het_sort")
                                orig-hets)
                   (seq-every-p (-partial #'gethash "id")
@@ -457,8 +487,23 @@ DICT is the dictionary ID to associate with them."
                                    (gethash "id" other))))
                            orig-hets)))
         (seq-doseq (orig-het orig-hets)
-          (let ((shaped-het (make-hash-table :test #'equal))
-                (title (gethash "title" entry)))
+          (let* ((shaped-het (make-hash-table :test #'equal))
+                 (title (d:process-title
+                         (gethash "title" entry))))
+            ;; chhoetaigi_taijittoasutian:
+            ;; work around some entries with empty titles
+            (unless title
+              (setq title (gethash "poj" orig-het)))
+            ;; chhoetaigi_taijittoasutian:
+            ;; work around some incorrectly formatted titles, like
+            ;; "a-a cham-cham" being formatted as "a-acham-cham" in
+            ;; the title field
+            (when (and (equal dict "chhoetaigi_taijittoasutian")
+                       ;; This means we know it's safe to substitude het.poj
+                       (d:latin-only title)
+                       (not (equal (downcase title)
+                                   (downcase (gethash "poj" orig-het)))))
+              (setq title (gethash "poj" orig-het)))
             (puthash "title" title shaped-het)
             (puthash "from" dict shaped-het)
             ;; TODO: We can't run d:process-heteronym just yet, as that
