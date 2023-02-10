@@ -134,7 +134,31 @@ No longer applicable as we don't use moedict-data anymore.
 - most likely, write a new word component for the new dictionary
 - update dictionary list in common.js, README, and root route
 - update copyright information
+* Dictionary testing
+- Does search work?
+  - “a”
+  - “無妨”
+  - “一”
+- Does word page rendering work?
+  - “無妨” (taijit, concised, revised, =moedict_twblg=)
+  - “實聯制” (kisaragi, itaigi)
 * todos
+** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
+The existing digitization only includes POJ/KIP and HanLo.
+
+The book uses POJ for Taiwanese (and even includes an introduction to POJ and Taiwanese tones).
+
+Digitize the first pages, then when you get to the entries, write them down in YAML. Use an Emacs command to automate some of it if you want.
+
+Each entry is:
+
+- scientific name (the word(s) after the comma are the name of the person who published the scientific name; this convention is still alive to this day)
+- Japanese name (in Romaji)
+- Taiwanese name「和名の次に本島語即ち福建語及廣東語を挿入し…」(in POJ)
+- Aboriginals name (including which people)
+- Where it's found
+- [category and such]
+** categories; 詞性表
 ** kisaragi: adhere to [[https://nwbw.naer.edu.tw/mediawiki/index.php/相關說明][the same edit guidelines as 新詞查詢]]
 ** TODO [#A] Make copyright information more clear
 ** TODO [#A] Word page: split sections for each language
