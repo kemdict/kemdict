@@ -1,54 +1,67 @@
 export const prerender = false;
 
 import { redirect } from "@sveltejs/kit";
-import { db, processWord, getTitles } from "$lib/server/db.js";
+import { db, processHet } from "$lib/server/db.js";
 import { dicts, langs, WordSortFns } from "$lib/common";
+import uniq from "lodash-es/uniq";
 
 export function load({ url }) {
   const query = url.searchParams.get("q");
   const mtch = url.searchParams.get("m") || "prefix";
   const sort = url.searchParams.get("s") || "asc";
-  let words = [];
+  let heteronyms = [];
 
   if (typeof query !== "string") {
     throw redirect(301, "/");
   }
 
-  words = getTitles(mtch, query);
-
   {
+    let titles = [];
+    const stmtHet = db.prepare(
+      `SELECT DISTINCT title FROM heteronyms WHERE title LIKE ?`
+    );
     const stmtPn = db.prepare(
       `
 SELECT DISTINCT title
 FROM pronunciations
 WHERE pronunciation LIKE ?`
     );
-    let titlesPn;
+    stmtHet.pluck(true);
+    stmtPn.pluck(true);
     if (mtch === "prefix") {
-      titlesPn = stmtPn.all(`${query}%`);
+      titles = stmtHet.all(`${query}%`);
+    } else if (mode === "suffix") {
+      titles = stmtHet.all(`%${query}`);
+    } else if (mode === "contains") {
+      titles = stmtHet.all(`%${query}%`);
+    }
+    if (mtch === "prefix") {
+      titles = [...stmtPn.all(`${query}%`), ...titles];
     } else if (mtch === "suffix") {
-      titlesPn = stmtPn.all(`%${query}`);
+      titles = [...stmtPn.all(`%${query}`), ...titles];
     } else if (mtch === "contains") {
-      titlesPn = stmtPn.all(`%${query}%`);
+      titles = [...stmtPn.all(`%${query}%`), ...titles];
     }
     const titleWordStmt = db.prepare(
-      `SELECT * FROM entries WHERE title IN (${titlesPn
-        .map((x) => `'${x.title}'`)
+      `SELECT * FROM heteronyms WHERE title IN (${uniq(titles)
+        .map((x) => `'${x}'`)
         .join(",")})`
     );
-    // FIXME: words can be matched with both title and pronunciation
-    // and thus appear twice.
-    words = [...words, ...db.transaction(() => titleWordStmt.all())()];
+    heteronyms = db.transaction(() => titleWordStmt.all())();
   }
 
   // This stops the query from going into the /word/ page when redirecting
   url.searchParams.delete("q");
   // Redirect on the only exact match
-  if (words && words.length === 1 && words[0]?.title === query) {
-    throw redirect(301, encodeURI(`/word/${words[0].title}`));
+  if (
+    heteronyms &&
+    heteronyms.length === 1 &&
+    heteronyms[0].props?.title === query
+  ) {
+    throw redirect(301, encodeURI(`/word/${heteronyms[0].props.title}`));
   }
 
-  words = words.map(processWord);
+  heteronyms = heteronyms.map(processHet);
 
   let sortFn;
   if (sort === "desc") {
@@ -56,29 +69,13 @@ WHERE pronunciation LIKE ?`
   } else {
     sortFn = WordSortFns.ascend;
   }
-  words.sort(sortFn);
+  heteronyms.sort(sortFn);
 
-  // FIXME: after match type works with pronunciations both should
-  // be combined.
-  let count = 0;
+  let count = heteronyms.length;
   let langSet = new Set();
-  for (const word of words) {
+  for (const het of heteronyms) {
     for (const dict of dicts) {
-      let dictPresent = false;
-      if (word[dict.id]?.heteronyms) {
-        // Eww.
-        word[dict.id].heteronyms = word[dict.id].heteronyms.filter(
-          (het) =>
-            het?.pronunciation?.includes(query) ||
-            het?.trs?.includes(query) ||
-            het?.bopomofo?.includes(query) ||
-            het?.pinyin?.includes(query) ||
-            het?.title?.includes(query)
-        );
-        let hets = word[dict.id].heteronyms.length;
-        count += hets;
-        if (hets !== 0) dictPresent = true;
-      }
+      let dictPresent = het.from === dict.id;
       if (dictPresent) {
         langSet.add(dict.lang);
       }
@@ -86,10 +83,10 @@ WHERE pronunciation LIKE ?`
   }
   return {
     match: mtch,
-    sort: sort,
-    query: query,
-    words: words,
-    count: count,
+    sort,
+    query,
+    heteronyms: heteronyms,
+    count,
     langs: Object.entries(langs).filter((l) => langSet.has(l[0])),
   };
 }

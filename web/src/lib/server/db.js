@@ -41,19 +41,18 @@ export const db = (() => {
 })();
 
 /**
- * Return the word object for `title` from the DB, or undefined if it
- * doesn't exist.
+ * Return heteronyms which match TITLE.
+ * TODO: this should also treat exact pronunciation matches as title matches.
  * @param {string} title
  * @returns {object}
  */
-export function getWord(title) {
-  const stmt = db.prepare("SELECT * FROM entries WHERE title = ?");
-  let ret = stmt.get(title);
+export function getHeteronyms(title) {
+  const stmt = db.prepare("SELECT * FROM heteronyms WHERE title = ?");
+  let ret = stmt.all(title);
   if (ret) {
-    return processWord(ret);
-  } else {
-    return ret;
+    ret = ret.map(processHet);
   }
+  return ret;
 }
 
 export function getBacklinks(title) {
@@ -64,34 +63,13 @@ export function getBacklinks(title) {
 }
 
 /**
- * Process a word object so that all its props are JS objects and not
- * JSON strings.
- * @param {object} word
+ * Decode the JSON in the props field in a heteronym object.
+ * @param {object} het
  * @returns {object}
  */
-export function processWord(word) {
-  for (let prop in word) {
-    if (prop !== "title") {
-      word[prop] = JSON.parse(word[prop]);
-    }
+export function processHet(het) {
+  if (typeof het.props === "string") {
+    het.props = JSON.parse(het.props);
   }
-  return word;
-}
-
-/**
- * Get titles matching `needle` under `mode`. `mode` can only be
- * "prefix", "suffix", or "infix".
- * @param {string} mode
- * @param {string} needle
- * @returns {string[]}
- */
-export function getTitles(mode, needle) {
-  const stmt = db.prepare(`SELECT * FROM entries WHERE title LIKE ?`);
-  if (mode === "prefix") {
-    return stmt.all(`${needle}%`);
-  } else if (mode === "suffix") {
-    return stmt.all(`%${needle}`);
-  } else if (mode === "contains") {
-    return stmt.all(`%${needle}%`);
-  }
+  return het;
 }

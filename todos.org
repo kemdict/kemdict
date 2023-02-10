@@ -1,4 +1,12 @@
 * done
+** DONE data: heteronyms-based
+- [X] heteronyms-based data storage
+- [X] word page.server.js
+- [X] word page
+- [X] word components
+- [X] word preview
+- [X] search page.server.js
+- [X] search page
 ** CANCELLED Search sort button needs to be styled
 :LOGBOOK:
 - State "CANCELLED"  from "TODO"       [2023-01-28 Sat 02:23] \\

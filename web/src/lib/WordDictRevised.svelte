@@ -1,5 +1,5 @@
 <script>
-  export let entry;
+  export let heteronyms;
   export let title;
   import { spc } from "$lib/processing";
   import Pronunciation from "$lib/Pronunciation.svelte";
@@ -29,10 +29,10 @@
   }
 </script>
 
-{#each entry.heteronyms as het}
+{#each heteronyms as het}
   <h1>{title}</h1>
-  {#if het.bopomofo}
-    <Pronunciation>{spc(het.bopomofo)}</Pronunciation>
+  {#if het.props.bopomofo}
+    <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}
-  {@html process_def(het.definition)}
+  {@html process_def(het.props.definition)}
 {/each}

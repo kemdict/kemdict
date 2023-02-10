@@ -1,11 +1,11 @@
 <script>
-  export let entry;
+  export let heteronyms;
   import Pronunciation from "$lib/Pronunciation.svelte";
   function getTitle(het) {
-    if (het.title === het.HanLoTaibunKip) {
-      return het.title;
+    if (het.props.title === het.props.HanLoTaibunKip) {
+      return het.props.title;
     } else {
-      return `${het.title} (${het.HanLoTaibunKip})`;
+      return `${het.props.title} (${het.props.HanLoTaibunKip})`;
     }
   }
   function process_def(def) {
@@ -36,21 +36,21 @@
   }
 </script>
 
-{#each entry.heteronyms as het}
+{#each heteronyms as het}
   <h1>{getTitle(het)}</h1>
-  <Pronunciation>{het.kip}</Pronunciation>
-  {#if het.definition}
-    <p class="my-2">{@html process_def(het.definition)}</p>
-    {#if het.example}
+  <Pronunciation>{het.props.kip}</Pronunciation>
+  {#if het.props.definition}
+    <p class="my-2">{@html process_def(het.props.definition)}</p>
+    {#if het.props.example}
       <blockquote>
         <ul class="list-disc pl-2">
-          {#each splitExample(het.example) as ex}
+          {#each splitExample(het.props.example) as ex}
             <li>{ex}</li>
           {/each}
         </ul>
       </blockquote>
     {/if}
   {:else}
-    <p class="my-2">{@html process_def(het.example)}</p>
+    <p class="my-2">{@html process_def(het.props.example)}</p>
   {/if}
 {/each}

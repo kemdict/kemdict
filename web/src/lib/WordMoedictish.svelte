@@ -1,16 +1,17 @@
 <script>
+  export let heteronyms;
+  export let title;
+  export let dict;
+
   import Pronunciation from "$lib/Pronunciation.svelte";
   import { groupByProp } from "$lib/common";
   import { spc, interlinear_annotation } from "$lib/processing";
-  export let word;
-  export let dict;
 
   const pronunciation_key_mapping = {
     kisaragi_dict: "pronunciation",
     moedict_twblg: "trs",
   };
 
-  $: entry = word[dict];
   $: pronunciation_key = pronunciation_key_mapping[dict];
 
   function process_def_kisaragi(def) {
@@ -23,18 +24,18 @@
   }
 </script>
 
-{#each entry.heteronyms as het}
-  <h1>{word.title}</h1>
-  {#if het[pronunciation_key] && het[pronunciation_key] !== word.title}
+{#each heteronyms as het}
+  <h1>{title}</h1>
+  {#if het.props[pronunciation_key] && het.props[pronunciation_key] !== title}
     <Pronunciation
-      id={`${dict}--${spc(het[pronunciation_key]).replace(" ", "")}`}
-      >{spc(het[pronunciation_key])}</Pronunciation
+      id={`${dict}--${spc(het.props[pronunciation_key]).replace(" ", "")}`}
+      >{spc(het.props[pronunciation_key])}</Pronunciation
     >
   {/if}
-  {#if entry.vogue || het.vogue}
+  {#if het.props.vogue}
     <div class="text-gray-700 dark:text-gray-300">（流行語）</div>
   {/if}
-  {#each groupByProp(het.definitions, "type", "none") as [type, defs]}
+  {#each groupByProp(het.props.definitions, "type", "none") as [type, defs]}
     {#if type !== "none"}
       <p class="pos">{type}</p>
     {/if}

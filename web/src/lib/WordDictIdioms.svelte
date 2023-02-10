@@ -1,5 +1,5 @@
 <script>
-  export let entry;
+  export let heteronyms;
   export let title;
   import { spc, newline_string_to_ol } from "$lib/processing";
   import Pronunciation from "$lib/Pronunciation.svelte";
@@ -50,46 +50,46 @@
   }
 </script>
 
-{#each entry.heteronyms as het}
+{#each heteronyms as het}
   <h1>{title}</h1>
-  {#if het.bopomofo}
-    <Pronunciation>{spc(het.bopomofo)}</Pronunciation>
+  {#if het.props.bopomofo}
+    <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}
-  <p class="def">{@html het.definition}</p>
-  {#if het.用法語意說明 || het.用法使用類別 || het.用法例句}
+  <p class="def">{@html het.props.definition}</p>
+  {#if het.props.用法語意說明 || het.props.用法使用類別 || het.props.用法例句}
     <h2>用法</h2>
-    <p>{het.用法語意說明}</p>
-    <p>{het.用法使用類別}</p>
-    {#if het.用法例句}
+    <p>{het.props.用法語意說明}</p>
+    <p>{het.props.用法使用類別}</p>
+    {#if het.props.用法例句}
       <h3>例句</h3>
-      <p>{@html newline_string_to_ol(het.用法例句)}</p>
+      <p>{@html newline_string_to_ol(het.props.用法例句)}</p>
     {/if}
   {/if}
   <h2>辨識</h2>
-  {#if het.近義同}
-    <p>近義：{@html het.近義同}</p>
+  {#if het.props.近義同}
+    <p>近義：{@html het.props.近義同}</p>
   {/if}
-  {#if het.近義反}
-    <p>反義：{@html het.近義反}</p>
+  {#if het.props.近義反}
+    <p>反義：{@html het.props.近義反}</p>
   {/if}
-  {#if het.word_ref}
-    <p>參考詞語：「{@html het.word_ref}」</p>
+  {#if het.props.word_ref}
+    <p>參考詞語：「{@html het.props.word_ref}」</p>
   {/if}
-  <p>{het.辨識同}{het.辨識異}</p>
-  {#if het.辨識例句}
-    {@html idioms_nuance(het.辨識例句)}
+  <p>{het.props.辨識同}{het.props.辨識異}</p>
+  {#if het.props.辨識例句}
+    {@html idioms_nuance(het.props.辨識例句)}
   {/if}
-  <p>{het.形音辨誤}</p>
-  {#if het.source_name}
+  <p>{het.props.形音辨誤}</p>
+  {#if het.props.source_name}
     <h2 id="isc">典源</h2>
-    <p>{het.source_name}</p>
-    <p>{@html idioms_source(het.source_content)}</p>
+    <p>{het.props.source_name}</p>
+    <p>{@html idioms_source(het.props.source_content)}</p>
     <h3>注解</h3>
-    <p>{@html idioms_source_comment(het.source_comment)}</p>
-    <p>{het.source_reference}</p>
+    <p>{@html idioms_source_comment(het.props.source_comment)}</p>
+    <p>{het.props.source_reference}</p>
   {/if}
   <h2>典故說明</h2>
-  <p>{@html het.典故說明}</p>
+  <p>{@html het.props.典故說明}</p>
   <h2>書證</h2>
-  {@html newline_string_to_ol(het.書證)}
+  {@html newline_string_to_ol(het.props.書證)}
 {/each}

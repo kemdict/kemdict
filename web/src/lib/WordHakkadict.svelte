@@ -1,7 +1,6 @@
 <script>
-  export let entry;
+  export let heteronyms;
   export let title;
-  import { spc } from "$lib/processing";
   import Pronunciation from "$lib/Pronunciation.svelte";
 
   const p_names = ["四縣", "海陸", "大埔", "饒平", "詔安", "南四縣"];
@@ -31,12 +30,12 @@
   }
 </script>
 
-{#each entry.heteronyms as het}
+{#each heteronyms as het}
   <h1>{title}</h1>
   {#each p_names as p}
-    {#if het[`p_${p}`]}
-      <Pronunciation>{p}：{het[`p_${p}`]}</Pronunciation>
+    {#if het.props[`p_${p}`]}
+      <Pronunciation>{p}：{het.props[`p_${p}`]}</Pronunciation>
     {/if}
   {/each}
-  {@html process_def(het.definition)}
+  {@html process_def(het.props.definition)}
 {/each}

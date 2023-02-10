@@ -1,5 +1,5 @@
 <script>
-  export let entry;
+  export let heteronyms;
   export let title;
   import { spc } from "$lib/processing";
   import Pronunciation from "$lib/Pronunciation.svelte";
@@ -10,23 +10,23 @@
   }
 </script>
 
-{#each entry.heteronyms as het}
+{#each heteronyms as het}
   <h1>{title}</h1>
-  {#if het.bopomofo}
-    <Pronunciation>{spc(het.bopomofo)}</Pronunciation>
+  {#if het.props.bopomofo}
+    <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}
-  {#if het.definition}
+  {#if het.props.definition}
     <ol>
-      {#each split(het.definition) as d}
+      {#each split(het.props.definition) as d}
         <!-- TODO: we really need a better way of displaying nested lists. -->
         <li><p class="def">{@html d.replace(/　(\(\d+\))/g, "<br>$1")}</p></li>
       {/each}
     </ol>
   {/if}
-  {#if het.antonyms}
-    {@html het.antonyms}
+  {#if het.props.antonyms}
+    {@html het.props.antonyms}
   {/if}
-  {#if het.synonyms}
-    {@html het.synonyms}
+  {#if het.props.synonyms}
+    {@html het.props.synonyms}
   {/if}
 {/each}

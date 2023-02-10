@@ -5,7 +5,7 @@
   import SingleLayout from "$lib/SingleLayout.svelte";
   import Collapsible from "$lib/Collapsible.svelte";
   import WordPreview from "$lib/WordPreview.svelte";
-  import { WordSortFns, langs } from "$lib/common.js";
+  import { dictsByLang, groupByProp } from "$lib/common.js";
 
   function getTitle(mtch, query) {
     if (mtch === "prefix") {
@@ -17,13 +17,6 @@
     }
   }
 
-  let sortFn;
-  let sort = data.sort;
-  $: if (sort === "desc") {
-    sortFn = WordSortFns.descend;
-  } else {
-    sortFn = WordSortFns.ascend;
-  }
   $: title = getTitle(data.match, data.query);
 </script>
 
@@ -45,14 +38,16 @@
     <p class="text-sm">
       共 {data.count} 個定義
     </p>
-    {#each data.langs as [id, lang]}
+    {#each data.langs as [langId, lang]}
       <Collapsible
         class="mt-6 border-b border-stone-300 text-lg font-bold dark:border-stone-500"
       >
         <svelte:fragment slot="header">{lang}</svelte:fragment>
         <ul slot="body">
-          {#each data.words as word}
-            <WordPreview {word} lang={id} />
+          {#each data.heteronyms as het}
+            {#if dictsByLang[langId].includes(het.from)}
+              <WordPreview heteronyms={[het]} />
+            {/if}
           {/each}
         </ul>
       </Collapsible>

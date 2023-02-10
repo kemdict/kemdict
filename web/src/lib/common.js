@@ -4,7 +4,7 @@ export const langs = {
   hak_TW: "客語",
 };
 
-// This also defines the order in the word page
+// This no longer defines the order in word pages.
 export const dicts = [
   {
     id: "kisaragi_dict",
@@ -56,23 +56,18 @@ export const dicts = [
   },
 ];
 
+export function dictsToObj(dictionaries) {
+  let tmp = {};
+  dictionaries.forEach((dict) => (tmp[dict.id] = dict));
+  return tmp;
+}
 export const dictIds = dicts.map((x) => x.id);
 export const langIds = Object.keys(langs);
-export const dictsByLang = [
-  {
-    zh_TW: ["kisaragi_dict", "dict_concised", "dict_revised", "dict_idioms"],
-  },
-  {
-    nan_TW: [
-      "chhoetaigi_taijittoasutian",
-      "moedict_twblg",
-      "chhoetaigi_itaigi",
-    ],
-  },
-  {
-    hak_TW: ["hakkadict"],
-  },
-];
+export const dictsByLang = {
+  zh_TW: ["kisaragi_dict", "dict_concised", "dict_revised", "dict_idioms"],
+  nan_TW: ["chhoetaigi_taijittoasutian", "moedict_twblg", "chhoetaigi_itaigi"],
+  hak_TW: ["hakkadict"],
+};
 
 /**
  * Return array of dictionary IDs present in `word`.
