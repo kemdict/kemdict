@@ -453,10 +453,9 @@ non-nil."
                     "dev-chhoetaigi-itaigi.json"
                     "dev-chhoetaigi-taijittoasutian.json"
                     "dev-chhoetaigi-taioanpehoekichhoogiku.json")))
-      [
-       ("dict_idioms" . "dev-dict_idioms.json")
+      [("dict_idioms" . "dev-dict_idioms.json")
        ("hakkadict" . "dev-hakkadict.json")
-       ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
+       ;; ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
        ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
        ("moedict_twblg" . ("dev-dict-twblg.json"
                            "dev-dict-twblg-ext.json"))
