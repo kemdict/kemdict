@@ -13,6 +13,7 @@ DICT_TARGETS += kisaragi/kisaragi_dict.json
 DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
+DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
 
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
@@ -35,6 +36,8 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ca
 # 2. this makes it consistent when MOE's Taigi dictionary is also displayed
 # but this is frankly questionable.
 # TODO: I'll revisit this later.
+# FIXME: I'm also just throwing away PojUnicodeOthers when it contains
+# alternative pronunciations.
 #
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
 #   a main title and I need to pick one. It's not an ideal assumption.
@@ -55,7 +58,17 @@ chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.m
 # LekuHanLoKip -> example
 chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","title","definition","example","kip","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input|Page|Others|Goanchheh/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","title","definition","example","kip","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
+
+# 1956 台灣白話基礎語句
+# Original header:
+# "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HoaBun","EngBun","KaisoehEngbun","NounClassifier","LesuPoj","Opposite","LekuPoj","LekuEngbun","LekuHoabun","Confer","PageNumber"
+#
+# We don't add another title. We'll copy props.poj to props.title in
+# process-data.
+chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json: ChhoeTaigiDatabase/README.md
+	mkdir -p chhoetaigi
+	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","kip","KipUnicodeOthers","KipInput","KipInputOthers","HoaBun","EngBun","KaisoehEngbun","NounClassifier","例詞POJ","antonym","examplePOJ","exampleEn","exampleZh","參照","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.

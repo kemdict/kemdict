@@ -68,7 +68,8 @@ Does nothing if OUTPUT-PATH already exists as a file."
         (vconcat
          (seq-filter
           (lambda (it)
-            (equal word (gethash "title" it)))
+            (or (equal word (gethash "title" it))
+                (equal word (gethash "poj" it))))
           parsed)))))))
 
 (when nil
@@ -87,7 +88,9 @@ Does nothing if OUTPUT-PATH already exists as a file."
   (d::dev:extract-development-version "無妨"
     "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json")
   (d::dev:extract-development-version "無妨"
-    "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json" "dev-chhoetaigi-taijittoasutian.json"))
+    "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json" "dev-chhoetaigi-taijittoasutian.json")
+  (d::dev:extract-development-version "bûn-ha̍k"
+    "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json" "dev-chhoetaigi-taioanpehoekichhoogiku.json"))
 
 (defvar d:titles:look-up-table (make-hash-table :test #'equal)
   "A look up table for titles.")
@@ -377,6 +380,12 @@ This is a separate step from shaping."
       ("chhoetaigi_itaigi"
        (d::hash-update props "definition"
          #'d:links:link-to-word))
+      ("chhoetaigi_taioanpehoekichhoogiku"
+       ;; Ensure the entry title and the props title are the same
+       (unless (equal title (gethash "title" props))
+         (d::hash-update props "title"
+           (lambda (_title)
+             title))))
       ("chhoetaigi_taijittoasutian"
        ;; Ensure the entry title and the props title are the same
        (unless (equal title (gethash "title" props))
@@ -429,20 +438,25 @@ non-nil."
                     "dev-dict_concised.json"
                     "dev-dict_idioms.json"
                     "dev-hakkadict.json"
-                    "dev-chhoetaigi-itaigi.json")))
-      [("moedict_twblg" . ("dev-dict-twblg.json"
-                           "dev-dict-twblg-ext.json"))
+                    "dev-chhoetaigi-itaigi.json"
+                    "dev-chhoetaigi-taijittoasutian.json"
+                    "dev-chhoetaigi-taioanpehoekichhoogiku.json")))
+      [
+       ("dict_idioms" . "dev-dict_idioms.json")
+       ("hakkadict" . "dev-hakkadict.json")
+       ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
        ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
+       ("moedict_twblg" . ("dev-dict-twblg.json"
+                           "dev-dict-twblg-ext.json"))
        ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
        ("dict_revised" . "dev-dict_revised.json")
        ("dict_concised" . "dev-dict_concised.json")
-       ("dict_idioms" . "dev-dict_idioms.json")
-       ("hakkadict" . "dev-hakkadict.json")
        ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
     ;; The order here, reversed, defines the order they will appear in
     ;; the word pages.
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
      ("hakkadict" . "ministry-of-education/hakkadict.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
      ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
      ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                          "moedict-data-twblg/dict-twblg-ext.json"))
@@ -498,10 +512,12 @@ DICT is the dictionary ID to associate with them."
                            orig-hets)))
         (seq-doseq (orig-het orig-hets)
           (let* ((shaped-het (make-hash-table :test #'equal))
-                 (title (d:process-title
-                         (gethash "title" entry))))
-            ;; chhoetaigi_taijittoasutian:
-            ;; work around some entries with empty titles
+                 ;; title can be empty. We'll read from .poj just below.
+                 (title (-some-> (gethash "title" entry)
+                          d:process-title)))
+            ;; - work around some entries in chhoetaigi_taijittoasutian
+            ;;   having empty titles
+            ;; - also allows working with chhoetaigi_taioanpehoekichhoogiku
             (unless title
               (setq title (gethash "poj" orig-het)))
             ;; chhoetaigi_taijittoasutian:
@@ -516,8 +532,8 @@ DICT is the dictionary ID to associate with them."
               (setq title (gethash "poj" orig-het)))
             (puthash "title" title shaped-het)
             (puthash "from" dict shaped-het)
-            ;; TODO: We can't run d:process-heteronym just yet, as that
-            ;; requires the list of all titles to work correctly.
+            ;; We can't run d:process-props just yet, as that requires
+            ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
             (dolist (extra-prop (list "added" "vogue"))
               ;; These props can be added on the heteronym or on the
