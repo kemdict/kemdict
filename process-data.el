@@ -605,7 +605,7 @@ DICT is the dictionary ID to associate with them."
             (gethash "from" het))))))
     ;; Step 4
     (message "Writing result out to disk...")
-    (let ((json-encoding-pretty-print t)
+    (let ((json-encoding-pretty-print (not noninteractive))
           ;; This tells `json-encode' to use the same false as
           ;; `json-parse-buffer''s default, because there are false
           ;; values from there.
