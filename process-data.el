@@ -412,7 +412,15 @@ This is a separate step from shaping."
     props))
 
 (defun d::dictionaries (&optional dev?)
-  "Return dictionaries according to DEV?."
+  "Return definitions of dictionaries.
+
+The value is a vector:
+    [(ID . FILE) ; either this form
+     (ID . (FILE1 FILE2 ...)) ; or this form
+     ...]
+
+Development versions are returned when applicable if DEV? is
+non-nil."
   (if (and dev?
            (-all? #'file-exists-p
                   '("dev-dict_revised.json"
@@ -431,14 +439,16 @@ This is a separate step from shaping."
        ("dict_idioms" . "dev-dict_idioms.json")
        ("hakkadict" . "dev-hakkadict.json")
        ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
-    [("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
-                         "moedict-data-twblg/dict-twblg-ext.json"))
+    ;; The order here, reversed, defines the order they will appear in
+    ;; the word pages.
+    [("dict_idioms" . "ministry-of-education/dict_idioms.json")
+     ("hakkadict" . "ministry-of-education/hakkadict.json")
      ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+     ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
+                         "moedict-data-twblg/dict-twblg-ext.json"))
      ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
      ("dict_revised" . "ministry-of-education/dict_revised.json")
      ("dict_concised" . "ministry-of-education/dict_concised.json")
-     ("dict_idioms" . "ministry-of-education/dict_idioms.json")
-     ("hakkadict" . "ministry-of-education/hakkadict.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
 
 ;; For entries with heteronyms:

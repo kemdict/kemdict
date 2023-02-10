@@ -15,3 +15,26 @@
 《如月的現代台灣華語補足典》著作權由我（如月飛羽）以 CC0 釋出，內文見[[./LICENSE-CC0][LICENSE-CC0]]。
 
 其餘授權請見各 submodule 原本的儲存庫。
+
+* 結構
+
+heteronyms.json:
+
+#+begin_src yaml
+- title: "word"
+  from: "dictA"
+  props:
+    - ...
+  pns:
+    - "wo-r-d"
+  added: 1675843454.0
+#+end_src
+
+entries.db:
+
+- table: =heteronyms=
+  - title, from, props
+- table: =pronunciations=
+  - title, pronunciation
+- table: =links=
+  - from, to
