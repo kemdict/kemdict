@@ -29,6 +29,13 @@ Writes into TABLE. Returns the new value associated with KEY."
                (funcall fn v)
                table))))
 
+(defun d::hash-prune (table value)
+  "Remove all entries in TABLE that are associated with VALUE."
+  (cl-loop for k in (hash-table-keys table)
+           when (equal value (gethash k table))
+           do (remhash k table))
+  table)
+
 (defvar d::ucs-NFC::buffer (get-buffer-create " process-data"))
 (defun d::ucs-NFC (str)
   "Like `ucs-normalize-NFC-string' but keeps reusing the same temp buffer."
@@ -418,7 +425,12 @@ This is a separate step from shaping."
            ;; displayed. Getting rid of it here allows
            ;; shredding them from the database.
            (s-replace-regexp "<a name.*" "" def)))))
-    props))
+    ;; If a prop is empty, just don't include it.
+    ;; Saves on parsing time and memory, I think.
+    ;; Needs the client to check for `undefined' though.
+    ;; heteronyms.json: 249MiB -> 202MiB
+    ;; entries.db:      189MiB -> 152MiB
+    (d::hash-prune props "")))
 
 (defun d::dictionaries (&optional dev?)
   "Return definitions of dictionaries.
