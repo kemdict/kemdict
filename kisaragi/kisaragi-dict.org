@@ -70,6 +70,7 @@ Hub / USB Hub
 - 形 :: 形容詞
 - 名 :: 名詞
 - 動 :: 動詞
+- 句 :: 慣用句
 
 ** 流行語
 流行語用 :vogue: 標籤。
@@ -215,6 +216,12 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** 都是they的錯
+:PROPERTIES:
+:added:    2023-02-11T00:45:22+0900
+:END:
+*** ㄉㄡ ㄕˋ ðeɪ ㄉㄜ˙ ㄘㄨㄛˋ
+**** 句|都是他們的錯。用來嘲笑或諷刺他人不正視自己的對錯，把什麼事情都怪在別人頭上。
 ** 超級傳播者
 :PROPERTIES:
 :added:    2023-02-08T17:04:14+0900
@@ -318,13 +325,13 @@ These are not compiled because only words under the Words heading are.
 :PROPERTIES:
 :added:    2023-01-15T20:59:47+0900
 :END:
-*** ㄓㄣ
+*** ㄧㄥˇ ㄍㄜˊ
 **** 名|構成[[影片]]的個別靜止畫面。又稱「幀」、「畫格」。
 ** 畫格
 :PROPERTIES:
 :added:    2023-01-15T20:59:44+0900
 :END:
-*** ㄓㄣ
+*** ㄏㄨㄚˋ ㄍㄜˊ
 **** 名|構成[[影片]]的個別靜止畫面。又稱「幀」、「影格」。
 ** 幀
 :PROPERTIES:
