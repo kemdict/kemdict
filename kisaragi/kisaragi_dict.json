@@ -1,5 +1,39 @@
 [
   {
+    "title": "樂齡",
+    "added": 1676221545.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄜˋ ㄌㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "年長的委婉說法。約指60歲以上。源自於對老年生活較為愜意、放鬆，可以放心享受快樂的形容。",
+            "type": "形"
+          },
+          {
+            "def": "年長者。如：「樂齡學習中心」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "樂活",
+    "added": 1676221347.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄜˋ ㄏㄨㄛˊ",
+        "definitions": [
+          {
+            "def": "快樂、無憂無慮而放鬆的生活方式。英語LOHAS的音譯，為lifestyles of health and sustainability（健康且永續的生活方式）的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "都是they的錯",
     "added": 1676043922.0,
     "heteronyms": [

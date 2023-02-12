@@ -216,6 +216,19 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** 樂齡
+:PROPERTIES:
+:added:    2023-02-13T02:05:45+0900
+:END:
+*** ㄌㄜˋ ㄌㄧㄥˊ
+**** 形|年長的委婉說法。約指60歲以上。源自於對老年生活較為愜意、放鬆，可以放心享受快樂的形容。
+**** 名|年長者。如：「樂齡學習中心」
+** 樂活
+:PROPERTIES:
+:added:    2023-02-13T02:02:27+0900
+:END:
+*** ㄌㄜˋ ㄏㄨㄛˊ
+**** 名|快樂、無憂無慮而放鬆的生活方式。英語LOHAS的音譯，為lifestyles of health and sustainability（健康且永續的生活方式）的簡稱。
 ** 都是they的錯
 :PROPERTIES:
 :added:    2023-02-11T00:45:22+0900
