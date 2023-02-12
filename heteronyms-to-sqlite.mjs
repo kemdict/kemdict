@@ -5,12 +5,12 @@
  * YAML:
  *
  *     - title: word
- *       pronunciations: [...]
+ *       pns: [...]
  *       from: dict_revised
  *       props:
  *       - ...
  *     - title: word
- *       pronunciations: [...]
+ *       pns: [...]
  *       from: hakkadict
  *       props:
  *       - ...
@@ -18,9 +18,9 @@
  *
  * In the database, this becomes
  *
- * | title | from         | props                      |
- * | word  | hakkadict    | {"definition": "...", ...} |
- * | word  | dict_revised | {"definition": "...", ...} |
+ * | title | pns   | from         | props                      |
+ * | word  | [...] | hakkadict    | {"definition": "...", ...} |
+ * | word  | [...] | dict_revised | {"definition": "...", ...} |
  *
  * @name heteronyms-to-sqlite.js
  */
@@ -40,20 +40,11 @@ if (fs.existsSync("entries.db")) {
 import Database from "better-sqlite3";
 const db = new Database("entries.db");
 
-const dicts = [
-  "kisaragi_dict",
-  "dict_revised",
-  "hakkadict",
-  "dict_concised",
-  "dict_idioms",
-  "moedict_twblg",
-  "chhoetaigi_itaigi",
-  "chhoetaigi_taijittoasutian",
-];
-
 function stringifyFields(thing) {
-  if (typeof thing.props !== "string") {
-    thing.props = JSON.stringify(thing.props);
+  for (const key of ["props", "pns"]) {
+    if (typeof thing[key] !== "string") {
+      thing[key] = JSON.stringify(thing[key]);
+    }
   }
   return thing;
 }
@@ -63,14 +54,8 @@ db.prepare(
 CREATE TABLE heteronyms (
   "title" NOT NULL,
   "from" NOT NULL,
+  "pns" NOT NULL,
   "props" NOT NULL)`
-).run();
-
-db.prepare(
-  `
-CREATE TABLE pronunciations (
-  title NOT NULL,
-  pronunciation NOT NULL)`
 ).run();
 
 db.prepare(
@@ -123,21 +108,11 @@ const EachPT = db.transaction((array, message = "", func) => {
   const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json"));
   const insertHet = db.prepare(`
 INSERT INTO
-  heteronyms ("title","from","props")
+  heteronyms ("title","from","pns","props")
 VALUES
-  (@title,@from,@props)`);
-  const insertPronunciation = db.prepare(`
-INSERT INTO
-  pronunciations (title,pronunciation)
-VALUES
-  (?, ?)`);
+  (@title,@from,@pns,@props)`);
   EachPT(heteronyms, "Inserting heteronyms into DB: ", (het) => {
     insertHet.run(stringifyFields(het));
-    if (het.pronunciations) {
-      for (const pronunciation of het.pronunciations) {
-        insertPronunciation.run(het.title, pronunciation);
-      }
-    }
   });
 }
 
