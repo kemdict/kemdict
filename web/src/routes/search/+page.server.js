@@ -17,37 +17,24 @@ export function load({ url }) {
 
   {
     let titles = [];
-    const stmtHet = db.prepare(
-      `SELECT DISTINCT title FROM heteronyms WHERE title LIKE ?`
-    );
-    const stmtPn = db.prepare(
+    const stmt = db.prepare(
       `
-SELECT DISTINCT title
-FROM pronunciations
-WHERE pronunciation LIKE ?`
+SELECT DISTINCT heteronyms.*
+FROM heteronyms, json_each(heteronyms.pns)
+WHERE
+  title LIKE @q
+OR
+  json_each.value LIKE @q`
     );
-    stmtHet.pluck(true);
-    stmtPn.pluck(true);
+    let opt;
     if (mtch === "prefix") {
-      titles = stmtHet.all(`${query}%`);
-    } else if (mode === "suffix") {
-      titles = stmtHet.all(`%${query}`);
-    } else if (mode === "contains") {
-      titles = stmtHet.all(`%${query}%`);
-    }
-    if (mtch === "prefix") {
-      titles = [...stmtPn.all(`${query}%`), ...titles];
+      opt = { q: `${query}%` };
     } else if (mtch === "suffix") {
-      titles = [...stmtPn.all(`%${query}`), ...titles];
+      opt = { q: `%${query}` };
     } else if (mtch === "contains") {
-      titles = [...stmtPn.all(`%${query}%`), ...titles];
+      opt = { q: `%${query}%` };
     }
-    const titleWordStmt = db.prepare(
-      `SELECT * FROM heteronyms WHERE title IN (${uniq(titles)
-        .map((x) => `'${x}'`)
-        .join(",")})`
-    );
-    heteronyms = db.transaction(() => titleWordStmt.all())();
+    heteronyms = stmt.all(opt);
   }
 
   // This stops the query from going into the /word/ page when redirecting
