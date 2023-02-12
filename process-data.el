@@ -467,7 +467,7 @@ non-nil."
     ;; the word pages.
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
      ("hakkadict" . "ministry-of-education/hakkadict.json")
-     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+     ;; ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
      ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
      ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                          "moedict-data-twblg/dict-twblg-ext.json"))
