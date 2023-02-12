@@ -68,7 +68,7 @@ chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 # process-data.
 chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","kip","KipUnicodeOthers","KipInput","KipInputOthers","HoaBun","EngBun","KaisoehEngbun","NounClassifier","例詞POJ","antonym","examplePOJ","exampleEn","exampleZh","參照","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input|Page|Others/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","kip","KipUnicodeOthers","KipInput","KipInputOthers","zh","en","descEn","NounClassifier","例詞POJ","antonym","examplePOJ","exampleEn","exampleZh","參照","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.

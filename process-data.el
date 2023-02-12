@@ -174,9 +174,9 @@ this:
           ;; Presumably this is faster. Haven't timed it though.
           (if (and open close)
               (rx-to-string
-               `(seq (group (any ,open))
+               `(seq (group ,open)
                      (group (*? any))
-                     (group (any ,close)))
+                     (group ,close))
                :no-group)
             (rx (group (any "「【"))
                 (group (*? any))
@@ -241,7 +241,10 @@ this:
           (equal (d:links:comma-word-list "敵意,仇隙")
                  "<a href=\"/word/敵意\">敵意</a>、仇隙")
           (equal (d:links:comma-word-list "交情。")
-                 "交情。")))))
+                 "交情。")
+          ;; Should also work for a single word
+          (equal (d:links:comma-word-list "敵意")
+                 "<a href=\"/word/敵意\">敵意</a>")))))
 
 (defconst d::pn-keys
   (list
@@ -388,6 +391,15 @@ This is a separate step from shaping."
        (d::hash-update props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taioanpehoekichhoogiku"
+       (dolist (key (list "en" "zh"))
+         (d::hash-update props key
+           #'d:links:comma-word-list))
+       (dolist (key (list "examplePOJ" "exampleEn" "exampleZh"))
+         (d::hash-update props key
+           (lambda (example)
+             (-> example
+                 (d:links:linkify-brackets "[“" "”]")
+                 (d:links:linkify-brackets "“[" "]”")))))
        ;; Ensure the entry title and the props title are the same
        (unless (equal title (gethash "title" props))
          (d::hash-update props "title"
@@ -442,39 +454,41 @@ The value is a vector:
 
 Development versions are returned when applicable if DEV? is
 non-nil."
-  (if (and dev?
-           (-all? #'file-exists-p
-                  '("dev-dict_revised.json"
-                    "dev-dict-twblg.json"
-                    "dev-dict-twblg-ext.json"
-                    "dev-dict_concised.json"
-                    "dev-dict_idioms.json"
-                    "dev-hakkadict.json"
-                    "dev-chhoetaigi-itaigi.json"
-                    "dev-chhoetaigi-taijittoasutian.json"
-                    "dev-chhoetaigi-taioanpehoekichhoogiku.json")))
-      [("dict_idioms" . "dev-dict_idioms.json")
-       ("hakkadict" . "dev-hakkadict.json")
-       ;; ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
-       ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
-       ("moedict_twblg" . ("dev-dict-twblg.json"
-                           "dev-dict-twblg-ext.json"))
-       ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
-       ("dict_revised" . "dev-dict_revised.json")
-       ("dict_concised" . "dev-dict_concised.json")
-       ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]
+  (cond
+   ((and dev?
+         (-all? #'file-exists-p
+                '("dev-dict_revised.json"
+                  "dev-dict-twblg.json"
+                  "dev-dict-twblg-ext.json"
+                  "dev-dict_concised.json"
+                  "dev-dict_idioms.json"
+                  "dev-hakkadict.json"
+                  "dev-chhoetaigi-itaigi.json"
+                  "dev-chhoetaigi-taijittoasutian.json"
+                  "dev-chhoetaigi-taioanpehoekichhoogiku.json")))
+    [("dict_idioms" . "dev-dict_idioms.json")
+     ("hakkadict" . "dev-hakkadict.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
+     ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
+     ("moedict_twblg" . ("dev-dict-twblg.json"
+                         "dev-dict-twblg-ext.json"))
+     ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
+     ("dict_revised" . "dev-dict_revised.json")
+     ("dict_concised" . "dev-dict_concised.json")
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
+   (t
     ;; The order here, reversed, defines the order they will appear in
     ;; the word pages.
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
      ("hakkadict" . "ministry-of-education/hakkadict.json")
-     ;; ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
      ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
      ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                          "moedict-data-twblg/dict-twblg-ext.json"))
      ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
      ("dict_revised" . "ministry-of-education/dict_revised.json")
      ("dict_concised" . "ministry-of-education/dict_concised.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")]))
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])))
 
 ;; For entries with heteronyms:
 ;;   [{:title "title"
