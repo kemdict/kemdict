@@ -606,11 +606,12 @@ DICT is the dictionary ID to associate with them."
     (cl-loop
      for het being the elements of heteronyms
      using (index i)
+     with total = (length heteronyms)
      do
      (progn
        (when (or (= (1+ i) 1)
                  (= 0 (% (1+ i) 10000)))
-         (message "Processing heteronyms (#%s)..." (1+ i)))
+         (message "Processing heteronyms (%s/%s)..." (1+ i) total))
        (d::hash-update het "props"
          (lambda (props)
            (d:process-props
