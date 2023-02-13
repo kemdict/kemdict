@@ -330,11 +330,11 @@ do."
                                    (d:links:link-to-word (match-string 2 str)))))
        ;; These are the only types that exist.
        (s-replace-regexp (rx "[" (group (any "例似反")) "]")
-                         "<br><m>\\1</m> ")
+                         "<br><m>［\\1］</m>")
        (s-replace-regexp (rx "§" (group "英") (group (+ (any "a-zA-Z "))))
-                         "<br><m>\\1</m> \\2")
+                         "<br><m>［\\1］</m>\\2")
        (s-replace-regexp (rx (opt "　") "△")
-                         "<br><m title=\"參考詞\">△</m> ")
+                         "<br><m title=\"參考詞\">［△］</m> ")
        d:links:linkify-brackets))
 
 (defun d:process-props (props title dict)
@@ -355,6 +355,20 @@ This is a separate step from shaping."
     (dolist (key (list "近義同" "近義反"))
       (d::hash-update props key
         #'d:links:comma-word-list))
+    (dolist (key (list "antonyms" "synonyms"))
+      (d::hash-update props key
+        (lambda (words)
+          (->> words
+               (s-replace-regexp
+                (rx "[" (group (any "似反")) "]"
+                    (group (* any)))
+                (lambda (str)
+                  (format
+                   "<m>［%s］</m>%s"
+                   (match-string 1 str)
+                   (save-match-data
+                     (d:links:comma-word-list
+                      (match-string 2 str))))))))))
     (d::hash-update props "word_ref"
       #'d:links:link-to-word)
     (d::hash-update props "definitions"
