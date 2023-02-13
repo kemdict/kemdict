@@ -41,25 +41,52 @@ export const db = (() => {
 })();
 
 /**
- * Return heteronyms which match TITLE.
- * TODO: this should also treat exact pronunciation matches as title matches.
- * @param {string} title
- * @returns {object}
+ * Return heteronyms which match QUERY in its title or pronunciations.
+ *
+ * If MTCH is:
+ * - "prefix": match heteronyms starting with QUERY
+ * - "suffix": match heteronyms ending with QUERY
+ * - "contains": match heteronyms that contain QUERY
+ * - any thing else: match heteronyms exactly
+ *
+ * @param {string} query
+ * @param {string?} mtch
+ * @returns {Array<object>}
  */
-export function getHeteronyms(title) {
-  const stmt = db.prepare("SELECT * FROM heteronyms WHERE title = ?");
-  let ret = stmt.all(title);
-  if (ret) {
-    ret = ret.map(processHet);
+export function getHeteronyms(query, mtch) {
+  let opt;
+  let operator = "LIKE";
+  if (mtch === "prefix") {
+    opt = { q: `${query}%` };
+  } else if (mtch === "suffix") {
+    opt = { q: `%${query}` };
+  } else if (mtch === "contains") {
+    opt = { q: `%${query}%` };
+  } else {
+    opt = { q: query };
+    operator = "=";
   }
-  return ret;
+  const stmt = db.prepare(
+    `
+SELECT DISTINCT heteronyms.*
+FROM heteronyms, json_each(heteronyms.pns)
+WHERE
+  title ${operator} @q
+OR
+  json_each.value ${operator} @q`
+  );
+  return stmt.all(opt)?.map(processHet);
 }
 
-export function getBacklinks(title) {
-  const stmt = db.prepare(`SELECT DISTINCT "from" FROM links WHERE "to" = ?`);
+export function getBacklinks(...titles) {
+  const stmt = db.prepare(
+    `SELECT DISTINCT "from" FROM links WHERE "to" IN (${titles
+      .map((x) => `'${x}'`)
+      .join(",")})`
+  );
   // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
   stmt.pluck(true);
-  return stmt.all(title);
+  return stmt.all();
 }
 
 /**

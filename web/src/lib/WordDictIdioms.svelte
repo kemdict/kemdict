@@ -1,6 +1,5 @@
 <script>
   export let heteronyms;
-  export let title;
   import { spc, newline_string_to_ol } from "$lib/processing";
   import Pronunciation from "$lib/Pronunciation.svelte";
 
@@ -51,7 +50,7 @@
 </script>
 
 {#each heteronyms as het}
-  <h1>{title}</h1>
+  <h1>{het.title}</h1>
   {#if het.props.bopomofo}
     <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}

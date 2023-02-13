@@ -1,4 +1,9 @@
 * done
+** DONE less han-centric: eg. =/word/in= should show words / heteronyms which have title = in or pronunciation = in
+See https://www.weblio.jp/content/わ for what I want
+
+- Return multiple word objects from word/server
+- Accept multiple word objects in word/page
 ** DONE data: heteronyms-based
 - [X] heteronyms-based data storage
 - [X] word page.server.js
@@ -163,11 +168,6 @@ Each entry is:
 ** TODO [#A] Word page: split sections for each language
 ** TODO [#A] Search without tones
 ** TODO [#A] 服務條款、隱私權條款
-** less han-centric: eg. =/word/in= should show words / heteronyms which have title = in or pronunciation = in
-See https://www.weblio.jp/content/わ for what I want
-
-- Return multiple word objects from word/server
-- Accept multiple word objects in word/page
 ** about: justify kemdict considering chhoetaigi's existence
 ** Search: put exact match on top
 ** Include more from ChhoeTaigi

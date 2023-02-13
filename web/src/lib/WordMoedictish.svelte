@@ -1,6 +1,5 @@
 <script>
   export let heteronyms;
-  export let title;
   export let dict;
 
   import Pronunciation from "$lib/Pronunciation.svelte";
@@ -25,8 +24,8 @@
 </script>
 
 {#each heteronyms as het}
-  <h1>{title}</h1>
-  {#if het.props[pronunciation_key] && het.props[pronunciation_key] !== title}
+  <h1>{het.title}</h1>
+  {#if het.props[pronunciation_key] && het.props[pronunciation_key] !== het.title}
     <Pronunciation
       id={`${dict}--${spc(het.props[pronunciation_key]).replace(" ", "")}`}
       >{spc(het.props[pronunciation_key])}</Pronunciation

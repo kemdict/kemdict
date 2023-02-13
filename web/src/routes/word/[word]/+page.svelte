@@ -66,7 +66,7 @@
       </div>
       <div class="word">
         {#if dict.id == "kisaragi_dict"}
-          <WordMoedictish {title} heteronyms={hets} dict={dict.id} />
+          <WordMoedictish heteronyms={hets} dict={dict.id} />
           <div class="copyright">
             <p>
               《{dict.name}》採 CC0 釋出，可無條件隨意複製，隨意利用。
@@ -151,7 +151,7 @@
             </p>
           </div>
         {:else if dict.id == "dict_revised"}
-          <WordDictRevised heteronyms={hets} {title} />
+          <WordDictRevised heteronyms={hets} />
           <div class="copyright">
             <p>
               《<a href="https://dict.revised.moe.edu.tw/">重編國語辭典修訂本</a
@@ -161,7 +161,7 @@
             <p><a href="/l/reviseddict_10312.pdf">使用說明</a></p>
           </div>
         {:else if dict.id == "dict_concised"}
-          <WordDictConcised heteronyms={hets} {title} />
+          <WordDictConcised heteronyms={hets} />
           <div class="copyright">
             <p>
               《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a
@@ -171,7 +171,7 @@
             <p><a href="/l/conciseddict_10312.pdf">使用說明</a></p>
           </div>
         {:else if dict.id == "moedict_twblg"}
-          <WordMoedictish heteronyms={hets} {title} dict={dict.id} />
+          <WordMoedictish heteronyms={hets} dict={dict.id} />
           <div class="copyright">
             <p>
               《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a
@@ -185,7 +185,7 @@
             </p>
           </div>
         {:else if dict.id == "hakkadict"}
-          <WordHakkadict heteronyms={hets} {title} />
+          <WordHakkadict heteronyms={hets} />
           <div class="copyright">
             <p>
               《<a href="https://hakkadict.moe.edu.tw">臺灣客家語常用詞辭典</a
@@ -194,7 +194,7 @@
             <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
           </div>
         {:else if dict.id == "dict_idioms"}
-          <WordDictIdioms heteronyms={hets} {title} />
+          <WordDictIdioms heteronyms={hets} />
           <div class="copyright">
             <p>
               《<a href="https://dict.idioms.moe.edu.tw">成語典</a

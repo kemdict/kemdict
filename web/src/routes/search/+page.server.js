@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import { redirect } from "@sveltejs/kit";
-import { db, processHet } from "$lib/server/db.js";
+import { getHeteronyms } from "$lib/server/db.js";
 import { dicts, langs, WordSortFns } from "$lib/common";
 
 export function load({ url }) {
@@ -14,26 +14,7 @@ export function load({ url }) {
     throw redirect(301, "/");
   }
 
-  {
-    const stmt = db.prepare(
-      `
-SELECT DISTINCT heteronyms.*
-FROM heteronyms, json_each(heteronyms.pns)
-WHERE
-  title LIKE @q
-OR
-  json_each.value LIKE @q`
-    );
-    let opt;
-    if (mtch === "prefix") {
-      opt = { q: `${query}%` };
-    } else if (mtch === "suffix") {
-      opt = { q: `%${query}` };
-    } else if (mtch === "contains") {
-      opt = { q: `%${query}%` };
-    }
-    heteronyms = stmt.all(opt);
-  }
+  heteronyms = getHeteronyms(query, mtch);
 
   // This stops the query from going into the /word/ page when redirecting
   url.searchParams.delete("q");
@@ -45,8 +26,6 @@ OR
   ) {
     throw redirect(301, encodeURI(`/word/${heteronyms[0].props.title}`));
   }
-
-  heteronyms = heteronyms.map(processHet);
 
   let sortFn;
   if (sort === "desc") {
