@@ -3,6 +3,7 @@
   import SearchBar from "$lib/SearchBar.svelte";
   import DarkModeToggle from "$lib/DarkModeToggle.svelte";
   import SplitLayout from "$lib/SplitLayout.svelte";
+  import Out from "$lib/Out.svelte";
   const title = "Kemdict 國語整合典";
   const sitename = "Kemdict 國語整合典";
   const description =
@@ -60,6 +61,13 @@
       </li>
       <li>
         <p><a href="dict-itaigi">iTaigi 華台對照典</a></p>
+      </li>
+      <li>
+        <p>
+          <Out href="https://mhi.moe.edu.tw/infoList.jsp?ID=2&ID2=1705"
+            >台灣白話基礎語句</Out
+          >
+        </p>
       </li>
       <li>
         <p><a href="dict-taijittoasutian">台日大辭典台語譯本 (1932)</a></p>

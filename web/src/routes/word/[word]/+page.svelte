@@ -13,6 +13,7 @@
   import WordHakkadict from "$lib/WordHakkadict.svelte";
   import WordITaigi from "$lib/WordITaigi.svelte";
   import WordTaiJit from "$lib/WordTaiJit.svelte";
+  import WordKichhooGiku from "$lib/WordKichhooGiku.svelte";
   import WordList from "$lib/WordList.svelte";
   import WordMoedictish from "$lib/WordMoedictish.svelte";
 
@@ -21,11 +22,11 @@
   $: heteronyms = data.heteronyms;
   $: title = data.title;
   $: backlinks = data.backlinks;
-  $: groupedHets = groupByProp(heteronyms, "from");
-  $: presentDicts = dicts.filter((dict) =>
-    heteronyms.some((x) => dict.id === x.from)
-  );
-  $: dictsObj = dictsToObj(presentDicts);
+  $: dictsObj = dictsToObj(dicts);
+  $: groupedHets = groupByProp(heteronyms, "from").map(([id, hets]) => {
+    return [dictsObj[id], hets];
+  });
+  $: presentDicts = groupedHets.map((group) => group[0]);
 </script>
 
 <svelte:head>
@@ -48,32 +49,27 @@
   </div>
   <svelte:fragment slot="right">
     <div class="sm:hidden"><TOC term={title} {presentDicts} /></div>
-    {#each groupedHets as [dictId, hets]}
-      <div id={dictId} class="dict">
-        {#if dictId === "chhoetaigi_taijittoasutian"}
-          <Out href={format(dictsObj[dictId].url, hets[0].props.id)}
-            >{dictsObj[dictId].name}</Out
-          >
+    {#each groupedHets as [dict, hets]}
+      <div id={dict.Id} class="dict">
+        {#if ["chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
+          <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
         {:else}
-          <Out href={format(dictsObj[dictId].url, title)}
-            >{dictsObj[dictId].name}</Out
-          >
+          <Out href={format(dict.url, title)}>{dict.name}</Out>
         {/if}
         <span
           ><a
             class="hover:link dark:gray-500 text-gray-400"
-            href="#{dictId}"
-            id={dictId}>#</a
+            href="#{dict.id}"
+            id={dict.id}>#</a
           ></span
         >
       </div>
       <div class="word">
-        {#if dictId == "kisaragi_dict"}
-          <WordMoedictish {title} heteronyms={hets} dict={dictId} />
+        {#if dict.id == "kisaragi_dict"}
+          <WordMoedictish {title} heteronyms={hets} dict={dict.id} />
           <div class="copyright">
             <p>
-              《{dictsObj[dictId].name}》採 CC0
-              釋出，可無條件隨意複製，隨意利用。
+              《{dict.name}》採 CC0 釋出，可無條件隨意複製，隨意利用。
             </p>
             <p>
               這個定義有問題嗎？<a
@@ -82,11 +78,40 @@
               >
             </p>
           </div>
-        {:else if dictId == "chhoetaigi_taijittoasutian"}
+        {:else if dict.id == "chhoetaigi_taioanpehoekichhoogiku"}
+          <WordKichhooGiku heteronyms={hets} />
+          <div class="copyright">
+            <p>
+              《{dict.name}》
+            </p>
+            <p>原作者：Ko Chek-hoàn（高積煥）、Tân Pang-tìn（陳邦鎮）</p>
+            <p>
+              數位化：<a href="http://ip194097.ntcu.edu.tw/memory/TGB/"
+                >台語文記憶</a
+              >
+            </p>
+            <p>
+              數位化與編修：Lîm Bûn-cheng、Tēⁿ Tì-têng、Tân Kim-hoa、Chiúⁿ
+              Ji̍t-êng
+            </p>
+            <p>
+              <a
+                href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase#8-1956-台灣白話基礎語句"
+                >以 姓名標示-Sio-kâng方式分享 4.0 國際 (CC BY-SA 4.0) 授權</a
+              >
+            </p>
+            <p>
+              資料來自 <a
+                href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase"
+                >ChhoeTaigi 的字詞資料庫</a
+              >
+            </p>
+          </div>
+        {:else if dict.id == "chhoetaigi_taijittoasutian"}
           <WordTaiJit heteronyms={hets} />
           <div class="copyright">
             <p>
-              《{dictsObj[dictId].name}》
+              《{dict.name}》
             </p>
             <p>原作者：小川尚義</p>
             <p>台文翻譯kap編修：Lîm Chùn-io̍k（林俊育）長老</p>
@@ -110,11 +135,11 @@
               >
             </p>
           </div>
-        {:else if dictId == "chhoetaigi_itaigi"}
+        {:else if dict.id == "chhoetaigi_itaigi"}
           <WordITaigi heteronyms={hets} />
           <div class="copyright">
             <p>
-              《{dictsObj[dictId].name}》資料取自
+              《{dict.name}》資料取自
               <a href="https://itaigi.tw/">iTaigi</a>，採
               <a href="https://itaigi.tw/hokbu">CC0</a> 釋出。
             </p>
@@ -125,7 +150,7 @@
               >。
             </p>
           </div>
-        {:else if dictId == "dict_revised"}
+        {:else if dict.id == "dict_revised"}
           <WordDictRevised heteronyms={hets} {title} />
           <div class="copyright">
             <p>
@@ -135,7 +160,7 @@
             <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
             <p><a href="/l/reviseddict_10312.pdf">使用說明</a></p>
           </div>
-        {:else if dictId == "dict_concised"}
+        {:else if dict.id == "dict_concised"}
           <WordDictConcised heteronyms={hets} {title} />
           <div class="copyright">
             <p>
@@ -145,8 +170,8 @@
             <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
             <p><a href="/l/conciseddict_10312.pdf">使用說明</a></p>
           </div>
-        {:else if dictId == "moedict_twblg"}
-          <WordMoedictish heteronyms={hets} {title} dict={dictId} />
+        {:else if dict.id == "moedict_twblg"}
+          <WordMoedictish heteronyms={hets} {title} dict={dict.id} />
           <div class="copyright">
             <p>
               《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a
@@ -159,7 +184,7 @@
               >
             </p>
           </div>
-        {:else if dictId == "hakkadict"}
+        {:else if dict.id == "hakkadict"}
           <WordHakkadict heteronyms={hets} {title} />
           <div class="copyright">
             <p>
@@ -168,7 +193,7 @@
             </p>
             <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
           </div>
-        {:else if dictId == "dict_idioms"}
+        {:else if dict.id == "dict_idioms"}
           <WordDictIdioms heteronyms={hets} {title} />
           <div class="copyright">
             <p>

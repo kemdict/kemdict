@@ -5,7 +5,9 @@
   import SingleLayout from "$lib/SingleLayout.svelte";
   import Collapsible from "$lib/Collapsible.svelte";
   import WordPreview from "$lib/WordPreview.svelte";
-  import { dictsByLang, groupByProp } from "$lib/common.js";
+  import { dictsByLang } from "$lib/common.js";
+
+  $: heteronyms = data.heteronyms;
 
   function getTitle(mtch, query) {
     if (mtch === "prefix") {
@@ -44,7 +46,7 @@
       >
         <svelte:fragment slot="header">{lang}</svelte:fragment>
         <ul slot="body">
-          {#each data.heteronyms as het}
+          {#each heteronyms as het}
             {#if dictsByLang[langId].includes(het.from)}
               <WordPreview heteronyms={[het]} />
             {/if}

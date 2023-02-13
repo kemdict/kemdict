@@ -44,7 +44,8 @@
           {processPreview(
             het.props.definition ||
               het.props.definitions?.map((x) => x.def).join("") ||
-              het.props.example
+              het.props.example ||
+              het.props.zh
           )}
         </p>
       </div>

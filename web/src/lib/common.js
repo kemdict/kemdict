@@ -7,6 +7,12 @@ export const langs = {
 // This no longer defines the order in word pages.
 export const dicts = [
   {
+    id: "chhoetaigi_taioanpehoekichhoogiku",
+    name: "台灣白話基礎語句",
+    url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
+    lang: "nan_TW",
+  },
+  {
     id: "kisaragi_dict",
     name: "如月的現代台灣華語補足典",
     url: "/dict-kisaragi",
@@ -65,7 +71,12 @@ export const dictIds = dicts.map((x) => x.id);
 export const langIds = Object.keys(langs);
 export const dictsByLang = {
   zh_TW: ["kisaragi_dict", "dict_concised", "dict_revised", "dict_idioms"],
-  nan_TW: ["chhoetaigi_taijittoasutian", "moedict_twblg", "chhoetaigi_itaigi"],
+  nan_TW: [
+    "chhoetaigi_taioanpehoekichhoogiku",
+    "chhoetaigi_taijittoasutian",
+    "moedict_twblg",
+    "chhoetaigi_itaigi",
+  ],
   hak_TW: ["hakkadict"],
 };
 

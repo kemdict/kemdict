@@ -4,14 +4,15 @@ Kemdict 整合了多部辭典，提供一次搜尋的功能。
 
 目前整合的辭典：
 
-- 重編國語辭典
-- 臺灣閩南語常用詞辭典
-- 臺灣客家語常用詞辭典
-- 成語典
-- 國語辭典簡編本
 - [[如月的現代台灣華語補足典]]
-- iTaigi 華台對照典
-- 台日大辭典台語譯本
+- 重編國語辭典（透過[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][辭典公眾授權網]]）
+- 臺灣閩南語常用詞辭典（透過[[https://github.com/g0v/moedict-data-twblg][moedict-data-twblg]]）
+- 臺灣客家語常用詞辭典（透過[[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=dpViqL/newsresult_format0?r1=1&searchall=1][客家語常用詞辭典文字內容下載公告]]）
+- 成語典（透過[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][辭典公眾授權網]]）
+- 國語辭典簡編本（透過[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][辭典公眾授權網]]）
+- iTaigi 華台對照典（透過[[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase][ChhoeTaigi 台語字詞資料庫]]）
+- 台日大辭典台語譯本（透過[[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase][ChhoeTaigi 台語字詞資料庫]]）
+- [[https://mhi.moe.edu.tw/infoList.jsp?ID=2&ID2=1705][台灣白話基礎語句]]（透過[[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase][ChhoeTaigi 台語字詞資料庫]]）
 
 我希望整合的辭典：
 

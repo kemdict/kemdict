@@ -12,8 +12,11 @@
     font-size: 70%;
   }
   blockquote {
-    @apply rounded px-4 py-1;
+    @apply rounded px-3 py-1;
     @apply bg-gray-200 dark:bg-stone-700;
+    & + blockquote {
+      @apply mt-2;
+    }
   }
   hr {
     @apply border-gray-400;

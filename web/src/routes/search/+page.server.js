@@ -3,7 +3,6 @@ export const prerender = false;
 import { redirect } from "@sveltejs/kit";
 import { db, processHet } from "$lib/server/db.js";
 import { dicts, langs, WordSortFns } from "$lib/common";
-import uniq from "lodash-es/uniq";
 
 export function load({ url }) {
   const query = url.searchParams.get("q");
@@ -16,7 +15,6 @@ export function load({ url }) {
   }
 
   {
-    let titles = [];
     const stmt = db.prepare(
       `
 SELECT DISTINCT heteronyms.*
