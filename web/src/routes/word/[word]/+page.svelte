@@ -35,7 +35,7 @@
 </svelte:head>
 
 <SplitLayout leftFirst={false} initialInput={title}>
-  <div class="sm:fixed" slot="left">
+  <div slot="left">
     <div class="max-sm:hidden">
       <TOC {presentDicts} />
     </div>

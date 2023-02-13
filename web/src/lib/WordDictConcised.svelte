@@ -23,9 +23,9 @@
     </ol>
   {/if}
   {#if het.props.antonyms}
-    {@html het.props.antonyms}
+    <p>{@html het.props.antonyms}</p>
   {/if}
   {#if het.props.synonyms}
-    {@html het.props.synonyms}
+    <p>{@html het.props.synonyms}</p>
   {/if}
 {/each}

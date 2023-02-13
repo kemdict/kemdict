@@ -9,7 +9,7 @@ export function load({ params }) {
   const title = params.word;
   const heteronyms = getHeteronyms(title);
   const titles = uniq(heteronyms.map((het) => het.title));
-  const backlinks = getBacklinks(...titles);
+  const backlinks = getBacklinks(...titles).sort();
 
   if (heteronyms) {
     return { title, heteronyms, backlinks };
