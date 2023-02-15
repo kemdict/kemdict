@@ -18,11 +18,11 @@ export function load({ url }) {
 
   // This stops the query from going into the /word/ page when redirecting
   url.searchParams.delete("q");
-  // Redirect on the only exact match
+  // Redirect if all matched heteronyms belong to the same title
   if (
     heteronyms &&
-    heteronyms.length === 1 &&
-    heteronyms[0].props?.title === query
+    heteronyms.length < 10 &&
+    heteronyms.every((x) => x.title === heteronyms[0].title)
   ) {
     throw redirect(301, encodeURI(`/word/${heteronyms[0].props.title}`));
   }
