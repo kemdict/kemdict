@@ -13,10 +13,11 @@ markdown: $(MD)
 
 src/lib/entries.db: ../dicts
 	cd ../dicts && make entries.db
-	cp ../dicts/entries.db src/lib/
+	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
 
 src/lib/kisaragi_dict.json: ../dicts
 	cp ../dicts/kisaragi/kisaragi_dict.json src/lib/
+	([ -n "$$ANDROID_DATA" ] && cp ../dicts/kisaragi/kisaragi_dict.json "$@") || ln -f -T ../dicts/kisaragi/kisaragi_dict.json "$@"
 
 DEPS := markdown static/l src/lib/kisaragi_dict.json
 
