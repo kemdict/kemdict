@@ -5,6 +5,8 @@
 來自台語的借詞也會列。
 
 * Todo
+網軍
+帶風向
 掉幀
 幀率
 影格率
@@ -216,6 +218,12 @@ These are not compiled because only words under the Words heading are.
 :END:
 **** /ˈeɪ aɪ/
 ***** 名|人工智慧。
+** PT人員
+:PROPERTIES:
+:added:    2023-02-13T15:55:35+0900
+:END:
+*** piː tiː ㄖㄣˊ ㄩㄢˊ
+**** 名|兼職人員。PT為英文part-time（部分工時）的縮寫。
 ** 樂齡
 :PROPERTIES:
 :added:    2023-02-13T02:05:45+0900
