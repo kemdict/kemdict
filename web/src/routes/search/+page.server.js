@@ -21,6 +21,7 @@ export function load({ url }) {
   // Redirect if all matched heteronyms belong to the same title
   if (
     heteronyms &&
+    heteronyms.length > 0 &&
     heteronyms.length < 10 &&
     heteronyms.every((x) => x.title === heteronyms[0].title)
   ) {
