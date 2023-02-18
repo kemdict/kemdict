@@ -9,6 +9,9 @@ build: entries.db
 	cask install
 	touch .cask
 
+node_modules: package.json
+	npm install
+
 DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json
 DICT_TARGETS += ministry-of-education/package.json
@@ -19,7 +22,7 @@ DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
-heteronyms.json: $(DICT_TARGETS) process-data.el .cask
+heteronyms.json: $(DICT_TARGETS) process-data.el .cask node_modules
 	cask eval "(load \"process-data\")"
 
 entries.db: heteronyms.json heteronyms-to-sqlite.mjs
