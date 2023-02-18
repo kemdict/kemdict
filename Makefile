@@ -7,6 +7,7 @@ build: entries.db
 
 .cask: Cask
 	cask install
+	touch .cask
 
 DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json

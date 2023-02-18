@@ -624,7 +624,8 @@ DICT is the dictionary ID to associate with them."
      do
      (progn
        (when (or (= (1+ i) 1)
-                 (= 0 (% (1+ i) 10000)))
+                 (= 0 (% (1+ i) 10000))
+                 (= (1+ i) total))
          (message "Processing heteronyms (%s/%s)..." (1+ i) total))
        (d::hash-update het "props"
          (lambda (props)
