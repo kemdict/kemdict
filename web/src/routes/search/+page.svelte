@@ -1,9 +1,12 @@
 <script>
   export let data;
 
+  import { browser } from "$app/environment";
+  import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
+
   import Elsewhere from "$lib/Elsewhere.svelte";
   import SingleLayout from "$lib/SingleLayout.svelte";
-  import Collapsible from "$lib/Collapsible.svelte";
+  import Spinner from "$lib/Spinner.svelte";
   import WordPreview from "$lib/WordPreview.svelte";
   import { dictsByLang } from "$lib/common.js";
 
@@ -40,19 +43,31 @@
     <p class="text-sm">
       共 {data.count} 個定義
     </p>
-    {#each data.langs as [langId, lang]}
-      <Collapsible
-        class="mt-6 border-b border-stone-300 text-lg font-bold dark:border-stone-500"
-      >
-        <svelte:fragment slot="header">{lang}</svelte:fragment>
-        <ul slot="body">
-          {#each heteronyms as het}
-            {#if dictsByLang[langId].includes(het.from)}
-              <WordPreview heteronyms={[het]} />
-            {/if}
+    {#if browser}
+      <div class="mt-4">
+        <Tabs>
+          <TabList>
+            {#each data.langs as [langId, lang]}
+              <Tab>{lang}</Tab>
+            {/each}
+          </TabList>
+          {#each data.langs as [langId, lang]}
+            <TabPanel>
+              <ul>
+                {#each heteronyms as het}
+                  {#if dictsByLang[langId].includes(het.from)}
+                    <WordPreview heteronyms={[het]} />
+                  {/if}
+                {/each}
+              </ul>
+            </TabPanel>
           {/each}
-        </ul>
-      </Collapsible>
-    {/each}
+        </Tabs>
+      </div>
+    {:else}
+      <div class="text-center">
+        <Spinner />
+      </div>
+    {/if}
   {/if}
 </SingleLayout>

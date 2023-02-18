@@ -41,6 +41,20 @@
 }
 
 @layer components {
+  .svelte-tabs {
+    ul.svelte-tabs__tab-list {
+      @apply border-b-gray-300 dark:border-b-stone-700;
+      @apply flex;
+    }
+    li.svelte-tabs__tab {
+      @apply text-gray-800 dark:text-white;
+      @apply px-6 max-sm:flex-grow max-sm:text-center;
+      &.svelte-tabs__selected {
+        @apply border-b-2;
+        @apply border-indigo-500 text-indigo-500 dark:border-indigo-300 dark:text-indigo-300;
+      }
+    }
+  }
   /* Put it here for more readable comments. */
   div.split-layout {
     @apply relative;
