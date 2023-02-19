@@ -1,5 +1,6 @@
 <script>
-  import RecentWordList from "$lib/RecentWordList.svelte";
+  export let data;
+  import WordList from "$lib/WordList.svelte";
   import SearchBar from "$lib/SearchBar.svelte";
   import DarkModeToggle from "$lib/DarkModeToggle.svelte";
   import SplitLayout from "$lib/SplitLayout.svelte";
@@ -53,7 +54,7 @@
       <SearchBar />
     </div>
     <h2>最近新增的詞</h2>
-    <RecentWordList limit={12} />
+    <WordList words={data.kisaragi_dict_titles} />
     <h2>收錄字典</h2>
     <ul class="ml-1 list-none p-0">
       <li>

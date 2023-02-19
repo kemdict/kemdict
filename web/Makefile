@@ -15,13 +15,10 @@ src/lib/entries.db: ../dicts
 	cd ../dicts && make entries.db
 	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
 
-src/lib/kisaragi_dict.json: ../dicts
-	([ -n "$$ANDROID_DATA" ] && cp ../dicts/kisaragi/kisaragi_dict.json "$@") || ln -f -T ../dicts/kisaragi/kisaragi_dict.json "$@"
-
 node_modules: package.json
 	npm install
 
-DEPS := markdown static/l src/lib/kisaragi_dict.json node_modules
+DEPS := markdown static/l node_modules
 
 dev: $(DEPS) src/lib/entries.db
 	npx vite dev
