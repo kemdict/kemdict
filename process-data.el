@@ -8,26 +8,12 @@
 (require 'seq)
 (require 's)
 (require 'ol)
+(require 'ht)
 
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
 
-(defun d::hash-update (table key fn &optional inexistence)
-  "Update the value of KEY in TABLE with FN.
-
-If KEY is not associated with anything, do nothing. This is
-normally done by checking that the value is non-nil, but if nil
-is a valid value in TABLE, pass a value guaranteed to not be in
-TABLE as INEXISTENCE. This is equivalent to the DFLT argument of
-`gethash'.
-
-Writes into TABLE. Returns the new value associated with KEY."
-  (declare (indent 2))
-  (let ((v (gethash key table inexistence)))
-    (unless (equal v inexistence)
-      (puthash key
-               (funcall fn v)
-               table))))
+(put 'ht-update-with! 'lisp-indent-function 2)
 
 (defun d::hash-prune (table value)
   "Remove all entries in TABLE that are associated with VALUE."
@@ -346,17 +332,17 @@ some processing.
 This is a separate step from shaping."
   (let ((d:links:from title))
     (dolist (key (list "definition" "source_comment" "典故說明"))
-      (d::hash-update props key
+      (ht-update-with! props key
         #'d:links:linkify-brackets))
     (dolist (key (list "trs" "poj" "kip"))
-      (d::hash-update props key
+      (ht-update-with! props key
         (lambda (pn)
           (d:pn-normalize pn :one))))
     (dolist (key (list "近義同" "近義反"))
-      (d::hash-update props key
+      (ht-update-with! props key
         #'d:links:comma-word-list))
     (dolist (key (list "antonyms" "synonyms"))
-      (d::hash-update props key
+      (ht-update-with! props key
         (lambda (words)
           (->> words
                (s-replace-regexp
@@ -369,14 +355,14 @@ This is a separate step from shaping."
                    (save-match-data
                      (d:links:comma-word-list
                       (match-string 2 str))))))))))
-    (d::hash-update props "word_ref"
+    (ht-update-with! props "word_ref"
       #'d:links:link-to-word)
-    (d::hash-update props "definitions"
+    (ht-update-with! props "definitions"
       (lambda (defs)
         (seq-doseq (def defs)
-          (d::hash-update def "quote"
+          (ht-update-with! def "quote"
             #'d::ucs-NFC)
-          (d::hash-update def "example"
+          (ht-update-with! def "example"
             (lambda (v)
               (cond
                ((stringp v)
@@ -385,16 +371,16 @@ This is a separate step from shaping."
                 (seq-map #'d::ucs-NFC v))
                (t (error "%s: het.props.definitions.example is neither a string or a sequence"
                          title)))))
-          (d::hash-update def "def"
+          (ht-update-with! def "def"
             (-compose
              #'d:links:linkify-brackets
              #'d:links:linkify-first-phrase)))))
     (pcase dict
       ("kisaragi_dict"
-       (d::hash-update props "definitions"
+       (ht-update-with! props "definitions"
          (lambda (defs)
            (seq-doseq (def defs)
-             (d::hash-update def "def"
+             (ht-update-with! def "def"
                (lambda (d)
                  (->> d
                       (s-replace "#+begin_quote" "<blockquote>")
@@ -402,33 +388,33 @@ This is a separate step from shaping."
                       ;; No need to apply linkify-brackets again
                       d:links:org-style)))))))
       ("chhoetaigi_itaigi"
-       (d::hash-update props "definition"
+       (ht-update-with! props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taioanpehoekichhoogiku"
        (dolist (key (list "en" "zh"))
-         (d::hash-update props key
+         (ht-update-with! props key
            #'d:links:comma-word-list))
        (dolist (key (list "examplePOJ" "exampleEn" "exampleZh"))
-         (d::hash-update props key
+         (ht-update-with! props key
            (lambda (example)
              (-> example
                  (d:links:linkify-brackets "[“" "”]")
                  (d:links:linkify-brackets "“[" "]”")))))
        ;; Ensure the entry title and the props title are the same
        (unless (equal title (gethash "title" props))
-         (d::hash-update props "title"
+         (ht-update-with! props "title"
            (lambda (_title)
              title))))
       ("chhoetaigi_taijittoasutian"
        ;; Ensure the entry title and the props title are the same
        (unless (equal title (gethash "title" props))
-         (d::hash-update props "title"
+         (ht-update-with! props "title"
            (lambda (_title)
              title)))
-       (d::hash-update props "definition"
+       (ht-update-with! props "definition"
          (lambda (def)
            (d:links:linkify-brackets def "[" "]")))
-       (d::hash-update props "example"
+       (ht-update-with! props "example"
          ;; This makes it more readable. Is it a good idea though?
          ;; Before: "An ~ is red." (in page "apple")
          ;; After: "An apple is red."
@@ -441,10 +427,10 @@ This is a separate step from shaping."
                              d:links:from
                              str))))
       ("dict_concised"
-       (d::hash-update props "definition"
+       (ht-update-with! props "definition"
          #'d:process-def:dict_concised))
       ("dict_idioms"
-       (d::hash-update props "definition"
+       (ht-update-with! props "definition"
          (lambda (def)
            ;; There is often an anchor at the end of
            ;; dict_idioms definitions that's not
@@ -627,7 +613,7 @@ DICT is the dictionary ID to associate with them."
                  (= 0 (% (1+ i) 10000))
                  (= (1+ i) total))
          (message "Processing heteronyms (%s/%s)..." (1+ i) total))
-       (d::hash-update het "props"
+       (ht-update-with! het "props"
          (lambda (props)
            (d:process-props
             props
@@ -658,7 +644,6 @@ DICT is the dictionary ID to associate with them."
                #'d:links:link-to-word
                #'d:links:linkify-brackets
                #'d:titles:to-look-up-table
-               #'d::hash-update
                #'d:process-props)
     comp))
 
