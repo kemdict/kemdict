@@ -129,6 +129,20 @@ this:
             d:links))
     (s-lex-format "<a href=\"/word/${href}\">${desc}</a>")))
 
+(defun d:links:linkify-arrow (str)
+  "Try to create a link for synonym arrows in STR."
+  (when str
+    (->> str
+         (s-replace-regexp
+          (rx "→"
+              (group (+ any))
+              "。")
+          (lambda (str)
+            (format
+             "→%s。"
+             (d:links:link-to-word
+              (match-string 1 str))))))))
+
 (defun d:links:linkify-first-phrase (str)
   "Try to create a link for the first phrase in STR."
   (when str
@@ -149,7 +163,7 @@ this:
           (d:titles:to-look-up-table (list "a"))))
      (and (equal (d:links:linkify-first-phrase "a。")
                  "<a href=\"/word/a\">a</a>。")
-          (equal (d:links:linkify-brackets "b。")
+          (equal (d:links:linkify-first-phrase "b。")
                  "b。")))))
 
 (defun d:links:linkify-brackets (str &optional open close)
@@ -321,7 +335,8 @@ do."
                          "<br><m>［\\1］</m>\\2")
        (s-replace-regexp (rx (opt "　") "△")
                          "<br><m title=\"參考詞\">［△］</m> ")
-       d:links:linkify-brackets))
+       d:links:linkify-brackets
+       d:links:linkify-arrow))
 
 (defun d:process-props (props title dict)
   "Process the heteronym props object PROPS.
