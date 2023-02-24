@@ -25,7 +25,7 @@ export function load({ url }) {
     heteronyms.length < 10 &&
     heteronyms.every((x) => x.title === heteronyms[0].title)
   ) {
-    throw redirect(301, encodeURI(`/word/${heteronyms[0].props.title}`));
+    throw redirect(302, encodeURI(`/word/${heteronyms[0].title}`));
   }
 
   let sortFn;

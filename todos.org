@@ -147,6 +147,8 @@ No longer applicable as we don't use moedict-data anymore.
   - “無妨” (taijit, concised, revised, =moedict_twblg=)
   - “實聯制” (kisaragi, itaigi)
 * todos
+** Access het.title instead of het.props.title
+The two are supposed to be the same, ie. the latter shouldn't need to exist.
 ** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
 The existing digitization only includes POJ/KIP and HanLo.
 
@@ -170,7 +172,6 @@ Each entry is:
 ** TODO [#A] 服務條款、隱私權條款
 ** about: justify kemdict considering chhoetaigi's existence
 ** Search: put exact match on top
-** Include more from ChhoeTaigi
 ** TODO build mobile version with Expo
 ** TODO link to share on Twitter, Facebook, or just copy the URL
 ** TODO varied links to moedict and chhoetaigi
