@@ -11,7 +11,7 @@ export function load({ params }) {
   const titles = uniq(heteronyms.map((het) => het.title));
   const backlinks = getBacklinks(...titles).sort();
 
-  if (heteronyms) {
+  if (heteronyms.length > 0) {
     return { title, heteronyms, backlinks };
   } else {
     throw error(404, "`Word ${w} not found.`");
