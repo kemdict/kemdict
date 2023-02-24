@@ -1,5 +1,200 @@
 [
   {
+    "title": "影格率",
+    "added": 1677228996.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄥˇ ㄍㄜˊ ㄌㄩˋ",
+        "definitions": [
+          {
+            "def": "→[[幀數]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "幀率",
+    "added": 1677228962.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄣ ㄌㄩˋ",
+        "definitions": [
+          {
+            "def": "→[[幀數]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "掉幀",
+    "added": 1677228703.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄧㄠˋ ㄓㄣ",
+        "definitions": [
+          {
+            "def": "數位裝置播放影片或利用互動式媒體時，由於效能不足而跳過原先要顯示的[[畫格]]。如：「近幾年的電腦播放4K影片也不會掉幀」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "洗風向",
+    "added": 1677228466.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧˇ ㄈㄥ ㄒㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "利用大量人力，有意圖的影響輿論[[風向]]。一般用於指責他人，帶有貶義。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "帶風向",
+    "added": 1677228313.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄞˋ ㄈㄥ ㄒㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "有意圖的影響輿論[[風向]]。一般用於指責他人，帶有貶義。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "風向",
+    "added": 1677227957.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄥ ㄒㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "輿論或團體中意見的傾向。如：「該國風向有變，不再反對外銷軍火」、「帶風向」、「洗風向」、「看風向」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "婉君",
+    "vogue": true,
+    "added": 1677227822.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄢˇ ㄐㄩㄣˉ",
+        "definitions": [
+          {
+            "def": "2014年選舉期間流行，對於[[網軍]]的委婉說法。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "買網軍",
+    "added": 1677227673.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄞˇ ㄨㄤˇ ㄐㄩㄣ",
+        "definitions": [
+          {
+            "def": "僱用一群人在網路上進行言語攻擊。亦即購買[[網軍]]的服務。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "網軍",
+    "added": 1677227554.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄤˇ ㄐㄩㄣ",
+        "definitions": [
+          {
+            "def": "被僱用來對意見不同的人進行言語攻擊的網路使用者。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "質量",
+    "added": 1677227511.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓˊ ㄌㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "中國用語，指[[品質]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "非典",
+    "added": 1677227163.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄟ ㄉㄧㄢˇ",
+        "definitions": [
+          {
+            "def": "中國用語，指[[SARS]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "SARS",
+    "added": 1677226756.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/sɑɹs/",
+        "definitions": [
+          {
+            "def": "嚴重急性呼吸道症候群。2002年至2003年於東亞地區流行的傳染病。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "りしれ供さ小",
+    "vogue": true,
+    "added": 1677226622.0,
+    "heteronyms": [
+      {
+        "pronunciation": "lí sī teh kóng sann siáu",
+        "definitions": [
+          {
+            "def": "你是在講什麼鬼話。台語「你是咧講啥痟」的假借字。",
+            "type": "句"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "緊急事件",
     "added": 1676987133.0,
     "heteronyms": [
