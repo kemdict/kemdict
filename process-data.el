@@ -392,6 +392,12 @@ This is a separate step from shaping."
             (-compose
              #'d:links:linkify-brackets
              #'d:links:linkify-first-phrase)))))
+    ;; Ensure the entry title and the props title are the same
+    ;; This is necessary for moedict_twblg, 臺灣白話基礎語句 and 台日大辭典
+    (unless (equal title (gethash "title" props))
+      (ht-update-with! props "title"
+        (lambda (_title)
+          title)))
     (pcase dict
       ("kisaragi_dict"
        (ht-update-with! props "definitions"
@@ -416,18 +422,8 @@ This is a separate step from shaping."
            (lambda (example)
              (-> example
                  (d:links:linkify-brackets "[“" "”]")
-                 (d:links:linkify-brackets "“[" "]”")))))
-       ;; Ensure the entry title and the props title are the same
-       (unless (equal title (gethash "title" props))
-         (ht-update-with! props "title"
-           (lambda (_title)
-             title))))
+                 (d:links:linkify-brackets "“[" "]”"))))))
       ("chhoetaigi_taijittoasutian"
-       ;; Ensure the entry title and the props title are the same
-       (unless (equal title (gethash "title" props))
-         (ht-update-with! props "title"
-           (lambda (_title)
-             title)))
        (ht-update-with! props "definition"
          (lambda (def)
            (d:links:linkify-brackets def "[" "]")))
