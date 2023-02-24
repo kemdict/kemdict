@@ -118,16 +118,25 @@ only checking for the word's existence with \"word\". Use it like
 this:
 
   (d:links:link-to-word \"word\" :href \"word#heading\")"
-  (if (or (equal target d:links:from)
-          ;; This is /way/ faster than using `member' to test a list.
-          (not (gethash target d:titles:look-up-table))
-          (s-contains? "<a" desc t))
-      desc
-    (when d:links:from
-      (push `((from . ,d:links:from)
-              (to . ,target))
-            d:links))
-    (s-lex-format "<a href=\"/word/${href}\">${desc}</a>")))
+  (let
+      ;; HACK: some phrases contain a period. Treat would-be
+      ;; references to it without a period as actual references.
+      ((period nil))
+    (if (or (equal target d:links:from)
+            ;; This is /way/ faster than using `member' to test a list.
+            (not (or (gethash target d:titles:look-up-table)
+                     (and (gethash (concat target "。") d:titles:look-up-table)
+                          (setq period t))))
+            (s-contains? "<a" desc t))
+        desc
+      (when period
+        (setq target (concat target "。")
+              href (concat href "。")))
+      (when d:links:from
+        (push `((from . ,d:links:from)
+                (to . ,target))
+              d:links))
+      (s-lex-format "<a href=\"/word/${href}\">${desc}</a>"))))
 
 (defun d:links:linkify-arrow (str)
   "Try to create a link for synonym arrows in STR."
