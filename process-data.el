@@ -493,17 +493,24 @@ non-nil."
      ("dict_revised" . "dev-dict_revised.json")
      ("dict_concised" . "dev-dict_concised.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
+   ;; For testing on my phone
+   ((getenv "ANDROID_DATA")
+    [("dict_idioms" . "ministry-of-education/dict_idioms.json")
+     ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
+                         "moedict-data-twblg/dict-twblg-ext.json"))
+     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
    (t
     ;; The order here, reversed, defines the order they will appear in
     ;; the word pages.
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
-     ;; ("hakkadict" . "ministry-of-education/hakkadict.json")
-     ;; ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
-     ;; ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
-     ;; ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
-     ;;                     "moedict-data-twblg/dict-twblg-ext.json"))
-     ;; ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-     ;; ("dict_revised" . "ministry-of-education/dict_revised.json")
+     ("hakkadict" . "ministry-of-education/hakkadict.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+     ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+     ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
+                         "moedict-data-twblg/dict-twblg-ext.json"))
+     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+     ("dict_revised" . "ministry-of-education/dict_revised.json")
      ("dict_concised" . "ministry-of-education/dict_concised.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])))
 
