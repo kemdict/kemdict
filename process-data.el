@@ -349,6 +349,32 @@ do."
        d:links:linkify-brackets
        d:links:linkify-arrow))
 
+(defun d:hakkadict:pn (pn dialect)
+  "Turn numeric tones in PN into Unicode.
+
+DIALECT is the dialect, because that matters: 31 is \"ˋ\" in 四縣
+and 南四縣, \"^\" in 大埔 and 詔安.
+
+According to 客家語拼音方案. See:
+https://language.moe.gov.tw/result.aspx?classify_sn=&subclassify_sn=447&content_sn=12"
+  (->> pn
+       (s-replace-all '(("113" . "ˇ")
+                        ("11" . "ˇ")
+                        ("21" . "^")
+                        ("24" . "ˊ")
+                        ("33" . "+")
+                        ("35" . "ˊ")
+                        ("43" . "ˋ")
+                        ("53" . "ˋ")
+                        ("54" . "ˋ")
+                        ("55" . "")
+                        ("2" . "ˋ")
+                        ("5" . "")))
+       ;; 四縣, 南四縣 is "ˋ", 大埔, 詔安 is "^"
+       (s-replace "31" (if (member dialect '("四縣" "南四縣"))
+                           "ˋ"
+                         "^"))))
+
 (defun d:process-props (props title dict)
   "Process the heteronym props object PROPS.
 
@@ -408,6 +434,11 @@ This is a separate step from shaping."
         (lambda (_title)
           title)))
     (pcase dict
+      ("hakkadict"
+       (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
+         (ht-update-with! props (format "p_%s" p_name)
+           (lambda (str)
+             (d:hakkadict:pn str p_name)))))
       ("kisaragi_dict"
        (ht-update-with! props "definitions"
          (lambda (defs)
