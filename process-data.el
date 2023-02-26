@@ -370,7 +370,7 @@ This is a separate step from shaping."
     (dolist (key (list "antonyms" "synonyms"))
       (ht-update-with! props key
         (lambda (words)
-          (->> words
+          (->> (d:links:linkify-brackets words "【" "】")
                (s-replace-regexp
                 (rx "[" (group (any "似反")) "]"
                     (group (* any)))
