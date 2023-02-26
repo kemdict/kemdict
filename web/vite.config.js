@@ -5,4 +5,7 @@ export default {
   server: { fs: { allow: [".."] } },
   clearScreen: false,
   envPrefix: "KEMDICT_",
+  build: {
+    minify: "terser",
+  },
 };

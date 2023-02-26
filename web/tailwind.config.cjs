@@ -1,11 +1,3 @@
-let cjkFallback = [
-  "Noto Sans CJK TC",
-  "Microsoft Jhenghei",
-  "Microsoft Yahei",
-  "Meiryo",
-  "Malgun Gothic",
-];
-
 module.exports = {
   darkMode: "class",
   content: ["./src/**/*.{svelte,md,ts,js,html}"],
@@ -13,28 +5,16 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "'Overpass'",
         "'Noto Sans CJK TC'",
         "'Noto Sans TC'",
         "'jf-openhuninn'",
         "'jf-openhuninn-1.1'",
         "'Iansui 094'",
-        ...cjkFallback,
+        "Microsoft Jhenghei",
+        "Microsoft Yahei",
+        "Meiryo",
+        "Malgun Gothic",
         "sans-serif",
-      ],
-      serif: [
-        "'Source Serif Pro'",
-        "'Noto Serif CJK TC'",
-        "'Noto Serif TC'",
-        ...cjkFallback,
-        "sans-serif",
-      ],
-      // serif: ["Equity"],
-      mono: [
-        "Inconsolata",
-        "Noto Sans Mono CJK TC",
-        ...cjkFallback,
-        "monospace",
       ],
     },
     extend: {

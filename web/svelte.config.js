@@ -19,6 +19,13 @@ const config = {
     adapter: adapterNode({
       out: "built-node",
     }),
+    // New in SvelteKit 1.8.4
+    output: {
+      preloadStrategy: "preload-mjs",
+    },
+    version: {
+      name: process.env.KEMDICT_VERSION,
+    },
   },
 };
 
