@@ -37,4 +37,10 @@
     {/if}
   {/each}
   {@html process_def(het.props.definition)}
+  {#if het.props.antonyms}
+    <p><m>反義詞</m>：{@html het.props.antonyms}</p>
+  {/if}
+  {#if het.props.synonyms}
+    <p><m>近義詞</m>：{@html het.props.synonyms}</p>
+  {/if}
 {/each}

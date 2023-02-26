@@ -51,7 +51,7 @@
     <div class="sm:hidden"><TOC term={title} {presentDicts} /></div>
     {#each groupedHets as [dict, hets]}
       <div id={dict.Id} class="dict">
-        {#if ["chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
+        {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
           <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
         {:else}
           <Out href={format(dict.url, title)}>{dict.name}</Out>

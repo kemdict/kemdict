@@ -51,7 +51,7 @@ export const dicts = [
   {
     id: "hakkadict",
     name: "教育部臺灣客家語常用詞辭典",
-    url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=qwMPHD/search?dcf=sti&extrasearch=es1&qs0=$1",
+    url: 'https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id="$1".&searchmode=basic',
     lang: "hak_TW",
   },
   {
