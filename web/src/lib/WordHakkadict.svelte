@@ -3,7 +3,11 @@
   import Pronunciation from "$lib/Pronunciation.svelte";
 
   const p_names = ["四縣", "海陸", "大埔", "饒平", "詔安", "南四縣"];
-
+  function process_type(typ) {
+    if (typ) {
+      return typ.replace("\n", "/");
+    }
+  }
   function process_def(def) {
     if (def) {
       let x = "";
@@ -36,6 +40,9 @@
       <Pronunciation>{p}：{het.props[`p_${p}`]}</Pronunciation>
     {/if}
   {/each}
+  {#if het.props.type}
+    <p class="mt-4"><m>{process_type(het.props.type)}</m></p>
+  {/if}
   {@html process_def(het.props.definition)}
   {#if het.props.antonyms}
     <p><m>反義詞</m>：{@html het.props.antonyms}</p>
