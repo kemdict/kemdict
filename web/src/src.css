@@ -13,7 +13,7 @@
   }
   blockquote {
     @apply rounded px-3 py-1;
-    @apply bg-gray-200 dark:bg-stone-700;
+    @apply bg-gray-100 dark:bg-stone-700;
     & + blockquote {
       @apply mt-2;
     }
@@ -200,7 +200,7 @@
 
 @layer utilities {
   .link {
-    @apply text-indigo-500 dark:text-indigo-300;
+    @apply text-indigo-600 dark:text-indigo-300;
     @apply no-underline;
     &:hover {
       @apply underline;
