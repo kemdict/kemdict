@@ -19,6 +19,21 @@
   <title>{title}</title>
   <meta property="og:title" content={title} />
   <meta property="og:sitename" content={sitename} />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://kemdict.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://kemdict.com/search?q={q}"
+        },
+        "query-input": "required name=q"
+      }
+    }
+  </script>
 </svelte:head>
 
 <SplitLayout wantHeader={false}>
