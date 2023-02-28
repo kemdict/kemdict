@@ -13,17 +13,13 @@
       let x = "";
       let match;
       for (const d of def.split("\n")) {
-        if ((match = d.match(/^\[(.*)\]$/))) {
-          if (x.length > 0) {
-            x += `</ol>`;
-          }
-          x += `<p class="pos">${match[1]}</p><ol>`;
-        } else {
-          if (x.length == 0) {
-            x += `<ol>`;
-          }
-          x += `<li><p class="def">${d.replace(/^\d+\./, "")}</p></li>`;
+        if (x.length == 0) {
+          x += `<ol>`;
         }
+        let nodigit = d.replace(/^\d+\./, "");
+        x += "<li>";
+        x += `<p class="def">${nodigit}</p>`;
+        x += "</li>";
       }
       x += "</ol>";
       return x;
@@ -41,7 +37,7 @@
     {/if}
   {/each}
   {#if het.props.type}
-    <p class="mt-4"><m>{process_type(het.props.type)}</m></p>
+    <p class="pos">{process_type(het.props.type)}</p>
   {/if}
   {@html process_def(het.props.definition)}
   {#if het.props.antonyms}
