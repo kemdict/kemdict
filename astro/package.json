@@ -1,7 +1,6 @@
 {
-  "name": "kemdict-astro",
+  "name": "kemdict",
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,6 +9,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.0.17"
+    "@astrojs/node": "^5.0.4",
+    "@astrojs/svelte": "^2.0.2",
+    "astro": "^2.0.17",
+    "svelte": "^3.55.1",
+    "tailwindcss": "^3.2.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4",
+    "prettier-plugin-astro": "^0.8.0",
+    "prettier-plugin-svelte": "^2.9.0",
+    "prettier-plugin-tailwindcss": "^0.2.3"
   }
 }
