@@ -1,0 +1,23 @@
+---
+const { search, initialInput, initialMatchSelection } = Astro.props;
+
+import DarkModeToggle from "./DarkModeToggle.svelte";
+import SearchBar from "./SearchBar.astro";
+---
+
+<div class="mb-8">
+  <nav class="my-2 flex items-center justify-between">
+    <a class="font-bold hover:underline" href="/">Kemdict 國語整合典 (β)</a>
+    <div class="text-right">
+      <DarkModeToggle client:load />
+    </div>
+  </nav>
+  {
+    search && (
+      <SearchBar
+        initialInput={initialInput}
+        initialMatchSelection={initialMatchSelection}
+      />
+    )
+  }
+</div>

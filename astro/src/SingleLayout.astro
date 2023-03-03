@@ -1,0 +1,19 @@
+---
+const { title, initialInput, initialMatchSelection } = Astro.props;
+const klass = Astro.props.class;
+
+import BaseLayout from "$src/BaseLayout.astro";
+import Header from "$src/components/Header.astro";
+---
+
+<BaseLayout title={title}>
+  <Fragment slot="head"><slot name="head" /></Fragment>
+  <Header
+    search={true}
+    initialInput={initialInput}
+    initialMatchSelection={initialMatchSelection}
+  />
+  <div class:list={[klass, "mx-auto maz-w-2xl"]}>
+    <slot />
+  </div>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+const { words } = Astro.props;
+---
+
+<div class="not-prose">
+  <ul class="flex flex-wrap">
+    {
+      words.map((word) => (
+        <li class="mr-2 py-2">
+          <a class="wordlink" href="/word/{word}">
+            {word}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
