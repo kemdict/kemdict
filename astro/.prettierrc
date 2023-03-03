@@ -1,11 +1,12 @@
 pluginSearchDirs: false
 plugins:
   - prettier-plugin-svelte
+  - prettier-plugin-astro
   - prettier-plugin-tailwindcss
 overrides:
-  - files: "*.njk"
-    options:
-      parser: "html"
   - files: "*.svelte"
     options:
       parser: "svelte"
+  - files: "*.astro"
+    options:
+      parser: "astro"
