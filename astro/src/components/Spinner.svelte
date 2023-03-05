@@ -1,6 +1,6 @@
 <div class="h-8">
   <svg
-    class="inline h-5 w-5 animate-spin text-gray-700"
+    class="inline h-5 w-5 animate-spin text-gray-700 dark:text-gray-300"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
