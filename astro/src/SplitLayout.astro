@@ -1,5 +1,10 @@
 ---
-const { initialInput, wantHeader = true, leftFirst = true } = Astro.props;
+const {
+  title,
+  initialInput,
+  wantHeader = true,
+  leftFirst = true,
+} = Astro.props;
 
 import BaseLayout from "$src/BaseLayout.astro";
 import Header from "$src/components/Header.astro";

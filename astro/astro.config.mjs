@@ -1,11 +1,19 @@
 import { defineConfig } from "astro/config";
-import astroSvelte from "@astrojs/svelte";
+import svelte from "@astrojs/svelte";
+import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 
 export default defineConfig({
-  integrations: [astroSvelte()],
+  integrations: [svelte(), mdx()],
   output: "server",
   adapter: node({
     mode: "standalone",
   }),
+  vite: {
+    clearScreen: false,
+    envPrefix: "KEMDICT_",
+    build: {
+      minify: "terser",
+    },
+  },
 });

@@ -1,0 +1,32 @@
+---
+const {
+  // Array of dict objects
+  presentDicts = [],
+  term,
+} = Astro.props;
+import { langs, groupByProp } from "$src/common";
+---
+
+{
+  presentDicts.length > 1 && (
+    <div class="mb-8">
+      {term && <h1 class="mb-2 mt-0 text-2xl font-bold">{term}</h1>}
+      <div class="border p-2">
+        {groupByProp(presentDicts, "lang").map(([lang, dicts]) => (
+          <>
+            <h2 class="mt-2 font-bold first:mt-0">{langs[lang]}</h2>
+            <ul>
+              {dicts.map((dict) => (
+                <li>
+                  <a class="link ml-2" href="#{dict.id}">
+                    {dict.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))}
+      </div>
+    </div>
+  )
+}

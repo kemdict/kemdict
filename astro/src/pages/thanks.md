@@ -1,4 +1,5 @@
 ---
+layout: $src/MarkdownLayout.astro
 title: 致謝與授權
 ---
 

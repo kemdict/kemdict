@@ -1,6 +1,7 @@
 ---
-import { getHeteronyms } from "$lib/server/db.js";
-import { dicts, langs, WordSortFns } from "$lib/common";
+import { getHeteronyms } from "$src/server/db.js";
+import { dicts, langs, WordSortFns } from "$src/common";
+
 const url = Astro.url;
 const query = url.searchParams.get("q");
 const mtch = url.searchParams.get("m") || "prefix";
@@ -10,9 +11,12 @@ let heteronyms = [];
 if (typeof query !== "string") {
   return Astro.redirect("/");
 }
+
 heteronyms = getHeteronyms(query, mtch);
+
 // This stops the query from going into the /word/ page when redirecting
 url.searchParams.delete("q");
+
 // Redirect if all matched heteronyms belong to the same title
 if (
   heteronyms &&
@@ -22,6 +26,7 @@ if (
 ) {
   return Astro.redirect(encodeURI(`/word/${heteronyms[0].title}`));
 }
+
 let sortFn;
 if (sort === "desc") {
   sortFn = WordSortFns.descend;
@@ -40,13 +45,11 @@ for (const het of heteronyms) {
     }
   }
 }
-const langs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 
-import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
+const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 
-import Elsewhere from "$src/components/Elsewhere.svelte";
-import SingleLayout from "$src/SingleLayout.svelte";
-import Spinner from "$lib/Spinner.svelte";
+import Elsewhere from "$src/components/Elsewhere.astro";
+import SingleLayout from "$src/SingleLayout.astro";
 import WordPreview from "$src/components/WordPreview.svelte";
 import { dictsByLang } from "$src/common.js";
 
@@ -84,25 +87,11 @@ const title = getTitle(mtch, query);
         <h1 class="mt-8 text-2xl font-bold">{title}</h1>
         <p class="text-sm">共 {count} 個定義</p>
         <div class="mt-4">
-          <Tabs>
-            <TabList>
-              {langs.map(([langId, lang]) => (
-                <Tab>{lang}</Tab>
-              ))}
-            </TabList>
-            {langs.map(([langId, lang]) => (
-              <TabPanel>
-                <ul>
-                  {heteronyms.map(
-                    (het) =>
-                      dictsByLang[langId].includes(het.from) && (
-                        <WordPreview heteronyms={[het]} />
-                      )
-                  )}
-                </ul>
-              </TabPanel>
+          <ul>
+            {heteronyms.map((het) => (
+              <WordPreview heteronyms={[het]} />
             ))}
-          </Tabs>
+          </ul>
         </div>
       </>
     )

@@ -1,4 +1,5 @@
 ---
+layout: $src/MarkdownLayout.astro
 title: 字典 | 台日大辭典台語譯本 (1932)
 ---
 

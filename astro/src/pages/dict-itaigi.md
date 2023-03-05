@@ -1,4 +1,5 @@
 ---
+layout: $src/MarkdownLayout.astro
 title: 字典 | iTaigi 華台對照典
 ---
 

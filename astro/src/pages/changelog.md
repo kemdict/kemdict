@@ -1,4 +1,5 @@
 ---
+layout: $src/MarkdownLayout.astro
 title: 版本紀錄
 desc: Kemdict 國語整合典的更新紀錄。
 ---

@@ -1,6 +1,6 @@
 <script>
   import truncate from "lodash-es/truncate";
-  import { spc } from "$lib/processing";
+  import { spc } from "$src/processing";
   export let heteronyms;
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.

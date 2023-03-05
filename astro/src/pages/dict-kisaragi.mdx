@@ -1,0 +1,23 @@
+---
+layout: $src/MarkdownLayout.astro
+title: 字典 | 如月的現代台灣華語補足典
+---
+
+import { db } from "$src/server/db.js";
+export const titles = (() => {
+const stmt = db.prepare(
+  `SELECT DISTINCT title FROM heteronyms WHERE "from" = 'kisaragi_dict'`
+);
+stmt.pluck(true)
+return stmt.all()
+})()
+
+import WordList from "$src/components/WordList.astro"
+
+# 字典 — 如月的現代台灣華語補足典
+
+我記錄台灣華語有在使用但沒被收錄的詞的地方。
+
+目前共有 {titles.length} 條：
+
+<WordList words={titles} />

@@ -22,17 +22,7 @@ function readDB(path) {
 }
 
 export const db = (() => {
-  const path = [
-    "../kemdict.db",
-    "./src/lib/entries.db",
-    "./src/lib/entries.db.gz",
-    // If we build on Netlify, like the path copying doesn't work well
-    // with the project being in a subdirectory, ie. during build we get
-    // src/... but during serverless function runtime we get web/src/...
-    //
-    // Just, like, work around that.
-    "./web/src/lib/entries.db.gz",
-  ].find((f) => fs.existsSync(f));
+  const path = ["../kemdict.db", "./entries.db"].find((f) => fs.existsSync(f));
   if (path) {
     return readDB(path);
   } else {

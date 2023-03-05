@@ -1,17 +1,13 @@
 {
   "name": "kemdict",
   "type": "module",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
   "dependencies": {
+    "@astrojs/mdx": "^0.17.2",
     "@astrojs/node": "^5.0.4",
     "@astrojs/svelte": "^2.0.2",
     "astro": "^2.0.17",
+    "better-sqlite3": "^8.1.0",
+    "lodash-es": "^4.17.21",
     "svelte": "^3.55.1",
     "tailwindcss": "^3.2.4"
   },
