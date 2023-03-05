@@ -1,4 +1,4 @@
 User-agent: *
 
-Sitemap: https://kemdict.com/sitemap.xml
+Sitemap: https://kemdict.com/sitemap-index.xml
 Disallow: /search

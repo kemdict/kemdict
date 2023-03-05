@@ -22,7 +22,9 @@ function readDB(path) {
 }
 
 export const db = (() => {
-  const path = ["../kemdict.db", "./entries.db"].find((f) => fs.existsSync(f));
+  const path = ["../kemdict.db", "./entries.db", "../../dicts/entries.db"].find(
+    (f) => fs.existsSync(f)
+  );
   if (path) {
     return readDB(path);
   } else {

@@ -1,7 +1,7 @@
 export LANG=en_US.UTF-8
 export KEMDICT_VERSION=$(shell git describe --tags --always)
 
-DEPS := public/l node_modules
+DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs)
 
 node_modules: package.json
 	npm install

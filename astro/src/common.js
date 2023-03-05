@@ -102,8 +102,6 @@ export function dictsInWord(word, full, lang) {
 // Show loading indicator after this many miliseconds.
 export const showLoadingAfterMS = 250;
 
-export const baseURL = "https://kemdict.com";
-
 export const version = import.meta.env.KEMDICT_VERSION;
 
 export const WordSortFns = {
