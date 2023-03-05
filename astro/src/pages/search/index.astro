@@ -50,7 +50,9 @@ const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
-import WordPreview from "$src/components/WordPreview.svelte";
+
+import Results from "./Results.svelte";
+
 import { dictsByLang } from "$src/common.js";
 
 function getTitle(mtch, query) {
@@ -86,13 +88,7 @@ const title = getTitle(mtch, query);
       <>
         <h1 class="mt-8 text-2xl font-bold">{title}</h1>
         <p class="text-sm">共 {count} 個定義</p>
-        <div class="mt-4">
-          <ul>
-            {heteronyms.map((het) => (
-              <WordPreview heteronyms={[het]} />
-            ))}
-          </ul>
-        </div>
+        <Results client:load langs={presentLangs} heteronyms={heteronyms} />
       </>
     )
   }
