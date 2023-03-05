@@ -1,6 +1,6 @@
 <script>
   export let heteronyms;
-  import Pronunciation from "$lib/Pronunciation.svelte";
+  import Pronunciation from "$src/components/Pronunciation.svelte";
 
   const p_names = ["四縣", "海陸", "大埔", "饒平", "詔安", "南四縣"];
   function process_type(typ) {

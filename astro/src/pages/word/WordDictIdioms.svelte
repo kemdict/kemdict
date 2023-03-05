@@ -1,7 +1,7 @@
 <script>
   export let heteronyms;
-  import { spc, newline_string_to_ol } from "$lib/processing";
-  import Pronunciation from "$lib/Pronunciation.svelte";
+  import { spc, newline_string_to_ol } from "$src/processing";
+  import Pronunciation from "$src/components/Pronunciation.svelte";
 
   function idioms_nuance(str) {
     /* Sure... */

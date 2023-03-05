@@ -1,7 +1,7 @@
 <script>
   export let heteronyms;
-  import { spc } from "$lib/processing";
-  import Pronunciation from "$lib/Pronunciation.svelte";
+  import { spc } from "$src/processing";
+  import Pronunciation from "$src/components/Pronunciation.svelte";
 
   function split(str) {
     // Some lines contain just a Tab. Get rid of them.

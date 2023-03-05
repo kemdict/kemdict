@@ -1,6 +1,6 @@
 <script>
   export let heteronyms;
-  import Pronunciation from "$lib/Pronunciation.svelte";
+  import Pronunciation from "$src/components/Pronunciation.svelte";
   function getTitle(het) {
     if (het.props.title === het.props.HanLoTaibunKip) {
       return het.props.title;

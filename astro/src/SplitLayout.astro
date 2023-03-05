@@ -11,6 +11,9 @@ import Header from "$src/components/Header.astro";
 ---
 
 <BaseLayout title={title}>
+  <Fragment slot="head">
+    <slot name="head" />
+  </Fragment>
   {wantHeader && <Header search={true} initialInput={initialInput} />}
   {
     leftFirst ? (

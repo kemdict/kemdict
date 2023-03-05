@@ -2,9 +2,9 @@
   export let heteronyms;
   export let dict;
 
-  import Pronunciation from "$lib/Pronunciation.svelte";
-  import { groupByProp } from "$lib/common";
-  import { spc, interlinear_annotation } from "$lib/processing";
+  import Pronunciation from "$src/components/Pronunciation.svelte";
+  import { groupByProp } from "$src/common";
+  import { spc, interlinear_annotation } from "$src/processing";
 
   const pronunciation_key_mapping = {
     kisaragi_dict: "pronunciation",
