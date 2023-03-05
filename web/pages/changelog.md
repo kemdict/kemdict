@@ -5,6 +5,16 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 # 版本紀錄
 
+## 0.10.1 (2023-03-05)
+
+- 加入《台灣白話基礎語句》的內容（來自 [ChhoeTaigi 的資料](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/blob/master/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv)）
+- 搜尋：使用分頁介面顯示各語言
+- 詞彙頁面：讓非漢字的單字包含讀音符合它的定義，意即[a-kong](/word/a-kong)現在包含「阿公」的定義（像 Weblio 一樣）
+- 詞彙頁面：修正無法捲動左側面板
+- 台日大辭典：連結單字到原網站
+- 客家語常用詞辭典：連結單字到原網站
+- 客家語常用詞辭典：顯示近義詞、反義詞、及詞性資訊
+
 ## 0.10.0 (2023-01-28)
 
 - 修正有些搜尋會因為要求資料裡沒有的欄位而出現錯誤的問題
