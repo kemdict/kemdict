@@ -404,6 +404,9 @@ This is a separate step from shaping."
       (ht-update-with! props key
         (lambda (pn)
           (d:pn-normalize pn :one))))
+    (dolist (key (list "radical" "v_type" "v_pinyin"))
+      (ht-update-with! props key
+        #'s-trim))
     (dolist (key (list "近義同" "近義反"))
       (ht-update-with! props key
         #'d:links:comma-word-list))
@@ -423,8 +426,6 @@ This is a separate step from shaping."
                       (match-string 2 str))))))))))
     (ht-update-with! props "word_ref"
       #'d:links:link-to-word)
-    (ht-update-with! props "radical"
-      #'s-trim)
     (ht-update-with! props "definitions"
       (lambda (defs)
         (seq-doseq (def defs)
@@ -445,6 +446,8 @@ This is a separate step from shaping."
              #'d:links:linkify-first-phrase)))))
     ;; Just remove the title prop. It's already in het.title.
     (ht-remove! props "title")
+    ;; The length prop is kind of pointless: just use [...str].length.
+    (ht-remove! props "length")
     (pcase dict
       ("hakkadict"
        (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
