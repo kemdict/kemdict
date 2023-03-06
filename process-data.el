@@ -298,6 +298,11 @@ instead."
     (->> p
          d::ucs-NFC
          (s-replace "　" " ")
+         ;; The replacement character, which appears in one entry in
+         ;; itaigi.
+         ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
+         ;; I'm pretty sure it's not supposed to be there.
+         (s-replace (string #xFFFD) "")
          (s-replace "（變）" "/")
          (s-split "/")
          (-map #'s-trim)
