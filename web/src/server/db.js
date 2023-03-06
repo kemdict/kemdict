@@ -62,10 +62,8 @@ export function getHeteronyms(query, mtch) {
     `
 SELECT DISTINCT heteronyms.*
 FROM heteronyms, json_each(heteronyms.pns)
-WHERE
-  title ${operator} @q
-OR
-  json_each.value ${operator} @q`
+WHERE "from" IS NOT NULL
+  AND (title ${operator} @q OR json_each.value ${operator} @q)`
   );
   return stmt.all(opt)?.map(processHet);
 }

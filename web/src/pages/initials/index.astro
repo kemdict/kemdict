@@ -1,0 +1,51 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+import Group from "./Group.svelte";
+
+import { db } from "$src/server/db.js";
+import { groupByProp } from "$src/common.js";
+
+const strokeStmt = db.prepare(`
+  SELECT DISTINCT
+    heteronyms.title,
+    cast(json_tree.value as integer) AS 'stroke_count'
+  FROM heteronyms, json_tree(heteronyms.props)
+  WHERE length("title") = 1
+    AND json_tree.key = 'stroke_count'
+  ORDER BY 'stroke_count'
+`);
+
+const nostrokeStmt = db.prepare(`
+  SELECT DISTINCT
+    substr(heteronyms.title, 0, 2) AS 'initial'
+  FROM heteronyms
+  ORDER BY 'initial'
+`);
+
+// We also need pronunciation initials!
+
+nostrokeStmt.pluck(true);
+
+const with_stroke = strokeStmt.all();
+
+let no_stroke;
+{
+  let set = new Set(with_stroke.map((x) => x.title));
+  no_stroke = nostrokeStmt
+    .all()
+    .filter((x) => !set.has(x))
+    .sort();
+}
+---
+
+<SingleLayout title="首字索引">
+  <div class="prose">
+    <h1>首字索引</h1>
+    <Group title="其他" elements={no_stroke} />
+    {
+      groupByProp(with_stroke, "stroke_count").map(([count, elements]) => (
+        <Group title={`${count} 畫`} elements={elements} />
+      ))
+    }
+  </div>
+</SingleLayout>

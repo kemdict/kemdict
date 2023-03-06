@@ -125,6 +125,8 @@ export const WordSortFns = {
 /**
  * Return a new array which is `arr` whose objects are grouped by `property`.
  *
+ * [["value", [...]], ["value2", [...]]]
+ *
  * Items without `property` are grouped under `fallback`. (More
  * accurately, they are grouped under the string representation of
  * `fallback`, so eg. `false` and "false" are equivalent.)
@@ -159,4 +161,14 @@ export function groupByProp(arr, property, fallback) {
  */
 export function format(template, str) {
   return str.replace(RegExp(`(${str})`), template);
+}
+
+/**
+ * Return number of characters in `str`.
+ *
+ * From
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length
+ */
+export function strLen(str) {
+  return [...str].length;
 }
