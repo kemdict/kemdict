@@ -1,7 +1,7 @@
----
-const { term } = Astro.props;
-import Out from "./Out.svelte";
----
+<script>
+  export let term;
+  import Out from "./Out.svelte";
+</script>
 
 <div class="prose">
   <h2 class="mb-2 mt-0">在其他地方搜尋「{term}」</h2>
