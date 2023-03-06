@@ -2,10 +2,10 @@
   export let heteronyms;
   import Pronunciation from "$src/components/Pronunciation.svelte";
   function getTitle(het) {
-    if (het.props.title === het.props.HanLoTaibunKip) {
-      return het.props.title;
+    if (het.title === het.props.HanLoTaibunKip) {
+      return het.title;
     } else {
-      return `${het.props.title} (${het.props.HanLoTaibunKip})`;
+      return `${het.title} (${het.props.HanLoTaibunKip})`;
     }
   }
   function process_def(def) {
