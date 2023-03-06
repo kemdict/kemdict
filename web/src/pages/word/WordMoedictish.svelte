@@ -66,14 +66,10 @@
                 <p class="def">{@html def.def}</p>
               {/if}
               {#if def.example}
-                <blockquote>
-                  {@html interlinear_annotation(def.example)}
-                </blockquote>
+                {@html interlinear_annotation(def.example)}
               {/if}
               {#if def.quote}
-                <blockquote>
-                  {@html interlinear_annotation(def.quote)}
-                </blockquote>
+                {@html interlinear_annotation(def.quote)}
               {/if}
             </li>
           {/if}

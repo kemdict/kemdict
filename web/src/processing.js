@@ -39,13 +39,17 @@ export function interlinear_annotation(defs) {
     if (typeof defs === "string") {
       defs = [defs];
     }
+    let first = true;
     for (let i = 0; i < defs.length; i++) {
       if (defs[i]) {
         // Deal with the interlinear annotation characters.
         let matches = [...defs[i].matchAll("\ufff9|\ufffa|\ufffb")];
         if (matches.length !== 0 && matches.length % 3 === 0) {
           defs[i] = defs[i]
-            .replace(/\ufff9/g, "<p>")
+            .replace(
+              /\ufff9/g,
+              first ? "<blockquote><p>" : "</blockquote><blockquote><p>"
+            )
             .replace(/\ufffa/g, "</p><p>")
             .replace(/\ufffb/g, "</p>");
           // This is more "correct" i.r.t. interpreting the characters
@@ -56,6 +60,7 @@ export function interlinear_annotation(defs) {
           // .replace(/\ufffa/g, "<rp>(</rp><rt>")
           // .replace(/\ufffb/g, "<rp>)</rp></rt></ruby><br>");
         }
+        first = false;
       }
     }
     defs = defs.join("\n");
