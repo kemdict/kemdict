@@ -423,6 +423,8 @@ This is a separate step from shaping."
                       (match-string 2 str))))))))))
     (ht-update-with! props "word_ref"
       #'d:links:link-to-word)
+    (ht-update-with! props "radical"
+      #'s-trim)
     (ht-update-with! props "definitions"
       (lambda (defs)
         (seq-doseq (def defs)
