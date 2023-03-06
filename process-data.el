@@ -311,10 +311,23 @@ do."
     (unless (equal "" title)
       (->> title
            (s-replace "'" "’")
-           ;; A "省" is CJK COMPATIBILITY IDEOGRAPH-F96D. I've
-           ;; reported the error.
-           (s-replace "省" "省")
            (s-replace "?" "？")
+
+           ;; A "省" in dict_concised is CJK COMPATIBILITY
+           ;; IDEOGRAPH-F96D. I've reported the error.
+           (s-replace "省" "省")
+
+           ;; This is only used once in itaigi:
+           ;; https://itaigi.tw/k/%EF%97%AA%E8%8A%B3%E6%B0%B4/
+           ;;
+           ;; The problem is that it's in the private use area, and so
+           ;; even though it's covered by HanaMinA I still am not
+           ;; quite sure what it is actually supposed to look like.
+           ;;
+           ;; Given its pronunciation / meaning has another matching
+           ;; Han character, this seems more correct.
+           (s-replace (string 62954) "𫝺")
+
            ;; Work around chhoetaigi_taijittoasutian entries like
            ;; "(**裝)模做樣". I don't think the title is supposed to
            ;; be like that.
