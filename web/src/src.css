@@ -153,7 +153,7 @@
       @apply link;
     }
     h1 {
-      @apply mt-8 text-2xl first:mt-4;
+      @apply mt-10 text-2xl first:mt-4;
     }
     h2 {
       @apply mt-4 text-2xl;

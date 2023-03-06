@@ -62,3 +62,17 @@ export function interlinear_annotation(defs) {
   }
   return defs;
 }
+
+export function radicals_and_strokes(props) {
+  if (!props.radical && !props.stroke_count) return;
+  let x = "";
+  x += `<div class="mb-4">【`;
+  if (props.radical) {
+    x += `<a href="/word/${props.radical}">${props.radical}</a>部`;
+  }
+  if (props.stroke_count) {
+    x += `，共${props.stroke_count}畫`;
+  }
+  x += "】</div>";
+  return x;
+}

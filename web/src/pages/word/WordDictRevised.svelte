@@ -1,6 +1,7 @@
 <script>
   export let heteronyms;
-  import { spc } from "$src/processing";
+  import { spc, radicals_and_strokes } from "$src/processing";
+  import { strLen } from "$src/common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
   function process_def(def) {
@@ -32,6 +33,9 @@
   <h1>{het.title}</h1>
   {#if het.props.bopomofo}
     <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
+  {/if}
+  {#if strLen(het.title) === 1}
+    {@html radicals_and_strokes(het.props)}
   {/if}
   {@html process_def(het.props.definition)}
 {/each}
