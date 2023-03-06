@@ -1,8 +1,18 @@
-* Sveltekit-based frontend
+* Astro-based frontend
 
-This will not build with adapter-cloudflare due to the use of builtin Node modules in my server modules.
+This cannot be built for Cloudflare due to the use of builtin Node modules.
 
-* Building for Node
+** Why Astro
+
+SvelteKit provides client-side navigation, however the cost of this is that all components must be sent to the client.
+
+Astro, on the other hand, allows only sending the components that are actually needed, which reduces the time between page load and finishing hydration substantially, at the cost of losing client side navigation.
+
+In other words, Astro allows components that only run at build time.
+
+Since I wasn't using client side navigation anyways (disabling it via =data-sveltekit-reload=, in order to leverage CDN cache more), this is a worthwhile trade.
+
+** Building for Node
 
 #+begin_src shell
 make build-with-data
@@ -14,26 +24,29 @@ or
 make build-no-data
 #+end_src
 
-Both make =svelte.config.js= use =adapter-node= and output to =built-node=. Other required files, namely =package.json=, =package-lock.json=, and kisaragi-dict are all copied in as well.
+The output is in =dist=.
 
 The =with-data= variant builds the SQLite database as well; this requires Cask and Emacs.
 
+The data is always required at runtime, but this allows the code to be updated without having to spend 10+ minutes rebuilding the data unnecessarily.
+
 ** Deploying to a server
+
 Copy the folder to a server, perhaps through =tar= and =scp=:
 
 #+begin_src shell
-tar -cf built-node.tar -a built-node
-scp built-node.tar user@example.com:/home/user
+tar -cf dist.tar -a dist
+scp dist.tar user@example.com:/home/user
 #+end_src
 
 Then, on the server:
 
 #+begin_src shell
 ssh user@example.com
-tar -x built-node.tar
-rm built-node.tar
+tar -x dist.tar
+rm dist.tar
 test -f kemdict && rm -r kemdict
-mv built-node kemdict
+mv dist kemdict
 #+end_src
 
 Note that =better-sqlite3= currently will fail to install on Node 19 (which the Arch =nodejs= package is on), so you'll have to make sure to use Node 18.
@@ -65,7 +78,7 @@ ExecStart=npm run prod
 WantedBy=default.target
 #+end_src
 
-Put this in =~/.config/systemd/user/<name>.service=, do a user daemon-reload, then make sure to mark the user as lingering (see =enable-linger= in [[https://man.archlinux.org/man/loginctl.1.en.html][loginctl(1)]]):
+Put this in =~/.config/systemd/user/<name>.service=, do a user =daemon-reload=, then make sure to mark the user as lingering (so services start at boot and don't stop just because you quit your ssh session; see =enable-linger= in [[https://man.archlinux.org/man/loginctl.1.en.html][loginctl(1)]]):
 
 #+begin_src shell
 loginctl enable-linger $USER
