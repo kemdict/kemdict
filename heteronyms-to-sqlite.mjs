@@ -49,12 +49,17 @@ function stringifyFields(thing) {
   return thing;
 }
 
+// title: string
+// from?: string
+//   null = this should not be shown in results
+// pns?: array
+// props: object
 db.prepare(
   `
 CREATE TABLE heteronyms (
   "title" NOT NULL,
-  "from" NOT NULL,
-  "pns" NOT NULL,
+  "from",
+  "pns",
   "props" NOT NULL)`
 ).run();
 

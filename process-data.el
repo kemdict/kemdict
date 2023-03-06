@@ -518,7 +518,11 @@ The value is a vector:
      ...]
 
 Development versions are returned when applicable if DEV? is
-non-nil."
+non-nil.
+
+An ID of nil means the entries are included but will not be shown
+by default. This is added for assigning extra stroke count
+information."
   (cond
    ((and dev?
          (-all? #'file-exists-p
@@ -540,7 +544,8 @@ non-nil."
      ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
      ("dict_revised" . "dev-dict_revised.json")
      ("dict_concised" . "dev-dict_concised.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
+     (nil . "kisaragi/extra-strokes.json")])
    ;; For testing on my phone
    ((getenv "ANDROID_DATA")
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
@@ -560,7 +565,8 @@ non-nil."
      ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
      ("dict_revised" . "ministry-of-education/dict_revised.json")
      ("dict_concised" . "ministry-of-education/dict_concised.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])))
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
+     (nil . "kisaragi/extra-strokes.json")])))
 
 ;; For entries with heteronyms:
 ;;   [{:title "title"
@@ -661,7 +667,7 @@ DICT is the dictionary ID to associate with them."
      do
      (progn
        (message "Collecting heteronyms and titles from %s (%s/%s)..."
-                dict (1+ i) dict-count)
+                (or dict files) (1+ i) dict-count)
        (let ((result (d:parse-and-shape dict files)))
          (cl-loop
           for het in (car result)
