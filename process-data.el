@@ -310,17 +310,18 @@ do."
   (let ((title (s-trim title)))
     (unless (equal "" title)
       (->> title
-           (replace-regexp-in-string "'"
-                                     "’")
-           (replace-regexp-in-string (rx "?")
-                                     "？")
+           (s-replace "'" "’")
+           ;; A "省" is CJK COMPATIBILITY IDEOGRAPH-F96D. I've
+           ;; reported the error.
+           (s-replace "省" "省")
+           (s-replace "?" "？")
            ;; Work around chhoetaigi_taijittoasutian entries like
            ;; "(**裝)模做樣". I don't think the title is supposed to
            ;; be like that.
-           (replace-regexp-in-string (rx "(**" (group (+ any)) ")")
-                                     "\\1")
-           (replace-regexp-in-string (rx (any "[" "]"))
-                                     "")))))
+           (s-replace-regexp (rx "(**" (group (+ any)) ")")
+                             "\\1")
+           (s-replace-regexp (rx (any "[" "]"))
+                             "")))))
 
 (defun d:process-def:dict_concised (def)
   "Process DEF for dict_concised."
