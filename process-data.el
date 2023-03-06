@@ -427,12 +427,8 @@ This is a separate step from shaping."
             (-compose
              #'d:links:linkify-brackets
              #'d:links:linkify-first-phrase)))))
-    ;; Ensure the entry title and the props title are the same
-    ;; This is necessary for moedict_twblg, 臺灣白話基礎語句 and 台日大辭典
-    (unless (equal title (gethash "title" props))
-      (ht-update-with! props "title"
-        (lambda (_title)
-          title)))
+    ;; Just remove the title prop. It's already in het.title.
+    (ht-remove! props "title")
     (pcase dict
       ("hakkadict"
        (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
