@@ -1,0 +1,95 @@
+---
+import { getHeteronyms } from "$src/server/db.js";
+import { dicts, langs, WordSortFns } from "$src/common";
+
+const url = Astro.url;
+const query = url.searchParams.get("q");
+const mtch = url.searchParams.get("m") || "prefix";
+const sort = url.searchParams.get("s") || "asc";
+let heteronyms = [];
+
+if (typeof query !== "string") {
+  return Astro.redirect("/");
+}
+
+heteronyms = getHeteronyms(query, mtch);
+
+// This stops the query from going into the /word/ page when redirecting
+url.searchParams.delete("q");
+
+// Redirect if all matched heteronyms belong to the same title
+if (
+  heteronyms &&
+  heteronyms.length > 0 &&
+  heteronyms.length < 10 &&
+  heteronyms.every((x) => x.title === heteronyms[0].title)
+) {
+  return Astro.redirect(encodeURI(`/word/${heteronyms[0].title}`));
+}
+
+let sortFn;
+if (sort === "desc") {
+  sortFn = WordSortFns.descend;
+} else {
+  sortFn = WordSortFns.ascend;
+}
+heteronyms.sort(sortFn);
+
+let count = heteronyms.length;
+let langSet = new Set();
+for (const het of heteronyms) {
+  for (const dict of dicts) {
+    let dictPresent = het.from === dict.id;
+    if (dictPresent) {
+      langSet.add(dict.lang);
+    }
+  }
+}
+
+const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
+
+import Elsewhere from "$src/components/Elsewhere.astro";
+import SingleLayout from "$src/SingleLayout.astro";
+
+import Results from "./Results.svelte";
+
+import { dictsByLang } from "$src/common.js";
+
+function getTitle(mtch, query) {
+  if (mtch === "prefix") {
+    return `以「${query}」開頭的詞`;
+  } else if (mtch === "suffix") {
+    return `以「${query}」結尾的詞`;
+  } else if (mtch === "contains") {
+    return `包含「${query}」的詞`;
+  }
+}
+
+const title = getTitle(mtch, query);
+---
+
+<SingleLayout
+  title={`${title} - kemdict 搜尋結果`}
+  initialMatchSelection={mtch}
+  initialInput={query}
+>
+  <Fragment slot="head">
+    <meta name="description" content="搜尋 kemdict" />
+  </Fragment>
+  {
+    count === 0 ? (
+      <div class="prose">
+        <h1>「{query}」的搜尋結果</h1>
+        <p>找不到{title}。</p>
+        <hr />
+        <Elsewhere term={query} />
+      </div>
+    ) : (
+      <>
+        <h1 class="mt-8 text-2xl font-bold">{title}</h1>
+        <p class="text-sm">共 {count} 個定義</p>
+        <Results client:load langs={presentLangs} heteronyms={heteronyms} />
+      </>
+    )
+  }
+</SingleLayout>

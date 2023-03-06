@@ -1,0 +1,29 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+const { title, date, desc } = Astro.props.frontmatter;
+---
+
+<SingleLayout title={title} class="prose">
+  <slot />
+  <Fragment slot="head">
+    {
+      title && (
+        <>
+          <meta property="og:title" content={title} />
+          <meta property="twitter:title" content={title} />
+        </>
+      )
+    }
+    {
+      desc && (
+        <>
+          <meta name="description" content={desc} />
+          <meta property="og:description" content={desc} />
+          <meta property="twitter:description" content={desc} />
+        </>
+      )
+    }
+    <meta property="og:type" content="article" />
+    {date && <meta property="og:article:modified_time" content={date} />}
+  </Fragment>
+</SingleLayout>

@@ -1,0 +1,77 @@
+---
+import "./src.css";
+
+const { title } = Astro.props;
+---
+
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>{title}</title>
+    <meta name="twitter:creator" content="@kisaragi_hiu" />
+    <meta name="keywords" content="dictionary" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="generator" content={Astro.generator} />
+    <slot name="head" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Fathom -->
+    <script>
+      var dnt = navigator.doNotTrack || navigator.msDoNotTrack || null;
+      if (dnt !== "yes" && dnt !== "1") {
+        (function (f, a, t, h, o, m) {
+          a[h] =
+            a[h] ||
+            function () {
+              (a[h].q = a[h].q || []).push(arguments);
+            };
+          (o = f.createElement("script")),
+            (m = f.getElementsByTagName("script")[0]);
+          o.async = 1;
+          o.src = t;
+          o.id = "fathom-script";
+          m.parentNode.insertBefore(o, m);
+        })(document, window, "//fathom.kisaragi-hiu.com/tracker.js", "fathom");
+        fathom("set", "siteId", "XDKQL");
+        fathom("trackPageview");
+      }
+    </script>
+    <!-- / Fathom -->
+    <script is:inline>
+      if (
+        localStorage.theme === "dark" ||
+        ((!localStorage.theme || localStorage.theme === "auto") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+    <link rel="icon" href="/favicon.ico?v=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?v=1"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16x16.png?v=1"
+    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body>
+    <div class="base"><slot /></div>
+  </body>
+</html>

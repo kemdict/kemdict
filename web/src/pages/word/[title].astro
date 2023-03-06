@@ -1,0 +1,68 @@
+---
+import uniq from "lodash-es/uniq";
+import { getHeteronyms, getBacklinks } from "$src/server/db.js";
+
+const { title } = Astro.params;
+const heteronyms = getHeteronyms(title);
+const titles = uniq(heteronyms.map((het) => het.title));
+const backlinks = getBacklinks(...titles).sort();
+
+import SplitLayout from "$src/SplitLayout.astro";
+import SingleLayout from "$src/SingleLayout.astro";
+
+import TOC from "$src/components/TOC.astro";
+import Elsewhere from "$src/components/Elsewhere.astro";
+import WordList from "$src/components/WordList.astro";
+
+import Word from "./Word.svelte";
+
+import { dictsToObj, dicts, groupByProp } from "$src/common";
+
+const dictsObj = dictsToObj(dicts);
+const groupedHets = groupByProp(heteronyms, "from").map(([id, hets]) => {
+  return [dictsObj[id], hets];
+});
+const presentDicts = groupedHets.map((group) => group[0]);
+---
+
+{
+  heteronyms.length > 0 ? (
+    <SplitLayout
+      title={`「${title}」 - kemdict`}
+      leftFirst={false}
+      initialInput={title}
+    >
+      <Fragment slot="head">
+        <meta name="description" content="「{title}」的定義" />
+      </Fragment>
+      <div slot="left">
+        <div class="max-sm:hidden">
+          <TOC presentDicts={presentDicts} />
+        </div>
+        <Elsewhere term={title} />
+        {backlinks.length > 0 && (
+          <div class="prose">
+            <h2>有提到「{title}」的條目</h2>
+            <WordList words={backlinks} />
+          </div>
+        )}
+      </div>
+      <svelte:fragment slot="right">
+        <div class="sm:hidden">
+          <TOC term={title} {presentDicts} />
+        </div>
+        <Word groupedHets={groupedHets} title={title} />
+      </svelte:fragment>
+    </SplitLayout>
+  ) : (
+    <SingleLayout
+      title={`找不到「${title}」 - Kemdict 國語整合典`}
+      class="prose"
+    >
+      <h1>{title}</h1>
+      <p>找不到這個詞。</p>
+      <hr />
+      <Elsewhere term={title} />
+    </SingleLayout>
+  )
+}

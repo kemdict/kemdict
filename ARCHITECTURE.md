@@ -8,9 +8,7 @@ Kemdict is both an alternative interface to several dictionaries, as well as an 
 
 `kisaragi_dict` is an Org Mode file, and it is turned into JSON through Emacs Lisp.
 
-`web` is the frontend, made with SvelteKit. It has server side code and is hosted on a server. The server side loads the dictionary data then returns what the client side needs to render words.
-
-~~`mobile` is an older SvelteKit-based frontend that can be packaged up for mobile via Capacitor. This version has a goal of being offline.~~ This has been deleted. I still wish to create an offline mobile version.
+`web` is the frontend, made with Svelte and Astro. It has server side code and is hosted on a server. The server side loads the dictionary data and renders pages for the client.
 
 Make is used as the task runner.
 

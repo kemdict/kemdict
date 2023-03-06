@@ -1,51 +1,37 @@
 export LANG=en_US.UTF-8
 export KEMDICT_VERSION=$(shell git describe --tags --always)
 
-.DEFAULT_GOAL := build-no-data
-
-MD = $(patsubst pages/%.md,src/routes/%/+page.svelte.md,$(shell find pages/ -name "*.md"))
-
-$(MD): src/routes/%/+page.svelte.md: pages/%.md
-	@mkdir -p "$(dir $@)"
-	([ -n "$$ANDROID_DATA" ] && cp "$<" "$@") || ln -f -T "$<" "$@"
-
-markdown: $(MD)
-
-src/lib/entries.db: ../dicts
-	cd ../dicts && make entries.db
-	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
+DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs)
 
 node_modules: package.json
 	npm install
 
-DEPS := markdown static/l node_modules
+entries.db: ../dicts
+	cd ../dicts && make entries.db
+	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
 
-dev: $(DEPS) src/lib/entries.db
-	npx vite dev
+dist: $(DEPS)
+	npx astro build
+	cp package.json package-lock.json dist/
 
-# Sveltekit's default tasks, moved here from package.json
-check:
-	npx svelte-kit sync && npx svelte-check
-
-check-watch:
-	npx svelte-kit sync && npx svelte-check --watch
-
-.PHONY: check check-watch
-
-# Build as a node application ready to be run after an npm install
-# Runtime tasks are declared in package.json
-built-node: $(DEPS)
-	npx vite build
-	cp package.json package-lock.json built-node/
-
-build-with-data: built-node src/lib/entries.db
-	cp --parents src/lib/entries.db built-node/
-
-build-no-data: built-node
-
-static/l: ../dicts
+public/l: ../dicts
 	cd ../dicts && make ministry-of-education/package.json
-	mkdir -p static/l
-	cp ../dicts/ministry-of-education/license/* static/l/
+	mkdir -p public/l/
+	cp ../dicts/ministry-of-education/license/* public/l/
 
-.PHONY: dev build-no-data build-with-data
+.PHONY: dev build preview check build-no-data build-with-data
+
+dev: $(DEPS) entries.db
+	npx astro dev
+
+build-with-data: dist entries.db
+	cp --parents entries.db dist/
+
+build-no-data: dist
+
+preview: $(DEPS)
+	npx astro preview
+
+# TODO
+check:
+	npx svelte-check

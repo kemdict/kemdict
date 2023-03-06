@@ -54,14 +54,14 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
           cd web
-          tar -czf built-node.tar.gz -a built-node
-          rsync built-node.tar.gz "$SSH_HOST":/home/kisaragi
+          tar -czf dist.tar.gz -a dist
+          rsync dist.tar.gz "$SSH_HOST":/home/kisaragi
           ssh "$SSH_HOST" bash << HERE
-            tar -xf built-node.tar.gz
-            rm built-node.tar.gz
+            tar -xf dist.tar.gz
+            rm dist.tar.gz
             mkdir -p deployed
             test -d deployed/kemdict && rm -r deployed/kemdict
-            mv built-node deployed/kemdict
+            mv dist deployed/kemdict
             systemctl restart --user kemdict
           HERE
         shell: bash

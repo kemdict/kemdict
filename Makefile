@@ -9,4 +9,4 @@ dev:
 	cd web && make dev
 
 preview: build
-	cd web && env PORT=5173 node built-node
+	cd web && env PORT=5173 node dist/server/entry.mjs
