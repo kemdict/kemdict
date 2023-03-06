@@ -2,6 +2,7 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "./Group.svelte";
 
+import uniq from "lodash-es/uniq";
 import { db } from "$src/server/db.js";
 import { groupByProp } from "$src/common.js";
 
@@ -19,20 +20,24 @@ const nostrokeStmt = db.prepare(`
   SELECT DISTINCT
     substr(heteronyms.title, 0, 2) AS 'initial'
   FROM heteronyms
-  ORDER BY 'initial'
 `);
 
-// We also need pronunciation initials!
+const pnStmt = db.prepare(`
+  SELECT DISTINCT
+    substr(json_each.value, 0, 2) AS 'pnInitial'
+  FROM heteronyms, json_each(heteronyms.pns)
+  WHERE "pnInitial" IS NOT NULL
+`);
 
 nostrokeStmt.pluck(true);
+pnStmt.pluck(true);
 
 const with_stroke = strokeStmt.all();
 
 let no_stroke;
 {
   let set = new Set(with_stroke.map((x) => x.title));
-  no_stroke = nostrokeStmt
-    .all()
+  no_stroke = uniq([...nostrokeStmt.all(), ...pnStmt.all()])
     .filter((x) => !set.has(x))
     .sort();
 }

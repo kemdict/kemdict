@@ -6,6 +6,12 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 # 版本紀錄
 
+## 0.11.1 (2023-03-07)
+
+- 移植到 Astro 上，加快初始載入速度
+- 新增筆畫索引頁面
+- 重編本、簡編本：顯示部首與筆畫數
+
 ## 0.10.1 (2023-03-05)
 
 - 加入《台灣白話基礎語句》的內容（來自 [ChhoeTaigi 的資料](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/blob/master/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv)）
