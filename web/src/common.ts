@@ -1,3 +1,5 @@
+import { escapeRegExp } from "lodash";
+
 export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",
@@ -122,9 +124,6 @@ export const WordSortFns = {
  * Items without `property` are grouped under `fallback`. (More
  * accurately, they are grouped under the string representation of
  * `fallback`, so eg. `false` and "false" are equivalent.)
- *
- * @param {Array<object>} arr
- * @param {string} property
  */
 // This is more or less seq-group-by ported over, except the fallback part.
 export function groupByProp<T>(
@@ -154,7 +153,7 @@ export function groupByProp<T>(
  * $1 in `template` stands for `str`.
  */
 export function format(template: string, str: string): string {
-  return str.replace(RegExp(`(${str})`), template);
+  return str.replace(RegExp(`(${escapeRegExp(str)})`), template);
 }
 
 /**

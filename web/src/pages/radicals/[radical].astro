@@ -1,0 +1,39 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+
+import { db } from "$src/server/db";
+import { format } from "$src/common";
+
+const { radical } = Astro.params;
+
+const charsWithRadicalStmt = db.prepare(`
+  SELECT DISTINCT
+    heteronyms.title
+  FROM heteronyms, json_tree(heteronyms.props)
+  WHERE length("title") = 1
+    AND json_tree.key = 'radical'
+    AND json_tree.value = '${radical}'
+`);
+
+charsWithRadicalStmt.pluck(true);
+
+const entries: string[] = charsWithRadicalStmt.all();
+---
+
+<SingleLayout title={`部首為「${radical}」的字 - kemdict`}>
+  <div class="prose">
+    <a href="/radicals">← 回到部首索引</a>
+    <h1 class="mt-2">部首為「{radical}」的字</h1>
+    {
+      (
+        <ul class="flex list-none flex-wrap gap-x-2 p-0">
+          {entries.map((entry) => (
+            <li class="w-4">
+              <a href={format("/search?q=$1&s=prefix", entry)}>{entry}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</SingleLayout>

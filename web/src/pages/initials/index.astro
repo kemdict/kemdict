@@ -1,6 +1,6 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
-import Group from "./Group.svelte";
+import Group from "$src/components/Group.svelte";
 
 import { uniq } from "lodash";
 import { db } from "$src/server/db";
@@ -47,10 +47,14 @@ let no_stroke: string[];
 <SingleLayout title="首字索引">
   <div class="prose">
     <h1>首字索引</h1>
-    <Group title="其他" elements={no_stroke} />
+    <Group title="其他" elements={no_stroke} template="/search?q=$1&m=prefix" />
     {
       groupByProp(with_stroke, "stroke_count").map(([count, elements]) => (
-        <Group title={`${count} 畫`} elements={elements} />
+        <Group
+          title={`${count} 畫`}
+          elements={elements}
+          template="/search?q=$1&m=prefix"
+        />
       ))
     }
   </div>

@@ -1,0 +1,30 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+import Group from "$src/components/Group.svelte";
+
+import { db } from "$src/server/db";
+import { groupByProp } from "$src/common";
+
+const radicals = db
+  .prepare(
+    `
+SELECT * FROM radicals
+`
+  )
+  .all();
+---
+
+<SingleLayout title="部首索引">
+  <div class="prose">
+    <h1>部首索引</h1>
+    {
+      groupByProp(radicals, "stroke_count").map(([count, elements]) => (
+        <Group
+          title={`${count} 畫`}
+          elements={elements}
+          template="/radicals/$1"
+        />
+      ))
+    }
+  </div>
+</SingleLayout>
