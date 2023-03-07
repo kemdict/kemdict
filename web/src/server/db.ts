@@ -1,6 +1,8 @@
 import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
+import type { Heteronym } from "$src/common";
+
 // This already uses ES6 sets when available.
 
 /**
@@ -8,10 +10,8 @@ import Database from "better-sqlite3";
  * object for it as an in-memory database.
  * If `path` does not end in ".gz", try to return a connection instead
  * (without using an in-memory database).
- * @param {string} path
- * @returns {Database}
  */
-function readDB(path) {
+function readDB(path: string): Database {
   if (path.endsWith(".db.gz")) {
     let data = fs.readFileSync(path);
     let decompressed = zlib.gunzipSync(data);
@@ -41,12 +41,13 @@ export const db = (() => {
  * - "contains": match heteronyms that contain QUERY
  * - any thing else: match heteronyms exactly
  *
- * @param {string} query
- * @param {string?} mtch
  * @returns {Array<object>}
  */
-export function getHeteronyms(query, mtch) {
-  let opt;
+export function getHeteronyms(
+  query: string,
+  mtch?: string | undefined
+): Heteronym[] {
+  let opt = { q: query };
   let operator = "LIKE";
   if (mtch === "prefix") {
     opt = { q: `${query}%` };
@@ -55,7 +56,6 @@ export function getHeteronyms(query, mtch) {
   } else if (mtch === "contains") {
     opt = { q: `%${query}%` };
   } else {
-    opt = { q: query };
     operator = "=";
   }
   const stmt = db.prepare(
@@ -68,7 +68,7 @@ WHERE "from" IS NOT NULL
   return stmt.all(opt)?.map(processHet);
 }
 
-export function getBacklinks(...titles) {
+export function getBacklinks(...titles: string[]): string[] {
   const stmt = db.prepare(
     `SELECT DISTINCT "from" FROM links WHERE "to" IN (${titles
       .map((x) => `'${x}'`)
@@ -81,10 +81,8 @@ export function getBacklinks(...titles) {
 
 /**
  * Decode the JSON in the props field in a heteronym object.
- * @param {object} het
- * @returns {object}
  */
-export function processHet(het) {
+export function processHet(het: Heteronym): Heteronym {
   if (typeof het.props === "string") {
     het.props = JSON.parse(het.props);
   }

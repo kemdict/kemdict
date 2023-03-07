@@ -27,6 +27,9 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  server: {
+    port: 5173,
+  },
   vite: {
     clearScreen: false,
     envPrefix: "KEMDICT_",

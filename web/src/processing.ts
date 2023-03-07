@@ -4,21 +4,18 @@
  * @param {string} str
  * @returns {string}
  */
-export function spc(str) {
-  if (typeof str !== "string") {
-    throw new TypeError("str must be a string");
-  }
+export function spc(str: undefined): undefined;
+export function spc(str: string): string {
   if (str) {
     return str.replace(/　/g, " ");
   }
 }
 
 /**
- * Separate ilnes into ol elements.
- * @param {string} str
- * @returns {string}
+ * Separate lines into ol elements.
  */
-export function newline_string_to_ol(str) {
+export function newline_string_to_ol(str: undefined): undefined;
+export function newline_string_to_ol(str: string): string {
   if (str) {
     return `<ol>
     ${str
@@ -34,7 +31,9 @@ export function newline_string_to_ol(str) {
 /**
  * Deal with Unicode rubies.
  */
-export function interlinear_annotation(defs) {
+export function interlinear_annotation(defs: undefined): undefined;
+export function interlinear_annotation(defs: string | string[]): string;
+export function interlinear_annotation(defs: string[]): string {
   if (defs) {
     if (typeof defs === "string") {
       defs = [defs];
@@ -43,7 +42,7 @@ export function interlinear_annotation(defs) {
     for (let i = 0; i < defs.length; i++) {
       if (defs[i]) {
         // Deal with the interlinear annotation characters.
-        let matches = [...defs[i].matchAll("\ufff9|\ufffa|\ufffb")];
+        let matches = [...defs[i].matchAll(/\ufff9|\ufffa|\ufffb/g)];
         if (matches.length !== 0 && matches.length % 3 === 0) {
           defs[i] = defs[i]
             .replace(
@@ -63,12 +62,12 @@ export function interlinear_annotation(defs) {
         first = false;
       }
     }
-    defs = defs.join("\n");
+    return defs.join("\n");
   }
-  return defs;
+  return undefined;
 }
 
-export function radicals_and_strokes(props) {
+export function radicals_and_strokes(props: any): string {
   if (!props.radical && !props.stroke_count) return;
   let x = "";
   x += `<div class="mb-4">【`;

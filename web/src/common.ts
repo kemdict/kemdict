@@ -4,8 +4,22 @@ export const langs = {
   hak_TW: "客語",
 };
 
+interface Dict {
+  id: string;
+  name: string;
+  url: string;
+  lang: string;
+}
+
+interface Heteronym {
+  title: string;
+  from?: string;
+  pns?: any[];
+  props: any;
+}
+
 // This no longer defines the order in word pages.
-export const dicts = [
+export const dicts: Dict[] = [
   {
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",
@@ -62,7 +76,7 @@ export const dicts = [
   },
 ];
 
-export function dictsToObj(dictionaries) {
+export function dictsToObj(dictionaries: Dict[]) {
   let tmp = {};
   dictionaries.forEach((dict) => (tmp[dict.id] = dict));
   return tmp;
@@ -80,40 +94,18 @@ export const dictsByLang = {
   hak_TW: ["hakkadict"],
 };
 
-/**
- * Return array of dictionary IDs present in `word`.
- * If `full` is truthy, return dictionary objects instead.
- */
-export function dictsInWord(word, full, lang) {
-  let ds = dicts.filter((dict) => {
-    if (lang) {
-      return word[dict.id] && lang === dict.lang;
-    } else {
-      return word[dict.id];
-    }
-  });
-  if (full) {
-    return ds;
-  } else {
-    return ds.map((d) => d.id);
-  }
-}
-
-// Show loading indicator after this many miliseconds.
-export const showLoadingAfterMS = 250;
-
 export const version = import.meta.env.KEMDICT_VERSION;
 
 export const WordSortFns = {
   // These return numbers because that's what Array.sort wants.
-  ascend: (a, b) => {
+  ascend: (a: Heteronym, b: Heteronym): 1 | -1 => {
     if (a.title > b.title) {
       return 1;
     } else {
       return -1;
     }
   },
-  descend: (a, b) => {
+  descend: (a: Heteronym, b: Heteronym): 1 | -1 => {
     if (a.title < b.title) {
       return 1;
     } else {
@@ -135,8 +127,12 @@ export const WordSortFns = {
  * @param {string} property
  */
 // This is more or less seq-group-by ported over, except the fallback part.
-export function groupByProp(arr, property, fallback) {
-  function reducer(acc, elt) {
+export function groupByProp<T>(
+  arr: T[],
+  property: string,
+  fallback: any
+): Array<[any, T[]]> {
+  function reducer(acc: Record<any, T[]>, elt: T) {
     let key = elt[property];
     let cell = acc[key];
     if (cell) {
@@ -156,10 +152,8 @@ export function groupByProp(arr, property, fallback) {
 /**
  * Format `str` using `template`.
  * $1 in `template` stands for `str`.
- * @param {string} template
- * @param {string} str
  */
-export function format(template, str) {
+export function format(template: string, str: string): string {
   return str.replace(RegExp(`(${str})`), template);
 }
 
@@ -169,6 +163,6 @@ export function format(template, str) {
  * From
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length
  */
-export function strLen(str) {
+export function strLen(str: string): number {
   return [...str].length;
 }
