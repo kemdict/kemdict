@@ -76,7 +76,7 @@ export const dicts: Dict[] = [
   },
 ];
 
-export function dictsToObj(dictionaries: Dict[]) {
+export function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
   const tmp = {};
   dictionaries.forEach((dict) => (tmp[dict.id] = dict));
   return tmp;
@@ -94,7 +94,7 @@ export const dictsByLang = {
   hak_TW: ["hakkadict"],
 };
 
-export const version = import.meta.env.KEMDICT_VERSION;
+export const version = (import.meta.env.KEMDICT_VERSION as string) || "unknown";
 
 export const WordSortFns = {
   // These return numbers because that's what Array.sort wants.

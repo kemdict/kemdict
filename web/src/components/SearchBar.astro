@@ -1,4 +1,8 @@
 ---
+export interface Props {
+  initialInput?: string;
+  initialMatchSelection?: string;
+}
 const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
 ---
 

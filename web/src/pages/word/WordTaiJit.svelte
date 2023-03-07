@@ -1,14 +1,15 @@
-<script>
-  export let heteronyms;
+<script lang="ts">
+  import type { Heteronym } from "$src/common";
+  export let heteronyms: Heteronym[];
   import Pronunciation from "$src/components/Pronunciation.svelte";
-  function getTitle(het) {
+  function getTitle(het: Heteronym): string {
     if (het.title === het.props.HanLoTaibunKip) {
       return het.title;
     } else {
       return `${het.title} (${het.props.HanLoTaibunKip})`;
     }
   }
-  function process_def(def) {
+  function process_def(def: string | undefined): string {
     if (def) {
       let x = "<ol>";
       for (const d of def.split(/\n/)) {
@@ -18,7 +19,7 @@
       return x;
     }
   }
-  function splitExample(ex) {
+  function splitExample(ex: string | undefined): string[] {
     if (ex) {
       return (
         ex

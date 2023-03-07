@@ -1,5 +1,12 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
+export interface Props {
+  frontmatter: {
+    title?: string;
+    date?: string;
+    desc?: string;
+  };
+}
 const { title, date, desc } = Astro.props.frontmatter;
 ---
 

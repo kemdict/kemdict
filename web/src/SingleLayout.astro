@@ -1,4 +1,10 @@
 ---
+export interface Props {
+  title: string;
+  initialInput?: string;
+  initialMatchSelection?: string;
+  class?: string;
+}
 const { title, initialInput, initialMatchSelection } = Astro.props;
 const klass = Astro.props.class;
 

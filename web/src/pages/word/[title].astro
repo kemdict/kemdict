@@ -1,7 +1,7 @@
 ---
 import { uniq } from "lodash";
 import { getHeteronyms, getBacklinks } from "$src/server/db";
-import type { Heteronym } from "$src/common";
+import type { Dict, Heteronym } from "$src/common";
 
 const { title } = Astro.params;
 const heteronyms = getHeteronyms(title);
@@ -20,9 +20,11 @@ import Word from "./Word.svelte";
 import { dictsToObj, dicts, groupByProp } from "$src/common";
 
 const dictsObj = dictsToObj(dicts);
-const groupedHets = groupByProp(heteronyms, "from").map(([id, hets]) => {
-  return [dictsObj[id], hets];
-});
+const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
+  ([id, hets]: [string, Heteronym[]]) => {
+    return [dictsObj[id], hets];
+  }
+);
 const presentDicts = groupedHets.map((group) => group[0]);
 ---
 

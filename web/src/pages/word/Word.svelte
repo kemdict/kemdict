@@ -13,7 +13,7 @@
 
   import type { Dict, Heteronym } from "$src/common";
 
-  export let groupedHets: [[Dict, Heteronym[]]];
+  export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
 </script>
 

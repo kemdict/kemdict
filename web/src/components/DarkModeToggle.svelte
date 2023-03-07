@@ -27,7 +27,7 @@
     }
   }
   if (typeof localStorage !== "undefined") {
-    theme = localStorage.theme;
+    theme = localStorage.getItem("theme");
   }
   function rotateDarkMode() {
     if (system === states.dark) {
@@ -43,7 +43,7 @@
         theme = states.auto;
       }
     }
-    localStorage.theme = theme;
+    localStorage.setItem("theme", theme);
     setDarkMode();
   }
   $: isDark = theme === "dark" || (states.isAuto(theme) && system === "dark");

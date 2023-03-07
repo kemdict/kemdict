@@ -66,7 +66,10 @@ export function interlinear_annotation(defs: string[]): string {
   return undefined;
 }
 
-export function radicals_and_strokes(props: any): string {
+export function radicals_and_strokes(props: {
+  radical?: string;
+  stroke_count?: string;
+}): string {
   if (!props.radical && !props.stroke_count) return;
   let x = "";
   x += `<div class="mb-4">【`;

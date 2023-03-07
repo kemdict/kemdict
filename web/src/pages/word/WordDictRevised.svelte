@@ -1,15 +1,39 @@
-<script>
-  export let heteronyms;
+<script lang="ts">
+  import type { Heteronym } from "$src/common";
+  interface HetRevised extends Heteronym {
+    props: {
+      title: string;
+      alias: string;
+      length: string;
+      id: string;
+      radical: string;
+      stroke_count: string;
+      non_radical_stroke_count: string;
+      het_sort: string;
+      bopomofo: string;
+      v_type: string;
+      v_bopomofo: string;
+      pinyin: string;
+      v_pinyin: string;
+      synonyms: string;
+      antonyms: string;
+      definition: string;
+      het_ref: string;
+      異體字: string;
+    };
+  }
+  export let heteronyms: HetRevised[];
   import { spc, radicals_and_strokes } from "$src/processing";
   import { strLen } from "$src/common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
-  function process_def(def) {
+  function process_def(def: string): string {
     if (def) {
       let x = "";
-      let match;
+      let match: RegExpMatchArray;
       for (const d of def.split("\n")) {
-        if ((match = d.match(/^\[(.*)\]$/))) {
+        match = d.match(/^\[(.*)\]$/);
+        if (match && match[1]) {
           if (x.length > 0) {
             x += `</ol>`;
           }

@@ -1,4 +1,9 @@
 ---
+export interface Props {
+  search?: boolean | undefined;
+  initialInput?: string;
+  initialMatchSelection?: string;
+}
 const { search, initialInput, initialMatchSelection } = Astro.props;
 
 import DarkModeToggle from "./DarkModeToggle.svelte";

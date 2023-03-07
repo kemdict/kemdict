@@ -1,7 +1,8 @@
-<script>
-  export let heteronyms;
+<script lang="ts">
+  import type { Heteronym } from "$src/common";
+  export let heteronyms: Heteronym[];
   import Pronunciation from "$src/components/Pronunciation.svelte";
-  function getTitle(het) {
+  function getTitle(het: Heteronym): string {
     if (het.title === het.props.HanLoTaibunKip) {
       return het.title;
     } else {
