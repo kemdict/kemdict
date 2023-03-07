@@ -12,11 +12,9 @@
       (insert (s-lex-format "
 ,{
 \"title\": \"${a}\",
-\"props\": {
-  \"stroke_count\": ${b},
-  \"radical\": \"${c}\",
-  \"non_radical_stroke_count\": ${d}
-}
+\"stroke_count\": ${b},
+\"radical\": \"${c}\",
+\"non_radical_stroke_count\": ${d}
 }
 ")))))
 

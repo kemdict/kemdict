@@ -1,922 +1,692 @@
 [
   {
     "title": "秥",
-    "props": {
-      "stroke_count": 10,
-      "radical": "禾",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 10,
+    "radical": "禾",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "㐁",
-    "props": {
-      "stroke_count": 6,
-      "radical": "一",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 6,
+    "radical": "一",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "㑁",
-    "props": {
-      "stroke_count": 7,
-      "radical": "人",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 7,
+    "radical": "人",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "㓾",
-    "props": {
-      "stroke_count": 14,
-      "radical": "刀",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 14,
+    "radical": "刀",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "㔂",
-    "props": {
-      "stroke_count": 14,
-      "radical": "刀",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 14,
+    "radical": "刀",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "㔃",
-    "props": {
-      "stroke_count": 14,
-      "radical": "刀",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 14,
+    "radical": "刀",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "㕸",
-    "props": {
-      "stroke_count": 8,
-      "radical": "口",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 8,
+    "radical": "口",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "㖸",
-    "props": {
-      "stroke_count": 12,
-      "radical": "口",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "口",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "㗘",
-    "props": {
-      "stroke_count": 13,
-      "radical": "口",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 13,
+    "radical": "口",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "㗱",
-    "props": {
-      "stroke_count": 15,
-      "radical": "口",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 15,
+    "radical": "口",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "㘝",
-    "props": {
-      "stroke_count": 5,
-      "radical": "口",
-      "non_radical_stroke_count": 2
-    }
+    "stroke_count": 5,
+    "radical": "口",
+    "non_radical_stroke_count": 2
   },
   {
     "title": "㜮",
-    "props": {
-      "stroke_count": 17,
-      "radical": "女",
-      "non_radical_stroke_count": 14
-    }
+    "stroke_count": 17,
+    "radical": "女",
+    "non_radical_stroke_count": 14
   },
   {
     "title": "㝗",
-    "props": {
-      "stroke_count": 10,
-      "radical": "宀",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 10,
+    "radical": "宀",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "㤉",
-    "props": {
-      "stroke_count": 7,
-      "radical": "心",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "心",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "㧌",
-    "props": {
-      "stroke_count": 7,
-      "radical": "手",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "手",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "㧎",
-    "props": {
-      "stroke_count": 7,
-      "radical": "手",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "手",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "㧒",
-    "props": {
-      "stroke_count": 8,
-      "radical": "手",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 8,
+    "radical": "手",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "㧡",
-    "props": {
-      "stroke_count": 9,
-      "radical": "手",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "手",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "㧣",
-    "props": {
-      "stroke_count": 9,
-      "radical": "手",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "手",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "㧻",
-    "props": {
-      "stroke_count": 11,
-      "radical": "手",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "手",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "㧾",
-    "props": {
-      "stroke_count": 11,
-      "radical": "手",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "手",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "㨂",
-    "props": {
-      "stroke_count": 11,
-      "radical": "手",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "手",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "㨑",
-    "props": {
-      "stroke_count": 12,
-      "radical": "手",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "手",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "㨨",
-    "props": {
-      "stroke_count": 13,
-      "radical": "手",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 13,
+    "radical": "手",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "㨮",
-    "props": {
-      "stroke_count": 14,
-      "radical": "手",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 14,
+    "radical": "手",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "㨻",
-    "props": {
-      "stroke_count": 15,
-      "radical": "手",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 15,
+    "radical": "手",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "㪉",
-    "props": {
-      "stroke_count": 10,
-      "radical": "攴",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 10,
+    "radical": "攴",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "㪐",
-    "props": {
-      "stroke_count": 12,
-      "radical": "攴",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 12,
+    "radical": "攴",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "㬹",
-    "props": {
-      "stroke_count": 12,
-      "radical": "肉",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 12,
+    "radical": "肉",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "㴘",
-    "props": {
-      "stroke_count": 12,
-      "radical": "水",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "水",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "㴙",
-    "props": {
-      "stroke_count": 12,
-      "radical": "水",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "水",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "㸐",
-    "props": {
-      "stroke_count": 23,
-      "radical": "火",
-      "non_radical_stroke_count": 19
-    }
+    "stroke_count": 23,
+    "radical": "火",
+    "non_radical_stroke_count": 19
   },
   {
     "title": "㼓",
-    "props": {
-      "stroke_count": 15,
-      "radical": "瓜",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 15,
+    "radical": "瓜",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "㽎",
-    "props": {
-      "stroke_count": 13,
-      "radical": "甘",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 13,
+    "radical": "甘",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "㾀",
-    "props": {
-      "stroke_count": 10,
-      "radical": "疒",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 10,
+    "radical": "疒",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "㾊",
-    "props": {
-      "stroke_count": 11,
-      "radical": "疒",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 11,
+    "radical": "疒",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "㿸",
-    "props": {
-      "stroke_count": 16,
-      "radical": "皮",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 16,
+    "radical": "皮",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "䀐",
-    "props": {
-      "stroke_count": 8,
-      "radical": "目",
-      "non_radical_stroke_count": 3
-    }
+    "stroke_count": 8,
+    "radical": "目",
+    "non_radical_stroke_count": 3
   },
   {
     "title": "䀯",
-    "props": {
-      "stroke_count": 12,
-      "radical": "目",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 12,
+    "radical": "目",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "䀴",
-    "props": {
-      "stroke_count": 12,
-      "radical": "目",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 12,
+    "radical": "目",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "䃗",
-    "props": {
-      "stroke_count": 15,
-      "radical": "石",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 15,
+    "radical": "石",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "䆀",
-    "props": {
-      "stroke_count": 17,
-      "radical": "禾",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 17,
+    "radical": "禾",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "䇭",
-    "props": {
-      "stroke_count": 12,
-      "radical": "竹",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 12,
+    "radical": "竹",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "䉂",
-    "props": {
-      "stroke_count": 17,
-      "radical": "竹",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 17,
+    "radical": "竹",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "䉪",
-    "props": {
-      "stroke_count": 21,
-      "radical": "竹",
-      "non_radical_stroke_count": 15
-    }
+    "stroke_count": 21,
+    "radical": "竹",
+    "non_radical_stroke_count": 15
   },
   {
     "title": "䌈",
-    "props": {
-      "stroke_count": 16,
-      "radical": "糸",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 16,
+    "radical": "糸",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "䖙",
-    "props": {
-      "stroke_count": 17,
-      "radical": "虍",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 17,
+    "radical": "虍",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "䗆",
-    "props": {
-      "stroke_count": 14,
-      "radical": "虫",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 14,
+    "radical": "虫",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "䘆",
-    "props": {
-      "stroke_count": 22,
-      "radical": "虫",
-      "non_radical_stroke_count": 16
-    }
+    "stroke_count": 22,
+    "radical": "虫",
+    "non_radical_stroke_count": 16
   },
   {
     "title": "䘥",
-    "props": {
-      "stroke_count": 11,
-      "radical": "衣",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 11,
+    "radical": "衣",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "䘼",
-    "props": {
-      "stroke_count": 14,
-      "radical": "衣",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 14,
+    "radical": "衣",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "䟓",
-    "props": {
-      "stroke_count": 9,
-      "radical": "足",
-      "non_radical_stroke_count": 2
-    }
+    "stroke_count": 9,
+    "radical": "足",
+    "non_radical_stroke_count": 2
   },
   {
     "title": "䟘",
-    "props": {
-      "stroke_count": 11,
-      "radical": "足",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 11,
+    "radical": "足",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "䠡",
-    "props": {
-      "stroke_count": 18,
-      "radical": "足",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 18,
+    "radical": "足",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "䢍",
-    "props": {
-      "stroke_count": 8,
-      "radical": "辵",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 8,
+    "radical": "辵",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "䢢",
-    "props": {
-      "stroke_count": 14,
-      "radical": "辵",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 14,
+    "radical": "辵",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "䫌",
-    "props": {
-      "stroke_count": 17,
-      "radical": "頁",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 17,
+    "radical": "頁",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "䫐",
-    "props": {
-      "stroke_count": 17,
-      "radical": "頁",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 17,
+    "radical": "頁",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "䭳",
-    "props": {
-      "stroke_count": 27,
-      "radical": "香",
-      "non_radical_stroke_count": 18
-    }
+    "stroke_count": 27,
+    "radical": "香",
+    "non_radical_stroke_count": 18
   },
   {
     "title": "䯋",
-    "props": {
-      "stroke_count": 15,
-      "radical": "骨",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 15,
+    "radical": "骨",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "䯖",
-    "props": {
-      "stroke_count": 17,
-      "radical": "骨",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 17,
+    "radical": "骨",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "丼",
-    "props": {
-      "stroke_count": 5,
-      "radical": "丶",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 5,
+    "radical": "丶",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "亼",
-    "props": {
-      "stroke_count": 3,
-      "radical": "人",
-      "non_radical_stroke_count": 1
-    }
+    "stroke_count": 3,
+    "radical": "人",
+    "non_radical_stroke_count": 1
   },
   {
     "title": "伨",
-    "props": {
-      "stroke_count": 6,
-      "radical": "人",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 6,
+    "radical": "人",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "伻",
-    "props": {
-      "stroke_count": 7,
-      "radical": "人",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 7,
+    "radical": "人",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "佢",
-    "props": {
-      "stroke_count": 7,
-      "radical": "人",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 7,
+    "radical": "人",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "佮",
-    "props": {
-      "stroke_count": 8,
-      "radical": "人",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 8,
+    "radical": "人",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "俥",
-    "props": {
-      "stroke_count": 9,
-      "radical": "人",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 9,
+    "radical": "人",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "倯",
-    "props": {
-      "stroke_count": 10,
-      "radical": "人",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 10,
+    "radical": "人",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "𬦰",
-    "props": {
-      "stroke_count": 13,
-      "radical": "足",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 13,
+    "radical": "足",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "𫣆",
-    "props": {
-      "stroke_count": 12,
-      "radical": "人",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 12,
+    "radical": "人",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "傪",
-    "props": {
-      "stroke_count": 13,
-      "radical": "人",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 13,
+    "radical": "人",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "傫",
-    "props": {
-      "stroke_count": 13,
-      "radical": "人",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 13,
+    "radical": "人",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "僫",
-    "props": {
-      "stroke_count": 14,
-      "radical": "人",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 14,
+    "radical": "人",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "儑",
-    "props": {
-      "stroke_count": 16,
-      "radical": "人",
-      "non_radical_stroke_count": 14
-    }
+    "stroke_count": 16,
+    "radical": "人",
+    "non_radical_stroke_count": 14
   },
   {
     "title": "凄",
-    "props": {
-      "stroke_count": 10,
-      "radical": "冫",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 10,
+    "radical": "冫",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "刐",
-    "props": {
-      "stroke_count": 6,
-      "radical": "刀",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 6,
+    "radical": "刀",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "刡",
-    "props": {
-      "stroke_count": 7,
-      "radical": "刀",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 7,
+    "radical": "刀",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "刣",
-    "props": {
-      "stroke_count": 7,
-      "radical": "刀",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 7,
+    "radical": "刀",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "剾",
-    "props": {
-      "stroke_count": 13,
-      "radical": "刀",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 13,
+    "radical": "刀",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "劗",
-    "props": {
-      "stroke_count": 21,
-      "radical": "刀",
-      "non_radical_stroke_count": 19
-    }
+    "stroke_count": 21,
+    "radical": "刀",
+    "non_radical_stroke_count": 19
   },
   {
     "title": "勥",
-    "props": {
-      "stroke_count": 14,
-      "radical": "力",
-      "non_radical_stroke_count": 12
-    }
+    "stroke_count": 14,
+    "radical": "力",
+    "non_radical_stroke_count": 12
   },
   {
     "title": "勼",
-    "props": {
-      "stroke_count": 4,
-      "radical": "勹",
-      "non_radical_stroke_count": 2
-    }
+    "stroke_count": 4,
+    "radical": "勹",
+    "non_radical_stroke_count": 2
   },
   {
     "title": "吂",
-    "props": {
-      "stroke_count": 6,
-      "radical": "口",
-      "non_radical_stroke_count": 3
-    }
+    "stroke_count": 6,
+    "radical": "口",
+    "non_radical_stroke_count": 3
   },
   {
     "title": "哊",
-    "props": {
-      "stroke_count": 9,
-      "radical": "口",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "口",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "哯",
-    "props": {
-      "stroke_count": 10,
-      "radical": "口",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 10,
+    "radical": "口",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "哹",
-    "props": {
-      "stroke_count": 10,
-      "radical": "口",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 10,
+    "radical": "口",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "唌",
-    "props": {
-      "stroke_count": 10,
-      "radical": "口",
-      "non_radical_stroke_count": 7
-    }
+    "stroke_count": 10,
+    "radical": "口",
+    "non_radical_stroke_count": 7
   },
   {
     "title": "唩",
-    "props": {
-      "stroke_count": 11,
-      "radical": "口",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "口",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "唭",
-    "props": {
-      "stroke_count": 11,
-      "radical": "口",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "口",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "啉",
-    "props": {
-      "stroke_count": 11,
-      "radical": "口",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "口",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "嗘",
-    "props": {
-      "stroke_count": 13,
-      "radical": "口",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 13,
+    "radical": "口",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "嗙",
-    "props": {
-      "stroke_count": 13,
-      "radical": "口",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 13,
+    "radical": "口",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "嗬",
-    "props": {
-      "stroke_count": 13,
-      "radical": "口",
-      "non_radical_stroke_count": 10
-    }
+    "stroke_count": 13,
+    "radical": "口",
+    "non_radical_stroke_count": 10
   },
   {
     "title": "嗺",
-    "props": {
-      "stroke_count": 14,
-      "radical": "口",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 14,
+    "radical": "口",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "噷",
-    "props": {
-      "stroke_count": 16,
-      "radical": "口",
-      "non_radical_stroke_count": 13
-    }
+    "stroke_count": 16,
+    "radical": "口",
+    "non_radical_stroke_count": 13
   },
   {
     "title": "囥",
-    "props": {
-      "stroke_count": 7,
-      "radical": "口",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "口",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "坉",
-    "props": {
-      "stroke_count": 7,
-      "radical": "土",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "土",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "垵",
-    "props": {
-      "stroke_count": 9,
-      "radical": "土",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "土",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "堛",
-    "props": {
-      "stroke_count": 12,
-      "radical": "土",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "土",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "夆",
-    "props": {
-      "stroke_count": 7,
-      "radical": "夂",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "夂",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "奀",
-    "props": {
-      "stroke_count": 7,
-      "radical": "大",
-      "non_radical_stroke_count": 4
-    }
+    "stroke_count": 7,
+    "radical": "大",
+    "non_radical_stroke_count": 4
   },
   {
     "title": "奒",
-    "props": {
-      "stroke_count": 9,
-      "radical": "大",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "大",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "奜",
-    "props": {
-      "stroke_count": 11,
-      "radical": "大",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "大",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "姼",
-    "props": {
-      "stroke_count": 9,
-      "radical": "女",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "女",
+    "non_radical_stroke_count": 6
   },
   {
     "title": "媌",
-    "props": {
-      "stroke_count": 12,
-      "radical": "女",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "女",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "嫲",
-    "props": {
-      "stroke_count": 14,
-      "radical": "女",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 14,
+    "radical": "女",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "孋",
-    "props": {
-      "stroke_count": 22,
-      "radical": "女",
-      "non_radical_stroke_count": 19
-    }
+    "stroke_count": 22,
+    "radical": "女",
+    "non_radical_stroke_count": 19
   },
   {
     "title": "孲",
-    "props": {
-      "stroke_count": 11,
-      "radical": "子",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "子",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "尞",
-    "props": {
-      "stroke_count": 12,
-      "radical": "小",
-      "non_radical_stroke_count": 9
-    }
+    "stroke_count": 12,
+    "radical": "小",
+    "non_radical_stroke_count": 9
   },
   {
     "title": "岭",
-    "props": {
-      "stroke_count": 8,
-      "radical": "山",
-      "non_radical_stroke_count": 5
-    }
+    "stroke_count": 8,
+    "radical": "山",
+    "non_radical_stroke_count": 5
   },
   {
     "title": "崠",
-    "props": {
-      "stroke_count": 11,
-      "radical": "山",
-      "non_radical_stroke_count": 8
-    }
+    "stroke_count": 11,
+    "radical": "山",
+    "non_radical_stroke_count": 8
   },
   {
     "title": "嶋",
-    "props": {
-      "stroke_count": 14,
-      "radical": "山",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 14,
+    "radical": "山",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "廍",
-    "props": {
-      "stroke_count": 14,
-      "radical": "广",
-      "non_radical_stroke_count": 11
-    }
+    "stroke_count": 14,
+    "radical": "广",
+    "non_radical_stroke_count": 11
   },
   {
     "title": "恅",
-    "props": {
-      "stroke_count": 9,
-      "radical": "心",
-      "non_radical_stroke_count": 6
-    }
+    "stroke_count": 9,
+    "radical": "心",
+    "non_radical_stroke_count": 6
   }
 ]
