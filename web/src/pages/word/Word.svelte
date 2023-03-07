@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Out from "$src/components/Out.svelte";
   import WordDictConcised from "./WordDictConcised.svelte";
   import WordDictIdioms from "./WordDictIdioms.svelte";
@@ -11,8 +11,10 @@
 
   import { format } from "$src/common";
 
-  export let groupedHets = [["dict", [{ title: "het" }]]];
-  export let title;
+  import type { Dict, Heteronym } from "$src/common";
+
+  export let groupedHets: [[Dict, Heteronym[]]];
+  export let title: string;
 </script>
 
 {#each groupedHets as [dict, hets]}

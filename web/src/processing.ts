@@ -4,8 +4,7 @@
  * @param {string} str
  * @returns {string}
  */
-export function spc(str: undefined): undefined;
-export function spc(str: string): string {
+export function spc(str: string | undefined): string | undefined {
   if (str) {
     return str.replace(/　/g, " ");
   }
@@ -42,7 +41,7 @@ export function interlinear_annotation(defs: string[]): string {
     for (let i = 0; i < defs.length; i++) {
       if (defs[i]) {
         // Deal with the interlinear annotation characters.
-        let matches = [...defs[i].matchAll(/\ufff9|\ufffa|\ufffb/g)];
+        const matches = [...defs[i].matchAll(/\ufff9|\ufffa|\ufffb/g)];
         if (matches.length !== 0 && matches.length % 3 === 0) {
           defs[i] = defs[i]
             .replace(

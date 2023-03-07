@@ -13,8 +13,8 @@ import type { Heteronym } from "$src/common";
  */
 function readDB(path: string): Database {
   if (path.endsWith(".db.gz")) {
-    let data = fs.readFileSync(path);
-    let decompressed = zlib.gunzipSync(data);
+    const data = fs.readFileSync(path);
+    const decompressed = zlib.gunzipSync(data);
     return new Database(decompressed);
   } else {
     return new Database(path, { readonly: true, fileMustExist: true });

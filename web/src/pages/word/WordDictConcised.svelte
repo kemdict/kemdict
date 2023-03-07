@@ -1,10 +1,21 @@
-<script>
-  export let heteronyms;
+<script lang="ts">
+  import type { Heteronym } from "$src/common";
+  interface HetConcised extends Heteronym {
+    props: {
+      id: string;
+      radical: string;
+      bopomofo: string;
+      definition: string;
+      synonyms: string;
+      antonyms: string;
+    };
+  }
+  export let heteronyms: Array<HetConcised> = [];
   import { spc, radicals_and_strokes } from "$src/processing";
   import { strLen } from "$src/common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
-  function split(str) {
+  function split(str: string): string[] {
     // Some lines contain just a Tab. Get rid of them.
     return str.split("\n").filter((x) => x.trim().length > 0);
   }

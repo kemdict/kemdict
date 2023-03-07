@@ -7,10 +7,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": { "$src/*": ["src/*"] }
-  }
+  },
+  "include": ["src/**/*"]
 }

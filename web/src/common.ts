@@ -77,7 +77,7 @@ export const dicts: Dict[] = [
 ];
 
 export function dictsToObj(dictionaries: Dict[]) {
-  let tmp = {};
+  const tmp = {};
   dictionaries.forEach((dict) => (tmp[dict.id] = dict));
   return tmp;
 }
@@ -133,8 +133,8 @@ export function groupByProp<T>(
   fallback?: any
 ): Array<[any, T[]]> {
   function reducer(acc: Record<any, T[]>, elt: T) {
-    let key = elt[property];
-    let cell = acc[key];
+    const key = elt[property];
+    const cell = acc[key];
     if (cell) {
       cell.push(elt);
     } else {

@@ -33,6 +33,9 @@ preview: $(DEPS)
 	npx astro preview
 
 # Currently this will succeed with a go fatal error at the end.
+# That error goes to stderr while Astro's output thankfully goes to
+# stdout.
 # https://github.com/withastro/astro/issues/6306
 check:
-	npx astro check
+	npx astro check 2>/dev/null
+	npx eslint .

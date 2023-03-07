@@ -11,33 +11,50 @@ extends:
   - "eslint:recommended"
   - "plugin:astro/recommended"
   - "plugin:svelte/recommended"
+  - "plugin:svelte/prettier"
   - "plugin:@typescript-eslint/recommended"
+  - "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  - "prettier"
+
+parser: "@typescript-eslint/parser"
+parserOptions:
+  project: "./tsconfig.json"
+  tsconfigRootDir: "."
+  extraFileExtensions:
+    - ".svelte"
+    - ".astro"
 
 overrides:
   - files: ["*"]
     rules:
       "no-irregular-whitespace": "off"
+  - files: ["*.js"]
+    rules:
       "no-unused-vars":
         - "error"
-        - argsIgnorePattern: "^_"
+        - &noUnusedVarsSetting
+          argsIgnorePattern: "^_"
           destructuredArrayIgnorePattern: "^_"
   - files: ["*.ts"]
     parser: "@typescript-eslint/parser"
-    rules:
+    rules: &TS
       "@typescript-eslint/no-explicit-any": "off"
+      "@typescript-eslint/no-unused-vars":
+        - "error"
+        - *noUnusedVarsSetting
   - files: ["*.astro"]
     parser: "astro-eslint-parser"
     parserOptions:
       parser: "@typescript-eslint/parser"
-      extraFileExtensions: [".astro"]
     rules:
       # The database is fully trusted.
       "astro/no-set-html-directive": "off"
+      <<: *TS
   - files: ["*.svelte"]
     parser: "svelte-eslint-parser"
     parserOptions:
       parser: "@typescript-eslint/parser"
-      extraFileExtensions: [".svelte"]
     rules:
       # The database is fully trusted.
       "svelte/no-at-html-tags": "off"
+      <<: *TS
