@@ -1,10 +1,11 @@
 ---
-import uniq from "lodash-es/uniq";
-import { getHeteronyms, getBacklinks } from "$src/server/db.js";
+import { uniq } from "lodash";
+import { getHeteronyms, getBacklinks } from "$src/server/db";
+import type { Heteronym } from "$src/common";
 
 const { title } = Astro.params;
 const heteronyms = getHeteronyms(title);
-const titles = uniq(heteronyms.map((het) => het.title));
+const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = getBacklinks(...titles).sort();
 
 import SplitLayout from "$src/SplitLayout.astro";

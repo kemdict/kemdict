@@ -3,7 +3,7 @@ layout: $src/MarkdownLayout.astro
 title: 字典 | 如月的現代台灣華語補足典
 ---
 
-import { db } from "$src/server/db.js";
+import { db } from "$src/server/db";
 export const titles = (() => {
 const stmt = db.prepare(
   `SELECT DISTINCT title FROM heteronyms WHERE "from" = 'kisaragi_dict'`

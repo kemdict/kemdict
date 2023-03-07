@@ -1,5 +1,5 @@
 <script>
-  import truncate from "lodash-es/truncate";
+  import { truncate } from "lodash";
   import { spc } from "$src/processing";
   export let heteronyms;
   // FIXME: for Hakkadict, it's questionable for me to pick one

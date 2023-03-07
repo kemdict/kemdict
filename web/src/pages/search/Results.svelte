@@ -21,11 +21,11 @@
   <div id="tabs" class="hidden">
     <Tabs>
       <TabList>
-        {#each langs as [langId, lang]}
+        {#each langGroups as [_langId, lang]}
           <Tab>{lang}</Tab>
         {/each}
       </TabList>
-      {#each langs as [langId, lang]}
+      {#each langGroups as [langId, _lang]}
         <TabPanel>
           <ul>
             {#each heteronyms as het}

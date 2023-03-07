@@ -32,6 +32,7 @@ build-no-data: dist
 preview: $(DEPS)
 	npx astro preview
 
-# TODO
+# Currently this will succeed with a go fatal error at the end.
+# https://github.com/withastro/astro/issues/6306
 check:
-	npx svelte-check
+	npx astro check

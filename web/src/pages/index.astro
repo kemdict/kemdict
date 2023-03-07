@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 
-import { db } from "$src/server/db.js";
+import { db } from "$src/server/db";
 
 function kisaragi_dict_titles() {
   const stmt = db.prepare(

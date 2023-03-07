@@ -4,14 +4,14 @@ export const langs = {
   hak_TW: "客語",
 };
 
-interface Dict {
+export interface Dict {
   id: string;
   name: string;
   url: string;
   lang: string;
 }
 
-interface Heteronym {
+export interface Heteronym {
   title: string;
   from?: string;
   pns?: any[];
@@ -130,7 +130,7 @@ export const WordSortFns = {
 export function groupByProp<T>(
   arr: T[],
   property: string,
-  fallback: any
+  fallback?: any
 ): Array<[any, T[]]> {
   function reducer(acc: Record<any, T[]>, elt: T) {
     let key = elt[property];

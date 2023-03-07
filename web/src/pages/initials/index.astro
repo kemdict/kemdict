@@ -2,8 +2,8 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "./Group.svelte";
 
-import uniq from "lodash-es/uniq";
-import { db } from "$src/server/db.js";
+import { uniq } from "lodash";
+import { db } from "$src/server/db";
 import { groupByProp } from "$src/common";
 
 const strokeStmt = db.prepare(`
@@ -32,13 +32,14 @@ const pnStmt = db.prepare(`
 nostrokeStmt.pluck(true);
 pnStmt.pluck(true);
 
-const with_stroke = strokeStmt.all();
+const with_stroke: Array<{ title: string; stroke_count: number }> =
+  strokeStmt.all();
 
-let no_stroke;
+let no_stroke: string[];
 {
-  let set = new Set(with_stroke.map((x) => x.title));
+  let s = new Set(with_stroke.map((x) => x.title));
   no_stroke = uniq([...nostrokeStmt.all(), ...pnStmt.all()])
-    .filter((x) => !set.has(x))
+    .filter((x: any) => !s.has(x))
     .sort();
 }
 ---
