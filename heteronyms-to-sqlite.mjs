@@ -157,5 +157,3 @@ WHERE json_tree.key = 'radical'
 ORDER BY stroke_count
 `
 ).run();
-
-db.prepare(`DROP TABLE stroke`).run();
