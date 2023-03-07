@@ -132,3 +132,30 @@ VALUES
     insertLink.run(entry);
   });
 }
+
+db.prepare(
+  `
+CREATE TABLE stroke AS
+SELECT DISTINCT
+  title,
+  cast(json_tree.value as integer) AS value
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE json_tree.key = 'stroke_count'
+  AND length(title) = 1
+`
+).run();
+
+db.prepare(
+  `
+CREATE TABLE radicals AS
+SELECT DISTINCT
+  json_tree.value as title,
+  stroke.value as stroke_count
+FROM heteronyms, json_tree(heteronyms.props)
+LEFT JOIN stroke ON stroke.title = json_tree.value
+WHERE json_tree.key = 'radical'
+ORDER BY stroke_count
+`
+).run();
+
+db.prepare(`DROP TABLE stroke`).run();
