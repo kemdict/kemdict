@@ -18,7 +18,7 @@
 </script>
 
 {#each groupedHets as [dict, hets]}
-  <div id={dict.Id} class="dict">
+  <div id={dict.id} class="dict">
     {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
       <!-- FIXME: this only links to the first one. -->
       <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
