@@ -36,9 +36,6 @@ export default defineConfig({
     build: {
       minify: "terser",
     },
-    // This basically makes Vite also bundle it.
-    // We need this because lodash is commonjs.
-    ssr: { noExternal: ["lodash"] },
     resolve: {
       alias: [
         {

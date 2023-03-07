@@ -1,4 +1,4 @@
-import { escapeRegExp } from "lodash";
+import { escapeRegExp } from "lodash-es";
 
 export const langs = {
   zh_TW: "華語",

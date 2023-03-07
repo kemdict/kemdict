@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { truncate } from "lodash";
+  import { truncate } from "lodash-es";
   import { spc } from "$src/processing";
   import type { Heteronym } from "$src/common";
   export let heteronyms: Heteronym[];

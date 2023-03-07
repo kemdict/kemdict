@@ -7,13 +7,13 @@
   "dependencies": {
     "@astrojs/node": "^5.0.4",
     "better-sqlite3": "^8.1.0",
-    "lodash": "^4.17.21"
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@astrojs/mdx": "^0.17.2",
     "@astrojs/sitemap": "^1.1.0",
     "@astrojs/svelte": "^2.0.2",
-    "@types/lodash": "^4.14.191",
+    "@types/lodash-es": "^4.17.6",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "astro": "^2.0.17",
