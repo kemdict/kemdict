@@ -1,39 +1,43 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
+import Group from "$src/components/Group.svelte";
 
 import { db } from "$src/server/db";
 import { format } from "$src/common";
+import { groupByProp } from "$src/common";
 
 const { radical } = Astro.params;
 
-const charsWithRadicalStmt = db.prepare(`
+const charsStmt = db.prepare(`
   SELECT DISTINCT
-    heteronyms.title
+    heteronyms.title,
+    stroke.value as stroke_count
   FROM heteronyms, json_tree(heteronyms.props)
-  WHERE length("title") = 1
+  LEFT JOIN stroke ON stroke.title = heteronyms.title
+  WHERE length(heteronyms.title) = 1
     AND json_tree.key = 'radical'
     AND json_tree.value = '${radical}'
+  ORDER BY stroke_count
 `);
 
-charsWithRadicalStmt.pluck(true);
-
-const entries: string[] = charsWithRadicalStmt.all();
+const entries = charsStmt.all();
 ---
 
 <SingleLayout title={`部首為「${radical}」的字 - kemdict`}>
   <div class="prose">
     <a href="/radicals">← 回到部首索引</a>
-    <h1 class="mt-2">部首為「{radical}」的字</h1>
+    <h1 class="mt-2">
+      部首為「<a href={`/word/${radical}`}>{radical}</a>」的字
+    </h1>
+    {/* FIXME: 這是總筆畫數，但我們需要部首外筆畫數 */}
     {
-      (
-        <ul class="flex list-none flex-wrap gap-x-2 p-0">
-          {entries.map((entry) => (
-            <li class="w-4">
-              <a href={format("/search?q=$1&s=prefix", entry)}>{entry}</a>
-            </li>
-          ))}
-        </ul>
-      )
+      groupByProp(entries, "stroke_count").map(([count, elements]) => (
+        <Group
+          title={`${count} 畫`}
+          elements={elements}
+          template="/search?q=$1&s=prefix"
+        />
+      ))
     }
   </div>
 </SingleLayout>
