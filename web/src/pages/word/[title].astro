@@ -48,12 +48,12 @@ const presentDicts = groupedHets.map((group) => group[0]);
           </div>
         )}
       </div>
-      <svelte:fragment slot="right">
+      <Fragment slot="right">
         <div class="sm:hidden">
           <TOC term={title} presentDicts={presentDicts} />
         </div>
         <Word groupedHets={groupedHets} title={title} />
-      </svelte:fragment>
+      </Fragment>
     </SplitLayout>
   ) : (
     <SingleLayout
