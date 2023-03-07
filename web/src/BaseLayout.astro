@@ -23,7 +23,7 @@ const { title } = Astro.props;
       rel="stylesheet"
     />
     <!-- Fathom -->
-    <script>
+    <script is:inline>
       var dnt = navigator.doNotTrack || navigator.msDoNotTrack || null;
       if (dnt !== "yes" && dnt !== "1") {
         (function (f, a, t, h, o, m) {
