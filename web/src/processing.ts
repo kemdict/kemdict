@@ -74,7 +74,7 @@ export function radicals_and_strokes(props: {
   let x = "";
   x += `<div class="mb-4">【`;
   if (props.radical) {
-    x += `<a href="/word/${props.radical}">${props.radical}</a>部`;
+    x += `<a href="/radicals/${props.radical}">${props.radical}</a>部`;
   }
   if (props.stroke_count) {
     x += `，共${props.stroke_count}畫`;
