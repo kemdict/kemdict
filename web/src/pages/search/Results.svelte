@@ -1,5 +1,5 @@
 <script>
-  export let langs = ["id", "readablename"];
+  export let langGroups = [["id", "readablename"]];
   export let heteronyms = [];
   import { dictsByLang } from "$src/common";
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
