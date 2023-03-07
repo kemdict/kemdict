@@ -36,5 +36,13 @@ export default defineConfig({
     build: {
       minify: "terser",
     },
+    resolve: {
+      alias: [
+        {
+          find: /^\$src\/(.*)/,
+          replacement: `${process.cwd()}/src/$1`,
+        },
+      ],
+    },
   },
 });
