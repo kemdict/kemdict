@@ -11,7 +11,6 @@
   function process_def(def) {
     if (def) {
       let x = "";
-      let match;
       for (const d of def.split("\n")) {
         if (x.length == 0) {
           x += `<ol>`;

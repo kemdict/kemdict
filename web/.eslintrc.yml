@@ -1,0 +1,43 @@
+env:
+  node: true
+  browser: true
+  es2022: true
+
+ignorePatterns:
+  - "node_modules"
+  - "dist"
+
+extends:
+  - "eslint:recommended"
+  - "plugin:astro/recommended"
+  - "plugin:svelte/recommended"
+  - "plugin:@typescript-eslint/recommended"
+
+overrides:
+  - files: ["*"]
+    rules:
+      "no-irregular-whitespace": "off"
+      "no-unused-vars":
+        - "error"
+        - argsIgnorePattern: "^_"
+          destructuredArrayIgnorePattern: "^_"
+  - files: ["*.ts"]
+    parser: "@typescript-eslint/parser"
+    rules:
+      "@typescript-eslint/no-explicit-any": "off"
+  - files: ["*.astro"]
+    parser: "astro-eslint-parser"
+    parserOptions:
+      parser: "@typescript-eslint/parser"
+      extraFileExtensions: [".astro"]
+    rules:
+      # The database is fully trusted.
+      "astro/no-set-html-directive": "off"
+  - files: ["*.svelte"]
+    parser: "svelte-eslint-parser"
+    parserOptions:
+      parser: "@typescript-eslint/parser"
+      extraFileExtensions: [".svelte"]
+    rules:
+      # The database is fully trusted.
+      "svelte/no-at-html-tags": "off"
