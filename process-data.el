@@ -368,7 +368,17 @@ do."
        (s-replace-regexp (rx (opt "　") "△")
                          "<br><m title=\"參考詞\">［△］</m> ")
        d:links:linkify-brackets
-       d:links:linkify-arrow))
+       d:links:linkify-arrow
+       (s-replace-regexp
+        (rx (group "相對於")
+            (group (*? any))
+            (group "而言"))
+        (lambda (str)
+          (concat
+           (match-string 1 str)
+           (d:links:link-to-word
+            (match-string 2 str))
+           (match-string 3 str))))))
 
 (defun d:hakkadict:pn (pn dialect)
   "Turn numeric tones in PN into Unicode.
