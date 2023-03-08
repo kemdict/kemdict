@@ -66,7 +66,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
           parsed)))))))
 
 (when nil
-  (d::dev:extract-development-version "無妨"
+  (d::dev:extract-development-version "雙數"
     "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
   (d::dev:extract-development-version "無妨"
     "ministry-of-education/hakkadict.json" "dev-hakkadict.json")
@@ -74,7 +74,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
     "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
   (d::dev:extract-development-version "無妨"
     "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")
-  (d::dev:extract-development-version "無妨"
+  (d::dev:extract-development-version "單數"
     "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
   (d::dev:extract-development-version "一枕南柯"
     "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json")
@@ -343,6 +343,28 @@ do."
            (s-replace-regexp (rx (any "[" "]"))
                              "")))))
 
+(defun d:links:簡編本:近義反義 (str)
+  "Linkify antonyms and synonyms STR for dict_concised."
+  (save-match-data
+    (->> str
+         d:links:comma-word-list
+         (s-replace-regexp
+          (rx (group digit ".")
+              (group (+? any))
+              (group (or (+ " ") eos)))
+          (lambda (s)
+            (message "%s" s)
+            (save-match-data
+              (concat
+               (match-string 1 s)
+               (d:links:link-to-word
+                (match-string 2 s))
+               ;; Has separator: replace it with list comma, otherwise
+               ;; just keep it empty
+               (if (equal "" (match-string 3 s))
+                   ""
+                 "、"))))))))
+
 (defun d:process-def:dict_concised (def)
   "Process DEF for dict_concised."
   (->> def
@@ -430,17 +452,17 @@ This is a separate step from shaping."
     (dolist (key (list "antonyms" "synonyms"))
       (ht-update-with! props key
         (lambda (words)
-          (->> (d:links:linkify-brackets words "【" "】")
-               (s-replace-regexp
-                (rx "[" (group (any "似反")) "]"
-                    (group (* any)))
-                (lambda (str)
-                  (format
-                   "<m>［%s］</m>%s"
-                   (match-string 1 str)
-                   (save-match-data
-                     (d:links:comma-word-list
-                      (match-string 2 str))))))))))
+          (->>
+           (d:links:linkify-brackets words "【" "】")
+           (s-replace-regexp
+            (rx "[" (group (any "似反")) "]"
+                (group (* any)))
+            (lambda (str)
+              (format
+               "<m>［%s］</m>%s"
+               (match-string 1 str)
+               (d:links:簡編本:近義反義
+                (match-string 2 str)))))))))
     (ht-update-with! props "word_ref"
       #'d:links:link-to-word)
     (ht-update-with! props "definitions"
