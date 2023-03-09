@@ -133,27 +133,50 @@ VALUES
   });
 }
 
-db.prepare(
+db.exec(
   `
-CREATE TABLE stroke AS
+CREATE TABLE a AS
 SELECT DISTINCT
   title,
-  cast(json_tree.value as integer) AS value
+  json_tree.value AS radical
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE json_tree.key = 'radical'
+  AND length(title) = 1;
+
+CREATE TABLE b AS
+SELECT DISTINCT
+  title,
+  cast(json_tree.value as integer) AS stroke_count
 FROM heteronyms, json_tree(heteronyms.props)
 WHERE json_tree.key = 'stroke_count'
-  AND length(title) = 1
-`
-).run();
+  AND length(title) = 1;
 
-db.prepare(
-  `
+CREATE TABLE c AS
+SELECT DISTINCT
+  title,
+  cast(json_tree.value as integer) AS non_radical_stroke_count
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE json_tree.key = 'non_radical_stroke_count'
+  AND length(title) = 1;
+
 CREATE TABLE radicals AS
 SELECT DISTINCT
-  json_tree.value as title,
-  stroke.value as stroke_count
-FROM heteronyms, json_tree(heteronyms.props)
-LEFT JOIN stroke ON stroke.title = json_tree.value
-WHERE json_tree.key = 'radical'
-ORDER BY stroke_count
+  heteronyms.title,
+  a.radical,
+  b.stroke_count,
+  c.non_radical_stroke_count
+FROM heteronyms
+LEFT JOIN a ON a.title = heteronyms.title
+LEFT JOIN b ON b.title = heteronyms.title
+LEFT JOIN c ON c.title = heteronyms.title
+WHERE length(heteronyms.title) = 1
+  AND a.radical                  IS NOT NULL
+  AND b.stroke_count             IS NOT NULL
+  AND c.non_radical_stroke_count IS NOT NULL
+ORDER BY b.stroke_count;
+
+DROP TABLE a;
+DROP TABLE b;
+DROP TABLE c;
 `
-).run();
+);

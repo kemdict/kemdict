@@ -308,6 +308,8 @@ instead."
          (-map #'s-trim)
          (remove ""))))
 
+;; FIXME: there is one entry in TaijitToaSutian that uses a slash to
+;; indicate multiple different sets of Han characters.
 (defun d:process-title (title)
   "Process TITLE to replace problematic characters, and so on.
 If TITLE is empty, return nil so the call site can decide what to
