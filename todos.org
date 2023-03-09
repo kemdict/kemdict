@@ -149,6 +149,7 @@ No longer applicable as we don't use moedict-data anymore.
   - “無妨” (taijit, concised, revised, =moedict_twblg=)
   - “實聯制” (kisaragi, itaigi)
 * todos
+** add stroke info for 首字索引
 ** search: Just generate pages for each language
 ** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
 The existing digitization only includes POJ/KIP and HanLo.

@@ -8,7 +8,10 @@ import { groupByProp } from "$src/common";
 const radicals = db
   .prepare(
     `
-SELECT * FROM radicals
+    SELECT DISTINCT title, stroke_count
+    FROM han
+    WHERE non_radical_stroke_count = 0
+    ORDER BY stroke_count
 `
   )
   .all();
