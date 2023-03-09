@@ -137,10 +137,10 @@ export function groupByProp<T>(
     if (cell) {
       cell.push(elt);
     } else {
-      if (key) {
-        acc[key] = [elt];
-      } else {
+      if (typeof key === "undefined") {
         acc[fallback] = [elt];
+      } else {
+        acc[key] = [elt];
       }
     }
     return acc;
