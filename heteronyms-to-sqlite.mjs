@@ -159,7 +159,7 @@ FROM heteronyms, json_tree(heteronyms.props)
 WHERE json_tree.key = 'non_radical_stroke_count'
   AND length(title) = 1;
 
-CREATE TABLE radicals AS
+CREATE TABLE han AS
 SELECT DISTINCT
   heteronyms.title,
   a.radical,
