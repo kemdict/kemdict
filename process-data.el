@@ -355,7 +355,6 @@ do."
               (group (+? any))
               (group (or (+ " ") eos)))
           (lambda (s)
-            (message "%s" s)
             (save-match-data
               (concat
                (match-string 1 s)
@@ -596,6 +595,7 @@ information."
      ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                          "moedict-data-twblg/dict-twblg-ext.json"))
      ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+     ("dict_concised" . "ministry-of-education/dict_concised.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
    (t
     ;; The order here, reversed, defines the order they will appear in
