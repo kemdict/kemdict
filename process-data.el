@@ -9,38 +9,11 @@
 (require 's)
 (require 'ol)
 (require 'ht)
-(require 'async)
 
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
 
 (put 'ht-update-with! 'lisp-indent-function 2)
-
-(defvar d::async-map::msg nil
-  "Message used for `d::async-map'. Should have two placeholders.")
-(defun d::async-map (func seq)
-  "Map FUNC over SEQ in parallel.
-Return each value of FUNC in the same order like `map'.
-
-Spawns a subprocess for each item in SEQ, so this should only be
-used for a small number of slow tasks, not a large number of
-tasks."
-  (let ((futures (seq-map
-                  (lambda (&rest args)
-                    (async-start
-                     (lambda ()
-                       (apply func args))))
-                  seq)))
-    ;; Jobs are already started when we're waiting for them, so "wait
-    ;; for each in turn" is the same as "wait for all".
-    (cl-loop
-     for f being the elements of futures
-     using (index i)
-     with l = (length futures)
-     collect (progn
-               (when d::async-map::msg
-                 (message d::async-map::msg (1+ i) l))
-               (async-get f)))))
 
 (defun d::hash-prune (table value)
   "Remove all entries in TABLE that are associated with VALUE."
@@ -728,20 +701,25 @@ DICT is the dictionary ID to associate with them."
   (let* ((dictionaries
           (d::dictionaries (or (not noninteractive)
                                (getenv "DEV"))))
+         (dict-count (length dictionaries))
          (heteronyms nil)
-         (all-titles nil)
-         (d::async-map::msg "Parsing and shaping dictionaries (%s/%s)..."))
+         (all-titles nil))
     ;; Step 1
-    (let ((ret (d::async-map
-                `(lambda (pair)
-                   (pcase-let ((`(,dict . ,files) pair))
-                     (setq load-path ',load-path)
-                     (let ((d:nested t))
-                       (load (expand-file-name "./process-data.el")))
-                     (d:parse-and-shape dict files)))
-                dictionaries)))
-      (setq heteronyms (apply #'append (mapcar #'car ret))
-            all-titles (apply #'append (mapcar #'cdr ret))))
+    (cl-loop
+     for (dict . files) being the elements of dictionaries
+     using (index i)
+     do
+     (progn
+       (message "Collecting heteronyms and titles from %s (%s/%s)..."
+                (or dict files) (1+ i) dict-count)
+       (let ((result (d:parse-and-shape dict files)))
+         (cl-loop
+          for het in (car result)
+          do (push het heteronyms))
+         ;; Collect titles
+         (cl-loop
+          for k in (cdr result)
+          do (push k all-titles)))))
     ;; Step 2
     (message "Removing duplicate titles...")
     (setq d:titles:look-up-table (d:titles:to-look-up-table all-titles))
@@ -779,25 +757,22 @@ DICT is the dictionary ID to associate with them."
         (insert (json-encode heteronyms))))
     (message "Done")))
 
-;; This allows loading this file as a library in a subprocess without
-;; ending up in a horrible loop
-(defvar d:nested nil)
-(unless d:nested
-  (let ((comp (if (and (fboundp #'native-comp-available-p)
-                       (native-comp-available-p))
-                  #'native-compile
-                #'byte-compile)))
-    (-each (list #'d:main
-                 #'d:links:comma-word-list
-                 #'d:links:link-to-word
-                 #'d:links:linkify-brackets
-                 #'d:titles:to-look-up-table
-                 #'d:process-props)
-      comp))
-  (d:main)
-  (when noninteractive
-    (kill-emacs)))
+(let ((comp (if (and (fboundp #'native-comp-available-p)
+                     (native-comp-available-p))
+                #'native-compile
+              #'byte-compile)))
+  (-each (list #'d:main
+               #'d:links:comma-word-list
+               #'d:links:link-to-word
+               #'d:links:linkify-brackets
+               #'d:titles:to-look-up-table
+               #'d:process-props)
+    comp))
 
+(d:main)
+
+(when noninteractive
+  (kill-emacs))
 
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc emacs-lisp-package)

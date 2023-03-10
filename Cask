@@ -1,7 +1,7 @@
-(source melpa-stable)
+(source melpa)
 (source gnu)
 
-(depends-on "dash")
-(depends-on "s")
-(depends-on "ht" :git "https://github.com/Wilfred/ht.el")
-(depends-on "async" "1.9.7")
+(development
+ (depends-on "dash")
+ (depends-on "s")
+ (depends-on "ht"))
