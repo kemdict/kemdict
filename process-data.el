@@ -689,32 +689,26 @@ DICT is the dictionary ID to associate with them."
 (defun d:main ()
   (setq d:links nil)
   (setq d:titles:look-up-table nil)
-  (let* ((dictionaries
-          (d::dictionaries (or (not noninteractive)
-                               (getenv "DEV"))))
-         (dict-count (length dictionaries))
-         (heteronyms nil)
-         (all-titles nil))
-    ;; Step 1
-    (cl-loop
-     for (dict . files) being the elements of dictionaries
-     using (index i)
-     do
-     (progn
-       (message "Collecting heteronyms and titles from %s (%s/%s)..."
-                (or dict files) (1+ i) dict-count)
-       (let ((result (d:parse-and-shape dict files)))
-         (cl-loop
-          for het in (car result)
-          do (push het heteronyms))
-         ;; Collect titles
-         (cl-loop
-          for k in (cdr result)
-          do (push k all-titles)))))
-    ;; Step 2
-    (message "Removing duplicate titles...")
-    (setq d:titles:look-up-table (d:titles:to-look-up-table all-titles))
-    (setq all-titles (hash-table-keys d:titles:look-up-table))
+  (let* ((heteronyms nil))
+    (let* ((dictionaries
+            (d::dictionaries (or (not noninteractive)
+                                 (getenv "DEV"))))
+           (dict-count (length dictionaries))
+           (all-titles nil))
+      ;; Step 1
+      (cl-loop
+       for (dict . files) being the elements of dictionaries
+       using (index i)
+       do
+       (progn
+         (message "Collecting heteronyms and titles from %s (%s/%s)..."
+                  (or dict files) (1+ i) dict-count)
+         (let ((result (d:parse-and-shape dict files)))
+           (setq heteronyms (nconc (car result) heteronyms))
+           (setq all-titles (nconc (cdr result) all-titles)))))
+      ;; Step 2
+      (message "Removing duplicate titles...")
+      (setq d:titles:look-up-table (d:titles:to-look-up-table all-titles)))
     ;; Step 3
     (cl-loop
      for het being the elements of heteronyms
