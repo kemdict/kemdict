@@ -621,8 +621,9 @@ information."
 ;;     :props ...}])
 ;; Also works for entries that are themselves heteronyms
 (defun d:parse-and-shape (dict files)
-  "Return (heteronyms . titles) in FILES.
-DICT is the dictionary ID to associate with them."
+  "Return heteronyms in FILES.
+DICT is the dictionary ID to associate with them.
+Titles are written to `d:titles:look-up-table'."
   (let* ((files (-list files))
          (raw-dict (with-temp-buffer
                      (cl-loop for f in files
@@ -631,8 +632,7 @@ DICT is the dictionary ID to associate with them."
                                 (erase-buffer)
                                 (insert-file-contents f)
                                 (json-parse-buffer)))))
-         (heteronyms nil)
-         (titles nil))
+         (heteronyms nil))
     (seq-doseq (entry raw-dict)
       (let ((orig-hets (or (gethash "heteronyms" entry)
                            (vector entry))))
@@ -683,18 +683,17 @@ DICT is the dictionary ID to associate with them."
                      (-uniq (d:pn-collect orig-het))
                      shaped-het)
             (push shaped-het heteronyms)
-            (push title titles)))))
-    (cons heteronyms titles)))
+            (puthash title t d:titles:look-up-table)))))
+    heteronyms))
 
 (defun d:main ()
   (setq d:links nil)
-  (setq d:titles:look-up-table nil)
+  (setq d:titles:look-up-table (ht))
   (let* ((heteronyms nil))
     (let* ((dictionaries
             (d::dictionaries (or (not noninteractive)
                                  (getenv "DEV"))))
-           (dict-count (length dictionaries))
-           (all-titles nil))
+           (dict-count (length dictionaries)))
       ;; Step 1
       (cl-loop
        for (dict . files) being the elements of dictionaries
@@ -703,12 +702,10 @@ DICT is the dictionary ID to associate with them."
        (progn
          (message "Collecting heteronyms and titles from %s (%s/%s)..."
                   (or dict files) (1+ i) dict-count)
-         (let ((result (d:parse-and-shape dict files)))
-           (setq heteronyms (nconc (car result) heteronyms))
-           (setq all-titles (nconc (cdr result) all-titles)))))
-      ;; Step 2
-      (message "Removing duplicate titles...")
-      (setq d:titles:look-up-table (d:titles:to-look-up-table all-titles)))
+         (setq heteronyms (nconc (d:parse-and-shape dict files)
+                                 heteronyms))
+         (garbage-collect))))
+    (garbage-collect)
     ;; Step 3
     (cl-loop
      for het being the elements of heteronyms
@@ -750,7 +747,6 @@ DICT is the dictionary ID to associate with them."
                #'d:links:comma-word-list
                #'d:links:link-to-word
                #'d:links:linkify-brackets
-               #'d:titles:to-look-up-table
                #'d:process-props)
     comp))
 
