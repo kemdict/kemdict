@@ -22,7 +22,7 @@
            do (remhash k table))
   table)
 
-(defvar d::ucs-NFC::buffer (get-buffer-create " process-data"))
+(defvar d::ucs-NFC::buffer (get-buffer-create " process-data" t))
 (defun d::ucs-NFC (str)
   "Like `ucs-normalize-NFC-string' but keeps reusing the same temp buffer."
   (with-current-buffer d::ucs-NFC::buffer
@@ -184,11 +184,10 @@ this:
          (s-replace-regexp
           ;; Presumably this is faster. Haven't timed it though.
           (if (and open close)
-              (rx-to-string
-               `(seq (group ,open)
-                     (group (*? any))
-                     (group ,close))
-               :no-group)
+              (rx
+               (group (regexp open))
+               (group (*? any))
+               (group (regexp close)))
             (rx (group (any "「【"))
                 (group (*? any))
                 (group (any "」】"))))
@@ -295,18 +294,16 @@ instead."
            d::ucs-NFC
            (s-replace "　" " ")
            s-trim)
-    (->> p
+    (--> p
          d::ucs-NFC
-         (s-replace "　" " ")
+         (s-replace "　" " " it)
          ;; The replacement character, which appears in one entry in
          ;; itaigi.
          ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
          ;; I'm pretty sure it's not supposed to be there.
-         (s-replace (string #xFFFD) "")
-         (s-replace "（變）" "/")
-         (s-split "/")
-         (-map #'s-trim)
-         (remove ""))))
+         (s-replace (string #xFFFD) "" it)
+         (s-replace "（變）" "/" it)
+         (s-split "[ \t\n\r]*/[ \t\n\r]*" it t))))
 
 ;; FIXME: there is one entry in TaijitToaSutian that uses a slash to
 ;; indicate multiple different sets of Han characters.
@@ -437,20 +434,20 @@ some processing.
 
 This is a separate step from shaping."
   (let ((d:links:from title))
-    (dolist (key (list "definition" "source_comment" "典故說明"))
+    (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
-    (dolist (key (list "trs" "poj" "kip"))
+    (dolist (key '("trs" "poj" "kip"))
       (ht-update-with! props key
         (lambda (pn)
           (d:pn-normalize pn :one))))
-    (dolist (key (list "radical" "v_type" "v_pinyin"))
+    (dolist (key '("radical" "v_type" "v_pinyin"))
       (ht-update-with! props key
         #'s-trim))
-    (dolist (key (list "近義同" "近義反"))
+    (dolist (key '("近義同" "近義反"))
       (ht-update-with! props key
         #'d:links:comma-word-list))
-    (dolist (key (list "antonyms" "synonyms"))
+    (dolist (key '("antonyms" "synonyms"))
       (ht-update-with! props key
         (lambda (words)
           (->>
@@ -509,10 +506,10 @@ This is a separate step from shaping."
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taioanpehoekichhoogiku"
-       (dolist (key (list "en" "zh"))
+       (dolist (key '("en" "zh"))
          (ht-update-with! props key
            #'d:links:comma-word-list))
-       (dolist (key (list "examplePOJ" "exampleEn" "exampleZh"))
+       (dolist (key '("examplePOJ" "exampleEn" "exampleZh"))
          (ht-update-with! props key
            (lambda (example)
              (-> example
@@ -682,12 +679,6 @@ DICT is the dictionary ID to associate with them."
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
-            (dolist (extra-prop (list "added" "vogue"))
-              ;; These props can be added on the heteronym or on the
-              ;; entire word.
-              (when-let (v (or (gethash extra-prop entry)
-                               (gethash extra-prop orig-het)))
-                (puthash extra-prop v shaped-het)))
             (puthash "pns"
                      (-uniq (d:pn-collect orig-het))
                      shaped-het)
