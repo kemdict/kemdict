@@ -3,7 +3,7 @@ import { getHeteronyms } from "$src/server/db";
 import { dicts, langs, WordSortFns } from "$src/common";
 
 const url = Astro.url;
-const query: string | undefined = url.searchParams.get("q");
+const query: string | undefined = url.searchParams.get("q")?.trim();
 const mtch: string = url.searchParams.get("m") || "prefix";
 const sort: string = url.searchParams.get("s") || "asc";
 let heteronyms = [];
