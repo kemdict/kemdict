@@ -119,7 +119,7 @@
       <div class="copyright">
         <p>
           《<a href="https://dict.revised.moe.edu.tw/">重編國語辭典修訂本</a
-          >》版本編號：2015_20220922
+          >》版本編號：2015_20230106
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href="/l/reviseddict_10312.pdf">使用說明</a></p>
@@ -129,7 +129,7 @@
       <div class="copyright">
         <p>
           《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a
-          >》版本編號：2014_20220928
+          >》版本編號：2014_20230112
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href="/l/conciseddict_10312.pdf">使用說明</a></p>
@@ -162,7 +162,7 @@
       <div class="copyright">
         <p>
           《<a href="https://dict.idioms.moe.edu.tw">成語典</a
-          >》版本編號：2020_20220928
+          >》版本編號：2020_20230112
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href="/l/idiomsdict_10409.pdf">使用說明</a></p>
