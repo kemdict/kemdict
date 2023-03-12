@@ -259,7 +259,7 @@ this:
 (defconst d::pn-keys
   (list
    ;; kemdict-data-ministry-of-education
-   "bopomofo" "pinyin"
+   "bopomofo" ; "pinyin"
    ;; moedict-twblg
    "trs"
    ;; kisaragi-dict
