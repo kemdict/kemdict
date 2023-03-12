@@ -53,15 +53,4 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          cd web
-          tar -czf dist.tar.gz -a dist
-          rsync dist.tar.gz "$SSH_HOST":/home/kisaragi
-          ssh "$SSH_HOST" bash << HERE
-            tar -xf dist.tar.gz
-            rm dist.tar.gz
-            mkdir -p deployed
-            test -d deployed/kemdict && rm -r deployed/kemdict
-            mv dist deployed/kemdict
-            systemctl restart --user kemdict
-          HERE
-        shell: bash
+          make admin.deploy
