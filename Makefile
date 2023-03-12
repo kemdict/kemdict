@@ -1,6 +1,7 @@
-export LANG=en_US.UTF-8
-
+.ONESHELL:
 .DEFAULT_GOAL := build
+
+export LANG=en_US.UTF-8
 
 admin.deploy: entries.db.gz
 	@[ "$$SSH_HOST"x != x ] || (echo 'Please specify $$SSH_HOST'; exit 1)
