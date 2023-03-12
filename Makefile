@@ -2,6 +2,14 @@ export LANG=en_US.UTF-8
 
 .DEFAULT_GOAL := build
 
+admin.deploy: entries.db.gz
+	@[ "$$SSH_HOST"x != x ] || (echo 'Please specify $$SSH_HOST'; exit 1)
+	rsync entries.db.gz "$$SSH_HOST:/home/kisaragi/deployed/kemdict.db.gz"
+	ssh "$$SSH_HOST" bash << HERE
+	  gzip -d -f deployed/kemdict.db.gz
+	  systemctl restart --user kemdict
+	HERE
+
 build: entries.db
 .PHONY: build
 
