@@ -575,17 +575,17 @@ information."
                   "dev-chhoetaigi-itaigi.json"
                   "dev-chhoetaigi-taijittoasutian.json"
                   "dev-chhoetaigi-taioanpehoekichhoogiku.json")))
-    [("dict_idioms" . "dev-dict_idioms.json")
-     ("hakkadict" . "dev-hakkadict.json")
-     ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
-     ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
+    [(nil . "kisaragi/extra-strokes.json")
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
+     ("dict_concised" . "dev-dict_concised.json")
+     ("dict_revised" . "dev-dict_revised.json")
+     ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
      ("moedict_twblg" . ("dev-dict-twblg.json"
                          "dev-dict-twblg-ext.json"))
-     ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
-     ("dict_revised" . "dev-dict_revised.json")
-     ("dict_concised" . "dev-dict_concised.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
-     (nil . "kisaragi/extra-strokes.json")])
+     ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
+     ("hakkadict" . "dev-hakkadict.json")
+     ("dict_idioms" . "dev-dict_idioms.json")])
    ;; For testing on my phone
    ((getenv "ANDROID_DATA")
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
@@ -595,19 +595,19 @@ information."
      ("dict_concised" . "ministry-of-education/dict_concised.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
    (t
-    ;; The order here, reversed, defines the order they will appear in
-    ;; the word pages.
-    [("dict_idioms" . "ministry-of-education/dict_idioms.json")
-     ("hakkadict" . "ministry-of-education/hakkadict.json")
-     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
-     ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+    ;; The order here defines the order they will appear in the word
+    ;; pages.
+    [(nil . "kisaragi/extra-strokes.json")
+     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
+     ("dict_concised" . "ministry-of-education/dict_concised.json")
+     ("dict_revised" . "ministry-of-education/dict_revised.json")
+     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
      ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
                          "moedict-data-twblg/dict-twblg-ext.json"))
-     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-     ("dict_revised" . "ministry-of-education/dict_revised.json")
-     ("dict_concised" . "ministry-of-education/dict_concised.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
-     (nil . "kisaragi/extra-strokes.json")])))
+     ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+     ("hakkadict" . "ministry-of-education/hakkadict.json")
+     ("dict_idioms" . "ministry-of-education/dict_idioms.json")])))
 
 ;; For entries with heteronyms:
 ;;   [{:title "title"

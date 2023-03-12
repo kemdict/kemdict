@@ -110,7 +110,7 @@ const EachPT = db.transaction((array, message = "", func) => {
 });
 
 {
-  const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json"));
+  const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json")).reverse();
   const insertHet = db.prepare(`
 INSERT INTO
   heteronyms ("title","from","pns","props")
