@@ -1,5 +1,103 @@
 [
   {
+    "title": "Q彈",
+    "added": 1678626762.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kyu/ ㄊㄢˊ",
+        "definitions": [
+          {
+            "def": "形容食物有彈性。「Q」為台語「𩚨」([[khiū]]) 的通假字。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "頭身",
+    "added": 1678626311.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄡˊ ㄕㄣ",
+        "definitions": [
+          {
+            "def": "頭部與身高的比例，為身高除以頭部的高度（以一個數字表示）。現實成年人比例約為六到八頭身。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Q版",
+    "added": 1678625978.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kyu/ ㄅㄢˇ",
+        "definitions": [
+          {
+            "def": "以誇飾[[頭身]]比例來突顯可愛的版本。如：「Q版人偶」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Q",
+    "added": 1678625665.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kyu/",
+        "definitions": [
+          {
+            "def": "形容食物有彈性。台語「𩚨」([[khiū]]) 的通假字。",
+            "type": "形"
+          },
+          {
+            "def": "可愛的。英語cute首音節的通假字。見「Q版」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "燙口",
+    "added": 1678624671.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄤˋ ㄎㄡˇ",
+        "definitions": [
+          {
+            "def": "形容食品溫度高到可能會燙傷嘴部的程度。如：「她喜歡喝燙口的水」",
+            "type": "形"
+          },
+          {
+            "def": "被溫度高的食物燙到嘴巴。如：「小心燙口」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "bling bling",
+    "added": 1678624599.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/blɪŋ blɪŋ/",
+        "definitions": [
+          {
+            "def": "閃閃發亮的。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "留觀",
     "added": 1678434121.0,
     "heteronyms": [
