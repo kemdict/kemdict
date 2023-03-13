@@ -185,9 +185,9 @@ this:
           ;; Presumably this is faster. Haven't timed it though.
           (if (and open close)
               (rx
-               (group (regexp open))
+               (group (literal open))
                (group (*? any))
-               (group (regexp close)))
+               (group (literal close)))
             (rx (group (any "「【"))
                 (group (*? any))
                 (group (any "」】"))))
