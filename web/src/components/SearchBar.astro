@@ -6,10 +6,73 @@ export interface Props {
 const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
 ---
 
-<!-- Following the same approach as kit.svelte.dev/src/lib/search/SearchBox.svelte, with some hints from MDN's page about navigator.platform -->
 <script>
-  const sbi = document.getElementById("sbi");
-  window.addEventListener("keydown", (event) => {
+  import { lGet, lUpdate, lSet } from "$src/localStorage";
+  const sbi = document.getElementById("sbi") as HTMLInputElement;
+  const sf = document.getElementById("sf") as HTMLFormElement;
+  const sfd = document.getElementById("sfd") as HTMLSelectElement;
+  const sg = document.getElementById("suggest") as HTMLDivElement;
+  sf.addEventListener("submit", (_e) => {
+    if (!lGet("search-history")) {
+      lSet("search-history", []);
+    }
+    lUpdate("search-history", (old) => {
+      const n = [
+        { q: sbi.value, m: sfd.selectedOptions[0].textContent },
+        ...old,
+      ];
+      return n.slice(0, 5);
+    });
+  });
+  sf.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      sg.classList.add("hidden");
+    }
+  });
+  window.addEventListener("click", (_e) => {
+    sg.classList.add("hidden");
+  });
+  sbi.addEventListener("focus", (_e) => {
+    const ul = sg.getElementsByTagName("ul")[0] as HTMLUListElement;
+    const h3 = document.createElement("h3") as HTMLHeadingElement;
+    h3.textContent = "搜尋紀錄";
+    h3.classList.add("text-gray-500", "dark:text-gray-300", "font-bold");
+    const entries = lGet("search-history", []) as Array<{
+      q: string;
+      m: string;
+    }>;
+    // Invalid content -> clear it
+    if (!entries[0]?.q) {
+      lSet("search-history", []);
+      return;
+    }
+    if (entries.length === 0) return;
+    ul.replaceChildren(
+      ...entries.map(({ q, m }) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const mtch = document.createElement("span") as HTMLSpanElement;
+        mtch.classList.add("text-gray-500", "dark:text-gray-400");
+        mtch.textContent = `${m}：`;
+        a.append(mtch);
+        a.append(q);
+        a.href = `/search?q=${q}`;
+        a.classList.add("wordlink");
+        li.classList.add("my-2", "mr-2");
+        li.appendChild(a);
+        return li;
+      })
+    );
+    sg.replaceChildren(h3, ul);
+    sg.classList.remove("hidden");
+  });
+  window.addEventListener("keydown", (e) => {
+    // Following the same approach as
+    // kit.svelte.dev/src/lib/search/SearchBox.svelte, with some hints
+    // from MDN's page about navigator.platform
     let modifier = "ctrlKey";
     if (
       navigator.platform.indexOf("Mac") === 0 ||
@@ -17,16 +80,16 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
     ) {
       modifier = "metaKey";
     }
-    if (event.key === "k" && event[modifier]) {
+    if (e.key === "k" && e[modifier]) {
       sbi.focus();
-      event.preventDefault();
+      e.preventDefault();
     }
   });
 </script>
 
 <div class="relative mt-2 mb-2">
   <form action="/search" class="flex h-8" id="sf">
-    <select class="btnColor rounded-l" name="m">
+    <select class="btnColor rounded-l" name="m" id="sfd">
       <option selected={initialMatchSelection == "prefix"} value="prefix"
         >開頭為</option
       >
@@ -46,6 +109,12 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
       id="sbi"
       value={initialInput}
     />
+    <div
+      class="absolute top-8 z-[5] my-2 hidden w-full bg-white p-2 px-3 shadow dark:bg-[#363330]"
+      id="suggest"
+    >
+      <ul class="not-prose mt-1 flex list-none flex-wrap px-2"></ul>
+    </div>
     <!-- /search?q=<...>, like search engines -->
     <input class="btnColor rounded-r" type="submit" value="搜尋" />
     <div
