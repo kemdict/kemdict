@@ -39,7 +39,7 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
     const ul = sg.getElementsByTagName("ul")[0] as HTMLUListElement;
     const h3 = document.createElement("h3") as HTMLHeadingElement;
     h3.textContent = "搜尋紀錄";
-    h3.classList.add("text-gray-500", "font-bold");
+    h3.classList.add("text-gray-500", "dark:text-gray-300", "font-bold");
     const entries = lGet("search-history", []) as Array<{
       q: string;
       m: string;
@@ -55,13 +55,13 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
         const li = document.createElement("li");
         const a = document.createElement("a");
         const mtch = document.createElement("span") as HTMLSpanElement;
-        mtch.classList.add("text-gray-500");
+        mtch.classList.add("text-gray-500", "dark:text-gray-400");
         mtch.textContent = `${m}：`;
         a.append(mtch);
         a.append(q);
         a.href = `/search?q=${q}`;
         a.classList.add("wordlink");
-        li.classList.add("my-2", "bg-white", "mr-2");
+        li.classList.add("my-2", "mr-2");
         li.appendChild(a);
         return li;
       })
@@ -110,7 +110,7 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
       value={initialInput}
     />
     <div
-      class="absolute top-8 z-[5] my-2 hidden w-full bg-white p-2 px-3 shadow"
+      class="absolute top-8 z-[5] my-2 hidden w-full bg-white p-2 px-3 shadow dark:bg-[#363330]"
       id="suggest"
     >
       <ul class="not-prose mt-1 flex list-none flex-wrap px-2"></ul>
