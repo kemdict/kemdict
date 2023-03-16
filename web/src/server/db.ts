@@ -47,17 +47,20 @@ export function getHeteronyms(
   query: string,
   mtch?: string | undefined
 ): Heteronym[] {
-  let opt = { q: query };
-  let operator = "LIKE";
-  if (mtch === "prefix") {
-    opt = { q: `${query}%` };
-  } else if (mtch === "suffix") {
-    opt = { q: `%${query}` };
-  } else if (mtch === "contains") {
-    opt = { q: `%${query}%` };
-  } else {
-    operator = "=";
-  }
+  const opt = {
+    q: (() => {
+      if (mtch === "prefix") {
+        return `${query}%`;
+      } else if (mtch === "suffix") {
+        return `%${query}`;
+      } else if (mtch === "contains") {
+        return `%${query}%`;
+      } else {
+        return query;
+      }
+    })(),
+  };
+  const operator = mtch ? "LIKE" : "=";
   const stmt = db.prepare(
     `
 SELECT DISTINCT heteronyms.*

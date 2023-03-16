@@ -1,6 +1,8 @@
 .ONESHELL:
 .DEFAULT_GOAL := build
 
+.PHONY: build dev preview admin.deploy
+
 export LANG=en_US.UTF-8
 
 build:
