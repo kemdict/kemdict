@@ -117,19 +117,27 @@
     :where(p):not(:where([class~="not-prose"] *)) {
       @apply my-2;
     }
-    :where(h1):not(:where([class~="not-prose"] *)),
     :where(h2):not(:where([class~="not-prose"] *)),
     :where(h3):not(:where([class~="not-prose"] *)) {
       @apply font-bold;
     }
     :where(h1):not(:where([class~="not-prose"] *)) {
-      @apply mt-8 mb-4 text-xl;
+      @apply mt-8 mb-4 text-3xl;
     }
     :where(h2):not(:where([class~="not-prose"] *)) {
+      @apply mt-8 mb-4 text-xl;
+    }
+    :where(h3):not(:where([class~="not-prose"] *)) {
       @apply mt-6;
     }
     :where(a):not(:where([class~="not-prose"] *)) {
       @apply link;
+    }
+    ul.two {
+      column-count: 2;
+      p {
+        @apply my-0 py-1;
+      }
     }
     :where(ul):not(:where([class~="not-prose"] *)) {
       list-style-type: "– ";
@@ -137,6 +145,27 @@
     }
     :where(ol):not(:where([class~="not-prose"] *)) {
       @apply list-decimal;
+    }
+    :where(dl):not(:where([class~="not-prose"] *)) {
+      dt {
+        @apply font-bold;
+        @apply text-gray-600 dark:text-gray-300;
+        a {
+          @apply text-indigo-500 dark:text-indigo-400;
+        }
+        &:before {
+          content: "– ";
+          @apply font-normal;
+        }
+        &:after {
+          content: " ::";
+          @apply font-normal;
+          @apply text-gray-400 dark:text-gray-500;
+        }
+      }
+      dd {
+        @apply ml-6 mb-2;
+      }
     }
     :where(table):not(:where([class~="not-prose"] *)) {
       @apply text-left text-lg;

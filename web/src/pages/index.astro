@@ -62,7 +62,7 @@ const description =
     </div>
   </div>
   <div class="prose" slot="right">
-    <h2>前言</h2>
+    <h3>前言</h3>
     <ul class="ml-1 list-none p-0">
       <li>
         <p><a href="about">關於</a></p>
@@ -73,55 +73,61 @@ const description =
       <li>
         <p><a href="thanks">致謝與授權</a></p>
       </li>
-      <h2>索引</h2>
-      <ul class="ml-1 list-none p-0">
-        <li>
-          <p><a href="initials">首字索引</a></p>
-        </li>
-        <li>
-          <p><a href="radicals">部首索引</a></p>
-        </li>
-      </ul>
-      <h2>搜尋</h2>
-      <div class="ml-1">
-        <SearchBar />
-      </div>
-      <h2>最近新增的詞</h2>
-      <WordList words={kisaragi_dict_titles()} />
-      <h2>收錄字典</h2>
-      <ul class="ml-1 list-none p-0">
-        <li>
-          <p><a href="dict-kisaragi">如月的現代台灣華語補足典</a></p>
-        </li>
-        <li>
-          <p><a href="dict-itaigi">iTaigi 華台對照典</a></p>
-        </li>
-        <li>
-          <p>
-            <Out href="https://mhi.moe.edu.tw/infoList.jsp?ID=2&ID2=1705">
-              台灣白話基礎語句
-            </Out>
-          </p>
-        </li>
-        <li>
-          <p><a href="dict-taijittoasutian">台日大辭典台語譯本 (1932)</a></p>
-        </li>
-        <li>
-          <p><a href="dict-moe">教育部重編國語辭典修訂本</a></p>
-        </li>
-        <li>
-          <p><a href="dict-moe">教育部國語辭典簡編本</a></p>
-        </li>
-        <li>
-          <p><a href="dict-moe">教育部臺灣閩南語常用詞辭典</a></p>
-        </li>
-        <li>
-          <p><a href="dict-moe">教育部臺灣客家語常用詞辭典</a></p>
-        </li>
-        <li>
-          <p><a href="dict-moe">教育部成語典</a></p>
-        </li>
-      </ul>
+    </ul>
+    <h3>附錄</h3>
+    <ul class="ml-1 list-none p-0">
+      <li>
+        <p><a href="pojtl">台語羅馬字簡介</a></p>
+      </li>
+    </ul>
+    <h3>索引</h3>
+    <ul class="ml-1 list-none p-0">
+      <li>
+        <p><a href="initials">首字索引</a></p>
+      </li>
+      <li>
+        <p><a href="radicals">部首索引</a></p>
+      </li>
+    </ul>
+    <h3>搜尋</h3>
+    <div class="ml-1">
+      <SearchBar />
+    </div>
+    <h3>最近新增的詞</h3>
+    <WordList words={kisaragi_dict_titles()} />
+    <h3>收錄字典</h3>
+    <ul class="two ml-1 list-none p-0">
+      <li>
+        <p><a href="dict-kisaragi">如月的現代台灣華語補足典</a></p>
+      </li>
+      <li>
+        <p><a href="dict-itaigi">iTaigi 華台對照典</a></p>
+      </li>
+      <li>
+        <p>
+          <Out href="https://mhi.moe.edu.tw/infoList.jsp?ID=2&ID2=1705">
+            台灣白話基礎語句
+          </Out>
+        </p>
+      </li>
+      <li>
+        <p><a href="dict-taijittoasutian">台日大辭典台語譯本 (1932)</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部重編國語辭典修訂本</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部國語辭典簡編本</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部臺灣閩南語常用詞辭典</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部臺灣客家語常用詞辭典</a></p>
+      </li>
+      <li>
+        <p><a href="dict-moe">教育部成語典</a></p>
+      </li>
     </ul>
   </div>
 </SplitLayout>

@@ -1,0 +1,176 @@
+---
+import MarkdownLayout from "$src/MarkdownLayout.astro";
+import Out from "$src/components/Out.astro";
+import Ex from "./Ex.astro";
+import W from "./W.astro";
+
+const props = {
+  title: "台語羅馬字簡介 | Kemdict",
+};
+---
+
+<MarkdownLayout frontmatter={props}>
+  <h1>台語羅馬字簡介</h1>
+  <p>
+    <strong>注意：</strong
+    >筆者並非白話字專家，使用上亦不熟練，但仍希望能盡可能介紹我所知道的部分。
+  </p>
+  <p>此篇參考：</p>
+  <dl>
+    <dt>
+      <Out
+        href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
+      >
+        臺灣閩南語羅馬字拼音方案
+      </Out>及<Out
+        href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
+      >
+        臺灣閩南語羅馬字拼音方案使用手冊
+      </Out>
+    </dt><dd>教育部羅馬字的標準文件</dd>
+    <dt>
+      <Out
+        href="https://kisaragi-hiu.gitlab.io/list-of-plants-of-formosa/text/#hanrei"
+      >
+        《臺灣植物名彙》凡例
+      </Out>之五
+    </dt><dd>鼻音與八音段落一大部分是由此翻譯而來的</dd>
+    <dt>
+      維基百科：<Out href="https://zh.wikipedia.org/zh-tw/白話字">
+        白話字
+      </Out>、<Out href="https://en.wikipedia.org/wiki/Pe̍h-ōe-jī">
+        Pe̍h-ōe-jī
+      </Out>、<Out
+        href="https://zh.wikipedia.org/wiki/臺灣閩南語羅馬字拼音方案"
+      >
+        臺灣閩南語羅馬字拼音方案
+      </Out>
+    </dt><dd>正確性檢查</dd>
+  </dl>
+  <h2>字母</h2>
+  <p>
+    教育部羅馬字與傳統白話字差別不大，個人認為可以將前者視為後者的拼字改良。
+  </p>
+  <p>
+    確切的定義請見<Out
+      href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
+    >
+      臺灣閩南語羅馬字拼音方案
+    </Out>及<Out
+      href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
+    >
+      臺灣閩南語羅馬字拼音方案使用手冊
+    </Out>，在此試著列出傳統白話字與教育部羅馬字的差別：
+  </p>
+  <table>
+    <tr>
+      <th>POJ</th>
+      <td>ch</td>
+      <td>chh</td>
+      <td>eng</td>
+      <td>◌ⁿ</td>
+      <td>oa</td>
+      <td>oai</td>
+      <td>oe</td>
+      <td>o͘</td>
+    </tr>
+    <tr>
+      <th>TL</th>
+      <td>ts</td>
+      <td>tsh</td>
+      <td>ing</td>
+      <td>nn</td>
+      <td>ua</td>
+      <td>uai</td>
+      <td>ue</td>
+      <td>oo</td>
+    </tr>
+  </table>
+
+  <h2>鼻音</h2>
+  <p>
+    鼻音指聲音有通過鼻腔的音。可以分成兩種，一種是聲音只通過鼻腔的，另一種則是聲音同時通過鼻腔和口腔的。
+  </p>
+  <ul>
+    <li>
+      <p>只通過鼻腔的鼻音有 m、n、ng，無特殊記號。</p>
+      <p><Ex><W>im 音</W>、<W>an 安</W>、<W>âng 紅</W></Ex></p>
+    </li>
+    <li>
+      <p>同時通過鼻腔和口腔的鼻音在字尾寫nn（白話字寫ⁿ）。</p>
+      <p><Ex><W>kiunn 薑</W>、<W>koann 官</W>、<W>siunn 箱</W></Ex></p>
+    </li>
+  </ul>
+  <h2>八音</h2>
+  <table class="table-fixed">
+    <thead>
+      <tr>
+        <td></td>
+        <th>陰平</th>
+        <th>陰上</th>
+        <th>陰去</th>
+        <th>陰入</th>
+        <th>陽平</th>
+        <th>陽上</th>
+        <th>陽去</th>
+        <th>陽入</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>符號</th>
+        <td>無</td>
+        <td>´</td>
+        <td>`</td>
+        <td>無</td>
+        <td>^</td>
+        <td>無</td>
+        <td>¯</td>
+        <td>'</td>
+      </tr>
+      <tr>
+        <th>例</th>
+        <td><W>king 間</W></td>
+        <td><W>kíng 揀</W></td>
+        <td><W>kìng 敬</W></td>
+        <td><W>kip 急</W></td>
+        <td><W>kîng 窮</W></td>
+        <td>-</td>
+        <td><W>bān 萬</W></td>
+        <td><W>ki̍p 及</W></td>
+      </tr>
+    </tbody>
+  </table>
+  <ol class="mt-4">
+    <li>
+      <p>陰平的音由高調開始並持平。</p>
+      <p><Ex><W>a 阿</W></Ex></p>
+    </li>
+    <li>
+      <p>陰上的音調由高調開始並快速下降，音尾較弱。</p><p>
+        <Ex><W>bí 米</W></Ex>
+      </p>
+    </li>
+    <li>
+      <p>陰去的音調由低調開始並拉長，音尾較弱。</p>
+      <p><Ex><W>ì 意</W></Ex></p>
+    </li>
+    <li>
+      <p>陰入的音調從中調開始快速地下降一些，音尾快速停止氣息。</p>
+      <p>與陰平同無符號，但字尾為短音字 h、k、t、p 時屬陰入。</p>
+      <p><Ex><W>kip 急</W></Ex></p>
+    </li>
+    <li>
+      <p>陽平的音調由低調開始並漸漸上升。</p><p><Ex><W>âng 紅</W></Ex></p>
+    </li>
+    <li><p>陽上的發音與符號皆與陰平相同，因此八音實際上只有七音。</p></li>
+    <li>
+      <p>陽去的音調由中調開始並持平、拉長。</p><p><Ex><W>ōo 芋</W></Ex></p>
+    </li>
+    <li>
+      <p>陽入的音調如同陰平，但音尾快速停止氣息。</p><p>
+        <Ex><W>ji̍t 日</W></Ex>
+      </p>
+    </li>
+  </ol>
+</MarkdownLayout>
