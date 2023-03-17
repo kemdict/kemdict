@@ -98,6 +98,9 @@
     }
   }
   .dict {
+    h1 + & {
+      @apply mt-0;
+    }
     @apply mt-12 mb-2 border-b;
     @apply border-black dark:border-stone-500;
     @apply flex justify-between;
@@ -134,6 +137,21 @@
     }
     :where(ol):not(:where([class~="not-prose"] *)) {
       @apply list-decimal;
+    }
+    :where(table):not(:where([class~="not-prose"] *)) {
+      @apply text-left text-lg;
+      th {
+        @apply text-gray-700 dark:text-gray-300;
+      }
+      td {
+        @apply text-teal-900 dark:text-fuchsia-100;
+      }
+      th,
+      td {
+        @apply border-b-2 dark:border-stone-700;
+        @apply text-left text-lg;
+        @apply p-2;
+      }
     }
   }
   .word {

@@ -9,15 +9,26 @@
   import WordKichhooGiku from "./WordKichhooGiku.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
 
-  import { format } from "$src/common";
+  import { format, langs } from "$src/common";
 
   import type { Dict, Heteronym } from "$src/common";
 
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
+
+  let addedLangIds: string[] = [];
+  function markLang(lang: string) {
+    addedLangIds.push(lang);
+    return lang;
+  }
 </script>
 
 {#each groupedHets as [dict, hets]}
+  {#if !addedLangIds.includes(dict.lang)}
+    <h1 class="mt-4 mb-4 text-4xl font-normal" id={markLang(dict.lang)}>
+      {langs[dict.lang]}
+    </h1>
+  {/if}
   <div id={dict.id} class="dict">
     {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
       <!-- FIXME: this only links to the first one. -->

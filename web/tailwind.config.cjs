@@ -20,6 +20,7 @@ module.exports = {
         "花園明朝B",
         "sans-serif",
       ],
+      mono: ["monospace"],
     },
     extend: {
       // https://github.com/tailwindlabs/tailwindcss/discussions/1361
