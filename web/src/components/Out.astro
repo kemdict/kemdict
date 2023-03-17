@@ -1,0 +1,26 @@
+---
+/* An outgoing link.
+   This lets me avoid specifying target and rel over and over again.
+
+   klass: classes for the anchor element
+   id: id of the anchor element
+   href: where the link goes
+ */
+
+export interface Props {
+  class?: string;
+  id?: string;
+  href?: string;
+}
+const { href, id } = Astro.props;
+const klass = Astro.props.class;
+const content = await Astro.slots.render("default");
+---
+
+<a
+  href={href}
+  id={id}
+  class={`after:content-['°'] link ${klass}`}
+  target="_blank"
+  rel="noreferrer">{content.trim()}</a
+>

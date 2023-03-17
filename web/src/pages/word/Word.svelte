@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Out from "$src/components/Out.svelte";
+  import Out from "$src/components/Out.astro";
   import WordDictConcised from "./WordDictConcised.svelte";
   import WordDictIdioms from "./WordDictIdioms.svelte";
   import WordDictRevised from "./WordDictRevised.svelte";

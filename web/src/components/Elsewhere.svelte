@@ -1,6 +1,6 @@
 <script>
   export let term;
-  import Out from "./Out.svelte";
+  import Out from "./Out.astro";
 </script>
 
 <div class="prose">
