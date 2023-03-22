@@ -2,7 +2,10 @@
   "name": "kemdict",
   "type": "module",
   "scripts": {
-    "prod": "npm install --omit=dev && node server/entry.mjs"
+    "prod": "npm install --omit=dev && (node purge-cache.mjs&; node server/entry.mjs)"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@astrojs/node": "^5.1.0",

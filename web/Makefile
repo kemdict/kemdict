@@ -12,7 +12,7 @@ entries.db: ../dicts
 
 dist: $(DEPS)
 	npx astro build
-	cp package.json package-lock.json dist/
+	cp package.json package-lock.json purge-cache.mjs dist/
 
 public/l: ../dicts
 	cd ../dicts && make ministry-of-education/package.json
