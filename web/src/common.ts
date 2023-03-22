@@ -36,13 +36,13 @@ export const dicts: Dict[] = [
   },
   {
     id: "dict_concised",
-    name: "教育部國語辭典簡編本",
+    name: "國語辭典簡編本",
     url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
   },
   {
     id: "dict_revised",
-    name: "教育部重編國語辭典",
+    name: "重編國語辭典修訂本",
     url: "https://dict.revised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
   },
@@ -54,7 +54,7 @@ export const dicts: Dict[] = [
   },
   {
     id: "moedict_twblg",
-    name: "教育部臺灣閩南語常用詞辭典",
+    name: "臺灣閩南語常用詞辭典",
     url: "https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample=$1",
     lang: "nan_TW",
   },
@@ -66,13 +66,13 @@ export const dicts: Dict[] = [
   },
   {
     id: "hakkadict",
-    name: "教育部臺灣客家語常用詞辭典",
+    name: "臺灣客家語常用詞辭典",
     url: 'https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id="$1".&searchmode=basic',
     lang: "hak_TW",
   },
   {
     id: "dict_idioms",
-    name: "教育部成語典",
+    name: "成語典",
     url: "https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=$1",
     lang: "zh_TW",
   },

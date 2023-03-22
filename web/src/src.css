@@ -33,7 +33,7 @@
   }
   .base {
     width: 95%;
-    @apply m-auto mb-24 max-w-4xl;
+    @apply mx-auto my-12 max-w-4xl;
   }
   ol {
     @apply pl-4;
