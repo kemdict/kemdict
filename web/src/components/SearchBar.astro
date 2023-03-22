@@ -8,6 +8,7 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
 
 <script>
   import { lGet, lUpdate, lSet } from "$src/localStorage";
+  import { uniqWith, isEqual } from "lodash-es";
   const sbi = document.getElementById("sbi") as HTMLInputElement;
   const sf = document.getElementById("sf") as HTMLFormElement;
   const sfd = document.getElementById("sfd") as HTMLSelectElement;
@@ -17,10 +18,10 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
       lSet("search-history", []);
     }
     lUpdate("search-history", (old) => {
-      const n = [
-        { q: sbi.value, m: sfd.selectedOptions[0].textContent },
-        ...old,
-      ];
+      const n = uniqWith(
+        [{ q: sbi.value, m: sfd.selectedOptions[0].textContent }, ...old],
+        isEqual
+      );
       return n.slice(0, 5);
     });
   });
