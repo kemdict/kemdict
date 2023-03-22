@@ -7,6 +7,8 @@
    href: where the link goes
  */
 
+import OutSvelte from "./Out.svelte";
+
 export interface Props {
   class?: string;
   id?: string;
@@ -17,10 +19,4 @@ const klass = Astro.props.class;
 const content = await Astro.slots.render("default");
 ---
 
-<a
-  href={href}
-  id={id}
-  class={`after:content-['°'] link ${klass}`}
-  target="_blank"
-  rel="noreferrer">{content.trim()}</a
->
+<OutSvelte href={href} class={klass} id={id}>{content.trim()}</OutSvelte>
