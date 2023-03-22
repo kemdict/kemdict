@@ -68,7 +68,7 @@
       /* The gap between the left edge of the container and the right slot */
       @apply sm:ml-[15rem] md:ml-[18rem];
       & > div.left {
-        /* The right slot position minus the gap (2rem) we want between left
+        /* The right slot position minus the gap (3rem) we want between left
            and right */
         @apply sm:w-[12rem] md:w-[15rem];
         /* Actually place it on the left */
@@ -97,13 +97,21 @@
       @apply no-underline;
     }
   }
-  .dict {
+  .lang {
+    @apply mt-4;
     h1 + & {
       @apply mt-0;
     }
-    @apply mt-12 mb-2 border-b;
+    @apply font-serif text-2xl;
+    @apply border-b;
     @apply border-black dark:border-stone-500;
-    @apply flex justify-between;
+  }
+  .dict {
+    @apply mt-4;
+    h1 + & {
+      @apply mt-2;
+    }
+    @apply text-lg font-bold;
   }
   .toc,
   .def {

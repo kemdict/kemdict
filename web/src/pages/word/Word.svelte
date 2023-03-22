@@ -25,17 +25,13 @@
 
 {#each groupedHets as [dict, hets]}
   {#if !addedLangIds.includes(dict.lang)}
-    <h1 class="mt-4 mb-4 text-4xl font-normal" id={markLang(dict.lang)}>
-      {langs[dict.lang]}
+    <h1 class="lang" id={markLang(dict.lang)}>
+      <a class="hover:link dark:gray-500 mr-1 text-gray-400" href="#{dict.lang}"
+        >#</a
+      >{langs[dict.lang]}
     </h1>
   {/if}
   <div id={dict.id} class="dict">
-    {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
-      <!-- FIXME: this only links to the first one. -->
-      <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
-    {:else}
-      <Out href={format(dict.url, title)}>{dict.name}</Out>
-    {/if}
     <span
       ><a
         class="hover:link dark:gray-500 text-gray-400"
@@ -43,6 +39,14 @@
         id={dict.id}>#</a
       ></span
     >
+    <span>
+      {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
+        <!-- FIXME: this only links to the first one. -->
+        <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
+      {:else}
+        <Out href={format(dict.url, title)}>{dict.name}</Out>
+      {/if}
+    </span>
   </div>
   <div class="word">
     {#if dict.id == "kisaragi_dict"}

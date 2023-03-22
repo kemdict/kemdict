@@ -1,3 +1,25 @@
+let cjkFallbackSans = [
+  "'Noto Sans CJK TC'",
+  "'Noto Sans TC'",
+  "'jf-openhuninn'",
+  "'jf-openhuninn-1.1'",
+  "Microsoft Jhenghei",
+  "Microsoft Yahei",
+  "Meiryo",
+  "Malgun Gothic",
+];
+
+let cjkFallbackSerif = [
+  "'Noto Serif CJK TC'",
+  "'Noto Serif TC'",
+  "'Iansui 094'",
+  "HanaMinA",
+  "HanaMinB",
+  "花園明朝A",
+  "花園明朝B",
+  "'Droid Serif'",
+];
+
 module.exports = {
   darkMode: "class",
   content: ["./src/**/*.{svelte,md,ts,js,html,astro,mdx}"],
@@ -5,19 +27,15 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        "'Noto Sans CJK TC'",
-        "'Noto Sans TC'",
-        "'jf-openhuninn'",
-        "'jf-openhuninn-1.1'",
-        "'Iansui 094'",
-        "Microsoft Jhenghei",
-        "Microsoft Yahei",
-        "Meiryo",
-        "Malgun Gothic",
-        "HanaMinA",
-        "HanaMinB",
-        "花園明朝A",
-        "花園明朝B",
+        "Noto Sans",
+        ...cjkFallbackSans,
+        ...cjkFallbackSerif,
+        "sans-serif",
+      ],
+      serif: [
+        "Noto Serif",
+        ...cjkFallbackSerif,
+        ...cjkFallbackSans,
         "sans-serif",
       ],
       mono: ["monospace"],
