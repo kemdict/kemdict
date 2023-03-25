@@ -1,5 +1,149 @@
 [
   {
+    "title": "行充",
+    "added": 1679767267.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄥˊ ㄔㄨㄥ",
+        "definitions": [
+          {
+            "def": "→[[行動電源]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "平板",
+    "added": 1679766861.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄆㄧㄥˊ ㄅㄢˇ",
+        "definitions": [
+          {
+            "def": "[[平板電腦]]的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "行動電源",
+    "added": 1679766663.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄥˊ ㄉㄨㄥˋ ㄉㄧㄢˋ ㄩㄢˊ",
+        "definitions": [
+          {
+            "def": "用來為[[手機]]或[[平板]]等行動裝置充電的攜帶式電池。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "周邊產品",
+    "added": 1679766586.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ ㄔㄢˇ ㄆㄧㄣˇ",
+        "definitions": [
+          {
+            "def": "→[[周邊商品]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "周邊商品",
+    "added": 1679766508.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ ㄕㄤ ㄆㄧㄣˇ",
+        "definitions": [
+          {
+            "def": "一個品牌的附屬產品。\n例如：一個偶像演唱會結束後販賣以其代表色為主題的鑰匙圈，其品牌並非以鑰匙圈為主，因此鑰匙圈是周邊商品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "周邊",
+    "added": 1679765979.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ",
+        "definitions": [
+          {
+            "def": "附近、在旁邊的。如：「周邊地區」",
+            "type": "形"
+          },
+          {
+            "def": "附屬的。如：「周邊設備」、「周邊商品」",
+            "type": "形"
+          },
+          {
+            "def": "[[周邊設備]]。",
+            "type": "名"
+          },
+          {
+            "def": "[[周邊商品]]。一個品牌的附屬產品。\n例如：一個偶像演唱會結束後販賣以其代表色為主題的鑰匙圈，其品牌並非以鑰匙圈為主，因此鑰匙圈是周邊商品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "週邊",
+    "added": 1679765626.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ",
+        "definitions": [
+          {
+            "def": "→[[周邊]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "行車記錄器",
+    "added": 1679523141.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄥˊ ㄔㄜ ㄐㄧˋ ㄌㄨˋ ㄑㄧˋ",
+        "definitions": [
+          {
+            "def": "一種汽車或機車用的攝影機，記錄車前狀況，以便發生意外時有證據可參考。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "食器",
+    "added": 1679522974.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄑㄧˋ",
+        "definitions": [
+          {
+            "def": "飲食用的器具。似「餐具」。如：「食器清潔劑」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "Q彈",
     "added": 1678626762.0,
     "heteronyms": [
@@ -251,8 +395,8 @@
         "pronunciation": "ㄨㄤˇ ㄔㄨㄢˊ",
         "definitions": [
           {
-            "def": "[[網路]]上流傳。似「聽說」。",
-            "type": "動"
+            "def": "在[[網路]]上流傳的。",
+            "type": "形"
           }
         ]
       }
@@ -2033,7 +2177,7 @@
         "pronunciation": "ㄅㄟˇ ㄑㄧ",
         "definitions": [
           {
-            "def": "同「白痴」。台語「[[白痴#moedict_twblg][白痴]]」的通假字。"
+            "def": "同「白痴」。台語「[[白痴#nan_TW][白痴]]」的通假字。"
           }
         ]
       }
@@ -2284,7 +2428,7 @@
         "pronunciation": "ㄍㄧㄥ",
         "definitions": [
           {
-            "def": "硬撐。挺住。逞強。來自台語「[[弓#moedict_twblg][弓]]」。",
+            "def": "硬撐。挺住。逞強。來自台語「[[弓#nan_TW][弓]]」。",
             "type": "動"
           }
         ]
@@ -2299,7 +2443,7 @@
         "pronunciation": "ㄐㄧㄡ",
         "definitions": [
           {
-            "def": "邀約。來自台語「[[招#moedict_twblg--tsio][招]]」。如：「吃這麼好，怎麼都不揪？」",
+            "def": "邀約。來自台語「[[招#nan_TW][招]]」。如：「吃這麼好，怎麼都不揪？」",
             "type": "動"
           }
         ]
@@ -2404,7 +2548,7 @@
         "pronunciation": "ㄙㄨㄟ",
         "definitions": [
           {
-            "def": "運氣不好。來自台語「[[衰#moedict_twblg][衰]]」。",
+            "def": "運氣不好。來自台語「[[衰#nan_TW][衰]]」。",
             "type": "形"
           }
         ]
@@ -2926,7 +3070,7 @@
         "pronunciation": "tsiok kám-sim",
         "definitions": [
           {
-            "def": "非常感動。台語「[[足#moedict_twblg][足]][[感心#moedict_twblg][感心]]」的借詞。"
+            "def": "非常感動。台語「[[足#nan_TW][足]][[感心#nan_TW][感心]]」的借詞。"
           }
         ]
       }
@@ -3057,7 +3201,7 @@
         "pronunciation": "tòng-suán",
         "definitions": [
           {
-            "def": "當選。一般用來鼓勵或祝福[[候選人]]當選。為台語「[[當選#moedict_twblg][當選]]」之[[通假字]]。",
+            "def": "當選。一般用來鼓勵或祝福[[候選人]]當選。為台語「[[當選#nan_TW][當選]]」之[[通假字]]。",
             "type": "動"
           }
         ]
