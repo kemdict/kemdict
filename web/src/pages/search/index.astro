@@ -54,7 +54,7 @@ import SingleLayout from "$src/SingleLayout.astro";
 import Results from "./Results.svelte";
 
 function getTitle(
-  mtch: "prefix" | "suffix" | "contains" | string,
+  mtch: "prefix" | "suffix" | "contains" | "exact" | string,
   query: string
 ): string {
   if (mtch === "prefix") {
@@ -63,6 +63,8 @@ function getTitle(
     return `以「${query}」結尾的詞`;
   } else if (mtch === "contains") {
     return `包含「${query}」的詞`;
+  } else if (mtch === "exact") {
+    return `完全符合「${query}」的詞`;
   }
 }
 

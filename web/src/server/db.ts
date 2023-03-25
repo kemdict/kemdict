@@ -39,7 +39,7 @@ export const db = (() => {
  * - "prefix": match heteronyms starting with QUERY
  * - "suffix": match heteronyms ending with QUERY
  * - "contains": match heteronyms that contain QUERY
- * - any thing else: match heteronyms exactly
+ * - any thing else (including "exact"): match heteronyms exactly
  *
  * @returns {Array<object>}
  */

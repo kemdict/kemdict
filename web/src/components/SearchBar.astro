@@ -100,6 +100,9 @@ const { initialInput = "", initialMatchSelection = "prefix" } = Astro.props;
       <option selected={initialMatchSelection == "contains"} value="contains"
         >包含</option
       >
+      <option selected={initialMatchSelection == "exact"} value="exact"
+        >完全符合</option
+      >
     </select>
     <input
       class="fade peer w-full border-b-2 border-gray-200 bg-white hover:border-gray-300 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700"
