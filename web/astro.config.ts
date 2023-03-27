@@ -62,7 +62,7 @@ export default defineConfig({
           ],
         },
       }),
-      legacy({ targets: "> 0.2%, Firefox ESR" }),
+      legacy(),
     ],
     clearScreen: false,
     envPrefix: "KEMDICT_",
