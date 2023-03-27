@@ -76,12 +76,6 @@ export default defineConfig({
     ],
     clearScreen: false,
     envPrefix: "KEMDICT_",
-    build: {
-      minify: "terser",
-      terserOptions: {
-        compress: { drop_console: true },
-      },
-    },
     resolve: {
       alias: [
         {
