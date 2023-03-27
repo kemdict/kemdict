@@ -46,6 +46,10 @@ overrides:
       "@typescript-eslint/no-unused-vars":
         - "error"
         - *noUnusedVarsSetting
+      "@typescript-eslint/restrict-template-expressions":
+        - "error"
+        - allowNumber: true
+          allowBoolean: true
   - files: ["*.astro"]
     parser: "astro-eslint-parser"
     parserOptions:
