@@ -3,8 +3,8 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs)
 
-node_modules: package.json
-	npm install
+node_modules: pnpm-lock.yaml
+	pnpm install --frozen-lockfile
 
 entries.db: ../dicts
 	cd ../dicts && make entries.db
@@ -12,7 +12,7 @@ entries.db: ../dicts
 
 dist: $(DEPS)
 	npx astro build
-	cp package.json package-lock.json purge-cache.mjs dist/
+	cp package.json pnpm-lock.yaml purge-cache.mjs dist/
 
 public/l: ../dicts
 	cd ../dicts && make ministry-of-education/package.json

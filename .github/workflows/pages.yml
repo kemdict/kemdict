@@ -27,12 +27,15 @@ jobs:
           fetch-depth: 0
           # only need dicts for kisaragi_dict.json, not the raw data
           submodules: true
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-          cache: "npm"
-          cache-dependency-path: "web/package-lock.json"
+          cache: "pnpm"
+          cache-dependency-path: "web/pnpm-lock.yaml"
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -44,7 +47,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - name: Install packages
         run: |
-          cd web && npm install
+          cd web && pnpm install
       - name: Build
         run: |
           cd web
