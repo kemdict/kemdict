@@ -10,15 +10,6 @@ import sitemap from "@astrojs/sitemap";
 
 const baseURL = "https://kemdict.com";
 
-// Conditional require. Because lightningcss doesn't run on Android
-// but I still want to be able to develop here.
-const lightningcss = (() => {
-  try {
-    return require("vite-plugin-lightningcss");
-  } catch (_e) {
-    return () => undefined;
-  }
-})();
 import babel from "vite-plugin-babel";
 import legacy from "@vitejs/plugin-legacy";
 
@@ -70,9 +61,6 @@ export default defineConfig({
         ],
       }),
       legacy({ targets: "> 0.2%, Firefox ESR" }),
-      lightningcss({
-        browserslist: "> 0.2%, Firefox ESR",
-      }),
     ],
     clearScreen: false,
     envPrefix: "KEMDICT_",
