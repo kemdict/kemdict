@@ -49,16 +49,18 @@ export default defineConfig({
       // understand it. Such is the nature of not-yet-standardized
       // language extensions.
       babel({
-        plugins: [
-          [
-            "@babel/plugin-proposal-pipeline-operator",
-            {
-              proposal: "hack",
-              topicToken: "%",
-            },
+        babelConfig: {
+          plugins: [
+            [
+              "@babel/plugin-proposal-pipeline-operator",
+              {
+                proposal: "hack",
+                topicToken: "%",
+              },
+            ],
+            "@babel/plugin-proposal-do-expressions",
           ],
-          "@babel/plugin-proposal-do-expressions",
-        ],
+        },
       }),
       legacy({ targets: "> 0.2%, Firefox ESR" }),
     ],
