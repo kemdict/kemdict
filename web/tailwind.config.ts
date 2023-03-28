@@ -1,4 +1,6 @@
-let cjkFallbackSans = [
+import type { Config } from "tailwindcss";
+
+const cjkFallbackSans = [
   "'Noto Sans CJK TC'",
   "'Noto Sans TC'",
   "'jf-openhuninn'",
@@ -9,7 +11,7 @@ let cjkFallbackSans = [
   "Malgun Gothic",
 ];
 
-let cjkFallbackSerif = [
+const cjkFallbackSerif = [
   "'Noto Serif CJK TC'",
   "'Noto Serif TC'",
   "'Iansui 094'",
@@ -20,7 +22,7 @@ let cjkFallbackSerif = [
   "'Droid Serif'",
 ];
 
-module.exports = {
+export default {
   darkMode: "class",
   content: ["./src/**/*.{svelte,md,ts,js,html,astro,mdx}"],
   safelist: ["visible", "invisible"],
@@ -49,4 +51,4 @@ module.exports = {
       },
     },
   },
-};
+} satisfies Config;
