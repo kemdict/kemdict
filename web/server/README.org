@@ -1,0 +1,5 @@
+* Server
+
+Deploy scripts.
+
+Files in this folder (aside from anything named =readme= (case-insensitive)) are copied to the =dist= folder during build by [[../Makefile]].

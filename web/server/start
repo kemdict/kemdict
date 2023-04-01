@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pnpm install --prod
+node purge-cache.mjs &
+node server/entry.mjs

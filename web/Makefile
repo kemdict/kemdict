@@ -12,7 +12,8 @@ entries.db: ../dicts
 
 dist: $(DEPS)
 	npx astro build
-	cp package.json pnpm-lock.yaml purge-cache.mjs dist/
+	cp package.json pnpm-lock.yaml dist/
+	find server -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 
 public/l: ../dicts
 	cd ../dicts && make ministry-of-education/package.json

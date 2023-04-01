@@ -72,11 +72,13 @@ Restart=always
 RestartSec=3
 WorkingDirectory=/home/user/kemdict
 Environment="PORT=1234"
-ExecStart=npm run prod
+ExecStart=start
 
 [Install]
 WantedBy=default.target
 #+end_src
+
+=start= is [[./server/start]], copied to =dist= by [[./Makefile]].
 
 Put this in =~/.config/systemd/user/<name>.service=, do a user =daemon-reload=, then make sure to mark the user as lingering (so services start at boot and don't stop just because you quit your ssh session; see =enable-linger= in [[https://man.archlinux.org/man/loginctl.1.en.html][loginctl(1)]]):
 
