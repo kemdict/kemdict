@@ -15,7 +15,8 @@ export default {
   safelist: ["visible", "invisible"],
   theme: {
     fontFamily: {
-      sans: ["Noto Sans", ...cjkFallback, "sans-serif"],
+      sans: ["'M PLUS 1'", ...cjkFallback, "sans-serif"],
+      mono: ["Iosevka", "monospace"],
     },
   },
 } satisfies Config;

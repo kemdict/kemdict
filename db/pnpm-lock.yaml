@@ -4,6 +4,12 @@ dependencies:
   better-sqlite3:
     specifier: ^8.2.0
     version: 8.2.0
+  highlight.js:
+    specifier: ^11.7.0
+    version: 11.7.0
+  lodash-es:
+    specifier: ^4.17.21
+    version: 4.17.21
 
 devDependencies:
   '@sveltejs/adapter-auto':
@@ -15,6 +21,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.5.0
     version: 1.5.0(svelte@3.58.0)(vite@4.2.0)
+  '@types/node':
+    specifier: ^18.15.11
+    version: 18.15.11
   prettier:
     specifier: ^2.8.0
     version: 2.8.0
@@ -41,7 +50,7 @@ devDependencies:
     version: 5.0.2
   vite:
     specifier: ^4.2.0
-    version: 4.2.0
+    version: 4.2.0(@types/node@18.15.11)
 
 packages:
 
@@ -396,7 +405,7 @@ packages:
       svelte: 3.58.0
       tiny-glob: 0.2.9
       undici: 5.18.0
-      vite: 4.2.0
+      vite: 4.2.0(@types/node@18.15.11)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -414,7 +423,7 @@ packages:
       magic-string: 0.30.0
       svelte: 3.58.0
       svelte-hmr: 0.15.1(svelte@3.58.0)
-      vite: 4.2.0
+      vite: 4.2.0(@types/node@18.15.11)
       vitefu: 0.2.4(vite@4.2.0)
     transitivePeerDependencies:
       - supports-color
@@ -426,6 +435,10 @@ packages:
 
   /@types/estree@1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+    dev: true
+
+  /@types/node@18.15.11:
+    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
     dev: true
 
   /@types/pug@2.0.6:
@@ -809,6 +822,11 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /highlight.js@11.7.0:
+    resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
+    engines: {node: '>=12.0.0'}
+    dev: false
+
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
     dev: false
@@ -904,6 +922,10 @@ packages:
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
+
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -1646,7 +1668,7 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  /vite@4.2.0:
+  /vite@4.2.0(@types/node@18.15.11):
     resolution: {integrity: sha512-AbDTyzzwuKoRtMIRLGNxhLRuv1FpRgdIw+1y6AQG73Q5+vtecmvzKo/yk8X/vrHDpETRTx01ABijqUHIzBXi0g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -1671,6 +1693,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.15.11
       esbuild: 0.17.15
       postcss: 8.4.21
       resolve: 1.22.2
@@ -1687,7 +1710,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.2.0
+      vite: 4.2.0(@types/node@18.15.11)
     dev: true
 
   /wrappy@1.0.2:
