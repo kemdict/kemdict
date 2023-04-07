@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@astrojs/node": "^5.1.0",
-    "better-sqlite3": "^8.1.0",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
