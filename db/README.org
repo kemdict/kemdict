@@ -1,0 +1,5 @@
+* DB
+
+The database server.
+
+This should allow the main site to be easier to host and iterate on.
