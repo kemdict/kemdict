@@ -4,11 +4,9 @@
   import "highlight.js/styles/atom-one-dark.css";
   import { signatures } from "$lib/common";
   export let data;
+  export let basePath = "/titles";
 
-  $: params = data.params;
-  $: searchParams = data.searchParams;
-
-  const args = signatures["/het"].args;
+  const args = signatures[basePath].args;
 </script>
 
 <div class="my-8 max-h-96 overflow-auto rounded">
@@ -21,15 +19,15 @@
 <a class="link" href="/">Back to top</a>
 
 <h1 class="mt-2 flex text-4xl">
-  /het/
+  {basePath}/
   <div>
-    {#each Object.entries(params) as [k, v]}
+    {#each Object.entries(data.params) as [k, v]}
       <div>{v}</div>
       <div class="text-sm">{k}</div>
     {/each}
   </div>
-  <div>
-    ?{#each Object.entries(searchParams) as [k, v]}
+  <div class="flex">
+    ?{#each Object.entries(data.searchParams) as [k, v]}
       {k}={v}
     {/each}
   </div>

@@ -3,4 +3,4 @@
   export let data;
 </script>
 
-<Route {data} basePath="/het" />
+<Route {data} basePath="/titles" />
