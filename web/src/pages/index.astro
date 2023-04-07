@@ -1,7 +1,9 @@
 ---
 export const prerender = false;
 
-import { getDictTitles } from "$src/server/db";
+import { api } from "$src/common";
+
+const titles = await api(`/titles/kisaragi_dict?limit=12`);
 
 import SplitLayout from "$src/SplitLayout.astro";
 import WordList from "$src/components/WordList.astro";
@@ -86,7 +88,7 @@ const description =
       <SearchBar />
     </div>
     <h3>最近新增的詞</h3>
-    <WordList words={getDictTitles("kisaragi_dict", 12)} />
+    <WordList words={titles} />
     <h3>收錄字典</h3>
     <ul class="md:two ml-1 list-none p-0">
       <li>

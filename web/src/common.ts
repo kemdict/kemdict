@@ -1,5 +1,9 @@
 import { escapeRegExp } from "lodash-es";
 
+export async function api(path: string) {
+  return fetch(`http://localhost:5173${path}`).then((res) => res.json());
+}
+
 export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",

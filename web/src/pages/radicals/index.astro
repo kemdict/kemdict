@@ -2,10 +2,9 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { getRadicals } from "$src/server/db";
-import { groupByProp } from "$src/common";
+import { api, groupByProp } from "$src/common";
 
-const radicals = getRadicals();
+const radicals = await api("/radicals");
 ---
 
 <SingleLayout title="部首索引">

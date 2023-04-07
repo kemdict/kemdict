@@ -1,12 +1,18 @@
 ---
 import { uniq } from "lodash-es";
-import { getHeteronyms, getBacklinks } from "$src/server/db";
 import type { Dict, Heteronym } from "$src/common";
+import { api } from "$src/common";
 
 const { title } = Astro.params;
-const heteronyms = getHeteronyms(title);
+const heteronyms = await api(`/het/${title}`);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
-const backlinks = getBacklinks(...titles).sort();
+
+let backlinks;
+{
+  let promises = titles.map((title) => api(`/back/${title}`));
+  backlinks = await Promise.all(promises);
+  backlinks = backlinks.flat(1).sort();
+}
 
 import SplitLayout from "$src/SplitLayout.astro";
 import SingleLayout from "$src/SingleLayout.astro";

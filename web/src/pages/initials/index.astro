@@ -2,10 +2,9 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { getChars } from "$src/server/db";
-import { groupByProp } from "$src/common";
+import { api, groupByProp } from "$src/common";
 
-const { with_stroke, without_stroke } = getChars();
+const { with_stroke, without_stroke } = await api("/all-chars");
 ---
 
 <SingleLayout title="首字索引 - kemdict">

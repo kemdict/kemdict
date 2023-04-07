@@ -1,6 +1,5 @@
 ---
-import { getHeteronyms } from "$src/server/db";
-import { dicts, langs, WordSortFns } from "$src/common";
+import { api, dicts, langs, WordSortFns } from "$src/common";
 
 const url = Astro.url;
 const query: string | undefined = url.searchParams.get("q")?.trim();
@@ -12,7 +11,7 @@ if (typeof query !== "string") {
   return Astro.redirect("/");
 }
 
-heteronyms = getHeteronyms(query, mtch);
+heteronyms = await api(`/het/${query}?m=${mtch}`);
 
 // This stops the query from going into the /word/ page when redirecting
 url.searchParams.delete("q");
