@@ -2,22 +2,12 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { db } from "$src/server/db";
+import { getCharsByRadical } from "$src/server/db";
 import { format } from "$src/common";
 import { groupByProp } from "$src/common";
 
 const { radical } = Astro.params;
-
-const charsStmt = db.prepare(`
-  SELECT DISTINCT
-    title,
-    non_radical_stroke_count
-  FROM han
-  WHERE radical = ?
-  ORDER BY non_radical_stroke_count
-`);
-
-const entries = charsStmt.all(radical);
+const entries = getCharsByRadical(radical);
 ---
 
 <SingleLayout title={`部首為「${radical}」的字 - kemdict`}>

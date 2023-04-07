@@ -2,19 +2,10 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { db } from "$src/server/db";
+import { getRadicals } from "$src/server/db";
 import { groupByProp } from "$src/common";
 
-const radicals = db
-  .prepare(
-    `
-    SELECT DISTINCT radical, stroke_count
-    FROM han
-    WHERE non_radical_stroke_count = 0
-    ORDER BY radical
-`
-  )
-  .all();
+const radicals = getRadicals();
 ---
 
 <SingleLayout title="部首索引">

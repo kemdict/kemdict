@@ -1,15 +1,7 @@
 ---
 export const prerender = false;
 
-import { db } from "$src/server/db";
-
-function kisaragi_dict_titles() {
-  const stmt = db.prepare(
-    `SELECT DISTINCT title FROM heteronyms WHERE "from" = 'kisaragi_dict' LIMIT 12`
-  );
-  stmt.pluck(true);
-  return stmt.all();
-}
+import { getDictTitles } from "$src/server/db";
 
 import SplitLayout from "$src/SplitLayout.astro";
 import WordList from "$src/components/WordList.astro";
@@ -94,7 +86,7 @@ const description =
       <SearchBar />
     </div>
     <h3>最近新增的詞</h3>
-    <WordList words={kisaragi_dict_titles()} />
+    <WordList words={getDictTitles("kisaragi_dict", 12)} />
     <h3>收錄字典</h3>
     <ul class="md:two ml-1 list-none p-0">
       <li>

@@ -2,52 +2,20 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { uniq } from "lodash-es";
-import { db } from "$src/server/db";
+import { getChars } from "$src/server/db";
 import { groupByProp } from "$src/common";
 
-const strokeStmt = db.prepare(`
-  SELECT DISTINCT
-    heteronyms.title,
-    cast(json_tree.value as integer) AS 'stroke_count'
-  FROM heteronyms, json_tree(heteronyms.props)
-  WHERE length("title") = 1
-    AND json_tree.key = 'stroke_count'
-  ORDER BY 'stroke_count'
-`);
-
-const nostrokeStmt = db.prepare(`
-  SELECT DISTINCT
-    substr(heteronyms.title, 0, 2) AS 'initial'
-  FROM heteronyms
-`);
-
-const pnStmt = db.prepare(`
-  SELECT DISTINCT
-    substr(json_each.value, 0, 2) AS 'pnInitial'
-  FROM heteronyms, json_each(heteronyms.pns)
-  WHERE "pnInitial" IS NOT NULL
-`);
-
-nostrokeStmt.pluck(true);
-pnStmt.pluck(true);
-
-const with_stroke: Array<{ title: string; stroke_count: number }> =
-  strokeStmt.all();
-
-let no_stroke: string[];
-{
-  let s = new Set(with_stroke.map((x) => x.title));
-  no_stroke = uniq([...nostrokeStmt.all(), ...pnStmt.all()])
-    .filter((x: any) => !s.has(x))
-    .sort();
-}
+const { with_stroke, without_stroke } = getChars();
 ---
 
 <SingleLayout title="首字索引 - kemdict">
   <div class="prose">
     <h1>首字索引</h1>
-    <Group title="其他" elements={no_stroke} template="/search?q=$1&m=prefix" />
+    <Group
+      title="其他"
+      elements={without_stroke}
+      template="/search?q=$1&m=prefix"
+    />
     {
       groupByProp(with_stroke, "stroke_count").map(([count, elements]) => (
         <Group
