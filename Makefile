@@ -28,6 +28,7 @@ DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
+DICT_TARGETS += unihan.json
 
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
@@ -41,6 +42,9 @@ entries.db: heteronyms.json heteronyms-to-sqlite.mjs
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
 	touch entries.db.gz
+
+unihan.json:
+	unihan-etl -F json -d $(abspath unihan.json) -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .cask
 	cask eval "(load \"kisaragi/generate\")"

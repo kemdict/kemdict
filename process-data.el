@@ -15,22 +15,51 @@
 
 (put 'ht-update-with! 'lisp-indent-function 2)
 
+(defmacro with-syms (symbols &rest body)
+  "Bind SYMBOLS to uninterned symbols, then run BODY."
+  (declare (debug (sexp body))
+           (indent 1))
+  `(let ,(mapcar (lambda (s)
+                   `(,s (make-symbol ,(format "--%s--" (symbol-name s)))))
+                 symbols)
+     ,@body))
+
+(defun d::hash-rename (table from to)
+  "Rename the key FROM to TO in TABLE."
+  (ht-set! table to (ht-get table from))
+  (ht-remove! table from))
+
 (defun d::hash-prune (table value)
   "Remove all entries in TABLE that are associated with VALUE."
-  (cl-loop for k in (hash-table-keys table)
-           when (equal value (gethash k table))
-           do (remhash k table))
-  table)
+  (with-syms (dflt)
+    (cl-loop for k in (hash-table-keys table)
+             when (equal value (gethash k table dflt))
+             do (remhash k table))
+    table))
 
-(defvar d::ucs-NFC::buffer (get-buffer-create " process-data" t))
+(defvar d::ucs::buffer (get-buffer-create " process-data" t))
 (defun d::ucs-NFC (str)
   "Like `ucs-normalize-NFC-string' but keeps reusing the same temp buffer."
-  (with-current-buffer d::ucs-NFC::buffer
+  (with-current-buffer d::ucs::buffer
     (erase-buffer)
     (insert str)
     (ucs-normalize-NFC-region
      (point-min) (point-max))
     (buffer-string)))
+(defun d::ucs-NFKC (str)
+  "Like `ucs-normalize-NFKC-string' but keeps reusing the same temp buffer."
+  (with-current-buffer d::ucs::buffer
+    (erase-buffer)
+    (insert str)
+    (ucs-normalize-NFKC-region
+     (point-min) (point-max))
+    (buffer-string)))
+
+(defun d:radical-id-to-char (radical-id)
+  "Return the normalized radical character for RADICAL-ID.
+For example, 1 is 一, 213 is 龜."
+  (d::ucs-NFKC
+   (string (+ #x2f00 (1- radical-id)))))
 
 (defun d:latin-only (str)
   "Whether STR contains only characters from the latin and symbol scripts."
@@ -257,18 +286,18 @@ this:
                  "<a href=\"/word/敵意\">敵意</a>")))))
 
 (defconst d::pn-keys
-  (list
-   ;; kemdict-data-ministry-of-education
-   "bopomofo" ; "pinyin"
-   ;; moedict-twblg
-   "trs"
-   ;; kisaragi-dict
-   "pronunciation"
-   ;; hakkadict
-   "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
-   ;; chhoetaigi-itaigi (keys are defined in Makefile
-   ;; in this repository)
-   "poj" "kip"))
+  '(;; kemdict-data-ministry-of-education
+    "bopomofo" ; "pinyin"
+    ;; moedict-twblg
+    "trs"
+    ;; kisaragi-dict
+    "pronunciation"
+    ;; hakkadict
+    "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
+    ;; chhoetaigi-itaigi (keys are defined in Makefile
+    ;; in this repository)
+    "poj" "kip"
+    "kMandarin"))
 
 (defun d:pn-collect (het &optional table?)
   "Collect pronunciations from heteronym object HET.
@@ -285,10 +314,15 @@ pronunciation key to the corresponding value."
 (defun d:pn-normalize (p &optional one)
   "Normalize pronunciation string P.
 
+If P is a hash table, get the string from its value in
+\"zh-Hant\".
+
 Return a list of normalized strings. This is because some
 pronunciation strings include multiple pronunciations. If ONE is
 non-nil, don't do pronunciation splitting and return a string
 instead."
+  (when (hash-table-p p)
+    (setq p (gethash "zh-Hant" p)))
   (if one
       (->> p
            d::ucs-NFC
@@ -486,6 +520,30 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("unihan"
+       (ht-set! props "pinyin"
+                (-some-> props
+                  (ht-get "kMandarin")
+                  (ht-get "zh-Hant")))
+       (when-let* ((hashes (ht-get props "kRSUnicode"))
+                   ;; There can be multiple radicals because it's
+                   ;; ambiguous for some characters.
+                   ;; HACK: we'll just take the first one.
+                   (hash (elt hashes 0))
+                   (radical (ht-get hash "radical"))
+                   (non-radical-stroke (ht-get hash "strokes"))
+                   (total-stroke (-some-> props
+                                   (ht-get "kTotalStrokes")
+                                   (ht-get "zh-Hant"))))
+         (ht-set! props "radical" (d:radical-id-to-char radical))
+         (ht-set! props "stroke_count" total-stroke)
+         (ht-set! props "non_radical_stroke_count"
+                  non-radical-stroke))
+       (d::hash-rename props "kCangjie" "cangjie")
+       (d::hash-rename props "kDefinition" "defs")
+       (--each '("char" "ucn" "kRSUnicode"
+                 "kMandarin" "kTotalStrokes")
+         (ht-remove! props it)))
       ("hakkadict"
        (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
          (ht-update-with! props (format "p_%s" p_name)
@@ -547,9 +605,10 @@ This is a separate step from shaping."
     ;; Needs the client to check for `undefined' though.
     ;; heteronyms.json: 249MiB -> 202MiB
     ;; entries.db:      189MiB -> 152MiB
-    (d::hash-prune props "")))
+    (d::hash-prune props "")
+    (d::hash-prune props nil)))
 
-(defun d::dictionaries (&optional dev?)
+(defun d::dictionaries ()
   "Return definitions of dictionaries.
 
 The value is a vector:
@@ -557,35 +616,10 @@ The value is a vector:
      (ID . (FILE1 FILE2 ...)) ; or this form
      ...]
 
-Development versions are returned when applicable if DEV? is
-non-nil.
-
 An ID of nil means the entries are included but will not be shown
 by default. This is added for assigning extra stroke count
 information."
   (cond
-   ((and dev?
-         (-all? #'file-exists-p
-                '("dev-dict_revised.json"
-                  "dev-dict-twblg.json"
-                  "dev-dict-twblg-ext.json"
-                  "dev-dict_concised.json"
-                  "dev-dict_idioms.json"
-                  "dev-hakkadict.json"
-                  "dev-chhoetaigi-itaigi.json"
-                  "dev-chhoetaigi-taijittoasutian.json"
-                  "dev-chhoetaigi-taioanpehoekichhoogiku.json")))
-    [(nil . "kisaragi/extra-strokes.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
-     ("dict_concised" . "dev-dict_concised.json")
-     ("dict_revised" . "dev-dict_revised.json")
-     ("chhoetaigi_taijittoasutian" . "dev-chhoetaigi-taijittoasutian.json")
-     ("moedict_twblg" . ("dev-dict-twblg.json"
-                         "dev-dict-twblg-ext.json"))
-     ("chhoetaigi_itaigi" . "dev-chhoetaigi-itaigi.json")
-     ("chhoetaigi_taioanpehoekichhoogiku" . "dev-chhoetaigi-taioanpehoekichhoogiku.json")
-     ("hakkadict" . "dev-hakkadict.json")
-     ("dict_idioms" . "dev-dict_idioms.json")])
    ;; For testing on my phone
    ((getenv "ANDROID_DATA")
     [("dict_idioms" . "ministry-of-education/dict_idioms.json")
@@ -598,6 +632,7 @@ information."
     ;; The order here defines the order they will appear in the word
     ;; pages.
     [(nil . "kisaragi/extra-strokes.json")
+     ("unihan" . "unihan.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
      ("dict_concised" . "ministry-of-education/dict_concised.json")
      ("dict_revised" . "ministry-of-education/dict_revised.json")
@@ -656,14 +691,16 @@ Titles are written to `d:titles:look-up-table'."
                            orig-hets)))
         (seq-doseq (orig-het orig-hets)
           (let* ((shaped-het (make-hash-table :test #'equal))
-                 ;; title can be empty. We'll read from .poj just below.
+                 ;; title can be empty. We'll read from fallback
+                 ;; fields below.
                  (title (-some-> (gethash "title" entry)
                           d:process-title)))
-            ;; - work around some entries in chhoetaigi_taijittoasutian
-            ;;   having empty titles
-            ;; - also allows working with chhoetaigi_taioanpehoekichhoogiku
             (unless title
-              (setq title (gethash "poj" orig-het)))
+              (setq title (or
+                           ;; 臺日大辭典 and 臺灣白話基礎語句
+                           (gethash "poj" orig-het)
+                           ;; unihan
+                           (gethash "char" orig-het))))
             ;; chhoetaigi_taijittoasutian:
             ;; work around some incorrectly formatted titles, like
             ;; "a-a cham-cham" being formatted as "a-acham-cham" in
@@ -691,8 +728,7 @@ Titles are written to `d:titles:look-up-table'."
   (setq d:titles:look-up-table (ht))
   (let* ((heteronyms nil))
     (let* ((dictionaries
-            (d::dictionaries (or (not noninteractive)
-                                 (getenv "DEV"))))
+            (d::dictionaries))
            (dict-count (length dictionaries)))
       ;; Step 1
       (cl-loop
