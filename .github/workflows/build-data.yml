@@ -24,7 +24,7 @@ jobs:
       - name: Install packages
         run: |
           pnpm install
-          pip install unihan-etl
+          pip install unihan-etl typing_extensions
       - name: Set up Emacs
         run: |
           sudo add-apt-repository ppa:kelleyk/emacs

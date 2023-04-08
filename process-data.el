@@ -10,6 +10,24 @@
 (require 'ol)
 (require 'ht)
 
+(defconst d:abc-han-ht
+  (ht (?a "日") (?b "月") (?c "金") (?d "木") (?e "水") (?f "火")
+      (?g "土") (?h "竹") (?i "戈") (?j "十") (?k "大") (?l "中")
+      (?m "一") (?n "弓") (?o "人") (?p "心") (?q "手") (?r "口")
+      (?s "尸") (?t "廿") (?u "山") (?v "女") (?w "田") (?x "難")
+      (?y "卜") (?z "重")))
+
+(defun d:cangjie-abc-to-han (abc)
+  (let* ((seq (downcase abc))
+         (idx 0)
+         (c nil)
+         (str ""))
+    (while (< idx (length seq))
+      (setq c (aref seq idx))
+      (setq str (concat str (gethash c d:abc-han-ht)))
+      (cl-incf idx))
+    str))
+
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
 
@@ -539,6 +557,8 @@ This is a separate step from shaping."
          (ht-set! props "stroke_count" total-stroke)
          (ht-set! props "non_radical_stroke_count"
                   non-radical-stroke))
+       (ht-update-with! props "kCangjie"
+         #'d:cangjie-abc-to-han)
        (d::hash-rename props "kCangjie" "cangjie")
        (d::hash-rename props "kDefinition" "defs")
        (--each '("char" "ucn" "kRSUnicode"
