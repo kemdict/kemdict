@@ -8,6 +8,7 @@
   import WordTaiJit from "./WordTaiJit.svelte";
   import WordKichhooGiku from "./WordKichhooGiku.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
+  import WordUnihan from "./WordUnihan.svelte";
 
   import { format, langs } from "$src/common";
 
@@ -16,7 +17,7 @@
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
 
-  let addedLangIds: string[] = [];
+  let addedLangIds: string[] = ["han"];
   function markLang(lang: string) {
     addedLangIds.push(lang);
     return lang;
@@ -49,7 +50,15 @@
     </span>
   </div>
   <div class="word">
-    {#if dict.id == "kisaragi_dict"}
+    {#if dict.id == "unihan"}
+      <WordUnihan heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          {dict.name}
+          <a href="https://www.unicode.org/license.txt">© Unicode, Inc.</a>
+        </p>
+      </div>
+    {:else if dict.id == "kisaragi_dict"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
       <div class="copyright">
         <p>

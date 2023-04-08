@@ -4,6 +4,7 @@ export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",
   hak_TW: "客語",
+  han: "漢字",
 };
 
 export interface Dict {
@@ -22,6 +23,12 @@ export interface Heteronym {
 
 // This no longer defines the order in word pages.
 export const dicts: Dict[] = [
+  {
+    id: "unihan",
+    name: "Unihan 資料庫",
+    url: "https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=$1",
+    lang: "han",
+  },
   {
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",

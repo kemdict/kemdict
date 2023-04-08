@@ -20,7 +20,7 @@
   }
   hr {
     @apply border-gray-400;
-    @apply my-8 mx-auto w-[95%];
+    @apply mx-auto my-8 w-[95%];
   }
   body {
     @apply relative mt-12;
@@ -72,7 +72,7 @@
            and right */
         @apply sm:w-[12rem] md:w-[15rem];
         /* Actually place it on the left */
-        @apply sm:absolute sm:top-4 sm:left-4;
+        @apply sm:absolute sm:left-4 sm:top-4;
         /* Style for when it's collapsed */
         .fixed {
           @apply sm:w-[12rem] md:w-[15rem];
@@ -92,7 +92,7 @@
     }
   }
   .wordlink {
-    @apply btn py-1 px-2 font-bold;
+    @apply btn px-2 py-1 font-bold;
     &:hover {
       @apply no-underline;
     }
@@ -130,10 +130,10 @@
       @apply font-bold;
     }
     :where(h1):not(:where([class~="not-prose"] *)) {
-      @apply mt-8 mb-4 text-3xl;
+      @apply mb-4 mt-8 text-3xl;
     }
     :where(h2):not(:where([class~="not-prose"] *)) {
-      @apply mt-8 mb-4 text-xl;
+      @apply mb-4 mt-8 text-xl;
     }
     :where(h3):not(:where([class~="not-prose"] *)) {
       @apply mt-6;
@@ -172,7 +172,7 @@
         }
       }
       dd {
-        @apply ml-6 mb-2;
+        @apply mb-2 ml-6;
       }
     }
     :where(table):not(:where([class~="not-prose"] *)) {
@@ -193,7 +193,7 @@
   }
   .word {
     .copyright {
-      @apply mt-6 mb-2 text-right text-sm opacity-75;
+      @apply mb-2 mt-6 text-right text-sm opacity-75;
     }
     transition-property: max-height;
     transition-duration: 250ms;
@@ -219,9 +219,9 @@
     ol {
       padding-left: 1.5rem;
       @apply list-decimal;
-    }
-    li {
-      @apply mt-2;
+      li {
+        @apply mt-2;
+      }
     }
     li:first-child {
       @apply mt-0;
