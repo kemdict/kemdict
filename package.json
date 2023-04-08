@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "dependencies": {
     "better-sqlite3": "^7.6.2",
     "csvtojson": "^2.0.10"

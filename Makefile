@@ -19,7 +19,7 @@ build: entries.db
 	touch .cask
 
 node_modules: package.json
-	npm install
+	pnpm install
 
 DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json
