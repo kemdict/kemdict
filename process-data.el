@@ -631,8 +631,7 @@ information."
    (t
     ;; The order here defines the order they will appear in the word
     ;; pages.
-    [(nil . "kisaragi/extra-strokes.json")
-     ("unihan" . "unihan.json")
+    [("unihan" . "unihan.json")
      ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
      ("dict_concised" . "ministry-of-education/dict_concised.json")
      ("dict_revised" . "ministry-of-education/dict_revised.json")
