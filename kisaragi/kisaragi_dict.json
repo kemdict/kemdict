@@ -1,5 +1,101 @@
 [
   {
+    "title": "副歌",
+    "added": 1681306911.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄨˋ ㄍㄜ",
+        "definitions": [
+          {
+            "def": "（音樂）[[主副歌形式]]的主要段落之一。與[[主歌]]相對，主要為樂曲的高潮。[英]chorus, refrain",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "主副歌形式",
+    "added": 1681306318.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨˇ ㄈㄨˋ ㄍㄜ ㄒㄧㄥˊ ㄕˋ",
+        "definitions": [
+          {
+            "def": "英語[[https://en.wikipedia.org/wiki/Verse–chorus_form][verse–chorus form]]的意譯。亦作「正副歌形式」。一種音樂的形式，為多數流行音樂所使用。以兩個重複的段落——[[主歌]]與[[副歌]]為主，主歌主要進行鋪陳，副歌則為樂曲的高潮。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "主歌",
+    "added": 1681305114.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨˇ ㄍㄜ",
+        "definitions": [
+          {
+            "def": "（音樂）[[主副歌形式]]的主要段落之一。與[[副歌]]相對，主要為進行鋪陳的段落。[英]verse",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "過門",
+    "added": 1681304818.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄛˋ ㄇㄣˊ",
+        "definitions": [
+          {
+            "def": "（音樂）一首樂曲的段落間連接用的簡短樂句。[英]transition",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ㄟ",
+    "added": 1681304775.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ê",
+        "definitions": [
+          {
+            "def": "台語「[[的#nan_TW][的]]」的通假字。"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ē",
+        "definitions": [
+          {
+            "def": "台語「[[會#nan_TW][會]]」的通假字。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "腳色",
+    "added": 1681304772.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄠˇ ㄙㄜˋ",
+        "definitions": [
+          {
+            "def": "→[[角色]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "行充",
     "added": 1679767267.0,
     "heteronyms": [
