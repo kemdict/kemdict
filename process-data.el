@@ -187,23 +187,41 @@ this:
       (format "<a href=\"/word/%s\">%s</a>"
               href desc))))
 
-(defun d:links:link-keywords (str)
+(defun d:links:linkify-keywords (str)
   "Extract 5 keywords in STR and attempt to make them links."
+  ;; Estimate the amount of information in the string and guess a
+  ;; possibly appropriate number of keywords to extract.
+  ;; Use bytes to treat Han characters as having more information.
   (let ((count (/ (string-bytes str) 50)))
     (dolist (keyword (jieba-extract-keywords str count "n,v"))
-      (setq str (s-replace
-                 keyword
-                 (d:links:link-to-word keyword)
-                 str)))
+      (setq str
+            (s-replace-regexp
+             ;; HACK: avoid replacing a link.
+             ;; This detection handles "/word/KEY" and <a>KEY</a>
+             (rx (group (not ">"))
+                 (literal keyword)
+                 (group (not "\"")))
+             (lambda (str)
+               (concat
+                (match-string 1 str)
+                (d:links:link-to-word keyword)
+                (match-string 2 str)))
+             str)))
     str))
 
-(ert-deftest d:links:link-keywords ()
+(ert-deftest d:links:linkify-keywords ()
   (should
    (let ((d:titles:look-up-table
           (d:titles:to-look-up-table (list "塞責"))))
-     (and (equal (d:links:link-keywords
+     (and (equal (d:links:linkify-keywords
                   "他無論做什麼事都按照規定一板一眼的，絕不馬虎塞責。")
-                 "他無論做什麼事都按照規定一板一眼的，絕不馬虎<a href=\"/word/塞責\">塞責</a>。")))))
+                 "他無論做什麼事都按照規定一板一眼的，絕不馬虎<a href=\"/word/塞責\">塞責</a>。")
+          ;; Idempotent
+          (equal (d:links:linkify-keywords
+                  (d:links:linkify-keywords
+                   "他無論做什麼事都按照規定一板一眼的，絕不馬虎塞責。"))
+                 (d:links:linkify-keywords
+                  "他無論做什麼事都按照規定一板一眼的，絕不馬虎塞責。"))))))
 
 (defun d:links:linkify-arrow (str)
   "Try to create a link for synonym arrows in STR."
@@ -506,6 +524,9 @@ some processing.
 
 This is a separate step from shaping."
   (let ((d:links:from title))
+    (--each '("definition" "source_comment" "典故說明" "用法例句")
+      (ht-update-with! props it
+        #'d:links:linkify-keywords))
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
@@ -551,6 +572,7 @@ This is a separate step from shaping."
                          title)))))
           (ht-update-with! def "def"
             (-compose
+             #'d:links:linkify-keywords
              #'d:links:linkify-brackets
              #'d:links:linkify-first-phrase)))))
     ;; Just remove the title prop. It's already in het.title.
@@ -633,8 +655,6 @@ This is a separate step from shaping."
        (ht-update-with! props "definition"
          #'d:process-def:dict_concised))
       ("dict_idioms"
-       (ht-update-with! props "用法例句"
-         #'d:links:link-keywords)
        (ht-update-with! props "definition"
          (lambda (def)
            ;; There is often an anchor at the end of
