@@ -10,7 +10,6 @@ import sitemap from "@astrojs/sitemap";
 
 const baseURL = "https://kemdict.com";
 
-import babel from "vite-plugin-babel";
 import legacy from "@vitejs/plugin-legacy";
 
 export default defineConfig({
@@ -36,34 +35,7 @@ export default defineConfig({
     port: 5173,
   },
   vite: {
-    plugins: [
-      // This only works in plain JS, not TypeScript, because
-      // tsc is used for TypeScript and it isn't Babel.
-      //
-      // In other words, it works in Svelte and plain .js files, but
-      // not in TypeScript files and Astro components (where the JS
-      // inside is actually always TypeScript).
-      //
-      // Even if you get Babel to process TypeScript files instead,
-      // Prettier and TypeScript language server still won't
-      // understand it. Such is the nature of not-yet-standardized
-      // language extensions.
-      babel({
-        babelConfig: {
-          plugins: [
-            [
-              "@babel/plugin-proposal-pipeline-operator",
-              {
-                proposal: "hack",
-                topicToken: "%",
-              },
-            ],
-            "@babel/plugin-proposal-do-expressions",
-          ],
-        },
-      }),
-      legacy(),
-    ],
+    plugins: [legacy()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
     resolve: {

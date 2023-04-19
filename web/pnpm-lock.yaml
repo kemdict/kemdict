@@ -21,12 +21,6 @@ devDependencies:
   '@astrojs/svelte':
     specifier: ^2.1.0
     version: 2.1.0(astro@2.2.1)(svelte@3.56.0)(typescript@4.9.5)(vite@4.2.1)
-  '@babel/plugin-proposal-do-expressions':
-    specifier: ^7.18.6
-    version: 7.18.6(@babel/core@7.21.0)
-  '@babel/plugin-proposal-pipeline-operator':
-    specifier: ^7.18.9
-    version: 7.18.9(@babel/core@7.21.0)
   '@types/lodash-es':
     specifier: ^4.17.6
     version: 4.17.6
@@ -84,9 +78,6 @@ devDependencies:
   tailwindcss:
     specifier: ^3.3.0
     version: 3.3.0(postcss@8.4.21)
-  vite-plugin-babel:
-    specifier: ^1.1.3
-    version: 1.1.3(@babel/core@7.21.0)(vite@4.2.1)
 
 packages:
 
@@ -597,17 +588,6 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/plugin-proposal-do-expressions@7.18.6(@babel/core@7.21.0):
-    resolution: {integrity: sha512-ddToGCONJhCuL+l4FhtGnKl5ZYCj9fDVFiqiCdQDpeIbVn/NvMeSib+7T1/rk08jRafae4qNiP8OnJyuqlsuYA==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.21.0
-      '@babel/helper-plugin-utils': 7.20.2
-      '@babel/plugin-syntax-do-expressions': 7.18.6(@babel/core@7.21.0)
-    dev: true
-
   /@babel/plugin-proposal-dynamic-import@7.18.6(@babel/core@7.21.0):
     resolution: {integrity: sha512-1auuwmK+Rz13SJj36R+jqFPMJWyKEDd7lLSdOj4oJK0UTgGueSAtkrCvz9ewmgyU/P941Rv2fQwZJN8s6QruXw==}
     engines: {node: '>=6.9.0'}
@@ -711,17 +691,6 @@ packages:
       '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.21.0)
     dev: true
 
-  /@babel/plugin-proposal-pipeline-operator@7.18.9(@babel/core@7.21.0):
-    resolution: {integrity: sha512-Pc33e6m8f4MJhRXVCUwiKZNtEm+W2CUPHIL0lyJNtkp+w6d75CLw3gsBKQ81VAMUgT9jVPIEU8gwJ5nJgmJ1Ag==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.21.0
-      '@babel/helper-plugin-utils': 7.20.2
-      '@babel/plugin-syntax-pipeline-operator': 7.18.6(@babel/core@7.21.0)
-    dev: true
-
   /@babel/plugin-proposal-private-methods@7.18.6(@babel/core@7.21.0):
     resolution: {integrity: sha512-nutsvktDItsNn4rpGItSNV2sz1XwS+nfU0Rg8aCx3W3NOKVzdMjJRu0O5OkgDp3ZGICSTbgRpxZoWsxoKRvbeA==}
     engines: {node: '>=6.9.0'}
@@ -781,16 +750,6 @@ packages:
 
   /@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.21.0):
     resolution: {integrity: sha512-b+YyPmr6ldyNnM6sqYeMWE+bgJcJpO6yS4QD7ymxgH34GBPNDM/THBh8iunyvKIZztiwLH4CJZ0RxTk9emgpjw==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.21.0
-      '@babel/helper-plugin-utils': 7.20.2
-    dev: true
-
-  /@babel/plugin-syntax-do-expressions@7.18.6(@babel/core@7.21.0):
-    resolution: {integrity: sha512-kTogvOsjBTVOSZtkkziiXB5hwGXqwhq2gBXDaiWVruRLDT7C2GqfbsMnicHJ7ePq2GE8UJeWS34YbNP6yDhwUA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -892,16 +851,6 @@ packages:
 
   /@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.21.0):
     resolution: {integrity: sha512-KoK9ErH1MBlCPxV0VANkXW2/dw4vlbGDrFgz8bmUsBGYkFRcbRwMh6cIJubdPrkxRwuGdtCk0v/wPTKbQgBjkg==}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.21.0
-      '@babel/helper-plugin-utils': 7.20.2
-    dev: true
-
-  /@babel/plugin-syntax-pipeline-operator@7.18.6(@babel/core@7.21.0):
-    resolution: {integrity: sha512-pFtIdQomJtkTHWcNsGXhjJ5YUkL+AxJnP4G+Ol85UO6uT2fpHTPYLLE5bBeRA9cxf25qa/VKsJ3Fi67Gyqe3rA==}
-    engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
@@ -6946,16 +6895,6 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
-
-  /vite-plugin-babel@1.1.3(@babel/core@7.21.0)(vite@4.2.1):
-    resolution: {integrity: sha512-WE8ORQm8530kj0geiDL1r/+P2MaU0b+5wL5E8Jq07aounFwRIUeJXziGiMr2DFQs78vaefB5GRKh257M8Z6gFQ==}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      vite: ^2.7.0 || ^3.0.0 || ^4.0.0
-    dependencies:
-      '@babel/core': 7.21.0
-      vite: 4.2.1(terser@5.16.8)
-    dev: true
 
   /vite@4.2.1(terser@5.16.8):
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
