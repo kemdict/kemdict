@@ -816,21 +816,20 @@ Titles are written to `d:titles:look-up-table'."
         (insert (json-encode heteronyms))))
     (message "Done")))
 
-(let ((comp (if (and (fboundp #'native-comp-available-p)
-                     (native-comp-available-p))
-                #'native-compile
-              #'byte-compile)))
-  (-each (list #'d:main
-               #'d:links:comma-word-list
-               #'d:links:link-to-word
-               #'d:links:linkify-brackets
-               #'d:process-props)
-    comp))
-
-(jieba-reset 'big)
-(d:main)
 
 (when noninteractive
+  (jieba-reset 'big)
+  (let ((comp (if (and (fboundp #'native-comp-available-p)
+                       (native-comp-available-p))
+                  #'native-compile
+                #'byte-compile)))
+    (-each (list #'d:main
+                 #'d:links:comma-word-list
+                 #'d:links:link-to-word
+                 #'d:links:linkify-brackets
+                 #'d:process-props)
+      comp))
+  (d:main)
   (kill-emacs))
 
 ;; Local Variables:
