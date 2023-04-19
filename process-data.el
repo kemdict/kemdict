@@ -184,7 +184,8 @@ this:
         (push `((from . ,d:links:from)
                 (to . ,target))
               d:links))
-      (s-lex-format "<a href=\"/word/${href}\">${desc}</a>"))))
+      (format "<a href=\"/word/%s\">%s</a>"
+              href desc))))
 
 (defun d:links:link-keywords (str)
   "Extract 5 keywords in STR and attempt to make them links."
