@@ -9,6 +9,7 @@
 (require 's)
 (require 'ol)
 (require 'ht)
+(require 'jieba)
 
 (defconst d:abc-han-ht
   (ht (?a "日") (?b "月") (?c "金") (?d "木") (?e "水") (?f "火")
@@ -184,6 +185,24 @@ this:
                 (to . ,target))
               d:links))
       (s-lex-format "<a href=\"/word/${href}\">${desc}</a>"))))
+
+(defun d:links:link-keywords (str)
+  "Extract 5 keywords in STR and attempt to make them links."
+  (let ((count (/ (string-bytes str) 50)))
+    (dolist (keyword (jieba-extract-keywords str count "n,v"))
+      (setq str (s-replace
+                 keyword
+                 (d:links:link-to-word keyword)
+                 str)))
+    str))
+
+(ert-deftest d:links:link-keywords ()
+  (should
+   (let ((d:titles:look-up-table
+          (d:titles:to-look-up-table (list "塞責"))))
+     (and (equal (d:links:link-keywords
+                  "他無論做什麼事都按照規定一板一眼的，絕不馬虎塞責。")
+                 "他無論做什麼事都按照規定一板一眼的，絕不馬虎<a href=\"/word/塞責\">塞責</a>。")))))
 
 (defun d:links:linkify-arrow (str)
   "Try to create a link for synonym arrows in STR."
@@ -613,6 +632,8 @@ This is a separate step from shaping."
        (ht-update-with! props "definition"
          #'d:process-def:dict_concised))
       ("dict_idioms"
+       (ht-update-with! props "用法例句"
+         #'d:links:link-keywords)
        (ht-update-with! props "definition"
          (lambda (def)
            ;; There is often an anchor at the end of
@@ -805,6 +826,7 @@ Titles are written to `d:titles:look-up-table'."
                #'d:process-props)
     comp))
 
+(jieba-reset 'big)
 (d:main)
 
 (when noninteractive
