@@ -74,21 +74,30 @@
   {#if het.props.word_ref}
     <p>參考詞語：「{@html het.props.word_ref}」</p>
   {/if}
-  <p>{het.props.辨識同}{het.props.辨識異}</p>
+  <p>
+    {#if het.props.辨識同}{het.props.辨識同}{/if}
+    {#if het.props.辨識異}{het.props.辨識異}{/if}
+  </p>
   {#if het.props.辨識例句}
     {@html idioms_nuance(het.props.辨識例句)}
   {/if}
-  <p>{het.props.形音辨誤}</p>
+  {#if het.props.形音辨誤}
+    <p>{het.props.形音辨誤}</p>
+  {/if}
   {#if het.props.source_name}
     <h2 id="isc">典源</h2>
     <p>{het.props.source_name}</p>
     <p>{@html idioms_source(het.props.source_content)}</p>
     <h3>注解</h3>
     <p>{@html idioms_source_comment(het.props.source_comment)}</p>
-    <p>{het.props.source_reference}</p>
+    {#if het.props.source_reference}
+      <p>{het.props.source_reference}</p>
+    {/if}
   {/if}
   <h2>典故說明</h2>
   <p>{@html het.props.典故說明}</p>
-  <h2>書證</h2>
-  {@html newline_string_to_ol(het.props.書證)}
+  {#if het.props.書證}
+    <h2>書證</h2>
+    {@html newline_string_to_ol(het.props.書證)}
+  {/if}
 {/each}
