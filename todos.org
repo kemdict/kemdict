@@ -1,4 +1,17 @@
 * done
+** DONE add stroke info for 首字索引
+** DONE history for search
+just 3 entries would be useful
+** DONE Import Unihan database for at least strokes
+
+After installing from Pip,
+
+#+begin_src shell
+unihan-etl -F json -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
+#+end_src
+
+Then somehow merge it into the database.
+
 ** DONE Access het.title instead of het.props.title
 The two are supposed to be the same, ie. the latter shouldn't need to exist.
 ** DONE less han-centric: eg. =/word/in= should show words / heteronyms which have title = in or pronunciation = in
@@ -150,24 +163,13 @@ No longer applicable as we don't use moedict-data anymore.
   - “實聯制” (kisaragi, itaigi)
 * todos
 ** search: only redirect in prefix mode
-
 in suffix and contains it's jarring to redirect, actually
 ** make it possible to turn off pronunciation search
 I wanted to search for words with “-” in them but the result is 100000+ entries long.
 ** make it possible to filter language
-** history for search
-just 3 entries would be useful
-** Import Unihan database for at least strokes
-
-After installing from Pip,
-
-#+begin_src shell
-unihan-etl -F json -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
-#+end_src
-
-Then somehow merge it into the database.
-
-** add stroke info for 首字索引
+** List words in dictionary pages
+like currently done for kisaragi-dict, but for all included dictionaries
+including search
 ** search: Just generate pages for each language
 ** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
 The existing digitization only includes POJ/KIP and HanLo.
