@@ -25,7 +25,9 @@
   function idioms_source(str) {
     return str
       .split("\n")
-      .map((x) => x.replace(/^\*(\d)\*(.*)/, `$2<a href="#sc$1">$1</a>`))
+      .map((x) =>
+        x.replace(/^\*(\d)\*(.*)/, `$2<sup><a href="#sc$1">$1</a></sup>`)
+      )
       .join("");
   }
 
