@@ -200,7 +200,7 @@ this:
              ;; This detection handles "/word/KEY" and <a>KEY</a>
              (rx (group (not ">"))
                  (literal keyword)
-                 (group (not "\"")))
+                 (group (not (any "\"" "<"))))
              (lambda (str)
                (concat
                 (match-string 1 str)
