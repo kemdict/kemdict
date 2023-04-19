@@ -3,7 +3,7 @@ export const prerender = false;
 
 import { getDictTitles } from "$src/server/db";
 
-import SplitLayout from "$src/SplitLayout.astro";
+import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.astro";
 import SearchBar from "$src/components/SearchBar.astro";
 import DarkModeToggle from "$src/components/DarkModeToggle.svelte";
@@ -14,7 +14,7 @@ const description =
   "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 ---
 
-<SplitLayout title={title} wantHeader={false}>
+<SingleLayout title={title} wantHeader={false}>
   <Fragment slot="head">
     <meta property="og:type" content="website" />
     <meta name="description" content={description} />
@@ -39,39 +39,44 @@ const description =
       })}
     ></script>
   </Fragment>
-  <div slot="left">
-    <div class="sm:fixed">
-      <img
-        decoding="sync"
-        alt="logo"
-        class="h-[1rem] w-[1rem] brightness-0 dark:brightness-200 max-sm:inline sm:h-[10rem] sm:w-[10rem]"
-        src="/logo.png"
-      />
-      <h1 class="my-2 text-xl font-bold max-sm:mb-4">
-        <span>Kemdict 國語整合典 (β)</span>
+  <div>
+    <div>
+      <h1 class="mb-2">
+        <div class="text-6xl font-bold">Kemdict</div>
+        <div class="text-2xl font-bold">國語整合典 (β)</div>
       </h1>
       <DarkModeToggle client:load />
+      <SearchBar />
     </div>
   </div>
-  <div class="prose" slot="right">
-    <h3>前言</h3>
-    <ul class="ml-1 list-none p-0">
-      <li>
-        <p><a href="about">關於</a></p>
-      </li>
-      <li>
-        <p><a href="changelog">版本紀錄</a></p>
-      </li>
-      <li>
-        <p><a href="thanks">致謝與授權</a></p>
-      </li>
-    </ul>
-    <h3>附錄</h3>
-    <ul class="ml-1 list-none p-0">
-      <li>
-        <p><a href="pojtl">台語羅馬字簡介</a></p>
-      </li>
-    </ul>
+  <div class="prose">
+    <div class="md:flex">
+      <div class="w-1/2">
+        <h3>前言</h3>
+        <ul class="ml-1 list-none p-0">
+          <li>
+            <p><a href="about">關於</a></p>
+          </li>
+          <li>
+            <p><a href="changelog">版本紀錄</a></p>
+          </li>
+          <li>
+            <p><a href="thanks">致謝與授權</a></p>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>附錄</h3>
+        <ul class="ml-1 list-none p-0">
+          <li>
+            <p><a href="pojtl">台語羅馬字簡介</a></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="ml-1"></div>
+    <h3>最近新增的詞</h3>
+    <WordList words={getDictTitles("kisaragi_dict", 15)} />
     <h3>索引</h3>
     <ul class="ml-1 list-none p-0">
       <li>
@@ -81,12 +86,6 @@ const description =
         <p><a href="radicals">部首索引</a></p>
       </li>
     </ul>
-    <h3>搜尋</h3>
-    <div class="ml-1">
-      <SearchBar />
-    </div>
-    <h3>最近新增的詞</h3>
-    <WordList words={getDictTitles("kisaragi_dict", 12)} />
     <h3>收錄字典</h3>
     <ul class="md:two ml-1 list-none p-0">
       <li>
@@ -122,4 +121,4 @@ const description =
       </li>
     </ul>
   </div>
-</SplitLayout>
+</SingleLayout>

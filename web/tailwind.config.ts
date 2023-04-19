@@ -29,6 +29,7 @@ export default {
   theme: {
     fontFamily: {
       sans: [
+        "'Jost*'",
         "Noto Sans",
         ...cjkFallbackSans,
         ...cjkFallbackSerif,

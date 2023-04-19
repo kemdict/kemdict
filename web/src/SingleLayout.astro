@@ -3,9 +3,15 @@ export interface Props {
   title: string;
   initialInput?: string;
   initialMatchSelection?: string;
+  wantHeader?: boolean;
   class?: string;
 }
-const { title, initialInput, initialMatchSelection } = Astro.props;
+const {
+  title,
+  initialInput,
+  initialMatchSelection,
+  wantHeader = true,
+} = Astro.props;
 const klass = Astro.props.class;
 
 import BaseLayout from "$src/BaseLayout.astro";
@@ -14,11 +20,15 @@ import Header from "$src/components/Header.astro";
 
 <BaseLayout title={title}>
   <Fragment slot="head"><slot name="head" /></Fragment>
-  <Header
-    search={true}
-    initialInput={initialInput}
-    initialMatchSelection={initialMatchSelection}
-  />
+  {
+    wantHeader && (
+      <Header
+        search={true}
+        initialInput={initialInput}
+        initialMatchSelection={initialMatchSelection}
+      />
+    )
+  }
   <div class:list={[klass, "mx-auto max-w-2xl"]}>
     <slot />
   </div>
