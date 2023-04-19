@@ -524,12 +524,12 @@ some processing.
 
 This is a separate step from shaping."
   (let ((d:links:from title))
-    (--each '("definition" "source_comment" "典故說明" "用法例句")
-      (ht-update-with! props it
-        #'d:links:linkify-keywords))
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
+    (--each '("definition" "source_comment" "典故說明" "用法例句")
+      (ht-update-with! props it
+        #'d:links:linkify-keywords))
     (dolist (key '("trs" "poj" "kip"))
       (ht-update-with! props key
         (lambda (pn)
@@ -571,10 +571,11 @@ This is a separate step from shaping."
                (t (error "%s: het.props.definitions.example is neither a string or a sequence"
                          title)))))
           (ht-update-with! def "def"
-            (-compose
-             #'d:links:linkify-keywords
-             #'d:links:linkify-brackets
-             #'d:links:linkify-first-phrase)))))
+            (lambda (str)
+              (-> str
+                  d:links:linkify-first-phrase
+                  d:links:linkify-brackets
+                  d:links:linkify-keywords))))))
     ;; Just remove the title prop. It's already in het.title.
     (ht-remove! props "title")
     ;; The length prop is kind of pointless: just use [...str].length.
