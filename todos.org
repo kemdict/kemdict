@@ -162,6 +162,7 @@ No longer applicable as we don't use moedict-data anymore.
   - “無妨” (taijit, concised, revised, =moedict_twblg=)
   - “實聯制” (kisaragi, itaigi)
 * todos
+** fix backlinks section to look less terrible with a lot of links
 ** search: only redirect in prefix mode
 in suffix and contains it's jarring to redirect, actually
 ** make it possible to turn off pronunciation search
