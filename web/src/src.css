@@ -29,18 +29,19 @@
     @apply border-gray-400;
     @apply mx-auto my-8 w-[95%];
   }
+  .base {
+    width: 95%;
+    @apply mx-auto my-0 max-w-4xl py-12;
+  }
   body {
-    @apply relative mt-12;
+    @apply relative;
+    min-height: 100vh;
     @apply bg-white dark:bg-stone-900;
-    @apply dark:text-white;
+    @apply text-gray-950 dark:text-white;
     @apply fade;
     &:focus-visible {
       outline: none;
     }
-  }
-  .base {
-    width: 95%;
-    @apply mx-auto my-12 max-w-4xl;
   }
   ol {
     @apply pl-4;

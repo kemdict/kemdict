@@ -14,7 +14,7 @@ const description =
   "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 ---
 
-<SingleLayout title={title} wantHeader={false}>
+<SingleLayout class="lg:pb-16 lg:pt-32" title={title} wantHeader={false}>
   <Fragment slot="head">
     <meta property="og:type" content="website" />
     <meta name="description" content={description} />
@@ -39,7 +39,7 @@ const description =
       })}
     ></script>
   </Fragment>
-  <div class="lg:mb-16 lg:mt-32">
+  <div>
     <h1 class="mb-2">
       <div class="text-6xl font-bold">Kemdict</div>
       <div class="text-2xl font-bold">國語整合典 (β)</div>
