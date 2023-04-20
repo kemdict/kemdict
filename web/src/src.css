@@ -5,6 +5,13 @@
 @tailwind utilities;
 
 @layer base {
+  kbd {
+    @apply inline-flex items-center justify-center px-1;
+    @apply border border-b-2;
+    @apply border-gray-400 bg-gray-200 dark:text-gray-700;
+    @apply rounded;
+    @apply min-h-[2em] min-w-[2em];
+  }
   html {
     line-height: 1.6;
   }
@@ -80,15 +87,16 @@
       }
     }
   }
-  /* Search Form */
-  #sf {
-    input,
-    select {
-      @apply px-2 py-1;
-      @apply fade;
-    }
-    kbd {
-      @apply font-bold text-gray-400;
+  .text-input {
+    @apply h-12;
+    @apply px-4;
+    @apply text-sm;
+    @apply border border-gray-400 dark:border-stone-500;
+    @apply bg-white/20;
+    @apply rounded;
+    &:focus {
+      @apply outline outline-2 outline-offset-2;
+      @apply outline-gray-300 dark:outline-gray-500;
     }
   }
   .wordlink {
@@ -249,7 +257,9 @@
     @apply bg-gray-200 hover:bg-gray-300 dark:bg-stone-800 dark:hover:bg-stone-700;
   }
   .btn {
-    @apply btnColor fade rounded-md;
+    @apply btnColor rounded-md;
+    @apply border;
+    @apply border-gray-400 bg-gray-200 dark:border-stone-700;
   }
 }
 

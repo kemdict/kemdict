@@ -4,12 +4,14 @@ export interface Props {
   initialInput?: string;
   initialMatchSelection?: string;
   wantHeader?: boolean;
+  showMatchTypes?: boolean;
   class?: string;
 }
 const {
   title,
   initialInput,
   initialMatchSelection,
+  showMatchTypes,
   wantHeader = true,
 } = Astro.props;
 const klass = Astro.props.class;
@@ -26,6 +28,7 @@ import Header from "$src/components/Header.astro";
         search={true}
         initialInput={initialInput}
         initialMatchSelection={initialMatchSelection}
+        showMatchTypes={showMatchTypes}
       />
     )
   }

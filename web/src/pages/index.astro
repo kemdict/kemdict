@@ -5,7 +5,7 @@ import { getDictTitles } from "$src/server/db";
 
 import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.astro";
-import SearchBar from "$src/components/SearchBar.astro";
+import SearchBar from "$src/components/SearchBar.svelte";
 import DarkModeToggle from "$src/components/DarkModeToggle.svelte";
 import Out from "$src/components/Out.astro";
 const title = "Kemdict 國語整合典";
@@ -39,15 +39,13 @@ const description =
       })}
     ></script>
   </Fragment>
-  <div>
-    <div>
-      <h1 class="mb-2">
-        <div class="text-6xl font-bold">Kemdict</div>
-        <div class="text-2xl font-bold">國語整合典 (β)</div>
-      </h1>
-      <DarkModeToggle client:load />
-      <SearchBar />
-    </div>
+  <div class="lg:mb-16 lg:mt-32">
+    <h1 class="mb-2">
+      <div class="text-6xl font-bold">Kemdict</div>
+      <div class="text-2xl font-bold">國語整合典 (β)</div>
+    </h1>
+    <DarkModeToggle client:load />
+    <SearchBar client:load />
   </div>
   <div class="prose">
     <div class="md:flex">

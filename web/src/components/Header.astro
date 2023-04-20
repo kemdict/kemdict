@@ -3,11 +3,13 @@ export interface Props {
   search?: boolean | undefined;
   initialInput?: string;
   initialMatchSelection?: string;
+  showMatchTypes?: boolean;
 }
-const { search, initialInput, initialMatchSelection } = Astro.props;
+const { search, initialInput, initialMatchSelection, showMatchTypes } =
+  Astro.props;
 
 import DarkModeToggle from "./DarkModeToggle.svelte";
-import SearchBar from "./SearchBar.astro";
+import SearchBar from "./SearchBar.svelte";
 ---
 
 <div class="mb-8">
@@ -18,10 +20,15 @@ import SearchBar from "./SearchBar.astro";
     </div>
   </nav>
   {
+    /* TODO: Include advanced search params, like match type, filters, dictionary, length, etc. in this page. */
+  }
+  {
     search && (
       <SearchBar
         initialInput={initialInput}
         initialMatchSelection={initialMatchSelection}
+        showMatchTypes={showMatchTypes}
+        client:load
       />
     )
   }

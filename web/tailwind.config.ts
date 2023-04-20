@@ -52,4 +52,8 @@ export default {
       },
     },
   },
+  plugins: [require("daisyui")],
+  daisyui: {
+    prefix: "daisy-",
+  },
 } satisfies Config;
