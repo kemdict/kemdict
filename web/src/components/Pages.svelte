@@ -1,13 +1,14 @@
 <script>
   import { range } from "lodash-es";
   import clsx from "clsx";
-  import { format } from "$src/common";
   export let activePage = 1;
   export let pageCount = 3;
-  export let pageLinkTemplate = "./$1";
+  export let url;
 
   function linkToPage(page) {
-    return format(pageLinkTemplate, `${page}`);
+    let localUrl = new URL(url);
+    localUrl.searchParams.set("p", page);
+    return localUrl.toString();
   }
 
   const chevron_back_outline = `<svg class="h-4 w-4" viewBox="0 0 512 512"

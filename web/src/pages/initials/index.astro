@@ -1,23 +1,37 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
+import Pages from "$src/components/Pages.svelte";
 
-import { getChars } from "$src/server/db";
-import { groupByProp } from "$src/common";
+import { chars } from "$src/server/db";
 
-const { with_stroke, without_stroke } = getChars();
+const { with_stroke_grouped, without_stroke } = chars;
+
+const params = new URL(Astro.request.url).searchParams;
+// NaN is falsy; one-based
+const page = parseInt(params.get("p")) || 1;
+const with_stroke_this_page = with_stroke_grouped[page - 1];
 ---
 
 <SingleLayout title="首字索引 - kemdict">
+  <Pages
+    url={Astro.url}
+    activePage={page}
+    pageCount={with_stroke_grouped.length}
+  />
   <div class="prose">
     <h1>首字索引</h1>
-    <Group
-      title="其他"
-      elements={without_stroke}
-      template="/search?q=$1&m=prefix"
-    />
     {
-      groupByProp(with_stroke, "stroke_count").map(([count, elements]) => (
+      page === 1 && (
+        <Group
+          title="其他"
+          elements={without_stroke}
+          template="/search?q=$1&m=prefix"
+        />
+      )
+    }
+    {
+      with_stroke_this_page.map(([count, elements]) => (
         <Group
           title={`${count} 畫`}
           elements={elements}

@@ -3,6 +3,7 @@ import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
 import { uniq } from "lodash-es";
 import type { Heteronym } from "$src/common";
+import { groupByProp } from "$src/common";
 
 // This already uses ES6 sets when available.
 
@@ -99,7 +100,7 @@ export function getDictTitles(from: string, limit?: number | undefined) {
   }
 }
 
-export function getChars(): {
+function getChars(): {
   with_stroke: Array<{
     title: string;
     stroke_count: number;
@@ -129,13 +130,41 @@ export function getChars(): {
   nostrokeStmt.pluck(true);
   pnStmt.pluck(true);
   const with_stroke = strokeStmt.all();
-  let without_stroke: string[];
-  let s = new Set(with_stroke.map((x) => x.title));
-  without_stroke = uniq([...nostrokeStmt.all(), ...pnStmt.all()])
+  const s = new Set(with_stroke.map((x) => x.title));
+  const without_stroke: string[] = uniq([
+    ...nostrokeStmt.all(),
+    ...pnStmt.all(),
+  ])
     .filter((x: any) => !s.has(x))
     .sort();
   return { with_stroke, without_stroke };
 }
+
+function paginate(arr) {
+  let res = [];
+  let buffer = 0;
+  let i = 0;
+  for (const group of arr) {
+    if (buffer + group[1].length > 500) {
+      i += 1;
+      buffer = 0;
+    }
+    if (!res[i]) {
+      res[i] = [];
+    }
+    res[i].push(group);
+    buffer += group[1].length;
+  }
+  return res;
+}
+
+export const chars = (() => {
+  const { with_stroke, without_stroke } = getChars();
+  const with_stroke_grouped = paginate(
+    groupByProp(with_stroke, "stroke_count")
+  );
+  return { without_stroke, with_stroke_grouped };
+})();
 
 export function getCharsByRadical(radical: string) {
   const stmt = db.prepare(`
