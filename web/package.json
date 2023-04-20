@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/node": "^5.1.0",
     "better-sqlite3": "^8.1.0",
+    "clsx": "^1.2.1",
     "daisyui": "^2.51.5",
     "lodash-es": "^4.17.21"
   },
