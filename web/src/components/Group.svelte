@@ -14,8 +14,10 @@
 </h2>
 <ul class="flex list-none flex-wrap gap-x-2 p-0">
   {#each elements as element}
-    <li class="w-4 text-lg max-sm:my-1 max-sm:text-xl">
-      <a href={format(template, element.title || element.radical || element)}
+    <li class="w-5 text-lg max-sm:my-1 max-sm:text-xl">
+      <a
+        class="inline-flex w-5"
+        href={format(template, element.title || element.radical || element)}
         >{element.title || element.radical || element}</a
       >
     </li>
