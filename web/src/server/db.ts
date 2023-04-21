@@ -129,23 +129,30 @@ function getChars(): {
 `);
   nostrokeStmt.pluck(true);
   pnStmt.pluck(true);
-  const with_stroke = strokeStmt.all();
+  const with_stroke: Array<{ title: string; stroke_count: number }> =
+    strokeStmt.all();
   const s = new Set(with_stroke.map((x) => x.title));
   const without_stroke: string[] = uniq([
     ...nostrokeStmt.all(),
     ...pnStmt.all(),
   ])
-    .filter((x: any) => !s.has(x))
+    .filter((x) => !s.has(x))
     .sort();
   return { with_stroke, without_stroke };
 }
 
-function paginate(arr) {
-  let res = [];
+/** Paginate a result from groupByProp.
+ * Try to keep each page under `size`.
+ */
+function paginate<T>(
+  arr: Array<[any, T[]]>,
+  size = 500
+): Array<Array<[any, T[]]>> {
+  const res = [];
   let buffer = 0;
   let i = 0;
   for (const group of arr) {
-    if (buffer + group[1].length > 500) {
+    if (buffer + group[1].length > size) {
       i += 1;
       buffer = 0;
     }
