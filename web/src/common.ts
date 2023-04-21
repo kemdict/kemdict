@@ -92,16 +92,13 @@ export function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
 }
 export const dictIds = dicts.map((x) => x.id);
 export const langIds = Object.keys(langs);
-export const dictsByLang = {
-  zh_TW: ["kisaragi_dict", "dict_concised", "dict_revised", "dict_idioms"],
-  nan_TW: [
-    "chhoetaigi_taioanpehoekichhoogiku",
-    "chhoetaigi_taijittoasutian",
-    "moedict_twblg",
-    "chhoetaigi_itaigi",
-  ],
-  hak_TW: ["hakkadict"],
-};
+export const dictsByLang = (() => {
+  const res = {};
+  groupByProp(dicts, "lang")
+    .map(([key, objs]) => [key, objs.map((x) => x.id)])
+    .forEach(([key, ids]) => (res[key] = ids));
+  return res;
+})();
 
 export const version = (import.meta.env.KEMDICT_VERSION as string) || "unknown";
 
