@@ -1,5 +1,8 @@
 ---
 import "./src.css";
+import Out from "$src/components/Out.astro";
+import { P } from "$src/components/typography";
+import clsx from "clsx";
 
 export interface Props {
   title: string;
@@ -78,6 +81,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
-    <div class="base"><slot /></div>
+    <div class="base">
+      <slot />
+    </div>
+    <footer
+      class={clsx("py-16 text-center", "text-gray-600 dark:text-stone-100")}
+    >
+      <hr />
+      <P>
+        <Out
+          class="opacity-75 transition hover:opacity-100"
+          href="https://kisaragi-hiu.com"
+        >
+          https://kisaragi-hiu.com
+        </Out>
+      </P>
+      <P>
+        <Out
+          class="opacity-75 transition hover:opacity-100"
+          href="https://kisaragi-hiu.fanbox.cc/"
+        >
+          在 FANBOX 上贊助我一餐飯
+        </Out>
+      </P>
+    </footer>
   </body>
 </html>

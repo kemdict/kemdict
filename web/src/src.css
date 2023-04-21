@@ -31,7 +31,7 @@
   }
   .base {
     width: 95%;
-    @apply mx-auto my-0 max-w-4xl py-12;
+    @apply mx-auto my-0 max-w-4xl pt-12;
   }
   body {
     @apply relative;
