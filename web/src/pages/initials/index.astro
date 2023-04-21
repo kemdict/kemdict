@@ -9,19 +9,32 @@ import { chars } from "$src/server/db";
 const { with_stroke_grouped, without_stroke } = chars;
 
 const params = new URL(Astro.request.url).searchParams;
-// NaN is falsy; one-based
-const page = parseInt(params.get("p")) || 1;
+
+function parsePageParam(param) {
+  const p = Number(param);
+  if (
+    !param ||
+    !p ||
+    p > with_stroke_grouped.length ||
+    p < 1 ||
+    !Number.isInteger(p)
+  ) {
+    return false;
+  } else {
+    return p;
+  }
+}
+
+const page = parsePageParam(params.get("p"));
+if (page === false) {
+  return Astro.redirect("/initials?p=1");
+}
 const with_stroke_this_page = with_stroke_grouped[page - 1];
 ---
 
 <SingleLayout title="首字索引 - kemdict">
   <H1>首字索引</H1>
-  <Pages
-    url={Astro.url}
-    activePage={page}
-    pageCount={with_stroke_grouped.length}
-  />
-  <div class="prose">
+  <div class="prose mb-4">
     {
       page === 1 && (
         <Group
@@ -39,9 +52,14 @@ const with_stroke_this_page = with_stroke_grouped[page - 1];
             elements={elements}
             template="/search?q=$1&m=prefix"
           />
-          {elements.length}
         </>
       ))
     }
   </div>
+
+  <Pages
+    url={Astro.url}
+    activePage={page}
+    pageCount={with_stroke_grouped.length}
+  />
 </SingleLayout>
