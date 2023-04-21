@@ -110,16 +110,23 @@ function getChars(): {
   const strokeStmt = db.prepare(`
   SELECT DISTINCT
     heteronyms.title,
+    group_concat("from") as dicts,
     cast(json_tree.value as integer) AS 'stroke_count'
   FROM heteronyms, json_tree(heteronyms.props)
   WHERE length("title") = 1
     AND json_tree.key = 'stroke_count'
+  GROUP BY title
+    HAVING dicts != 'unihan'
   ORDER BY 'stroke_count'
 `);
   const nostrokeStmt = db.prepare(`
+SELECT initial FROM (
   SELECT DISTINCT
-    substr(heteronyms.title, 0, 2) AS 'initial'
+    substr(heteronyms.title, 0, 2) AS 'initial',
+    group_concat("from") as dicts
   FROM heteronyms
+)
+WHERE dicts != 'unihan'
 `);
   const pnStmt = db.prepare(`
   SELECT DISTINCT
