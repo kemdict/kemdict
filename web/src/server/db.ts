@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
-import { uniq, chunk } from "lodash-es";
+import { uniq, chunk, sortBy } from "lodash-es";
 import type { Heteronym } from "$src/common";
 import { groupByProp } from "$src/common";
 
@@ -148,47 +148,12 @@ WHERE dicts != 'unihan'
   return { with_stroke, without_stroke };
 }
 
-/** Paginate a result from groupByProp.
- * Try to keep each page under `size`.
- */
-function paginate<T>(
-  arr: Array<[any, T[]]>,
-  size = 500
-): Array<Array<[any, T[]]>> {
-  const res = [];
-  let buffer = 0;
-  let i = 0;
-  function push(group: [any, T[]]) {
-    if (!res[i]) {
-      res[i] = [];
-    }
-    res[i].push(group);
-    buffer += group[1].length;
-  }
-  function _nextPage() {
-    i += 1;
-    buffer = 0;
-  }
-  for (const group of arr) {
-    if (buffer + group[1].length > size) {
-      _nextPage();
-    }
-    chunk(group[1], size).forEach((part, index) => {
-      if (index > 0) {
-        _nextPage();
-      }
-      push([group[0], part]);
-    });
-  }
-  return res;
-}
-
 export const chars = (() => {
   const { with_stroke, without_stroke } = getChars();
-  const with_stroke_grouped = paginate(
-    groupByProp(with_stroke, "stroke_count"),
-    1000
-  );
+  const with_stroke_grouped = chunk(
+    sortBy(with_stroke, "stroke_count"),
+    1200
+  ).map((page) => groupByProp(page, "stroke_count"));
   return { without_stroke, with_stroke_grouped };
 })();
 
