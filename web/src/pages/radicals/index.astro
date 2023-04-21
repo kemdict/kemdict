@@ -1,6 +1,7 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
+import { H1 } from "$src/components/typography";
 
 import { getRadicals } from "$src/server/db";
 import { groupByProp } from "$src/common";
@@ -9,8 +10,8 @@ const radicals = getRadicals();
 ---
 
 <SingleLayout title="部首索引">
+  <H1>部首索引</H1>
   <div class="prose">
-    <h1>部首索引</h1>
     {
       groupByProp(radicals, "stroke_count").map(([count, elements]) => (
         <Group

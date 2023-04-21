@@ -3,7 +3,14 @@
   import clsx from "clsx";
   export let activePage = 1;
   export let pageCount = 3;
+  export let maxDisplayedCount = 5;
   export let url;
+
+  /// Return the list of pages that should be displayed given `page`,
+  /// the current page.
+  function currentDisplayedPages(page) {
+    return range(1, pageCount + 1);
+  }
 
   function linkToPage(page) {
     let localUrl = new URL(url);
@@ -42,7 +49,7 @@
   const hover = "hover:bg-gray-100 hover:dark:bg-stone-800";
 </script>
 
-<div class="flex items-center justify-center space-x-2">
+<div class="flex flex-wrap items-center justify-center space-x-2">
   {#if activePage === 1}
     <span class={clsx(a, disabled)}>
       {@html chevron_back_outline}
@@ -52,7 +59,7 @@
       {@html chevron_back_outline}
     </a>
   {/if}
-  {#each range(1, pageCount + 1) as page}
+  {#each currentDisplayedPages(activePage) as page}
     <a
       class={clsx(
         a,

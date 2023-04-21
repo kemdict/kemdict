@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
-import { uniq } from "lodash-es";
+import { uniq, chunk } from "lodash-es";
 import type { Heteronym } from "$src/common";
 import { groupByProp } from "$src/common";
 
@@ -136,7 +136,7 @@ function getChars(): {
     ...nostrokeStmt.all(),
     ...pnStmt.all(),
   ])
-    .filter((x) => !s.has(x))
+    .filter((x: string) => !s.has(x))
     .sort();
   return { with_stroke, without_stroke };
 }
@@ -151,16 +151,27 @@ function paginate<T>(
   const res = [];
   let buffer = 0;
   let i = 0;
-  for (const group of arr) {
-    if (buffer + group[1].length > size) {
-      i += 1;
-      buffer = 0;
-    }
+  function push(group: [any, T[]]) {
     if (!res[i]) {
       res[i] = [];
     }
     res[i].push(group);
     buffer += group[1].length;
+  }
+  function _nextPage() {
+    i += 1;
+    buffer = 0;
+  }
+  for (const group of arr) {
+    if (buffer + group[1].length > size) {
+      _nextPage();
+    }
+    chunk(group[1], size).forEach((part, index) => {
+      if (index > 0) {
+        _nextPage();
+      }
+      push([group[0], part]);
+    });
   }
   return res;
 }
@@ -168,7 +179,8 @@ function paginate<T>(
 export const chars = (() => {
   const { with_stroke, without_stroke } = getChars();
   const with_stroke_grouped = paginate(
-    groupByProp(with_stroke, "stroke_count")
+    groupByProp(with_stroke, "stroke_count"),
+    1000
   );
   return { without_stroke, with_stroke_grouped };
 })();

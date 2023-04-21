@@ -2,6 +2,7 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 import Pages from "$src/components/Pages.svelte";
+import { H1 } from "$src/components/typography";
 
 import { chars } from "$src/server/db";
 
@@ -14,13 +15,13 @@ const with_stroke_this_page = with_stroke_grouped[page - 1];
 ---
 
 <SingleLayout title="首字索引 - kemdict">
+  <H1>首字索引</H1>
   <Pages
     url={Astro.url}
     activePage={page}
     pageCount={with_stroke_grouped.length}
   />
   <div class="prose">
-    <h1>首字索引</h1>
     {
       page === 1 && (
         <Group
@@ -32,11 +33,14 @@ const with_stroke_this_page = with_stroke_grouped[page - 1];
     }
     {
       with_stroke_this_page.map(([count, elements]) => (
-        <Group
-          title={`${count} 畫`}
-          elements={elements}
-          template="/search?q=$1&m=prefix"
-        />
+        <>
+          <Group
+            title={`${count} 畫`}
+            elements={elements}
+            template="/search?q=$1&m=prefix"
+          />
+          {elements.length}
+        </>
       ))
     }
   </div>
