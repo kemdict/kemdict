@@ -27,6 +27,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot name="head" />
     <link href={canonicalURL} rel="canonical" />
     <link
+      rel="stylesheet"
+      href="https://indestructibletype.com/fonts/Jost.css"
+      type="text/css"
+      charset="utf-8"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
       rel="stylesheet"
     />

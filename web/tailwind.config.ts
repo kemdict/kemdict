@@ -30,6 +30,7 @@ export default {
     fontFamily: {
       sans: [
         "'Jost*'",
+        "'Jost'",
         "Noto Sans",
         ...cjkFallbackSans,
         ...cjkFallbackSerif,
