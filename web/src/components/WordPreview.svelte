@@ -34,7 +34,7 @@
 
 {#each heteronyms as het}
   <li>
-    <a href="/word/{het.title}">
+    <a href="/word/{het.title}#{het.from}">
       <div
         class="-mx-1 my-2 p-1 text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800"
       >
