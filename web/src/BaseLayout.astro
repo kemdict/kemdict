@@ -37,9 +37,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
     <script
+      id="plausible"
       defer
       data-domain="kemdict.com"
-      src="https://plausible.io/js/script.js"
+      src="https://plausible.io/js/script.compat.outbound-links.js"
     ></script>
     <script is:inline>
       if (
