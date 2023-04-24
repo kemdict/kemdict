@@ -7,6 +7,8 @@
      href: where the link goes
    */
   export let href = undefined;
+  export let after = true;
+  export let title = undefined;
   let klass = "link";
   export { klass as class };
   export let id = undefined;
@@ -15,7 +17,8 @@
 <a
   {href}
   {id}
-  class={clsx("after:content-['°']", klass)}
+  {title}
+  class={clsx(after && "after:content-['°']", klass)}
   target="_blank"
   rel="noreferrer"><slot /></a
 >
