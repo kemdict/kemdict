@@ -2,40 +2,28 @@
   export let langGroups = [["id", "readablename"]];
   export let heteronyms = [];
   import { dictsByLang } from "$src/common";
-  import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
+  import { Tab, TabGroup } from "@skeletonlabs/skeleton";
   import WordPreview from "$src/components/WordPreview.svelte";
-  import Spinner from "$src/components/Spinner.svelte";
-  import { onMount } from "svelte";
-  // Thanks https://stackoverflow.com/a/75274563
-  onMount(() => {
-    const spinner = document.getElementById("spinner");
-    spinner.parentNode.removeChild(spinner);
-    document.getElementById("tabs").classList.toggle("hidden");
-  });
+  let currentTab = langGroups[0][0];
 </script>
 
 <div class="mt-4">
-  <div class="text-center" id="spinner">
-    <Spinner />
-  </div>
-  <div id="tabs" class="hidden">
-    <Tabs>
-      <TabList>
-        {#each langGroups as [_langId, lang]}
-          <Tab>{lang}</Tab>
-        {/each}
-      </TabList>
-      {#each langGroups as [langId, _lang]}
-        <TabPanel>
+  <div id="tabs">
+    <TabGroup>
+      {#each langGroups as [langId, lang]}
+        <Tab bind:group={currentTab} name={langId} value={langId}>{lang}</Tab>
+      {/each}
+      <svelte:fragment slot="panel">
+        {#if currentTab}
           <ul>
             {#each heteronyms as het}
-              {#if dictsByLang[langId].includes(het.from)}
+              {#if dictsByLang[currentTab].includes(het.from)}
                 <WordPreview heteronyms={[het]} />
               {/if}
             {/each}
           </ul>
-        </TabPanel>
-      {/each}
-    </Tabs>
+        {/if}
+      </svelte:fragment>
+    </TabGroup>
   </div>
 </div>
