@@ -78,7 +78,7 @@
     }
   }
   .wordlink {
-    @apply btn px-2 py-1 font-bold;
+    @apply fade btnBorder btnColor rounded-md px-2 py-1 font-bold;
     &:hover {
       @apply no-underline;
     }
@@ -238,8 +238,15 @@
     @apply border;
     @apply border-gray-400 bg-gray-200 dark:border-stone-700;
   }
-  .btn {
+  .btn2 {
     @apply btnColor btnBorder rounded-md;
+  }
+  .link {
+    @apply text-primary-700 dark:text-primary-600 fade;
+    @apply no-underline;
+    &:hover {
+      @apply text-primary-600 dark:text-primary-500;
+    }
   }
 }
 
@@ -249,13 +256,6 @@
   }
   .font-token {
     @apply font-sans;
-  }
-  .link {
-    @apply text-primary-700;
-    @apply no-underline;
-    &:hover {
-      @apply text-primary-700;
-    }
   }
   .fade {
     @apply transition duration-100 ease-in-out;
