@@ -5,13 +5,6 @@
 @tailwind utilities;
 
 @layer base {
-  kbd {
-    @apply inline-flex items-center justify-center px-1;
-    @apply border border-b-2;
-    @apply border-gray-400 bg-gray-200 dark:text-gray-700;
-    @apply rounded;
-    @apply min-h-[2em] min-w-[2em];
-  }
   html {
     line-height: 1.6;
   }
@@ -26,7 +19,6 @@
     }
   }
   hr {
-    @apply border-gray-400;
     @apply mx-auto my-8 w-[95%];
   }
   .base {
@@ -34,35 +26,19 @@
     @apply mx-auto my-0 max-w-4xl pt-12;
   }
   body {
+    /* We do this because Skeleton does not have 950 styles yet, and
+  the surface 900 color is way too bright. */
+    @apply dark:bg-[#0B0F14];
     @apply relative;
     min-height: 100vh;
-    @apply bg-white dark:bg-stone-900;
-    @apply text-gray-950 dark:text-white;
     @apply fade;
     &:focus-visible {
       outline: none;
     }
   }
-  ol {
-    @apply pl-4;
-  }
 }
 
 @layer components {
-  .svelte-tabs {
-    ul.svelte-tabs__tab-list {
-      @apply border-b-gray-300 dark:border-b-stone-700;
-      @apply flex;
-    }
-    li.svelte-tabs__tab {
-      @apply text-gray-800 dark:text-white;
-      @apply px-6 max-sm:flex-grow max-sm:text-center;
-      &.svelte-tabs__selected {
-        @apply border-b-2;
-        @apply border-indigo-500 text-indigo-500 dark:border-indigo-300 dark:text-indigo-300;
-      }
-    }
-  }
   /* Put it here for more readable comments. */
   div.split-layout {
     @apply relative;
@@ -267,11 +243,17 @@
 }
 
 @layer utilities {
+  .font-heading-token {
+    @apply text-sans;
+  }
+  .font-token {
+    @apply text-sans;
+  }
   .link {
-    @apply text-indigo-600 dark:text-indigo-300;
-    @apply no-underline;
+    @apply text-primary-700;
+    @apply underline;
     &:hover {
-      @apply underline;
+      @apply text-primary-700;
     }
   }
   .fade {
