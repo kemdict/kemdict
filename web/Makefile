@@ -1,7 +1,7 @@
 export LANG=en_US.UTF-8
 export KEMDICT_VERSION=$(shell git describe --tags --always)
 
-DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs)
+DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro)
 
 node_modules: pnpm-lock.yaml
 	pnpm install --frozen-lockfile
@@ -10,6 +10,7 @@ entries.db: ../dicts
 	cd ../dicts && make entries.db
 	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
 
+.PHONY: dist
 dist: $(DEPS)
 	npx astro build
 	cp package.json pnpm-lock.yaml dist/
@@ -31,7 +32,8 @@ build-with-data: dist entries.db
 build-no-data: dist
 
 preview: $(DEPS)
-	npx astro preview
+	make dist
+	cd dist && bash start
 
 # Currently this will succeed with a go fatal error at the end.
 # That error goes to stderr while Astro's output thankfully goes to

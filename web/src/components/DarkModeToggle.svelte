@@ -1,6 +1,6 @@
 <script>
-  // This is copied into app.html as well to avoid FOUC.
   function setDarkMode() {
+    // This is copied into BaseLayout as well to avoid FOUC.
     if (
       localStorage.theme === "dark" ||
       ((!localStorage.theme || localStorage.theme === "auto") &&

@@ -37,11 +37,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
     <script
+      is:inline
       id="plausible"
       defer
       data-domain="kemdict.com"
       src="https://plausible.io/js/script.compat.outbound-links.js"
     ></script>
+    {
+      /* This has to not be type="module", because for some reason
+      that causes it to run too late, and a FOUC happens. This also
+      means is:inline is necessary as Astro-bundled script tags are
+      loaded with type="module". */
+    }
     <script is:inline>
       if (
         localStorage.theme === "dark" ||
