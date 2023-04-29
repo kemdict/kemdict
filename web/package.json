@@ -19,6 +19,7 @@
     "@astrojs/mdx": "^0.18.2",
     "@astrojs/sitemap": "^1.2.1",
     "@astrojs/svelte": "^2.1.0",
+    "@skeletonlabs/skeleton": "^1.2.5",
     "@types/lodash-es": "^4.17.6",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { join } from "node:path";
 
 const cjkFallbackSans = [
   "'Noto Sans CJK TC'",
@@ -24,7 +25,13 @@ const cjkFallbackSerif = [
 
 export default {
   darkMode: "class",
-  content: ["./src/**/*.{svelte,md,ts,js,html,astro,mdx}"],
+  content: [
+    "./src/**/*.{svelte,md,ts,js,html,astro,mdx}",
+    join(
+      require.resolve("@skeletonlabs/skeleton"),
+      "../**/*.{html,js,svelte,ts}"
+    ),
+  ],
   safelist: ["visible", "invisible"],
   theme: {
     fontFamily: {
@@ -53,8 +60,5 @@ export default {
       },
     },
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    prefix: "daisy-",
-  },
+  plugins: [...require("@skeletonlabs/skeleton/tailwind/skeleton.cjs")()],
 } satisfies Config;
