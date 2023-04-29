@@ -244,10 +244,10 @@
 
 @layer utilities {
   .font-heading-token {
-    @apply text-sans;
+    @apply font-sans;
   }
   .font-token {
-    @apply text-sans;
+    @apply font-sans;
   }
   .link {
     @apply text-primary-700;
