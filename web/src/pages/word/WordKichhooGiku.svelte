@@ -5,7 +5,7 @@
 
 {#each heteronyms as het}
   <h1>{het.title}</h1>
-  <Pronunciation>{het.props.kip}</Pronunciation>
+  <Pronunciation>{het.props.poj}</Pronunciation>
   <p class="def">
     {#if het.props.zh}華語：{@html het.props.zh}<br />{/if}
     {#if het.props.en}英語：{het.props.en}{/if}

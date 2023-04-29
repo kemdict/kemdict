@@ -4,6 +4,7 @@
   export let initialMatchSelection = "prefix";
   export let showMatchTypes = false;
   export let highlightBtn = false;
+  // export let currentLang = "zh_TW";
 
   const matchTypes = [
     { mtch: "prefix", name: "開頭" },
