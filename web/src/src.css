@@ -252,7 +252,7 @@
   }
   .link {
     @apply text-primary-700;
-    @apply underline;
+    @apply no-underline;
     &:hover {
       @apply text-primary-700;
     }
