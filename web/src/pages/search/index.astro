@@ -6,6 +6,7 @@ const url = Astro.url;
 const query: string | undefined = url.searchParams.get("q")?.trim();
 const mtch: string = url.searchParams.get("m") || "prefix";
 const sort: string = url.searchParams.get("s") || "asc";
+const currentLang: string = url.searchParams.get("lang") || "zh_TW";
 let heteronyms = [];
 
 if (typeof query !== "string") {
@@ -13,9 +14,6 @@ if (typeof query !== "string") {
 }
 
 heteronyms = getHeteronyms(query, mtch);
-
-// This stops the query from going into the /word/ page when redirecting
-url.searchParams.delete("q");
 
 // Redirect if all matched heteronyms belong to the same title
 if (
@@ -95,6 +93,8 @@ const title = getTitle(mtch, query);
         <Results
           client:load
           langGroups={presentLangs}
+          currentLang={currentLang}
+          currentParams={url.searchParams}
           heteronyms={heteronyms}
         />
       </>

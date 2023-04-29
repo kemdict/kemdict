@@ -4,25 +4,33 @@
   import { dictsByLang } from "$src/common";
   import { Tab, TabGroup } from "@skeletonlabs/skeleton";
   import WordPreview from "$src/components/WordPreview.svelte";
-  let currentTab = langGroups[0][0];
+  export let currentLang = langGroups[0][0];
+  export let currentParams = new URLSearchParams();
+  function paramsToLink(langId) {
+    currentParams.set("lang", langId);
+    return "?" + currentParams.toString();
+  }
 </script>
 
 <div class="mt-4">
   <div id="tabs">
     <TabGroup>
       {#each langGroups as [langId, lang]}
-        <Tab bind:group={currentTab} name={langId} value={langId}>{lang}</Tab>
+        <!-- We pass in the current tab just to get it to highlight the current tab correctly. Because we're using a separate page for each tab. -->
+        <Tab group={currentLang} name={langId} value={langId} padding="">
+          <a class="unstyled block px-4 py-2" href={paramsToLink(langId)}
+            >{lang}</a
+          >
+        </Tab>
       {/each}
       <svelte:fragment slot="panel">
-        {#if currentTab}
-          <ul>
-            {#each heteronyms as het}
-              {#if dictsByLang[currentTab].includes(het.from)}
-                <WordPreview heteronyms={[het]} />
-              {/if}
-            {/each}
-          </ul>
-        {/if}
+        <ul>
+          {#each heteronyms as het}
+            {#if dictsByLang[currentLang].includes(het.from)}
+              <li><WordPreview heteronyms={[het]} /></li>
+            {/if}
+          {/each}
+        </ul>
       </svelte:fragment>
     </TabGroup>
   </div>
