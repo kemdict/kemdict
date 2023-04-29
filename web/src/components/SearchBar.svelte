@@ -1,7 +1,9 @@
 <script>
+  import clsx from "clsx";
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
   export let showMatchTypes = false;
+  export let highlightBtn = false;
 
   const matchTypes = [
     { mtch: "prefix", name: "開頭" },
@@ -28,7 +30,15 @@
         </div>
       </div>
       <input
-        class="btn p-1 px-2 text-sm font-bold"
+        class={clsx(
+          "rounded-md p-1 px-2 text-sm font-bold transition",
+          highlightBtn
+            ? [
+                "bg-indigo-500 text-indigo-50 hover:bg-indigo-600",
+                "dark:bg-indigo-500 dark:hover:bg-indigo-400",
+              ]
+            : "btnColor btnBorder"
+        )}
         type="submit"
         value="搜尋"
       />

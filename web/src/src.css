@@ -257,10 +257,12 @@
   .btnColor {
     @apply bg-gray-200 hover:bg-gray-300 dark:bg-stone-800 dark:hover:bg-stone-700;
   }
-  .btn {
-    @apply btnColor rounded-md;
+  .btnBorder {
     @apply border;
     @apply border-gray-400 bg-gray-200 dark:border-stone-700;
+  }
+  .btn {
+    @apply btnColor btnBorder rounded-md;
   }
 }
 
