@@ -204,7 +204,7 @@ export function getHetFromUrl(url: URL): [false, string] {
   const mtch: string = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "asc";
   let heteronyms: Heteronym[] = [];
-  if (typeof query !== "string") {
+  if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
   heteronyms = getHeteronyms(query, mtch);
