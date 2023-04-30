@@ -4,7 +4,16 @@
 
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { groupByProp } from "$src/common";
+  import { toPOJ } from "$src/hack";
   import { spc, interlinear_annotation } from "$src/processing";
+
+  function processPn(pn) {
+    if (dict === "moedict_twblg") {
+      return toPOJ(pn);
+    } else {
+      return pn;
+    }
+  }
 
   const pronunciation_key_mapping = {
     kisaragi_dict: "pronunciation",
@@ -28,8 +37,8 @@
   {#if het.props[pronunciation_key] && het.props[pronunciation_key] !== het.title}
     <Pronunciation
       id={`${dict}--${spc(het.props[pronunciation_key]).replace(" ", "")}`}
-      >{spc(het.props[pronunciation_key])}</Pronunciation
-    >
+      >{processPn(spc(het.props[pronunciation_key]))}
+    </Pronunciation>
   {/if}
   {#if het.props.vogue}
     <div class="text-gray-700 dark:text-gray-300">（流行語）</div>
