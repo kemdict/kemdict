@@ -45,7 +45,9 @@ for (const het of heteronyms) {
 
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 let currentLang: string =
-  url.searchParams.get("lang") || presentLangs[0][0] || "zh_TW";
+  url.searchParams.get("lang") ||
+  (presentLangs[0] && presentLangs[0][0]) ||
+  "zh_TW";
 
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
