@@ -6,7 +6,6 @@ const url = Astro.url;
 const query: string | undefined = url.searchParams.get("q")?.trim();
 const mtch: string = url.searchParams.get("m") || "prefix";
 const sort: string = url.searchParams.get("s") || "asc";
-const currentLang: string = url.searchParams.get("lang") || "zh_TW";
 let heteronyms = [];
 
 if (typeof query !== "string") {
@@ -45,6 +44,8 @@ for (const het of heteronyms) {
 }
 
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
+let currentLang: string =
+  url.searchParams.get("lang") || presentLangs[0][0] || "zh_TW";
 
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
