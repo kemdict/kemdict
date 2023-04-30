@@ -242,10 +242,10 @@
     @apply btnColor btnBorder rounded-md;
   }
   .link {
-    @apply text-primary-700 dark:text-primary-600 fade;
+    @apply text-primary-700 dark:text-primary-500 fade;
     @apply no-underline;
     &:hover {
-      @apply text-primary-600 dark:text-primary-500;
+      @apply text-primary-600 dark:text-primary-400;
     }
   }
 }

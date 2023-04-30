@@ -1,11 +1,13 @@
 <script>
   import clsx from "clsx";
+  import { ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
   export let showMatchTypes = false;
   export let highlightBtn = false;
   // export let currentLang = "zh_TW";
 
+  let currentMtch = initialMatchSelection;
   const matchTypes = [
     { mtch: "prefix", name: "開頭" },
     { mtch: "suffix", name: "結尾" },
@@ -46,20 +48,13 @@
     </div>
     {#if showMatchTypes}
       <div class="max-w-fit">
-        {#each matchTypes as { mtch, name }}
-          <div>
-            <label class="daisy-label cursor-pointer">
-              <span class="daisy-label-text">{name}</span>
-              <input
-                checked={initialMatchSelection === mtch}
-                type="radio"
-                name="m"
-                value={mtch}
-                class="daisy-radio checked:bg-indigo-500"
-              />
-            </label>
-          </div>
-        {/each}
+        <ListBox>
+          {#each matchTypes as { mtch, name }}
+            <ListBoxItem bind:group={currentMtch} name="m" value={mtch}>
+              {name}
+            </ListBoxItem>
+          {/each}
+        </ListBox>
       </div>
     {/if}
   </form>
