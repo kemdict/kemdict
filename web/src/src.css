@@ -3,6 +3,7 @@
 /* @import "@skeletonlabs/skeleton/styles/typography.css"; */
 @import "typography.css";
 @import "@skeletonlabs/skeleton/styles/elements.css";
+@import "@skeletonlabs/skeleton/styles/variants.css";
 @import "fonts.css";
 
 @layer base {
