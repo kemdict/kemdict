@@ -1,0 +1,30 @@
+name: Deploy pojtl-api
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "pojtl-api/**"
+      - "!*.org"
+  workflow_dispatch:
+
+jobs:
+  "build":
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up SSH
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_SECRET: ${{ secrets.SSH_SECRET }}
+        run: |
+          mkdir -p ~/.ssh
+          printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
+          printenv SSH_SECRET > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Deploy
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          make admin.deploy.pojtl-api

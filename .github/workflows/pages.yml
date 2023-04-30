@@ -59,4 +59,4 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          make admin.deploy
+          make admin.deploy.kemdict
