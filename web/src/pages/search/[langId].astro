@@ -26,6 +26,7 @@ import SingleLangResults from "./SingleLangResults.svelte";
   initialMatchSelection={mtch}
   initialInput={query}
   showMatchTypes={true}
+  submitSuffix={`/${langId}`}
 >
   <SingleLangResults
     client:load

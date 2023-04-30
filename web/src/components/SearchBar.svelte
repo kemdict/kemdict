@@ -1,6 +1,7 @@
 <script>
   import clsx from "clsx";
   import { ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
+  export let submitSuffix = "";
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
   export let showMatchTypes = false;
@@ -17,7 +18,7 @@
 </script>
 
 <div class="relative mb-2 mt-2">
-  <form action="/search">
+  <form action="/search{submitSuffix || ''}">
     <div class="flex space-x-2">
       <div class="relative flex-grow">
         <input
