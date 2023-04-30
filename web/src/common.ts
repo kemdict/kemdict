@@ -169,3 +169,24 @@ export function format(template: string, str: string): string {
 export function strLen(str: string): number {
   return [...str].length;
 }
+
+export type Mtch = "prefix" | "suffix" | "contains" | "exact" | string;
+
+export function getSearchTitle(
+  mtch: Mtch,
+  query: string,
+  markup?: boolean
+): string {
+  if (markup) {
+    query = `<span class="font-bold">${query}</span>`;
+  }
+  if (mtch === "prefix") {
+    return `以「${query}」開頭的詞`;
+  } else if (mtch === "suffix") {
+    return `以「${query}」結尾的詞`;
+  } else if (mtch === "contains") {
+    return `包含「${query}」的詞`;
+  } else if (mtch === "exact") {
+    return `完全符合「${query}」的詞`;
+  }
+}

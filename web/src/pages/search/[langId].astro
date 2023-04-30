@@ -1,0 +1,37 @@
+---
+import { langs, getSearchTitle } from "$src/common";
+const { langId } = Astro.params;
+import { getHetFromUrl } from "$src/server/db";
+const url = Astro.url;
+const [success, data] = getHetFromUrl(url);
+if (!success) {
+  return Astro.redirect(data);
+}
+const heteronyms = data.heteronyms;
+const mtch = data.mtch;
+const query = data.query;
+let count = heteronyms.length;
+const langSet = data.langSet;
+
+const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
+const title = getSearchTitle(mtch, query);
+const titleMarkup = getSearchTitle(mtch, query, true);
+
+import SingleLayout from "$src/SingleLayout.astro";
+import SingleLangResults from "./SingleLangResults.svelte";
+---
+
+<SingleLayout
+  title={`${title} - kemdict 搜尋結果`}
+  initialMatchSelection={mtch}
+  initialInput={query}
+  showMatchTypes={true}
+>
+  <SingleLangResults
+    client:load
+    langGroups={presentLangs}
+    langId={langId}
+    currentParamsString={url.searchParams.toString()}
+    heteronyms={heteronyms}
+  />
+</SingleLayout>

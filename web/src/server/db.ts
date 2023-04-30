@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
 import { uniq, chunk, sortBy } from "lodash-es";
+import { groupByProp, WordSortFns, dicts } from "$src/common";
 import type { Heteronym } from "$src/common";
-import { groupByProp } from "$src/common";
 
 // This already uses ES6 sets when available.
 
@@ -191,4 +191,47 @@ export function processHet(het: Heteronym): Heteronym {
     het.props = JSON.parse(het.props);
   }
   return het;
+}
+
+/**
+ * Like search/index.astro's load() function.
+ */
+export function getHetFromUrl(
+  url: URL
+): [true, { heteronyms: Heteronym[]; mtch: string; query: string }];
+export function getHetFromUrl(url: URL): [false, string] {
+  const query: string | undefined = url.searchParams.get("q")?.trim();
+  const mtch: string = url.searchParams.get("m") || "prefix";
+  const sort: string = url.searchParams.get("s") || "asc";
+  let heteronyms: Heteronym[] = [];
+  if (typeof query !== "string") {
+    return [false, "/"];
+  }
+  heteronyms = getHeteronyms(query, mtch);
+  // Redirect if all matched heteronyms belong to the same title
+  if (
+    heteronyms &&
+    heteronyms.length > 0 &&
+    heteronyms.length < 10 &&
+    heteronyms.every((x) => x.title === heteronyms[0].title)
+  ) {
+    return [false, encodeURI(`/word/${heteronyms[0].title}`)];
+  }
+  let sortFn: typeof WordSortFns.descend;
+  if (sort === "desc") {
+    sortFn = WordSortFns.descend;
+  } else {
+    sortFn = WordSortFns.ascend;
+  }
+  heteronyms.sort(sortFn);
+  const langSet = new Set();
+  for (const het of heteronyms) {
+    for (const dict of dicts) {
+      const dictPresent = het.from === dict.id;
+      if (dictPresent) {
+        langSet.add(dict.lang);
+      }
+    }
+  }
+  return [true, { heteronyms, mtch, query, langSet }];
 }

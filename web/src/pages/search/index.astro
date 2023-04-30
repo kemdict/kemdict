@@ -1,47 +1,24 @@
 ---
-import { getHeteronyms } from "$src/server/db";
-import { dicts, langs, WordSortFns } from "$src/common";
+import { getHetFromUrl } from "$src/server/db";
+import {
+  dictsByLang,
+  dicts,
+  langs,
+  WordSortFns,
+  getSearchTitle,
+} from "$src/common";
 
 const url = Astro.url;
-const query: string | undefined = url.searchParams.get("q")?.trim();
-const mtch: string = url.searchParams.get("m") || "prefix";
-const sort: string = url.searchParams.get("s") || "asc";
-let heteronyms = [];
-
-if (typeof query !== "string") {
-  return Astro.redirect("/");
+const [success, data] = getHetFromUrl(url);
+if (!success) {
+  return Astro.redirect(data);
 }
-
-heteronyms = getHeteronyms(query, mtch);
-
-// Redirect if all matched heteronyms belong to the same title
-if (
-  heteronyms &&
-  heteronyms.length > 0 &&
-  heteronyms.length < 10 &&
-  heteronyms.every((x) => x.title === heteronyms[0].title)
-) {
-  return Astro.redirect(encodeURI(`/word/${heteronyms[0].title}`));
-}
-
-let sortFn: typeof WordSortFns.descend;
-if (sort === "desc") {
-  sortFn = WordSortFns.descend;
-} else {
-  sortFn = WordSortFns.ascend;
-}
-heteronyms.sort(sortFn);
+const heteronyms = data.heteronyms;
+const mtch = data.mtch;
+const query = data.query;
+const langSet = data.langSet;
 
 let count = heteronyms.length;
-let langSet = new Set();
-for (const het of heteronyms) {
-  for (const dict of dicts) {
-    let dictPresent = het.from === dict.id;
-    if (dictPresent) {
-      langSet.add(dict.lang);
-    }
-  }
-}
 
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 let currentLang: string =
@@ -49,27 +26,15 @@ let currentLang: string =
   (presentLangs[0] && presentLangs[0][0]) ||
   "zh_TW";
 
+import WordPreview from "$src/components/WordPreview.svelte";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 
 import Results from "./Results.svelte";
+import Abb from "./Abb.svelte";
 
-function getTitle(
-  mtch: "prefix" | "suffix" | "contains" | "exact" | string,
-  query: string
-): string {
-  if (mtch === "prefix") {
-    return `以「${query}」開頭的詞`;
-  } else if (mtch === "suffix") {
-    return `以「${query}」結尾的詞`;
-  } else if (mtch === "contains") {
-    return `包含「${query}」的詞`;
-  } else if (mtch === "exact") {
-    return `完全符合「${query}」的詞`;
-  }
-}
-
-const title = getTitle(mtch, query);
+const title = getSearchTitle(mtch, query);
+const titleMarkup = getSearchTitle(mtch, query, true);
 ---
 
 <SingleLayout
@@ -91,8 +56,15 @@ const title = getTitle(mtch, query);
       </div>
     ) : (
       <>
-        <h1 class="mt-8 text-2xl font-bold">{title}</h1>
-        <p class="text-sm">共 {count} 個定義</p>
+        <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
+        {presentLangs.map((lang) => (
+          <Abb
+            lang={lang}
+            heteronyms={heteronyms}
+            currentParams={url.searchParams}
+          />
+        ))}
+        {/*
         <Results
           client:load
           langGroups={presentLangs}
@@ -100,6 +72,7 @@ const title = getTitle(mtch, query);
           currentParams={url.searchParams}
           heteronyms={heteronyms}
         />
+        */}
       </>
     )
   }

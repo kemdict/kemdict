@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { truncate } from "lodash-es";
+  import ListLink from "./ListLink.svelte";
   import { spc } from "$src/processing";
   import type { Heteronym } from "$src/common";
   export let heteronyms: Heteronym[];
@@ -20,7 +20,7 @@
     return html?.replace(/<[^>]*>?/gm, "") || "";
   }
   function processPreview(def: string | undefined): string {
-    return truncate(strip(def), { length: 45, omission: "……" });
+    return strip(def);
   }
   function processPn(het: Heteronym) {
     let pn: string | undefined =
@@ -34,21 +34,17 @@
 </script>
 
 {#each heteronyms as het}
-  <a href="/word/{het.title}#{het.from}">
-    <div
-      class="-mx-1 my-2 p-1 text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800"
-    >
-      <h2 class="link font-bold hover:no-underline">
-        {het.title}{processPn(het)}
-      </h2>
-      <p class="text-gray-500 dark:text-stone-300">
-        {processPreview(
-          het.props.definition ||
-            het.props.definitions?.map((x) => x.def).join("") ||
-            het.props.example ||
-            het.props.zh
-        )}
-      </p>
-    </div>
-  </a>
+  <ListLink href="/word/{het.title}#{het.from}">
+    <svelte:fragment slot="heading">
+      {het.title}{processPn(het)}
+    </svelte:fragment>
+    <svelte:fragment slot="body">
+      {processPreview(
+        het.props.definition ||
+          het.props.definitions?.map((x) => x.def).join("") ||
+          het.props.example ||
+          het.props.zh
+      )}
+    </svelte:fragment>
+  </ListLink>
 {/each}
