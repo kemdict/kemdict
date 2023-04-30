@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "pojtl"
+version = "0.1.0"
+description = ""
+authors = ["Kisaragi Hiu <mail@kisaragi-hiu.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^2.3.1"
+kesi = "^1.4.3"
+gunicorn = "^20.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

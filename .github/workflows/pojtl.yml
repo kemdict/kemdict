@@ -1,11 +1,11 @@
-name: Deploy web
+name: Deploy pojtl
 
 on:
   push:
     branches:
       - main
     paths:
-      - "web/**"
+      - "pojtl/**"
       - "!*.org"
   workflow_dispatch:
 
