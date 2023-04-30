@@ -1,5 +1,5 @@
 ---
-import { langs, getSearchTitle } from "$src/common";
+import { langs, getSearchTitle, dictsByLang } from "$src/common";
 const { langId } = Astro.params;
 import { getHetFromUrl } from "$src/server/db";
 const url = Astro.url;
@@ -10,29 +10,42 @@ if (!success) {
 const heteronyms = data.heteronyms;
 const mtch = data.mtch;
 const query = data.query;
-let count = heteronyms.length;
 const langSet = data.langSet;
 
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 const title = getSearchTitle(mtch, query);
 const titleMarkup = getSearchTitle(mtch, query, true);
+const applicableHeteronyms = heteronyms.filter((het) =>
+  dictsByLang[langId].includes(het.from)
+);
+let count = applicableHeteronyms.length;
+
+// If there are no matching heteronyms specific to this language, try all languages instead.
+if (count === 0) {
+  return Astro.redirect(`/search?${url.searchParams.toString()}`);
+}
 
 import SingleLayout from "$src/SingleLayout.astro";
 import SingleLangResults from "./SingleLangResults.svelte";
+import Elsewhere from "$src/components/Elsewhere.astro";
 ---
 
 <SingleLayout
-  title={`${title} - kemdict 搜尋結果`}
+  title={`${title} - kemdict ${langs[langId]}搜尋結果`}
   initialMatchSelection={mtch}
   initialInput={query}
   showMatchTypes={true}
   submitSuffix={`/${langId}`}
 >
+  <Fragment slot="head">
+    <meta name="description" content="搜尋 kemdict" />
+  </Fragment>
+  <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
   <SingleLangResults
     client:load
     langGroups={presentLangs}
     langId={langId}
     currentParamsString={url.searchParams.toString()}
-    heteronyms={heteronyms}
+    heteronyms={applicableHeteronyms}
   />
 </SingleLayout>

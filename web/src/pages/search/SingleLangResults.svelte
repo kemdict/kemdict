@@ -1,13 +1,11 @@
 <script lang="ts">
+  import type { Heteronym } from "$src/common";
   export let langGroups = [["id", "readablename"]];
-  export let heteronyms = [];
-  import { dictsByLang } from "$src/common";
+  // This is filtered before passed into this component
+  export let heteronyms: Heteronym[] = [];
   import { Tab, TabGroup } from "@skeletonlabs/skeleton";
   import WordPreview from "$src/components/WordPreview.svelte";
   export let langId: string;
-  const applicableHeteronyms = heteronyms.filter((het) =>
-    dictsByLang[langId].includes(het.from)
-  );
   export let currentParamsString: string;
 </script>
 
@@ -31,7 +29,7 @@
       {/each}
       <svelte:fragment slot="panel">
         <ul>
-          <WordPreview heteronyms={applicableHeteronyms} />
+          <WordPreview {heteronyms} />
         </ul>
       </svelte:fragment>
     </TabGroup>
