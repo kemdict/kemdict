@@ -47,8 +47,11 @@ const db = (() => {
  */
 export function getHeteronyms(
   query: string,
-  mtch?: string | undefined
+  options?: {
+    mtch?: string | undefined;
+  }
 ): Heteronym[] {
+  const mtch = options?.mtch;
   const opt = {
     q: (() => {
       if (mtch === "prefix") {
@@ -207,7 +210,7 @@ export function getHetFromUrl(url: URL): [false, string] {
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  heteronyms = getHeteronyms(query, mtch);
+  heteronyms = getHeteronyms(query, { mtch });
   // Redirect if all matched heteronyms belong to the same title
   if (
     heteronyms &&
