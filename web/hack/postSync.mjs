@@ -4,7 +4,7 @@
  *   node postSync.mjs <url> <input>
  */
 
-const url = process.argv[2];
+const url = process.argv[2] || process.exit(1);
 
 async function get(text) {
   const response = await fetch(url, {
