@@ -14,6 +14,9 @@
 
   function linkToPage(page) {
     let localUrl = new URL(url);
+    if (import.meta.env.PROD) {
+      localUrl = new URL(url.pathname + url.search, Astro.site);
+    }
     localUrl.searchParams.set("p", page);
     return localUrl.toString();
   }
