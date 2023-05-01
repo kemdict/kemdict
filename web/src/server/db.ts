@@ -70,25 +70,22 @@ export function getHeteronyms(
     })(),
   };
   const operator = mtch ? "LIKE" : "=";
-  const matchingDictsStmt = db.prepare(`
-SELECT DISTINCT "from"
-FROM heteronyms, json_each(heteronyms.pns)
-WHERE "from" IS NOT NULL
-AND (title ${operator} @q OR json_each.value ${operator} @q)
-`);
-  matchingDictsStmt.pluck(true);
   const heteronymsStmt = db.prepare(
     `
 SELECT DISTINCT heteronyms.*
 FROM heteronyms, json_each(heteronyms.pns)
 WHERE "from" IS NOT NULL
 AND (title ${operator} @q OR json_each.value ${operator} @q)
-${hasDicts ? `AND "from" IN (${sqlEscape(dicts)})` : ""}
 `
   );
   const hets = heteronymsStmt.all(opt);
+  let applicableHets = hets;
+  if (hasDicts) {
+    applicableHets = hets.filter((het) => dicts.includes(het.from));
+  }
+  // Across all hets, not just filtered
   const matchingDicts = hets && uniq(hets.map((x) => x.from));
-  return [matchingDicts, hets?.map(processHet)];
+  return [matchingDicts, applicableHets?.map(processHet)];
 }
 
 export function getBacklinks(...titles: string[]): string[] {
