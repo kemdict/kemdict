@@ -48,7 +48,8 @@ const db = (() => {
 export function getHeteronyms(
   query: string,
   options?: {
-    mtch?: string | undefined;
+    mtch?: string;
+    dicts?: string[];
   }
 ): Heteronym[] {
   const mtch = options?.mtch;
@@ -87,7 +88,7 @@ export function getBacklinks(...titles: string[]): string[] {
   return stmt.all();
 }
 
-export function getDictTitles(from: string, limit?: number | undefined) {
+export function getDictTitles(from: string, limit?: number) {
   if (limit) {
     const stmt = db.prepare(
       `SELECT DISTINCT title FROM heteronyms WHERE "from" = ? LIMIT ?`
