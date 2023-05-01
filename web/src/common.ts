@@ -92,6 +92,7 @@ export function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
 }
 export const dictIds = dicts.map((x) => x.id);
 export const langIds = Object.keys(langs);
+// {"zh_TW": [...], "han": [...]}
 export const dictsByLang = (() => {
   const res = {};
   groupByProp(dicts, "lang")

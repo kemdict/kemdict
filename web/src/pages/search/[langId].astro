@@ -3,7 +3,7 @@ import { langs, getSearchTitle, dictsByLang } from "$src/common";
 const { langId } = Astro.params;
 import { getHetFromUrl } from "$src/server/db";
 const url = Astro.url;
-const [success, data] = getHetFromUrl(url);
+const [success, data] = getHetFromUrl(url, langId);
 if (!success) {
   return Astro.redirect(data);
 }
@@ -13,12 +13,7 @@ const query = data.query;
 const langSet = data.langSet;
 
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
-const title = getSearchTitle(mtch, query);
-const titleMarkup = getSearchTitle(mtch, query, true);
-const applicableHeteronyms = heteronyms.filter((het) =>
-  dictsByLang[langId].includes(het.from)
-);
-let count = applicableHeteronyms.length;
+const count = heteronyms.length;
 
 // If there are no matching heteronyms specific to this language, try all languages instead.
 if (count === 0) {
@@ -28,6 +23,8 @@ if (count === 0) {
 import SingleLayout from "$src/SingleLayout.astro";
 import SingleLangResults from "./SingleLangResults.svelte";
 import Elsewhere from "$src/components/Elsewhere.astro";
+const title = getSearchTitle(mtch, query);
+const titleMarkup = getSearchTitle(mtch, query, true);
 ---
 
 <SingleLayout
@@ -46,6 +43,6 @@ import Elsewhere from "$src/components/Elsewhere.astro";
     langGroups={presentLangs}
     langId={langId}
     currentParamsString={url.searchParams.toString()}
-    heteronyms={applicableHeteronyms}
+    heteronyms={heteronyms}
   />
 </SingleLayout>

@@ -4,7 +4,7 @@ import { getHeteronyms, getBacklinks } from "$src/server/db";
 import type { Dict, Heteronym } from "$src/common";
 
 const { title } = Astro.params;
-const heteronyms = getHeteronyms(title);
+const [_, heteronyms] = getHeteronyms(title);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = getBacklinks(...titles).sort();
 

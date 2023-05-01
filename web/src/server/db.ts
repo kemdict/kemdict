@@ -2,8 +2,12 @@ import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
 import { uniq, chunk, sortBy } from "lodash-es";
-import { groupByProp, WordSortFns, dicts } from "$src/common";
+import { groupByProp, WordSortFns, dicts, dictsByLang } from "$src/common";
 import type { Heteronym } from "$src/common";
+
+function escapeJoin(things: string[]): string {
+  return things.map((x) => `'${x.replace("'", "\\'")}'`).join(",");
+}
 
 // This already uses ES6 sets when available.
 
@@ -43,7 +47,7 @@ const db = (() => {
  * - "contains": match heteronyms that contain QUERY
  * - any thing else (including "exact"): match heteronyms exactly
  *
- * @returns {Array<object>}
+ * Returns [matchingDicts, Heteronyms]
  */
 export function getHeteronyms(
   query: string,
@@ -51,8 +55,10 @@ export function getHeteronyms(
     mtch?: string;
     dicts?: string[];
   }
-): Heteronym[] {
+): [string[], Heteronym[]] {
   const mtch = options?.mtch;
+  const dicts = options?.dicts;
+  const hasDicts = dicts && dicts.length > 0;
   const opt = {
     q: (() => {
       if (mtch === "prefix") {
@@ -67,21 +73,32 @@ export function getHeteronyms(
     })(),
   };
   const operator = mtch ? "LIKE" : "=";
-  const stmt = db.prepare(
+  const matchingDictsStmt = db.prepare(`
+SELECT DISTINCT "from"
+FROM heteronyms, json_each(heteronyms.pns)
+WHERE "from" IS NOT NULL
+AND (title ${operator} @q OR json_each.value ${operator} @q)
+`);
+  matchingDictsStmt.pluck(true);
+  const heteronymsStmt = db.prepare(
     `
 SELECT DISTINCT heteronyms.*
 FROM heteronyms, json_each(heteronyms.pns)
 WHERE "from" IS NOT NULL
-  AND (title ${operator} @q OR json_each.value ${operator} @q)`
+AND (title ${operator} @q OR json_each.value ${operator} @q)
+${hasDicts ? `AND "from" IN (${escapeJoin(dicts)})` : ""}
+`
   );
-  return stmt.all(opt)?.map(processHet);
+  const hets = heteronymsStmt.all(opt);
+  const matchingDicts = matchingDictsStmt.all(opt);
+  return [matchingDicts, hets?.map(processHet)];
 }
 
 export function getBacklinks(...titles: string[]): string[] {
   const stmt = db.prepare(
-    `SELECT DISTINCT "from" FROM links WHERE "to" IN (${titles
-      .map((x) => `'${x}'`)
-      .join(",")})`
+    `
+SELECT DISTINCT "from" FROM links
+WHERE "to" IN (${escapeJoin(titles)})`
   );
   // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
   stmt.pluck(true);
@@ -201,17 +218,20 @@ export function processHet(het: Heteronym): Heteronym {
  * Like search/index.astro's load() function.
  */
 export function getHetFromUrl(
-  url: URL
+  url: URL,
+  lang?: string
 ): [true, { heteronyms: Heteronym[]; mtch: string; query: string }];
-export function getHetFromUrl(url: URL): [false, string] {
+export function getHetFromUrl(url: URL, lang?: string): [false, string] {
   const query: string | undefined = url.searchParams.get("q")?.trim();
   const mtch: string = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "asc";
-  let heteronyms: Heteronym[] = [];
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  heteronyms = getHeteronyms(query, { mtch });
+  const [matchingDicts, heteronyms] = getHeteronyms(query, {
+    mtch,
+    dicts: lang && dictsByLang[lang],
+  });
   // Redirect if all matched heteronyms belong to the same title
   if (
     heteronyms &&
@@ -229,9 +249,9 @@ export function getHetFromUrl(url: URL): [false, string] {
   }
   heteronyms.sort(sortFn);
   const langSet = new Set();
-  for (const het of heteronyms) {
+  for (const dictId of matchingDicts) {
     for (const dict of dicts) {
-      const dictPresent = het.from === dict.id;
+      const dictPresent = dictId === dict.id;
       if (dictPresent) {
         langSet.add(dict.lang);
       }
