@@ -52,7 +52,7 @@ export function getHeteronyms(
     mtch?: string;
     dicts?: string[];
   }
-): [string[], Heteronym[]] {
+): [string[] | undefined, Heteronym[]] {
   const mtch = options?.mtch;
   const dicts = options?.dicts;
   const hasDicts = dicts && dicts.length > 0;
@@ -87,7 +87,10 @@ ${hasDicts ? `AND "from" IN (${sqlEscape(dicts)})` : ""}
 `
   );
   const hets = heteronymsStmt.all(opt);
-  const matchingDicts = matchingDictsStmt.all(opt);
+  let matchingDicts = undefined;
+  if (hasDicts) {
+    matchingDicts = matchingDictsStmt.all(opt);
+  }
   return [matchingDicts, hets?.map(processHet)];
 }
 
