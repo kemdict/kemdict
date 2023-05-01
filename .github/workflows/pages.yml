@@ -51,11 +51,7 @@ jobs:
       - name: Install packages
         run: |
           cd web && pnpm install
-      - name: Build
-        run: |
-          cd web
-          make build-no-data
-      - name: Deploy node
+      - name: Build and deploy
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
