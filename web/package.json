@@ -12,8 +12,8 @@
     "@astrojs/node": "^5.1.0",
     "better-sqlite3": "^8.1.0",
     "clsx": "^1.2.1",
-    "daisyui": "^2.51.5",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "sqlstring": "^2.3.3"
   },
   "devDependencies": {
     "@astrojs/mdx": "^0.18.2",
@@ -21,6 +21,7 @@
     "@astrojs/svelte": "^2.1.0",
     "@skeletonlabs/skeleton": "^1.2.5",
     "@types/lodash-es": "^4.17.6",
+    "@types/sqlstring": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "@vitejs/plugin-legacy": "^4.0.2",

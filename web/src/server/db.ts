@@ -1,13 +1,10 @@
 import * as fs from "node:fs";
 import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
+import { escape as sqlEscape } from "sqlstring";
 import { uniq, chunk, sortBy } from "lodash-es";
 import { groupByProp, WordSortFns, dicts, dictsByLang } from "$src/common";
 import type { Heteronym } from "$src/common";
-
-function escapeJoin(things: string[]): string {
-  return things.map((x) => `'${x.replace("'", "\\'")}'`).join(",");
-}
 
 // This already uses ES6 sets when available.
 
@@ -86,7 +83,7 @@ SELECT DISTINCT heteronyms.*
 FROM heteronyms, json_each(heteronyms.pns)
 WHERE "from" IS NOT NULL
 AND (title ${operator} @q OR json_each.value ${operator} @q)
-${hasDicts ? `AND "from" IN (${escapeJoin(dicts)})` : ""}
+${hasDicts ? `AND "from" IN (${sqlEscape(dicts)})` : ""}
 `
   );
   const hets = heteronymsStmt.all(opt);
@@ -98,7 +95,7 @@ export function getBacklinks(...titles: string[]): string[] {
   const stmt = db.prepare(
     `
 SELECT DISTINCT "from" FROM links
-WHERE "to" IN (${escapeJoin(titles)})`
+WHERE "to" IN (${sqlEscape(titles)})`
   );
   // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
   stmt.pluck(true);
