@@ -38,6 +38,7 @@ export default defineConfig({
     plugins: [legacy()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
+    ssr: { noExternal: ["sqlstring"] },
     resolve: {
       alias: [
         {

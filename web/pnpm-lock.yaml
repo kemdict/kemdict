@@ -13,9 +13,6 @@ dependencies:
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
-  sqlstring:
-    specifier: ^2.3.3
-    version: 2.3.3
 
 devDependencies:
   '@astrojs/mdx':
@@ -78,6 +75,9 @@ devDependencies:
   prettier-plugin-tailwindcss:
     specifier: ^0.2.4
     version: 0.2.4(prettier-plugin-astro@0.8.0)(prettier-plugin-svelte@2.9.0)(prettier@2.8.4)
+  sqlstring:
+    specifier: ^2.3.3
+    version: 2.3.3
   svelte:
     specifier: ^3.56.0
     version: 3.56.0
@@ -6337,7 +6337,7 @@ packages:
   /sqlstring@2.3.3:
     resolution: {integrity: sha512-qC9iz2FlN7DQl3+wjwn3802RTyjCx7sDvfQEXchwa6CWOx07/WVfh91gBmQ9fahw8snwGEWU3xGzOt4tFyHLxg==}
     engines: {node: '>= 0.6'}
-    dev: false
+    dev: true
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
