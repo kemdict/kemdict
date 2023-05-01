@@ -87,10 +87,7 @@ ${hasDicts ? `AND "from" IN (${sqlEscape(dicts)})` : ""}
 `
   );
   const hets = heteronymsStmt.all(opt);
-  let matchingDicts = undefined;
-  if (hasDicts) {
-    matchingDicts = matchingDictsStmt.all(opt);
-  }
+  const matchingDicts = hets && uniq(hets.map((x) => x.from));
   return [matchingDicts, hets?.map(processHet)];
 }
 
