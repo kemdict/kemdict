@@ -1,5 +1,11 @@
 ---
-import { langs, getSearchTitle, dictsByLang } from "$src/common";
+import {
+  parsePageParam,
+  langs,
+  getSearchTitle,
+  dictsByLang,
+} from "$src/common";
+import { chunk } from "lodash-es";
 const { langId } = Astro.params;
 import { getHetFromUrl } from "$src/server/db";
 const url = Astro.url;
@@ -18,6 +24,16 @@ const count = heteronyms.length;
 // If there are no matching heteronyms specific to this language, try all languages instead.
 if (count === 0) {
   return Astro.redirect(`/search?${url.searchParams.toString()}`);
+}
+
+// We do the chunking in Javascript and not in SQL because we still need the
+// total number of results
+const chunked = chunk(heteronyms, 50);
+const page = parsePageParam(url.searchParams.get("p"), chunked.length);
+// If "?p" is invalid, delete it and try again
+if (page === false) {
+  url.searchParams.delete("p");
+  return Astro.redirect(url);
 }
 
 import SingleLayout from "$src/SingleLayout.astro";
@@ -39,10 +55,13 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   </Fragment>
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
   <SingleLangResults
+    pageCount={chunked.length}
+    url={Astro.url}
+    activePage={page}
     client:load
     langGroups={presentLangs}
     langId={langId}
     currentParamsString={url.searchParams.toString()}
-    heteronyms={heteronyms}
+    heteronyms={chunked[page - 1]}
   />
 </SingleLayout>

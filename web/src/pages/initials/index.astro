@@ -5,29 +5,15 @@ import Pages from "$src/components/Pages.svelte";
 import { H1 } from "$src/components/typography";
 
 import { chars } from "$src/server/db";
+import { parsePageParam } from "$src/common";
 
 const { with_stroke_grouped, without_stroke } = chars;
 
 const params = new URL(Astro.request.url).searchParams;
 
-function parsePageParam(param) {
-  const p = Number(param);
-  if (
-    !param ||
-    !p ||
-    p > with_stroke_grouped.length ||
-    p < 1 ||
-    !Number.isInteger(p)
-  ) {
-    return false;
-  } else {
-    return p;
-  }
-}
-
-const page = parsePageParam(params.get("p"));
+const page = parsePageParam(params.get("p"), with_stroke_grouped.length);
 if (page === false) {
-  return Astro.redirect("/initials?p=1");
+  return Astro.redirect("/initials");
 }
 const with_stroke_this_page = with_stroke_grouped[page - 1];
 ---
