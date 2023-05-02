@@ -20,19 +20,11 @@
     }
   }
   function splitExample(ex: string | undefined): string[] {
-    if (ex) {
-      return (
-        ex
-          // The "(1)" is a marker for which definition to apply to.
-          // Some examples are delimited by this marker alone, without
-          // the semicolon. (See 戶 for an example.)
-          // Insert a semicolon so it's easier to split.
-          // TODO: put the examples between the definitions instead
-          .replace(/([^；]\(\d+\))/, "；$1")
-          .split("；")
-      );
+    if (!ex) return [];
+    if (ex.match(/\(\d+\)/)) {
+      return ex.replace(/\((\d+)\)/g, "($1) ").split("\n");
     } else {
-      return [];
+      return ex.split("；");
     }
   }
 </script>
