@@ -38,7 +38,11 @@ export default defineConfig({
     plugins: [legacy()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
-    ssr: { noExternal: ["sqlstring"] },
+    ssr: {
+      noExternal: [
+        ...(process.env.NODE_ENV !== "development" ? ["sqlstring"] : []),
+      ],
+    },
     resolve: {
       alias: [
         {
