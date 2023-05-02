@@ -9,6 +9,18 @@
   - 成語典
 - moedict-data-twblg ::
   - 教育部臺灣閩南語常用詞辭典
+- ChhoeTaigiDatabase ::
+  - 台日大辭典(台譯版)
+  - 台灣白話基礎語句
+  - iTaigi華台對照典
+
+** Roadmap
+
+- 臺灣植物名彙 — 等我[[https://kisaragi-hiu.com/list-of-plants-of-formosa][完全數位化它]]之後
+- 原住民族語言線上辭典
+  - 看起來很完整，而且有十六個語言
+  - 授權是「[[https://e-dictionary.ilrdf.org.tw/copyright.htm][除有合理使用情形外，應取得本會之同意或授權後，方得利用]]」
+  - 在那之前，是有全文下載，可是全文是適合列印閱讀的而不是適合資料分析的
 
 ** 授權
 
@@ -27,7 +39,6 @@ heteronyms.json:
     - ...
   pns:
     - "wo-r-d"
-  added: 1675843454.0
 #+end_src
 
 entries.db:
