@@ -52,11 +52,20 @@ export default {
       mono: ["monospace"],
     },
     extend: {
-      // https://github.com/tailwindlabs/tailwindcss/discussions/1361
-      boxShadow: {
-        DEFAULT: "0 0 0.25rem #00000040",
-        md: "0 0 0.25rem #00000070",
-        white: "0 0 0.5rem #ffffff",
+      colors: {
+        surface: {
+          50: "#f9faff",
+          100: "#ececfd",
+          200: "#e7e7fd",
+          300: "#d8d9fb",
+          400: "#bbbdf9",
+          500: "#9ea0f6",
+          600: "#8e90dd",
+          700: "#7778b9",
+          800: "#5f6094",
+          900: "#4d4e79",
+          950: "#0B0F14",
+        },
       },
     },
   },

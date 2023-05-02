@@ -15,7 +15,7 @@
   }
   blockquote {
     @apply rounded px-3 py-1;
-    @apply bg-gray-100 dark:bg-stone-700;
+    @apply bg-surface-100 dark:bg-stone-700;
     & + blockquote {
       @apply mt-2;
     }
@@ -25,12 +25,13 @@
   }
   .base {
     width: 95%;
-    @apply mx-auto my-0 max-w-4xl pt-12;
+    @apply mx-auto my-0 max-w-5xl pt-12;
   }
   body {
-    /* We do this because Skeleton does not have 950 styles yet, and
-  the surface 900 color is way too bright. */
-    @apply dark:bg-[#0B0F14];
+    /* Note that these are colors we declared in tailwind.config because
+  Skeleton does not have 950 styles yet, and the surface 900 color is
+  way too bright. */
+    @apply bg-surface-50 dark:bg-surface-950;
     @apply relative;
     min-height: 100vh;
     @apply fade;
@@ -41,31 +42,6 @@
 }
 
 @layer components {
-  /* Put it here for more readable comments. */
-  div.split-layout {
-    @apply relative;
-    /* HACK this works around the left slot clipping into content that
-       comes after the split layout.
-
-       Honestly we should just use a grid.
-    */
-    @apply sm:min-h-[32rem];
-    & > div {
-      /* The gap between the left edge of the container and the right slot */
-      @apply sm:ml-[15rem] md:ml-[18rem];
-      & > div.left {
-        /* The right slot position minus the gap (3rem) we want between left
-           and right */
-        @apply sm:w-[12rem] md:w-[15rem];
-        /* Actually place it on the left */
-        @apply sm:absolute sm:left-4 sm:top-4;
-        /* Style for when it's collapsed */
-        .fixed {
-          @apply sm:w-[12rem] md:w-[15rem];
-        }
-      }
-    }
-  }
   .text-input {
     @apply h-12;
     @apply px-4;
@@ -233,7 +209,7 @@
     }
   }
   .btnColor {
-    @apply bg-gray-200 hover:bg-gray-300 dark:bg-stone-800 dark:hover:bg-stone-700;
+    @apply bg-surface-200 hover:bg-surface-300 dark:bg-stone-800 dark:hover:bg-stone-700;
   }
   .btnBorder {
     @apply border;
@@ -243,7 +219,7 @@
     @apply btnColor btnBorder rounded-md;
   }
   .link {
-    @apply text-primary-700 dark:text-primary-500 fade;
+    @apply fade text-primary-700 dark:text-primary-500;
     @apply no-underline;
     &:hover {
       @apply text-primary-600 dark:text-primary-400;

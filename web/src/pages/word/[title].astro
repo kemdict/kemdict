@@ -8,7 +8,6 @@ const [_, heteronyms] = getHeteronyms(title);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = getBacklinks(...titles).sort();
 
-import SplitLayout from "$src/SplitLayout.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 
 import TOC from "$src/components/TOC.astro";
@@ -30,33 +29,44 @@ const presentDicts = groupedHets.map((group) => group[0]);
 
 {
   heteronyms.length > 0 ? (
-    <SplitLayout
+    <SingleLayout
+      wide={true}
       title={`「${title}」 - kemdict`}
-      leftFirst={false}
       initialInput={title}
     >
       <Fragment slot="head">
         <meta name="description" content="「{title}」的定義" />
       </Fragment>
-      <div slot="left">
-        <div class="max-sm:hidden">
-          <TOC presentDicts={presentDicts} />
-        </div>
-        <Elsewhere term={title} />
-        {backlinks.length > 0 && (
-          <div class="prose">
-            <h2>有提到「{title}」的條目</h2>
-            <WordList words={backlinks} />
+      <div class="md:flex md:flex-row-reverse md:gap-x-8">
+        <div class="md:w-5/12">
+          <div class="hidden md:block">
+            <TOC presentDicts={presentDicts} />
+            <Elsewhere term={title} />
+            {backlinks.length > 0 && (
+              <div class="prose">
+                <h2>有提到「{title}」的條目</h2>
+                <WordList words={backlinks} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <Fragment slot="right">
-        <div class="sm:hidden">
-          <TOC term={title} presentDicts={presentDicts} />
         </div>
-        <Word groupedHets={groupedHets} title={title} />
-      </Fragment>
-    </SplitLayout>
+        <div>
+          <div class="md:hidden">
+            <TOC term={title} presentDicts={presentDicts} />
+          </div>
+          <Word groupedHets={groupedHets} title={title} />
+          <div class="md:hidden">
+            <Elsewhere term={title} />
+            {backlinks.length > 0 && (
+              <div class="prose">
+                <h2>有提到「{title}」的條目</h2>
+                <WordList words={backlinks} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </SingleLayout>
   ) : (
     <SingleLayout
       title={`找不到「${title}」 - Kemdict 國語整合典`}

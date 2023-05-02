@@ -7,8 +7,10 @@ export interface Props {
   showMatchTypes?: boolean;
   class?: string;
   submitSuffix?: string;
+  wide?: boolean;
 }
 const {
+  wide,
   title,
   initialInput,
   initialMatchSelection,
@@ -18,6 +20,7 @@ const {
 } = Astro.props;
 const klass = Astro.props.class;
 
+import clsx from "clsx";
 import BaseLayout from "$src/BaseLayout.astro";
 import Header from "$src/components/Header.astro";
 ---
@@ -35,7 +38,7 @@ import Header from "$src/components/Header.astro";
       />
     )
   }
-  <div class={klass}>
+  <div class={clsx(wide ?? "mx-auto max-w-3xl", klass)}>
     <slot />
   </div>
 </BaseLayout>

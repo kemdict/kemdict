@@ -68,8 +68,8 @@
         a,
         hover,
         page === activePage && [
-          "bg-gray-200 dark:bg-stone-700",
-          "hover:bg-gray-300 hover:dark:bg-stone-600",
+          "bg-surface-200 dark:bg-surface-900",
+          "hover:bg-surface-300 hover:dark:bg-surface-800",
         ]
       )}
       href={linkToPage(page)}>{page}</a

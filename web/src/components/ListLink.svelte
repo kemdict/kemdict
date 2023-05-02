@@ -5,7 +5,7 @@
 <li>
   <a {href}>
     <div
-      class="-mx-1 my-2 p-1 text-sm transition hover:bg-gray-100 dark:hover:bg-stone-800"
+      class="-mx-1 my-2 p-1 text-sm transition hover:bg-surface-50 dark:hover:bg-stone-800"
     >
       <h2 class="link font-bold hover:no-underline">
         <slot name="heading" />
