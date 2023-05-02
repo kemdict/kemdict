@@ -25,13 +25,6 @@
 </script>
 
 {#each groupedHets as [dict, hets]}
-  {#if !addedLangIds.includes(dict.lang)}
-    <h1 class="lang" id={markLang(dict.lang)}>
-      <a class="hover:link dark:gray-500 mr-1 text-gray-400" href="#{dict.lang}"
-        >#</a
-      >{langs[dict.lang]}
-    </h1>
-  {/if}
   <div id={dict.id} class="dict">
     <span
       ><a

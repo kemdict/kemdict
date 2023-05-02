@@ -8,6 +8,15 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 ## 0.12.1 (次版)
 
+- 詞彙頁面改為使用分頁
+  - 舊連結格式：
+    - 全部：`https://kemdict.com/word/單詞`
+    - 僅某語言：`https://kemdict.com/word/單詞#zh_TW`
+    - 僅某字典：`https://kemdict.com/word/單詞#dict_revised`
+  - 新連結格式：
+    - 全部：`https://kemdict.com/word/單詞`
+    - 僅某語言：`https://kemdict.com/word/單詞?lang=zh_TW`
+    - 僅某字典：`https://kemdict.com/word/單詞?lang=zh_TW#dict_revised`
 - 搜尋：移除搜尋歷史
 - 利用 [Skeleton](https://www.skeleton.dev/) 的風格
 - 儘量使用白話字

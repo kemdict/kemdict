@@ -1,8 +1,4 @@
 <script lang="ts">
-  import type { Heteronym } from "$src/common";
-  import { Tab, TabGroup } from "@skeletonlabs/skeleton";
-  import Pages from "$src/components/Pages.svelte";
-  import WordPreview from "$src/components/WordPreview.svelte";
   export let pageCount: number;
   export let activePage: number;
   export let url: string | URL;
@@ -11,6 +7,11 @@
   export let heteronyms: Heteronym[] = [];
   export let langId: string;
   export let currentParamsString: string;
+
+  import type { Heteronym } from "$src/common";
+  import { Tab, TabGroup } from "@skeletonlabs/skeleton";
+  import Pages from "$src/components/Pages.svelte";
+  import WordPreview from "$src/components/WordPreview.svelte";
 </script>
 
 <div class="mt-4">

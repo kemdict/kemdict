@@ -85,11 +85,24 @@ export const dicts: Dict[] = [
   },
 ];
 
+export function dictIdsToLangs(...dictIds: string[]): Set<string> {
+  const langSet = new Set();
+  for (const dictId of dictIds) {
+    for (const dict of dicts) {
+      const dictPresent = dictId === dict.id;
+      if (dictPresent) {
+        langSet.add(dict.lang);
+      }
+    }
+  }
+  return langSet;
+}
 export function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
   const tmp = {};
   dictionaries.forEach((dict) => (tmp[dict.id] = dict));
   return tmp;
 }
+export const dictsObj = dictsToObj(dicts);
 export const dictIds = dicts.map((x) => x.id);
 export const langIds = Object.keys(langs);
 // {"zh_TW": [...], "han": [...]}
@@ -209,5 +222,16 @@ export function parsePageParam(param: string | null, maximum: number) {
     return false;
   } else {
     return p;
+  }
+}
+
+export function parseLangParam(param: string | null, langIds: Set<string>) {
+  // Param not present = first lang
+  if (param === null) {
+    return [...langIds][0];
+  } else if (!langIds.has(param)) {
+    return false;
+  } else {
+    return param;
   }
 }

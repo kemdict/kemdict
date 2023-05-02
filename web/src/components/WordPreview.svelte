@@ -1,6 +1,7 @@
 <script lang="ts">
   import ListLink from "./ListLink.svelte";
   import { spc } from "$src/processing";
+  import { dictsObj } from "$src/common";
   import type { Heteronym } from "$src/common";
   export let heteronyms: Heteronym[];
   // FIXME: for Hakkadict, it's questionable for me to pick one
@@ -34,7 +35,7 @@
 </script>
 
 {#each heteronyms as het}
-  <ListLink href="/word/{het.title}#{het.from}">
+  <ListLink href="/word/{het.title}?lang={dictsObj[het.from].lang}#{het.from}">
     <svelte:fragment slot="heading">
       {het.title}{processPn(het)}
     </svelte:fragment>

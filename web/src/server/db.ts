@@ -3,7 +3,12 @@ import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
 import { escape as sqlEscape } from "sqlstring";
 import { uniq, chunk, sortBy } from "lodash-es";
-import { groupByProp, WordSortFns, dicts, dictsByLang } from "$src/common";
+import {
+  groupByProp,
+  WordSortFns,
+  dictsByLang,
+  dictIdsToLangs,
+} from "$src/common";
 import type { Heteronym } from "$src/common";
 
 // This already uses ES6 sets when available.
@@ -222,7 +227,7 @@ export function getHetFromUrl(url: URL, lang?: string): [false, string] {
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  const [matchingDicts, heteronyms] = getHeteronyms(query, {
+  const [matchingDictIds, heteronyms] = getHeteronyms(query, {
     mtch,
     dicts: lang && dictsByLang[lang],
   });
@@ -242,14 +247,6 @@ export function getHetFromUrl(url: URL, lang?: string): [false, string] {
     sortFn = WordSortFns.ascend;
   }
   heteronyms.sort(sortFn);
-  const langSet = new Set();
-  for (const dictId of matchingDicts) {
-    for (const dict of dicts) {
-      const dictPresent = dictId === dict.id;
-      if (dictPresent) {
-        langSet.add(dict.lang);
-      }
-    }
-  }
+  const langSet = dictIdsToLangs(...matchingDictIds);
   return [true, { heteronyms, mtch, query, langSet }];
 }
