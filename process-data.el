@@ -646,9 +646,9 @@ This is a separate step from shaping."
          ;; After: "An apple is red."
          (lambda (str)
            (s-replace-regexp (rx (opt " ")
-                                 ;; this is #x223c, TILDE OPERATOR,
-                                 ;; not "~", TILDE.
-                                 (repeat 1 4 "∼")
+                                 (** 1 4 (or
+                                          "∼" ; #x223c, TILDE OPERATOR
+                                          "~"))
                                  (opt " "))
                              d:links:from
                              str))))
