@@ -3,9 +3,6 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro)
 
-node_modules: pnpm-lock.yaml
-	pnpm install --frozen-lockfile
-
 entries.db: ../dicts
 	cd ../dicts && make entries.db
 	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
@@ -13,7 +10,8 @@ entries.db: ../dicts
 .PHONY: dist
 dist: $(DEPS)
 	npx astro build
-	cp package.json pnpm-lock.yaml dist/
+	cp package.json dist/
+	touch dist/pnpm-workspace.yaml # to mark it as a new root
 	find server -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 
 public/l: ../dicts

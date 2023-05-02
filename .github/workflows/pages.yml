@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: "16"
           cache: "pnpm"
-          cache-dependency-path: "web/pnpm-lock.yaml"
+          cache-dependency-path: "pnpm-lock.yaml"
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -50,7 +50,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - name: Install packages
         run: |
-          cd web && pnpm install
+          pnpm install
       - name: Build and deploy
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
