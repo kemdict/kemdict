@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Heteronym } from "$src/common";
+  import type { Heteronym } from "common";
   export let heteronyms: Heteronym[];
   import Pronunciation from "$src/components/Pronunciation.svelte";
   function getTitle(het: Heteronym): string {

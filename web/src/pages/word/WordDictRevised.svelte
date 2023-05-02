@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Heteronym } from "$src/common";
+  import type { Heteronym } from "common";
   interface HetRevised extends Heteronym {
     props: {
       title: string;
@@ -24,7 +24,7 @@
   }
   export let heteronyms: HetRevised[];
   import { spc, radicals_and_strokes } from "$src/processing";
-  import { strLen } from "$src/common";
+  import { strLen } from "common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
   function process_def(def: string): string {

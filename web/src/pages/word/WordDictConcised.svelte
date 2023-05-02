@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Heteronym } from "$src/common";
+  import type { Heteronym } from "common";
   interface HetConcised extends Heteronym {
     props: {
       id: string;
@@ -12,7 +12,7 @@
   }
   export let heteronyms: Array<HetConcised> = [];
   import { spc, radicals_and_strokes } from "$src/processing";
-  import { strLen } from "$src/common";
+  import { strLen } from "common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
   function split(str: string): string[] {

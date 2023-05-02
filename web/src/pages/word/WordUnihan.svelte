@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Heteronym } from "$src/common";
+  import type { Heteronym } from "common";
   import Out from "$src/components/Out.svelte";
   function asHex(char: string) {
     return char.codePointAt(0).toString(16);

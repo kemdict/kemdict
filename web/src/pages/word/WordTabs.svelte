@@ -11,8 +11,8 @@
   }
 
   import { Tab, TabGroup } from "@skeletonlabs/skeleton";
-  import { langs } from "$src/common";
-  import type { Dict, Heteronym } from "$src/common";
+  import { langs } from "common";
+  import type { Dict, Heteronym } from "common";
   import Word from "./Word.svelte";
 </script>
 

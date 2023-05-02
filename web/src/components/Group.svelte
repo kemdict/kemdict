@@ -2,7 +2,7 @@
   export let title: string | undefined;
   export let elements = [];
   export let template = "$1";
-  import { format } from "$src/common";
+  import { format } from "common";
 </script>
 
 <h2 class="mb-2 text-xl">

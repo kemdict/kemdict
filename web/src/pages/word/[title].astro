@@ -8,8 +8,8 @@ import {
   langs,
   groupByProp,
   parseLangParam,
-} from "$src/common";
-import type { Dict, Heteronym } from "$src/common";
+} from "common";
+import type { Dict, Heteronym } from "common";
 
 const { title } = Astro.params;
 const [presentDictIds, heteronyms] = getHeteronyms(title);

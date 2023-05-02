@@ -1,8 +1,8 @@
 <script lang="ts">
   import ListLink from "./ListLink.svelte";
   import { spc } from "$src/processing";
-  import { dictsObj } from "$src/common";
-  import type { Heteronym } from "$src/common";
+  import { dictsObj } from "common";
+  import type { Heteronym } from "common";
   export let heteronyms: Heteronym[];
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.

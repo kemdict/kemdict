@@ -1,8 +1,8 @@
 <script lang="ts">
   import WordPreview from "$src/components/WordPreview.svelte";
   import ListLink from "$src/components/ListLink.svelte";
-  import { dictsByLang } from "$src/common";
-  import type { Heteronym } from "$src/common";
+  import { dictsByLang } from "common";
+  import type { Heteronym } from "common";
 
   // id, name
   export let lang: [string, string];

@@ -9,7 +9,7 @@
   export let langId: string;
   export let currentParamsString: string;
 
-  import type { Heteronym } from "$src/common";
+  import type { Heteronym } from "common";
   import { Tab, TabGroup } from "@skeletonlabs/skeleton";
   import Pages from "$src/components/Pages.svelte";
   import WordPreview from "$src/components/WordPreview.svelte";

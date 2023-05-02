@@ -10,9 +10,9 @@
   import WordMoedictish from "./WordMoedictish.svelte";
   import WordUnihan from "./WordUnihan.svelte";
 
-  import { format, langs } from "$src/common";
+  import { format, langs } from "common";
 
-  import type { Dict, Heteronym } from "$src/common";
+  import type { Dict, Heteronym } from "common";
 
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;

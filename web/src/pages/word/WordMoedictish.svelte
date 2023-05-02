@@ -3,7 +3,7 @@
   export let dict;
 
   import Pronunciation from "$src/components/Pronunciation.svelte";
-  import { groupByProp } from "$src/common";
+  import { groupByProp } from "common";
   import { toPOJ } from "$src/hack";
   import { spc, interlinear_annotation } from "$src/processing";
 
