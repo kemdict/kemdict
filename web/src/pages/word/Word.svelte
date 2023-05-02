@@ -163,7 +163,7 @@
       <div class="copyright">
         <p>
           《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a
-          >》版本編號：20190610
+          >》版本編號：20230222
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p>
