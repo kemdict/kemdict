@@ -8,16 +8,20 @@
       return typ.replace("\n", "/");
     }
   }
-  function process_def(def) {
+  function processDef(d) {
+    return d
+      .replace(/^\d+\./, "")
+      .replace(/例：(.*?)（(.*?)）/, `<blockquote>$1<br>$2</blockquote>`);
+  }
+  function processDefs(def) {
     if (def) {
       let x = "";
       for (const d of def.split("\n")) {
         if (x.length == 0) {
           x += `<ol>`;
         }
-        let nodigit = d.replace(/^\d+\./, "");
         x += "<li>";
-        x += `<p class="def">${nodigit}</p>`;
+        x += `<p class="def">${processDef(d)}</p>`;
         x += "</li>";
       }
       x += "</ol>";
@@ -38,7 +42,7 @@
   {#if het.props.type}
     <p class="pos">{process_type(het.props.type)}</p>
   {/if}
-  {@html process_def(het.props.definition)}
+  {@html processDefs(het.props.definition)}
   {#if het.props.antonyms}
     <p><m>反義詞</m>：{@html het.props.antonyms}</p>
   {/if}
