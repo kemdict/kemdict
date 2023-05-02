@@ -1,6 +1,7 @@
 <script>
   import clsx from "clsx";
   import { ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
+  import { onMount } from "svelte";
   export let submitSuffix = "";
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
@@ -15,6 +16,24 @@
     { mtch: "contains", name: "包含" },
     { mtch: "exact", name: "完全符合" },
   ];
+  onMount(() => {
+    window.addEventListener("keydown", (e) => {
+      // Following the same approach as
+      // kit.svelte.dev/src/lib/search/SearchBox.svelte, with some hints
+      // from MDN's page about navigator.platform
+      let modifier = "ctrlKey";
+      if (
+        navigator.platform.indexOf("Mac") === 0 ||
+        navigator.platform === "iPhone"
+      ) {
+        modifier = "metaKey";
+      }
+      if (e.key === "k" && e[modifier]) {
+        document.getElementById("sbi").focus();
+        e.preventDefault();
+      }
+    });
+  });
 </script>
 
 <div class="relative mb-2 mt-2">
@@ -22,6 +41,7 @@
     <div class="flex space-x-2">
       <div class="relative flex-grow">
         <input
+          id="sbi"
           type="search"
           autocomplete="off"
           placeholder="輸入要搜尋的詞彙…"
