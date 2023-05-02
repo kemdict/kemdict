@@ -1,15 +1,23 @@
 <script>
   import { range } from "lodash-es";
   import clsx from "clsx";
+  // Current active page
   export let activePage = 1;
+  // Total page count
   export let pageCount = 3;
-  export let maxDisplayedCount = 5;
+  // TODO: truncate pages beyond this
+  /* export let maxDisplayedCount = 5; */
+  // The current URL for creating links to each page
+  // (Each page is a server-side rendered page at, say, /abc?p=3 for
+  // page 3 at /abc.)
   export let url;
+  // The base URL of the site, because there is no access to
+  // Astro.site within framework components.
   export let baseURL;
 
-  /// Return the list of pages that should be displayed given `page`,
-  /// the current page.
-  function currentDisplayedPages(page) {
+  // TODO: Return the list of pages that should be displayed given
+  // `page`, the current page.
+  function currentDisplayedPages(_page) {
     return range(1, pageCount + 1);
   }
 
@@ -53,36 +61,38 @@
   const hover = "hover:bg-gray-100 hover:dark:bg-stone-800";
 </script>
 
-<div class="flex flex-wrap items-center justify-center space-x-2">
-  {#if activePage === 1}
-    <span class={clsx(a, disabled)}>
-      {@html chevron_back_outline}
-    </span>
-  {:else}
-    <a class={clsx(a, hover)} href={linkToPage(activePage - 1)}>
-      {@html chevron_back_outline}
-    </a>
-  {/if}
-  {#each currentDisplayedPages(activePage) as page}
-    <a
-      class={clsx(
-        a,
-        hover,
-        page === activePage && [
-          "bg-surface-200 dark:bg-surface-900",
-          "hover:bg-surface-300 hover:dark:bg-surface-800",
-        ]
-      )}
-      href={linkToPage(page)}>{page}</a
-    >
-  {/each}
-  {#if activePage === pageCount}
-    <span class={clsx(a, disabled)}>
-      {@html chevron_forward_outline}
-    </span>
-  {:else}
-    <a class={clsx(a, hover)} href={linkToPage(activePage + 1)}>
-      {@html chevron_forward_outline}
-    </a>
-  {/if}
-</div>
+{#if pageCount > 1}
+  <div class="flex flex-wrap items-center justify-center space-x-2">
+    {#if activePage === 1}
+      <span class={clsx(a, disabled)}>
+        {@html chevron_back_outline}
+      </span>
+    {:else}
+      <a class={clsx(a, hover)} href={linkToPage(activePage - 1)}>
+        {@html chevron_back_outline}
+      </a>
+    {/if}
+    {#each currentDisplayedPages(activePage) as page}
+      <a
+        class={clsx(
+          a,
+          hover,
+          page === activePage && [
+            "bg-surface-200 dark:bg-surface-900",
+            "hover:bg-surface-300 hover:dark:bg-surface-800",
+          ]
+        )}
+        href={linkToPage(page)}>{page}</a
+      >
+    {/each}
+    {#if activePage === pageCount}
+      <span class={clsx(a, disabled)}>
+        {@html chevron_forward_outline}
+      </span>
+    {:else}
+      <a class={clsx(a, hover)} href={linkToPage(activePage + 1)}>
+        {@html chevron_forward_outline}
+      </a>
+    {/if}
+  </div>
+{/if}
