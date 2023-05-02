@@ -41,6 +41,7 @@
         <ul>
           <WordPreview {heteronyms} />
         </ul>
+        <Pages {baseURL} {url} {activePage} {pageCount} />
       </svelte:fragment>
     </TabGroup>
   </div>
