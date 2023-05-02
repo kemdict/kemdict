@@ -5,6 +5,7 @@
   export let pageCount = 3;
   export let maxDisplayedCount = 5;
   export let url;
+  export let baseURL;
 
   /// Return the list of pages that should be displayed given `page`,
   /// the current page.
@@ -15,7 +16,7 @@
   function linkToPage(page) {
     let localUrl = new URL(url);
     if (import.meta.env.PROD) {
-      localUrl = new URL(url.pathname + url.search, Astro.site);
+      localUrl = new URL(url.pathname + url.search, baseURL);
     }
     localUrl.searchParams.set("p", page);
     return localUrl.toString();

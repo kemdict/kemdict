@@ -57,6 +57,7 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   <SingleLangResults
     pageCount={chunked.length}
     url={Astro.url}
+    baseURL={Astro.site}
     activePage={page}
     client:load
     langGroups={presentLangs}

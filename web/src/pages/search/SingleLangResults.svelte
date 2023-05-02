@@ -2,6 +2,7 @@
   export let pageCount: number;
   export let activePage: number;
   export let url: string | URL;
+  export let baseURL: string = "";
   export let langGroups = [["id", "readablename"]];
   // This is filtered before passed into this component
   export let heteronyms: Heteronym[] = [];
@@ -34,7 +35,7 @@
       {/each}
       <svelte:fragment slot="panel">
         <!-- TODO: client side page navigation -->
-        <Pages {url} {activePage} {pageCount} />
+        <Pages {baseURL} {url} {activePage} {pageCount} />
         <ul>
           <WordPreview {heteronyms} />
         </ul>

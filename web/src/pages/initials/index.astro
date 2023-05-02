@@ -45,6 +45,7 @@ const with_stroke_this_page = with_stroke_grouped[page - 1];
 
   <Pages
     url={Astro.url}
+    baseURL={Astro.site}
     activePage={page}
     pageCount={with_stroke_grouped.length}
   />
