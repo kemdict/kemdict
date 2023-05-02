@@ -54,7 +54,6 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   </Fragment>
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
   <SingleLangResults
-    client:load
     pageCount={chunked.length}
     url={Astro.url}
     baseURL={Astro.site}
