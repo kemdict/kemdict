@@ -3,13 +3,8 @@ import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
 import { escape as sqlEscape } from "sqlstring";
 import { uniq, chunk, sortBy } from "lodash-es";
-import {
-  groupByProp,
-  WordSortFns,
-  dictsByLang,
-  dictIdsToLangs,
-} from "$src/common";
-import type { Heteronym } from "$src/common";
+import { groupByProp, WordSortFns, dictsByLang, dictIdsToLangs } from "common";
+import type { Heteronym } from "common";
 
 // This already uses ES6 sets when available.
 
@@ -30,9 +25,12 @@ function readDB(path: string): Database {
 }
 
 const db = (() => {
-  const path = ["../kemdict.db", "./entries.db", "../../dicts/entries.db"].find(
-    (f) => fs.existsSync(f)
-  );
+  const path = [
+    "../kemdict.db",
+    "./entries.db",
+    "../dicts/entries.db",
+    "../../dicts/entries.db",
+  ].find((f) => fs.existsSync(f));
   if (path) {
     return readDB(path);
   } else {

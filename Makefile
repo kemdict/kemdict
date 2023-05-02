@@ -1,7 +1,8 @@
 .ONESHELL:
 .DEFAULT_GOAL := build
 
-.PHONY: build dev preview admin.deploy
+.PHONY: build dev dev-pojtl-api preview
+.PHONY: admin.deploy.kemdict admin.deploy.pojtl-api
 
 export LANG=en_US.UTF-8
 
@@ -10,6 +11,9 @@ build:
 
 dev:
 	cd web && make dev
+
+dev-pojtl-api:
+	cd pojtl-api && make dev
 
 preview: build
 	cd web && env PORT=5173 node dist/server/entry.mjs

@@ -12,6 +12,7 @@
     "@astrojs/node": "^5.1.2",
     "better-sqlite3": "^8.3.0",
     "clsx": "^1.2.1",
+    "common": "link:../common",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
@@ -31,10 +32,6 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-svelte": "^2.27.2",
     "postcss-preset-env": "^8.3.2",
-    "prettier": "^2.8.8",
-    "prettier-plugin-astro": "^0.8.0",
-    "prettier-plugin-svelte": "^2.10.0",
-    "prettier-plugin-tailwindcss": "^0.2.8",
     "sqlstring": "^2.3.3",
     "svelte": "^3.58.0",
     "svelte-preprocess": "^5.0.3",
