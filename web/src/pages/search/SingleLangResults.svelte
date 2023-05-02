@@ -1,4 +1,5 @@
 <script lang="ts">
+  export let langCountObj: Record<LangId, number>;
   export let pageCount: number;
   export let activePage: number;
   export let url: string | URL;
@@ -9,7 +10,7 @@
   export let langId: string;
   export let currentParamsString: string;
 
-  import type { Heteronym } from "common";
+  import type { Heteronym, LangId } from "common";
   import { Tab, TabGroup } from "@skeletonlabs/skeleton";
   import Pages from "$src/components/Pages.svelte";
   import WordPreview from "$src/components/WordPreview.svelte";
@@ -29,7 +30,8 @@
         <Tab group={langId} name={id} value={id} padding="">
           <a
             class="unstyled block px-4 py-2"
-            href="/search/{id}?{currentParamsString}">{name}</a
+            href="/search/{id}?{currentParamsString}"
+            >{name}{#if langCountObj[id] > 1} ({langCountObj[id]}){/if}</a
           >
         </Tab>
       {/each}

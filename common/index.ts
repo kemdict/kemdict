@@ -7,6 +7,10 @@ export const langs = {
   han: "漢字",
 };
 
+export function langIdName(langId: LangId): string {
+  return langs[langId];
+}
+
 export interface Dict {
   id: string;
   name: string;
@@ -20,6 +24,9 @@ export interface Heteronym {
   pns?: any[];
   props: any;
 }
+
+export type DictId = string;
+export type LangId = string;
 
 // This no longer defines the order in word pages.
 export const dicts: Dict[] = [
@@ -85,15 +92,17 @@ export const dicts: Dict[] = [
   },
 ];
 
+export function dictIdToDict(dictId: DictId): Dict {
+  return dictsObj[dictId];
+}
+export function dictIdLang(dictId: DictId): LangId {
+  return dictsObj[dictId].lang;
+}
+
 export function dictIdsToLangs(...dictIds: string[]): Set<string> {
   const langSet = new Set();
   for (const dictId of dictIds) {
-    for (const dict of dicts) {
-      const dictPresent = dictId === dict.id;
-      if (dictPresent) {
-        langSet.add(dict.lang);
-      }
-    }
+    langSet.add(dictIdLang(dictId));
   }
   return langSet;
 }

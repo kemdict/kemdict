@@ -12,8 +12,12 @@ const heteronyms = data.heteronyms;
 const mtch = data.mtch;
 const query = data.query;
 const langSet = data.langSet;
+// We pass langCountObj around because the other option is to pass both
+// all heteronyms and applicable heteronyms here.
+const langCountObj = data.langCountObj;
 
-const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
+// This preserves order as declared in common.
+const langGroups = Object.entries(langs).filter((l) => langSet.has(l[0]));
 const count = heteronyms.length;
 
 // If there are no matching heteronyms specific to this language, try all languages instead.
@@ -50,13 +54,14 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   </Fragment>
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
   <SingleLangResults
+    client:load
     pageCount={chunked.length}
     url={Astro.url}
     baseURL={Astro.site}
     activePage={page}
-    client:load
-    langGroups={presentLangs}
+    langGroups={langGroups}
     langId={langId}
+    langCountObj={langCountObj}
     currentParamsString={url.searchParams.toString()}
     heteronyms={chunked[page - 1]}
   />

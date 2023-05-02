@@ -2,10 +2,10 @@
   import WordPreview from "$src/components/WordPreview.svelte";
   import ListLink from "$src/components/ListLink.svelte";
   import { dictsByLang } from "common";
-  import type { Heteronym } from "common";
+  import type { Heteronym, LangId } from "common";
 
   // id, name
-  export let lang: [string, string];
+  export let lang: [LangId, string];
   export let heteronyms: Heteronym[];
   export let currentParams: URLSearchParams;
   const previewCount = 5;

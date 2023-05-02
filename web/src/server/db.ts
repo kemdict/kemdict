@@ -3,7 +3,13 @@ import * as zlib from "node:zlib";
 import Database from "better-sqlite3";
 import { escape as sqlEscape } from "sqlstring";
 import { uniq, chunk, sortBy } from "lodash-es";
-import { groupByProp, WordSortFns, dictsByLang, dictIdsToLangs } from "common";
+import {
+  groupByProp,
+  WordSortFns,
+  dictsByLang,
+  dictIdLang,
+  dictIdsToLangs,
+} from "common";
 import type { Heteronym } from "common";
 
 // This already uses ES6 sets when available.
@@ -87,8 +93,14 @@ AND (title ${operator} @q OR json_each.value ${operator} @q)
     applicableHets = hets.filter((het) => dicts.includes(het.from));
   }
   // Across all hets, not just filtered
-  const matchingDicts = hets && uniq(hets.map((x) => x.from));
-  return [matchingDicts, applicableHets?.map(processHet)];
+  const dictSet = new Set();
+  const dictCountObj: Record<string, number> = {};
+  for (const het of hets || []) {
+    dictSet.add(het.from);
+    dictCountObj[het.from] = (dictCountObj[het.from] || 0) + 1;
+  }
+  const matchingDicts = [...dictSet];
+  return [matchingDicts, applicableHets?.map(processHet), dictCountObj];
 }
 
 export function getBacklinks(...titles: string[]): string[] {
@@ -225,7 +237,7 @@ export function getHetFromUrl(url: URL, lang?: string): [false, string] {
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  const [matchingDictIds, heteronyms] = getHeteronyms(query, {
+  const [matchingDictIds, heteronyms, dictCountObj] = getHeteronyms(query, {
     mtch,
     dicts: lang && dictsByLang[lang],
   });
@@ -246,5 +258,10 @@ export function getHetFromUrl(url: URL, lang?: string): [false, string] {
   }
   heteronyms.sort(sortFn);
   const langSet = dictIdsToLangs(...matchingDictIds);
-  return [true, { heteronyms, mtch, query, langSet }];
+  const langCountObj = {};
+  for (const [dictId, count] of Object.entries(dictCountObj)) {
+    langCountObj[dictIdLang(dictId)] =
+      (langCountObj[dictIdLang(dictId)] || 0) + count;
+  }
+  return [true, { heteronyms, mtch, query, langSet, langCountObj }];
 }
