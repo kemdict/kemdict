@@ -102,7 +102,6 @@ ${tokens
       const arr = [];
       const tokenCount = tokens.length;
       tokens.forEach((token, index) => {
-        console.log(`query: `, query);
         let query = opt(token, index === 0, index === tokenCount - 1);
         arr.push(query);
         arr.push(query);
