@@ -45,42 +45,44 @@ const db = (() => {
 })();
 
 /**
- * Return heteronyms which match QUERY in its title or pronunciations.
+ * Return heteronyms which match every TOKENS in its title or pronunciations.
  *
  * If MTCH is:
- * - "prefix": match heteronyms starting with QUERY
- * - "suffix": match heteronyms ending with QUERY
- * - "contains": match heteronyms that contain QUERY
+ * - "prefix": match heteronyms starting with the first TOKEN
+ * - "suffix": match heteronyms ending with the last TOKEN
+ * - "contains": match heteronyms that contain TOKEN
  * - any thing else (including "exact"): match heteronyms exactly
  *
  * Returns [matchingDicts, Heteronyms]
  */
 export function getHeteronyms(
-  // TODO: accept a list of QUERYs and only return hets that match
-  // all of them. We can then split input on space before calling
-  // this function to support queries like "水 火"
-  query: string,
+  tokens: string | string[],
   options?: {
     mtch?: string;
     dicts?: string[];
   }
 ): [string[] | undefined, Heteronym[]] {
+  if (typeof tokens === "string") {
+    tokens = [tokens];
+  }
   const mtch = options?.mtch;
   const dicts = options?.dicts;
   const hasDicts = dicts && dicts.length > 0;
-  const opt = {
-    q: (() => {
-      if (mtch === "prefix") {
-        return `${query}%`;
-      } else if (mtch === "suffix") {
-        return `%${query}`;
-      } else if (mtch === "contains") {
-        return `%${query}%`;
-      } else {
-        return query;
-      }
-    })(),
-  };
+  function opt(token, first = false, last = false) {
+    let m = mtch;
+    if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
+      m = "contains";
+    }
+    if (m === "prefix") {
+      return `${token}%`;
+    } else if (m === "suffix") {
+      return `%${token}`;
+    } else if (m === "contains") {
+      return `%${token}%`;
+    } else {
+      return token;
+    }
+  }
   const operator = mtch ? "LIKE" : "=";
   const heteronymsStmt = db.prepare(
     // TODO: create another index table (normalized token, hetId) so
@@ -90,10 +92,24 @@ export function getHeteronyms(
 SELECT DISTINCT heteronyms.*
 FROM heteronyms, json_each(heteronyms.pns)
 WHERE "from" IS NOT NULL
-AND (title ${operator} @q OR json_each.value ${operator} @q)
+${tokens
+  .map(() => `AND (title ${operator} ? OR json_each.value ${operator} ?)`)
+  .join("\n")}
 `
   );
-  const hets = heteronymsStmt.all(opt);
+  const hets = heteronymsStmt.all(
+    (() => {
+      const arr = [];
+      const tokenCount = tokens.length;
+      tokens.forEach((token, index) => {
+        console.log(`query: `, query);
+        let query = opt(token, index === 0, index === tokenCount - 1);
+        arr.push(query);
+        arr.push(query);
+      });
+      return arr;
+    })()
+  );
   let applicableHets = hets;
   if (hasDicts) {
     applicableHets = hets.filter((het) => dicts.includes(het.from));
@@ -243,7 +259,8 @@ export function getHetFromUrl(url: URL, lang?: string): [false, string] {
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  const [matchingDictIds, heteronyms, dictCountObj] = getHeteronyms(query, {
+  const tokens = query.split(/\s+/);
+  const [matchingDictIds, heteronyms, dictCountObj] = getHeteronyms(tokens, {
     mtch,
     dicts: lang && dictsByLang[lang],
   });
