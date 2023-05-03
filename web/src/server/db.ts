@@ -56,6 +56,9 @@ const db = (() => {
  * Returns [matchingDicts, Heteronyms]
  */
 export function getHeteronyms(
+  // TODO: accept a list of QUERYs and only return hets that match
+  // all of them. We can then split input on space before calling
+  // this function to support queries like "水 火"
   query: string,
   options?: {
     mtch?: string;
@@ -80,6 +83,9 @@ export function getHeteronyms(
   };
   const operator = mtch ? "LIKE" : "=";
   const heteronymsStmt = db.prepare(
+    // TODO: create another index table (normalized token, hetId) so
+    // we don't have to parse arrays like this, and also to make it
+    // easier to support search without tones
     `
 SELECT DISTINCT heteronyms.*
 FROM heteronyms, json_each(heteronyms.pns)
