@@ -244,3 +244,19 @@ export function parseLangParam(param: string | null, langIds: Set<string>) {
     return param;
   }
 }
+
+export function tokenToQuery(token, mtch, first = false, last = false) {
+  let m = mtch;
+  if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
+    m = "contains";
+  }
+  if (m === "prefix") {
+    return `${token}%`;
+  } else if (m === "suffix") {
+    return `%${token}`;
+  } else if (m === "contains") {
+    return `%${token}%`;
+  } else {
+    return token;
+  }
+}

@@ -9,6 +9,7 @@ import {
   dictsByLang,
   dictIdLang,
   dictIdsToLangs,
+  tokenToQuery,
 } from "common";
 import type { Heteronym } from "common";
 
@@ -68,21 +69,6 @@ export function getHeteronyms(
   const mtch = options?.mtch;
   const dicts = options?.dicts;
   const hasDicts = dicts && dicts.length > 0;
-  function opt(token, first = false, last = false) {
-    let m = mtch;
-    if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
-      m = "contains";
-    }
-    if (m === "prefix") {
-      return `${token}%`;
-    } else if (m === "suffix") {
-      return `%${token}`;
-    } else if (m === "contains") {
-      return `%${token}%`;
-    } else {
-      return token;
-    }
-  }
   const operator = mtch ? "LIKE" : "=";
   const heteronymsStmt = db.prepare(
     // TODO: create another index table (normalized token, hetId) so
@@ -102,7 +88,12 @@ ${tokens
       const arr = [];
       const tokenCount = tokens.length;
       tokens.forEach((token, index) => {
-        let query = opt(token, index === 0, index === tokenCount - 1);
+        let query = tokenToQuery(
+          token,
+          mtch,
+          index === 0,
+          index === tokenCount - 1
+        );
         arr.push(query);
         arr.push(query);
       });
