@@ -10,36 +10,40 @@ import useSWR from "swr";
  * Read the database.
  */
 async function readDB(): Promise<SQLite.WebSQLDatabase> {
-  const info = await FS.getInfoAsync(FS.documentDirectory + "SQLite");
+  let info = await FS.getInfoAsync(FS.documentDirectory + "SQLite");
   if (!info.exists) {
     await FS.makeDirectoryAsync(FS.documentDirectory + "SQLite");
   }
-  console.log("starting download");
-  await FS.downloadAsync(
-    // require only works with static values. (On Hermes only, I guess??)
-    Asset.fromModule(require("./entries.db")).uri,
-    FS.documentDirectory + "SQLite/entries.db"
-  );
-  console.log("download finished");
+  info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
+  if (!info.exists) {
+    console.log("starting download");
+    await FS.downloadAsync(
+      // require only works with static values. (On Hermes only, I guess??)
+      Asset.fromModule(require("./entries.db")).uri,
+      FS.documentDirectory + "SQLite/entries.db"
+    );
+    console.log("download finished");
+  }
   return SQLite.openDatabase("SQLite/entries.db");
 }
 
 export default function App() {
-  const [items, setItems] = useState(null);
-  const { data, isLoading } = useSWR("dummy", async (_) => {
+  const { data, isLoading } = useSWR("dummy", async () => {
     const db = await readDB();
     console.log("db acquired");
-    return await new Promise((resolve, _reject) => {
+    return await new Promise((resolve) => {
       db.transaction((tx) => {
         console.log("executing SQL");
         tx.executeSql(
-          `select * from "heteronyms" limit 5;`,
-          [],
+          `select * from "heteronyms" where "title" = ?;`,
+          ["㐀"],
           (_, resultSet) => {
-            resolve(resultSet.rows);
+            console.log("success");
+            resolve(resultSet.rows._array);
           },
           (_, _err) => {
-            resolve(["error"]);
+            console.log("error");
+            resolve([{ title: "error" }]);
           }
         );
       });
@@ -50,7 +54,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{ color: "#fff" }}>Hello!</Text>
-      {isLoading ? (
+      {!data ? (
         <View>
           <Text style={{ color: "#fff" }}>Loading</Text>
         </View>
