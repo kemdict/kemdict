@@ -25,6 +25,12 @@ dependencies:
   react-native:
     specifier: 0.71.7
     version: 0.71.7(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0)
+  react-native-paper:
+    specifier: ^5.7.2
+    version: 5.7.2(react-native-safe-area-context@4.5.2)(react-native-vector-icons@9.2.0)(react-native@0.71.7)(react@18.2.0)
+  react-native-safe-area-context:
+    specifier: ^4.5.2
+    version: 4.5.2(react-native@0.71.7)(react@18.2.0)
   swr:
     specifier: ^2.1.5
     version: 2.1.5(react@18.2.0)
@@ -1389,6 +1395,16 @@ packages:
       '@babel/helper-string-parser': 7.21.5
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+
+  /@callstack/react-theme-provider@3.0.8(react@18.2.0):
+    resolution: {integrity: sha512-5U231sYY2sqQOaELX0WBCn+iluV8bFaXIS7em03k4W5Xz0AhGvKlnpLIhDGFP8im/SvNW7/2XoR0BsClhn9t6Q==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      deepmerge: 3.3.0
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+    dev: false
 
   /@expo/bunyan@4.0.0:
     resolution: {integrity: sha512-Ydf4LidRB/EBI+YrB+cVLqIseiRfjUI/AeHBgjGMtq3GroraDu81OV7zqophRgupngoL3iS3JUMDMnxO7g39qA==}
@@ -2857,6 +2873,14 @@ packages:
       wrap-ansi: 6.2.0
     dev: false
 
+  /cliui@7.0.4:
+    resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
+    dependencies:
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      wrap-ansi: 7.0.0
+    dev: false
+
   /cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
@@ -2917,6 +2941,13 @@ packages:
     dependencies:
       color-name: 1.1.4
       simple-swizzle: 0.2.2
+    dev: false
+
+  /color@3.2.1:
+    resolution: {integrity: sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==}
+    dependencies:
+      color-convert: 1.9.3
+      color-string: 1.9.1
     dev: false
 
   /colorette@1.4.0:
@@ -3946,6 +3977,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       source-map: 0.7.4
+    dev: false
+
+  /hoist-non-react-statics@3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
+    dependencies:
+      react-is: 16.13.1
     dev: false
 
   /hosted-git-info@3.0.8:
@@ -5764,6 +5801,41 @@ packages:
     resolution: {integrity: sha512-OXXYgpISEqERwjSlaCiaQY6cTY5CH6j73gdkWpK0hedxtiWMWgH+i5TOi4hIGYitm9kQBeyDu+wim9fA8ROFJA==}
     dev: false
 
+  /react-native-paper@5.7.2(react-native-safe-area-context@4.5.2)(react-native-vector-icons@9.2.0)(react-native@0.71.7)(react@18.2.0):
+    resolution: {integrity: sha512-v4py1Zx2OuZ85Pk4K0+0vOIi/VcfkufbXofiXsxVN/HMGd+YeShTITq8aK3p/zuq9qm5OlzxoHga7xA7D51CIQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-safe-area-context: '*'
+      react-native-vector-icons: '*'
+    dependencies:
+      '@callstack/react-theme-provider': 3.0.8(react@18.2.0)
+      color: 3.2.1
+      react: 18.2.0
+      react-native: 0.71.7(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0)
+      react-native-safe-area-context: 4.5.2(react-native@0.71.7)(react@18.2.0)
+      react-native-vector-icons: 9.2.0
+      use-latest-callback: 0.1.6(react@18.2.0)
+    dev: false
+
+  /react-native-safe-area-context@4.5.2(react-native@0.71.7)(react@18.2.0):
+    resolution: {integrity: sha512-oH4/Dm7/PWOOZtFRiA4HE08lsfA948BRq8Fn7TEndYjoDXFoNdbjQRahXzCV8JGP/tv3qrVNeaDE8rmdRRUOlA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.71.7(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0)
+    dev: false
+
+  /react-native-vector-icons@9.2.0:
+    resolution: {integrity: sha512-wKYLaFuQST/chH3AJRjmOLoLy3JEs1JR6zMNgTaemFpNoXs0ztRnTxcxFD9xhX7cJe1/zoN5BpQYe7kL0m5yyA==}
+    hasBin: true
+    dependencies:
+      prop-types: 15.8.1
+      yargs: 16.2.0
+    dev: false
+
   /react-native@0.71.7(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0):
     resolution: {integrity: sha512-Id6iRLS581fJMFGbBl1jP5uSmjExtGOvw5Gvh7694zISXjsRAsFMmU+izs0pyCLqDBoHK7y4BT7WGPGw693nYw==}
     engines: {node: '>=14'}
@@ -6864,6 +6936,14 @@ packages:
       requires-port: 1.0.0
     dev: false
 
+  /use-latest-callback@0.1.6(react@18.2.0):
+    resolution: {integrity: sha512-VO/P91A/PmKH9bcN9a7O3duSuxe6M14ZoYXgA6a8dab8doWNdhiIHzEkX/jFeTTRBsX0Ubk6nG4q2NIjNsj+bg==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /use-sync-external-store@1.2.0(react@18.2.0):
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
@@ -7100,6 +7180,11 @@ packages:
       decamelize: 1.2.0
     dev: false
 
+  /yargs-parser@20.2.9:
+    resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
+    engines: {node: '>=10'}
+    dev: false
+
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
@@ -7120,6 +7205,19 @@ packages:
       which-module: 2.0.1
       y18n: 4.0.3
       yargs-parser: 18.1.3
+    dev: false
+
+  /yargs@16.2.0:
+    resolution: {integrity: sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==}
+    engines: {node: '>=10'}
+    dependencies:
+      cliui: 7.0.4
+      escalade: 3.1.1
+      get-caller-file: 2.0.5
+      require-directory: 2.1.1
+      string-width: 4.2.3
+      y18n: 5.0.8
+      yargs-parser: 20.2.9
     dev: false
 
   /yargs@17.7.2:
