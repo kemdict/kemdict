@@ -1,25 +1,11 @@
 import { List, Appbar } from "react-native-paper";
 import useSWR from "swr";
 import { FlatList, Text, View } from "react-native";
-import { readDB } from "../db.ts";
+import { crossDbAll } from "../db.ts";
 
 export default function Home() {
   const { data, isLoading } = useSWR("dummy", async () => {
-    const db = await readDB();
-    return await new Promise((resolve) => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          `select * from "heteronyms" limit 10;`,
-          [],
-          (_, resultSet) => {
-            resolve(resultSet.rows._array);
-          },
-          (_, _err) => {
-            resolve([{ title: "error" }]);
-          }
-        );
-      });
-    });
+    return await crossDbAll(`select * from "heteronyms" limit 10;`);
   });
   return (
     <>
