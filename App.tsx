@@ -11,10 +11,11 @@ import useSWR from "swr";
  */
 async function readDB(): Promise<SQLite.WebSQLDatabase> {
   let info: FS.FileInfo;
-  info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
-  if (info.exists) {
-    await FS.deleteAsync(FS.documentDirectory + "SQLite/entries.db");
-  }
+  // TODO: verify integrity
+  // info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
+  // if (info.exists) {
+  //   await FS.deleteAsync(FS.documentDirectory + "SQLite/entries.db");
+  // }
   info = await FS.getInfoAsync(FS.documentDirectory + "SQLite");
   if (!info.exists) {
     await FS.makeDirectoryAsync(FS.documentDirectory + "SQLite");
@@ -52,17 +53,17 @@ export default function App() {
   });
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ color: "#fff" }}>Hello!</Text>
+      <Text style={styles.text}>Hello!</Text>
       {isLoading ? (
         <View>
-          <Text style={{ color: "#fff" }}>Loading</Text>
+          <Text style={styles.text}>Loading</Text>
         </View>
       ) : (
         <FlatList
           data={data}
           renderItem={({ item }) => (
             <View>
-              <Text style={{ color: "#fff" }}>{JSON.stringify(item)}</Text>
+              <Text style={styles.text}>{JSON.stringify(item)}</Text>
             </View>
           )}
           keyExtractor={(item) => item.title}
@@ -79,5 +80,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#0B0F14",
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    color: "#fff",
   },
 });
