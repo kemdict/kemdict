@@ -12,6 +12,7 @@
     "@astrojs/node": "^5.1.2",
     "better-sqlite3": "^8.3.0",
     "clsx": "^1.2.1",
+    "astro": "^2.4.0",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
@@ -25,7 +26,6 @@
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "@vitejs/plugin-legacy": "^4.0.3",
-    "astro": "^2.3.3",
     "common": "link:../common",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
@@ -33,7 +33,6 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-svelte": "^2.27.2",
     "postcss-preset-env": "^8.3.2",
-    "sqlstring": "^2.3.3",
     "svelte": "^3.58.0",
     "svelte-preprocess": "^5.0.3",
     "tailwindcss": "^3.3.2"

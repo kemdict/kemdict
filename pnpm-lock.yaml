@@ -37,10 +37,7 @@ importers:
     dependencies:
       '@astrojs/node':
         specifier: ^5.1.2
-        version: 5.1.2(astro@2.3.3)
-      better-sqlite3:
-        specifier: ^8.3.0
-        version: 8.3.0
+        version: 5.1.2(astro@2.4.0)
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -50,13 +47,13 @@ importers:
     devDependencies:
       '@astrojs/mdx':
         specifier: ^0.19.0
-        version: 0.19.0(astro@2.3.3)(rollup@3.21.3)
+        version: 0.19.0(astro@2.4.0)(rollup@3.21.3)
       '@astrojs/sitemap':
         specifier: ^1.2.2
         version: 1.2.2
       '@astrojs/svelte':
         specifier: ^2.1.1
-        version: 2.1.1(astro@2.3.3)(svelte@3.58.0)(typescript@4.9.5)(vite@4.3.4)
+        version: 2.1.1(astro@2.4.0)(svelte@3.58.0)(typescript@4.9.5)(vite@4.3.4)
       '@skeletonlabs/skeleton':
         specifier: ^1.2.5
         version: 1.2.5
@@ -79,8 +76,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(terser@5.17.1)(vite@4.3.4)
       astro:
-        specifier: ^2.3.3
-        version: 2.3.3(terser@5.17.1)
+        specifier: ^2.4.0
+        version: 2.4.0(terser@5.17.1)
       common:
         specifier: link:../common
         version: link:../common
@@ -102,9 +99,6 @@ importers:
       postcss-preset-env:
         specifier: ^8.3.2
         version: 8.3.2(postcss@8.4.23)
-      sqlstring:
-        specifier: ^2.3.3
-        version: 2.3.3
       svelte:
         specifier: ^3.58.0
         version: 3.58.0
@@ -151,13 +145,13 @@ packages:
       vscode-languageserver-types: 3.17.3
       vscode-uri: 3.0.7
 
-  /@astrojs/markdown-remark@2.1.4(astro@2.3.3):
+  /@astrojs/markdown-remark@2.1.4(astro@2.4.0):
     resolution: {integrity: sha512-z5diCcFo2xkBAJ11KySAIKpZZkULZmzUvWsZ2VWIOrR6QrEgEfVl5jTpgPSedx4m+xUPuemlUviOotGB7ItNsQ==}
     peerDependencies:
       astro: ^2.3.0
     dependencies:
       '@astrojs/prism': 2.1.1
-      astro: 2.3.3(terser@5.17.1)
+      astro: 2.4.0(terser@5.17.1)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -172,12 +166,35 @@ packages:
       vfile: 5.3.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
-  /@astrojs/mdx@0.19.0(astro@2.3.3)(rollup@3.21.3):
+  /@astrojs/markdown-remark@2.2.0(astro@2.4.0):
+    resolution: {integrity: sha512-4M1+GzQwDqF0KfX9Ahug43b0avorcK+iTapEaVuNnaCUVS6sZKRkztT3g6hmXiFmGHSL8qYaS9IVEmKtP6hYmw==}
+    peerDependencies:
+      astro: ^2.4.0
+    dependencies:
+      '@astrojs/prism': 2.1.1
+      astro: 2.4.0(terser@5.17.1)
+      github-slugger: 1.5.0
+      import-meta-resolve: 2.2.2
+      rehype-raw: 6.1.1
+      rehype-stringify: 9.0.3
+      remark-gfm: 3.0.1
+      remark-parse: 10.0.1
+      remark-rehype: 10.1.0
+      remark-smartypants: 2.0.0
+      shiki: 0.14.2
+      unified: 10.1.2
+      unist-util-visit: 4.1.2
+      vfile: 5.3.7
+    transitivePeerDependencies:
+      - supports-color
+
+  /@astrojs/mdx@0.19.0(astro@2.4.0)(rollup@3.21.3):
     resolution: {integrity: sha512-McFpMV+npinIEKnY5t9hsdzLd76g78GgIRUPxem2OeXPNB8xr2pNS28GeU0+6Pn5STnB+sgcyyeqXLgzauOlMQ==}
     engines: {node: '>=16.12.0'}
     dependencies:
-      '@astrojs/markdown-remark': 2.1.4(astro@2.3.3)
+      '@astrojs/markdown-remark': 2.1.4(astro@2.4.0)
       '@astrojs/prism': 2.1.1
       '@mdx-js/mdx': 2.3.0
       '@mdx-js/rollup': 2.3.0(rollup@3.21.3)
@@ -201,13 +218,13 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/node@5.1.2(astro@2.3.3):
+  /@astrojs/node@5.1.2(astro@2.4.0):
     resolution: {integrity: sha512-tDApFnU99O3KQXaRUmfwbkdxqgJhNvPDWou4CVBpybVm3xruigMfz5c+H9P2f4vRo0+sYTzof1L3Hzx9Rh9sQA==}
     peerDependencies:
       astro: ^2.3.3
     dependencies:
       '@astrojs/webapi': 2.1.1
-      astro: 2.3.3(terser@5.17.1)
+      astro: 2.4.0(terser@5.17.1)
       send: 0.18.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -227,7 +244,7 @@ packages:
       zod: 3.21.4
     dev: true
 
-  /@astrojs/svelte@2.1.1(astro@2.3.3)(svelte@3.58.0)(typescript@4.9.5)(vite@4.3.4):
+  /@astrojs/svelte@2.1.1(astro@2.4.0)(svelte@3.58.0)(typescript@4.9.5)(vite@4.3.4):
     resolution: {integrity: sha512-F4tJqGBAMqLVvkVzaXb2EACFDvFjuxeAI3uhkpI+FHYhrdTwLkk0EnWOZD6JjYLePbY1IlJmDEe22dYNgZrz9A==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -235,7 +252,7 @@ packages:
       svelte: ^3.54.0
     dependencies:
       '@sveltejs/vite-plugin-svelte': 2.1.1(svelte@3.58.0)(vite@4.3.4)
-      astro: 2.3.3(terser@5.17.1)
+      astro: 2.4.0(terser@5.17.1)
       svelte: 3.58.0
       svelte2tsx: 0.5.23(svelte@3.58.0)(typescript@4.9.5)
     transitivePeerDependencies:
@@ -2172,6 +2189,7 @@ packages:
 
   /@types/estree@1.0.1:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
+    dev: true
 
   /@types/hast@2.3.4:
     resolution: {integrity: sha512-wLEm0QvaoawEDoTRwzTXp4b4jpwiJDvR5KMnFnVodm3scufTlBOWRD6N1OBf9TZMhjlNsSfcO5V+7AF4+Vy+9g==}
@@ -2443,6 +2461,9 @@ packages:
     resolution: {integrity: sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==}
     engines: {node: '>=12'}
 
+  /ansi-sequence-parser@1.1.0:
+    resolution: {integrity: sha512-lEm8mt52to2fT8GhciPCGeCXACSz2UwIN4X2e2LJSnZ5uAbn2/dsYdOmUXq0AtWS5cpAupysIneExOgH0Vd2TQ==}
+
   /ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
     engines: {node: '>=4'}
@@ -2549,19 +2570,19 @@ packages:
       - supports-color
     dev: true
 
-  /astro@2.3.3(terser@5.17.1):
-    resolution: {integrity: sha512-LH9e42VoK8QqHCbZcFAf0GGZs4WVjfq3kJ/hrYgwpPyf8e2uUym4W9+DzM6+vEn7kbUq8Ec0l63zQQl3eXqxZQ==}
+  /astro@2.4.0(terser@5.17.1):
+    resolution: {integrity: sha512-cEorAsC1vgcpGI7sbUc3p5dModZWxr3jvBwMHKfhIHufwrvY7w3EssPyDyG3m27JTnYlD18JAnimVLhTAvmSQw==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
     peerDependencies:
-      sharp: ^0.31.3
+      sharp: '>=0.31.0'
     peerDependenciesMeta:
       sharp:
         optional: true
     dependencies:
       '@astrojs/compiler': 1.4.0
       '@astrojs/language-server': 1.0.0
-      '@astrojs/markdown-remark': 2.1.4(astro@2.3.3)
+      '@astrojs/markdown-remark': 2.2.0(astro@2.4.0)
       '@astrojs/telemetry': 2.1.1
       '@astrojs/webapi': 2.1.1
       '@babel/core': 7.21.8
@@ -2583,7 +2604,7 @@ packages:
       devalue: 4.3.0
       diff: 5.1.0
       es-module-lexer: 1.2.1
-      estree-walker: 3.0.3
+      estree-walker: 3.0.0
       execa: 6.1.0
       fast-glob: 3.2.12
       github-slugger: 2.0.0
@@ -2599,7 +2620,7 @@ packages:
       rehype: 12.0.1
       semver: 7.5.0
       server-destroy: 1.0.1
-      shiki: 0.11.1
+      shiki: 0.14.2
       slash: 4.0.0
       string-width: 5.1.2
       strip-ansi: 7.0.1
@@ -3603,10 +3624,14 @@ packages:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
 
+  /estree-walker@3.0.0:
+    resolution: {integrity: sha512-s6ceX0NFiU/vKPiKvFdR83U1Zffu7upwZsGwpoqfg5rbbq1l50WQ5hCeIvM6E6oD4shUHCYMsiFPns4Jk0YfMQ==}
+
   /estree-walker@3.0.3:
     resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
     dependencies:
       '@types/estree': 1.0.1
+    dev: true
 
   /esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
@@ -6369,6 +6394,15 @@ packages:
       jsonc-parser: 3.2.0
       vscode-oniguruma: 1.7.0
       vscode-textmate: 6.0.0
+    dev: true
+
+  /shiki@0.14.2:
+    resolution: {integrity: sha512-ltSZlSLOuSY0M0Y75KA+ieRaZ0Trf5Wl3gutE7jzLuIcWxLp5i/uEnLoQWNvgKXQ5OMpGkJnVMRLAuzjc0LJ2A==}
+    dependencies:
+      ansi-sequence-parser: 1.1.0
+      jsonc-parser: 3.2.0
+      vscode-oniguruma: 1.7.0
+      vscode-textmate: 8.0.0
 
   /side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
@@ -6454,6 +6488,7 @@ packages:
   /sqlstring@2.3.3:
     resolution: {integrity: sha512-qC9iz2FlN7DQl3+wjwn3802RTyjCx7sDvfQEXchwa6CWOx07/WVfh91gBmQ9fahw8snwGEWU3xGzOt4tFyHLxg==}
     engines: {node: '>= 0.6'}
+    dev: false
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
@@ -7150,6 +7185,10 @@ packages:
 
   /vscode-textmate@6.0.0:
     resolution: {integrity: sha512-gu73tuZfJgu+mvCSy4UZwd2JXykjK9zAZsfmDeut5dx/1a7FeTk0XwJsSuqQn+cuMCGVbIBfl+s53X4T19DnzQ==}
+    dev: true
+
+  /vscode-textmate@8.0.0:
+    resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
 
   /vscode-uri@2.1.2:
     resolution: {integrity: sha512-8TEXQxlldWAuIODdukIb+TR5s+9Ds40eSJrw+1iDDA9IFORPjMELarNQE3myz5XIkWWpdprmJjm1/SxMlWOC8A==}
