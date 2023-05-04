@@ -1,14 +1,27 @@
+import { Provider as PaperProvider } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView, FlatList, ScrollView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet, SafeAreaView } from "react-native";
 
-import Home from "./pages/Home.tsx";
+const Stack = createNativeStackNavigator();
+
+import Home from "./pages/Home";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Home />
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </PaperProvider>
   );
 }
 
