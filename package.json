@@ -4,6 +4,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "expo": "~48.0.16",
+    "expo-asset": "^8.9.1",
+    "expo-file-system": "^15.2.2",
+    "expo-sqlite": "~11.1.1",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.7"

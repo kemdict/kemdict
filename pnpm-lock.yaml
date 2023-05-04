@@ -4,6 +4,15 @@ dependencies:
   expo:
     specifier: ~48.0.16
     version: 48.0.16(@babel/core@7.21.8)
+  expo-asset:
+    specifier: ^8.9.1
+    version: 8.9.1(expo@48.0.16)
+  expo-file-system:
+    specifier: ^15.2.2
+    version: 15.2.2(expo@48.0.16)
+  expo-sqlite:
+    specifier: ~11.1.1
+    version: 11.1.1(expo@48.0.16)
   expo-status-bar:
     specifier: ~1.4.4
     version: 1.4.4
@@ -1671,6 +1680,16 @@ packages:
     resolution: {integrity: sha512-TI+l71+5aSKnShYclFa14Kum+hQMZ86b95SH6tQUG3qZEmLTarvWpKwqtTwQKqvlJSJrpFiSFu3eCuZokY6zWA==}
     dev: false
 
+  /@expo/websql@1.0.1:
+    resolution: {integrity: sha512-H9/t1V7XXyKC343FJz/LwaVBfDhs6IqhDtSYWpt8LNSQDVjf5NvVJLc5wp+KCpRidZx8+0+YeHJN45HOXmqjFA==}
+    dependencies:
+      argsarray: 0.0.1
+      immediate: 3.3.0
+      noop-fn: 1.0.0
+      pouchdb-collections: 1.0.1
+      tiny-queue: 0.2.1
+    dev: false
+
   /@expo/xcpretty@4.2.2:
     resolution: {integrity: sha512-Lke/geldJqUV0Dfxg5/QIOugOzdqZ/rQ9yHKSgGbjZtG1uiSqWyFwWvXmrdd3/sIdX33eykGvIcf+OrvvcXVUw==}
     hasBin: true
@@ -2276,6 +2295,10 @@ packages:
 
   /argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+    dev: false
+
+  /argsarray@0.0.1:
+    resolution: {integrity: sha512-u96dg2GcAKtpTrBdDoFIM7PjcBA+6rSP0OR94MOReNRyUECL6MtQt5XXmRr4qrftYaef9+l5hcpO5te7sML1Cg==}
     dev: false
 
   /arr-diff@4.0.0:
@@ -3360,6 +3383,15 @@ packages:
       invariant: 2.2.4
     dev: false
 
+  /expo-sqlite@11.1.1(expo@48.0.16):
+    resolution: {integrity: sha512-93KQ4Bc4+xQF2nOZC2jcJ+d0K1ooQSEYganLukw4Sp2LuxUtBsPXYTyOeisSxQSMMaz9nHiTqag8DEC1MiB7Xw==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/websql': 1.0.1
+      expo: 48.0.16(@babel/core@7.21.8)
+    dev: false
+
   /expo-status-bar@1.4.4:
     resolution: {integrity: sha512-5DV0hIEWgatSC3UgQuAZBoQeaS9CqeWRZ3vzBR9R/+IUD87Adbi4FGhU10nymRqFXOizGsureButGZIXPs7zEA==}
     dev: false
@@ -3891,6 +3923,10 @@ packages:
     resolution: {integrity: sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==}
     engines: {node: '>=4.0'}
     hasBin: true
+    dev: false
+
+  /immediate@3.3.0:
+    resolution: {integrity: sha512-HR7EVodfFUdQCTIeySw+WDRFJlPcLOJbXfwwZ7Oom6tjsvZ3bOkCDJHehQC3nxJrv7+f9XecwazynjU8e4Vw3Q==}
     dev: false
 
   /import-fresh@2.0.0:
@@ -5151,6 +5187,10 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: false
 
+  /noop-fn@1.0.0:
+    resolution: {integrity: sha512-pQ8vODlgXt2e7A3mIbFDlizkr46r75V+BJxVAyat8Jl7YmI513gG5cfyRL0FedKraoZ+VAouI1h4/IWpus5pcQ==}
+    dev: false
+
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
@@ -5476,6 +5516,10 @@ packages:
   /posix-character-classes@0.1.1:
     resolution: {integrity: sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /pouchdb-collections@1.0.1:
+    resolution: {integrity: sha512-31db6JRg4+4D5Yzc2nqsRqsA2oOkZS8DpFav3jf/qVNBxusKa2ClkEIZ2bJNpaDbMfWtnuSq59p6Bn+CipPMdg==}
     dev: false
 
   /pretty-bytes@5.6.0:
@@ -6478,6 +6522,10 @@ packages:
 
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+    dev: false
+
+  /tiny-queue@0.2.1:
+    resolution: {integrity: sha512-EijGsv7kzd9I9g0ByCl6h42BWNGUZrlCSejfrb3AKeHC33SGbASu1VDf5O3rRiiUOhAC9CHdZxFPbZu0HmR70A==}
     dev: false
 
   /tmp@0.0.33:

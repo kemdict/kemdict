@@ -1,5 +1,5 @@
 dev:
-	npx expo start
+	npx expo start # maybe set EXPO_DEBUG?
 
 dev-android:
 	npx expo start --android
