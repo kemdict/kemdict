@@ -155,12 +155,13 @@ No longer applicable as we don't use moedict-data anymore.
 - update copyright information
 * Dictionary testing
 - Does search work?
-  - “a”
-  - “無妨”
-  - “一”
+  - "a"
+  - "a p" (prefix, suffix)
+  - "無妨"
+  - "一"
 - Does word page rendering work?
-  - “無妨” (taijit, concised, revised, =moedict_twblg=)
-  - “實聯制” (kisaragi, itaigi)
+  - "無妨" (taijit, concised, revised, =moedict_twblg=)
+  - "實聯制" (kisaragi, itaigi)
 * Why not make the DB its own service
 
 I'm still not sure, but

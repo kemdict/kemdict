@@ -27,7 +27,7 @@ export async function readDB() {
       "../dicts/entries.db",
       "../../dicts/entries.db",
     ].find((f) => fs.existsSync(f));
-    if (!path) return;
+    if (!path) throw new Error("DB not found!");
     if (path.endsWith(".db.gz")) {
       const data = fs.readFileSync(path);
       const decompressed = zlib.gunzipSync(data);
