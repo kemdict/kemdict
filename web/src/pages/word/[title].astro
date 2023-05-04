@@ -12,7 +12,7 @@ import {
 import type { Dict, Heteronym } from "common";
 
 const { title } = Astro.params;
-const [presentDictIds, heteronyms] = getHeteronyms(title);
+const [presentDictIds, heteronyms] = await getHeteronyms(title);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = getBacklinks(...titles).sort();
 

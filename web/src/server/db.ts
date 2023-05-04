@@ -12,17 +12,19 @@ import {
   tokenToQuery,
   parseQueryToTokens,
 } from "common";
+import { crossDbAll } from "common";
 import type { Heteronym, DictId, LangId } from "common";
 
 // This already uses ES6 sets when available.
 
-/**
- * Read a gzipped SQLite database and return a Database
- * object for it as an in-memory database.
- * If `path` does not end in ".gz", try to return a connection instead
- * (without using an in-memory database).
- */
-function readDB(path: string): Database.Database {
+function readDB(): Database.Database {
+  const path = [
+    "../kemdict.db",
+    "./entries.db",
+    "../dicts/entries.db",
+    "../../dicts/entries.db",
+  ].find((f) => fs.existsSync(f));
+  if (!path) return;
   if (path.endsWith(".db.gz")) {
     const data = fs.readFileSync(path);
     const decompressed = zlib.gunzipSync(data);
@@ -35,19 +37,7 @@ function readDB(path: string): Database.Database {
   }
 }
 
-const db = (() => {
-  const path = [
-    "../kemdict.db",
-    "./entries.db",
-    "../dicts/entries.db",
-    "../../dicts/entries.db",
-  ].find((f) => fs.existsSync(f));
-  if (path) {
-    return readDB(path);
-  } else {
-    return;
-  }
-})();
+const db = readDB();
 
 /**
  * Return heteronyms which match every TOKENS in its title or pronunciations.
@@ -60,13 +50,13 @@ const db = (() => {
  *
  * Returns [matchingDicts, Heteronyms]
  */
-export function getHeteronyms(
+export async function getHeteronyms(
   tokens: string | string[],
   options?: {
     mtch?: string;
     dicts?: string[];
   }
-): [string[] | undefined, Heteronym[], Record<DictId, number>] {
+): Promise<[string[] | undefined, Heteronym[], Record<DictId, number>]> {
   if (typeof tokens === "string") {
     tokens = [tokens];
   }
@@ -74,7 +64,11 @@ export function getHeteronyms(
   const dicts = options?.dicts;
   const hasDicts = dicts && dicts.length > 0;
   const operator = mtch ? "LIKE" : "=";
-  const heteronymsStmt = db.prepare(
+  const hets = (await crossDbAll(
+    {
+      readDB,
+      runtime: "web",
+    },
     // TODO: create another index table (normalized token, hetId) so
     // we don't have to parse arrays like this, and also to make it
     // easier to support search without tones
@@ -85,9 +79,7 @@ WHERE "from" IS NOT NULL
 ${tokens
   .map(() => `AND (title ${operator} ? OR json_each.value ${operator} ?)`)
   .join("\n")}
-`
-  );
-  const hets = heteronymsStmt.all(
+`,
     (() => {
       const arr = [];
       const tokenCount = tokens.length;
@@ -103,7 +95,7 @@ ${tokens
       });
       return arr;
     })()
-  ) as Heteronym[];
+  )) as Heteronym[];
   let applicableHets = hets;
   if (hasDicts) {
     applicableHets = hets.filter((het) => dicts.includes(het.from));
@@ -244,22 +236,24 @@ export function processHet(het: Heteronym): Heteronym {
 /**
  * Like search/index.astro's load() function.
  */
-export function getHetFromUrl(
+export async function getHetFromUrl(
   url: URL,
   lang?: string
-): [
-  boolean,
-  (
-    | {
-        heteronyms: Heteronym[];
-        mtch: string;
-        query: string;
-        langSet: Set<LangId>;
-        langCountObj: Record<LangId, number>;
-      }
-    | string
-  ) // when the first item is false, this is a string
-] {
+): Promise<
+  [
+    boolean,
+    (
+      | {
+          heteronyms: Heteronym[];
+          mtch: string;
+          query: string;
+          langSet: Set<LangId>;
+          langCountObj: Record<LangId, number>;
+        }
+      | string
+    ) // when the first item is false, this is a string
+  ]
+> {
   const query: string | undefined = url.searchParams.get("q")?.trim();
   const mtch: string = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "asc";
@@ -267,10 +261,13 @@ export function getHetFromUrl(
     return [false, "/"];
   }
   const tokens = parseQueryToTokens(query);
-  const [matchingDictIds, heteronyms, dictCountObj] = getHeteronyms(tokens, {
-    mtch,
-    dicts: lang && dictsByLang[lang],
-  });
+  const [matchingDictIds, heteronyms, dictCountObj] = await getHeteronyms(
+    tokens,
+    {
+      mtch,
+      dicts: lang && dictsByLang[lang],
+    }
+  );
   // Redirect if all matched heteronyms belong to the same title
   if (
     heteronyms &&

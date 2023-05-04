@@ -3,7 +3,7 @@ import { getHetFromUrl } from "$src/server/db";
 import { dictsByLang, dicts, langs, WordSortFns, getSearchTitle } from "common";
 
 const url = Astro.url;
-const [success, data] = getHetFromUrl(url);
+const [success, data] = await getHetFromUrl(url);
 if (!success) {
   return Astro.redirect(data);
 }
