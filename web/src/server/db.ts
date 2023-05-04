@@ -11,7 +11,7 @@ import {
   dictIdsToLangs,
   tokenToQuery,
 } from "common";
-import type { Heteronym } from "common";
+import type { Heteronym, DictId, LangId } from "common";
 
 // This already uses ES6 sets when available.
 
@@ -21,13 +21,16 @@ import type { Heteronym } from "common";
  * If `path` does not end in ".gz", try to return a connection instead
  * (without using an in-memory database).
  */
-function readDB(path: string): Database {
+function readDB(path: string): Database.Database {
   if (path.endsWith(".db.gz")) {
     const data = fs.readFileSync(path);
     const decompressed = zlib.gunzipSync(data);
     return new Database(decompressed);
   } else {
-    return new Database(path, { readonly: true, fileMustExist: true });
+    return new Database(path, {
+      readonly: true,
+      fileMustExist: true,
+    });
   }
 }
 
@@ -62,7 +65,7 @@ export function getHeteronyms(
     mtch?: string;
     dicts?: string[];
   }
-): [string[] | undefined, Heteronym[]] {
+): [string[] | undefined, Heteronym[], Record<DictId, number>] {
   if (typeof tokens === "string") {
     tokens = [tokens];
   }
@@ -88,7 +91,7 @@ ${tokens
       const arr = [];
       const tokenCount = tokens.length;
       tokens.forEach((token, index) => {
-        let query = tokenToQuery(
+        const query = tokenToQuery(
           token,
           mtch,
           index === 0,
@@ -99,13 +102,13 @@ ${tokens
       });
       return arr;
     })()
-  );
+  ) as Heteronym[];
   let applicableHets = hets;
   if (hasDicts) {
     applicableHets = hets.filter((het) => dicts.includes(het.from));
   }
   // Across all hets, not just filtered
-  const dictSet = new Set();
+  const dictSet: Set<DictId> = new Set();
   const dictCountObj: Record<string, number> = {};
   for (const het of hets || []) {
     dictSet.add(het.from);
@@ -123,7 +126,7 @@ WHERE "to" IN (${sqlEscape(titles)})`
   );
   // Pluck mode: we get ["word", ...], and not [{"from": "word"}, ...]
   stmt.pluck(true);
-  return stmt.all();
+  return stmt.all() as string[];
 }
 
 export function getDictTitles(from: string, limit?: number) {
@@ -178,12 +181,14 @@ WHERE dicts != 'unihan'
 `);
   nostrokeStmt.pluck(true);
   pnStmt.pluck(true);
-  const with_stroke: Array<{ title: string; stroke_count: number }> =
-    strokeStmt.all();
+  const with_stroke = strokeStmt.all() as Array<{
+    title: string;
+    stroke_count: number;
+  }>;
   const s = new Set(with_stroke.map((x) => x.title));
   const without_stroke: string[] = uniq([
-    ...nostrokeStmt.all(),
-    ...pnStmt.all(),
+    ...(nostrokeStmt.all() as string[]),
+    ...(pnStmt.all() as string[]),
   ])
     .filter((x: string) => !s.has(x))
     .sort();
@@ -241,8 +246,19 @@ export function processHet(het: Heteronym): Heteronym {
 export function getHetFromUrl(
   url: URL,
   lang?: string
-): [true, { heteronyms: Heteronym[]; mtch: string; query: string }];
-export function getHetFromUrl(url: URL, lang?: string): [false, string] {
+): [
+  boolean,
+  (
+    | {
+        heteronyms: Heteronym[];
+        mtch: string;
+        query: string;
+        langSet: Set<LangId>;
+        langCountObj: Record<LangId, number>;
+      }
+    | string
+  ) // when the first item is false, this is a string
+] {
   const query: string | undefined = url.searchParams.get("q")?.trim();
   const mtch: string = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "asc";
@@ -271,7 +287,7 @@ export function getHetFromUrl(url: URL, lang?: string): [false, string] {
   }
   heteronyms.sort(sortFn);
   const langSet = dictIdsToLangs(...matchingDictIds);
-  const langCountObj = {};
+  const langCountObj: Record<LangId, number> = {};
   for (const [dictId, count] of Object.entries(dictCountObj)) {
     langCountObj[dictIdLang(dictId)] =
       (langCountObj[dictIdLang(dictId)] || 0) + count;

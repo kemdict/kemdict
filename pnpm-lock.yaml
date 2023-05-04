@@ -34,9 +34,6 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
-      common:
-        specifier: link:../common
-        version: link:../common
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -53,6 +50,9 @@ importers:
       '@skeletonlabs/skeleton':
         specifier: ^1.2.5
         version: 1.2.5
+      '@types/better-sqlite3':
+        specifier: ^7.6.4
+        version: 7.6.4
       '@types/lodash-es':
         specifier: ^4.17.7
         version: 4.17.7
@@ -71,6 +71,9 @@ importers:
       astro:
         specifier: ^2.3.3
         version: 2.3.3(terser@5.17.1)
+      common:
+        specifier: link:../common
+        version: link:../common
       eslint:
         specifier: ^8.39.0
         version: 8.39.0
@@ -2139,6 +2142,12 @@ packages:
     resolution: {integrity: sha512-enCvTL8m/EHS/zIvJno9nE+ndYPh1/oNFzRYRmtUqJICG2VnCSBzMLW5VN2KCQU91f23tsNKR8v7VJJQMatl7Q==}
     dependencies:
       '@babel/types': 7.21.5
+
+  /@types/better-sqlite3@7.6.4:
+    resolution: {integrity: sha512-dzrRZCYPXIXfSR1/surNbJ/grU3scTaygS0OMzjlGf71i9sc2fGyHPXXiXmEvNIoE0cGwsanEFMVJxPXmco9Eg==}
+    dependencies:
+      '@types/node': 17.0.45
+    dev: true
 
   /@types/debug@4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
