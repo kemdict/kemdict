@@ -10,6 +10,7 @@ import {
   dictIdLang,
   dictIdsToLangs,
   tokenToQuery,
+  parseQueryToTokens,
 } from "common";
 import type { Heteronym, DictId, LangId } from "common";
 
@@ -265,7 +266,7 @@ export function getHetFromUrl(
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  const tokens = query.split(/\s+/);
+  const tokens = parseQueryToTokens(query);
   const [matchingDictIds, heteronyms, dictCountObj] = getHeteronyms(tokens, {
     mtch,
     dicts: lang && dictsByLang[lang],

@@ -200,16 +200,36 @@ export function getSearchTitle(
   query: string,
   markup?: boolean
 ): string {
+  const tokens = parseQueryToTokens(query);
+  function wrap(s) {
+    if (markup) {
+      return `「<span class="font-bold">${s}</span>」`;
+    } else {
+      return `「${s}」`;
+    }
+  }
   if (markup) {
     query = `<span class="font-bold">${query}</span>`;
   }
-  if (mtch === "prefix") {
-    return `以「${query}」開頭的詞`;
+  if (mtch === "contains") {
+    return `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+  } else if (mtch === "prefix") {
+    if (tokens.length === 1) return `以${wrap(tokens[0])}開頭的詞`;
+    return `以${wrap(tokens[0])}開頭、且包含${joinLast(
+      tokens.slice(1).map(wrap),
+      "、",
+      "及"
+    )}的詞`;
   } else if (mtch === "suffix") {
-    return `以「${query}」結尾的詞`;
-  } else if (mtch === "contains") {
-    return `包含「${query}」的詞`;
-  } else if (mtch === "exact") {
+    if (tokens.length === 1)
+      return `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
+    return `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
+      tokens.slice(0, -1).map(wrap),
+      "、",
+      "及"
+    )}的詞`;
+  }
+  if (mtch === "exact") {
     return `完全符合「${query}」的詞`;
   }
 }
@@ -245,6 +265,10 @@ export function parseLangParam(param: string | null, langIds: Set<string>) {
   }
 }
 
+export function parseQueryToTokens(inputQuery: string): string[] {
+  return inputQuery.split(/\s+/);
+}
+
 export function tokenToQuery(token, mtch, first = false, last = false) {
   let m = mtch;
   if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
@@ -259,4 +283,23 @@ export function tokenToQuery(token, mtch, first = false, last = false) {
   } else {
     return token;
   }
+}
+
+export function joinLast(
+  strings: string[],
+  separator: string = "",
+  lastSeparator: string = separator
+) {
+  let buf = "";
+  for (let i = 0; i < strings.length; i++) {
+    if (i !== 0) {
+      if (i === strings.length - 1) {
+        buf += lastSeparator;
+      } else {
+        buf += separator;
+      }
+    }
+    buf += strings[i];
+  }
+  return buf;
 }
