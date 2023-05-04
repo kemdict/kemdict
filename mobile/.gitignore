@@ -17,3 +17,6 @@ web-build/
 .metro-health-check*
 
 *.db
+
+# I give up. I'm just hardlinking it directly.
+common/

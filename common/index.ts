@@ -123,8 +123,6 @@ export const dictsByLang = (() => {
   return res;
 })();
 
-export const version = (import.meta.env.KEMDICT_VERSION as string) || "unknown";
-
 export const WordSortFns = {
   // These return numbers because that's what Array.sort wants.
   ascend: (a: Heteronym, b: Heteronym): 1 | -1 => {
@@ -269,7 +267,7 @@ export function parseQueryToTokens(inputQuery: string): string[] {
   return inputQuery.split(/\s+/);
 }
 
-export function tokenToQuery(token, mtch, first = false, last = false) {
+export function tokenToLIKEInput(token, mtch, first = false, last = false) {
   let m = mtch;
   if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
     m = "contains";
@@ -302,4 +300,14 @@ export function joinLast(
     buf += strings[i];
   }
   return buf;
+}
+
+/**
+ * Decode the JSON in the props field in a heteronym object.
+ */
+export function processHet(het: Heteronym): Heteronym {
+  if (typeof het.props === "string") {
+    het.props = JSON.parse(het.props);
+  }
+  return het;
 }

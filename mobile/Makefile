@@ -1,4 +1,9 @@
-DEPS := assets/entries.db
+COMMON := common/index.ts common/db.ts
+DEPS := assets/entries.db $(COMMON)
+
+$(COMMON): common/%.ts: ../common/%.ts
+	mkdir -p common
+	([ -n "$$ANDROID_DATA" ] && cp "$<" "$@") || ln -f -T "$<" "$@"
 
 assets/entries.db: ../dicts
 	cd ../dicts && make entries.db

@@ -2,7 +2,7 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { getCharsByRadical } from "common/db";
+import { getCharsByRadical } from "$src/server/db";
 import { format, groupByProp } from "common";
 
 const { radical } = Astro.params;

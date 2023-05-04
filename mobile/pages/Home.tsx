@@ -1,7 +1,7 @@
 import { List, Appbar } from "react-native-paper";
 import useSWR from "swr";
 import { FlatList, Text, View } from "react-native";
-import { readDB } from ":/db.ts";
+import { readDB } from "../db.ts";
 
 export default function Home() {
   const { data, isLoading } = useSWR("dummy", async () => {

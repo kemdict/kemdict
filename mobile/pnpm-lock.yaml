@@ -1,50 +1,58 @@
 lockfileVersion: '6.0'
 
-dependencies:
-  expo:
-    specifier: ~48.0.15
-    version: 48.0.16(@babel/core@7.21.8)
-  expo-asset:
-    specifier: ^8.9.1
-    version: 8.9.1(expo@48.0.16)
-  expo-file-system:
-    specifier: ^15.2.2
-    version: 15.2.2(expo@48.0.16)
-  expo-splash-screen:
-    specifier: ~0.18.2
-    version: 0.18.2(expo-modules-autolinking@1.2.0)(expo@48.0.16)
-  expo-sqlite:
-    specifier: ~11.1.1
-    version: 11.1.1(expo@48.0.16)
-  expo-status-bar:
-    specifier: ~1.4.4
-    version: 1.4.4
-  react:
-    specifier: 18.2.0
-    version: 18.2.0
-  react-native:
-    specifier: 0.71.7
-    version: 0.71.7(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0)
-  react-native-paper:
-    specifier: ^5.7.2
-    version: 5.7.2(react-native-safe-area-context@4.5.2)(react-native-vector-icons@9.2.0)(react-native@0.71.7)(react@18.2.0)
-  react-native-safe-area-context:
-    specifier: ^4.5.2
-    version: 4.5.2(react-native@0.71.7)(react@18.2.0)
-  swr:
-    specifier: ^2.1.5
-    version: 2.1.5(react@18.2.0)
-  typescript:
-    specifier: ^4.9.4
-    version: 4.9.5
+importers:
 
-devDependencies:
-  '@babel/core':
-    specifier: ^7.21.8
-    version: 7.21.8
-  '@types/react':
-    specifier: ^18.2.3
-    version: 18.2.3
+  .:
+    dependencies:
+      '@types/lodash-es':
+        specifier: ^4.17.7
+        version: 4.17.7
+      expo:
+        specifier: ~48.0.15
+        version: 48.0.16(@babel/core@7.21.8)
+      expo-asset:
+        specifier: ^8.9.1
+        version: 8.9.1(expo@48.0.16)
+      expo-file-system:
+        specifier: ^15.2.2
+        version: 15.2.2(expo@48.0.16)
+      expo-splash-screen:
+        specifier: ~0.18.2
+        version: 0.18.2(expo-modules-autolinking@1.2.0)(expo@48.0.16)
+      expo-sqlite:
+        specifier: ~11.1.1
+        version: 11.1.1(expo@48.0.16)
+      expo-status-bar:
+        specifier: ~1.4.4
+        version: 1.4.4
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-native:
+        specifier: 0.71.7
+        version: 0.71.7(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0)
+      react-native-paper:
+        specifier: ^5.7.2
+        version: 5.7.2(react-native-safe-area-context@4.5.2)(react-native-vector-icons@9.2.0)(react-native@0.71.7)(react@18.2.0)
+      react-native-safe-area-context:
+        specifier: ^4.5.2
+        version: 4.5.2(react-native@0.71.7)(react@18.2.0)
+      swr:
+        specifier: ^2.1.5
+        version: 2.1.5(react@18.2.0)
+      typescript:
+        specifier: ^4.9.4
+        version: 4.9.5
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.21.8
+        version: 7.21.8
+      '@types/react':
+        specifier: ^18.2.3
+        version: 18.2.3
 
 packages:
 
@@ -2155,6 +2163,16 @@ packages:
     resolution: {integrity: sha512-c3mAZEuK0lvBp8tmuL74XRKn1+y2dcwOUpH7x4WrF6gk1GIgiluDRgMYQtw2OFcBvAJWlt6ASU3tSqxp0Uu0Aw==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.0
+    dev: false
+
+  /@types/lodash-es@4.17.7:
+    resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
+    dependencies:
+      '@types/lodash': 4.14.194
+    dev: false
+
+  /@types/lodash@4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
     dev: false
 
   /@types/node@18.16.3:
@@ -4609,6 +4627,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
+    dev: false
+
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
   /lodash.debounce@4.0.8:
