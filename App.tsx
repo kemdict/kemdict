@@ -10,51 +10,50 @@ import useSWR from "swr";
  * Read the database.
  */
 async function readDB(): Promise<SQLite.WebSQLDatabase> {
-  let info = await FS.getInfoAsync(FS.documentDirectory + "SQLite");
+  let info: FS.FileInfo;
+  info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
+  if (info.exists) {
+    await FS.deleteAsync(FS.documentDirectory + "SQLite/entries.db");
+  }
+  info = await FS.getInfoAsync(FS.documentDirectory + "SQLite");
   if (!info.exists) {
     await FS.makeDirectoryAsync(FS.documentDirectory + "SQLite");
   }
   info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
   if (!info.exists) {
-    console.log("starting download");
+    console.log("downloading");
     await FS.downloadAsync(
       // require only works with static values. (On Hermes only, I guess??)
-      Asset.fromModule(require("./entries.db")).uri,
+      Asset.fromModule(require("./assets/entries.db")).uri,
       FS.documentDirectory + "SQLite/entries.db"
     );
-    console.log("download finished");
+    console.log("done");
   }
-  return SQLite.openDatabase("SQLite/entries.db");
+  return SQLite.openDatabase("entries.db");
 }
 
 export default function App() {
   const { data, isLoading } = useSWR("dummy", async () => {
     const db = await readDB();
-    console.log("db acquired");
     return await new Promise((resolve) => {
       db.transaction((tx) => {
-        console.log("executing SQL");
         tx.executeSql(
-          `select * from "heteronyms" where "title" = ?;`,
-          ["㐀"],
+          `select * from "heteronyms" limit 10;`,
+          [],
           (_, resultSet) => {
-            console.log("success");
             resolve(resultSet.rows._array);
           },
           (_, _err) => {
-            console.log("error");
             resolve([{ title: "error" }]);
           }
         );
       });
     });
   });
-  console.log(`data: ${data}`);
-  console.log(`isLoading: ${isLoading}`);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{ color: "#fff" }}>Hello!</Text>
-      {!data ? (
+      {isLoading ? (
         <View>
           <Text style={{ color: "#fff" }}>Loading</Text>
         </View>
