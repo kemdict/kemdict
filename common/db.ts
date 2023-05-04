@@ -16,28 +16,60 @@ function processHet(het: Heteronym): Heteronym {
   return het;
 }
 
+export async function readDBWeb() {
+  const fs = await import("node:fs");
+  const zlib = await import("node:zlib");
+  const Database = (await import("better-sqlite3")).default;
+  const path = [
+    "../kemdict.db",
+    "./entries.db",
+    "../dicts/entries.db",
+    "../../dicts/entries.db",
+  ].find((f) => fs.existsSync(f));
+  if (!path) throw new Error("DB not found!");
+  if (path.endsWith(".db.gz")) {
+    const data = fs.readFileSync(path);
+    const decompressed = zlib.gunzipSync(data);
+    return new Database(decompressed);
+  } else {
+    return new Database(path, {
+      readonly: true,
+      fileMustExist: true,
+    });
+  }
+}
+export async function readDBRn() {
+  type FileInfo = import("expo-file-system").FileInfo;
+  const FS = await import("expo-file-system");
+  const Asset = (await import("expo-asset")).Asset;
+  const SQLite = await import("expo-sqlite");
+  let info: FileInfo;
+  // TODO: verify integrity
+  // info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
+  // if (info.exists) {
+  //   await FS.deleteAsync(FS.documentDirectory + "SQLite/entries.db");
+  // }
+  info = await FS.getInfoAsync(FS.documentDirectory + "SQLite");
+  if (!info.exists) {
+    await FS.makeDirectoryAsync(FS.documentDirectory + "SQLite");
+  }
+  info = await FS.getInfoAsync(FS.documentDirectory + "SQLite/entries.db");
+  if (!info.exists) {
+    console.log("downloading");
+    await FS.downloadAsync(
+      // require only works with static values. (On Hermes only, I guess??)
+      Asset.fromModule(require("./assets/entries.db")).uri,
+      FS.documentDirectory + "SQLite/entries.db"
+    );
+    console.log("done");
+  }
+  return SQLite.openDatabase("entries.db");
+}
 export async function readDB() {
   if (runtime === "web") {
-    const fs = await import("node:fs");
-    const zlib = await import("node:zlib");
-    const Database = (await import("better-sqlite3")).default;
-    const path = [
-      "../kemdict.db",
-      "./entries.db",
-      "../dicts/entries.db",
-      "../../dicts/entries.db",
-    ].find((f) => fs.existsSync(f));
-    if (!path) throw new Error("DB not found!");
-    if (path.endsWith(".db.gz")) {
-      const data = fs.readFileSync(path);
-      const decompressed = zlib.gunzipSync(data);
-      return new Database(decompressed);
-    } else {
-      return new Database(path, {
-        readonly: true,
-        fileMustExist: true,
-      });
-    }
+    return readDBWeb();
+  } else if (runtime === "rn") {
+    return readDBRn();
   }
 }
 
@@ -46,15 +78,16 @@ export async function crossDbAll(
   args: unknown[] = [],
   pluck?: boolean
 ): Promise<unknown[]> {
-  const db = await readDB();
   if (runtime === "web") {
+    const db = await readDBWeb();
     const stmt = db.prepare(source);
     if (pluck) stmt.pluck(pluck);
     return stmt.all(...args);
   } else {
+    const db = await readDBRn();
     return new Promise((resolve) => {
       db.transaction((tx) =>
-        tx.executeSql(source, args, (_, resultSet) =>
+        tx.executeSql(source, args as Array<string | number>, (_, resultSet) =>
           resolve(resultSet.rows._array)
         )
       );
