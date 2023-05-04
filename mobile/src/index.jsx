@@ -12,12 +12,21 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
+        <Stack.Navigator
+          screenOptions={({ navigation }) => ({
+            detachPreviousScreen: !navigation.isFocused(),
+            cardStyleInterpolator,
+            header: ({ navigation, route, options, back }) => (
+              <Appbar.Header elevated>
+                {back ? (
+                  <Appbar.BackAction onPress={() => navigation.goBack()} />
+                ) : null}
+                <Appbar.Content title={title} />
+              </Appbar.Header>
+            ),
+          })}
+        >
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
