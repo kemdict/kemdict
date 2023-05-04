@@ -19,9 +19,19 @@ importers:
 
   common:
     dependencies:
+      better-sqlite3:
+        specifier: ^8.3.0
+        version: 8.3.0
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      sqlstring:
+        specifier: ^2.3.3
+        version: 2.3.3
+    devDependencies:
+      '@types/better-sqlite3':
+        specifier: ^7.6.4
+        version: 7.6.4
 
   web:
     dependencies:
@@ -6444,7 +6454,6 @@ packages:
   /sqlstring@2.3.3:
     resolution: {integrity: sha512-qC9iz2FlN7DQl3+wjwn3802RTyjCx7sDvfQEXchwa6CWOx07/WVfh91gBmQ9fahw8snwGEWU3xGzOt4tFyHLxg==}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}

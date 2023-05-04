@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 
-import { getDictTitles } from "$src/server/db";
+import { getDictTitles } from "common/db";
 
 import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.astro";
@@ -12,6 +12,8 @@ const title = "Kemdict 國語整合典";
 const sitename = "Kemdict 國語整合典";
 const description =
   "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
+
+const words = await getDictTitles("kisaragi_dict", 15);
 ---
 
 <SingleLayout class="lg:pb-16 lg:pt-32" title={title} wantHeader={false}>
@@ -78,7 +80,7 @@ const description =
     </div>
     <div class="ml-1"></div>
     <h3>最近新增的詞</h3>
-    <WordList words={getDictTitles("kisaragi_dict", 15)} />
+    <WordList words={words} />
     <h3>索引</h3>
     <ul class="ml-1 list-none p-0">
       <li>

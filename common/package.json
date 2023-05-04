@@ -1,5 +1,12 @@
 {
   "private": true,
   "main": "index.ts",
-  "dependencies": { "lodash-es": "^4.17.21" }
+  "dependencies": {
+    "better-sqlite3": "^8.3.0",
+    "lodash-es": "^4.17.21",
+    "sqlstring": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.4"
+  }
 }

@@ -1,6 +1,6 @@
 ---
 import { uniq } from "lodash-es";
-import { getHeteronyms, getBacklinks } from "$src/server/db";
+import { getHeteronyms, getBacklinks } from "common/db";
 import {
   dictIdsToLangs,
   dictsToObj,
@@ -14,7 +14,7 @@ import type { Dict, Heteronym } from "common";
 const { title } = Astro.params;
 const [presentDictIds, heteronyms] = await getHeteronyms(title);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
-const backlinks = getBacklinks(...titles).sort();
+const backlinks = (await getBacklinks(...titles)).sort();
 
 import SingleLayout from "$src/SingleLayout.astro";
 import { Tab, TabGroup } from "@skeletonlabs/skeleton";

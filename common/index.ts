@@ -303,26 +303,3 @@ export function joinLast(
   }
   return buf;
 }
-
-export async function crossDbAll(
-  env: {
-    readDB: () => any | Promise<any>;
-    runtime: "rn" | "web";
-  },
-  source: string,
-  args: unknown[] = []
-): Promise<unknown[]> {
-  const db = await env.readDB();
-  if (env.runtime === "web") {
-    const stmt = db.prepare(source);
-    return stmt.all(...args);
-  } else {
-    return new Promise((resolve) => {
-      db.transaction((tx) =>
-        tx.executeSql(source, args, (_, resultSet) =>
-          resolve(resultSet.rows._array)
-        )
-      );
-    });
-  }
-}

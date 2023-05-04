@@ -3,7 +3,7 @@ import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 import { H1 } from "$src/components/typography";
 
-import { getRadicals } from "$src/server/db";
+import { getRadicals } from "common/db";
 import { groupByProp } from "common";
 
 const radicals = getRadicals();
