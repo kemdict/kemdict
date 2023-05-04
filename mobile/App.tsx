@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, FlatList, ScrollView } from "react-native";
 
-import Page from "./Page.tsx";
+import Home from "./pages/Home.tsx";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <Page />
+      <Home />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
