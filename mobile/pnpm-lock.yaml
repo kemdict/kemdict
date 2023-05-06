@@ -14,8 +14,8 @@ importers:
         specifier: ^4.17.7
         version: 4.17.7
       common:
-        specifier: link:../common
-        version: link:../common
+        specifier: file:../common
+        version: file:../common
       expo:
         specifier: ~48.0.15
         version: 48.0.16(@babel/core@7.21.8)
@@ -7401,4 +7401,9 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: false
+
+  file:../common:
+    resolution: {directory: ../common, type: directory}
+    name: common
     dev: false

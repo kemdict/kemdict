@@ -2,7 +2,7 @@
   "name": "kemdict-rn",
   "version": "1.0.0",
   "dependencies": {
-    "common": "link:../common",
+    "common": "file:../common",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@types/lodash-es": "^4.17.7",
