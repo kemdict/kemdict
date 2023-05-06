@@ -18,9 +18,21 @@
  *
  * In the database, this becomes
  *
- * | title | pns   | from         | props                      |
- * | word  | [...] | hakkadict    | {"definition": "...", ...} |
- * | word  | [...] | dict_revised | {"definition": "...", ...} |
+ * dicts:
+ * | id           | name | lang   |
+ * | hakkadict    | ...  | hak_TW |
+ * | dict_revised | ...  | zh_TW  |
+ *
+ * pns:
+ * | het_id | pn  |
+ * | 1      | abc |
+ * | 1      | def |
+ * | 2      | abc |
+ *
+ * heteronyms:
+ * | id | title | from         | props               |
+ * | 1  | word  | hakkadict    | {"def": "...", ...} |
+ * | 2  | word  | dict_revised | {"def": "...", ...} |
  *
  * @name heteronyms-to-sqlite.js
  */
@@ -39,7 +51,7 @@ if (fs.existsSync("entries.db")) {
 const db = new Database("entries.db");
 
 function stringifyFields(thing) {
-  for (const key of ["props", "pns"]) {
+  for (const key of ["props"]) {
     if (typeof thing[key] !== "string") {
       thing[key] = JSON.stringify(thing[key]);
     }
@@ -54,7 +66,7 @@ function stringifyFields(thing) {
 // props: object
 db.exec(
   `
-PRAGMA user_version = 2;
+PRAGMA user_version = 3;
 
 CREATE TABLE langs (
   "id" PRIMARY KEY,
@@ -68,11 +80,15 @@ CREATE TABLE dicts (
 );
 
 CREATE TABLE heteronyms (
-  "rowid" INTEGER PRIMARY KEY,
+  "id" INTEGER PRIMARY KEY,
   "title" NOT NULL,
   "from" REFERENCES dicts("id"),
-  "pns",
   "props" NOT NULL
+);
+
+CREATE TABLE pns (
+  "het_id" REFERENCES heteronyms("id"),
+  "pn" NOT NULL
 );
 
 CREATE TABLE links (
@@ -88,7 +104,7 @@ CREATE TABLE links (
  * @param {array} array - The array to iterate over.
  * @param {string} message - The message for the progress display.
  * @param {function} func - Function called for each element.
- argument, the element.
+ * Receives two arguments, the element and the index.
  */
 const EachPT = db.transaction((array, message = "", func) => {
   // Whether we should print progress.
@@ -116,7 +132,7 @@ const EachPT = db.transaction((array, message = "", func) => {
         message + `${i + 1} / ${length} (${progress}%, ${diff}/s)`
       );
     }
-    func(array[i]);
+    func(array[i], i);
   }
   process.stdout.write("\n");
 });
@@ -212,11 +228,23 @@ VALUES
   const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json")).reverse();
   const insertHet = db.prepare(`
 INSERT INTO
-  heteronyms ("title","from","pns","props")
+  heteronyms ("title","from","props")
 VALUES
-  (@title,@from,@pns,@props)`);
-  EachPT(heteronyms, "Inserting heteronyms into DB: ", (het) => {
+  (@title,@from,@props)`);
+  const insertPn = db.prepare(`
+INSERT INTO
+  pns ("het_id","pn")
+VALUES
+  (?,?)
+`);
+  EachPT(heteronyms, "Inserting heteronyms into DB: ", (het, i) => {
     insertHet.run(stringifyFields(het));
+    if (het.pns) {
+      for (let j = 0; j < het.pns.length; j++) {
+        // SQLite integer primary key is 1-based
+        insertPn.run(i + 1, het.pns[j]);
+      }
+    }
   });
 }
 
