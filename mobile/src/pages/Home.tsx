@@ -1,11 +1,11 @@
 import { List, Appbar } from "react-native-paper";
 import useSWR from "swr";
 import { FlatList, Text, View } from "react-native";
-import { crossDbAll } from "../db.ts";
+import { DB } from ":/db";
 
 export default function Home() {
   const { data, isLoading } = useSWR("dummy", async () => {
-    return await crossDbAll(`select * from "heteronyms" limit 10;`);
+    return await DB.crossDbAll(`select * from "heteronyms" limit 10;`);
   });
   return (
     <>

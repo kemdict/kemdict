@@ -13,6 +13,9 @@ importers:
       '@types/lodash-es':
         specifier: ^4.17.7
         version: 4.17.7
+      common:
+        specifier: link:../common
+        version: link:../common
       expo:
         specifier: ~48.0.15
         version: 48.0.16(@babel/core@7.21.8)

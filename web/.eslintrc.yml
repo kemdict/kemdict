@@ -31,7 +31,7 @@ overrides:
   - files: ["*.js"]
     rules:
       "no-unused-vars":
-        - "error"
+        - "warn"
         - &noUnusedVarsSetting
           argsIgnorePattern: "^_"
           destructuredArrayIgnorePattern: "^_"

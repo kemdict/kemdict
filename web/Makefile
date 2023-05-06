@@ -1,7 +1,10 @@
 export LANG=en_US.UTF-8
 export KEMDICT_VERSION=$(shell git describe --tags --always)
 
-DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro)
+DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro) common
+
+common: ../common
+	cd ../common && make dist
 
 entries.db: ../dicts
 	cd ../dicts && make entries.db

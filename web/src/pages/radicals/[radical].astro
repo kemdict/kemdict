@@ -2,11 +2,11 @@
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
-import { getCharsByRadical } from "$src/server/db";
+import { DB } from "$src/server/db";
 import { format, groupByProp } from "common";
 
 const { radical } = Astro.params;
-const entries = await getCharsByRadical(radical);
+const entries = await DB.getCharsByRadical(radical);
 ---
 
 <SingleLayout title={`部首為「${radical}」的字 - kemdict`}>

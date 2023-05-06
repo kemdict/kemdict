@@ -100,7 +100,7 @@ export function dictIdLang(dictId: DictId): LangId {
 }
 
 export function dictIdsToLangs(...dictIds: string[]): Set<string> {
-  const langSet = new Set();
+  const langSet: Set<LangId> = new Set();
   for (const dictId of dictIds) {
     langSet.add(dictIdLang(dictId));
   }
@@ -199,7 +199,7 @@ export function getSearchTitle(
   markup?: boolean
 ): string {
   const tokens = parseQueryToTokens(query);
-  function wrap(s) {
+  function wrap(s: string) {
     if (markup) {
       return `「<span class="font-bold">${s}</span>」`;
     } else {
@@ -212,22 +212,28 @@ export function getSearchTitle(
   if (mtch === "contains") {
     return `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
   } else if (mtch === "prefix") {
-    if (tokens.length === 1) return `以${wrap(tokens[0])}開頭的詞`;
-    return `以${wrap(tokens[0])}開頭、且包含${joinLast(
-      tokens.slice(1).map(wrap),
-      "、",
-      "及"
-    )}的詞`;
+    if (tokens.length === 1) {
+      return `以${wrap(tokens[0])}開頭的詞`;
+    } else {
+      return `以${wrap(tokens[0])}開頭、且包含${joinLast(
+        tokens.slice(1).map(wrap),
+        "、",
+        "及"
+      )}的詞`;
+    }
   } else if (mtch === "suffix") {
-    if (tokens.length === 1)
+    if (tokens.length === 1) {
       return `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
-    return `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
-      tokens.slice(0, -1).map(wrap),
-      "、",
-      "及"
-    )}的詞`;
-  }
-  if (mtch === "exact") {
+    } else {
+      return `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
+        tokens.slice(0, -1).map(wrap),
+        "、",
+        "及"
+      )}的詞`;
+    }
+  } else {
+    // if (mtch === "exact") {
+    // }
     return `完全符合「${query}」的詞`;
   }
 }
@@ -267,7 +273,12 @@ export function parseQueryToTokens(inputQuery: string): string[] {
   return inputQuery.split(/\s+/);
 }
 
-export function tokenToLIKEInput(token, mtch, first = false, last = false) {
+export function tokenToLIKEInput(
+  token: string,
+  mtch: Mtch,
+  first = false,
+  last = false
+): string {
   let m = mtch;
   if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
     m = "contains";
@@ -300,14 +311,4 @@ export function joinLast(
     buf += strings[i];
   }
   return buf;
-}
-
-/**
- * Decode the JSON in the props field in a heteronym object.
- */
-export function processHet(het: Heteronym): Heteronym {
-  if (typeof het.props === "string") {
-    het.props = JSON.parse(het.props);
-  }
-  return het;
 }

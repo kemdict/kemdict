@@ -1,9 +1,9 @@
 ---
-import { getDictTitles } from "$src/server/db";
+import { DB } from "$src/server/db";
 import MarkdownLayout from "$src/MarkdownLayout.astro";
 import WordList from "$src/components/WordList.astro";
 
-const titles = await getDictTitles("kisaragi_dict");
+const titles = await DB.getDictTitles("kisaragi_dict");
 const props = {
   title: "台語羅馬字簡介 | Kemdict",
 };

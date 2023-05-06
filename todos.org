@@ -153,15 +153,16 @@ No longer applicable as we don't use moedict-data anymore.
 - most likely, write a new word component for the new dictionary
 - update dictionary list in common.js, README, and root route
 - update copyright information
-* Dictionary testing
+* Testing
 - Does search work?
-  - "a"
-  - "a p" (prefix, suffix)
-  - "無妨"
-  - "一"
+  - "a", "a p" (prefix, suffix), "無妨", "zzz", "一"
+  - Language tabs
+  - Pagination
 - Does word page rendering work?
   - "無妨" (taijit, concised, revised, =moedict_twblg=)
   - "實聯制" (kisaragi, itaigi)
+- About
+- Initial index + pagination, Radical index
 * Why not make the DB its own service
 
 I'm still not sure, but
