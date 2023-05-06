@@ -1,6 +1,5 @@
 {
   "expo": {
-    "entryPoint": "index.js",
     "name": "kemdict-rn",
     "slug": "kemdict-rn",
     "version": "1.0.0",
