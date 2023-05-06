@@ -1,15 +1,19 @@
 {
   "private": true,
-  "main": "dist/index.js",
-  "dependencies": {
-    "better-sqlite3": "^8.3.0",
-    "lodash-es": "^4.17.21",
-    "sqlstring": "^2.3.3"
-  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.js",
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.4",
     "@types/lodash-es": "^4.17.7",
     "@types/sqlstring": "^2.3.0",
-    "typescript": "^5.0.4"
+    "lodash-es": "^4.17.21",
+    "sqlstring": "^2.3.3",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.5",
+    "vite-plugin-dts": "^2.3.0"
   }
 }

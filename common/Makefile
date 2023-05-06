@@ -1,6 +1,6 @@
 .PHONY: dist dev
 dist:
-	npx tsc
+	npx vite build
 
 dev:
-	npx tsc --watch
+	npx vite dev
