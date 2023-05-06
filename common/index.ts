@@ -21,7 +21,8 @@ export interface Dict {
 
 export interface Heteronym {
   title: string;
-  from?: string;
+  from: string | undefined;
+  lang: string;
   pns?: any[];
   props: any;
 }
@@ -369,15 +370,21 @@ export class CrossDB {
    * - "contains": match heteronyms that contain TOKEN
    * - any thing else (including "exact"): match heteronyms exactly
    *
-   * Returns [matchingDicts, Heteronyms]
+   * Returns [matchingDicts, Heteronyms, langCountObj]
    */
   async getHeteronyms(
     tokens: string | string[],
     options?: {
       mtch?: string;
       dicts?: string[];
+      langs?: string[];
     }
-  ): Promise<[string[] | undefined, Heteronym[], Record<DictId, number>]> {
+  ): Promise<{
+    presentDicts: DictId[];
+    presentLangSet: Set<LangId>;
+    heteronyms: Heteronym[];
+    langCountObj: Record<LangId, number>;
+  }> {
     if (typeof tokens === "string") {
       tokens = [tokens];
     }
@@ -390,8 +397,11 @@ export class CrossDB {
       // we don't have to parse arrays like this, and also to make it
       // easier to support search without tones
       `
-SELECT DISTINCT heteronyms.*
-FROM heteronyms, json_each(heteronyms.pns)
+SELECT DISTINCT title, "from", langs.id as lang, pns, props
+FROM heteronyms
+LEFT JOIN dicts ON heteronyms."from" = dicts.id
+LEFT JOIN langs ON dicts.lang = langs.id
+, json_each(heteronyms.pns)
 WHERE "from" IS NOT NULL
 ${tokens
   .map(() => `AND (title ${operator} ? OR json_each.value ${operator} ?)`)
@@ -419,17 +429,23 @@ ${tokens
         (het) => het.from && dicts.includes(het.from)
       );
     }
-    // Across all hets, not just filtered
     const dictSet: Set<DictId> = new Set();
-    const dictCountObj: Record<string, number> = {};
+    const langSet: Set<LangId> = new Set();
+    const langCountObj: Record<LangId, number> = {};
+    // Across all hets, not just filtered
     for (const het of hets || []) {
       if (het.from) {
         dictSet.add(het.from);
-        dictCountObj[het.from] = (dictCountObj[het.from] || 0) + 1;
       }
+      langSet.add(het.lang);
+      langCountObj[het.lang] = (langCountObj[het.lang] || 0) + 1;
     }
-    const matchingDicts = [...dictSet];
-    return [matchingDicts, applicableHets?.map(processHet), dictCountObj];
+    return {
+      presentDicts: [...dictSet],
+      presentLangSet: langSet,
+      heteronyms: applicableHets?.map(processHet),
+      langCountObj,
+    };
   }
 
   async getBacklinks(...titles: string[]): Promise<string[]> {

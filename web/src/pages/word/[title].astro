@@ -12,7 +12,11 @@ import {
 import type { Dict, Heteronym } from "common";
 
 const { title } = Astro.params;
-const [presentDictIds, heteronyms] = await DB.getHeteronyms(title);
+const {
+  presentDicts: presentDictIds,
+  presentLangSet,
+  heteronyms,
+} = await DB.getHeteronyms(title);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = (await DB.getBacklinks(...titles)).sort();
 
@@ -31,12 +35,11 @@ const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
   }
 );
 const presentDicts = presentDictIds.map((id) => dictsObj[id]);
-const presentLangs = dictIdsToLangs(...presentDictIds);
 
 const url = Astro.url;
 const requestedLang = parseLangParam(
   url.searchParams.get("lang"),
-  presentLangs
+  presentLangSet
 );
 // Invalid -> delete it and try again
 if (requestedLang === false) {
@@ -74,7 +77,7 @@ if (requestedLang === false) {
           </div>
           <WordTabs
             title={title}
-            presentLangs={[...presentLangs]}
+            presentLangs={[...presentLangSet]}
             requestedLang={requestedLang}
             groupedHets={groupedHets}
             currentParams={url.searchParams}

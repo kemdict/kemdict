@@ -19,9 +19,6 @@ importers:
 
   common:
     devDependencies:
-      '@types/better-sqlite3':
-        specifier: ^7.6.4
-        version: 7.6.4
       '@types/lodash-es':
         specifier: ^4.17.7
         version: 4.17.7

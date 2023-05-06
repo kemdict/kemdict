@@ -12,7 +12,6 @@ import type { Heteronym, LangId } from "common";
 
 export async function readDB() {
   const fs = await import("node:fs");
-  const zlib = await import("node:zlib");
   const Database = (await import("better-sqlite3")).default;
   const path = [
     "../kemdict.db",
@@ -21,16 +20,11 @@ export async function readDB() {
     "../../dicts/entries.db",
   ].find((f) => fs.existsSync(f));
   if (!path) throw new Error("DB not found!");
-  if (path.endsWith(".db.gz")) {
-    const data = fs.readFileSync(path);
-    const decompressed = zlib.gunzipSync(data);
-    return new Database(decompressed);
-  } else {
-    return new Database(path, {
-      readonly: true,
-      fileMustExist: true,
-    });
-  }
+  const db = new Database(path, {
+    readonly: true,
+    fileMustExist: true,
+  });
+  return db;
 }
 
 export const DB = new CrossDB("web", readDB);
@@ -72,7 +66,7 @@ export async function getHetFromUrl(
     return [false, "/"];
   }
   const tokens = parseQueryToTokens(query);
-  const [matchingDictIds, heteronyms, dictCountObj] = await DB.getHeteronyms(
+  const { presentDicts, heteronyms, langCountObj } = await DB.getHeteronyms(
     tokens,
     {
       mtch,
@@ -95,11 +89,6 @@ export async function getHetFromUrl(
     sortFn = WordSortFns.ascend;
   }
   heteronyms.sort(sortFn);
-  const langSet = dictIdsToLangs(...matchingDictIds);
-  const langCountObj: Record<LangId, number> = {};
-  for (const [dictId, count] of Object.entries(dictCountObj)) {
-    langCountObj[dictIdLang(dictId)] =
-      (langCountObj[dictIdLang(dictId)] || 0) + count;
-  }
+  const langSet = dictIdsToLangs(...presentDicts);
   return [true, { heteronyms, mtch, query, langSet, langCountObj }];
 }
