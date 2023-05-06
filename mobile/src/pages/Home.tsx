@@ -1,37 +1,33 @@
-import { List, Appbar } from "react-native-paper";
+import type { Heteronym } from "common";
+import { List, Appbar, Button } from "react-native-paper";
 import useSWR from "swr";
-import { FlatList, Text, View } from "react-native";
-import { DB } from "../db";
+import { FlatList, View } from "react-native";
+import { Text, Searchbar } from "react-native-paper";
 
-export default function Home() {
-  const { data, isLoading } = useSWR("dummy", async () => {
-    return await DB.crossDbAll(`select * from "heteronyms" limit 10;`);
-  });
+export default function Home({ navigation }) {
   return (
     <>
-      {isLoading ? (
-        <View>
-          <Text>Loading</Text>
+      <View
+        style={{
+          marginLeft: 10,
+          marginRight: 10,
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ flex: 1, alignItems: "center", gap: 12 }}>
+          <View style={{ alignItems: "center" }}>
+            <Text variant="displayMedium">Kemdict</Text>
+            <Text variant="headlineSmall">國語整合典</Text>
+          </View>
+          <Searchbar
+            value=""
+            placeholder="搜尋…"
+            onPressIn={() => navigation.navigate("Search")}
+          />
         </View>
-      ) : (
-        <FlatList
-          ListHeaderComponent={
-            <Appbar.Header>
-              <Appbar.Content title="Kemdict" />
-            </Appbar.Header>
-          }
-          data={data}
-          renderItem={({ item }) => (
-            <View>
-              <List.Item
-                title={item.title}
-                description={JSON.stringify(item)}
-              />
-            </View>
-          )}
-          keyExtractor={(item) => item.title}
-        ></FlatList>
-      )}
+      </View>
     </>
   );
 }

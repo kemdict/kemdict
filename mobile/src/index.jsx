@@ -1,4 +1,6 @@
 import { Provider as PaperProvider } from "react-native-paper";
+import { Appbar } from "react-native-paper";
+import { FlatList, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -6,27 +8,19 @@ import { StyleSheet, SafeAreaView } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
-import Home from "./pages/Home";
+import HomeScreen from "./pages/Home";
+import SearchScreen from "./pages/Search";
 
 export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator
-          screenOptions={({ navigation }) => ({
-            detachPreviousScreen: !navigation.isFocused(),
-            cardStyleInterpolator,
-            header: ({ navigation, route, options, back }) => (
-              <Appbar.Header elevated>
-                {back ? (
-                  <Appbar.BackAction onPress={() => navigation.goBack()} />
-                ) : null}
-                <Appbar.Content title={title} />
-              </Appbar.Header>
-            ),
-          })}
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
         >
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Search" component={SearchScreen} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />

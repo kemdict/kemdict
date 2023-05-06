@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { FlatList, Text, View } from "react-native";
 import { DB } from "../db";
 
-export default () => {
+export default function Home() {
   const { data, isLoading } = useSWR("dummy", async () => {
     return (await DB.crossDbAll(
       `select * from "heteronyms" limit 10;`
@@ -34,4 +34,4 @@ export default () => {
       )}
     </>
   );
-};
+}
