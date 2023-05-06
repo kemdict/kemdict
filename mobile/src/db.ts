@@ -2,6 +2,7 @@ import * as FS from "expo-file-system";
 import * as SQLite from "expo-sqlite";
 import { Asset } from "expo-asset";
 
+import { format } from "common";
 import { CrossDB } from "common/db";
 
 /**
@@ -23,7 +24,7 @@ export async function readDB(): Promise<SQLite.WebSQLDatabase> {
     console.log("downloading");
     await FS.downloadAsync(
       // require only works with static values. (On Hermes only, I guess??)
-      Asset.fromModule(require("./assets/entries.db")).uri,
+      Asset.fromModule(require("../assets/entries.db")).uri,
       FS.documentDirectory + "SQLite/entries.db"
     );
     console.log("done");

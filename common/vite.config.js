@@ -5,9 +5,8 @@ export default {
   plugins: [dts({ copyDtsFiles: true, skipDiagnostics: true })],
   build: {
     lib: {
-      entry: resolve(__dirname, "index.ts"),
+      entry: [resolve(__dirname, "index.ts"), resolve(__dirname, "db.ts")],
       name: "common",
-      fileName: "index",
     },
     rollupOptions: {
       external: [],
