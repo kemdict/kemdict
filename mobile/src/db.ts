@@ -2,8 +2,7 @@ import * as FS from "expo-file-system";
 import * as SQLite from "expo-sqlite";
 import { Asset } from "expo-asset";
 
-import { format } from "common";
-import { CrossDB } from "common/db";
+import { format, CrossDB } from "common";
 
 /**
  * Read the database.

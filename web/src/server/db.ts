@@ -6,8 +6,8 @@ import {
   dictIdLang,
   dictIdsToLangs,
   parseQueryToTokens,
+  CrossDB,
 } from "common";
-import { CrossDB } from "common/db";
 import type { Heteronym, LangId } from "common";
 
 export async function readDB() {

@@ -2,21 +2,9 @@
   "name": "common",
   "private": true,
   "type": "module",
-  "files": ["dist"],
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./db": {
-      "import": "./dist/db.js",
-      "require": "./dist/db.cjs"
-    }
-  },
+  "main": "dist/index.umd.cjs",
+  "module": "dist/index.js",
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.4",
     "@types/lodash-es": "^4.17.7",
     "@types/sqlstring": "^2.3.0",
     "lodash-es": "^4.17.21",
