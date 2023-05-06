@@ -597,8 +597,8 @@ This is a separate step from shaping."
                                    (ht-get "kTotalStrokes")
                                    (ht-get "zh-Hant"))))
          (ht-set! props "radical" (d:radical-id-to-char radical))
-         (ht-set! props "stroke_count" total-stroke)
-         (ht-set! props "non_radical_stroke_count"
+         (ht-set! props "sc" total-stroke)
+         (ht-set! props "nrsc"
                   non-radical-stroke))
        (ht-update-with! props "kCangjie"
          #'d:cangjie-abc-to-han)
@@ -663,6 +663,10 @@ This is a separate step from shaping."
            ;; displayed. Getting rid of it here allows
            ;; shredding them from the database.
            (s-replace-regexp "<a name.*" "" def)))))
+    (d::hash-rename props "non_radical_stroke_count" "nrsc")
+    (d::hash-rename props "stroke_count" "sc")
+    (d::hash-rename props "definition" "def")
+    (d::hash-rename props "definitions" "defs")
     ;; If a prop is empty, just don't include it.
     ;; Saves on parsing time and memory, I think.
     ;; Needs the client to check for `undefined' though.

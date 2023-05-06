@@ -28,6 +28,12 @@
 
 其餘授權請見各 submodule 原本的儲存庫。
 
+* Glossary
+
+- =sc=: stroke count (筆畫數)
+- =nrsc=: non radical stroke count (部首外筆畫數)
+- =def=: definition
+
 * 結構
 
 heteronyms.json:

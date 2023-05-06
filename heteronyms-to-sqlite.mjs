@@ -275,34 +275,34 @@ WHERE json_tree.key = 'radical'
 CREATE TABLE b AS
 SELECT DISTINCT
   title,
-  cast(json_tree.value as integer) AS stroke_count
+  cast(json_tree.value as integer) AS sc
 FROM heteronyms, json_tree(heteronyms.props)
-WHERE json_tree.key = 'stroke_count'
+WHERE json_tree.key = 'sc'
   AND length(title) = 1;
 
 CREATE TABLE c AS
 SELECT DISTINCT
   title,
-  cast(json_tree.value as integer) AS non_radical_stroke_count
+  cast(json_tree.value as integer) AS nrsc
 FROM heteronyms, json_tree(heteronyms.props)
-WHERE json_tree.key = 'non_radical_stroke_count'
+WHERE json_tree.key = 'nrsc'
   AND length(title) = 1;
 
 CREATE TABLE han AS
 SELECT DISTINCT
   heteronyms.title,
   a.radical,
-  b.stroke_count,
-  c.non_radical_stroke_count
+  b.sc,
+  c.nrsc
 FROM heteronyms
 LEFT JOIN a ON a.title = heteronyms.title
 LEFT JOIN b ON b.title = heteronyms.title
 LEFT JOIN c ON c.title = heteronyms.title
 WHERE length(heteronyms.title) = 1
-  AND a.radical                  IS NOT NULL
-  AND b.stroke_count             IS NOT NULL
-  AND c.non_radical_stroke_count IS NOT NULL
-ORDER BY b.stroke_count;
+  AND a.radical    IS NOT NULL
+  AND b.sc         IS NOT NULL
+  AND c.nrsc       IS NOT NULL
+ORDER BY b.sc;
 
 DROP TABLE a;
 DROP TABLE b;
