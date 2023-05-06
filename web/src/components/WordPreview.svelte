@@ -35,7 +35,7 @@
 </script>
 
 {#each heteronyms as het}
-  <ListLink href="/word/{het.title}?lang={dictsObj[het.from].lang}#{het.from}">
+  <ListLink href="/word/{het.title}?lang={het.lang}#{het.from}">
     <svelte:fragment slot="heading">
       {het.title}{processPn(het)}
     </svelte:fragment>

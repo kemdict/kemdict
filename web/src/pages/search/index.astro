@@ -1,6 +1,6 @@
 ---
 import { getHetFromUrl } from "$src/server/db";
-import { dictsByLang, dicts, langs, WordSortFns, getSearchTitle } from "common";
+import { dicts, langs, WordSortFns, getSearchTitle } from "common";
 
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url);

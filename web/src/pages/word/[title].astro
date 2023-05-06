@@ -1,14 +1,7 @@
 ---
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
-import {
-  dictIdsToLangs,
-  dictsToObj,
-  dicts,
-  langs,
-  groupByProp,
-  parseLangParam,
-} from "common";
+import { dictsObj, dicts, langs, groupByProp, parseLangParam } from "common";
 import type { Dict, Heteronym } from "common";
 
 const { title } = Astro.params;
@@ -28,7 +21,6 @@ import WordList from "$src/components/WordList.astro";
 import Word from "./Word.svelte";
 import WordTabs from "./WordTabs.svelte";
 
-const dictsObj = dictsToObj(dicts);
 const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
   ([id, hets]: [string, Heteronym[]]) => {
     return [dictsObj[id], hets];

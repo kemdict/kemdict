@@ -97,33 +97,13 @@ export const dicts: Dict[] = [
 export function dictIdToDict(dictId: DictId): Dict {
   return dictsObj[dictId];
 }
-export function dictIdLang(dictId: DictId): LangId {
-  return dictsObj[dictId].lang;
-}
 
-export function dictIdsToLangs(...dictIds: string[]): Set<string> {
-  const langSet: Set<LangId> = new Set();
-  for (const dictId of dictIds) {
-    langSet.add(dictIdLang(dictId));
-  }
-  return langSet;
-}
-export function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
+function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
   const tmp = {};
   dictionaries.forEach((dict) => (tmp[dict.id] = dict));
   return tmp;
 }
 export const dictsObj = dictsToObj(dicts);
-export const dictIds = dicts.map((x) => x.id);
-export const langIds = Object.keys(langs);
-// {"zh_TW": [...], "han": [...]}
-export const dictsByLang = (() => {
-  const res = {};
-  groupByProp(dicts, "lang")
-    .map(([key, objs]) => [key, objs.map((x) => x.id)])
-    .forEach(([key, ids]) => (res[key] = ids));
-  return res;
-})();
 
 export const WordSortFns = {
   // These return numbers because that's what Array.sort wants.
@@ -376,7 +356,6 @@ export class CrossDB {
     tokens: string | string[],
     options?: {
       mtch?: string;
-      dicts?: string[];
       langs?: string[];
     }
   ): Promise<{
@@ -389,8 +368,8 @@ export class CrossDB {
       tokens = [tokens];
     }
     const mtch = options?.mtch || "prefix";
-    const dicts = options?.dicts;
-    const hasDicts = dicts && dicts.length > 0;
+    const langs = options?.langs;
+    const hasLangs = langs && langs.length > 0;
     const operator = mtch ? "LIKE" : "=";
     const hets = (await this.crossDbAll(
       // TODO: create another index table (normalized token, hetId) so
@@ -424,10 +403,8 @@ ${tokens
       })()
     )) as Heteronym[];
     let applicableHets = hets;
-    if (hasDicts) {
-      applicableHets = hets.filter(
-        (het) => het.from && dicts.includes(het.from)
-      );
+    if (hasLangs) {
+      applicableHets = hets.filter((het) => langs.includes(het.lang));
     }
     const dictSet: Set<DictId> = new Set();
     const langSet: Set<LangId> = new Set();

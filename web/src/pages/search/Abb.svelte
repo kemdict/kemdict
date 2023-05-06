@@ -1,7 +1,6 @@
 <script lang="ts">
   import WordPreview from "$src/components/WordPreview.svelte";
   import ListLink from "$src/components/ListLink.svelte";
-  import { dictsByLang } from "common";
   import type { Heteronym, LangId } from "common";
 
   // id, name
@@ -10,9 +9,7 @@
   export let currentParams: URLSearchParams;
   const previewCount = 5;
 
-  const applicableHeteronyms = heteronyms.filter((het) =>
-    dictsByLang[lang[0]].includes(het.from)
-  );
+  const applicableHeteronyms = heteronyms.filter((het) => het.lang === lang[0]);
 </script>
 
 <div class="mb-6">

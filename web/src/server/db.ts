@@ -1,13 +1,5 @@
 import { chunk, sortBy } from "lodash-es";
-import {
-  groupByProp,
-  WordSortFns,
-  dictsByLang,
-  dictIdLang,
-  dictIdsToLangs,
-  parseQueryToTokens,
-  CrossDB,
-} from "common";
+import { groupByProp, WordSortFns, parseQueryToTokens, CrossDB } from "common";
 import type { Heteronym, LangId } from "common";
 
 export async function readDB() {
@@ -66,11 +58,11 @@ export async function getHetFromUrl(
     return [false, "/"];
   }
   const tokens = parseQueryToTokens(query);
-  const { presentDicts, heteronyms, langCountObj } = await DB.getHeteronyms(
+  const { presentLangSet, heteronyms, langCountObj } = await DB.getHeteronyms(
     tokens,
     {
       mtch,
-      dicts: lang && dictsByLang[lang],
+      langs: lang && [lang],
     }
   );
   // Redirect if all matched heteronyms belong to the same title
@@ -89,6 +81,8 @@ export async function getHetFromUrl(
     sortFn = WordSortFns.ascend;
   }
   heteronyms.sort(sortFn);
-  const langSet = dictIdsToLangs(...presentDicts);
-  return [true, { heteronyms, mtch, query, langSet, langCountObj }];
+  return [
+    true,
+    { heteronyms, mtch, query, langSet: presentLangSet, langCountObj },
+  ];
 }
