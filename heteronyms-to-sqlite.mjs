@@ -68,6 +68,7 @@ CREATE TABLE dicts (
 );
 
 CREATE TABLE heteronyms (
+  "rowid" INTEGER PRIMARY KEY,
   "title" NOT NULL,
   "from" REFERENCES dicts("id"),
   "pns",
@@ -231,8 +232,10 @@ VALUES
   });
 }
 
-db.exec(
-  `
+{
+  console.log("Creating table 'han'...");
+  db.exec(
+    `
 CREATE TABLE a AS
 SELECT DISTINCT
   title,
@@ -277,4 +280,5 @@ DROP TABLE a;
 DROP TABLE b;
 DROP TABLE c;
 `
-);
+  );
+}
