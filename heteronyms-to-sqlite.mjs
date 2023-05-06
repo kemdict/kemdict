@@ -27,17 +27,15 @@
 
 import fs from "node:fs";
 import readline from "node:readline";
+import Database from "better-sqlite3";
 
 if (!fs.existsSync("heteronyms.json")) {
   console.log("heteronyms.json should be generated first!");
   process.exit(1);
 }
-
 if (fs.existsSync("entries.db")) {
   fs.rmSync("entries.db");
 }
-
-import Database from "better-sqlite3";
 const db = new Database("entries.db");
 
 function stringifyFields(thing) {
@@ -54,21 +52,34 @@ function stringifyFields(thing) {
 //   null = this should not be shown in results
 // pns?: array
 // props: object
-db.prepare(
+db.exec(
   `
+PRAGMA user_version = 2;
+
+CREATE TABLE langs (
+  "id" PRIMARY KEY,
+  "name" NOT NULL
+);
+
+CREATE TABLE dicts (
+  "id" PRIMARY KEY,
+  "name" NOT NULL,
+  "lang" REFERENCES langs("id")
+);
+
 CREATE TABLE heteronyms (
   "title" NOT NULL,
-  "from",
+  "from" REFERENCES dicts("id"),
   "pns",
-  "props" NOT NULL)`
-).run();
+  "props" NOT NULL
+);
 
-db.prepare(
-  `
 CREATE TABLE links (
   "from" NOT NULL,
-  "to" NOT NULL)`
-).run();
+  "to" NOT NULL
+);
+`
+);
 
 /**
  * Run `func` for each element of `array`, with a progress display, in
@@ -108,6 +119,93 @@ const EachPT = db.transaction((array, message = "", func) => {
   }
   process.stdout.write("\n");
 });
+
+{
+  const langs = Object.entries({
+    zh_TW: "華語",
+    nan_TW: "台語",
+    hak_TW: "客語",
+    han: "漢字",
+  });
+  const dicts = [
+    {
+      id: "unihan",
+      name: "Unihan 資料庫",
+      url: "https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=$1",
+      lang: "han",
+    },
+    {
+      id: "chhoetaigi_taioanpehoekichhoogiku",
+      name: "台灣白話基礎語句",
+      url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
+      lang: "nan_TW",
+    },
+    {
+      id: "kisaragi_dict",
+      name: "如月的現代台灣華語補足典",
+      url: "/dict-kisaragi",
+      lang: "zh_TW",
+    },
+    {
+      id: "dict_concised",
+      name: "國語辭典簡編本",
+      url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
+      lang: "zh_TW",
+    },
+    {
+      id: "dict_revised",
+      name: "重編國語辭典修訂本",
+      url: "https://dict.revised.moe.edu.tw/search.jsp?word=$1",
+      lang: "zh_TW",
+    },
+    {
+      id: "chhoetaigi_taijittoasutian",
+      name: "台日大辭典台語譯本 (1932)",
+      url: "https://taigi.fhl.net/dict/search.php?DETAIL=1&LIMIT=id=$1",
+      lang: "nan_TW",
+    },
+    {
+      id: "moedict_twblg",
+      name: "臺灣閩南語常用詞辭典",
+      url: "https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample=$1",
+      lang: "nan_TW",
+    },
+    {
+      id: "chhoetaigi_itaigi",
+      name: "iTaigi 華台對照典",
+      url: "https://itaigi.tw/k/$1",
+      lang: "nan_TW",
+    },
+    {
+      id: "hakkadict",
+      name: "臺灣客家語常用詞辭典",
+      url: 'https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id="$1".&searchmode=basic',
+      lang: "hak_TW",
+    },
+    {
+      id: "dict_idioms",
+      name: "成語典",
+      url: "https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=$1",
+      lang: "zh_TW",
+    },
+  ];
+  const langStmt = db.prepare(`
+INSERT INTO
+  langs ("id", "name")
+VALUES
+  (?, ?)`);
+  const dictStmt = db.prepare(`
+INSERT INTO
+  dicts ("id", "name", "lang")
+VALUES
+  (@id,@name,@lang)`);
+  EachPT(langs, "Preparing langs: ", ([id, name]) => {
+    langStmt.run(id, name);
+  });
+  EachPT(dicts, "Preparing dicts: ", (dict) => {
+    dictStmt.run(dict);
+  });
+}
 
 {
   const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json")).reverse();
