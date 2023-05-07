@@ -309,27 +309,35 @@ function processHet(het: Heteronym): Heteronym {
  *
  * runtime: "web" or "rn" (React Native)
  * readDB: the function that returns the DB instance. Called once
- * during initialization; the db instance is reused afterwards.
+ * on first use; the db instance is reused afterwards.
  */
 export class CrossDB {
-  readonly runtime: "web" | "rn";
-  readonly _db: unknown;
+  readonly #runtime: "web" | "rn";
+  readonly #readDB: () => any;
+  #db: any = undefined;
   constructor(runtime: "web" | "rn", readDB: () => any) {
-    this.runtime = runtime;
-    this._db = await readDB();
+    this.#runtime = runtime;
+    this.#readDB = readDB;
+  }
+  // async constructor workaround
+  async getDB() {
+    if (!this.#db) {
+      this.#db = await this.#readDB();
+    }
+    return this.#db;
   }
   async crossDbAll(
     source: string,
     args: unknown[] = [],
     pluck?: boolean
   ): Promise<unknown[]> {
-    if (this.runtime === "web") {
-      const db = this._db;
+    if (this.#runtime === "web") {
+      const db = await this.getDB();
       const stmt = db.prepare(source);
       if (pluck) stmt.pluck(pluck);
       return stmt.all(...args);
     } else {
-      const db = this._db;
+      const db = await this.getDB();
       return new Promise((resolve) => {
         db.transaction((tx) =>
           tx.executeSql(
