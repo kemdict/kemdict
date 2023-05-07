@@ -68,6 +68,9 @@ importers:
       '@astrojs/svelte':
         specifier: ^2.1.1
         version: 2.1.1(astro@2.4.0)(svelte@3.58.0)(typescript@4.9.5)(vite@4.3.5)
+      '@size-limit/file':
+        specifier: ^8.2.4
+        version: 8.2.4(size-limit@8.2.4)
       '@skeletonlabs/skeleton':
         specifier: ^1.2.5
         version: 1.2.5
@@ -110,6 +113,9 @@ importers:
       postcss-preset-env:
         specifier: ^8.3.2
         version: 8.3.2(postcss@8.4.23)
+      size-limit:
+        specifier: ^8.2.4
+        version: 8.2.4
       sqlstring:
         specifier: ^2.3.3
         version: 2.3.3
@@ -2204,6 +2210,16 @@ packages:
       string-argv: 0.3.2
     dev: true
 
+  /@size-limit/file@8.2.4(size-limit@8.2.4):
+    resolution: {integrity: sha512-xLuF97W7m7lxrRJvqXRlxO/4t7cpXtfxOnjml/t4aRVUCMXLdyvebRr9OM4jjoK8Fmiz8jomCbETUCI3jVhLzA==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      size-limit: 8.2.4
+    dependencies:
+      semver: 7.3.8
+      size-limit: 8.2.4
+    dev: true
+
   /@skeletonlabs/skeleton@1.2.5:
     resolution: {integrity: sha512-umysPs4+jPPD4xfbTwp7rznd5rT0Jz80kxM/6DTr9QdKR85gH6TBBCoKCiPiQywZtnj5WUcJfO7F6Qir3LNu2Q==}
     dependencies:
@@ -2949,6 +2965,11 @@ packages:
     engines: {node: '>=10.16.0'}
     dependencies:
       streamsearch: 1.1.0
+
+  /bytes-iec@3.1.1:
+    resolution: {integrity: sha512-fey6+4jDK7TFtFg/klGSvNKJctyU7n2aQdnM+CO0ruLPbqqMOM8Tio0Pc+deqUeVKX1tL5DQep1zQ7+37aTAsA==}
+    engines: {node: '>= 0.8'}
+    dev: true
 
   /call-bind@1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
@@ -5381,6 +5402,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  /nanospinner@1.1.0:
+    resolution: {integrity: sha512-yFvNYMig4AthKYfHFl1sLj7B2nkHL4lzdig4osvl9/LdGbXwrdFRoqBS98gsEsOakr0yH+r5NZ/1Y9gdVB8trA==}
+    dependencies:
+      picocolors: 1.0.0
+    dev: true
+
   /napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     dev: false
@@ -6659,6 +6686,19 @@ packages:
       '@types/sax': 1.2.4
       arg: 5.0.2
       sax: 1.2.4
+    dev: true
+
+  /size-limit@8.2.4:
+    resolution: {integrity: sha512-Un16nSreD1v2CYwSorattiJcHuAWqXvg4TsGgzpjnoByqQwsSfCIEQHuaD14HNStzredR8cdsO9oGH91ibypTA==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+    hasBin: true
+    dependencies:
+      bytes-iec: 3.1.1
+      chokidar: 3.5.3
+      globby: 11.1.0
+      lilconfig: 2.1.0
+      nanospinner: 1.1.0
+      picocolors: 1.0.0
     dev: true
 
   /slash@3.0.0:
