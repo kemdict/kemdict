@@ -6,6 +6,7 @@ import {
   dictsObj,
   dicts,
   langs,
+  joinLast,
   groupByProp,
   parseLangParam,
 } from "common";
@@ -51,11 +52,20 @@ if (requestedLang === false) {
   heteronyms.length > 0 ? (
     <SingleLayout
       wide={true}
-      title={`「${title}」 - ${site.title}`}
+      title={`「${title}」的意思 - ${site.title}`}
       initialInput={title}
     >
       <Fragment slot="head">
-        <meta name="description" content="「{title}」的定義" />
+        <meta
+          name="description"
+          content={`「${title}」在${langs[requestedLang]}的意思。來自${joinLast(
+            presentDicts
+              .filter((dict) => dict.lang === requestedLang)
+              .map((dict) => dict.name),
+            "、",
+            "及"
+          )}的定義。 - ${site.oneLineDesc}`}
+        />
       </Fragment>
       <div class="w-full md:flex md:flex-row-reverse md:gap-x-8">
         <div class="md:w-5/12">
