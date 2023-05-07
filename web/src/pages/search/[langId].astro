@@ -52,7 +52,7 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   <Fragment slot="head">
     <meta
       name="description"
-      content="在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}"
+      content={`在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
     />
   </Fragment>
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
