@@ -81,8 +81,12 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
   <body>
     {
       import.meta.env.DEV && (
-        <div class="bg-error-300-600-token text-error-800-100-token text-center font-bold">
-          /// Development preview ///
+        <div class="bg-error-300-600-token text-error-800-100-token absolute w-full text-center font-bold">
+          <span>/// Development preview; </span>
+          <a class="unstyled underline" href={canonicalURL} target="_blank">
+            go to production
+          </a>
+          <span> ///</span>
         </div>
       )
     }
