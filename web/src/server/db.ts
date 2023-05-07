@@ -1,6 +1,6 @@
 import { chunk, sortBy } from "lodash-es";
 import { groupByProp, WordSortFns, parseQueryToTokens, CrossDB } from "common";
-import type { Heteronym, LangId } from "common";
+import type { Heteronym, LangId, Mtch } from "common";
 
 export async function readDB() {
   const fs = await import("node:fs");
@@ -51,7 +51,7 @@ export async function getHetFromUrl(
   ]
 > {
   const query: string | undefined = url.searchParams.get("q")?.trim();
-  const mtch: string = url.searchParams.get("m") || "prefix";
+  const mtch: Mtch = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "asc";
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
@@ -66,6 +66,7 @@ export async function getHetFromUrl(
   );
   // Redirect if all matched heteronyms belong to the same title
   if (
+    mtch !== "contains" &&
     heteronyms &&
     heteronyms.length > 0 &&
     heteronyms.length < 10 &&

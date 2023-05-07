@@ -371,9 +371,6 @@ export class CrossDB {
     const hasLangs = langs && langs.length > 0;
     const operator = mtch ? "LIKE" : "=";
     const hets = (await this.crossDbAll(
-      // TODO: create another index table (normalized token, hetId) so
-      // we don't have to parse arrays like this, and also to make it
-      // easier to support search without tones
       `
 SELECT DISTINCT title, "from", langs.id as lang, props
 FROM heteronyms
