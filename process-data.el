@@ -192,7 +192,7 @@ this:
   ;; Estimate the amount of information in the string and guess a
   ;; possibly appropriate number of keywords to extract.
   ;; Use bytes to treat Han characters as having more information.
-  (let ((count (/ (string-bytes str) 50)))
+  (let ((count (round (/ (string-bytes str) 50.0))))
     (dolist (keyword (jieba-extract-keywords str count "n,v"))
       (setq str
             (s-replace-regexp
@@ -212,10 +212,12 @@ this:
 (ert-deftest d:links:linkify-keywords ()
   (should
    (let ((d:titles:look-up-table
-          (d:titles:to-look-up-table (list "塞責"))))
+          (d:titles:to-look-up-table '("塞責" "空頭支票"))))
      (and (equal (d:links:linkify-keywords
                   "他無論做什麼事都按照規定一板一眼的，絕不馬虎塞責。")
                  "他無論做什麼事都按照規定一板一眼的，絕不馬虎<a href=\"/word/塞責\">塞責</a>。")
+          (equal (d:links:linkify-keywords "開立空頭支票是一種詐欺的行為。")
+                 "開立<a href=\"/word/空頭支票\">空頭支票</a>是一種詐欺的行為。")
           ;; Idempotent
           (equal (d:links:linkify-keywords
                   (d:links:linkify-keywords
