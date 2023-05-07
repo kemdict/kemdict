@@ -23,7 +23,6 @@ export interface Heteronym {
   title: string;
   from: string | undefined;
   lang: string;
-  pns?: any[];
   props: any;
 }
 
@@ -376,14 +375,14 @@ export class CrossDB {
       // we don't have to parse arrays like this, and also to make it
       // easier to support search without tones
       `
-SELECT DISTINCT title, "from", langs.id as lang, pns, props
+SELECT DISTINCT title, "from", langs.id as lang, props
 FROM heteronyms
 LEFT JOIN dicts ON heteronyms."from" = dicts.id
 LEFT JOIN langs ON dicts.lang = langs.id
-, json_each(heteronyms.pns)
+, pns
 WHERE "from" IS NOT NULL
 ${tokens
-  .map(() => `AND (title ${operator} ? OR json_each.value ${operator} ?)`)
+  .map(() => `AND (title ${operator} ? OR pns.pn ${operator} ?)`)
   .join("\n")}
 `,
       (() => {
