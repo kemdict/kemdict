@@ -1,4 +1,12 @@
 * done
+** DONE reflect db schema update
+
+- [X] =stroke_count= → =sc=
+- [X] =non_radical_stroke_count= → =nrsc=
+- [X] =definition= → =def=
+- [X] =definitions= → =defs=
+- [X] Collected pronunciations are in their own table and not a JSON field
+
 ** DONE add stroke info for 首字索引
 ** DONE history for search
 just 3 entries would be useful
@@ -172,14 +180,6 @@ I'm still not sure, but
 - Another interface to maintain within the same app
 
 * todos
-** reflect db schema update
-
-- [X] =stroke_count= → =sc=
-- [X] =non_radical_stroke_count= → =nrsc=
-- [X] =definition= → =def=
-- [X] =definitions= → =defs=
-- [ ] Collected pronunciations are in their own table and not a JSON field
-
 ** starring words / heteronyms
 ** fix backlinks section to look less terrible with a lot of links
 ** search: only redirect in prefix mode

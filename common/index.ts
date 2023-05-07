@@ -379,7 +379,7 @@ SELECT DISTINCT title, "from", langs.id as lang, props
 FROM heteronyms
 LEFT JOIN dicts ON heteronyms."from" = dicts.id
 LEFT JOIN langs ON dicts.lang = langs.id
-, pns
+INNER JOIN pns ON pns.het_id = heteronyms.id
 WHERE "from" IS NOT NULL
 ${tokens
   .map(() => `AND (title ${operator} ? OR pns.pn ${operator} ?)`)
@@ -453,7 +453,7 @@ WHERE "to" IN (${sqlEscape(titles)})`,
   async getChars(): Promise<{
     with_stroke: Array<{
       title: string;
-      stroke_count: number;
+      sc: number;
     }>;
     without_stroke: Array<string>;
   }> {
@@ -462,17 +462,17 @@ WHERE "to" IN (${sqlEscape(titles)})`,
   SELECT DISTINCT
     heteronyms.title,
     group_concat("from") as dicts,
-    cast(json_tree.value as integer) AS 'stroke_count'
+    cast(json_tree.value as integer) AS 'sc'
   FROM heteronyms, json_tree(heteronyms.props)
   WHERE length("title") = 1
-    AND json_tree.key = 'stroke_count'
+    AND json_tree.key = 'sc'
   GROUP BY title
     HAVING dicts != 'unihan'
-  ORDER BY 'stroke_count';
+  ORDER BY 'sc';
 `
     )) as Array<{
       title: string;
-      stroke_count: number;
+      sc: number;
     }>;
     const nostroke = (await this.crossDbAll(
       `
@@ -508,10 +508,10 @@ WHERE dicts != 'unihan'`,
       `
   SELECT DISTINCT
     title,
-    non_radical_stroke_count
+    nrsc
   FROM han
   WHERE radical = ?
-  ORDER BY non_radical_stroke_count
+  ORDER BY nrsc
 `,
       [radical]
     );
@@ -520,9 +520,9 @@ WHERE dicts != 'unihan'`,
   async getRadicals() {
     return await this.crossDbAll(
       `
-    SELECT DISTINCT radical, stroke_count
+    SELECT DISTINCT radical, sc
     FROM han
-    WHERE non_radical_stroke_count = 0
+    WHERE nrsc = 0
     ORDER BY radical
 `
     );
