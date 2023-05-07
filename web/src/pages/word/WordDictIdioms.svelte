@@ -56,7 +56,7 @@
   {#if het.props.bopomofo}
     <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}
-  <p class="def">{@html het.props.definition}</p>
+  <p class="def">{@html het.props.def}</p>
   {#if het.props.用法語意說明 || het.props.用法使用類別 || het.props.用法例句}
     <h2>用法</h2>
     <p>{het.props.用法語意說明}</p>

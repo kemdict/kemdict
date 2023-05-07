@@ -43,7 +43,7 @@
   {#if het.props.vogue}
     <div class="text-gray-700 dark:text-gray-300">（流行語）</div>
   {/if}
-  {#each groupByProp(het.props.definitions, "type", "none") as [type, defs]}
+  {#each groupByProp(het.props.defs, "type", "none") as [type, defs]}
     {#if type !== "none"}
       <p class="pos">{type}</p>
     {/if}

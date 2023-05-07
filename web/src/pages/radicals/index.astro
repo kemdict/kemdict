@@ -13,7 +13,7 @@ const radicals = await DB.getRadicals();
   <H1>部首索引</H1>
   <div class="prose">
     {
-      groupByProp(radicals, "stroke_count").map(([count, elements]) => (
+      groupByProp(radicals, "sc").map(([count, elements]) => (
         <Group
           title={`${count} 畫`}
           elements={elements}

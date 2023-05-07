@@ -68,16 +68,16 @@ export function interlinear_annotation(defs: string[]): string {
 
 export function radicals_and_strokes(props: {
   radical?: string;
-  stroke_count?: string;
+  sc?: string;
 }): string {
-  if (!props.radical && !props.stroke_count) return;
+  if (!props.radical && !props.sc) return;
   let x = "";
   x += `<div class="mb-4">【`;
   if (props.radical) {
     x += `<a href="/radicals/${props.radical}">${props.radical}</a>部`;
   }
-  if (props.stroke_count) {
-    x += `，共${props.stroke_count}畫`;
+  if (props.sc) {
+    x += `，共${props.sc}畫`;
   }
   x += "】</div>";
   return x;

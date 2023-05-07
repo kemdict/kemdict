@@ -28,8 +28,7 @@
       {/if}
     {/each}
     <p>
-      <span>筆畫：</span>共{het.props.stroke_count}畫，部首外共{het.props
-        .non_radical_stroke_count}畫
+      <span>筆畫：</span>共{het.props.sc}畫，部首外共{het.props.nrsc}畫
     </p>
     {#if het.props?.defs?.length == 1}
       <div><span>定義：</span>{het.props.defs[0]}</div>

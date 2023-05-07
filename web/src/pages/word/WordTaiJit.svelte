@@ -32,8 +32,8 @@
 {#each heteronyms as het}
   <h1>{getTitle(het)}</h1>
   <Pronunciation>{het.props.poj}</Pronunciation>
-  {#if het.props.definition}
-    <p class="my-2">{@html process_def(het.props.definition)}</p>
+  {#if het.props.def}
+    <p class="my-2">{@html process_def(het.props.def)}</p>
     {#if het.props.example}
       <blockquote>
         <ul class="list-disc pl-2">

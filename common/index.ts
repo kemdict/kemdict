@@ -490,8 +490,8 @@ WHERE dicts != 'unihan'`,
     const pn = (await this.crossDbAll(
       `
   SELECT DISTINCT
-    substr(json_each.value, 0, 2) AS 'pnInitial'
-  FROM heteronyms, json_each(heteronyms.pns)
+    substr(pn, 0, 2) AS 'pnInitial'
+  FROM pns
   WHERE "pnInitial" IS NOT NULL
 `,
       [],

@@ -41,8 +41,8 @@
     </svelte:fragment>
     <svelte:fragment slot="body">
       {processPreview(
-        het.props.definition ||
-          het.props.definitions?.map((x) => x.def).join("") ||
+        het.props.def ||
+          het.props.defs?.map((x) => x.def).join("") ||
           het.props.example ||
           het.props.zh
       )}

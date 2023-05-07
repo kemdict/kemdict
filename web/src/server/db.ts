@@ -23,10 +23,9 @@ export const DB = new CrossDB("web", readDB);
 
 export const chars = await (async () => {
   const { with_stroke, without_stroke } = await DB.getChars();
-  const with_stroke_grouped = chunk(
-    sortBy(with_stroke, "stroke_count"),
-    1200
-  ).map((page) => groupByProp(page, "stroke_count"));
+  const with_stroke_grouped = chunk(sortBy(with_stroke, "sc"), 1200).map(
+    (page) => groupByProp(page, "sc")
+  );
   return { without_stroke, with_stroke_grouped };
 })();
 

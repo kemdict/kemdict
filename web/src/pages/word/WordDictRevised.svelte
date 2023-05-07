@@ -7,8 +7,8 @@
       length: string;
       id: string;
       radical: string;
-      stroke_count: string;
-      non_radical_stroke_count: string;
+      sc: string;
+      nrsc: string;
       het_sort: string;
       bopomofo: string;
       v_type: string;
@@ -17,7 +17,7 @@
       v_pinyin: string;
       synonyms: string;
       antonyms: string;
-      definition: string;
+      def: string;
       het_ref: string;
       異體字: string;
     };
@@ -61,5 +61,5 @@
   {#if strLen(het.title) === 1}
     {@html radicals_and_strokes(het.props)}
   {/if}
-  {@html process_def(het.props.definition)}
+  {@html process_def(het.props.def)}
 {/each}

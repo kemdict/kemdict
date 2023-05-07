@@ -5,7 +5,7 @@
       id: string;
       radical: string;
       bopomofo: string;
-      definition: string;
+      def: string;
       synonyms: string;
       antonyms: string;
     };
@@ -29,9 +29,9 @@
   {#if strLen(het.title) === 1}
     {@html radicals_and_strokes(het.props)}
   {/if}
-  {#if het.props.definition}
+  {#if het.props.def}
     <ol>
-      {#each split(het.props.definition) as d}
+      {#each split(het.props.def) as d}
         <!-- TODO: we really need a better way of displaying nested lists. -->
         <li><p class="def">{@html d.replace(/　(\(\d+\))/g, "<br>$1")}</p></li>
       {/each}

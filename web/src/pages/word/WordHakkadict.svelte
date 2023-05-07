@@ -42,7 +42,7 @@
   {#if het.props.type}
     <p class="pos">{process_type(het.props.type)}</p>
   {/if}
-  {@html processDefs(het.props.definition)}
+  {@html processDefs(het.props.def)}
   {#if het.props.antonyms}
     <p><m>反義詞</m>：{@html het.props.antonyms}</p>
   {/if}

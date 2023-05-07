@@ -16,15 +16,13 @@ const entries = await DB.getCharsByRadical(radical);
       部首為「<a href={`/word/${radical}`}>{radical}</a>」的字
     </h1>
     {
-      groupByProp(entries, "non_radical_stroke_count").map(
-        ([count, elements]) => (
-          <Group
-            title={`${count} 畫`}
-            elements={elements}
-            template="/search?q=$1&s=prefix"
-          />
-        )
-      )
+    groupByProp(entries, "nrsc").map(([count, elements]) => (
+    <Group
+      title={`${count} 畫`}
+      elements={elements}
+      template="/search?q=$1&s=prefix"
+    />
+    ))
     }
   </div>
 </SingleLayout>
