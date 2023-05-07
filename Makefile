@@ -1,16 +1,18 @@
 .ONESHELL:
 .DEFAULT_GOAL := build
 
-.PHONY: build dev dev-pojtl-api preview
+.PHONY: dev-pojtl-api preview
 .PHONY: admin.deploy.kemdict admin.deploy.pojtl-api
 
 export LANG=en_US.UTF-8
 
+.PHONY: build
 build:
-	cd web && make build-no-data
+	cd web && make -j4 build-no-data
 
+.PHONY: dev
 dev:
-	cd web && make dev
+	cd web && make -j4 dev
 
 dev-pojtl-api:
 	cd pojtl-api && make dev
