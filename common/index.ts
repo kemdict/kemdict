@@ -306,15 +306,17 @@ function processHet(het: Heteronym): Heteronym {
 
 /**
  * Shared DB instance to support both expo-sqlite and better-sqlite3.
+ *
  * runtime: "web" or "rn" (React Native)
- * readDB: the function that returns the DB instance
+ * readDB: the function that returns the DB instance. Called once
+ * during initialization; the db instance is reused afterwards.
  */
 export class CrossDB {
   readonly runtime: "web" | "rn";
-  readonly readDB: () => any;
+  readonly _db: unknown;
   constructor(runtime: "web" | "rn", readDB: () => any) {
     this.runtime = runtime;
-    this.readDB = readDB;
+    this._db = await readDB();
   }
   async crossDbAll(
     source: string,
@@ -322,12 +324,12 @@ export class CrossDB {
     pluck?: boolean
   ): Promise<unknown[]> {
     if (this.runtime === "web") {
-      const db = await this.readDB();
+      const db = this._db;
       const stmt = db.prepare(source);
       if (pluck) stmt.pluck(pluck);
       return stmt.all(...args);
     } else {
-      const db = await this.readDB();
+      const db = this._db;
       return new Promise((resolve) => {
         db.transaction((tx) =>
           tx.executeSql(
@@ -456,16 +458,16 @@ WHERE "to" IN (${sqlEscape(titles)})`,
   }> {
     const with_stroke = (await this.crossDbAll(
       `
-  SELECT DISTINCT
-    heteronyms.title,
-    group_concat("from") as dicts,
-    cast(json_tree.value as integer) AS 'sc'
-  FROM heteronyms, json_tree(heteronyms.props)
-  WHERE length("title") = 1
-    AND json_tree.key = 'sc'
-  GROUP BY title
-    HAVING dicts != 'unihan'
-  ORDER BY 'sc';
+SELECT DISTINCT
+heteronyms.title,
+group_concat("from") as dicts,
+cast(json_tree.value as integer) AS 'sc'
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE length("title") = 1
+AND json_tree.key = 'sc'
+GROUP BY title
+HAVING dicts != 'unihan'
+ORDER BY 'sc';
 `
     )) as Array<{
       title: string;
