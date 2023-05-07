@@ -376,10 +376,10 @@ export class CrossDB {
     if (typeof tokens === "string") {
       tokens = [tokens];
     }
-    const mtch = options?.mtch || "prefix";
+    const mtch = options?.mtch || "exact";
     const langs = options?.langs;
     const hasLangs = langs && langs.length > 0;
-    const operator = mtch ? "LIKE" : "=";
+    const operator = mtch === "exact" ? "=" : "LIKE";
     const hets = (await this.crossDbAll(
       `
 SELECT DISTINCT title, "from", langs.id as lang, props
