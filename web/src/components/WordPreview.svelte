@@ -1,7 +1,6 @@
 <script lang="ts">
   import ListLink from "./ListLink.svelte";
   import { spc } from "$src/processing";
-  import { dictsObj } from "common";
   import type { Heteronym } from "common";
   export let heteronyms: Heteronym[];
   // FIXME: for Hakkadict, it's questionable for me to pick one
@@ -26,7 +25,7 @@
   function processPn(het: Heteronym) {
     let pn: string | undefined =
       het.props[pron_keys.find((pron) => het.props[pron])];
-    if (pn) {
+    if (pn && het.title !== pn) {
       return `（${spc(pn)}）`;
     } else {
       return "";
