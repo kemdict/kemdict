@@ -79,6 +79,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
+    {
+      import.meta.env.DEV && (
+        <div class="bg-error-300-600-token text-error-800-100-token text-center font-bold">
+          /// Development preview ///
+        </div>
+      )
+    }
     <div class="base">
       <slot />
     </div>
