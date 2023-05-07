@@ -1,7 +1,14 @@
 ---
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
-import { dictsObj, dicts, langs, groupByProp, parseLangParam } from "common";
+import {
+  site,
+  dictsObj,
+  dicts,
+  langs,
+  groupByProp,
+  parseLangParam,
+} from "common";
 import type { Dict, Heteronym } from "common";
 
 const { title } = Astro.params;
@@ -44,7 +51,7 @@ if (requestedLang === false) {
   heteronyms.length > 0 ? (
     <SingleLayout
       wide={true}
-      title={`「${title}」 - kemdict`}
+      title={`「${title}」 - ${site.title}`}
       initialInput={title}
     >
       <Fragment slot="head">

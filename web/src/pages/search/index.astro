@@ -1,6 +1,6 @@
 ---
 import { getHetFromUrl } from "$src/server/db";
-import { dicts, langs, WordSortFns, getSearchTitle } from "common";
+import { site, dicts, langs, WordSortFns, getSearchTitle } from "common";
 
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url);
@@ -32,13 +32,16 @@ const titleMarkup = getSearchTitle(mtch, query, true);
 ---
 
 <SingleLayout
-  title={`${title} - kemdict 搜尋結果`}
+  title={`${title} - 所有辭典 - ${site.title}`}
   initialMatchSelection={mtch}
   initialInput={query}
   showMatchTypes={true}
 >
   <Fragment slot="head">
-    <meta name="description" content="搜尋 kemdict" />
+    <meta
+      name="description"
+      content="在所有收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}"
+    />
   </Fragment>
   {
     count === 0 ? (

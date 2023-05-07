@@ -1,5 +1,5 @@
 ---
-import { parsePageParam, langs, getSearchTitle } from "common";
+import { site, parsePageParam, langs, getSearchTitle } from "common";
 import { chunk } from "lodash-es";
 const { langId } = Astro.params;
 import { getHetFromUrl } from "$src/server/db";
@@ -43,14 +43,17 @@ const titleMarkup = getSearchTitle(mtch, query, true);
 ---
 
 <SingleLayout
-  title={`${title} - kemdict ${langs[langId]}搜尋結果`}
+  title={`${title} - ${langs[langId]}辭典 - ${site.title}`}
   initialMatchSelection={mtch}
   initialInput={query}
   showMatchTypes={true}
   submitSuffix={`/${langId}`}
 >
   <Fragment slot="head">
-    <meta name="description" content="搜尋 kemdict" />
+    <meta
+      name="description"
+      content="在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}"
+    />
   </Fragment>
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
   <SingleLangResults

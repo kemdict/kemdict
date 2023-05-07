@@ -1,6 +1,11 @@
 import { uniq, escapeRegExp } from "lodash-es";
 import { escape as sqlEscape } from "sqlstring";
 
+export const site = {
+  oneLineDesc: "Kemdict 是一個免費且無廣告的辭典搜尋服務。",
+  title: "Kemdict",
+};
+
 export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",
