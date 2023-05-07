@@ -21,7 +21,8 @@ preview: build
 	cd web && env PORT=5173 node dist/server/entry.mjs
 
 admin.deploy.kemdict: build
-	@[ "$$SSH_HOST"x != x ] || (echo 'Please specify $$SSH_HOST'; exit 1)
+	@[ "$$ANDROID_DATA"x != x ] && (echo "The database is reduced on Android to make it fit in my phone's RAM for testing. Deploying here would use this reduced database. Exiting."; exit 1)
+	@[ "$$SSH_HOST"x == x ] && (echo 'Please specify $$SSH_HOST'; exit 1)
 	cd web
 	tar -czf dist.tar.gz -a dist
 	rsync dist.tar.gz "$$SSH_HOST:/home/kisaragi"
