@@ -38,6 +38,7 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   showMatchTypes={true}
 >
   <Fragment slot="head">
+    <meta name="og:image" content={`/og-image?title=${title}`} />
     <meta
       name="description"
       content={`在所有收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}

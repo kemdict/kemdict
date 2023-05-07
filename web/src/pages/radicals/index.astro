@@ -4,12 +4,15 @@ import Group from "$src/components/Group.svelte";
 import { H1 } from "$src/components/typography";
 
 import { DB } from "$src/server/db";
-import { groupByProp } from "common";
+import { site, groupByProp } from "common";
 
 const radicals = await DB.getRadicals();
 ---
 
-<SingleLayout title="部首索引">
+<SingleLayout title={`部首索引 - ${site.title}`}>
+  <Fragment slot="head">
+    <meta name="og:image" content="/og-image?title=部首索引" />
+  </Fragment>
   <H1>部首索引</H1>
   <div class="prose">
     {

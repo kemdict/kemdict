@@ -51,6 +51,10 @@ const titleMarkup = getSearchTitle(mtch, query, true);
 >
   <Fragment slot="head">
     <meta
+      name="og:image"
+      content={`/og-image?title=${title} - ${langs[langId]}`}
+    />
+    <meta
       name="description"
       content={`在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
     />

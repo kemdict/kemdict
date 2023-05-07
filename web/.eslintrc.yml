@@ -35,7 +35,7 @@ overrides:
         - &noUnusedVarsSetting
           argsIgnorePattern: "^_"
           destructuredArrayIgnorePattern: "^_"
-  - files: ["*.ts"]
+  - files: ["*.ts", "*.tsx"]
     parser: "@typescript-eslint/parser"
     rules: &TS
       "@typescript-eslint/no-unsafe-assignment": "off"

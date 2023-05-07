@@ -3,26 +3,29 @@ import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 
 import { DB } from "$src/server/db";
-import { format, groupByProp } from "common";
+import { site, format, groupByProp } from "common";
 
 const { radical } = Astro.params;
 const entries = await DB.getCharsByRadical(radical);
 ---
 
-<SingleLayout title={`部首為「${radical}」的字 - kemdict`}>
+<SingleLayout title={`部首為「${radical}」的字 - ${site.title}`}>
+  <Fragment slot="head">
+    <meta name="og:image" content={`/og-image?title=部首索引 — ${radical}`} />
+  </Fragment>
   <div class="prose">
     <a href="/radicals">← 回到部首索引</a>
     <h1 class="mt-2">
       部首為「<a href={`/word/${radical}`}>{radical}</a>」的字
     </h1>
     {
-    groupByProp(entries, "nrsc").map(([count, elements]) => (
-    <Group
-      title={`${count} 畫`}
-      elements={elements}
-      template="/search?q=$1&s=prefix"
-    />
-    ))
+      groupByProp(entries, "nrsc").map(([count, elements]) => (
+        <Group
+          title={`${count} 畫`}
+          elements={elements}
+          template="/search?q=$1&s=prefix"
+        />
+      ))
     }
   </div>
 </SingleLayout>
