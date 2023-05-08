@@ -14,7 +14,7 @@ dev.expo-go: $(DEPS)
 	npx expo start # maybe set EXPO_DEBUG?
 
 build.android.debug: $(DEPS)
-	cd android && ./gradlew assembleDebug
+	cd android && ./gradlew installRelease
 	find . -name "*.apk"
 
 # web:
