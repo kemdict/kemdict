@@ -26,7 +26,7 @@ admin.deploy.kemdict: build
 	cd web
 
 	@echo "Testing that the application starts..."
-	dist/start &
+	(cd dist && ./start &)
 	pid=$$!
 	sleep 15
 	ps -p $$pid > /dev/null || exit 1
