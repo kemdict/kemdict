@@ -1,12 +1,13 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import satori from "satori";
 import sharp from "sharp";
 
-const openHuninn = readFileSync(
-  `${process.cwd()}/public/jf-openhuninn-1.1.ttf`
+const fontPath = [`${process.cwd()}/public`, `${process.cwd()}/client`].find(
+  (f) => existsSync(f)
 );
-const Jost = readFileSync(`${process.cwd()}/public/Jost-400-Book.ttf`);
-const JostBold = readFileSync(`${process.cwd()}/public/Jost-700-Bold.ttf`);
+const openHuninn = readFileSync(`${fontPath}/jf-openhuninn-1.1.ttf`);
+const Jost = readFileSync(`${fontPath}/Jost-400-Book.ttf`);
+const JostBold = readFileSync(`${fontPath}/Jost-700-Bold.ttf`);
 
 const makeElemFunc =
   (elem) =>
