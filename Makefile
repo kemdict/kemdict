@@ -24,6 +24,14 @@ admin.deploy.kemdict: build
 	@[ "$$ANDROID_DATA"x != x ] && (echo "The database is reduced on Android to make it fit in my phone's RAM for testing. Deploying here would use this reduced database. Exiting."; exit 1)
 	@[ "$$SSH_HOST"x == x ] && (echo 'Please specify $$SSH_HOST'; exit 1)
 	cd web
+
+	@echo "Testing that the application starts..."
+	dist/start &
+	pid=$$!
+	sleep 15
+	ps -p $$pid > /dev/null || exit 1
+	kill $$pid
+
 	tar -czf dist.tar.gz -a dist
 	rsync dist.tar.gz "$$SSH_HOST:/home/kisaragi"
 	ssh "$$SSH_HOST" bash << HERE
