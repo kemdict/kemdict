@@ -37,6 +37,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      object-hash:
+        specifier: ^3.0.0
+        version: 3.0.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -5466,6 +5469,11 @@ packages:
       copy-descriptor: 0.1.1
       define-property: 0.2.5
       kind-of: 3.2.2
+    dev: false
+
+  /object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
     dev: false
 
   /object-inspect@1.12.3:

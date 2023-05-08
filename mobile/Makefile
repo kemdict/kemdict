@@ -1,4 +1,7 @@
-DEPS := assets/entries.db
+DEPS := assets/entries.db common
+
+common: ../common
+	cd ../common && make dist
 
 assets/entries.db: ../dicts
 	cd ../dicts && make entries.db
