@@ -11,7 +11,7 @@ const entries = await DB.getCharsByRadical(radical);
 
 <SingleLayout title={`部首為「${radical}」的字 - ${site.title}`}>
   <Fragment slot="head">
-    <meta property="og:image" content={`/og-image?title=部首索引 — ${radical}`} />
+    <meta property="og:image" content={`https://kemdict.com/og-image?title=部首索引 — ${radical}`} />
   </Fragment>
   <div class="prose">
     <a href="/radicals">← 回到部首索引</a>
