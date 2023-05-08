@@ -56,7 +56,7 @@ if (requestedLang === false) {
       initialInput={title}
     >
       <Fragment slot="head">
-        <meta name="og:image" content={`/og-image?title=「${title}」的定義`} />
+        <meta property="og:image" content={`/og-image?title=「${title}」的定義`} />
         <meta
           name="description"
           content={`「${title}」在${langs[requestedLang]}的意思。來自${joinLast(

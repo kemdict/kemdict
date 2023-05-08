@@ -18,13 +18,13 @@ const words = await DB.getDictTitles("kisaragi_dict", 15);
 
 <SingleLayout class="lg:pb-16 lg:pt-32" title={title} wantHeader={false}>
   <Fragment slot="head">
-    <meta property="og:type" content="website" />
     <meta name="description" content={description} />
-    <meta property="og:description" content={description} />
     <meta name="twitter:card" content="summary" />
-    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og-image" />
     <meta property="og:sitename" content={sitename} />
-    <meta name="og:image" content="/og-image" />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
