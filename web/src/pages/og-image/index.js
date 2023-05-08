@@ -24,7 +24,8 @@ const img = makeElemFunc("img");
 // <img class="rounded-xl"
 //      src="" width=75 height=75>
 export async function get({ request }) {
-  const title = new URL(request.url).searchParams.get("title");
+  const encoded = new URL(request.url).searchParams.get("title");
+  const title = decodeURI(encoded)
   const svg = await satori(
     div(
       {
