@@ -364,13 +364,14 @@ export class CrossDB {
    * - "contains": match heteronyms that contain TOKEN
    * - any thing else (including "exact"): match heteronyms exactly
    *
-   * Returns [matchingDicts, Heteronyms, langCountObj]
+   * Returns {presentDicts, presentLangSet, heteronyms, langCountObj}
    */
   async getHeteronyms(
     tokens: string | string[],
     options?: {
       mtch?: string;
       langs?: string[];
+      limit?: number;
     }
   ): Promise<{
     presentDicts: DictId[];
@@ -382,6 +383,7 @@ export class CrossDB {
       tokens = [tokens];
     }
     const mtch = options?.mtch || "exact";
+    const limit = options?.limit;
     const langs = options?.langs;
     const hasLangs = langs && langs.length > 0;
     const operator = mtch === "exact" ? "=" : "LIKE";
@@ -396,9 +398,10 @@ WHERE "from" IS NOT NULL
 ${tokens
   .map(() => `AND (title ${operator} ? OR pns.pn ${operator} ?)`)
   .join("\n")}
+${limit ? `LIMIT ?` : ""}
 `,
       (() => {
-        const arr: string[] = [];
+        const arr: Array<string | number> = [];
         const tokenCount = tokens.length;
         tokens.forEach((token, index) => {
           const query = tokenToLIKEInput(
@@ -410,6 +413,9 @@ ${tokens
           arr.push(query);
           arr.push(query);
         });
+        if (limit) {
+          arr.push(limit);
+        }
         return arr;
       })()
     )) as Heteronym[];
