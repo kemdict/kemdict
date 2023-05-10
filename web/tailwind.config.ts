@@ -36,9 +36,9 @@ export default {
   theme: {
     fontFamily: {
       sans: [
-        "'Jost*'",
-        "'Jost'",
-        "Noto Sans",
+        "Source Sans Pro",
+        "Roboto",
+        "Segoe UI",
         ...cjkFallbackSans,
         ...cjkFallbackSerif,
         "sans-serif",

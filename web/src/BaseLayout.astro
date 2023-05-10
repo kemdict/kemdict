@@ -28,12 +28,8 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <slot name="head" />
     <link href={canonicalURL} rel="canonical" />
-    <link
-      rel="stylesheet"
-      href="https://indestructibletype.com/fonts/Jost.css"
-      type="text/css"
-      charset="utf-8"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
       rel="stylesheet"

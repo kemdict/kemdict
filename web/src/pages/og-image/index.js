@@ -6,8 +6,8 @@ const fontPath = [`${process.cwd()}/public`, `${process.cwd()}/client`].find(
   (f) => existsSync(f)
 );
 const openHuninn = readFileSync(`${fontPath}/jf-openhuninn-1.1.ttf`);
-const Jost = readFileSync(`${fontPath}/Jost-400-Book.ttf`);
-const JostBold = readFileSync(`${fontPath}/Jost-700-Bold.ttf`);
+const SourceSans = readFileSync(`${fontPath}/SourceSans3-Regular.ttf`);
+const SourceSansBold = readFileSync(`${fontPath}/SourceSans3-Bold.ttf`);
 
 const makeElemFunc =
   (elem) =>
@@ -25,7 +25,7 @@ const img = makeElemFunc("img");
 //      src="" width=75 height=75>
 export async function get({ request }) {
   const encoded = new URL(request.url).searchParams.get("title");
-  const title = decodeURI(encoded)
+  const title = decodeURI(encoded);
   const svg = await satori(
     div(
       {
@@ -49,14 +49,14 @@ export async function get({ request }) {
       height: 628,
       fonts: [
         {
-          name: "Jost",
-          data: Jost,
+          name: "Source Sans 3",
+          data: SourceSans,
           weight: 400,
           style: "normal",
         },
         {
-          name: "Jost",
-          data: JostBold,
+          name: "Source Sans 3",
+          data: SourceSansBold,
           weight: 700,
           style: "normal",
         },
