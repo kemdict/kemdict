@@ -1,4 +1,6 @@
 * done
+** DONE search: only redirect in prefix mode
+in suffix and contains it's jarring to redirect, actually
 ** DONE reflect db schema update
 
 - [X] =stroke_count= → =sc=
@@ -182,8 +184,6 @@ I'm still not sure, but
 * todos
 ** starring words / heteronyms
 ** fix backlinks section to look less terrible with a lot of links
-** search: only redirect in prefix mode
-in suffix and contains it's jarring to redirect, actually
 ** make it possible to turn off pronunciation search
 I wanted to search for words with “-” in them but the result is 100000+ entries long.
 ** make it possible to filter language

@@ -66,7 +66,7 @@ export async function getHetFromUrl(
   );
   // Redirect if all matched heteronyms belong to the same title
   if (
-    mtch !== "contains" &&
+    mtch === "prefix" &&
     heteronyms &&
     heteronyms.length > 0 &&
     heteronyms.length < 10 &&
