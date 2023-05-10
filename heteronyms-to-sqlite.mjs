@@ -23,11 +23,13 @@
  * | hakkadict    | ...  | hak_TW |
  * | dict_revised | ...  | zh_TW  |
  *
- * pns:
- * | het_id | pn  |
- * | 1      | abc |
- * | 1      | def |
- * | 2      | abc |
+ * aliases ("false" and "true" are actually NULL and 1.0):
+ * | alias | het_id | exact |
+ * | abc   | 1      | false |
+ * | def   | 1      | false |
+ * | abc   | 2      | false |
+ * | word  | 1      | true  |
+ * | word  | 2      | true  |
  *
  * heteronyms:
  * | id | title | from         | props               |
@@ -62,11 +64,10 @@ function stringifyFields(thing) {
 // title: string
 // from?: string
 //   null = this should not be shown in results
-// pns?: array
 // props: object
 db.exec(
   `
-PRAGMA user_version = 3;
+PRAGMA user_version = 4;
 
 CREATE TABLE langs (
   "id" PRIMARY KEY,
@@ -86,9 +87,10 @@ CREATE TABLE heteronyms (
   "props" NOT NULL
 );
 
-CREATE TABLE pns (
+CREATE TABLE aliases (
   "het_id" REFERENCES heteronyms("id"),
-  "pn" NOT NULL
+  "alias" NOT NULL,
+  "exact"
 );
 
 CREATE TABLE links (
@@ -231,18 +233,28 @@ INSERT INTO
   heteronyms ("title","from","props")
 VALUES
   (@title,@from,@props)`);
-  const insertPn = db.prepare(`
+  const insertAlias = db.prepare(`
 INSERT INTO
-  pns ("het_id","pn")
+  aliases ("het_id","alias","exact")
 VALUES
-  (?,?)
+  (@het_id,@alias,@exact)
 `);
   EachPT(heteronyms, "Inserting heteronyms into DB: ", (het, i) => {
     insertHet.run(stringifyFields(het));
+    insertAlias.run({
+      // SQLite integer primary key is 1-based
+      het_id: i + 1,
+      alias: het.title,
+      exact: null,
+    });
     if (het.pns) {
       for (let j = 0; j < het.pns.length; j++) {
-        // SQLite integer primary key is 1-based
-        insertPn.run(i + 1, het.pns[j]);
+        insertAlias.run({
+          // SQLite integer primary key is 1-based
+          het_id: i + 1,
+          alias: het.pns[j],
+          exact: 1,
+        });
       }
     }
   });
@@ -307,6 +319,7 @@ ORDER BY b.sc;
 DROP TABLE a;
 DROP TABLE b;
 DROP TABLE c;
+VACUUM;
 `
   );
 }
