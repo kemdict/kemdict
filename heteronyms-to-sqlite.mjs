@@ -246,7 +246,7 @@ VALUES
       // SQLite integer primary key is 1-based
       het_id: i + 1,
       alias: het.title,
-      exact: null,
+      exact: 1,
     });
     if (het.pns) {
       for (let j = 0; j < het.pns.length; j++) {
@@ -254,7 +254,7 @@ VALUES
           // SQLite integer primary key is 1-based
           het_id: i + 1,
           alias: het.pns[j],
-          exact: 1,
+          exact: null,
         });
       }
     }
