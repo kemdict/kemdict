@@ -606,8 +606,14 @@ This is a separate step from shaping."
          #'d:cangjie-abc-to-han)
        (d::hash-rename props "kCangjie" "cangjie")
        (d::hash-rename props "kDefinition" "defs")
+       ;; Purge these currently unused fields until I know what to do
+       ;; with them
        (--each '("char" "ucn" "kRSUnicode"
-                 "kMandarin" "kTotalStrokes")
+                 "kMandarin" "kTotalStrokes"
+                 "kPhonetic"
+                 "kSemanticVariant" "kSimplifiedVariant"
+                 "kSpecializedSemanticVariant" "kTraditionalVariant"
+                 "kAccountingNumeric" "kOtherNumeric" "kPrimaryNumeric")
          (ht-remove! props it)))
       ("hakkadict"
        (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
