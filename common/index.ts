@@ -389,15 +389,11 @@ export class CrossDB {
     const operator = mtch === "exact" ? "=" : "LIKE";
     const hets = (await this.crossDbAll(
       `
-SELECT DISTINCT title, "from", langs.id as lang, props
+SELECT DISTINCT title, "from", lang, props
 FROM heteronyms
-LEFT JOIN dicts ON heteronyms."from" = dicts.id
-LEFT JOIN langs ON dicts.lang = langs.id
-INNER JOIN pns ON pns.het_id = heteronyms.id
+INNER JOIN aliases ON aliases.het_id = heteronyms.id
 WHERE "from" IS NOT NULL
-${tokens
-  .map(() => `AND (title ${operator} ? OR pns.pn ${operator} ?)`)
-  .join("\n")}
+${tokens.map(() => `AND aliases.alias ${operator} ?`).join("\n")}
 ${limit ? `LIMIT ?` : ""}
 `,
       (() => {
@@ -410,7 +406,6 @@ ${limit ? `LIMIT ?` : ""}
             index === 0,
             index === tokenCount - 1
           );
-          arr.push(query);
           arr.push(query);
         });
         if (limit) {
@@ -478,14 +473,13 @@ WHERE "to" IN (${sqlEscape(titles)})`,
     const with_stroke = (await this.crossDbAll(
       `
 SELECT DISTINCT
-heteronyms.title,
-group_concat("from") as dicts,
-cast(json_tree.value as integer) AS 'sc'
+  heteronyms.title,
+  cast(json_tree.value as integer) AS 'sc'
 FROM heteronyms, json_tree(heteronyms.props)
 WHERE length("title") = 1
-AND json_tree.key = 'sc'
+  AND json_tree.key = 'sc'
 GROUP BY title
-HAVING dicts != 'unihan'
+HAVING group_concat("from") != 'unihan'
 ORDER BY 'sc';
 `
     )) as Array<{
@@ -506,10 +500,11 @@ WHERE dicts != 'unihan'`,
     )) as string[];
     const pn = (await this.crossDbAll(
       `
-  SELECT DISTINCT
-    substr(pn, 0, 2) AS 'pnInitial'
-  FROM pns
-  WHERE "pnInitial" IS NOT NULL
+SELECT DISTINCT
+  substr(alias, 0, 2) AS 'pnInitial'
+FROM aliases
+WHERE exact IS NULL -- exact = comes from "title"
+AND "pnInitial" IS NOT NULL
 `,
       [],
       true
