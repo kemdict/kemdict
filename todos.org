@@ -161,6 +161,19 @@ No longer applicable as we don't use moedict-data anymore.
 ** DONE Figure out an icon
 ** DONE [#A] Make copyright information more clear
 ** DONE build mobile version with Expo
+** DONE =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
+
+#+begin_quote
+常用符號一覽表
+
+| 常用符號 | 代表意義                                 | 出現位置             |
+|----------+------------------------------------------+----------------------|
+| ※        | 表成語所取典源尚有疑慮。                 | 「釋義」、「典源」欄 |
+| ＃       | 表成語所取典源與既有成語辭書有所參差     | 「釋義」、「典源」欄 |
+| ◎        | 表成語除主要典源外，另收又見資料         | 「釋義」、「典源」欄 |
+| △        | 表另有可互見參酌之其他成語               | 「釋義」欄           |
+| ■        | 表與主要典源內容不同之參考資料有一筆以上 | 「典源」欄           |
+#+end_quote
 * Adding a dictionary
 - kemdict-data: add code to download the raw data at build time
 - kemdict-data: update process-data.el to include the new dictionary in the intermediate json file
@@ -223,16 +236,3 @@ Chhoetaigi dropdown → Taigi, equivalent zh
 Wiktionary dropdown → zh, en, ja
 
 ** TODO kisaragi-dict: implement eq-jp and eq-en (for changing links to Weblio or English Wiktionary)
-** TODO =dict_idioms=: add the △ ◎ symbols as documented [[https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41][here]]
-
-#+begin_quote
-常用符號一覽表
-
-| 常用符號 | 代表意義                                 | 出現位置             |
-|----------+------------------------------------------+----------------------|
-| ※        | 表成語所取典源尚有疑慮。                 | 「釋義」、「典源」欄 |
-| ＃       | 表成語所取典源與既有成語辭書有所參差     | 「釋義」、「典源」欄 |
-| ◎        | 表成語除主要典源外，另收又見資料         | 「釋義」、「典源」欄 |
-| △        | 表另有可互見參酌之其他成語               | 「釋義」欄           |
-| ■        | 表與主要典源內容不同之參考資料有一筆以上 | 「典源」欄           |
-#+end_quote

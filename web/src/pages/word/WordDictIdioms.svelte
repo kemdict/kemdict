@@ -3,7 +3,30 @@
   import { spc, newline_string_to_ol } from "$src/processing";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
-  function idioms_nuance(str) {
+  function markers(str) {
+    if (typeof str !== "string") return;
+    const alist = [
+      [/([^>])?(※)/g, "所取典源尚有疑慮"],
+      [/([^>])?(＃)/g, "所取典源與既有成語辭書有所參差"],
+      [/([^>])?(◎)/g, "除主要典源外另收又見資料"],
+      [/([^>])?(△)/g, "另有可互見參酌之其他成語"],
+      [/([^>])?(■)/g, "有至少一筆與主要典源內容不同的參考資料"],
+    ];
+    for (const [k, v] of alist) {
+      str = str.replace(
+        k,
+        `$1<a
+title="${v}"
+href="https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41"
+target="_blank"
+rel="noreferrer"
+>$2</a>`
+      );
+    }
+    return str;
+  }
+
+  function nuance(str) {
     /* Sure... */
     return `<table>${str
       .split("\n")
@@ -22,8 +45,8 @@
       .join("")}</table>`;
   }
 
-  function idioms_source(str) {
-    return str
+  function source(str) {
+    return markers(str)
       .split("\n")
       .map((x) =>
         x.replace(/^\*(\d)\*(.*)/, `$2<sup><a href="#sc$1">$1</a></sup>`)
@@ -31,10 +54,10 @@
       .join("");
   }
 
-  function idioms_source_comment(str) {
-    if (str) {
-      return `<ol>
-    ${str
+  function source_comment(str) {
+    if (typeof str !== "string") return;
+    return `<ol>
+    ${markers(str)
       .split("\n")
       .map(
         (d, i) =>
@@ -45,9 +68,6 @@
       )
       .join("")}
 </ol>`;
-    } else {
-      return str;
-    }
   }
 </script>
 
@@ -56,7 +76,7 @@
   {#if het.props.bopomofo}
     <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}
-  <p class="def">{@html het.props.def}</p>
+  <p class="def">{@html markers(het.props.def)}</p>
   {#if het.props.用法語意說明 || het.props.用法使用類別 || het.props.用法例句}
     <h2>用法</h2>
     <p>{het.props.用法語意說明}</p>
@@ -81,19 +101,19 @@
     {#if het.props.辨識異}{het.props.辨識異}{/if}
   </p>
   {#if het.props.辨識例句}
-    {@html idioms_nuance(het.props.辨識例句)}
+    {@html nuance(het.props.辨識例句)}
   {/if}
   {#if het.props.形音辨誤}
     <p>{het.props.形音辨誤}</p>
   {/if}
   {#if het.props.source_name}
     <h2 id="isc">典源</h2>
-    <p>{het.props.source_name}</p>
-    <p>{@html idioms_source(het.props.source_content)}</p>
+    <p>{@html markers(het.props.source_name)}</p>
+    <p>{@html source(het.props.source_content)}</p>
     <h3>注解</h3>
-    <p>{@html idioms_source_comment(het.props.source_comment)}</p>
+    <p>{@html source_comment(het.props.source_comment)}</p>
     {#if het.props.source_reference}
-      <p>{het.props.source_reference}</p>
+      <p>{@html markers(het.props.source_reference)}</p>
     {/if}
   {/if}
   <h2>典故說明</h2>
