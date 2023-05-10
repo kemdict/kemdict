@@ -72,7 +72,14 @@ export async function getHetFromUrl(
     heteronyms.length < 10 &&
     heteronyms.every((x) => x.title === heteronyms[0].title)
   ) {
-    return [false, encodeURI(`/word/${heteronyms[0].title}`)];
+    return [
+      false,
+      encodeURI(
+        heteronyms.length === 1
+          ? `/word/${heteronyms[0].title}?lang=${heteronyms[0].lang}`
+          : `/word/${heteronyms[0].title}`
+      ),
+    ];
   }
   let sortFn: typeof WordSortFns.descend;
   if (sort === "desc") {
