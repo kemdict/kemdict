@@ -697,26 +697,26 @@ information."
   (cond
    ;; For testing on my phone
    ((getenv "ANDROID_DATA")
-    [("dict_idioms" . "ministry-of-education/dict_idioms.json")
-     ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
-                         "moedict-data-twblg/dict-twblg-ext.json"))
-     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-     ("dict_concised" . "ministry-of-education/dict_concised.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")])
+    [("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json")
+     ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
+                                "moedict-data-twblg/dict-twblg-ext.json"))
+     ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+     ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
+     ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")])
    (t
     ;; The order here defines the order they will appear in the word
     ;; pages.
-    [("unihan" . "unihan.json")
-     ("kisaragi_dict" . "kisaragi/kisaragi_dict.json")
-     ("dict_concised" . "ministry-of-education/dict_concised.json")
-     ("dict_revised" . "ministry-of-education/dict_revised.json")
-     ("chhoetaigi_taijittoasutian" . "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-     ("moedict_twblg" . ("moedict-data-twblg/dict-twblg.json"
-                         "moedict-data-twblg/dict-twblg-ext.json"))
-     ("chhoetaigi_itaigi" . "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
-     ("chhoetaigi_taioanpehoekichhoogiku" . "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
-     ("hakkadict" . "ministry-of-education/hakkadict.json")
-     ("dict_idioms" . "ministry-of-education/dict_idioms.json")])))
+    [("unihan" "han" "unihan.json")
+     ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
+     ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
+     ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+     ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+     ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
+                                "moedict-data-twblg/dict-twblg-ext.json"))
+     ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+     ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+     ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
+     ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json")])))
 
 ;; For entries with heteronyms:
 ;;   [{:title "title"
@@ -729,9 +729,10 @@ information."
 ;;     :pns {...}
 ;;     :props ...}])
 ;; Also works for entries that are themselves heteronyms
-(defun d:parse-and-shape (dict files)
+(defun d:parse-and-shape (dict lang files)
   "Return heteronyms in FILES.
 DICT is the dictionary ID to associate with them.
+LANG is the language of DICT.
 Titles are written to `d:titles:look-up-table'."
   (let* ((files (-list files))
          (raw-dict (with-temp-buffer
@@ -787,6 +788,7 @@ Titles are written to `d:titles:look-up-table'."
               (setq title (gethash "poj" orig-het)))
             (puthash "title" title shaped-het)
             (puthash "from" dict shaped-het)
+            (puthash "lang" lang shaped-het)
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
@@ -801,18 +803,17 @@ Titles are written to `d:titles:look-up-table'."
   (setq d:links nil)
   (setq d:titles:look-up-table (ht))
   (let* ((heteronyms nil))
-    (let* ((dictionaries
-            (d::dictionaries))
+    (let* ((dictionaries (d::dictionaries))
            (dict-count (length dictionaries)))
       ;; Step 1
       (cl-loop
-       for (dict . files) being the elements of dictionaries
+       for (dict lang files) being the elements of dictionaries
        using (index i)
        do
        (progn
          (message "Collecting heteronyms and titles from %s (%s/%s)..."
                   (or dict files) (1+ i) dict-count)
-         (setq heteronyms (nconc (d:parse-and-shape dict files)
+         (setq heteronyms (nconc (d:parse-and-shape dict lang files)
                                  heteronyms))
          (garbage-collect))))
     (garbage-collect)

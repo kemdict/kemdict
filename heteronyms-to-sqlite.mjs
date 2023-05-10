@@ -84,13 +84,14 @@ CREATE TABLE heteronyms (
   "id" INTEGER PRIMARY KEY,
   "title" NOT NULL,
   "from" REFERENCES dicts("id"),
+  "lang" REFERENCES langs("id"),
   "props" NOT NULL
 );
 
 CREATE TABLE aliases (
-  "het_id" REFERENCES heteronyms("id"),
+  "het_id" INTEGER REFERENCES heteronyms("id"),
   "alias" NOT NULL,
-  "exact"
+  "exact" INTEGER
 );
 
 CREATE TABLE links (
@@ -230,9 +231,9 @@ VALUES
   const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json")).reverse();
   const insertHet = db.prepare(`
 INSERT INTO
-  heteronyms ("title","from","props")
+  heteronyms ("title","from","lang","props")
 VALUES
-  (@title,@from,@props)`);
+  (@title,@from,@lang,@props)`);
   const insertAlias = db.prepare(`
 INSERT INTO
   aliases ("het_id","alias","exact")
