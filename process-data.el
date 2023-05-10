@@ -73,6 +73,14 @@
     (ucs-normalize-NFKC-region
      (point-min) (point-max))
     (buffer-string)))
+(defun d::ucs-NFKD (str)
+  "Like `ucs-normalize-NFKD-string' but keeps reusing the same temp buffer."
+  (with-current-buffer d::ucs::buffer
+    (erase-buffer)
+    (insert str)
+    (ucs-normalize-NFKD-region
+     (point-min) (point-max))
+    (buffer-string)))
 
 (defun d:radical-id-to-char (radical-id)
   "Return the normalized radical character for RADICAL-ID.
@@ -518,6 +526,28 @@ https://language.moe.gov.tw/result.aspx?classify_sn=&subclassify_sn=447&content_
                            "ˋ"
                          "^"))))
 
+;; (d:pn:input-form "Chit ê mi̍h-kiāⁿ")
+(defun d:pn:input-form (pn)
+  "Normalize PN such that it is searchable with an ASCII keyboard."
+  (cl-block nil
+    (concat
+     (let* ((tmp nil)
+            (seq (d::ucs-NFKD
+                  (s-replace "ⁿ" "nn" pn)))
+            (i 0)
+            (c nil))
+       (while (and seq (< i (length seq)))
+         (setq c (aref seq i))
+         ;; Early return optimization
+         (when (memq (aref char-script-table c)
+                     '(han bopomofo cjk-misc))
+           (cl-return pn))
+         (unless (memq (get-char-code-property c 'general-category)
+                       '(Mn Mc Me))
+           (push c tmp))
+         (cl-incf i))
+       (nreverse tmp)))))
+
 (defun d:process-props (props title dict)
   "Process the heteronym props object PROPS.
 
@@ -792,9 +822,21 @@ Titles are written to `d:titles:look-up-table'."
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
-            (puthash "pns"
-                     (-uniq (d:pn-collect orig-het))
-                     shaped-het)
+            (-when-let (pns (-uniq (d:pn-collect orig-het)))
+              (puthash "pns" pns shaped-het)
+              ;; Input versions.
+              ;; - don't duplicate if equal to original
+              ;; - don't bother for some dictionaries
+              (unless (member dict '("kisaragi_dict"
+                                     "dict_concised"))
+                (puthash "input-pns"
+                         (let (ret)
+                           (dolist (pn pns)
+                             (let ((input-pn (d:pn:input-form pn)))
+                               (unless (equal pn input-pn)
+                                 (push input-pn ret))))
+                           ret)
+                         shaped-het)))
             (push shaped-het heteronyms)
             (puthash title t d:titles:look-up-table)))))
     heteronyms))
@@ -861,7 +903,11 @@ Titles are written to `d:titles:look-up-table'."
                  #'d:links:comma-word-list
                  #'d:links:link-to-word
                  #'d:links:linkify-brackets
-                 #'d:process-props)
+                 #'d:process-props
+                 #'d::ucs-NFC
+                 #'d::ucs-NFKC
+                 #'d::ucs-NFKD
+                 #'d:pn:input-form)
       comp))
   (d:main)
   (kill-emacs))

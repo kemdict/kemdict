@@ -242,20 +242,25 @@ VALUES
 `);
   EachPT(heteronyms, "Inserting heteronyms into DB: ", (het, i) => {
     insertHet.run(stringifyFields(het));
+    // SQLite integer primary key is 1-based
+    const het_id = i + 1;
     insertAlias.run({
-      // SQLite integer primary key is 1-based
-      het_id: i + 1,
+      het_id,
       alias: het.title,
       exact: 1,
     });
-    if (het.pns) {
-      for (let j = 0; j < het.pns.length; j++) {
-        insertAlias.run({
-          // SQLite integer primary key is 1-based
-          het_id: i + 1,
-          alias: het.pns[j],
-          exact: null,
-        });
+    for (const [key, exact] of [
+      ["pns", 1],
+      ["input-pns", null],
+    ]) {
+      if (het[key]) {
+        for (let j = 0; j < het[key].length; j++) {
+          insertAlias.run({
+            het_id,
+            exact,
+            alias: het[key][j],
+          });
+        }
       }
     }
   });
