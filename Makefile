@@ -14,9 +14,9 @@ admin.deploy: entries.db.gz
 build: entries.db
 .PHONY: build
 
-.cask: Cask
-	cask install
-	touch .cask
+.eask: Eask
+	eask install-deps
+	touch .eask
 
 node_modules: package.json
 	pnpm install
@@ -32,8 +32,8 @@ DICT_TARGETS += unihan.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
-heteronyms.json: $(DICT_TARGETS) process-data.el .cask node_modules
-	cask eval "(load \"process-data\")"
+heteronyms.json: $(DICT_TARGETS) process-data.el .eask node_modules
+	eask eval "(load \"process-data\")"
 
 entries.db: heteronyms.json heteronyms-to-sqlite.mjs
 	node heteronyms-to-sqlite.mjs
@@ -45,8 +45,8 @@ entries.db.gz: entries.db
 unihan.json:
 	unihan-etl -F json -d $(abspath unihan.json) -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
 
-kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .cask
-	cask eval "(load \"kisaragi/generate\")"
+kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
+	eask eval "(load \"kisaragi/generate\")"
 
 # I'm picking kip (department of education) for now because
 # 1. I treat it as just a spelling reform

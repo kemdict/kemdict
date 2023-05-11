@@ -1,4 +1,5 @@
 .cask
+.eask
 *.elc
 node_modules
 *.json

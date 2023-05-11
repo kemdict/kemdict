@@ -9,6 +9,7 @@
 (require 's)
 (require 'ol)
 (require 'ht)
+(require 'ucs-normalize)
 (require 'jieba)
 
 (defconst d:abc-han-ht

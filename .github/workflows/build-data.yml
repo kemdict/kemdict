@@ -30,8 +30,9 @@ jobs:
           sudo add-apt-repository ppa:kelleyk/emacs
           sudo apt update
           sudo apt-get install emacs28-nox
-      - name: Set up Cask
-        uses: conao3/setup-cask@master
+      - uses: emacs-eask/setup-eask@master
+        with:
+          version: "snapshot"
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -43,7 +44,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - name: Build data files
         run: |
-          cask
+          eask install-deps
           make entries.db.gz
       - name: Deploy built database
         env:
