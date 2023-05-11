@@ -12,6 +12,13 @@
 (require 'ucs-normalize)
 (require 'jieba)
 
+(defconst d:debug? nil)
+
+(defmacro d::debug (fmt &rest args)
+  "Pass FMT and ARGS to `message' if `d:debug?' is non-nil."
+  (when d:debug?
+    `(message ,fmt ,@args)))
+
 (defconst d:abc-han-ht
   (ht (?a "日") (?b "月") (?c "金") (?d "木") (?e "水") (?f "火")
       (?g "土") (?h "竹") (?i "戈") (?j "十") (?k "大") (?l "中")
@@ -507,10 +514,13 @@ https://language.moe.gov.tw/result.aspx?classify_sn=&subclassify_sn=447&content_
   (cl-block nil
     (concat
      (let* ((tmp nil)
-            (seq (ucs-normalize-NFKD-string
-                  (s-replace "ⁿ" "nn" pn)))
+            (seq (progn
+                   (d::debug "NFKD")
+                   (ucs-normalize-NFKD-string
+                    (s-replace "ⁿ" "nn" pn))))
             (i 0)
             (c nil))
+       (d::debug "Collecting")
        (while (and seq (< i (length seq)))
          (setq c (aref seq i))
          ;; Early return optimization
@@ -755,7 +765,7 @@ Titles are written to `d:titles:look-up-table'."
       (cl-incf i)
       (let ((orig-hets (or (gethash "heteronyms" entry)
                            (vector entry))))
-        ;; (message "%s - applying het_sort" dict)
+        (d::debug "%s - applying het_sort" dict)
         ;; Sort them according to the "het_sort" key, or if that's not
         ;; present, the "id" key.
         ;; TODO: maybe we want IDs in the DB as well
@@ -775,7 +785,7 @@ Titles are written to `d:titles:look-up-table'."
                                    (gethash "id" other))))
                            orig-hets)))
         (seq-doseq (orig-het orig-hets)
-          ;; (message "%s - processing title" dict)
+          (d::debug "%s - processing title" dict)
           (let* ((shaped-het (make-hash-table :test #'equal))
                  ;; title can be empty. We'll read from fallback
                  ;; fields below.
@@ -803,15 +813,18 @@ Titles are written to `d:titles:look-up-table'."
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
-            ;; (message "%s - collecting pns" dict)
+            (d::debug "%s - collecting pns" dict)
             (-when-let (pns (-uniq (d:pn-collect orig-het)))
-              ;; (message "%s - puthash pns" dict)
+              (d::debug "%s - puthash pns" dict)
               (puthash "pns" pns shaped-het)
               ;; Input versions.
               ;; - don't duplicate if equal to original
               ;; - don't bother for some dictionaries
-              (unless (member dict '("kisaragi_dict"
-                                     "dict_concised"))
+              (when (member dict '("moedict_twblg"
+                                   "chhoetaigi_itaigi"
+                                   "chhoetaigi_taioanpehoekichhoogiku"
+                                   "chhoetaigi_taijittoasutian"))
+                (d::debug "%s - input pns" dict)
                 (puthash "input-pns"
                          (let (ret)
                            (dolist (pn pns)
@@ -892,7 +905,11 @@ Titles are written to `d:titles:look-up-table'."
                  #'d:pn-collect
                  #'d:pn:input-form)
       comp))
-  (d:main)
+  ;; We're holding all dictionary data in memory, so if this is too
+  ;; low we'll be GC'ing all the time without being able to free any
+  ;; memory.
+  (let ((gc-cons-threshold 100000000))
+    (d:main))
   (kill-emacs))
 
 ;; Local Variables:
