@@ -53,8 +53,9 @@
 
 (defun d::hash-rename (table from to)
   "Rename the key FROM to TO in TABLE."
-  (ht-set! table to (ht-get table from))
-  (ht-remove! table from))
+  (-when-let (value (ht-get table from))
+    (ht-set! table to value)
+    (ht-remove! table from)))
 
 (defun d::hash-prune (table value)
   "Remove all entries in TABLE that are associated with VALUE."
