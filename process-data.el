@@ -396,7 +396,8 @@ do."
   (let ((title (s-trim title)))
     (unless (equal "" title)
       (->> title
-           (s-replace "'" "’")
+           ;; This was from when titles were filenames.
+           ;; (s-replace "'" "’")
            (s-replace "?" "？")
 
            ;; A "省" in dict_concised is CJK COMPATIBILITY
@@ -696,7 +697,8 @@ This is a separate step from shaping."
     ;; heteronyms.json: 249MiB -> 202MiB
     ;; entries.db:      189MiB -> 152MiB
     (d::hash-prune props "")
-    (d::hash-prune props nil)))
+    (d::hash-prune props nil)
+    (d::hash-prune props :null)))
 
 (defun d::dictionaries ()
   "Return definitions of dictionaries.
@@ -876,12 +878,11 @@ Titles are written to `d:titles:look-up-table'."
     ;; Step 4
     (message "Writing result out to disk...")
     (let ((json-encoding-pretty-print (not noninteractive))
-          ;; This tells `json-encode' to use the same false as
+          ;; This tells `json-encode' to use the same false / null as
           ;; `json-parse-buffer''s default, because there are false
           ;; values from there.
-          ;;
-          ;; I'm using nil as null on the other hand.
-          (json-false :false))
+          (json-false :false)
+          (json-null :null))
       (setq d:links (-uniq d:links))
       (with-temp-file "links.json"
         (insert (json-encode d:links)))
