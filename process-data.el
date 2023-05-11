@@ -57,36 +57,10 @@
              do (remhash k table))
     table))
 
-(defvar d::ucs::buffer (get-buffer-create " process-data" t))
-(defun d::ucs-NFC (str)
-  "Like `ucs-normalize-NFC-string' but keeps reusing the same temp buffer."
-  (with-current-buffer d::ucs::buffer
-    (erase-buffer)
-    (insert str)
-    (ucs-normalize-NFC-region
-     (point-min) (point-max))
-    (buffer-string)))
-(defun d::ucs-NFKC (str)
-  "Like `ucs-normalize-NFKC-string' but keeps reusing the same temp buffer."
-  (with-current-buffer d::ucs::buffer
-    (erase-buffer)
-    (insert str)
-    (ucs-normalize-NFKC-region
-     (point-min) (point-max))
-    (buffer-string)))
-(defun d::ucs-NFKD (str)
-  "Like `ucs-normalize-NFKD-string' but keeps reusing the same temp buffer."
-  (with-current-buffer d::ucs::buffer
-    (erase-buffer)
-    (insert str)
-    (ucs-normalize-NFKD-region
-     (point-min) (point-max))
-    (buffer-string)))
-
 (defun d:radical-id-to-char (radical-id)
   "Return the normalized radical character for RADICAL-ID.
 For example, 1 is 一, 213 is 龜."
-  (d::ucs-NFKC
+  (ucs-normalize-NFKC-string
    (string (+ #x2f00 (1- radical-id)))))
 
 (defun d:latin-only (str)
@@ -392,11 +366,11 @@ instead."
     (setq p (gethash "zh-Hant" p)))
   (if one
       (->> p
-           d::ucs-NFC
+           ucs-normalize-NFC-string
            (s-replace "　" " ")
            s-trim)
     (--> p
-         d::ucs-NFC
+         ucs-normalize-NFC-string
          (s-replace "　" " " it)
          ;; The replacement character, which appears in one entry in
          ;; itaigi.
@@ -533,7 +507,7 @@ https://language.moe.gov.tw/result.aspx?classify_sn=&subclassify_sn=447&content_
   (cl-block nil
     (concat
      (let* ((tmp nil)
-            (seq (d::ucs-NFKD
+            (seq (ucs-normalize-NFKD-string
                   (s-replace "ⁿ" "nn" pn)))
             (i 0)
             (c nil))
@@ -593,14 +567,14 @@ This is a separate step from shaping."
       (lambda (defs)
         (seq-doseq (def defs)
           (ht-update-with! def "quote"
-            #'d::ucs-NFC)
+            #'ucs-normalize-NFC-string)
           (ht-update-with! def "example"
             (lambda (v)
               (cond
                ((stringp v)
-                (d::ucs-NFC v))
+                (ucs-normalize-NFC-string v))
                ((seqp v)
-                (seq-map #'d::ucs-NFC v))
+                (seq-map #'ucs-normalize-NFC-string v))
                (t (error "%s: het.props.definitions.example is neither a string or a sequence"
                          title)))))
           (ht-update-with! def "def"
@@ -760,7 +734,7 @@ information."
 ;;     :pns {...}
 ;;     :props ...}])
 ;; Also works for entries that are themselves heteronyms
-(defun d:parse-and-shape (dict lang files)
+(defun d:parse-and-shape (dict lang files msg)
   "Return heteronyms in FILES.
 DICT is the dictionary ID to associate with them.
 LANG is the language of DICT.
@@ -773,10 +747,15 @@ Titles are written to `d:titles:look-up-table'."
                                 (erase-buffer)
                                 (insert-file-contents f)
                                 (json-parse-buffer)))))
-         (heteronyms nil))
+         (heteronyms nil)
+         (rep (make-progress-reporter msg 0 (length raw-dict)))
+         (i 0))
     (seq-doseq (entry raw-dict)
+      (progress-reporter-update rep i)
+      (cl-incf i)
       (let ((orig-hets (or (gethash "heteronyms" entry)
                            (vector entry))))
+        ;; (message "%s - applying het_sort" dict)
         ;; Sort them according to the "het_sort" key, or if that's not
         ;; present, the "id" key.
         ;; TODO: maybe we want IDs in the DB as well
@@ -796,6 +775,7 @@ Titles are written to `d:titles:look-up-table'."
                                    (gethash "id" other))))
                            orig-hets)))
         (seq-doseq (orig-het orig-hets)
+          ;; (message "%s - processing title" dict)
           (let* ((shaped-het (make-hash-table :test #'equal))
                  ;; title can be empty. We'll read from fallback
                  ;; fields below.
@@ -823,7 +803,9 @@ Titles are written to `d:titles:look-up-table'."
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
+            ;; (message "%s - collecting pns" dict)
             (-when-let (pns (-uniq (d:pn-collect orig-het)))
+              ;; (message "%s - puthash pns" dict)
               (puthash "pns" pns shaped-het)
               ;; Input versions.
               ;; - don't duplicate if equal to original
@@ -854,10 +836,11 @@ Titles are written to `d:titles:look-up-table'."
        using (index i)
        do
        (progn
-         (message "Collecting heteronyms and titles from %s (%s/%s)..."
-                  (or dict files) (1+ i) dict-count)
-         (setq heteronyms (nconc (d:parse-and-shape dict lang files)
-                                 heteronyms))
+         (setq heteronyms
+               (nconc (d:parse-and-shape dict lang files
+                                         (format "Collecting heteronyms and titles from %s (%s/%s)..."
+                                                 (or dict files) (1+ i) dict-count))
+                      heteronyms))
          (garbage-collect))))
     (garbage-collect)
     ;; Step 3
@@ -905,9 +888,8 @@ Titles are written to `d:titles:look-up-table'."
                  #'d:links:link-to-word
                  #'d:links:linkify-brackets
                  #'d:process-props
-                 #'d::ucs-NFC
-                 #'d::ucs-NFKC
-                 #'d::ucs-NFKD
+                 #'d:parse-and-shape
+                 #'d:pn-collect
                  #'d:pn:input-form)
       comp))
   (d:main)
