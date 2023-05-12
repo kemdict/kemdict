@@ -25,6 +25,9 @@
   <h1>{het.title}</h1>
   {#if het.props.def}
     <!-- JSON: {JSON.stringify(het.props.def)} -->
+    {#if het.props.ref}
+      <p>參照 {@html het.props.ref}</p>
+    {/if}
     <p>
       {@html processDef(het.props.def, het.title)}
     </p>
