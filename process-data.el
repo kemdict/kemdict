@@ -546,6 +546,18 @@ This is a separate step from shaping."
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
+    (ht-update-with! props "def"
+      (lambda (str)
+        (->> str
+             (s-replace-regexp
+              (rx (group (not ">"))
+                  (group (+ (any "a-zA-Z'^:ṟéɨʉ"))))
+              (lambda (s)
+                (concat
+                 (match-string 1 s)
+                 (d:links:link-to-word
+                  (match-string 2 s)))))
+             d:links:linkify-keywords)))
     (--each '("definition" "source_comment" "典故說明" "用法例句")
       (ht-update-with! props it
         #'d:links:linkify-keywords))
@@ -734,6 +746,7 @@ information."
      ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
      ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
      ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
+     ;; ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
      ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json")])))
 
 ;; For entries with heteronyms:

@@ -2,6 +2,7 @@ export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",
   hak_TW: "客語",
+  // xsy: "賽夏語",
   han: "漢字",
 };
 
@@ -12,6 +13,12 @@ export const dicts = [
     url: "https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=$1",
     lang: "han",
   },
+  // {
+  //   id: "ilrdf_xsy",
+  //   name: "原住民族語言線上辭典（賽夏語）",
+  //   url: "https://e-dictionary.ilrdf.org.tw/xsy/search.htm",
+  //   lang: "xsy",
+  // },
   {
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",
