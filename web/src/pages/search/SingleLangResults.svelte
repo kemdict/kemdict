@@ -38,7 +38,7 @@
       <svelte:fragment slot="panel">
         <!-- TODO: client side page navigation -->
         <Pages {baseURL} {url} {activePage} {pageCount} />
-        <ul>
+        <ul class="divide-y">
           <WordPreview {heteronyms} />
         </ul>
         <Pages {baseURL} {url} {activePage} {pageCount} />

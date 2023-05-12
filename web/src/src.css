@@ -6,6 +6,11 @@
 @import "@skeletonlabs/skeleton/styles/variants.css";
 @import "fonts.css";
 
+/* Setting borderColor.DEFAULT wouldn't work for dark mode */
+.divide-y {
+  @apply divide-gray-300 dark:divide-stone-600;
+}
+
 @layer base {
   html {
     line-height: 1.6;
