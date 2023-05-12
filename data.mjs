@@ -2,9 +2,43 @@ export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",
   hak_TW: "客語",
-  // xsy: "賽夏語",
   han: "漢字",
+  ais: "撒奇萊雅語",
+  ami: "阿美語",
+  bnn: "布農語",
+  ckv: "噶瑪蘭語",
+  dru: "魯凱語",
+  pwn: "排灣語",
+  pyu: "卑南語",
+  ssf: "邵語",
+  sxr: "拉阿魯哇語",
+  tao: "雅美語",
+  tay: "泰雅語",
+  trv: "太魯閣語",
+  sdq: "賽德克語",
+  tsu: "鄒語",
+  xnb: "卡那卡那富語",
+  xsy: "賽夏語",
 };
+
+const ilrdf_codes = [
+  "ais",
+  "ami",
+  "bnn",
+  "ckv",
+  "dru",
+  "pwn",
+  "pyu",
+  "ssf",
+  "sxr",
+  "tao",
+  "tay",
+  "trv",
+  "sdq",
+  "tsu",
+  "xnb",
+  "xsy",
+];
 
 export const dicts = [
   {
@@ -13,12 +47,12 @@ export const dicts = [
     url: "https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=$1",
     lang: "han",
   },
-  // {
-  //   id: "ilrdf_xsy",
-  //   name: "原住民族語言線上辭典（賽夏語）",
-  //   url: "https://e-dictionary.ilrdf.org.tw/xsy/search.htm",
-  //   lang: "xsy",
-  // },
+  ...ilrdf_codes.map((code) => ({
+    id: `ilrdf_${code}`,
+    name: `原住民族語言線上辭典（${langs[code]}）`,
+    url: `https://e-dictionary.ilrdf.org.tw/${code}/search.htm`,
+    lang: code,
+  })),
   {
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",

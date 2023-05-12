@@ -546,18 +546,6 @@ This is a separate step from shaping."
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
-    (ht-update-with! props "def"
-      (lambda (str)
-        (->> str
-             (s-replace-regexp
-              (rx (group (not ">"))
-                  (group (+ (any "a-zA-Z'^:ṟéɨʉ"))))
-              (lambda (s)
-                (concat
-                 (match-string 1 s)
-                 (d:links:link-to-word
-                  (match-string 2 s)))))
-             d:links:linkify-keywords)))
     (--each '("definition" "source_comment" "典故說明" "用法例句")
       (ht-update-with! props it
         #'d:links:linkify-keywords))
@@ -699,7 +687,22 @@ This is a separate step from shaping."
            ;; dict_idioms definitions that's not
            ;; displayed. Getting rid of it here allows
            ;; shredding them from the database.
-           (s-replace-regexp "<a name.*" "" def)))))
+           (s-replace-regexp "<a name.*" "" def))))
+      ((pred s-prefix? "ilrdf")
+       (ht-update-with! props "ref"
+         #'d:links:link-to-word)
+       (ht-update-with! props "def"
+         (lambda (str)
+           (->> str
+                (s-replace-regexp
+                 (rx (group (not ">"))
+                     (group (+ (any "a-zA-Z'^:ṟéɨʉ-"))))
+                 (lambda (s)
+                   (concat
+                    (match-string 1 s)
+                    (d:links:link-to-word
+                     (match-string 2 s)))))
+                d:links:linkify-keywords)))))
     (d::hash-rename props "non_radical_stroke_count" "nrsc")
     (d::hash-rename props "stroke_count" "sc")
     (d::hash-rename props "definition" "def")
@@ -736,18 +739,36 @@ information."
    (t
     ;; The order here defines the order they will appear in the word
     ;; pages.
-    [("unihan" "han" "unihan.json")
-     ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
-     ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
-     ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
-     ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-     ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
-                                "moedict-data-twblg/dict-twblg-ext.json"))
-     ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
-     ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
-     ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
-     ;; ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
-     ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json")])))
+    (--filter
+     (-all? #'file-exists-p (ensure-list (elt it 2)))
+     '(("unihan" "han" "unihan.json")
+       ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
+       ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
+       ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+       ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+       ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
+                                  "moedict-data-twblg/dict-twblg-ext.json"))
+       ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+       ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+       ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
+       ("ilrdf_ais" "ais" "ilrdf/ais.json")
+       ("ilrdf_ami" "ami" "ilrdf/ami.json")
+       ("ilrdf_bnn" "bnn" "ilrdf/bnn.json")
+       ("ilrdf_ckv" "ckv" "ilrdf/ckv.json")
+       ("ilrdf_dru" "dru" "ilrdf/dru.json")
+       ("ilrdf_pwn" "pwn" "ilrdf/pwn.json")
+       ("ilrdf_pyu" "pyu" "ilrdf/pyu.json")
+       ("ilrdf_ssf" "ssf" "ilrdf/ssf.json")
+       ("ilrdf_sxr" "sxr" "ilrdf/sxr.json")
+       ("ilrdf_tao" "tao" "ilrdf/tao.json")
+       ("ilrdf_tay" "tay" "ilrdf/tay.json")
+       ("ilrdf_trv" "trv" "ilrdf/trv.json")
+       ("ilrdf_sdq" "sdq" "ilrdf/sdq.json")
+       ("ilrdf_tsu" "tsu" "ilrdf/tsu.json")
+       ("ilrdf_xnb" "xnb" "ilrdf/xnb.json")
+       ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
+       ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json"))))))
+
 
 ;; For entries with heteronyms:
 ;;   [{:title "title"
@@ -882,7 +903,8 @@ Titles are written to `d:titles:look-up-table'."
        (when (or (= (1+ i) 1)
                  (= 0 (% (1+ i) 10000))
                  (= (1+ i) total))
-         (message "Processing heteronyms (%s/%s)..." (1+ i) total))
+         (message "Processing heteronyms (%s/%s)..." (1+ i) total)
+         (garbage-collect))
        (ht-update-with! het "props"
          (lambda (props)
            (d:process-props
@@ -898,6 +920,7 @@ Titles are written to `d:titles:look-up-table'."
           (json-false :false)
           (json-null :null))
       (setq d:links (-uniq d:links))
+      ;; TODO: we can probably just make a CSV instead.
       (with-temp-file "links.json"
         (insert (json-encode d:links)))
       (with-temp-file "heteronyms.json"
