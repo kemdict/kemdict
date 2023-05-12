@@ -10,18 +10,12 @@
   import WordMoedictish from "./WordMoedictish.svelte";
   import WordUnihan from "./WordUnihan.svelte";
 
-  import { format, langs } from "common";
+  import { format } from "common";
 
   import type { Dict, Heteronym } from "common";
 
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
-
-  let addedLangIds: string[] = ["han"];
-  function markLang(lang: string) {
-    addedLangIds.push(lang);
-    return lang;
-  }
 </script>
 
 {#each groupedHets as [dict, hets]}
