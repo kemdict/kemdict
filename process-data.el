@@ -161,7 +161,9 @@ this:
       ;; HACK: some phrases contain a period. Treat would-be
       ;; references to it without a period as actual references.
       ((period nil))
-    (if (or (equal target d:links:from)
+    (if (or (not target)
+            (eq target :null)
+            (equal target d:links:from)
             ;; This is /way/ faster than using `member' to test a list.
             (not (or (gethash target d:titles:look-up-table)
                      (and (gethash (concat target "。") d:titles:look-up-table)
@@ -688,7 +690,7 @@ This is a separate step from shaping."
            ;; displayed. Getting rid of it here allows
            ;; shredding them from the database.
            (s-replace-regexp "<a name.*" "" def))))
-      ((pred s-prefix? "ilrdf")
+      ((pred (s-prefix? "ilrdf"))
        (ht-update-with! props "ref"
          #'d:links:link-to-word)
        (ht-update-with! props "def"
