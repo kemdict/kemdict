@@ -23,7 +23,12 @@
 </script>
 
 {#each heteronyms as het}
-  <h1>{het.title}</h1>
+  <div class="flex w-full items-center">
+    <h1>{het.title}</h1>
+    {#if typeof het.props.freq === "number"}
+      <span class="text-xs text-slate-500">{"★".repeat(het.props.freq)}</span>
+    {/if}
+  </div>
   {#if het.props.def}
     <!-- JSON: {JSON.stringify(het.props.def)} -->
     {#if het.props.ref}
