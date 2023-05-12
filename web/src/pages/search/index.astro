@@ -20,12 +20,12 @@ let currentLang: string =
   (presentLangs[0] && presentLangs[0][0]) ||
   "zh_TW";
 
-import WordPreview from "$src/components/WordPreview.svelte";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
+import WordPreview from "$src/components/WordPreview.svelte";
+import ListLink from "$src/components/ListLink.svelte";
 
 import Results from "./Results.svelte";
-import Abb from "./Abb.svelte";
 
 const title = getSearchTitle(mtch, query);
 const titleMarkup = getSearchTitle(mtch, query, true);
@@ -38,7 +38,10 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   showMatchTypes={true}
 >
   <Fragment slot="head">
-    <meta property="og:image" content={`https://kemdict.com/og-image?title=${title}`} />
+    <meta
+      property="og:image"
+      content={`https://kemdict.com/og-image?title=${title}`}
+    />
     <meta
       name="description"
       content={`在所有收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
@@ -55,13 +58,35 @@ const titleMarkup = getSearchTitle(mtch, query, true);
     ) : (
       <>
         <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
-        {presentLangs.map((lang) => (
-          <Abb
-            lang={lang}
-            heteronyms={heteronyms}
-            currentParams={url.searchParams}
-          />
-        ))}
+        <div class="">
+          {presentLangs.map((lang) => {
+            const previewCount = 5;
+            const applicableHeteronyms = heteronyms.filter(
+              (het) => het.lang === lang[0]
+            );
+            return (
+              <div class="">
+                <h1 class="font-bold">
+                  {lang[1]} ({applicableHeteronyms.length})
+                </h1>
+                <ul>
+                  <WordPreview
+                    heteronyms={applicableHeteronyms.slice(0, previewCount)}
+                  />
+                  {applicableHeteronyms.length > previewCount && (
+                    <ListLink
+                      href={`/search/${lang[0]}?${url.searchParams.toString()}`}
+                    >
+                      <div class="text-center" slot="heading">
+                        共 {applicableHeteronyms.length} 項結果
+                      </div>
+                    </ListLink>
+                  )}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </>
     )
   }
