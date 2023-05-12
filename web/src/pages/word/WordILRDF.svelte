@@ -2,15 +2,17 @@
   import type { Heteronym } from "common";
   export let lang: string;
   export let heteronyms: Heteronym[] = [];
-  function processDef(str: string) {
+  function processDef(str: string, title: string) {
     let x = "";
     x += "<ol>";
-    let items = str.split(/\d\.[ \n]/g);
+    let items = str.replace(/\.\.\./g, "…").split(/\d\.[ \n]/g);
     x += items
       .map((x) => x.replace(/([.。?？])/g, "$1<br>"))
       .map((x) => (x.length > 0 ? `<li>${x}</li>` : ""))
       .join("")
-      .replace(/;/g, "；");
+      .replace(/;/g, "；")
+      .replace(/a href="(\/word\/.*?)"/g, `a href="$1?lang=${lang}"`)
+      .replace(RegExp(`\\b(${title})\\b`, "ig"), `<b>$1</b>`);
     x += "</ol>";
     return x;
   }
@@ -24,7 +26,7 @@
   {#if het.props.def}
     <!-- JSON: {JSON.stringify(het.props.def)} -->
     <p>
-      {@html processDef(het.props.def)}
+      {@html processDef(het.props.def, het.title)}
     </p>
   {/if}
   {#if het.props.note}

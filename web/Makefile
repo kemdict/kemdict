@@ -4,10 +4,10 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro) common
 
 common: ../common
-	cd ../common && make dist
+	cd ../common && $(MAKE) dist
 
 entries.db: ../dicts
-	cd ../dicts && make entries.db
+	cd ../dicts && $(MAKE) entries.db
 	([ -n "$$ANDROID_DATA" ] && cp ../dicts/entries.db "$@") || ln -f -T ../dicts/entries.db "$@"
 
 .PHONY: dist
@@ -18,7 +18,7 @@ dist: $(DEPS)
 	find server -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 
 public/l: ../dicts
-	cd ../dicts && make ministry-of-education/package.json
+	cd ../dicts && $(MAKE) ministry-of-education/package.json
 	mkdir -p public/l/
 	cp ../dicts/ministry-of-education/license/* public/l/
 
@@ -33,7 +33,7 @@ build-with-data: dist entries.db
 build-no-data: dist
 
 preview: $(DEPS)
-	make dist
+	$(MAKE) dist
 	cd dist && bash start
 
 # Currently this will succeed with a go fatal error at the end.
