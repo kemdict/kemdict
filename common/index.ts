@@ -1,6 +1,12 @@
 import { uniq, escapeRegExp } from "lodash-es";
 import { escape as sqlEscape } from "sqlstring";
 
+// sqlstring's escapes single quotes with a backslash, but SQLite
+// expects it to be doubled instead.
+function escape(thing: any) {
+  return sqlEscape(thing).replace("\\'", "''");
+}
+
 export const site = {
   oneLineDesc: "Kemdict 是一個免費且無廣告的辭典搜尋服務。",
   title: "Kemdict",
@@ -357,7 +363,7 @@ ${limit ? `LIMIT ?` : ""}
     return (await this.crossDbAll(
       `
 SELECT DISTINCT "from" FROM links
-WHERE "to" IN (${sqlEscape(titles)})`,
+WHERE "to" IN (${escape(titles)})`,
       [],
       true
     )) as string[];

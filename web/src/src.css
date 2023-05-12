@@ -173,7 +173,7 @@
       @apply font-bold;
     }
     a {
-      @apply link;
+      @apply link underline;
     }
     h1 {
       @apply mt-10 text-2xl first:mt-4;
