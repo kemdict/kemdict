@@ -1,5 +1,5 @@
 import { chunk, sortBy } from "lodash-es";
-import { groupByProp, WordSortFns, parseQueryToTokens, CrossDB } from "common";
+import { groupByProp, parseQueryToTokens, CrossDB } from "common";
 import type { Heteronym, LangId, Mtch } from "common";
 
 export async function readDB() {
@@ -52,7 +52,7 @@ export async function getHetFromUrl(
 > {
   const query: string | undefined = url.searchParams.get("q")?.trim();
   const mtch: Mtch = url.searchParams.get("m") || "prefix";
-  const sort: string = url.searchParams.get("s") || "asc";
+  const sort: string = url.searchParams.get("s") || "desc";
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
@@ -81,13 +81,22 @@ export async function getHetFromUrl(
       ),
     ];
   }
-  let sortFn: typeof WordSortFns.descend;
   if (sort === "desc") {
-    sortFn = WordSortFns.descend;
+    // Negative -> a comes first
+    // Positive -> b comes first
+    // 0 -> keep
+    heteronyms.sort((a: Heteronym, b: Heteronym) => {
+      if (a.exact && a.title === query) return -1;
+      if (b.exact && b.title === query) return 1;
+      return a.title < b.title ? -1 : 1;
+    });
   } else {
-    sortFn = WordSortFns.ascend;
+    heteronyms.sort((a: Heteronym, b: Heteronym) => {
+      if (a.exact && a.title === query) return -1;
+      if (b.exact && b.title === query) return 1;
+      return a.title > b.title ? -1 : 1;
+    });
   }
-  heteronyms.sort(sortFn);
   return [
     true,
     { heteronyms, mtch, query, langSet: presentLangSet, langCountObj },

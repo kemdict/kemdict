@@ -43,24 +43,6 @@ function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
 }
 export const dictsObj = dictsToObj(dicts);
 
-export const WordSortFns = {
-  // These return numbers because that's what Array.sort wants.
-  ascend: (a: Heteronym, b: Heteronym): 1 | -1 => {
-    if (a.title > b.title) {
-      return 1;
-    } else {
-      return -1;
-    }
-  },
-  descend: (a: Heteronym, b: Heteronym): 1 | -1 => {
-    if (a.title < b.title) {
-      return 1;
-    } else {
-      return -1;
-    }
-  },
-};
-
 /**
  * Return a new array which is `arr` whose objects are grouped by `property`.
  *
