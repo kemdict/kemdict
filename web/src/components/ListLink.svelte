@@ -12,9 +12,12 @@
     )}
     {href}
   >
-    <h2 class="link font-bold hover:no-underline">
-      <slot name="heading" />
-    </h2>
+    <div class="relative">
+      <h2 class="link font-bold hover:no-underline">
+        <slot name="heading" />
+      </h2>
+      <slot name="afterHeading" />
+    </div>
     {#if $$slots.body}
       <p class="truncate text-gray-500 dark:text-stone-300">
         <slot name="body" />

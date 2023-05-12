@@ -72,6 +72,7 @@ const titleMarkup = getSearchTitle(mtch, query, true);
                 <ul class="divide-y divide-gray-300">
                   <WordPreview
                     heteronyms={applicableHeteronyms.slice(0, previewCount)}
+                    searchQuery={query}
                   />
                   {applicableHeteronyms.length > previewCount && (
                     <ListLink

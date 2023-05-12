@@ -17,6 +17,7 @@ export interface Heteronym {
   from: string | undefined;
   lang: string;
   props: any;
+  exact?: boolean;
 }
 
 export type DictId = string;
@@ -322,7 +323,7 @@ export class CrossDB {
     const operator = mtch === "exact" ? "=" : "LIKE";
     const hets = (await this.crossDbAll(
       `
-SELECT DISTINCT title, "from", lang, props
+SELECT DISTINCT title, "from", lang, props, aliases.exact as exact
 FROM heteronyms
 INNER JOIN aliases ON aliases.het_id = heteronyms.id
 WHERE "from" IS NOT NULL

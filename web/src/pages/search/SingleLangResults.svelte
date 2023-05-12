@@ -9,6 +9,7 @@
   export let heteronyms: Heteronym[] = [];
   export let langId: string;
   export let currentParamsString: string;
+  export let searchQuery: string;
 
   import type { Heteronym, LangId } from "common";
   import { Tab, TabGroup } from "@skeletonlabs/skeleton";
@@ -39,7 +40,7 @@
         <!-- TODO: client side page navigation -->
         <Pages {baseURL} {url} {activePage} {pageCount} />
         <ul class="divide-y">
-          <WordPreview {heteronyms} />
+          <WordPreview {heteronyms} {searchQuery} />
         </ul>
         <Pages {baseURL} {url} {activePage} {pageCount} />
       </svelte:fragment>

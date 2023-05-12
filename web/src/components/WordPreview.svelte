@@ -2,7 +2,9 @@
   import ListLink from "./ListLink.svelte";
   import { spc } from "$src/processing";
   import type { Heteronym } from "common";
+  import clsx from "clsx";
   export let heteronyms: Heteronym[];
+  export let searchQuery: string;
   // FIXME: for Hakkadict, it's questionable for me to pick one
   // dialect out of the six provided.
   const pron_keys = [
@@ -37,6 +39,20 @@
   <ListLink href="/word/{het.title}?lang={het.lang}#{het.from}">
     <svelte:fragment slot="heading">
       {het.title}{processPn(het)}
+    </svelte:fragment>
+    <svelte:fragment slot="afterHeading">
+      {#if het.exact && searchQuery && het.title === searchQuery}
+        <div
+          class={clsx(
+            "absolute -top-2 right-2 inline-block",
+            "bg-gradient-to-tl from-purple-500 to-indigo-500",
+            "text-white",
+            "rounded px-2 py-1 text-sm shadow-lg"
+          )}
+        >
+          完全相符
+        </div>
+      {/if}
     </svelte:fragment>
     <svelte:fragment slot="body">
       {processPreview(
