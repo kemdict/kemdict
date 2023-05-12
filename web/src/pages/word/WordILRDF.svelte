@@ -11,6 +11,7 @@
       .map((x) => (x.length > 0 ? `<li>${x}</li>` : ""))
       .join("")
       .replace(/;/g, "；")
+      .replace(/没/g, "沒") // typo (IMO)
       .replace(/a href="(\/word\/.*?)"/g, `a href="$1?lang=${lang}"`)
       .replace(RegExp(`\\b(${title})\\b`, "ig"), `<b>$1</b>`);
     x += "</ol>";
