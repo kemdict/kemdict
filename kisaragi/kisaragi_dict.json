@@ -1,5 +1,65 @@
 [
   {
+    "title": "炎上",
+    "added": 1684700463.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄢˊ ㄕㄤˋ",
+        "definitions": [
+          {
+            "def": "因言行被視為不當而造成極大的爭議與批評。日語借詞。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "公審",
+    "added": 1684700347.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄥ ㄕㄣˇ",
+        "definitions": [
+          {
+            "def": "由群眾進行如同審判般的批評。如：「他肇事逃逸被人錄下來在網路上公審」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "接機",
+    "added": 1684700263.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄝ ㄐㄧ",
+        "definitions": [
+          {
+            "def": "到[[機場]]迎接即將搭飛機抵達的人。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "訪團",
+    "added": 1684700168.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄤˇ ㄊㄨㄢˊ",
+        "definitions": [
+          {
+            "def": "一國派至另一國進行[[訪問]]的團體。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "猴子",
     "added": 1683065248.0,
     "heteronyms": [
