@@ -3,19 +3,19 @@
   export let lang: string;
   export let heteronyms: Heteronym[] = [];
   function processDef(str: string, title: string) {
-    let x = "";
-    x += "<ol>";
+    let buf = "";
+    buf += "<ol>";
     let items = str.replace(/\.\.\./g, "…").split(/\d\.[ \n]/g);
-    x += items
+    buf += items
       .map((x) => x.replace(/([.。?？])/g, "$1<br>"))
       .map((x) => (x.length > 0 ? `<li>${x}</li>` : ""))
       .join("")
       .replace(/;/g, "；")
       .replace(/没/g, "沒") // typo (IMO)
       .replace(/a href="(\/word\/.*?)"/g, `a href="$1?lang=${lang}"`)
-      .replace(RegExp(`\\b(${title})\\b`, "ig"), `<b>$1</b>`);
-    x += "</ol>";
-    return x;
+      .replace(RegExp(`([ .])(${title})([ .])`, "ig"), `$1<b>$2</b>$3`);
+    buf += "</ol>";
+    return buf;
   }
   function processNote(str: string) {
     return str.replace(/(\d)\. /g, "<br>$1. ");
