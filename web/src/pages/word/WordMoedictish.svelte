@@ -24,7 +24,7 @@
 
   function process_def_kisaragi(def) {
     if (def) {
-      def = def.replace(/\n/g, "<br/>");
+      def = def.replace(/([^>])\n+/g, "$1<br/>");
     } else {
       def = "";
     }
@@ -53,15 +53,17 @@
           <li>
             <p class="def">
               {@html process_def_kisaragi(def.def)}
-              {#if def.example}
+            </p>
+            {#if def.example}
+              <p>
                 {def.example}
-              {/if}
-            </p>
-            <p>
-              {#if def.etymology}
+              </p>
+            {/if}
+            {#if def.etymology}
+              <p>
                 {@html process_def_kisaragi(def.etymology)}
-              {/if}
-            </p>
+              </p>
+            {/if}
             {#if def.quote}
               {#each def.quote as quote}
                 <p>{quote}</p>

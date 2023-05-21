@@ -42,7 +42,7 @@
       <div>
         <button
           type="button"
-          class="btn variant-filled h-full w-[10ch]"
+          class="btn variant-filled h-full w-[10ch] text-sm"
           use:popup={{
             event: "click",
             target: "combo",
@@ -71,7 +71,7 @@
           class="text-input w-full"
           value={initialInput}
         />
-        <div class="absolute right-2 top-2">
+        <div class="absolute right-2 top-[25%]">
           <kbd>Ctrl+K</kbd>
         </div>
       </div>

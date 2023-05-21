@@ -6,7 +6,7 @@
 <li>
   <a
     class={clsx(
-      "unstyled block rounded transition",
+      "block rounded transition",
       "hover:bg-surface-100 dark:hover:bg-stone-800",
       "-mx-1 my-2 p-1"
     )}

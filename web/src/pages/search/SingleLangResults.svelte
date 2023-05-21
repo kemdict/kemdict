@@ -21,17 +21,14 @@
   <div id="tabs">
     <TabGroup>
       <Tab group={langId} name="all" value="all" padding="">
-        <a
-          class="unstyled block px-4 py-2"
-          href="/search/?{currentParamsString}">所有辭典</a
+        <a class="block px-4 py-2" href="/search/?{currentParamsString}"
+          >所有辭典</a
         >
       </Tab>
       {#each langGroups as [id, name]}
         <!-- We pass in the current tab just to get it to highlight the current tab correctly. Because we're using a separate page for each tab. -->
         <Tab group={langId} name={id} value={id} padding="">
-          <a
-            class="unstyled block px-4 py-2"
-            href="/search/{id}?{currentParamsString}"
+          <a class="block px-4 py-2" href="/search/{id}?{currentParamsString}"
             >{name}{#if langCountObj[id] > 1} ({langCountObj[id]}){/if}</a
           >
         </Tab>

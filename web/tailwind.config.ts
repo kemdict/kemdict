@@ -69,5 +69,8 @@ export default {
       },
     },
   },
-  plugins: [...require("@skeletonlabs/skeleton/tailwind/skeleton.cjs")()],
+  plugins: [
+    require("@tailwindcss/typography"),
+    ...require("@skeletonlabs/skeleton/tailwind/skeleton.cjs")(),
+  ],
 } satisfies Config;

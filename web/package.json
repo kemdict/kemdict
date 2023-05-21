@@ -32,6 +32,7 @@
     "@floating-ui/dom": "^1.2.8",
     "@size-limit/file": "^8.2.4",
     "@skeletonlabs/skeleton": "^1.5.1",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/better-sqlite3": "^7.6.4",
     "@types/lodash-es": "^4.17.7",
     "@types/sqlstring": "^2.3.0",

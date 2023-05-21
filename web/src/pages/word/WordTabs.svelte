@@ -20,7 +20,7 @@
   {#each presentLangs as langId}
     <Tab group={requestedLang} name={langId} value={langId}>
       <a
-        class="unstyled block px-4 py-2"
+        class="block px-4 py-2"
         href="/word/{title}{paramsToString(currentParams, langId)}"
         >{langs[langId]}</a
       >
