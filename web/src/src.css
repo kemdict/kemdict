@@ -1,9 +1,9 @@
-@import "@skeletonlabs/skeleton/styles/tailwind.css";
-@import "@skeletonlabs/skeleton/styles/core.css";
+@import "@skeletonlabs/skeleton/styles/partials/tailwind.css";
+@import "@skeletonlabs/skeleton/styles/partials/core.css";
 /* @import "@skeletonlabs/skeleton/styles/typography.css"; */
 @import "typography.css";
-@import "@skeletonlabs/skeleton/styles/elements.css";
-@import "@skeletonlabs/skeleton/styles/variants.css";
+@import "@skeletonlabs/skeleton/styles/partials/elements.css";
+@import "@skeletonlabs/skeleton/styles/partials/variants.css";
 @import "fonts.css";
 
 /* Setting borderColor.DEFAULT wouldn't work for dark mode */
