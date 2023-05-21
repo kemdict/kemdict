@@ -112,7 +112,7 @@
         "pronunciation": "ê",
         "definitions": [
           {
-            "def": "台語「[[的#nan_TW][的]]」的通假字。"
+            "def": "台語「[[的?lang=nan_TW][的]]」的通假字。"
           }
         ]
       },
@@ -120,7 +120,7 @@
         "pronunciation": "ē",
         "definitions": [
           {
-            "def": "台語「[[會#nan_TW][會]]」的通假字。"
+            "def": "台語「[[會?lang=nan_TW][會]]」的通假字。"
           }
         ]
       }
@@ -2318,7 +2318,7 @@
         "pronunciation": "ㄅㄟˇ ㄑㄧ",
         "definitions": [
           {
-            "def": "同「白痴」。台語「[[白痴#nan_TW][白痴]]」的通假字。"
+            "def": "同「白痴」。台語「[[白痴?lang=nan_TW][白痴]]」的通假字。"
           }
         ]
       }
@@ -2376,7 +2376,7 @@
         "pronunciation": "ㄏㄞ / /haɪ/",
         "definitions": [
           {
-            "def": "精神很好的樣子。同「[[嗨#kisaragi_dict][嗨]]」。",
+            "def": "精神很好的樣子。同「[[嗨?lang=zh_TW#kisaragi_dict][嗨]]」。",
             "type": "形"
           }
         ]
@@ -2569,7 +2569,7 @@
         "pronunciation": "ㄍㄧㄥ",
         "definitions": [
           {
-            "def": "硬撐。挺住。逞強。來自台語「[[弓#nan_TW][弓]]」。",
+            "def": "硬撐。挺住。逞強。來自台語「[[弓?lang=nan_TW][弓]]」。",
             "type": "動"
           }
         ]
@@ -2584,7 +2584,7 @@
         "pronunciation": "ㄐㄧㄡ",
         "definitions": [
           {
-            "def": "邀約。來自台語「[[招#nan_TW][招]]」。如：「吃這麼好，怎麼都不揪？」",
+            "def": "邀約。來自台語「[[招?lang=nan_TW][招]]」。如：「吃這麼好，怎麼都不揪？」",
             "type": "動"
           }
         ]
@@ -2689,7 +2689,7 @@
         "pronunciation": "ㄙㄨㄟ",
         "definitions": [
           {
-            "def": "運氣不好。來自台語「[[衰#nan_TW][衰]]」。",
+            "def": "運氣不好。來自台語「[[衰?lang=nan_TW][衰]]」。",
             "type": "形"
           }
         ]
@@ -3211,7 +3211,7 @@
         "pronunciation": "tsiok kám-sim",
         "definitions": [
           {
-            "def": "非常感動。台語「[[足#nan_TW][足]][[感心#nan_TW][感心]]」的借詞。"
+            "def": "非常感動。台語「[[足?lang=nan_TW][足]][[感心?lang=nan_TW][感心]]」的借詞。"
           }
         ]
       }
@@ -3342,7 +3342,7 @@
         "pronunciation": "tòng-suán",
         "definitions": [
           {
-            "def": "當選。一般用來鼓勵或祝福[[候選人]]當選。為台語「[[當選#nan_TW][當選]]」之[[通假字]]。",
+            "def": "當選。一般用來鼓勵或祝福[[候選人]]當選。為台語「[[當選?lang=nan_TW][當選]]」之通假字。",
             "type": "動"
           }
         ]
