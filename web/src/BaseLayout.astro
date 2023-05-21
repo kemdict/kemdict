@@ -13,6 +13,20 @@ const { title } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
 ---
 
+<!-- Yes, this works, actually. -->
+<script>
+  import {
+    computePosition,
+    autoUpdate,
+    offset,
+    shift,
+    flip,
+    arrow,
+  } from "@floating-ui/dom";
+  import { storePopup } from "@skeletonlabs/skeleton";
+  storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+</script>
+
 <html lang="zh-TW">
   <head>
     <meta charset="utf-8" />

@@ -77,6 +77,9 @@ importers:
       '@astrojs/svelte':
         specifier: ^2.2.0
         version: 2.2.0(astro@2.5.1)(svelte@3.59.1)(typescript@4.9.5)(vite@4.3.8)
+      '@floating-ui/dom':
+        specifier: ^1.2.8
+        version: 1.2.8
       '@size-limit/file':
         specifier: ^8.2.4
         version: 8.2.4(size-limit@8.2.4)
@@ -2193,6 +2196,16 @@ packages:
   /@eslint/js@8.41.0:
     resolution: {integrity: sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@floating-ui/core@1.2.6:
+    resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
+    dev: true
+
+  /@floating-ui/dom@1.2.8:
+    resolution: {integrity: sha512-XLwhYV90MxiHDq6S0rzFZj00fnDM+A1R9jhSioZoMsa7G0Q0i+Q4x40ajR8FHSdYDE1bgjG45mIWe6jtv9UPmg==}
+    dependencies:
+      '@floating-ui/core': 1.2.6
     dev: true
 
   /@humanwhocodes/config-array@0.11.8:

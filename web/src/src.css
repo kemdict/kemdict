@@ -220,8 +220,14 @@
     @apply border;
     @apply border-gray-400 bg-gray-200 dark:border-stone-700;
   }
-  .btn2 {
-    @apply btnColor btnBorder rounded-md;
+  .k-btn {
+    @apply rounded-md p-1 px-2 text-sm font-bold transition;
+    @apply btnColor btnBorder;
+  }
+  .k-hlbtn {
+    @apply rounded-md p-1 px-2 text-sm font-bold transition;
+    @apply bg-indigo-500 text-indigo-50 hover:bg-indigo-600;
+    @apply dark:bg-indigo-500 dark:hover:bg-indigo-400;
   }
   .link {
     @apply fade text-primary-700 dark:text-primary-500;
