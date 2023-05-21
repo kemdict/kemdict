@@ -16,21 +16,21 @@
 <div class="my-2 space-y-2">
   {#each heteronyms as het}
     <div>
-      <p>
+      <div class="my-0">
         <span>漢字：</span><Out
           after={false}
           title="在 GlyphWiki 上查看"
           href="https://glyphwiki.org/wiki/u{asHex(het.title)}">{het.title}</Out
         >
-      </p>
+      </div>
       {#each keys as { key, name }}
         {#if het.props[key]}
-          <p><span>{name}：</span>{het.props[key]}</p>
+          <div class="my-0"><span>{name}：</span>{het.props[key]}</div>
         {/if}
       {/each}
-      <p>
+      <div class="my-0">
         <span>筆畫：</span>共{het.props.sc}畫，部首外共{het.props.nrsc}畫
-      </p>
+      </div>
       {#if het.props?.defs?.length == 1}
         <div><span>定義：</span>{het.props.defs[0]}</div>
       {:else if het.props?.defs?.length > 1}

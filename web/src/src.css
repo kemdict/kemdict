@@ -166,7 +166,7 @@
       @apply font-bold;
     }
     a {
-      @apply link underline;
+      @apply link;
     }
     h1 {
       @apply mt-10 text-2xl first:mt-4;
