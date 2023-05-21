@@ -1,17 +1,28 @@
+import type { APIContext } from "astro";
 import { readFileSync, existsSync } from "node:fs";
 import satori from "satori";
 import sharp from "sharp";
 
-const fontPath = [`${process.cwd()}/public`, `${process.cwd()}/client`].find(
-  (f) => existsSync(f)
-);
-const openHuninn = readFileSync(`${fontPath}/jf-openhuninn-1.1.ttf`);
-const SourceSans = readFileSync(`${fontPath}/SourceSans3-Regular.ttf`);
-const SourceSansBold = readFileSync(`${fontPath}/SourceSans3-Bold.ttf`);
+/**
+ * Find the file path for fontFileName.
+ */
+function findFont(fontFileName: string): string | undefined {
+  return [
+    `${process.cwd()}/server`, // during development
+    `${process.cwd()}/public`, // during development
+    process.cwd(), // when deployed, running from dist/
+    `${process.cwd()}/client`, // during development
+  ]
+    .map((d) => `${d}/${fontFileName}`)
+    .find((f) => existsSync(f));
+}
+const openHuninn = readFileSync(findFont("jf-openhuninn-1.1.ttf"));
+const SourceSans = readFileSync(findFont("SourceSans3-Regular.ttf"));
+const SourceSansBold = readFileSync(findFont("SourceSans3-Bold.ttf"));
 
 const makeElemFunc =
-  (elem) =>
-  (props, ...children) => {
+  (elem: string) =>
+  (props: any, ...children) => {
     if (typeof props === "string") {
       props = { tw: props };
     }
@@ -23,7 +34,7 @@ const img = makeElemFunc("img");
 
 // <img class="rounded-xl"
 //      src="" width=75 height=75>
-export async function get({ request }) {
+export async function get({ request }: APIContext) {
   const encoded = new URL(request.url).searchParams.get("title");
   const title = decodeURI(encoded);
   const svg = await satori(
