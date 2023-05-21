@@ -9,10 +9,12 @@ import sitemap from "@astrojs/sitemap";
 // TODO: icons with https://github.com/antfu/unplugin-icons
 
 const baseURL = "https://kemdict.com";
+const prod = process.env.NODE_ENV !== "development";
 
 import legacy from "@vitejs/plugin-legacy";
 
 export default defineConfig({
+  compressHTML: prod,
   site: baseURL,
   integrations: [
     svelte(),
@@ -39,9 +41,7 @@ export default defineConfig({
     clearScreen: false,
     envPrefix: "KEMDICT_",
     ssr: {
-      noExternal: [
-        ...(process.env.NODE_ENV !== "development" ? ["sqlstring"] : []),
-      ],
+      noExternal: [...(prod ? ["sqlstring"] : [])],
     },
     resolve: {
       alias: [
