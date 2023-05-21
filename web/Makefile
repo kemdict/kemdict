@@ -16,6 +16,7 @@ dist: $(DEPS)
 	cp package.json dist/
 	touch dist/pnpm-workspace.yaml # to mark it as a new root
 	find server -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
+	npx size-limit
 
 public/l: ../dicts
 	cd ../dicts && $(MAKE) ministry-of-education/package.json
