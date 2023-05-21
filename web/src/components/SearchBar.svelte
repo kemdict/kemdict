@@ -5,7 +5,6 @@
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
   export let highlightBtn = false;
-  // export let currentLang = "zh_TW";
 
   let currentMtch = initialMatchSelection || "prefix";
   const matchTypes = new Map(

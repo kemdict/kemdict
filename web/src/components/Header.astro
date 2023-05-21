@@ -3,16 +3,10 @@ export interface Props {
   search?: boolean;
   initialInput?: string;
   initialMatchSelection?: string;
-  showMatchTypes?: boolean;
   submitSuffix?: string;
 }
-const {
-  search,
-  initialInput,
-  initialMatchSelection,
-  showMatchTypes,
-  submitSuffix,
-} = Astro.props;
+const { search, initialInput, initialMatchSelection, submitSuffix } =
+  Astro.props;
 
 import DarkModeToggle from "./DarkModeToggle.svelte";
 import SearchBar from "./SearchBar.svelte";
@@ -33,7 +27,6 @@ import SearchBar from "./SearchBar.svelte";
       <SearchBar
         initialInput={initialInput}
         initialMatchSelection={initialMatchSelection}
-        showMatchTypes={showMatchTypes}
         submitSuffix={submitSuffix}
         client:load
       />
