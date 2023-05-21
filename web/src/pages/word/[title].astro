@@ -74,6 +74,7 @@ if (requestedLang === false) {
       <div class="">
         {/* FIXME: make it easier to scroll */}
         <WordTabs
+          client:load
           title={title}
           presentLangs={[...presentLangSet]}
           requestedLang={requestedLang}
