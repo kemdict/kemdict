@@ -77,17 +77,22 @@ if (requestedLang === false) {
           title={title}
           presentLangs={[...presentLangSet]}
           requestedLang={requestedLang}
-          groupedHets={groupedHets}
-          currentParams={url.searchParams}
+          currentParamString={url.searchParams.toString()}
         />
+        {groupedHets.map(
+          ([dict, hets]) =>
+            requestedLang === dict.lang && (
+              <Word groupedHets={[[dict, hets]]} title={title} />
+            )
+        )}
         <hr />
         <Elsewhere term={title} />
-        {backlinks.length > 0 && (
+        {/*backlinks.length > 0 && (
           <div class="prose">
             <h3>有提到「{title}」的條目</h3>
             <WordList words={backlinks} />
           </div>
-        )}
+        )*/}
       </div>
     </SingleLayout>
   ) : (
