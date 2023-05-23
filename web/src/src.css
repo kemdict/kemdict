@@ -106,6 +106,7 @@
     }
   }
   .prose {
+    @apply dark:prose-invert;
     @apply prose-a:link max-w-none;
     @apply prose-li:pl-1;
     @apply prose-blockquote:not-italic prose-blockquote:py-2 prose-blockquote:my-0 prose-blockquote:font-normal;
