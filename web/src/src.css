@@ -40,6 +40,7 @@
   Skeleton does not have 950 styles yet, and the surface 900 color is
   way too bright. */
     @apply bg-surface-50 dark:bg-surface-950;
+    @apply dark:text-white;
     @apply relative;
     min-height: 100vh;
     @apply fade;
