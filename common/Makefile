@@ -1,8 +1,7 @@
-DEPS := $(wildcard *.js *.mjs *.cjs *.ts *.json) ../dicts/data.mjs
+DEPS := $(wildcard src/* *.js *.mjs *.cjs *.ts *.json) ../dicts/data.mjs
 
-.PHONY: dev
 dist: $(DEPS)
 	npx unbuild
 
-dev:
-	npx vite dev
+dev: $(DEPS)
+	npx chokidar $(DEPS) --debounce 1000 --command "$(MAKE) dist"
