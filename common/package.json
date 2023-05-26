@@ -2,16 +2,24 @@
   "name": "common",
   "private": true,
   "type": "module",
-  "main": "dist/index.umd.cjs",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "unbuild": {
+    "externals": ["sqlstring", "lodash-es"]
+  },
   "devDependencies": {
     "@types/lodash-es": "^4.17.7",
     "@types/sqlstring": "^2.3.0",
     "lodash-es": "^4.17.21",
     "sqlstring": "^2.3.3",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.5",
-    "vite-plugin-dts": "^2.3.0"
+    "unbuild": "^1.2.1"
   }
 }
