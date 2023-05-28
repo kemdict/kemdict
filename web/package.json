@@ -18,8 +18,11 @@
   "dependencies": {
     "@astrojs/node": "^5.1.4",
     "astro": "^2.5.5",
+    "astro-i18next": "1.0.0-beta.21",
     "better-sqlite3": "^8.4.0",
     "clsx": "^1.2.1",
+    "i18next": "^22.5.0",
+    "i18next-fs-backend": "^2.1.2",
     "lodash-es": "^4.17.21",
     "satori": "^0.9.1",
     "satori-html": "^0.3.2",

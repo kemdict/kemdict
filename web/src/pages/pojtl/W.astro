@@ -1,7 +1,0 @@
----
-// Local helper for linking to words.
-const w = await Astro.slots.render("default");
-const c = w[w.length - 1];
----
-
-<a target="_blank" rel="noreferrer" href={`/word/${c}#nan_TW`}>{w}</a>

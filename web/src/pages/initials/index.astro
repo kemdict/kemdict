@@ -1,14 +1,15 @@
 ---
+import { changeLanguage } from "i18next";
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 import Pages from "$src/components/Pages.svelte";
 import { H1 } from "$src/components/typography";
-
 import { chars } from "$src/server/db";
 import { site, parsePageParam } from "common";
 
-const { with_stroke_grouped, without_stroke } = chars;
+changeLanguage("zh-TW");
 
+const { with_stroke_grouped, without_stroke } = chars;
 const params = new URL(Astro.request.url).searchParams;
 
 const page = parsePageParam(params.get("p"), with_stroke_grouped.length);

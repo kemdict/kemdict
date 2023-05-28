@@ -5,6 +5,7 @@ import svelte from "@astrojs/svelte";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
+import astroI18next from "astro-i18next";
 
 // TODO: icons with https://github.com/antfu/unplugin-icons
 
@@ -17,6 +18,7 @@ export default defineConfig({
   compressHTML: prod,
   site: baseURL,
   integrations: [
+    astroI18next(),
     svelte(),
     mdx(),
     sitemap({

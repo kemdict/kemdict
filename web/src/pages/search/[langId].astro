@@ -1,4 +1,6 @@
 ---
+import { changeLanguage } from "i18next";
+changeLanguage("zh-TW");
 import { site, parsePageParam, langs, getSearchTitle } from "common";
 import { chunk } from "lodash-es";
 const { langId } = Astro.params;

@@ -1,18 +1,18 @@
 ---
+import { t, changeLanguage } from "i18next";
 export const prerender = false;
-
 import { DB } from "$src/server/db";
-
 import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.astro";
 import SearchBar from "$src/components/SearchBar.svelte";
 import DarkModeToggle from "$src/components/DarkModeToggle.svelte";
 import Out from "$src/components/Out.astro";
-const title = "Kemdict 國語整合典";
-const sitename = "Kemdict 國語整合典";
-const description =
-  "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 
+changeLanguage("zh-TW");
+
+const title = t("site.name");
+const sitename = t("site.name");
+const description = t("site.description");
 const words = await DB.getDictTitles("kisaragi_dict", 15);
 ---
 
@@ -57,41 +57,41 @@ const words = await DB.getDictTitles("kisaragi_dict", 15);
   <div class="prose">
     <div class="md:flex">
       <div class="w-1/2">
-        <h3>前言</h3>
+        <h3>{t("前言")}</h3>
         <ul class="ml-1 list-none p-0">
           <li>
-            <p><a href="about">關於</a></p>
+            <p><a href="about">{t("page.about")}</a></p>
           </li>
           <li>
-            <p><a href="changelog">版本紀錄</a></p>
+            <p><a href="changelog">{t("page.changelog")}</a></p>
           </li>
           <li>
-            <p><a href="thanks">致謝與授權</a></p>
+            <p><a href="thanks">{t("page.thanks")}</a></p>
           </li>
         </ul>
       </div>
       <div>
-        <h3>附錄</h3>
+        <h3>{t("附錄")}</h3>
         <ul class="ml-1 list-none p-0">
           <li>
-            <p><a href="pojtl">台語羅馬字簡介</a></p>
+            <p><a href="pojtl">{t("page.pojtl")}</a></p>
           </li>
         </ul>
       </div>
     </div>
     <div class="ml-1"></div>
-    <h3>最近新增的詞</h3>
+    <h3>{t("recent-words")}</h3>
     <WordList words={words} />
-    <h3>索引</h3>
+    <h3>{t("index")}</h3>
     <ul class="ml-1 list-none p-0">
       <li>
-        <p><a href="initials">首字索引</a></p>
+        <p><a href="initials">{t("page.initials")}</a></p>
       </li>
       <li>
-        <p><a href="radicals">部首索引</a></p>
+        <p><a href="radicals">{t("page.radicals")}</a></p>
       </li>
     </ul>
-    <h3>收錄字典</h3>
+    <h3>{t("收錄字典")}</h3>
     <ul class="md:two ml-1 list-none p-0">
       <li>
         <p><a href="dict-kisaragi">如月的現代台灣華語補足典</a></p>

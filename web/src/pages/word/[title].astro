@@ -1,4 +1,7 @@
 ---
+import { changeLanguage } from "i18next";
+changeLanguage("zh-TW");
+
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
 import {
@@ -20,7 +23,6 @@ const {
 } = await DB.getHeteronyms(title);
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = (await DB.getBacklinks(...titles)).sort();
-
 import SingleLayout from "$src/SingleLayout.astro";
 import { Tab, TabGroup } from "@skeletonlabs/skeleton";
 import Elsewhere from "$src/components/Elsewhere.astro";

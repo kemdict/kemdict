@@ -1,0 +1,21 @@
+{
+  "support": "在 FANBOX 上贊助我一餐飯",
+  "前言": "前言",
+  "page": {
+    "about": "關於",
+    "changelog": "版本紀錄",
+    "thanks": "致謝與授權",
+    "pojtl": "台語羅馬字簡介",
+    "initials": "首字索引",
+    "radicals": "部首索引"
+  },
+  "dicts": { "kisaragi": "如月的現代台灣華語補足典" },
+  "site": {
+    "name": "Kemdict 國語整合典",
+    "description": "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。"
+  },
+  "附錄": "附錄",
+  "recent-words": "最近新增的詞",
+  "index": "索引",
+  "收錄字典": "收錄字典"
+}

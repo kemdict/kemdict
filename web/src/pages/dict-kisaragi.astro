@@ -1,11 +1,14 @@
 ---
+import { t, changeLanguage } from "i18next";
 import { DB } from "$src/server/db";
 import MarkdownLayout from "$src/MarkdownLayout.astro";
 import WordList from "$src/components/WordList.astro";
 
+changeLanguage("zh-TW");
+
 const titles = await DB.getDictTitles("kisaragi_dict");
 const props = {
-  title: "台語羅馬字簡介 | Kemdict",
+  title: `${t("dicts.kisaragi")} | Kemdict`,
 };
 ---
 
