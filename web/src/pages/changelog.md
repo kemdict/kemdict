@@ -6,7 +6,7 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 # 版本紀錄
 
-## 0.12.1 (次版)
+## 1.0.0 (2023-05-29)
 
 - 詞彙頁面改為使用分頁
   - 舊連結格式：
@@ -17,9 +17,11 @@ desc: Kemdict 國語整合典的更新紀錄。
     - 全部：`https://kemdict.com/word/單詞`
     - 僅某語言：`https://kemdict.com/word/單詞?lang=zh_TW`
     - 僅某字典：`https://kemdict.com/word/單詞?lang=zh_TW#dict_revised`
-- 搜尋：移除搜尋歷史
+- 搜尋：暫時移除搜尋歷史
+- 讓搜尋頁面
 - 利用 [Skeleton](https://www.skeleton.dev/) 的風格
 - 儘量使用白話字
+- 新風格
 
 ## 0.12.0 (2023-04-23)
 
