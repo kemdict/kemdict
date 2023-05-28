@@ -15,7 +15,9 @@ dist: $(DEPS)
 	npx astro build
 	cp package.json dist/
 	touch dist/pnpm-workspace.yaml # to mark it as a new root
-	find server -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
+	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
+	mkdir -p dist/hack
+	find hack/ -type f -not -iname "readme*" -exec cp '{}' dist/hack/ ';'
 	npx size-limit
 
 public/l: ../dicts

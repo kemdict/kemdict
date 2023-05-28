@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 
-export function toPOJ(text) {
+export function toPOJ(text: string) {
   return spawnSync(
     "node",
     ["hack/postSync.mjs", "https://pojtl.kemdict.com/toPOJ"],
@@ -8,7 +8,7 @@ export function toPOJ(text) {
   ).stdout;
 }
 
-export function toTL(text) {
+export function toTL(text: string) {
   return spawnSync(
     "node",
     ["hack/postSync.mjs", "https://pojtl.kemdict.com/toTL"],
