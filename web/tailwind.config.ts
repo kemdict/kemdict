@@ -52,12 +52,23 @@ export default {
       mono: ["monospace"],
     },
     extend: {
+      // Prose customizations are scattered around here, in src.css as
+      // "@apply prose-<thing>:<utility>;" statements, and as nested
+      // CSS declarations.
+      //
+      // This mess would be less painful if we just <expletive> fork
+      // @tailwindcss/typography, considering how simple the source
+      // styles.js is, but I wasn't able to get Astro to use the fork.
+      // For some reason. Even though it's installed. Words alone do
+      // not convey how insanity inducing it was, or how much I had
+      // tried and double-checked.
       typography: {
         DEFAULT: {
           css: {
             blockquote: {
               "p:first-of-type::before": { content: "none" },
               "p:first-of-type::after": { content: "none" },
+              p: { marginTop: "0", marginBottom: "0" },
             },
           },
         },
