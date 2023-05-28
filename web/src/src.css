@@ -110,6 +110,12 @@
     @apply prose-a:link max-w-none;
     @apply prose-li:pl-1;
     @apply prose-blockquote:not-italic prose-blockquote:py-2 prose-blockquote:my-0 prose-blockquote:font-normal;
+    blockquote {
+      @apply my-2;
+      p {
+        @apply my-0;
+      }
+    }
     --tw-prose-bullets: "#000";
     :where(ul):not(:where([class~="not-prose"] *)) {
       @apply ml-0 pl-0;

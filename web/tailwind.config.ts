@@ -52,6 +52,16 @@ export default {
       mono: ["monospace"],
     },
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            blockquote: {
+              "p:first-of-type::before": { content: "none" },
+              "p:first-of-type::after": { content: "none" },
+            },
+          },
+        },
+      },
       colors: {
         surface: {
           50: "#f9faff",

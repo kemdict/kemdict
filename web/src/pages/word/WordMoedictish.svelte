@@ -1,13 +1,15 @@
-<script>
-  export let heteronyms;
-  export let dict;
+<script lang="ts">
+  import type { Heteronym } from "common";
+
+  export let heteronyms: Heteronym[];
+  export let dict: string;
 
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { groupByProp } from "common";
   import { toPOJ } from "$src/hack";
   import { spc, interlinear_annotation } from "$src/processing";
 
-  function processPn(pn) {
+  function processPn(pn: string) {
     if (dict === "moedict_twblg") {
       return toPOJ(pn);
     } else {
@@ -22,7 +24,7 @@
 
   $: pronunciation_key = pronunciation_key_mapping[dict];
 
-  function process_def_kisaragi(def) {
+  function process_def_kisaragi(def: string | undefined) {
     if (def) {
       def = def.replace(/([^>])\n+/g, "$1<br/>");
     } else {
