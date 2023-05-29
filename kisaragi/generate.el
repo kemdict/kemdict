@@ -7,8 +7,11 @@
 ;; kisaragi-dict.org's format is described within. This file
 ;; implements the format itself.
 ;;
-;; Essentially entries are headings under the "Words" heading,
-;; structured in a particular way, and this file converts that to JSON
+;; Entries are headings that:
+;; - are under the first top level "Words" heading
+;; - and have the "added" property
+;;
+;; They are structured in a particular way documented in , and this file converts that to JSON
 ;; in a schema similar to that used by Moedict.
 
 ;;; Code:
