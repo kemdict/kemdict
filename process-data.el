@@ -641,7 +641,7 @@ This is a separate step from shaping."
          (ht-update-with! props (format "p_%s" p_name)
            (lambda (str)
              (d:hakkadict:pn str p_name)))))
-      ("kisaragi_dict"
+      ((pred (s-prefix? "kisaragi"))
        (ht-update-with! props "definitions"
          (lambda (defs)
            (seq-doseq (def defs)
@@ -749,6 +749,7 @@ information."
        ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+       ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
                                   "moedict-data-twblg/dict-twblg-ext.json"))
@@ -915,6 +916,7 @@ Titles are written to `d:titles:look-up-table'."
             props
             (gethash "title" het)
             (gethash "from" het))))))
+    (garbage-collect)
     ;; Step 4
     (message "Writing result out to disk...")
     (let ((json-encoding-pretty-print (not noninteractive))
