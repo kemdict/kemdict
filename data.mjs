@@ -78,6 +78,13 @@ export const dicts = [
     lang: "zh_TW",
   },
   {
+    id: "kisaragi_taigi",
+    name: "如月的台語補足典",
+    // TODO
+    url: "/dict-kisaragi",
+    lang: "nan_TW",
+  },
+  {
     id: "chhoetaigi_taijittoasutian",
     name: "台日大辭典台語譯本 (1932)",
     url: "https://taigi.fhl.net/dict/search.php?DETAIL=1&LIMIT=id=$1",
