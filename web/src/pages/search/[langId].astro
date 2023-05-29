@@ -1,7 +1,7 @@
 ---
-import { changeLanguage } from "i18next";
-changeLanguage("zh-TW");
-import { site, parsePageParam, langs, getSearchTitle } from "common";
+import { changeLanguage, t } from "i18next";
+import { parsePageParam, langs } from "common";
+import { getSearchTitle } from "$src/common";
 import { chunk } from "lodash-es";
 const { langId } = Astro.params;
 import { getHetFromUrl } from "$src/server/db";
@@ -17,16 +17,13 @@ const langSet = data.langSet;
 // We pass langCountObj around because the other option is to pass both
 // all heteronyms and applicable heteronyms here.
 const langCountObj = data.langCountObj;
-
 // This preserves order as declared in common.
 const langGroups = Object.entries(langs).filter((l) => langSet.has(l[0]));
 const count = heteronyms.length;
-
 // If there are no matching heteronyms specific to this language, try all languages instead.
 if (count === 0) {
   return Astro.redirect(`/search?${url.searchParams.toString()}`);
 }
-
 // We do the chunking in Javascript and not in SQL because we still need the
 // total number of results
 const chunked = chunk(heteronyms, 50);
@@ -36,16 +33,18 @@ if (page === false) {
   url.searchParams.delete("p");
   return Astro.redirect(url);
 }
-
 import SingleLayout from "$src/SingleLayout.astro";
 import SingleLangResults from "./SingleLangResults.svelte";
 import Elsewhere from "$src/components/Elsewhere.astro";
+
+changeLanguage("zh-TW");
+
 const title = getSearchTitle(mtch, query);
 const titleMarkup = getSearchTitle(mtch, query, true);
 ---
 
 <SingleLayout
-  title={`${title} - ${langs[langId]}辭典 - ${site.title}`}
+  title={`${title} - ${langs[langId]}辭典 - ${t("site.title")}`}
   initialMatchSelection={mtch}
   initialInput={query}
   submitSuffix={`/${langId}`}
@@ -57,7 +56,9 @@ const titleMarkup = getSearchTitle(mtch, query, true);
     />
     <meta
       name="description"
-      content={`在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
+      content={`在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${t(
+        "site.oneLineDesc"
+      )}`}
     />
   </Fragment>
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />

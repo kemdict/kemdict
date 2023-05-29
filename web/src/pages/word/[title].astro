@@ -1,11 +1,8 @@
 ---
-import { changeLanguage } from "i18next";
-changeLanguage("zh-TW");
-
+import { changeLanguage, t } from "i18next";
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
 import {
-  site,
   dictsObj,
   dicts,
   langs,
@@ -14,7 +11,6 @@ import {
   parseLangParam,
 } from "common";
 import type { Dict, Heteronym } from "common";
-
 const { title } = Astro.params;
 const {
   presentDicts: presentDictIds,
@@ -30,13 +26,14 @@ import WordList from "$src/components/WordList.astro";
 import Word from "./Word.svelte";
 import WordTabs from "./WordTabs.svelte";
 
+changeLanguage("zh-TW");
+
 const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
   ([id, hets]: [string, Heteronym[]]) => {
     return [dictsObj[id], hets];
   }
 );
 const presentDicts = presentDictIds.map((id) => dictsObj[id]);
-
 const url = Astro.url;
 const requestedLang = parseLangParam(
   url.searchParams.get("lang"),
@@ -52,7 +49,7 @@ if (requestedLang === false) {
 {
   heteronyms.length > 0 ? (
     <SingleLayout
-      title={`「${title}」的意思 - ${site.title}`}
+      title={`「${title}」的意思 - ${t("site.title")}`}
       initialInput={title}
     >
       <Fragment slot="head">
@@ -70,7 +67,7 @@ if (requestedLang === false) {
               .map((dict) => dict.name),
             "、",
             "及"
-          )}的定義。 - ${site.oneLineDesc}`}
+          )}的定義。 - ${t("site.oneLineDesc")}`}
         />
       </Fragment>
       <div class="">

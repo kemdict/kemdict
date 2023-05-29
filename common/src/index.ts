@@ -7,11 +7,6 @@ function escape(thing: any) {
   return sqlEscape(thing).replace("\\'", "''");
 }
 
-export const site = {
-  oneLineDesc: "Kemdict 是一個免費且無廣告的辭典搜尋服務。",
-  title: "Kemdict",
-};
-
 export interface Dict {
   id: string;
   name: string;
@@ -100,51 +95,6 @@ export function strLen(str: string): number {
 }
 
 export type Mtch = "prefix" | "suffix" | "contains" | "exact" | string;
-
-export function getSearchTitle(
-  mtch: Mtch,
-  query: string,
-  markup?: boolean
-): string {
-  const tokens = parseQueryToTokens(query);
-  function wrap(s: string) {
-    if (markup) {
-      return `「<span class="font-bold">${s}</span>」`;
-    } else {
-      return `「${s}」`;
-    }
-  }
-  if (markup) {
-    query = `<span class="font-bold">${query}</span>`;
-  }
-  if (mtch === "contains") {
-    return `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
-  } else if (mtch === "prefix") {
-    if (tokens.length === 1) {
-      return `以${wrap(tokens[0])}開頭的詞`;
-    } else {
-      return `以${wrap(tokens[0])}開頭、且包含${joinLast(
-        tokens.slice(1).map(wrap),
-        "、",
-        "及"
-      )}的詞`;
-    }
-  } else if (mtch === "suffix") {
-    if (tokens.length === 1) {
-      return `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
-    } else {
-      return `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
-        tokens.slice(0, -1).map(wrap),
-        "、",
-        "及"
-      )}的詞`;
-    }
-  } else {
-    // if (mtch === "exact") {
-    // }
-    return `完全符合「${query}」的詞`;
-  }
-}
 
 /**
  * Parse the page param into a valid integer.

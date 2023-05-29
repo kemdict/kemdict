@@ -1,6 +1,28 @@
 {
+  "、": "、",
+  "及": "及",
+  "search": {
+    "more-results": "共 {{n}} 項結果"
+  },
+  "searchTitle": {
+    "wrap": "「$1」",
+    "contains": "包含$1的詞",
+    "prefix": "以$1開頭的詞",
+    "prefixN": "以${first}開頭、且包含${rest}的詞",
+    "suffix": "以$1結尾的詞",
+    "suffixN": "以${last}結尾且包含${rest}的詞",
+    "exact": "完全符合「$1」的詞"
+  },
   "support": "在 FANBOX 上贊助我一餐飯",
   "前言": "前言",
+  "搜尋": "搜尋",
+  "輸入要搜尋的詞彙…": "輸入要搜尋的詞彙…",
+  "match": {
+    "prefix": "開頭為",
+    "suffix": "結尾為",
+    "contains": "包含",
+    "exact": "完全符合"
+  },
   "page": {
     "about": "關於",
     "changelog": "版本紀錄",
@@ -11,8 +33,10 @@
   },
   "dicts": { "kisaragi": "如月的現代台灣華語補足典" },
   "site": {
+    "title": "Kemdict",
     "name": "Kemdict 國語整合典",
-    "description": "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。"
+    "description": "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。",
+    "oneLineDesc": "Kemdict 是一個免費且無廣告的辭典搜尋服務。"
   },
   "附錄": "附錄",
   "recent-words": "最近新增的詞",

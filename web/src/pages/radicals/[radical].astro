@@ -1,18 +1,17 @@
 ---
-import { changeLanguage } from "i18next";
-changeLanguage("zh-TW");
-
+import { changeLanguage, t } from "i18next";
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
-
 import { DB } from "$src/server/db";
-import { site, format, groupByProp } from "common";
+import { format, groupByProp } from "common";
+
+changeLanguage("zh-TW");
 
 const { radical } = Astro.params;
 const entries = await DB.getCharsByRadical(radical);
 ---
 
-<SingleLayout title={`部首為「${radical}」的字 - ${site.title}`}>
+<SingleLayout title={`部首為「${radical}」的字 - ${t("site.title")}`}>
   <Fragment slot="head">
     <meta
       property="og:image"

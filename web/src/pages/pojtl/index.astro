@@ -1,14 +1,14 @@
 ---
 import { changeLanguage, t } from "i18next";
-changeLanguage("zh-TW");
-
 import MarkdownLayout from "$src/MarkdownLayout.astro";
 import Out from "$src/components/Out.astro";
 import Ex from "$src/components/Ex.astro";
 import W from "$src/components/W.astro";
 
+changeLanguage("zh-TW");
+
 const props = {
-  title: `${t("page.pojtl")} | Kemdict`,
+    title: `${t("page.pojtl")} | Kemdict`,
 };
 ---
 

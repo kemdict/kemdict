@@ -22,11 +22,14 @@
     "better-sqlite3": "^8.4.0",
     "clsx": "^1.2.1",
     "i18next": "^22.5.0",
+    "i18next-browser-languagedetector": "^7.0.1",
     "i18next-fs-backend": "^2.1.2",
+    "i18next-http-backend": "^2.2.1",
     "lodash-es": "^4.17.21",
     "satori": "^0.9.1",
     "satori-html": "^0.3.2",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "svelte-i18next": "^2.0.0"
   },
   "devDependencies": {
     "@astrojs/mdx": "^0.19.4",

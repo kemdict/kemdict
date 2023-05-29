@@ -28,6 +28,7 @@ public/l: ../dicts
 .PHONY: dev build preview check build-no-data build-with-data
 
 dev: $(DEPS) entries.db
+	npx astro-i18next generate
 	npx astro dev
 
 build-with-data: dist entries.db

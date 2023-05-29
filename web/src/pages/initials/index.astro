@@ -1,17 +1,16 @@
 ---
-import { changeLanguage } from "i18next";
+import { changeLanguage, t } from "i18next";
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 import Pages from "$src/components/Pages.svelte";
 import { H1 } from "$src/components/typography";
 import { chars } from "$src/server/db";
-import { site, parsePageParam } from "common";
+import { parsePageParam } from "common";
 
 changeLanguage("zh-TW");
 
 const { with_stroke_grouped, without_stroke } = chars;
 const params = new URL(Astro.request.url).searchParams;
-
 const page = parsePageParam(params.get("p"), with_stroke_grouped.length);
 if (page === false) {
   return Astro.redirect("/initials");
@@ -19,9 +18,12 @@ if (page === false) {
 const with_stroke_this_page = with_stroke_grouped[page - 1];
 ---
 
-<SingleLayout title="首字索引 - ${site.title}">
+<SingleLayout title={`${t("page.initials")} - ${t("site.title")}`}>
   <Fragment slot="head">
-    <meta property="og:image" content="https://kemdict.com/og-image?title=首字索引" />
+    <meta
+      property="og:image"
+      content="https://kemdict.com/og-image?title=首字索引"
+    />
   </Fragment>
   <H1>首字筆畫索引</H1>
   <div class="prose mb-4">

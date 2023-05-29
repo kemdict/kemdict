@@ -58,9 +58,15 @@ importers:
       i18next:
         specifier: ^22.5.0
         version: 22.5.0
+      i18next-browser-languagedetector:
+        specifier: ^7.0.1
+        version: 7.0.1
       i18next-fs-backend:
         specifier: ^2.1.2
         version: 2.1.2
+      i18next-http-backend:
+        specifier: ^2.2.1
+        version: 2.2.1
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -73,6 +79,9 @@ importers:
       sharp:
         specifier: ^0.32.1
         version: 0.32.1
+      svelte-i18next:
+        specifier: ^2.0.0
+        version: 2.0.0(i18next@22.5.0)(svelte@3.59.1)
     devDependencies:
       '@astrojs/mdx':
         specifier: ^0.19.4
@@ -7310,6 +7319,16 @@ packages:
       svelte: 3.59.1
     dev: true
 
+  /svelte-i18next@2.0.0(i18next@22.5.0)(svelte@3.59.1):
+    resolution: {integrity: sha512-Y03grFPNI+9fkAx5fgrz9SJY5/tAEBJ512YVP2GN+6nAPNvkY4cgowpUG1KFZzBBthy3FygluBw3jBvhGs6kWQ==}
+    peerDependencies:
+      i18next: '*'
+      svelte: '*'
+    dependencies:
+      i18next: 22.5.0
+      svelte: 3.59.1
+    dev: false
+
   /svelte-preprocess@5.0.4(@babel/core@7.22.1)(postcss@8.4.24)(svelte@3.59.1)(typescript@4.9.5):
     resolution: {integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==}
     engines: {node: '>= 14.10.0'}
@@ -7379,7 +7398,6 @@ packages:
   /svelte@3.59.1:
     resolution: {integrity: sha512-pKj8fEBmqf6mq3/NfrB9SLtcJcUvjYSWyePlfCqN9gujLB25RitWK8PvFzlwim6hD/We35KbPlRteuA6rnPGcQ==}
     engines: {node: '>= 8'}
-    dev: true
 
   /synckit@0.8.5:
     resolution: {integrity: sha512-L1dapNV6vu2s/4Sputv8xGsCdAVlb5nRDMFU/E27D44l5U6cw1g0dGd45uLc+OXjNMmF4ntiMdCimzcjFKQI8Q==}

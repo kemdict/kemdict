@@ -1,4 +1,5 @@
 <script>
+  import { t } from "i18next";
   import { popup, ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
   import { onMount } from "svelte";
   export let submitSuffix = "";
@@ -9,10 +10,10 @@
   let currentMtch = initialMatchSelection || "prefix";
   const matchTypes = new Map(
     Object.entries({
-      prefix: "開頭為",
-      suffix: "結尾為",
-      contains: "包含",
-      exact: "完全符合",
+      prefix: t("match.prefix"),
+      suffix: t("match.suffix"),
+      contains: t("match.contains"),
+      exact: t("match.exact"),
     })
   );
   onMount(() => {
@@ -65,7 +66,7 @@
           id="sbi"
           type="search"
           autocomplete="off"
-          placeholder="輸入要搜尋的詞彙…"
+          placeholder={t("輸入要搜尋的詞彙…")}
           name="q"
           class="text-input w-full"
           value={initialInput}
@@ -77,7 +78,7 @@
       <input
         class={highlightBtn ? "k-hlbtn" : "k-btn"}
         type="submit"
-        value="搜尋"
+        value={t("搜尋")}
       />
     </div>
   </form>

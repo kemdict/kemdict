@@ -1,10 +1,8 @@
 ---
-import { changeLanguage } from "i18next";
-changeLanguage("zh-TW");
-
+import { changeLanguage, t } from "i18next";
 import { getHetFromUrl } from "$src/server/db";
-import { site, dicts, langs, getSearchTitle } from "common";
-
+import { dicts, langs } from "common";
+import { getSearchTitle } from "$src/common";
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url);
 if (!success) {
@@ -14,28 +12,26 @@ const heteronyms = data.heteronyms;
 const mtch = data.mtch;
 const query = data.query;
 const langSet = data.langSet;
-
 let count = heteronyms.length;
-
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
 let currentLang: string =
   url.searchParams.get("lang") ||
   (presentLangs[0] && presentLangs[0][0]) ||
   "zh_TW";
-
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 import WordPreview from "$src/components/WordPreview.svelte";
 import ListLink from "$src/components/ListLink.svelte";
-
 import Results from "./Results.svelte";
+
+changeLanguage("zh-TW");
 
 const title = getSearchTitle(mtch, query);
 const titleMarkup = getSearchTitle(mtch, query, true);
 ---
 
 <SingleLayout
-  title={`${title} - 所有辭典 - ${site.title}`}
+  title={`${title} - 所有辭典 - ${t("site.title")}`}
   initialMatchSelection={mtch}
   initialInput={query}
 >
@@ -46,7 +42,9 @@ const titleMarkup = getSearchTitle(mtch, query, true);
     />
     <meta
       name="description"
-      content={`在所有收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
+      content={`在所有收錄辭典中搜尋${title}的結果。 - ${t(
+        "site.oneLineDesc"
+      )}`}
     />
   </Fragment>
   {
@@ -81,7 +79,9 @@ const titleMarkup = getSearchTitle(mtch, query, true);
                       href={`/search/${lang[0]}?${url.searchParams.toString()}`}
                     >
                       <div class="text-center" slot="heading">
-                        共 {applicableHeteronyms.length} 項結果
+                        {t("search.more-results", {
+                          n: applicableHeteronyms.length,
+                        })}
                       </div>
                     </ListLink>
                   )}

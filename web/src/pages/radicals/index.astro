@@ -1,20 +1,22 @@
 ---
-import { changeLanguage } from "i18next";
-changeLanguage("zh-TW");
-
+import { changeLanguage, t } from "i18next";
 import SingleLayout from "$src/SingleLayout.astro";
 import Group from "$src/components/Group.svelte";
 import { H1 } from "$src/components/typography";
-
 import { DB } from "$src/server/db";
-import { site, groupByProp } from "common";
+import { groupByProp } from "common";
+
+changeLanguage("zh-TW");
 
 const radicals = await DB.getRadicals();
 ---
 
-<SingleLayout title={`部首索引 - ${site.title}`}>
+<SingleLayout title={`${t("page.radicals")} - ${t("site.title")}`}>
   <Fragment slot="head">
-    <meta property="og:image" content="https://kemdict.com/og-image?title=部首索引" />
+    <meta
+      property="og:image"
+      content="https://kemdict.com/og-image?title=部首索引"
+    />
   </Fragment>
   <H1>部首索引</H1>
   <div class="prose">
