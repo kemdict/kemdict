@@ -625,13 +625,14 @@ This is a separate step from shaping."
          #'d:cangjie-abc-to-han)
        (d::hash-rename props "kCangjie" "cangjie")
        (d::hash-rename props "kDefinition" "defs")
+       (d::hash-rename props "kTraditionalVariant" "varT")
+       (d::hash-rename props "kSimplifiedVariant" "varS")
        ;; Purge these currently unused fields until I know what to do
        ;; with them
        (--each '("char" "ucn" "kRSUnicode"
                  "kMandarin" "kTotalStrokes"
                  "kPhonetic"
-                 "kSemanticVariant" "kSimplifiedVariant"
-                 "kSpecializedSemanticVariant" "kTraditionalVariant"
+                 "kSemanticVariant" "kSpecializedSemanticVariant"
                  "kAccountingNumeric" "kOtherNumeric" "kPrimaryNumeric")
          (ht-remove! props it)))
       ("hakkadict"
@@ -932,6 +933,7 @@ Titles are written to `d:titles:look-up-table'."
 
 (when noninteractive
   (jieba-reset 'big)
+  (jieba-add-word "物件" "n")
   (let ((comp (if (and (fboundp #'native-comp-available-p)
                        (native-comp-available-p))
                   #'native-compile
