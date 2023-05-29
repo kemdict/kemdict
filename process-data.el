@@ -302,7 +302,8 @@ this:
                             target)
                 (format "<a href=\"%s\">%s</a>" target description))
                (t
-                (d:links:link-to-word (car (s-split "#" target))
+                (d:links:link-to-word (car (s-split (rx (or "#" "?"))
+                                                    target))
                                       :desc description
                                       :href target)))))))))
 
