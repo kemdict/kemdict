@@ -65,6 +65,7 @@ export default {
       typography: {
         DEFAULT: {
           css: {
+            p: { marginTop: "0.25em", marginBottom: "0.25em" },
             blockquote: {
               "p:first-of-type::before": { content: "none" },
               "p:first-of-type::after": { content: "none" },
