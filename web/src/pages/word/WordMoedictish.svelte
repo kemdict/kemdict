@@ -19,6 +19,7 @@
 
   const pronunciation_key_mapping = {
     kisaragi_dict: "pronunciation",
+    kisaragi_taigi: "pronunciation",
     moedict_twblg: "trs",
   };
 
@@ -51,7 +52,7 @@
     {/if}
     <ol>
       {#each defs as def}
-        {#if dict == "kisaragi_dict"}
+        {#if dict === "kisaragi_dict" || dict === "kisaragi_taigi"}
           <li>
             <p class="def">
               {@html process_def_kisaragi(def.def)}

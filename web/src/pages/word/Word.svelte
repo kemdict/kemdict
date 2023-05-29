@@ -46,7 +46,7 @@
           <a href="https://www.unicode.org/license.txt">© Unicode, Inc.</a>
         </p>
       </div>
-    {:else if dict.id == "kisaragi_dict"}
+    {:else if dict.id === "kisaragi_dict" || dict.id === "kisaragi_taigi"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
       <div class="copyright">
         <p>
