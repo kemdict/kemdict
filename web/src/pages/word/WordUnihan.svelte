@@ -4,6 +4,19 @@
   function asHex(char: string) {
     return char.codePointAt(0).toString(16);
   }
+  function ucsToString(ucs: string) {
+    const hex = ucs.slice(2); // "U+1234" -> "1234"
+    const codePoint = Number.parseInt(hex, 16);
+    return String.fromCodePoint(codePoint);
+  }
+  function chars(characters: string[]) {
+    return characters
+      .map((c) => {
+        const str = ucsToString(c);
+        return `<a href="/word/${str}">${str}</a>`;
+      })
+      .join("、");
+  }
   export let heteronyms: Heteronym[];
   const keys = [
     { key: "pinyin", name: "拼音" },
@@ -31,6 +44,12 @@
       <div class="my-0">
         <span>筆畫：</span>共{het.props.sc}畫，部首外共{het.props.nrsc}畫
       </div>
+      {#if het.props?.varS}
+        <div><span>簡體：</span>{@html chars(het.props?.varS)}</div>
+      {/if}
+      {#if het.props?.varT}
+        <div><span>繁體：</span>{@html chars(het.props?.varT)}</div>
+      {/if}
       {#if het.props?.defs?.length == 1}
         <div><span>定義：</span>{het.props.defs[0]}</div>
       {:else if het.props?.defs?.length > 1}
