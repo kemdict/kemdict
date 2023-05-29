@@ -115,14 +115,22 @@
        (point-min) (point-max)))
     ret))
 
-(let ((json-encoding-pretty-print t))
-  (with-temp-file "kisaragi_dict.json"
-    (message "Generating kisaragi_dict.json...")
-    (insert (->> (kisaragi-dict/file-to-json "kisaragi-dict.org")
-                 (--sort (> (cdr (assoc "added" it))
-                            (cdr (assoc "added" other))))
-                 json-encode)
-            "\n")
-    (message "Generating kisaragi_dict.json...done")))
+(defun kisaragi-dict/write ()
+  "Write the file based on the current buffer."
+  (let* ((slug (file-name-base (buffer-file-name)))
+         (src (format "%s.org" slug))
+         (dest (format "%s.json" (replace-regexp-in-string "-" "_" slug))))
+    (let ((json-encoding-pretty-print t))
+      (with-temp-file dest
+        (message "Generating %s..." dest)
+        (insert (->> (kisaragi-dict/file-to-json src)
+                     (--sort (> (cdr (assoc "added" it))
+                                (cdr (assoc "added" other))))
+                     json-encode)
+                "\n")
+        (message "Generating %s...done" dest)))))
+
+(when (eq major-mode 'org-mode)
+  (add-hook 'after-save-hook #'kisaragi-dict/write nil t))
 
 ;;; generate.el ends here

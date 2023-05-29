@@ -1400,7 +1400,7 @@ Hub / USB Hub
 :added:    2022-11-08T09:40:28+0900
 :END:
 **** ㄓㄨㄚ ㄌㄡˋ
-***** 動|找尋並排除房屋漏水問題。
+***** 動|找尋並排除房屋漏水問題。同台語「[[掠漏]]」。
 *** 足感心
 :PROPERTIES:
 :added:    2022-11-08T09:38:49+0900
@@ -1635,5 +1635,5 @@ Hub / USB Hub
 * COMMENT Org setup
 
 # Local Variables:
-# eval: (add-hook 'after-save-hook (lambda () (load-file "generate.el")) nil t)
+# eval: (load (expand-file-name "generate.el") nil t)
 # End:

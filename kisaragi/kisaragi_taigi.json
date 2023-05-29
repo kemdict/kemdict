@@ -1,0 +1,54 @@
+[
+  {
+    "title": "燒糜",
+    "added": 1685376548.0,
+    "heteronyms": [
+      {
+        "pronunciation": "sio-bê",
+        "definitions": [
+          {
+            "def": "很燙的粥。見「[[燒?lang=nan_TW#moedict_twblg][燒]]」、「[[糜?lang=nan_TW#moedict_twblg][糜]]」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "過溝",
+    "added": 1685375981.0,
+    "heteronyms": [
+      {
+        "pronunciation": "kòe-kau",
+        "definitions": [
+          {
+            "def": "地名。",
+            "type": "名"
+          },
+          {
+            "def": "跨過溝渠。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "治嗽",
+    "added": 1685375273.0,
+    "heteronyms": [
+      {
+        "pronunciation": "tī-sàu",
+        "definitions": [
+          {
+            "def": "治療咳嗽。",
+            "type": "動"
+          },
+          {
+            "def": "咳嗽藥。緩解感冒症狀的藥。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  }
+]

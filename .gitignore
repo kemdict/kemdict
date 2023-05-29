@@ -6,8 +6,7 @@ node_modules
 !package.json
 !package-lock.json
 # This lets us avoid building data in the main repo
-!kisaragi/kisaragi_dict.json
-!kisaragi/extra-strokes.json
+!kisaragi/*.json
 *.db.br
 *.gz
 *.db

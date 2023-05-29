@@ -1,0 +1,55 @@
+#+title: 如月的台語補足典
+
+我記錄台灣華語有在使用但沒被收錄的詞的地方。
+
+* Words
+** 治嗽
+:PROPERTIES:
+:added:    2023-05-30T00:47:53+0900
+:END:
+*** tī-sàu
+**** 動|治療咳嗽。
+**** 名|咳嗽藥。緩解感冒症狀的藥。
+** 過溝
+:PROPERTIES:
+:added:    2023-05-30T00:59:41+0900
+:END:
+*** kòe-kau
+**** 名|地名。
+**** 動|跨過溝渠。
+** 燒糜
+:PROPERTIES:
+:added:    2023-05-30T01:09:08+0900
+:END:
+*** sio-bê
+**** 很燙的粥。見「[[燒?lang=nan_TW#moedict_twblg][燒]]」、「[[糜?lang=nan_TW#moedict_twblg][糜]]」。
+** 十八驚
+*** cha̍p-peh kiaⁿ
+**** 一組諺語。
+
+#+begin_quote
+醫生驚[[治嗽]]
+[[塗水]]驚[[掠漏]]
+[[剃頭店][剃頭]]驚臭頭
+[[總舖師][總舖]]驚食逗 # ?
+[[討海人][討海]]驚[[thàu-hong][風透]]
+種田驚[[挲草]]
+[[青盲]]驚[[過溝]]
+[[賊仔]]驚[[痟狗]]
+病院驚人哭
+[[契兄]]驚[[掠猴]]
+[[暗間]]驚嬰吼
+[[侗戇]]驚亂走
+[[燒?lang=nan_TW#moedict_twblg][燒]][[糜?lang=nan_TW#moedict_twblg][糜]]驚大嘴
+透早驚[[露水]]
+半暝驚歹鬼
+[[跋筊]]驚人走
+贏[[筊?lang=nan_TW#moedict_twblg][筊]]驚食飯
+輸[[筊?lang=nan_TW#moedict_twblg][筊]]驚天光
+#+end_quote
+
+* COMMENT Org setup
+
+# Local Variables:
+# eval: (load (expand-file-name "generate.el") nil t)
+# End:
