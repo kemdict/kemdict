@@ -56,12 +56,15 @@ if (fs.existsSync("entries.db")) {
 const db = new Database("entries.db");
 
 function stringifyFields(thing) {
-  for (const key of ["props"]) {
-    if (typeof thing[key] !== "string") {
-      thing[key] = JSON.stringify(thing[key]);
-    }
-  }
-  return thing;
+  return {
+    title: thing.title,
+    from: thing.from,
+    lang: thing.lang,
+    props:
+      typeof thing.props === "string"
+        ? thing.props
+        : JSON.stringify(thing.props),
+  };
 }
 
 // title: string
