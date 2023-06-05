@@ -139,7 +139,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
   "Used to mark where links are coming from to register to the links table.")
 
 (defvar d:links nil
-  "The links alist.")
+  "A list of link objects.")
 
 (cl-defun d:links:link-to-word (target
                                 &key
@@ -450,6 +450,8 @@ do."
                    ""
                  "、"))))))))
 
+;; TODO: move this back to JS (except linking). Storing the HTML here
+;; is too restrictive.
 (defun d:process-def:dict_concised (def)
   "Process DEF for dict_concised."
   (->> def

@@ -48,12 +48,7 @@ unihan.json:
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
 	eask eval "(load \"kisaragi/generate\")"
 
-# I'm picking kip (department of education) for now because
-# 1. I treat it as just a spelling reform
-# 2. this makes it consistent when MOE's Taigi dictionary is also displayed
-# but this is frankly questionable.
-# TODO: I'll revisit this later.
-# FIXME: I'm also just throwing away PojUnicodeOthers when it contains
+# FIXME: I'm just throwing away PojUnicodeOthers when it contains
 # alternative pronunciations.
 #
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
