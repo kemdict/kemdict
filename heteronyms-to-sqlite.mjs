@@ -44,6 +44,7 @@ import readline from "node:readline";
 import Database from "better-sqlite3";
 
 import { langs, dicts } from "./data.mjs";
+import { pnCollect, pnToInputForm, pnNormalize } from "./pn.mjs";
 
 if (!fs.existsSync("heteronyms.json")) {
   console.log("heteronyms.json should be generated first!");
@@ -183,16 +184,30 @@ VALUES
       alias: het.title,
       exact: 1,
     });
-    for (const [key, exact] of [
-      ["pns", 1],
-      ["input-pns", null],
-    ]) {
-      if (het[key]) {
-        for (let j = 0; j < het[key].length; j++) {
+    const pns = pnCollect(het).values();
+    for (const pn of pns) {
+      insertAlias.run({
+        het_id,
+        exact: 1,
+        alias: pn,
+      });
+      // Input versions.
+      // - don't duplicate if equal to original
+      // - don't bother for some dictionaries
+      if (
+        [
+          "moedict_twblg",
+          "chhoetaigi_itaigi",
+          "chhoetaigi_taioanpehoekichhoogiku",
+          "chhoetaigi_taijittoasutian",
+        ].includes(het.from)
+      ) {
+        const inputForm = pnToInputForm(pn);
+        if (inputForm !== pn) {
           insertAlias.run({
             het_id,
-            exact,
-            alias: het[key][j],
+            exact: null,
+            alias: inputForm,
           });
         }
       }

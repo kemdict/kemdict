@@ -191,6 +191,9 @@ this:
             (s-replace-regexp
              ;; HACK: avoid replacing a link.
              ;; This detection handles "/word/KEY" and <a>KEY</a>
+             ;; TODO: maybe we can get rid of this if we just make
+             ;; sure to linkify keywords first before applying other
+             ;; linkification functions?
              (rx (group (not ">"))
                  (literal keyword)
                  (group (not (any "\"" "<"))))
@@ -351,46 +354,6 @@ this:
     "poj" "kip"
     "kMandarin"))
 
-(defun d:pn-collect (het &optional table?)
-  "Collect pronunciations from heteronym object HET.
-When TABLE? is non-nil, return a hash table mapping the
-pronunciation key to the corresponding value."
-  (let ((ret))
-    (dolist (key d::pn-keys)
-      (when-let (p (gethash key het))
-        (dolist (p (d:pn-normalize p))
-          (push (cons key p)
-                ret))))
-    (if table? ret (mapcar #'cdr ret))))
-
-(defun d:pn-normalize (p &optional one)
-  "Normalize pronunciation string P.
-
-If P is a hash table, get the string from its value in
-\"zh-Hant\".
-
-Return a list of normalized strings. This is because some
-pronunciation strings include multiple pronunciations. If ONE is
-non-nil, don't do pronunciation splitting and return a string
-instead."
-  (when (hash-table-p p)
-    (setq p (gethash "zh-Hant" p)))
-  (if one
-      (->> p
-           ucs-normalize-NFC-string
-           (s-replace "　" " ")
-           s-trim)
-    (--> p
-         ucs-normalize-NFC-string
-         (s-replace "　" " " it)
-         ;; The replacement character, which appears in one entry in
-         ;; itaigi.
-         ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
-         ;; I'm pretty sure it's not supposed to be there.
-         (s-replace (string #xFFFD) "" it)
-         (s-replace "（變）" "/" it)
-         (s-split "[ \t\n\r]*/[ \t\n\r]*" it t))))
-
 ;; FIXME: there is one entry in TaijitToaSutian that uses a slash to
 ;; indicate multiple different sets of Han characters.
 (defun d:process-title (title)
@@ -515,31 +478,6 @@ https://language.moe.gov.tw/result.aspx?classify_sn=&subclassify_sn=447&content_
                            "ˋ"
                          "^"))))
 
-;; (d:pn:input-form "Chit ê mi̍h-kiāⁿ")
-(defun d:pn:input-form (pn)
-  "Normalize PN such that it is searchable with an ASCII keyboard."
-  (cl-block nil
-    (concat
-     (let* ((tmp nil)
-            (seq (progn
-                   (d::debug "NFKD")
-                   (ucs-normalize-NFKD-string
-                    (s-replace "ⁿ" "nn" pn))))
-            (i 0)
-            (c nil))
-       (d::debug "Collecting")
-       (while (and seq (< i (length seq)))
-         (setq c (aref seq i))
-         ;; Early return optimization
-         (when (memq (aref char-script-table c)
-                     '(han bopomofo cjk-misc))
-           (cl-return pn))
-         (unless (memq (get-char-code-property c 'general-category)
-                       '(Mn Mc Me))
-           (push c tmp))
-         (cl-incf i))
-       (nreverse tmp)))))
-
 (defun d:process-props (props title dict)
   "Process the heteronym props object PROPS.
 
@@ -557,7 +495,10 @@ This is a separate step from shaping."
     (dolist (key '("trs" "poj" "kip"))
       (ht-update-with! props key
         (lambda (pn)
-          (d:pn-normalize pn :one))))
+          (->> pn
+               ucs-normalize-NFC-string
+               (s-replace "　" " ")
+               s-trim))))
     (dolist (key '("radical" "v_type" "v_pinyin"))
       (ht-update-with! props key
         #'s-trim))
@@ -776,6 +717,27 @@ information."
        ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
        ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json"))))))
 
+(defun d:sort-orig-hets (orig-hets)
+  "Sort ORIG-HETS according to their het_sort or id keys.
+
+They are sorted according to the \"het_sort\" key, or if that's
+not present, the \"id\" key.
+
+ORIG-HETS are props that will be used to construct heteronyms."
+  (if (or (seq-every-p (-partial #'gethash "het_sort")
+                       orig-hets)
+          (seq-every-p (-partial #'gethash "id")
+                       orig-hets))
+      (sort
+       orig-hets
+       (lambda (it other)
+         (< (string-to-number
+             (or (gethash "het_sort" it)
+                 (gethash "id" it)))
+            (string-to-number
+             (or (gethash "het_sort" other)
+                 (gethash "id" other))))))
+    orig-hets))
 
 ;; For entries with heteronyms:
 ;;   [{:title "title"
@@ -810,37 +772,21 @@ Titles are written to `d:titles:look-up-table'."
       (let ((orig-hets (or (gethash "heteronyms" entry)
                            (vector entry))))
         (d::debug "%s - applying het_sort" dict)
-        ;; Sort them according to the "het_sort" key, or if that's not
-        ;; present, the "id" key.
         ;; TODO: maybe we want IDs in the DB as well
         ;; idea: add 1000000 to IDs from the first dict, 2000000 to
         ;; IDs from the second, and so on, plus ensuring we don't
         ;; exceed the maximum allowed word count in this scheme
-        (when (or (seq-every-p (-partial #'gethash "het_sort")
-                               orig-hets)
-                  (seq-every-p (-partial #'gethash "id")
-                               orig-hets))
-          (setq orig-hets (--sort
-                           (< (string-to-number
-                               (or (gethash "het_sort" it)
-                                   (gethash "id" it)))
-                              (string-to-number
-                               (or (gethash "het_sort" other)
-                                   (gethash "id" other))))
-                           orig-hets)))
+        (when (> (length orig-hets) 1)
+          (setq orig-hets (d:sort-orig-hets orig-hets)))
         (seq-doseq (orig-het orig-hets)
           (d::debug "%s - processing title" dict)
           (let* ((shaped-het (make-hash-table :test #'equal))
-                 ;; title can be empty. We'll read from fallback
-                 ;; fields below.
-                 (title (-some-> (gethash "title" entry)
-                          d:process-title)))
-            (unless title
-              (setq title (or
-                           ;; 臺日大辭典 and 臺灣白話基礎語句
-                           (gethash "poj" orig-het)
-                           ;; unihan
-                           (gethash "char" orig-het))))
+                 (title (or (-some-> (gethash "title" entry)
+                              d:process-title)
+                            ;; 臺日大辭典 and 臺灣白話基礎語句
+                            (gethash "poj" orig-het)
+                            ;; unihan
+                            (gethash "char" orig-het))))
             ;; chhoetaigi_taijittoasutian:
             ;; work around some incorrectly formatted titles, like
             ;; "a-a cham-cham" being formatted as "a-acham-cham" in
@@ -857,26 +803,6 @@ Titles are written to `d:titles:look-up-table'."
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)
-            (d::debug "%s - collecting pns" dict)
-            (-when-let (pns (-uniq (d:pn-collect orig-het)))
-              (d::debug "%s - puthash pns" dict)
-              (puthash "pns" pns shaped-het)
-              ;; Input versions.
-              ;; - don't duplicate if equal to original
-              ;; - don't bother for some dictionaries
-              (when (member dict '("moedict_twblg"
-                                   "chhoetaigi_itaigi"
-                                   "chhoetaigi_taioanpehoekichhoogiku"
-                                   "chhoetaigi_taijittoasutian"))
-                (d::debug "%s - input pns" dict)
-                (puthash "input-pns"
-                         (let (ret)
-                           (dolist (pn pns)
-                             (let ((input-pn (d:pn:input-form pn)))
-                               (unless (equal pn input-pn)
-                                 (push input-pn ret))))
-                           ret)
-                         shaped-het)))
             (push shaped-het heteronyms)
             (puthash title t d:titles:look-up-table)))))
     heteronyms))
@@ -948,9 +874,7 @@ Titles are written to `d:titles:look-up-table'."
                  #'d:links:link-to-word
                  #'d:links:linkify-brackets
                  #'d:process-props
-                 #'d:parse-and-shape
-                 #'d:pn-collect
-                 #'d:pn:input-form)
+                 #'d:parse-and-shape)
       comp))
   ;; We're holding all dictionary data in memory, so if this is too
   ;; low we'll be GC'ing all the time without being able to free any
