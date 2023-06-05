@@ -19,6 +19,16 @@
     // Some lines contain just a Tab. Get rid of them.
     return str.split("\n").filter((x) => x.trim().length > 0);
   }
+
+  function processDef(def: string) {
+    return (
+      def
+        // These are the only types that exist.
+        .replace(/\[([例似反])\]/g, "<br><m>［$1］</m>")
+        .replace(/§(英)([a-zA-Z ]+)/, "<br><m>［$1］</m>$2")
+        .replace(/　?△/, '<br><m title="參考詞">［△］</m> ')
+    );
+  }
 </script>
 
 {#each heteronyms as het}
@@ -31,7 +41,7 @@
   {/if}
   {#if het.props.def}
     <ol>
-      {#each split(het.props.def) as d}
+      {#each split(processDef(het.props.def)) as d}
         <!-- TODO: we really need a better way of displaying nested lists. -->
         <li><p class="def">{@html d.replace(/　(\(\d+\))/g, "<br>$1")}</p></li>
       {/each}
