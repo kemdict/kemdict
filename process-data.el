@@ -413,8 +413,6 @@ do."
                    ""
                  "、"))))))))
 
-;; TODO: move this back to JS (except linking). Storing the HTML here
-;; is too restrictive.
 (defun d:process-def:dict_concised (def)
   "Process DEF for dict_concised."
   (->> def
@@ -432,13 +430,6 @@ do."
                          (lambda (str)
                            (concat (match-string 1 str)
                                    (d:links:link-to-word (match-string 2 str)))))
-       ;; These are the only types that exist.
-       (s-replace-regexp (rx "[" (group (any "例似反")) "]")
-                         "<br><m>［\\1］</m>")
-       (s-replace-regexp (rx "§" (group "英") (group (+ (any "a-zA-Z "))))
-                         "<br><m>［\\1］</m>\\2")
-       (s-replace-regexp (rx (opt "　") "△")
-                         "<br><m title=\"參考詞\">［△］</m> ")
        d:links:linkify-brackets
        d:links:linkify-arrow
        (s-replace-regexp
