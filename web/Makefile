@@ -1,6 +1,8 @@
 export LANG=en_US.UTF-8
 export KEMDICT_VERSION=$(shell git describe --tags --always)
 
+.DEFAULT_GOAL := dist
+
 DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro) common
 
 common: ../common
