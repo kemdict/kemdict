@@ -44,7 +44,6 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-astro": "^0.23.0",
     "eslint-plugin-svelte": "^2.30.0",
-    "postcss-preset-env": "^8.4.2",
     "size-limit": "^8.2.4",
     "sqlstring": "^2.3.3",
     "svelte": "^3.59.1",
