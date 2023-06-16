@@ -93,7 +93,7 @@ export const dicts = [
   {
     id: "moedict_twblg",
     name: "臺灣閩南語常用詞辭典",
-    url: "https://twblg.dict.edu.tw/holodict_new/result_main.jsp?radiobutton=1&limit=20&querytarget=1&sample=$1",
+    url: "https://sutian.moe.edu.tw/und-hani/tshiau/?lui=tai_su&tsha=$1",
     lang: "nan_TW",
   },
   {
