@@ -9,7 +9,8 @@ if (!success) {
 }
 const heteronyms = data.heteronyms;
 const mtch = data.mtch;
-const query = data.query;
+const originalQuery = data.originalQuery;
+const normalizedQuery = data.query;
 const langSet = data.langSet;
 
 let count = heteronyms.length;
@@ -27,14 +28,14 @@ import ListLink from "$src/components/ListLink.svelte";
 
 import Results from "./Results.svelte";
 
-const title = getSearchTitle(mtch, query);
-const titleMarkup = getSearchTitle(mtch, query, true);
+const title = getSearchTitle(mtch, originalQuery);
+const titleMarkup = getSearchTitle(mtch, originalQuery, true);
 ---
 
 <SingleLayout
   title={`${title} - 所有辭典 - ${site.title}`}
   initialMatchSelection={mtch}
-  initialInput={query}
+  initialInput={originalQuery}
 >
   <Fragment slot="head">
     <meta
@@ -49,10 +50,10 @@ const titleMarkup = getSearchTitle(mtch, query, true);
   {
     count === 0 ? (
       <div class="prose">
-        <h1>「{query}」的搜尋結果</h1>
+        <h1>「{originalQuery}」的搜尋結果</h1>
         <p>找不到{title}。</p>
         <hr />
-        <Elsewhere term={query} />
+        <Elsewhere term={originalQuery} />
       </div>
     ) : (
       <>
@@ -71,7 +72,7 @@ const titleMarkup = getSearchTitle(mtch, query, true);
                 <ul class="divide-y divide-gray-300">
                   <WordPreview
                     heteronyms={applicableHeteronyms.slice(0, previewCount)}
-                    searchQuery={query}
+                    searchQuery={normalizedQuery}
                   />
                   {applicableHeteronyms.length > previewCount && (
                     <ListLink

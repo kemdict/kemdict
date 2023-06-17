@@ -10,7 +10,8 @@ if (!success) {
 }
 const heteronyms = data.heteronyms;
 const mtch = data.mtch;
-const query = data.query;
+const originalQuery = data.originalQuery;
+const normalizedQuery = data.query;
 const langSet = data.langSet;
 // We pass langCountObj around because the other option is to pass both
 // all heteronyms and applicable heteronyms here.
@@ -38,14 +39,14 @@ if (page === false) {
 import SingleLayout from "$src/SingleLayout.astro";
 import SingleLangResults from "./SingleLangResults.svelte";
 import Elsewhere from "$src/components/Elsewhere.astro";
-const title = getSearchTitle(mtch, query);
-const titleMarkup = getSearchTitle(mtch, query, true);
+const title = getSearchTitle(mtch, originalQuery);
+const titleMarkup = getSearchTitle(mtch, originalQuery, true);
 ---
 
 <SingleLayout
   title={`${title} - ${langs[langId]}辭典 - ${site.title}`}
   initialMatchSelection={mtch}
-  initialInput={query}
+  initialInput={originalQuery}
   submitSuffix={`/${langId}`}
 >
   <Fragment slot="head">
@@ -69,6 +70,6 @@ const titleMarkup = getSearchTitle(mtch, query, true);
     langCountObj={langCountObj}
     currentParamsString={url.searchParams.toString()}
     heteronyms={chunked[page - 1]}
-    searchQuery={query}
+    searchQuery={normalizedQuery}
   />
 </SingleLayout>

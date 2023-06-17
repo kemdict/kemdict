@@ -43,6 +43,7 @@ export async function getHetFromUrl(
           heteronyms: Heteronym[];
           mtch: string;
           query: string;
+          originalQuery: string;
           langSet: Set<LangId>;
           langCountObj: Record<LangId, number>;
         }
@@ -50,7 +51,14 @@ export async function getHetFromUrl(
     ) // when the first item is false, this is a string
   ]
 > {
-  const query: string | undefined = url.searchParams.get("q")?.trim();
+  /**
+   * Query text as written in the URL
+   */
+  const originalQuery: string | undefined = url.searchParams.get("q")?.trim();
+  /**
+   * Unicode normalized query
+   */
+  const query = originalQuery?.normalize("NFC");
   const mtch: Mtch = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "desc";
   if (typeof query !== "string" || query.length === 0) {
@@ -99,6 +107,13 @@ export async function getHetFromUrl(
   }
   return [
     true,
-    { heteronyms, mtch, query, langSet: presentLangSet, langCountObj },
+    {
+      heteronyms,
+      mtch,
+      query,
+      originalQuery,
+      langSet: presentLangSet,
+      langCountObj,
+    },
   ];
 }
