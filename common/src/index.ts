@@ -4,7 +4,7 @@ import { escape as sqlEscape } from "sqlstring";
 // sqlstring's escapes single quotes with a backslash, but SQLite
 // expects it to be doubled instead.
 function escape(thing: any) {
-  return sqlEscape(thing).replace("\\'", "''");
+  return sqlEscape(thing).replace("\\'", "''").normalize("NFD");
 }
 
 export const site = {
