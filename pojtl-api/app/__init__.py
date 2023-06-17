@@ -3,6 +3,7 @@ from kesi import Ku
 from markupsafe import escape
 
 app = Flask(__name__)
+app.logger.setLevel("INFO")
 
 
 @app.route("/")
