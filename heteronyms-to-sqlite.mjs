@@ -44,7 +44,7 @@ import readline from "node:readline";
 import Database from "better-sqlite3";
 
 import { langs, dicts } from "./data.mjs";
-import { pnCollect, pnToInputForm, pnNormalize } from "./pn.mjs";
+import { pnCollect, pnToInputForm } from "./pn.mjs";
 
 if (!fs.existsSync("heteronyms.json")) {
   console.log("heteronyms.json should be generated first!");
@@ -54,6 +54,15 @@ if (fs.existsSync("entries.db")) {
   fs.rmSync("entries.db");
 }
 const db = new Database("entries.db");
+
+/**
+ * Parse the JSON in `path`, with the whole thing normalized to NFD form.
+ * @param {string} path
+ * @returns {any}
+ */
+function parse(path) {
+  return JSON.parse(fs.readFileSync(path).toString().normalize("NFD"))
+}
 
 function stringifyFields(thing) {
   return {
@@ -166,7 +175,7 @@ VALUES
 }
 
 {
-  const heteronyms = JSON.parse(fs.readFileSync("heteronyms.json")).reverse();
+  const heteronyms = parse("heteronyms.json").reverse();
   const insertHet = db.prepare(`
 INSERT INTO
   heteronyms ("title","from","lang","props")
@@ -219,7 +228,7 @@ VALUES
 }
 
 {
-  const links = Object.values(JSON.parse(fs.readFileSync("links.json")));
+  const links = Object.values(parse("links.json"));
   const insertLink = db.prepare(`
 INSERT INTO
   links ("from","to")
