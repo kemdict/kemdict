@@ -59,6 +59,9 @@ const titleMarkup = getSearchTitle(mtch, originalQuery, true);
       content={`在${langs[langId]}收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
     />
   </Fragment>
+  {
+    /* So this... could allow injecting HTML, but only when there are matching entries in the database. If not, this file redirects to /search, which then renders a *not found* page without injection risk. */
+  }
   <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
   <SingleLangResults
     pageCount={chunked.length}

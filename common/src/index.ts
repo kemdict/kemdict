@@ -1,6 +1,20 @@
 import { uniq, escapeRegExp } from "lodash-es";
 import { escape as sqlEscape } from "sqlstring";
 
+import searchQueryParser from "search-query-parser";
+import type { SearchParserResult } from "search-query-parser";
+
+function ensureArray<T>(value: T[] | T): T[] | undefined {
+  if (Array.isArray(value)) {
+    return value;
+  } else if (typeof value === "undefined") {
+    // Don't box undefined
+    return value;
+  } else {
+    return [value];
+  }
+}
+
 // sqlstring's escapes single quotes with a backslash, but SQLite
 // expects it to be doubled instead.
 function escape(thing: any) {
@@ -106,7 +120,9 @@ export function getSearchTitle(
   query: string,
   markup?: boolean
 ): string {
-  const tokens = parseQueryToTokens(query);
+  let ret = "";
+  const parsed = parseQuery(query);
+  const tokens = parseStringQuery(parsed.text);
   function wrap(s: string) {
     if (markup) {
       return `「<span class="font-bold">${s}</span>」`;
@@ -118,12 +134,12 @@ export function getSearchTitle(
     query = `<span class="font-bold">${query}</span>`;
   }
   if (mtch === "contains") {
-    return `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+    ret = `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
   } else if (mtch === "prefix") {
     if (tokens.length === 1) {
-      return `以${wrap(tokens[0])}開頭的詞`;
+      ret = `以${wrap(tokens[0])}開頭的詞`;
     } else {
-      return `以${wrap(tokens[0])}開頭、且包含${joinLast(
+      ret = `以${wrap(tokens[0])}開頭、且包含${joinLast(
         tokens.slice(1).map(wrap),
         "、",
         "及"
@@ -131,9 +147,9 @@ export function getSearchTitle(
     }
   } else if (mtch === "suffix") {
     if (tokens.length === 1) {
-      return `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
+      ret = `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
     } else {
-      return `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
+      ret = `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
         tokens.slice(0, -1).map(wrap),
         "、",
         "及"
@@ -142,8 +158,14 @@ export function getSearchTitle(
   } else {
     // if (mtch === "exact") {
     // }
-    return `完全符合「${query}」的詞`;
+    ret = `完全符合「${query}」的詞`;
   }
+  //   if (markup) {
+
+  // ret += "<>"
+  //   }
+
+  return ret;
 }
 
 /**
@@ -177,11 +199,65 @@ export function parseLangParam(param: string | null, langIds: Set<string>) {
   }
 }
 
-export function parseQueryToTokens(inputQuery: string): string[] {
-  return inputQuery.split(/\s+/);
+/**
+ * Split `text` on whitespace to be processed later.`
+ */
+function parseStringQuery(text: string | string[] | undefined): string[] {
+  if (Array.isArray(text)) {
+    return text.join(" ").split(/\s+/);
+  } else {
+    return text?.split(/\s+/) || [];
+  }
+}
+export function parseQuery(inputQuery: string) {
+  // FIXME: use alwaysArray
+  const result = searchQueryParser.parse(inputQuery, {
+    keywords: ["lang", "title"],
+    offsets: false,
+  });
+  if (typeof result === "string") {
+    return { text: result } as SearchParserResult;
+  } else {
+    return result;
+  }
 }
 
-export function tokenToLIKEInput(
+function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
+  const operator = mtch === "exact" ? "=" : "LIKE";
+  const exprs: string[] = [];
+  const sqlArgs: string[] = [];
+  ensureArray(parsed.text as string[] | string)?.forEach((text) => {
+    // FIXME: use search-query-parser's tokenize option. That also
+    // allows negation to work on non-keyword terms.
+    const tokens = parseStringQuery(text);
+    tokens.forEach((s, i) => {
+      exprs.push(`AND aliases.alias ${operator} ?`);
+      sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
+    });
+  });
+  ensureArray(parsed.exclude?.text as string[] | string)?.forEach((text) => {
+    const tokens = parseStringQuery(text);
+    tokens.forEach((s, i) => {
+      exprs.push(`AND aliases.alias NOT ${operator} ?`);
+      sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
+    });
+  });
+  // TODO: This will tell SQLite to return heteronyms that are eg.
+  // both in language A and language B, which is not possible.
+  ensureArray(parsed.lang)?.forEach((lang) => {
+    exprs.push(`AND lang LIKE '%${lang}%'`);
+  });
+  ensureArray(parsed.exclude?.lang)?.forEach((lang) => {
+    exprs.push(`AND lang NOT LIKE '%${lang}%'`);
+  });
+
+  return {
+    sqlExprs: exprs.join("\n").normalize("NFD"),
+    sqlArgs: sqlArgs.map((s) => s.normalize("NFD")),
+  };
+}
+
+function tokenToLIKEInput(
   token: string,
   mtch: Mtch,
   first = false,
@@ -292,7 +368,7 @@ export class CrossDB {
    * Returns {presentDicts, presentLangSet, heteronyms, langCountObj}
    */
   async getHeteronyms(
-    tokens: string | string[],
+    parsed: string | SearchParserResult,
     options?: {
       mtch?: string;
       langs?: string[];
@@ -304,42 +380,24 @@ export class CrossDB {
     heteronyms: Heteronym[];
     langCountObj: Record<LangId, number>;
   }> {
-    if (typeof tokens === "string") {
-      tokens = [tokens.normalize("NFD")];
-    } else {
-      tokens = tokens.map((s) => s.normalize("NFD"));
+    if (typeof parsed === "string") {
+      parsed = { text: parsed.normalize("NFD") };
     }
     const mtch = options?.mtch || "exact";
     const limit = options?.limit;
     const langs = options?.langs;
     const hasLangs = langs && langs.length > 0;
-    const operator = mtch === "exact" ? "=" : "LIKE";
+    const { sqlExprs, sqlArgs } = parsedQueryToSQL(parsed, mtch);
     const hets = (await this.crossDbAll(
       `
 SELECT DISTINCT title, "from", lang, props, aliases.exact as exact
 FROM heteronyms
 INNER JOIN aliases ON aliases.het_id = heteronyms.id
 WHERE "from" IS NOT NULL
-${tokens.map(() => `AND aliases.alias ${operator} ?`).join("\n")}
+${sqlExprs}
 ${limit ? `LIMIT ?` : ""}
 `,
-      (() => {
-        const arr: Array<string | number> = [];
-        const tokenCount = tokens.length;
-        tokens.forEach((token, index) => {
-          const query = tokenToLIKEInput(
-            token,
-            mtch,
-            index === 0,
-            index === tokenCount - 1
-          );
-          arr.push(query);
-        });
-        if (limit) {
-          arr.push(limit);
-        }
-        return arr;
-      })()
+      [...sqlArgs, ...(limit ? [limit] : [])]
     )) as Heteronym[];
     let applicableHets = hets;
     if (hasLangs) {

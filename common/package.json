@@ -13,7 +13,10 @@
     }
   },
   "unbuild": {
-    "externals": ["sqlstring", "lodash-es"]
+    "externals": [
+      "sqlstring",
+      "lodash-es"
+    ]
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.7",
@@ -22,5 +25,8 @@
     "lodash-es": "^4.17.21",
     "sqlstring": "^2.3.3",
     "unbuild": "^1.2.1"
+  },
+  "dependencies": {
+    "search-query-parser": "^1.6.0"
   }
 }

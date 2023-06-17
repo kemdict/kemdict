@@ -97,7 +97,7 @@
       @apply my-0;
     }
     p {
-      @apply my-0 pb-4;
+      @apply my-0 pb-2;
     }
   }
   .links {

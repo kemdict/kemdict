@@ -1,5 +1,5 @@
 import { chunk, sortBy } from "lodash-es";
-import { groupByProp, parseQueryToTokens, CrossDB } from "common";
+import { groupByProp, parseQuery, CrossDB } from "common";
 import type { Heteronym, LangId, Mtch } from "common";
 
 export async function readDB() {
@@ -61,12 +61,13 @@ export async function getHetFromUrl(
   const query = originalQuery?.normalize("NFC");
   const mtch: Mtch = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "desc";
+  // Invalid
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
-  const tokens = parseQueryToTokens(query);
+  const parsed = parseQuery(query);
   const { presentLangSet, heteronyms, langCountObj } = await DB.getHeteronyms(
-    tokens,
+    parsed,
     {
       mtch,
       langs: lang && [lang],
@@ -76,6 +77,11 @@ export async function getHetFromUrl(
   if (
     mtch === "prefix" &&
     heteronyms &&
+    // The query is just text, no filters and no exclusions
+    Object.keys(parsed).length === 1 &&
+    // The query does not invoke the "second token uses contains
+    // matching" logic
+    !query.match(/\s/) &&
     heteronyms.length > 0 &&
     heteronyms.length < 10 &&
     heteronyms.every((x) => x.title === heteronyms[0].title)

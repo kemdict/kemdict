@@ -10,7 +10,7 @@ export interface Props {
 const { title, date, desc } = Astro.props.frontmatter;
 ---
 
-<SingleLayout title={title} class="prose">
+<SingleLayout title={title} class="prose prose-p:my-4">
   <slot />
   <Fragment slot="head">
     {

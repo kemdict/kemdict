@@ -57,6 +57,7 @@ const titleMarkup = getSearchTitle(mtch, originalQuery, true);
       </div>
     ) : (
       <>
+        {/* So this... could allow injecting HTML, but only when there are matching entries in the database. If not, this path isn't taken. */}
         <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
         <div class="">
           {presentLangs.map((lang) => {

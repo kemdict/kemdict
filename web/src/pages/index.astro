@@ -76,21 +76,26 @@ const words = await DB.getDictTitles("kisaragi_dict", 15);
           <li>
             <p><a href="pojtl">台語羅馬字簡介</a></p>
           </li>
+          <li>
+            <p><a href="usage">使用說明</a></p>
+          </li>
         </ul>
       </div>
     </div>
     <div class="ml-1"></div>
     <h3>最近新增的詞</h3>
     <WordList words={words} />
-    <h3>索引</h3>
-    <ul class="ml-1 list-none p-0">
-      <li>
-        <p><a href="initials">首字索引</a></p>
-      </li>
-      <li>
-        <p><a href="radicals">部首索引</a></p>
-      </li>
-    </ul>
+    <div>
+      <h3>索引</h3>
+      <ul class="ml-1 list-none p-0">
+        <li>
+          <p><a href="initials">首字索引</a></p>
+        </li>
+        <li>
+          <p><a href="radicals">部首索引</a></p>
+        </li>
+      </ul>
+    </div>
     <h3>收錄字典</h3>
     <ul class="md:two ml-1 list-none p-0">
       <li>
