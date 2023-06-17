@@ -1,5 +1,63 @@
 [
   {
+    "title": "時後",
+    "added": 1686995761.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄏㄡˋ",
+        "definitions": [
+          {
+            "def": "「時候」的誤用字。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "稍後",
+    "added": 1686995761.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄠ ㄏㄡˋ",
+        "definitions": [
+          {
+            "def": "「稍候」的誤用字。\n- 「請稍候」(常用，指請稍微等候)\n- 「請稍後再試」(常用，指請一小段時間之後再次嘗試)\n- 「請稍候再試」(少用，可指請稍微等候之後再次嘗試)\n- 「請稍後」(錯誤，「請」後方需要接動作)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "咧",
+    "added": 1686994852.0,
+    "heteronyms": [
+      {
+        "pronunciation": "leh / ㄌㄝ",
+        "definitions": [
+          {
+            "def": "用於句末，用以質問事物缺乏。似「在哪裡呢？」，但較有質問語氣。\n#+begin_quote\n你們說活動準備充足，但雨天備案咧？這樣當天參加者豈不是要淋雨？\n#+end_quote",
+            "type": "助"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手順",
+    "added": 1686994631.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄕㄨㄣˋ",
+        "definitions": [
+          {
+            "def": "步驟。借自日語。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "牙起來",
     "added": 1685374206.0,
     "heteronyms": [
@@ -7,7 +65,7 @@
         "pronunciation": "ㄧㄚˊ ㄑㄧˇ ㄌㄞˊ / giâ ㄑㄧˇ ㄌㄞˊ",
         "definitions": [
           {
-            "def": "生氣。「牙」，借自台語「[[夯?lang=nan_TW][夯 (giâ)]]」。",
+            "def": "生氣。「牙」，借自台語「[[夯?lang=nan_TW][夯(giâ)]]」。",
             "type": "動"
           }
         ]
@@ -22,7 +80,7 @@
         "pronunciation": "ㄧㄢˊ ㄕㄤˋ",
         "definitions": [
           {
-            "def": "因言行被視為不當而造成極大的爭議與批評。日語借詞。",
+            "def": "因言行被視為不當而造成爭議與批評。日語借詞。",
             "type": "動"
           }
         ]
