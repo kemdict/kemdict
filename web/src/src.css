@@ -139,7 +139,8 @@
       }
     }
     :where(table):not(:where([class~="not-prose"] *)) {
-      @apply text-left text-lg;
+      @apply divide-y;
+      @apply text-left;
       th {
         @apply text-gray-700 dark:text-gray-300;
       }
@@ -148,13 +149,20 @@
       }
       th,
       td {
-        @apply border-b-2 dark:border-stone-700;
-        @apply text-left text-lg;
-        @apply p-2;
+        @apply dark:border-stone-700;
+        @apply text-left;
+        @apply p-1;
       }
     }
   }
   .word {
+    table {
+      @apply text-lg;
+      th,
+      td {
+        @apply text-lg;
+      }
+    }
     .copyright {
       @apply mb-2 mt-6 text-right text-sm opacity-75;
     }

@@ -214,7 +214,7 @@ function parseStringQuery(text: string | string[] | undefined): string[] {
 export function parseQuery(inputQuery: string) {
   // FIXME: use alwaysArray
   const result = searchQueryParser.parse(inputQuery, {
-    keywords: ["lang", "title"],
+    keywords: ["lang", "title", "from"],
     offsets: false,
   });
   if (typeof result === "string") {
@@ -251,6 +251,12 @@ function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
   });
   ensureArray(parsed.exclude?.lang)?.forEach((lang) => {
     exprs.push(`AND lang NOT LIKE '%${lang}%'`);
+  });
+  ensureArray(parsed.from)?.forEach((dict) => {
+    exprs.push(`AND "from" LIKE '%${dict}%'`);
+  });
+  ensureArray(parsed.exclude?.from)?.forEach((dict) => {
+    exprs.push(`AND "from" NOT LIKE '%${dict}%'`);
   });
   ensureArray(parsed.title)?.forEach((title, i, titles) => {
     exprs.push(`AND title ${operator} ?`);

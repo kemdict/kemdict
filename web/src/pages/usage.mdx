@@ -37,7 +37,11 @@ desc: Kemdict 國語整合典的使用說明。
 
 搜尋使用 [`search-query-parser`](https://www.npmjs.com/package/search-query-parser) 讀取篩選器。
 
-用 `lang:<語言代碼>` 來指定語言。指定時不分大小寫。
+篩選器前可以加 "-" 來排除它，例如 `-lang:<語言代碼>`。目前暫時無法排除以空白分開的關鍵詞。
+
+<h4 class="text-lg"><code>lang:{"<語言代碼>"}</code></h4>
+
+指定語言。不分大小寫。
 
 語言代碼：
 
@@ -47,8 +51,20 @@ import { langs } from "common"
   {Object.entries(langs).map(([id, name]) => (<li>{name}: <code>{id}</code></li>))}
 </ul>
 
-用 `-lang:<語言代碼>` 來排除語言。目前暫時無法排除以空白分開的關鍵詞。
+<h4 class="text-lg"><code>from:{"<辭典代碼>"}</code></h4>
 
-用 `title:<文字>` 來搜尋詞目而不搜尋讀音。
+指定辭典。不分大小寫。
 
-`title:"-" lang:zh_TW` → 標題包含 dash 的華語詞目。`"-"` 需要引號，因為 `-` 是表示排除的特殊字元。
+辭典代碼：
+
+import { dicts } from "common"
+
+<table>
+{dicts.map(({id, name}) => (<tr><td>{name}</td><td><code>{id}</code></td></tr>))}
+</table>
+
+<h4 class="text-lg"><code>title:{"<文字>"}</code></h4>
+
+搜尋詞目而不搜尋讀音。
+
+- `title:"-" lang:zh_TW` → 標題包含 "-" 的華語詞目。`"-"` 需要引號，因為 `-` 是表示排除的特殊字元。
