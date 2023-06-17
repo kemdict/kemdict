@@ -18,7 +18,7 @@ export function pnNormalize(pn) {
   }
   return (
     p
-      .normalize("NFC")
+      .normalize("NFD")
       .replace("　", " ")
       // The replacement character, which appears in one entry in
       // itaigi.
