@@ -225,8 +225,11 @@ export function joinLast(
  * Decode the JSON in the props field in a heteronym object.
  */
 function processHet(het: Heteronym): Heteronym {
+  het.title = het.title.normalize("NFC");
+  het.from = het.from?.normalize("NFC");
+  het.lang = het.lang.normalize("NFC");
   if (typeof het.props === "string") {
-    het.props = JSON.parse(het.props);
+    het.props = JSON.parse(het.props.normalize("NFC"));
   }
   return het;
 }
@@ -302,7 +305,9 @@ export class CrossDB {
     langCountObj: Record<LangId, number>;
   }> {
     if (typeof tokens === "string") {
-      tokens = [tokens];
+      tokens = [tokens.normalize("NFD")];
+    } else {
+      tokens = tokens.map((s) => s.normalize("NFD"));
     }
     const mtch = options?.mtch || "exact";
     const limit = options?.limit;
