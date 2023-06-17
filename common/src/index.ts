@@ -134,9 +134,15 @@ export function getSearchTitle(
     query = `<span class="font-bold">${query}</span>`;
   }
   if (mtch === "contains") {
-    ret = `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+    if (tokens.length === 0) {
+      ret = `符合「${query}」的詞`;
+    } else {
+      ret = `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+    }
   } else if (mtch === "prefix") {
-    if (tokens.length === 1) {
+    if (tokens.length === 0) {
+      ret = `開頭符合「${query}」的詞`;
+    } else if (tokens.length === 1) {
       ret = `以${wrap(tokens[0])}開頭的詞`;
     } else {
       ret = `以${wrap(tokens[0])}開頭、且包含${joinLast(
@@ -146,7 +152,9 @@ export function getSearchTitle(
       )}的詞`;
     }
   } else if (mtch === "suffix") {
-    if (tokens.length === 1) {
+    if (tokens.length === 0) {
+      ret = `結尾符合「${query}」的詞`;
+    } else if (tokens.length === 1) {
       ret = `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
     } else {
       ret = `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
@@ -156,14 +164,8 @@ export function getSearchTitle(
       )}的詞`;
     }
   } else {
-    // if (mtch === "exact") {
-    // }
     ret = `完全符合「${query}」的詞`;
   }
-  //   if (markup) {
-
-  // ret += "<>"
-  //   }
 
   return ret;
 }
@@ -249,6 +251,18 @@ function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
   });
   ensureArray(parsed.exclude?.lang)?.forEach((lang) => {
     exprs.push(`AND lang NOT LIKE '%${lang}%'`);
+  });
+  ensureArray(parsed.title)?.forEach((title, i, titles) => {
+    exprs.push(`AND title ${operator} ?`);
+    sqlArgs.push(
+      tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1)
+    );
+  });
+  ensureArray(parsed.exclude?.title)?.forEach((title, i, titles) => {
+    exprs.push(`AND title NOT ${operator} ?`);
+    sqlArgs.push(
+      tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1)
+    );
   });
 
   return {
