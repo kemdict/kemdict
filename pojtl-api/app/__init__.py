@@ -41,27 +41,27 @@ Routes:
 @app.route("/toTL/<text>", methods=["GET"])
 @app.route("/toTL", methods=["POST"])
 def to_tl(text=None):
-    app.logger.info(f"/toTL/{text or ''}")
     if text is None:
         text = request.data.decode("utf-8")
+    app.logger.info(f"/toTL/{text or ''}")
     return escape(Ku(text).TL().hanlo)
 
 
 @app.route("/toPOJ/<text>", methods=["GET"])
 @app.route("/toPOJ", methods=["POST"])
 def to_poj(text=None):
-    app.logger.info(f"/toPOJ/{text or ''}")
     if text is None:
         text = request.data.decode("utf-8")
+    app.logger.info(f"/toPOJ/{text or ''}")
     return escape(Ku(text).POJ().hanlo)
 
 
 @app.route("/count/<text>", methods=["GET"])
 @app.route("/count", methods=["POST"])
 def count(text=None):
-    app.logger.info(f"/count/{text}")
     if text is None:
         text = request.data.decode("utf-8")
+    app.logger.info(f"/count/{text}")
     return escape(len(list(Ku(text).thianji())))
 
 
