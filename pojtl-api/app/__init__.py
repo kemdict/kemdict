@@ -11,6 +11,11 @@ def page_not_found(_error):
     return "404", 404
 
 
+@app.errorhandler(405)
+def wrong_method(_error):
+    return "wrong HTTP method", 405
+
+
 @app.route("/")
 def home():
     return Response(
