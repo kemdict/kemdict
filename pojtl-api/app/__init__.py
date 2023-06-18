@@ -6,6 +6,11 @@ app = Flask(__name__)
 app.logger.setLevel("INFO")
 
 
+@app.errorhandler(404)
+def page_not_found(_error):
+    return "404", 404
+
+
 @app.route("/")
 def home():
     return Response(
