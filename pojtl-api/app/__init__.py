@@ -39,7 +39,7 @@ Routes:
 
 
 @app.route("/toTL/<text>", methods=["GET"])
-@app.route("/toTL", methods=["POST"])
+@app.route("/toTL/", methods=["POST"])
 def to_tl(text=None):
     if text is None:
         text = request.data.decode("utf-8")
@@ -48,7 +48,7 @@ def to_tl(text=None):
 
 
 @app.route("/toPOJ/<text>", methods=["GET"])
-@app.route("/toPOJ", methods=["POST"])
+@app.route("/toPOJ/", methods=["POST"])
 def to_poj(text=None):
     if text is None:
         text = request.data.decode("utf-8")
@@ -57,7 +57,7 @@ def to_poj(text=None):
 
 
 @app.route("/count/<text>", methods=["GET"])
-@app.route("/count", methods=["POST"])
+@app.route("/count/", methods=["POST"])
 def count(text=None):
     if text is None:
         text = request.data.decode("utf-8")
