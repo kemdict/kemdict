@@ -63,7 +63,7 @@
           autocomplete="off"
           placeholder="輸入要搜尋的詞彙…"
           name="q"
-          class="text-input w-full"
+          class="k-input w-full"
           value={initialInput}
         />
         <div class="absolute right-2 top-[25%]">

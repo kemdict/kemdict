@@ -51,7 +51,7 @@
 }
 
 @layer components {
-  .text-input {
+  .k-input {
     @apply h-12;
     @apply px-4;
     @apply text-sm;
