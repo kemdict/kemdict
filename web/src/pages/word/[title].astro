@@ -99,7 +99,7 @@ if (requestedLang === false) {
         {backlinks.length > 0 && (
           <div class="prose">
             <h3>有提到「{title}」的條目</h3>
-            <WordList words={backlinks} />
+            <WordList words={backlinks} client:load />
           </div>
         )}
       </div>

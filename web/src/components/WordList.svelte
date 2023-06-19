@@ -1,6 +1,10 @@
 <script lang="ts">
-  export let search: boolean;
+  // TODO: sort by length; sort by codepoint; reset sort to default
+  // (as stored in database - by date for kisaragi-dict and by (TODO)
+  // backlinks ranking for backlinks)
+
   export let words: string[];
+  export let search: boolean = words.length > 20;
 
   // This is more reliable than binding value then setting input to
   // value in handlers. The bound value might update too late.
