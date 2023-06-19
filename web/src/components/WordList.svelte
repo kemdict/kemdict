@@ -3,6 +3,13 @@
   export let words: string[];
 
   let input = "";
+
+  function highlight(word: string, input: string) {
+    if (input === "") return word;
+    return word
+      .split(input)
+      .join(`<span class="bg-yellow-400 dark:bg-yellow-800">${input}</span>`);
+  }
 </script>
 
 <div class="not-prose">
@@ -20,7 +27,7 @@
       {#if !search || word.includes(input)}
         <li class="mr-2 py-2">
           <a class="wordlink" href="/word/{word}">
-            {word}
+            {@html highlight(word, input)}
           </a>
         </li>
       {/if}
