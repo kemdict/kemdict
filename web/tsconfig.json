@@ -10,6 +10,8 @@
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": ".",
