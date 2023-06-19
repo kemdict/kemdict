@@ -1,5 +1,9 @@
 ---
 const { term } = Astro.props;
+
+const term_ja = Astro.props.term_ja || term;
+const term_en = Astro.props.term_en || term;
+
 import Out from "./Out.astro";
 
 import { ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
@@ -76,13 +80,13 @@ const wiktionary = Object.entries({
       </Out>
     </li>
     <li>
-      <Out href={`https://www.weblio.jp/content_find?query=${term}`}>
+      <Out href={`https://www.weblio.jp/content_find?query=${term_ja}`}>
         Weblio
       </Out>
     </li>
     <li>
       <Out
-        href={`https://dictionary.goo.ne.jp/freewordsearcher.html?mode=0&kind=all&MT=${term}`}
+        href={`https://dictionary.goo.ne.jp/freewordsearcher.html?mode=0&kind=all&MT=${term_ja}`}
       >
         Goo 辞書
       </Out>

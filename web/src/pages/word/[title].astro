@@ -28,8 +28,17 @@ import WordList from "$src/components/WordList.astro";
 import Word from "./Word.svelte";
 import WordTabs from "./WordTabs.svelte";
 
+let term_ja = title;
+let term_en = title;
 const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
   ([id, hets]: [string, Heteronym[]]) => {
+    // Implement the logic for eq-ja / eq-en
+    if (id === "kisaragi_dict") {
+      const eq_ja = hets.find((het) => het.props["eq-ja"])?.props["eq-ja"];
+      if (eq_ja) term_ja = eq_ja;
+      const eq_en = hets.find((het) => het.props["eq-en"])?.props["eq-en"];
+      if (eq_en) term_en = eq_en;
+    }
     return [dictsObj[id], hets];
   }
 );
@@ -72,7 +81,6 @@ if (requestedLang === false) {
         />
       </Fragment>
       <div class="">
-        {/* FIXME: make it easier to scroll */}
         <WordTabs
           client:load
           title={title}
@@ -87,7 +95,7 @@ if (requestedLang === false) {
             )
         )}
         <hr />
-        <Elsewhere term={title} />
+        <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />
         {backlinks.length > 0 && (
           <div class="prose">
             <h3>有提到「{title}」的條目</h3>
