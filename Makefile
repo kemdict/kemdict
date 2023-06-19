@@ -10,9 +10,15 @@ export LANG=en_US.UTF-8
 build:
 	cd web && make -j4 build-no-data
 
+dev.web:
+	cd web && make -j4 dev
+
+dev.common:
+	cd common && make -j4 dev
+
 .PHONY: dev
 dev:
-	cd web && make -j4 dev
+	npx concurrently "make dev.common" "make dev.web"
 
 dev-pojtl-api:
 	cd pojtl-api && make dev
