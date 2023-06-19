@@ -547,6 +547,7 @@
   {
     "title": "人均",
     "added": 1678287842.0,
+    "eq-en": "per capita",
     "heteronyms": [
       {
         "pronunciation": "ㄖㄣˊ ㄐㄩㄣ",
@@ -600,6 +601,7 @@
   {
     "title": "借字",
     "added": 1678287353.0,
+    "eq-ja": "当て字",
     "heteronyms": [
       {
         "pronunciation": "ㄐㄧㄝˋ ㄗˋ",
@@ -3417,6 +3419,7 @@
   {
     "title": "踩踏事件",
     "added": 1667606408.0,
+    "eq-en": "stampede",
     "heteronyms": [
       {
         "pronunciation": "ㄘㄞˇ ㄊㄚˋ ㄕˋ ㄐㄧㄢˋ",
@@ -3530,6 +3533,7 @@
   {
     "title": "黑歷史",
     "added": 1667606400.0,
+    "eq-ja": "黒歴史",
     "heteronyms": [
       {
         "pronunciation": "ㄏㄟ ㄌㄧˋ ㄕˇ",

@@ -674,6 +674,8 @@ information."
      ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
      ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
      ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")])
+   ;; (t
+   ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
    (t
     ;; The order here defines the order they will appear in the word
     ;; pages.
@@ -791,6 +793,9 @@ Titles are written to `d:titles:look-up-table'."
             (puthash "title" title shaped-het)
             (puthash "from" dict shaped-het)
             (puthash "lang" lang shaped-het)
+            ;; Copy some top-level props to each heteronym.
+            (--each '("eq-en" "eq-ja")
+              (puthash it (gethash it entry) orig-het))
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.
             (puthash "props" orig-het shaped-het)

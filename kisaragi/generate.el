@@ -56,6 +56,8 @@
       (cons "added" (-> (org-element-property :ADDED elem)
                         parse-iso8601-time-string
                         float-time))
+      (cons "eq-en" (org-element-property :EQ-EN elem))
+      (cons "eq-ja" (org-element-property :EQ-JA elem))
       (cons "heteronyms"
             (cl-loop
              for het in (org-element-contents elem)
