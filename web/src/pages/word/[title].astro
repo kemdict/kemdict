@@ -24,7 +24,7 @@ const backlinks = (await DB.getBacklinks(...titles)).sort();
 import SingleLayout from "$src/SingleLayout.astro";
 import { Tab, TabGroup } from "@skeletonlabs/skeleton";
 import Elsewhere from "$src/components/Elsewhere.astro";
-import WordList from "$src/components/WordList.astro";
+import WordList from "$src/components/WordList.svelte";
 import Word from "./Word.svelte";
 import WordTabs from "./WordTabs.svelte";
 

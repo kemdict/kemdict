@@ -1,7 +1,7 @@
 ---
 import { DB } from "$src/server/db";
 import MarkdownLayout from "$src/MarkdownLayout.astro";
-import WordList from "$src/components/WordList.astro";
+import WordList from "$src/components/WordList.svelte";
 
 const titles = await DB.getDictTitles("kisaragi_dict");
 const props = {
