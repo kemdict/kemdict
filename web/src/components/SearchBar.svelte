@@ -6,6 +6,8 @@
   export let initialMatchSelection = "prefix";
   export let highlightBtn = false;
 
+  import PopupMenu from "./PopupMenu.svelte";
+
   let currentMtch = initialMatchSelection || "prefix";
   const matchTypes = new Map(
     Object.entries({
@@ -39,17 +41,12 @@
   <form action="/search{submitSuffix || ''}">
     <div class="flex space-x-2">
       <div>
-        <button
-          type="button"
-          class="btn variant-filled h-full w-[10ch] text-sm"
-          use:popup={{
-            event: "click",
-            target: "combo",
-            placement: "bottom",
-            closeQuery: ".listbox-item",
-          }}>{matchTypes.get(currentMtch)}</button
+        <PopupMenu
+          target="combo"
+          btnClass="btn variant-filled h-full w-[10ch] text-sm"
+          closeQuery=".listbox-item"
+          label={matchTypes.get(currentMtch)}
         >
-        <div class="card z-10 p-4" data-popup="combo">
           <ListBox>
             {#each [...matchTypes] as [mtch, name]}
               <ListBoxItem bind:group={currentMtch} name="m" value={mtch}>
@@ -57,8 +54,7 @@
               </ListBoxItem>
             {/each}
           </ListBox>
-          <div class="arrow bg-surface-100-800-token" />
-        </div>
+        </PopupMenu>
       </div>
       <div class="relative flex-grow">
         <input

@@ -1,9 +1,25 @@
 ---
 const { term } = Astro.props;
 import Out from "./Out.astro";
+
+import { ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
+import PopupMenu from "./PopupMenu.svelte";
+
+const moedict = Object.entries({
+  華語: `https://moedict.tw/${term}`,
+  台語: `https://moedict.tw/'${term}`,
+  客語: `https://moedict.tw/:${term}`,
+  兩岸詞典: `https://moedict.tw/~${term}`,
+});
+
+const wiktionary = Object.entries({
+  中文: `https://zh.wiktionary.org/w/index.php?search=${term}`,
+  英語: `https://en.wiktionary.org/w/index.php?search=${term}`,
+  日語: `https://ja.wiktionary.org/w/index.php?search=${term}`,
+});
 ---
 
-<div class="prose">
+<div class="prose mb-4">
   <h3 class="mb-2 mt-0">在其他地方搜尋「{term}」</h3>
   <ul class="flex list-none flex-wrap space-x-2">
     <li>
@@ -15,12 +31,42 @@ import Out from "./Out.astro";
       </Out>
     </li>
     <li>
-      <Out href={`https://zh.wiktionary.org/w/index.php?search=${term}`}>
-        維基詞典
-      </Out>
+      <PopupMenu
+        client:load
+        btnClass="link"
+        cardClass="card variant-glass-primary p-2"
+        arrowClass=""
+        closeBtn={true}
+        placement="right"
+        label="維基詞典…"
+      >
+        {
+          wiktionary.map(([label, href]) => (
+            <Out class="block px-4 py-2" href={href}>
+              {label}
+            </Out>
+          ))
+        }
+      </PopupMenu>
     </li>
     <li>
-      <Out href={`https://moedict.tw/${term}`}>萌典</Out>
+      <PopupMenu
+        client:load
+        btnClass="link"
+        cardClass="card variant-glass-primary p-2"
+        arrowClass=""
+        closeBtn={true}
+        placement="right"
+        label="萌典…"
+      >
+        {
+          moedict.map(([label, href]) => (
+            <Out class="block px-4 py-2" href={href}>
+              {label}
+            </Out>
+          ))
+        }
+      </PopupMenu>
     </li>
     <li>
       <Out
@@ -32,6 +78,13 @@ import Out from "./Out.astro";
     <li>
       <Out href={`https://www.weblio.jp/content_find?query=${term}`}>
         Weblio
+      </Out>
+    </li>
+    <li>
+      <Out
+        href={`https://dictionary.goo.ne.jp/freewordsearcher.html?mode=0&kind=all&MT=${term}`}
+      >
+        Goo 辞書
       </Out>
     </li>
   </ul>
