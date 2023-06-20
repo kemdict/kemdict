@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "moduleResolution": "nodenext",
-    "jsx": "react-jsx",
-    "baseUrl": "."
-  },
-  "extends": "expo/tsconfig.base"
-}
