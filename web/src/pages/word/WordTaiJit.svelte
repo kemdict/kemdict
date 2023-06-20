@@ -2,13 +2,7 @@
   import type { Heteronym } from "common";
   export let heteronyms: Heteronym[];
   import Pronunciation from "$src/components/Pronunciation.svelte";
-  function getTitle(het: Heteronym): string {
-    if (het.title === het.props.HanLoTaibunKip) {
-      return het.title;
-    } else {
-      return `${het.title} (${het.props.HanLoTaibunKip})`;
-    }
-  }
+  import { taigiTitle } from "$src/server/db";
   function process_def(def: string | undefined): string {
     if (def) {
       let x = "<ol>";
@@ -30,7 +24,7 @@
 </script>
 
 {#each heteronyms as het}
-  <h1>{getTitle(het)}</h1>
+  <h1>{taigiTitle(het)}</h1>
   <Pronunciation>{het.props.kip}</Pronunciation>
   {#if het.props.def}
     <p class="my-2">{@html process_def(het.props.def)}</p>
