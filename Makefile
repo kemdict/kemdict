@@ -48,7 +48,7 @@ unihan.json:
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
 	eask eval "(load \"kisaragi/generate\")"
 
-# FIXME: I'm just throwing away PojUnicodeOthers when it contains
+# FIXME: I'm just throwing away *UnicodeOthers when it contains
 # alternative pronunciations.
 #
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
@@ -61,7 +61,7 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ea
 #     "HanLoTaibunPoj","HanLoTaibunKip","HoaBun","DataProvidedBy"
 chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	npx csvtojson --ignoreColumns='/Input/' --headers='["id","poj","PojInput","kip","KipInput","title","HanLoTaibunKip","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input/' --headers='["id","poj","PojInput","kip","KipInput","titlePoj","title","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
 
 # Original header:
 # "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","HanLoTaibunPoj","KaisoehHanLoPoj","LekuHanLoPoj","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"
@@ -70,13 +70,13 @@ chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.m
 # LekuHanLoKip -> example
 chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	npx csvtojson --ignoreColumns='/Input|Page|Others|Goanchheh/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","title","definition","example","kip","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Input|Page|Others|Goanchheh/' --headers='["id","poj","PojUnicodeOthers","PojInput","PojInputOthers","titlePoj","definitionPoj","examplePoj","kip","KipUnicodeOthers","KipInput","KipInputOthers","title","definition","example","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
 
 # 1956 台灣白話基礎語句
 # Original header:
 # "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HoaBun","EngBun","KaisoehEngbun","NounClassifier","LesuPoj","Opposite","LekuPoj","LekuEngbun","LekuHoabun","Confer","PageNumber"
 #
-# We don't add another title. We'll copy props.poj to props.title in
+# We don't add another title. We'll copy props.kip to props.title in
 # process-data.
 chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi

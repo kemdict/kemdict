@@ -101,7 +101,7 @@ Does nothing if OUTPUT-PATH already exists as a file."
          (seq-filter
           (lambda (it)
             (or (equal word (gethash "title" it))
-                (equal word (gethash "poj" it))))
+                (equal word (gethash "kip" it))))
           parsed)))))))
 
 (when nil
@@ -777,7 +777,7 @@ Titles are written to `d:titles:look-up-table'."
                  (title (or (-some-> (gethash "title" entry)
                               d:process-title)
                             ;; 臺日大辭典 and 臺灣白話基礎語句
-                            (gethash "poj" orig-het)
+                            (gethash "kip" orig-het)
                             ;; unihan
                             (gethash "char" orig-het))))
             ;; chhoetaigi_taijittoasutian:
@@ -785,11 +785,11 @@ Titles are written to `d:titles:look-up-table'."
             ;; "a-a cham-cham" being formatted as "a-acham-cham" in
             ;; the title field
             (when (and (equal dict "chhoetaigi_taijittoasutian")
-                       ;; This means we know it's safe to substitude het.poj
+                       ;; This means we know it's safe to substitude het.kip
                        (d:latin-only title)
                        (not (equal (downcase title)
-                                   (downcase (gethash "poj" orig-het)))))
-              (setq title (gethash "poj" orig-het)))
+                                   (downcase (gethash "kip" orig-het)))))
+              (setq title (gethash "kip" orig-het)))
             (puthash "title" title shaped-het)
             (puthash "from" dict shaped-het)
             (puthash "lang" lang shaped-het)
