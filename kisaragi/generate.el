@@ -117,9 +117,9 @@
        (point-min) (point-max)))
     ret))
 
-(defun kisaragi-dict/write ()
-  "Write the file based on the current buffer."
-  (let* ((slug (file-name-base (buffer-file-name)))
+(defun kisaragi-dict/write (&optional file)
+  "Write the file based on FILE or the current buffer."
+  (let* ((slug (file-name-base (or file (buffer-file-name))))
          (src (format "%s.org" slug))
          (dest (format "%s.json" (replace-regexp-in-string "-" "_" slug))))
     (let ((json-encoding-pretty-print t))
@@ -134,5 +134,8 @@
 
 (when (eq major-mode 'org-mode)
   (add-hook 'after-save-hook #'kisaragi-dict/write nil t))
+(when noninteractive
+  (kisaragi-dict/write "kisaragi-dict.org")
+  (kisaragi-dict/write "kisaragi-taigi.org"))
 
 ;;; generate.el ends here
