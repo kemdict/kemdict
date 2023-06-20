@@ -6,6 +6,25 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 # 版本紀錄
 
+## 1.1.0 (2023-06-21)
+
+- 移除 beta 版的標籤 `(β)`
+- 新增搜尋時的篩選器功能。用 `lang:<語言代碼>` 指定語言、`from:<辭典代碼>` 指定詞彙來源。詳見更新的[使用說明](/usage)。
+- 修正查詢時 [Unicode 正規化](https://zh.wikipedia.org/wiki/Unicode等價性#正規形式)狀態不同則搜尋不到的問題
+- 修正 `/dict-kisaragi` 頁面標題誤植
+- 修正首字索引的標題不正確
+- 詞彙頁面：「有提到…的條目」數量較多時提供搜尋功能
+- 台語改使用教育部羅馬字 — 我現在覺得教育部臺灣閩南語常用詞辭典更新後與其相符較為重要
+- 更新教育部臺灣閩南語常用詞辭典的連結
+- Unihan：顯示 kTraditionalVariant 和 kSimplifiedVariant
+
+### pojtl-api
+
+`pojtl-api` (<https://pojtl.kemdict.com>) 是意傳的[台語羅馬字轉換器](https://lomaji.ithuan.tw/)的簡易版本，API 用途相同，只是在 Kemdict 的伺服器上執行而不去浪費意傳的資源。
+
+- 接受網址結尾有斜槓（`/toPOJ/`先前會失敗，現在接受）
+- 簡化出現 404 或 405 錯誤時的回應
+
 ## 1.0.0 (2023-05-29)
 
 - 詞彙頁面改為使用分頁
