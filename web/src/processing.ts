@@ -51,9 +51,10 @@ export function interlinear_annotation(defs: string[]): string {
             .replace(/\ufffa/g, "</p><p>")
             .replace(/\ufffb/g, "</p>");
           // This is more "correct" i.r.t. interpreting the characters
-          // as marking ruby, but I don't think POJ / TL should be
-          // treated as just pronunciation annotation of Han
+          // as marking ruby, but POJ / TL should not be treated or
+          // shown as simply pronunciation annotatio for Han
           // characters.
+          //
           // .replace(/\ufff9/g, "<ruby>")
           // .replace(/\ufffa/g, "<rp>(</rp><rt>")
           // .replace(/\ufffb/g, "<rp>)</rp></rt></ruby><br>");

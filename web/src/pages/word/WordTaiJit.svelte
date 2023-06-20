@@ -31,7 +31,7 @@
 
 {#each heteronyms as het}
   <h1>{getTitle(het)}</h1>
-  <Pronunciation>{het.props.poj}</Pronunciation>
+  <Pronunciation>{het.props.kip}</Pronunciation>
   {#if het.props.def}
     <p class="my-2">{@html process_def(het.props.def)}</p>
     {#if het.props.example}

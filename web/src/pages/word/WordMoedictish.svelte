@@ -6,12 +6,11 @@
 
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { groupByProp } from "common";
-  import { toPOJ } from "$src/hack";
   import { spc, interlinear_annotation } from "$src/processing";
 
   function processPn(pn: string) {
     if (dict === "moedict_twblg") {
-      return toPOJ(pn);
+      return pn;
     } else {
       return pn;
     }
