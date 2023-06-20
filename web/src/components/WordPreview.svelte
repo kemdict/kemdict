@@ -12,8 +12,8 @@
     "trs",
     "pronunciation",
     "p_四縣",
-    "poj",
     "kip",
+    "poj",
   ];
   function strip(html: string | undefined): string {
     // https://stackoverflow.com/a/822464/6927814
