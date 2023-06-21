@@ -130,9 +130,9 @@ export async function getHetFromUrl(
 export function taigiTitle(het: Heteronym): string {
   // title is set to kip in the dicts Makefile;
   // Show POJ in title if they're not equal.
-  if (het.title === het.props.titlePOJ) {
-    return het.title;
+  if (het.props.titlePoj && het.title !== het.props.titlePoj) {
+    return `${het.title} (${het.props.titlePoj})`;
   } else {
-    return `${het.title} (${het.props.titlePOJ})`;
+    return het.title;
   }
 }
