@@ -1,5 +1,190 @@
 [
   {
+    "title": "UV",
+    "added": 1687715560.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/juː viː/",
+        "definitions": [
+          {
+            "def": "紫外線。英語ultraviolet的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "光譜",
+    "added": 1687715149.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄤ ㄆㄨˇ",
+        "definitions": [
+          {
+            "def": "光學[[頻譜]]的簡稱。",
+            "type": "名"
+          },
+          {
+            "def": "引申指一個連續性、有極端值的範圍，如「性別光譜」、「政治光譜」。[英]spectrum",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "長褲",
+    "added": 1687714725.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄤˊ ㄎㄨˋ",
+        "definitions": [
+          {
+            "def": "長度超過膝蓋的褲子。[反]短褲",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "緊身褲",
+    "added": 1687714667.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄣˇ ㄕㄣ ㄎㄨˋ",
+        "definitions": [
+          {
+            "def": "緊貼著身體的褲子。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "DIY",
+    "added": 1687714210.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/diː aɪ waɪ/",
+        "definitions": [
+          {
+            "def": "英語do it yourself的縮寫。非專業的人依興趣自行製作或修繕物品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手作",
+    "added": 1687714057.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄗㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "手工製作。依興趣為自己或親友製作家用物品。[[DIY]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "五十音",
+    "added": 1687713768.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨˇ ㄕˊ ㄧㄣ",
+        "definitions": [
+          {
+            "def": "指日文[[假名]]字母。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "倚坐",
+    "added": 1687713295.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧˇ ㄗㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "倚靠或是坐在某物上。",
+            "type": "動"
+          },
+          {
+            "def": "靠坐。如：「請勿倚坐」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "大賞",
+    "added": 1687713078.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˋ ㄕㄤˇ",
+        "definitions": [
+          {
+            "def": "提供參賽者報名、進行評分與排名的活動。獎項。借自日語。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "眾院",
+    "added": 1687712922.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨㄥˋ ㄩㄢˋ",
+        "definitions": [
+          {
+            "def": "→[[眾議院]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "參院",
+    "added": 1687712880.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄘㄢ ㄩㄢˋ",
+        "definitions": [
+          {
+            "def": "→[[參議院]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "砲轟",
+    "added": 1687712702.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄆㄠˋ ㄏㄨㄥ",
+        "definitions": [
+          {
+            "def": "→[[炮轟]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "時後",
     "added": 1686995761.0,
     "heteronyms": [
