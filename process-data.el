@@ -686,9 +686,9 @@ information."
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
-       ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
                                   "moedict-data-twblg/dict-twblg-ext.json"))
+       ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
        ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
