@@ -480,10 +480,9 @@ This is a separate step from shaping."
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
-    ;; Too many false positives
-    ;; (--each '("definition" "source_comment" "典故說明" "用法例句")
-    ;;   (ht-update-with! props it
-    ;;     #'d:links:linkify-keywords))
+    (--each '("definition" "source_comment" "典故說明" "用法例句")
+      (ht-update-with! props it
+        #'d:links:linkify-keywords))
     (dolist (key '("trs" "poj" "kip"))
       (ht-update-with! props key
         (lambda (pn)
