@@ -157,7 +157,9 @@ this:
           ;; Replace just the first one.
           (when
               (and
-               (not (member keyword d:links:linked))
+               (not (--any?
+                     (s-contains? keyword it)
+                     d:links:linked))
                (re-search-forward
                 ;; HACK: avoid replacing a link.
                 ;; This detection handles "/word/KEY" and <a>KEY</a>
