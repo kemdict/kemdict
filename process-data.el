@@ -173,7 +173,9 @@ this:
              (concat
               (match-string 1)
               (d:links:link-to-word keyword)
-              (match-string 2)))))
+              (match-string 2))
+             :fixedcase
+             :literal)))
         (buffer-string)))))
 
 (ert-deftest d:links:linkify-keywords ()
