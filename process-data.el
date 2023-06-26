@@ -93,6 +93,12 @@ For example, 1 is 一, 213 is 龜."
 (defvar d:links:from nil
   "Used to mark where links are coming from to register to the links table.")
 
+;; Use a list because I expect the number of items to be fairly low.
+(defvar d:links:linked nil
+  "A list of targets that have already been linked.
+
+`d:links:linkify-keywords' uses this to avoid replacing links multiple times.")
+
 (defvar d:links nil
   "A list of link objects.")
 
@@ -129,6 +135,7 @@ this:
         (setq target (concat target "。")
               href (concat href "。")))
       (when d:links:from
+        (push target d:links:linked)
         (push `((from . ,d:links:from)
                 (to . ,target))
               d:links))
@@ -148,15 +155,18 @@ this:
         (dolist (keyword (jieba-extract-keywords str count "n,v"))
           (goto-char (point-min))
           ;; Replace just the first one.
-          (when (re-search-forward
-                 ;; HACK: avoid replacing a link.
-                 ;; This detection handles "/word/KEY" and <a>KEY</a>
-                 ;; FIXME: there are still at least 1000 entries where the href
-                 ;; is incorrectly replaced.
-                 (rx (group (not ">"))
-                     (literal keyword)
-                     (group (not (any "\"" "<"))))
-                 nil t)
+          (when
+              (and
+               (not (member keyword d:links:linked))
+               (re-search-forward
+                ;; HACK: avoid replacing a link.
+                ;; This detection handles "/word/KEY" and <a>KEY</a>
+                ;; FIXME: there are still at least 1000 entries where the href
+                ;; is incorrectly replaced.
+                (rx (group (not ">"))
+                    (literal keyword)
+                    (group (not (any "\"" "<"))))
+                nil t))
             (replace-match
              (concat
               (match-string 1)
@@ -435,7 +445,8 @@ PROPS describes TITLE and belongs to DICT. These are needed for
 some processing.
 
 This is a separate step from shaping."
-  (let ((d:links:from title))
+  (let ((d:links:from title)
+        (d:links:linked nil))
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
