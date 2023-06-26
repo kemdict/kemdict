@@ -141,24 +141,28 @@ this:
   ;; possibly appropriate number of keywords to extract.
   ;; Use bytes to treat Han characters as having more information.
   (let ((count (round (/ (string-bytes str) 50.0))))
-    (dolist (keyword (jieba-extract-keywords str count "n,v"))
-      (setq str
-            (s-replace-regexp
-             ;; HACK: avoid replacing a link.
-             ;; This detection handles "/word/KEY" and <a>KEY</a>
-             ;; TODO: maybe we can get rid of this if we just make
-             ;; sure to linkify keywords first before applying other
-             ;; linkification functions?
-             (rx (group (not ">"))
-                 (literal keyword)
-                 (group (not (any "\"" "<"))))
-             (lambda (str)
-               (concat
-                (match-string 1 str)
-                (d:links:link-to-word keyword)
-                (match-string 2 str)))
-             str)))
-    str))
+    (if (= count 0)
+        str
+      (with-temp-buffer
+        (insert str)
+        (dolist (keyword (jieba-extract-keywords str count "n,v"))
+          (goto-char (point-min))
+          ;; Replace just the first one.
+          (when (re-search-forward
+                 ;; HACK: avoid replacing a link.
+                 ;; This detection handles "/word/KEY" and <a>KEY</a>
+                 ;; FIXME: there are still at least 1000 entries where the href
+                 ;; is incorrectly replaced.
+                 (rx (group (not ">"))
+                     (literal keyword)
+                     (group (not (any "\"" "<"))))
+                 nil t)
+            (replace-match
+             (concat
+              (match-string 1)
+              (d:links:link-to-word keyword)
+              (match-string 2)))))
+        (buffer-string)))))
 
 (ert-deftest d:links:linkify-keywords ()
   (should
