@@ -79,51 +79,6 @@ For example, 1 is 一, 213 is 龜."
            '(latin symbol)))
    str))
 
-(defun d::dev:extract-development-version (word file output-path)
-  "Read FILE and write its definition of WORD to OUTPUT-PATH.
-
-The structure in FILE is preserved in OUTPUT-PATH.
-
-This allows for not having to load everything when I'm only
-iterating on one page.
-
-Does nothing if OUTPUT-PATH already exists as a file."
-  (declare (indent 1))
-  (let (parsed)
-    (with-temp-buffer
-      (insert-file-contents file)
-      (goto-char (point-min))
-      (setq parsed (json-parse-buffer)))
-    (with-temp-file output-path
-      (insert
-       (json-encode
-        (vconcat
-         (seq-filter
-          (lambda (it)
-            (or (equal word (gethash "title" it))
-                (equal word (gethash "kip" it))))
-          parsed)))))))
-
-(when nil
-  (d::dev:extract-development-version "雙數"
-    "ministry-of-education/dict_revised.json" "dev-dict_revised.json")
-  (d::dev:extract-development-version "無妨"
-    "ministry-of-education/hakkadict.json" "dev-hakkadict.json")
-  (d::dev:extract-development-version "無妨"
-    "moedict-data-twblg/dict-twblg.json" "dev-dict-twblg.json")
-  (d::dev:extract-development-version "無妨"
-    "moedict-data-twblg/dict-twblg-ext.json" "dev-dict-twblg-ext.json")
-  (d::dev:extract-development-version "單數"
-    "ministry-of-education/dict_concised.json" "dev-dict_concised.json")
-  (d::dev:extract-development-version "一枕南柯"
-    "ministry-of-education/dict_idioms.json" "dev-dict_idioms.json")
-  (d::dev:extract-development-version "無妨"
-    "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json" "dev-chhoetaigi-itaigi.json")
-  (d::dev:extract-development-version "無妨"
-    "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json" "dev-chhoetaigi-taijittoasutian.json")
-  (d::dev:extract-development-version "bûn-ha̍k"
-    "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json" "dev-chhoetaigi-taioanpehoekichhoogiku.json"))
-
 (defvar d:titles:look-up-table (make-hash-table :test #'equal)
   "A look up table for titles.")
 
