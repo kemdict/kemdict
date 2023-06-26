@@ -1,4 +1,8 @@
 * done
+** DONE make it possible to turn off pronunciation search
+I wanted to search for words with “-” in them but the result is 100000+ entries long.
+
+Done: use =title:"-"= to do the search above.
 ** DONE [#A] Word page: split sections for each language like goo辞書
 ** DONE [#A] Search without tones
 ** DONE Search: put exact match on top
@@ -203,8 +207,8 @@ I'm still not sure, but
 - Another interface to maintain within the same app
 
 * todos
-** make it possible to turn off pronunciation search
-I wanted to search for words with “-” in them but the result is 100000+ entries long.
+** 譜系分類法 (=dict_revised=) is broken
+** New link style to make texts easier to read
 ** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
 The existing digitization only includes POJ/KIP and HanLo.
 
