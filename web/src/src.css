@@ -175,9 +175,6 @@
     h3 {
       @apply font-bold;
     }
-    a {
-      @apply link;
-    }
     h1 {
       @apply mt-10 text-2xl first:mt-4;
     }
@@ -212,6 +209,9 @@
     p,
     li {
       @apply prose;
+      @apply prose-a:text-gray-900 dark:prose-a:text-gray-100;
+      @apply hover:prose-a:text-gray-900 dark:hover:prose-a:text-gray-100;
+      @apply hover:prose-a:underline;
     }
     .def {
       @apply mb-2 block;
