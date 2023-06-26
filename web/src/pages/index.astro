@@ -52,7 +52,7 @@ const words = await DB.getDictTitles("kisaragi_dict", 15);
         <DarkModeToggle client:load />
       </div>
     </div>
-    <SearchBar highlightBtn={true} client:load />
+    <SearchBar highlightBtn={true} redirectOnSingleResult={true} client:load />
   </div>
   <div class="prose">
     <div class="md:flex">

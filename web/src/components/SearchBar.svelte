@@ -5,6 +5,7 @@
   export let initialInput = "";
   export let initialMatchSelection = "prefix";
   export let highlightBtn = false;
+  export let redirectOnSingleResult = false;
 
   import PopupMenu from "./PopupMenu.svelte";
 
@@ -56,6 +57,9 @@
           </ListBox>
         </PopupMenu>
       </div>
+      {#if redirectOnSingleResult}
+        <input type="hidden" name="r" />
+      {/if}
       <div class="relative flex-grow">
         <input
           id="sbi"

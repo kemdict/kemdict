@@ -51,17 +51,18 @@ export async function getHetFromUrl(
     ) // when the first item is false, this is a string
   ]
 > {
-  /**
-   * Query text as written in the URL
-   */
+  /** Query text as written in the URL */
   const originalQuery: string | undefined = url.searchParams.get("q")?.trim();
-  /**
-   * Unicode normalized query
-   */
+  /** Unicode normalized query */
   const query = originalQuery?.normalize("NFC");
   const mtch: Mtch = url.searchParams.get("m") || "prefix";
   const sort: string = url.searchParams.get("s") || "desc";
-  // Invalid
+  /**
+   * When this flag is provided, if there is only one match, we
+   * redirect to it.
+   */
+  const redirectOnSingleResult = url.searchParams.has("r");
+  // Invalid: redirect to root
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/"];
   }
@@ -70,11 +71,12 @@ export async function getHetFromUrl(
     parsed,
     {
       mtch,
-      langs: lang && [lang],
+      langs: lang,
     }
   );
   // Redirect if all matched heteronyms belong to the same title
   if (
+    redirectOnSingleResult &&
     mtch === "prefix" &&
     heteronyms &&
     // The query is just text, no filters and no exclusions
