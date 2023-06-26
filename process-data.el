@@ -712,7 +712,11 @@ Titles are written to `d:titles:look-up-table'."
                                 (insert-file-contents f)
                                 (json-parse-buffer)))))
          (heteronyms nil)
-         (rep (make-progress-reporter msg 0 (length raw-dict)))
+         (rep (make-progress-reporter
+               msg
+               0 (length raw-dict) nil
+               ;; 5 percent / 4 seconds
+               5 4))
          (i 0))
     (seq-doseq (entry raw-dict)
       (progress-reporter-update rep i)
