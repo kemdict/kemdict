@@ -4,6 +4,9 @@ import { escape as sqlEscape } from "sqlstring";
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 
+/**
+ * If `value` is not undefined, return `value` as an array.
+ */
 function ensureArray<T>(value: T[] | T): T[] | undefined {
   if (Array.isArray(value)) {
     return value;
@@ -391,7 +394,7 @@ export class CrossDB {
     parsed: string | SearchParserResult,
     options?: {
       mtch?: string;
-      langs?: string[];
+      langs?: string[] | string;
       limit?: number;
     }
   ): Promise<{
@@ -405,7 +408,7 @@ export class CrossDB {
     }
     const mtch = options?.mtch || "exact";
     const limit = options?.limit;
-    const langs = options?.langs;
+    const langs = ensureArray(options?.langs);
     const hasLangs = langs && langs.length > 0;
     const { sqlExprs, sqlArgs } = parsedQueryToSQL(parsed, mtch);
     const hets = (await this.crossDbAll(
