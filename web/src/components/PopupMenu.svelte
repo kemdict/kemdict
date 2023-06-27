@@ -48,7 +48,7 @@
   type="button"
   class={btnClass}
   use:popup={{
-    event: "click",
+    event: "hover",
     placement,
     target,
     closeQuery: actualCloseQuery,
