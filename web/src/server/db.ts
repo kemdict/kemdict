@@ -1,5 +1,6 @@
-import { chunk, sortBy } from "lodash-es";
+import { chunk, sortBy, uniqBy } from "lodash-es";
 import { groupByProp, parseQuery, CrossDB } from "common";
+import { spc } from "$src/processing";
 import type { Heteronym, LangId, Mtch } from "common";
 
 export async function readDB() {
@@ -28,6 +29,51 @@ export const chars = await (async () => {
   );
   return { without_stroke, with_stroke_grouped };
 })();
+
+/** Return the preview text of `het`. */
+export function hetPreview(het: Heteronym) {
+  function strip(html: string | undefined): string {
+    // https://stackoverflow.com/a/822464/6927814
+    // This doesn't have to be perfect. We're not handling untrusted
+    // input either.
+    return html?.replace(/<[^>]*>?/gm, "") || "";
+  }
+  return strip(
+    het.props.def ||
+      het.props.defs?.map((x) => x.def).join("") ||
+      het.props.example ||
+      het.props.zh
+  );
+}
+
+/**
+ * Return true if `het` can be an exact match and `query` matches it
+ * exactly.
+ */
+export function hetExactMatch(het: Heteronym, query: string | undefined) {
+  return !!(het.exact && query && het.title === query);
+}
+
+// TODO: rename
+export function processPn(het: Heteronym) {
+  // FIXME: for Hakkadict, it's questionable for me to pick one
+  // dialect out of the six provided.
+  const pron_keys = [
+    "bopomofo",
+    "trs",
+    "pronunciation",
+    "p_四縣",
+    "kip",
+    "poj",
+  ];
+  let pn: string | undefined =
+    het.props[pron_keys.find((pron) => het.props[pron])];
+  if (pn && het.title !== pn) {
+    return `（${spc(pn)}）`;
+  } else {
+    return "";
+  }
+}
 
 /**
  * Like search/index.astro's load() function.
@@ -116,7 +162,15 @@ export async function getHetFromUrl(
   return [
     true,
     {
-      heteronyms,
+      heteronyms: uniqBy(heteronyms, (het) => {
+        return (
+          het.title +
+          het.lang +
+          het.from +
+          processPn(het) +
+          `${hetExactMatch(het, query)}`
+        );
+      }),
       mtch,
       query,
       originalQuery,
