@@ -4,6 +4,10 @@ import { escape as sqlEscape } from "sqlstring";
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 
+// function printfdebug(value: any) {
+//   console.log(JSON.stringify(value, null, 2));
+// }
+
 /**
  * If `value` is not undefined, return `value` as an array.
  */
@@ -229,12 +233,16 @@ export function parseQuery(inputQuery: string) {
 
 function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
   const operator = mtch === "exact" ? "=" : "LIKE";
+  // printfdebug({ parsed });
   const exprs: string[] = [];
   const sqlArgs: string[] = [];
   ensureArray(parsed.text as string[] | string)?.forEach((text) => {
     // FIXME: use search-query-parser's tokenize option. That also
     // allows negation to work on non-keyword terms.
-    const tokens = parseStringQuery(text);
+    const tokens =
+      mtch === "exact"
+        ? [text] // disable tokenizing in exact mode
+        : parseStringQuery(text);
     tokens.forEach((s, i) => {
       exprs.push(`AND aliases.alias ${operator} ?`);
       sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
@@ -362,6 +370,7 @@ export class CrossDB {
   ): Promise<unknown[]> {
     if (this.#runtime === "web") {
       const db = await this.getDB();
+      // printfdebug({ source, args });
       const stmt = db.prepare(source);
       if (pluck) stmt.pluck(pluck);
       return stmt.all(...args);
@@ -403,6 +412,10 @@ export class CrossDB {
     heteronyms: Heteronym[];
     langCountObj: Record<LangId, number>;
   }> {
+    // printfdebug({
+    //   parsed,
+    //   options,
+    // });
     if (typeof parsed === "string") {
       parsed = { text: parsed.normalize("NFD") };
     }
