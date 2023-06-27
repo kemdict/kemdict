@@ -293,11 +293,12 @@ this:
      (equal (d:links:org-style "hello")
             "hello"))))
 
-(defun d:links:comma-word-list (str)
-  "Add links to a string STR containing a comma-separated list of words."
+(defun d:links:comma-word-list (str &optional new-separator)
+  "Add links to a string STR containing a comma-separated list of words.
+If NEW-SEPARATOR is non-nil, use it as the new comma; otherwise use \"、\"."
   (->> (split-string str "[,、]" t)
        (-map #'d:links:link-to-word)
-       (s-join "、")))
+       (s-join (or new-separator "、"))))
 
 (ert-deftest d:links:comma-word-list ()
   (should
@@ -307,6 +308,8 @@ this:
                  "<a href=\"/word/敵意\">敵意</a>、仇隙")
           (equal (d:links:comma-word-list "敵意,仇隙")
                  "<a href=\"/word/敵意\">敵意</a>、仇隙")
+          (equal (d:links:comma-word-list "敵意,仇隙" ",")
+                 "<a href=\"/word/敵意\">敵意</a>,仇隙")
           (equal (d:links:comma-word-list "交情。")
                  "交情。")
           ;; Should also work for a single word
@@ -564,9 +567,11 @@ This is a separate step from shaping."
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taioanpehoekichhoogiku"
-       (dolist (key '("en" "zh"))
-         (ht-update-with! props key
-           #'d:links:comma-word-list))
+       (ht-update-with! props "en"
+         (lambda (s)
+           (d:links:comma-word-list s ", ")))
+       (ht-update-with! props "zh"
+         #'d:links:comma-word-list)
        (dolist (key '("examplePOJ" "exampleEn" "exampleZh"))
          (ht-update-with! props key
            (lambda (example)
