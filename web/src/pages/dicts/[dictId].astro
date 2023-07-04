@@ -1,0 +1,51 @@
+---
+const { dictId } = Astro.params;
+import { dictIdToDict, langIdName } from "common";
+import { marked } from "marked";
+marked.use({
+  mangle: false,
+  headerIds: false,
+});
+
+const dict = dictIdToDict(dictId);
+
+const title = `收錄字典 - ${dict.name} | Kemdict`;
+
+import BaseLayout from "$src/BaseLayout.astro";
+import Header from "$src/components/Header.astro";
+
+import DictList from "./DictList.svelte";
+---
+
+<BaseLayout title={title}>
+  <!-- <Fragment slot="head"></Fragment> -->
+  <Header search={true} />
+  <div class="flex space-x-4">
+    <div class="max-w-[22rem]">
+      <DictList client:load current={dictId} />
+    </div>
+    <div class="prose">
+      <div class="mb-2 font-bold">收錄字典介紹 -</div>
+      <h1>{dict.name}</h1>
+      <div set:html={marked.parse(dict.meta.desc_long)} />
+      <table>
+        <tr>
+          <th>名稱</th>
+          <td>{dict.name}</td>
+        </tr>
+        <tr>
+          <th>作者</th>
+          <td>{dict.meta.author}</td>
+        </tr>
+        <tr>
+          <th>年份</th>
+          <td>{dict.meta.year || "-"}</td>
+        </tr>
+        <tr>
+          <th>語言</th>
+          <td>{langIdName(dict.lang)}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</BaseLayout>

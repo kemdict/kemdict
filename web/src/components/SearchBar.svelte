@@ -1,6 +1,10 @@
 <script>
   import { popup, ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
   import { onMount } from "svelte";
+  /**
+   * Normally we submit the search to `/search`. Use this to make it
+   * `/search/foo`, for instance.
+   */
   export let submitSuffix = "";
   export let initialInput = "";
   export let initialMatchSelection = "prefix";

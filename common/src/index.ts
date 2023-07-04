@@ -38,6 +38,12 @@ export interface Dict {
   name: string;
   url: string;
   lang: string;
+  meta?: {
+    author?: string;
+    year: number;
+    desc_short: string;
+    desc_long: string;
+  };
 }
 export interface Heteronym {
   title: string;
