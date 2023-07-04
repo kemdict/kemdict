@@ -1,3 +1,0 @@
-[submodule "dicts"]
-	path = dicts
-	url = https://github.com/kemdict/kemdict-data.git
