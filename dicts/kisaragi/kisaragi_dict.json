@@ -1,0 +1,4085 @@
+[
+  {
+    "title": "UV",
+    "added": 1687715560.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/juː viː/",
+        "definitions": [
+          {
+            "def": "紫外線。英語ultraviolet的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "光譜",
+    "added": 1687715149.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄤ ㄆㄨˇ",
+        "definitions": [
+          {
+            "def": "光學[[頻譜]]的簡稱。",
+            "type": "名"
+          },
+          {
+            "def": "引申指一個連續性、有極端值的範圍，如「性別光譜」、「政治光譜」。[英]spectrum",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "長褲",
+    "added": 1687714725.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄤˊ ㄎㄨˋ",
+        "definitions": [
+          {
+            "def": "長度超過膝蓋的褲子。[反]短褲",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "緊身褲",
+    "added": 1687714667.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄣˇ ㄕㄣ ㄎㄨˋ",
+        "definitions": [
+          {
+            "def": "緊貼著身體的褲子。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "DIY",
+    "added": 1687714210.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/diː aɪ waɪ/",
+        "definitions": [
+          {
+            "def": "英語do it yourself的縮寫。非專業的人依興趣自行製作或修繕物品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手作",
+    "added": 1687714057.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄗㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "手工製作。依興趣為自己或親友製作家用物品。[[DIY]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "五十音",
+    "added": 1687713768.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨˇ ㄕˊ ㄧㄣ",
+        "definitions": [
+          {
+            "def": "指日文[[假名]]字母。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "倚坐",
+    "added": 1687713295.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧˇ ㄗㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "倚靠或是坐在某物上。",
+            "type": "動"
+          },
+          {
+            "def": "靠坐。如：「請勿倚坐」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "大賞",
+    "added": 1687713078.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˋ ㄕㄤˇ",
+        "definitions": [
+          {
+            "def": "提供參賽者報名、進行評分與排名的活動。獎項。借自日語。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "眾院",
+    "added": 1687712922.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨㄥˋ ㄩㄢˋ",
+        "definitions": [
+          {
+            "def": "→[[眾議院]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "參院",
+    "added": 1687712880.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄘㄢ ㄩㄢˋ",
+        "definitions": [
+          {
+            "def": "→[[參議院]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "砲轟",
+    "added": 1687712702.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄆㄠˋ ㄏㄨㄥ",
+        "definitions": [
+          {
+            "def": "→[[炮轟]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "時後",
+    "added": 1686995761.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄏㄡˋ",
+        "definitions": [
+          {
+            "def": "「時候」的誤用字。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "稍後",
+    "added": 1686995761.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄠ ㄏㄡˋ",
+        "definitions": [
+          {
+            "def": "「稍候」的誤用字。\n- 「請稍候」(常用，指請稍微等候)\n- 「請稍後再試」(常用，指請一小段時間之後再次嘗試)\n- 「請稍候再試」(少用，可指請稍微等候之後再次嘗試)\n- 「請稍後」(錯誤，「請」後方需要接動作)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "咧",
+    "added": 1686994852.0,
+    "heteronyms": [
+      {
+        "pronunciation": "leh / ㄌㄝ",
+        "definitions": [
+          {
+            "def": "用於句末，用以質問事物缺乏。似「在哪裡呢？」，但較有質問語氣。\n#+begin_quote\n你們說活動準備充足，但雨天備案咧？這樣當天參加者豈不是要淋雨？\n#+end_quote",
+            "type": "助"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手順",
+    "added": 1686994631.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄕㄨㄣˋ",
+        "definitions": [
+          {
+            "def": "步驟。借自日語。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "牙起來",
+    "added": 1685374206.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄚˊ ㄑㄧˇ ㄌㄞˊ / giâ ㄑㄧˇ ㄌㄞˊ",
+        "definitions": [
+          {
+            "def": "生氣。「牙」，借自台語「[[夯?lang=nan_TW][夯(giâ)]]」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "炎上",
+    "added": 1684700463.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄢˊ ㄕㄤˋ",
+        "definitions": [
+          {
+            "def": "因言行被視為不當而造成爭議與批評。日語借詞。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "公審",
+    "added": 1684700347.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄥ ㄕㄣˇ",
+        "definitions": [
+          {
+            "def": "由群眾進行如同審判般的批評。如：「他肇事逃逸被人錄下來在網路上公審」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "接機",
+    "added": 1684700263.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄝ ㄐㄧ",
+        "definitions": [
+          {
+            "def": "到[[機場]]迎接即將搭飛機抵達的人。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "訪團",
+    "added": 1684700168.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄤˇ ㄊㄨㄢˊ",
+        "definitions": [
+          {
+            "def": "一國派至另一國進行[[訪問]]的團體。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "猴子",
+    "added": 1683065248.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄡˊ ㄗ˙",
+        "definitions": [
+          {
+            "def": "指行為非常不成熟、或是極度沒有公德心的人。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "旱澇",
+    "added": 1682951999.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄢˋ ㄌㄠˋ",
+        "definitions": [
+          {
+            "def": "[[汛期]]與[[旱期]]。如：「旱澇交替時需要特別提防水災」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "汛期",
+    "added": 1682951676.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄩㄣˋ ㄑㄧˊ",
+        "definitions": [
+          {
+            "def": "降雨量大，使河川上漲的時期。亦見「防汛」。[同][[雨季]][反][[旱期]]、[[乾旱]]、[[乾季]]",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "副歌",
+    "added": 1681306911.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄨˋ ㄍㄜ",
+        "definitions": [
+          {
+            "def": "（音樂）[[主副歌形式]]的主要段落之一。與[[主歌]]相對，主要為樂曲的高潮。[英]chorus, refrain",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "主副歌形式",
+    "added": 1681306318.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨˇ ㄈㄨˋ ㄍㄜ ㄒㄧㄥˊ ㄕˋ",
+        "definitions": [
+          {
+            "def": "英語[[https://en.wikipedia.org/wiki/Verse–chorus_form][verse–chorus form]]的意譯。亦作「正副歌形式」。一種音樂的形式，為多數流行音樂所使用。以兩個重複的段落——[[主歌]]與[[副歌]]為主，主歌主要進行鋪陳，副歌則為樂曲的高潮。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "主歌",
+    "added": 1681305114.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨˇ ㄍㄜ",
+        "definitions": [
+          {
+            "def": "（音樂）[[主副歌形式]]的主要段落之一。與[[副歌]]相對，主要為進行鋪陳的段落。[英]verse",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "過門",
+    "added": 1681304818.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄛˋ ㄇㄣˊ",
+        "definitions": [
+          {
+            "def": "（音樂）一首樂曲的段落間連接用的簡短樂句。[英]transition",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ㄟ",
+    "added": 1681304775.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ê",
+        "definitions": [
+          {
+            "def": "台語「[[的?lang=nan_TW][的]]」的通假字。"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ē",
+        "definitions": [
+          {
+            "def": "台語「[[會?lang=nan_TW][會]]」的通假字。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "腳色",
+    "added": 1681304772.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄠˇ ㄙㄜˋ",
+        "definitions": [
+          {
+            "def": "→[[角色]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "行充",
+    "added": 1679767267.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄥˊ ㄔㄨㄥ",
+        "definitions": [
+          {
+            "def": "→[[行動電源]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "平板",
+    "added": 1679766861.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄆㄧㄥˊ ㄅㄢˇ",
+        "definitions": [
+          {
+            "def": "[[平板電腦]]的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "行動電源",
+    "added": 1679766663.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄥˊ ㄉㄨㄥˋ ㄉㄧㄢˋ ㄩㄢˊ",
+        "definitions": [
+          {
+            "def": "用來為[[手機]]或[[平板]]等行動裝置充電的攜帶式電池。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "周邊產品",
+    "added": 1679766586.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ ㄔㄢˇ ㄆㄧㄣˇ",
+        "definitions": [
+          {
+            "def": "→[[周邊商品]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "周邊商品",
+    "added": 1679766508.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ ㄕㄤ ㄆㄧㄣˇ",
+        "definitions": [
+          {
+            "def": "一個品牌的附屬產品。\n例如：一個偶像演唱會結束後販賣以其代表色為主題的鑰匙圈，其品牌並非以鑰匙圈為主，因此鑰匙圈是周邊商品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "周邊",
+    "added": 1679765979.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ",
+        "definitions": [
+          {
+            "def": "附近、在旁邊的。如：「周邊地區」",
+            "type": "形"
+          },
+          {
+            "def": "附屬的。如：「周邊設備」、「周邊商品」",
+            "type": "形"
+          },
+          {
+            "def": "[[周邊設備]]。",
+            "type": "名"
+          },
+          {
+            "def": "[[周邊商品]]。一個品牌的附屬產品。\n例如：一個偶像演唱會結束後販賣以其代表色為主題的鑰匙圈，其品牌並非以鑰匙圈為主，因此鑰匙圈是周邊商品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "週邊",
+    "added": 1679765626.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄡ ㄅㄧㄢ",
+        "definitions": [
+          {
+            "def": "→[[周邊]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "行車記錄器",
+    "added": 1679523141.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄥˊ ㄔㄜ ㄐㄧˋ ㄌㄨˋ ㄑㄧˋ",
+        "definitions": [
+          {
+            "def": "一種汽車或機車用的攝影機，記錄車前狀況，以便發生意外時有證據可參考。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "食器",
+    "added": 1679522974.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄑㄧˋ",
+        "definitions": [
+          {
+            "def": "飲食用的器具。似「餐具」。如：「食器清潔劑」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Q彈",
+    "added": 1678626762.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kyu/ ㄊㄢˊ",
+        "definitions": [
+          {
+            "def": "形容食物有彈性。「Q」為台語「𩚨」([[khiū]]) 的通假字。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "頭身",
+    "added": 1678626311.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄡˊ ㄕㄣ",
+        "definitions": [
+          {
+            "def": "頭部與身高的比例，為身高除以頭部的高度（以一個數字表示）。現實成年人比例約為六到八頭身。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Q版",
+    "added": 1678625978.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kyu/ ㄅㄢˇ",
+        "definitions": [
+          {
+            "def": "以誇飾[[頭身]]比例來突顯可愛的版本。如：「Q版人偶」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Q",
+    "added": 1678625665.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kyu/",
+        "definitions": [
+          {
+            "def": "形容食物有彈性。台語「𩚨」([[khiū]]) 的通假字。",
+            "type": "形"
+          },
+          {
+            "def": "可愛的。英語cute首音節的通假字。見「Q版」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "燙口",
+    "added": 1678624671.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄤˋ ㄎㄡˇ",
+        "definitions": [
+          {
+            "def": "形容食品溫度高到可能會燙傷嘴部的程度。如：「她喜歡喝燙口的水」",
+            "type": "形"
+          },
+          {
+            "def": "被溫度高的食物燙到嘴巴。如：「小心燙口」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "bling bling",
+    "added": 1678624599.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/blɪŋ blɪŋ/",
+        "definitions": [
+          {
+            "def": "閃閃發亮的。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "留觀",
+    "added": 1678434121.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄧㄡˊ ㄍㄨㄢ",
+        "definitions": [
+          {
+            "def": "停留並觀察狀況。\n#+begin_quote\n打完新冠疫苗之後請在旁邊或附近留觀至少30分鐘，確保沒有發生立即的嚴重不良反應。\n#+end_quote",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "桮",
+    "added": 1678319754.0,
+    "heteronyms": [
+      {
+        "pronunciation": "pue",
+        "definitions": [
+          {
+            "def": "同「筶」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "人均",
+    "added": 1678287842.0,
+    "eq-en": "per capita",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄣˊ ㄐㄩㄣ",
+        "definitions": [
+          {
+            "def": "形容一項數值是依所有人民的平均計算的。如：「人均GDP」、「人均所得」、「人均月薪」",
+            "type": "形"
+          },
+          {
+            "def": "單獨使用時引申指人均GDP。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "下單",
+    "added": 1678287753.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄚˋ ㄉㄢ",
+        "definitions": [
+          {
+            "def": "向販賣者提出訂單，進行購買。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "倉儲",
+    "added": 1678287454.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄘㄤ ㄔㄨˊ",
+        "definitions": [
+          {
+            "def": "管理倉庫的事業。如：「倉儲管理人員」、「倉儲物流」",
+            "type": "名"
+          },
+          {
+            "def": "倉庫。如：「迷你倉儲」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "借字",
+    "added": 1678287353.0,
+    "eq-ja": "当て字",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄝˋ ㄗˋ",
+        "definitions": [
+          {
+            "def": "不管漢字原意，僅用其讀音書寫詞的一種漢字的用法。又稱「假借字」、「借用字」、「通假字」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "唱秋",
+    "added": 1678286239.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄤˋ ㄑㄧㄡ",
+        "definitions": [
+          {
+            "def": "[[囂張]]。台語「聳鬚」的通假字。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "追劇",
+    "added": 1678261978.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨㄟ ㄐㄩˋ",
+        "definitions": [
+          {
+            "def": "在個人電子裝置上看已經計劃要看的戲劇、電視劇、電影等等。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "耍廢",
+    "added": 1678261588.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄨㄚˇ ㄈㄟˋ",
+        "definitions": [
+          {
+            "def": "放棄努力而變得沒用。如：「我們組裡有人在耍廢，害得其他人得要分擔他的工作」",
+            "type": "動"
+          },
+          {
+            "def": "做自己想做但可能會被認為沒用的事。休息。如：「連假我要來[[追劇]]，畢竟難得的四天連假就是要來耍廢一下」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "網傳",
+    "added": 1678261355.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄤˇ ㄔㄨㄢˊ",
+        "definitions": [
+          {
+            "def": "在[[網路]]上流傳的。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "門都沒有",
+    "added": 1678261213.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄣˊ ㄉㄡ ㄇㄟˊ ㄧㄡˇ",
+        "definitions": [
+          {
+            "def": "表達拒絕且無可商量。舊稱「門兒都沒有」。",
+            "type": "句"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "對岸",
+    "added": 1677332486.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄟˋ ㄢˋ",
+        "definitions": [
+          {
+            "def": "引申指台灣海峽對岸，亦即中國。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "載具",
+    "added": 1677331856.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗㄞˇ ㄐㄩˋ",
+        "definitions": [
+          {
+            "def": "運輸工具。車輛。",
+            "type": "名"
+          },
+          {
+            "def": "財政部電子發票平台的個人帳號，讓人以電子形式將發票儲存於財政部的[[雲端]]系統中。如：「發票存載具固然方便，但與紙本發票相比還是有資安的隱憂。」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "無痕模式",
+    "added": 1677232237.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨˊ ㄏㄣˊ ㄇㄛˊ ㄕˋ",
+        "definitions": [
+          {
+            "def": "如網頁瀏覽器等，原先會自動留下紀錄的軟體中，使其停止保留紀錄的模式。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "無痕",
+    "added": 1677232232.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨˊ ㄏㄣˊ",
+        "definitions": [
+          {
+            "def": "沒有痕跡。如：「船過水無痕」、「春夢無痕」",
+            "type": "形"
+          },
+          {
+            "def": "利用無痕模式而不保留紀錄的。見「無痕模式」。如：「無痕視窗」",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "影格率",
+    "added": 1677228996.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄥˇ ㄍㄜˊ ㄌㄩˋ",
+        "definitions": [
+          {
+            "def": "→[[幀數]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "幀率",
+    "added": 1677228962.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄣ ㄌㄩˋ",
+        "definitions": [
+          {
+            "def": "→[[幀數]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "掉幀",
+    "added": 1677228703.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄧㄠˋ ㄓㄣ",
+        "definitions": [
+          {
+            "def": "數位裝置播放影片或利用互動式媒體時，由於效能不足而跳過原先要顯示的[[畫格]]。如：「近幾年的電腦播放4K影片也不會掉幀」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "洗風向",
+    "added": 1677228466.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧˇ ㄈㄥ ㄒㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "利用大量人力，有意圖的影響輿論[[風向]]。一般用於指責他人，帶有貶義。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "帶風向",
+    "added": 1677228313.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄞˋ ㄈㄥ ㄒㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "有意圖的影響輿論[[風向]]。一般用於指責他人，帶有貶義。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "風向",
+    "added": 1677227957.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄥ ㄒㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "輿論或團體中意見的傾向。如：「該國風向有變，不再反對外銷軍火」、「帶風向」、「洗風向」、「看風向」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "婉君",
+    "vogue": true,
+    "added": 1677227822.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄢˇ ㄐㄩㄣˉ",
+        "definitions": [
+          {
+            "def": "2014年選舉期間流行，對於[[網軍]]的委婉說法。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "買網軍",
+    "added": 1677227673.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄞˇ ㄨㄤˇ ㄐㄩㄣ",
+        "definitions": [
+          {
+            "def": "僱用一群人在網路上進行言語攻擊。亦即購買[[網軍]]的服務。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "網軍",
+    "added": 1677227554.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄤˇ ㄐㄩㄣ",
+        "definitions": [
+          {
+            "def": "被僱用來對意見不同的人進行言語攻擊的網路使用者。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "質量",
+    "added": 1677227511.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓˊ ㄌㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "中國用語，指[[品質]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "非典",
+    "added": 1677227163.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄟ ㄉㄧㄢˇ",
+        "definitions": [
+          {
+            "def": "中國用語，指[[SARS]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "SARS",
+    "added": 1677226756.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/sɑɹs/",
+        "definitions": [
+          {
+            "def": "嚴重急性呼吸道症候群。2002年至2003年於東亞地區流行的傳染病。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "りしれ供さ小",
+    "vogue": true,
+    "added": 1677226622.0,
+    "heteronyms": [
+      {
+        "pronunciation": "lí sī teh kóng sann siáu",
+        "definitions": [
+          {
+            "def": "你是在講什麼鬼話。台語「你是咧講啥痟」的通假字。",
+            "type": "句"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "緊急事件",
+    "added": 1676987133.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄣˇ ㄐㄧˊ ㄕˋ ㄐㄧㄢˋ",
+        "definitions": [
+          {
+            "def": "需要緊急處置的事件，例如火災、地震、海嘯、恐怖攻擊、隨機殺人等等。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "緊急出口",
+    "added": 1676987053.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄣˇ ㄐㄧˊ ㄔㄨ ㄎㄡˇ",
+        "definitions": [
+          {
+            "def": "發生需要逃生的緊急事件時，提供逃生用的出口。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "違者",
+    "added": 1676986832.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄟˊ ㄓㄜˇ",
+        "definitions": [
+          {
+            "def": "違反規定的人。用於敘述該規定的罰則或違反的後果。如：「禁止吸煙，違者處以罰鍰」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "優先席",
+    "added": 1676986685.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄡ ㄒㄧㄢ ㄒㄧˊ",
+        "definitions": [
+          {
+            "def": "運輸工具優先提供給有需要的人的座位。同「博愛座」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "後站",
+    "added": 1676986632.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄡˋ ㄓㄢˋ",
+        "definitions": [
+          {
+            "def": "平面（非高架或地下的）火車站雖然鐵軌兩側都有出口但仍造成兩側發展明顯不均時，較為熱鬧一側的站體稱作「前站」，另一側的站體則稱為「後站」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "前站",
+    "added": 1676986399.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄢˊ ㄓㄢˋ",
+        "definitions": [
+          {
+            "def": "平面（非高架或地下的）火車站雖然鐵軌兩側都有出口但仍造成兩側發展明顯不均時，較為熱鬧一側的站體稱作「前站」，另一側的站體則稱為「後站」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "低銅",
+    "added": 1676618074.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄧ ㄊㄨㄥˊ",
+        "definitions": [
+          {
+            "def": "低音[[銅管]]。指長號、上低音號、低音號等等音域低的銅管樂器。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "PT人員",
+    "added": 1676271335.0,
+    "heteronyms": [
+      {
+        "pronunciation": "piː tiː ㄖㄣˊ ㄩㄢˊ",
+        "definitions": [
+          {
+            "def": "兼職人員。PT為英文part-time（部分工時）的縮寫。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "樂齡",
+    "added": 1676221545.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄜˋ ㄌㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "年長的委婉說法。約指60歲以上。源自於對老年生活較為愜意、放鬆，可以放心享受快樂的形容。",
+            "type": "形"
+          },
+          {
+            "def": "年長者。如：「樂齡學習中心」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "樂活",
+    "added": 1676221347.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄜˋ ㄏㄨㄛˊ",
+        "definitions": [
+          {
+            "def": "快樂、無憂無慮而放鬆的生活方式。英語LOHAS的音譯，為lifestyles of health and sustainability（健康且永續的生活方式）的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "都是they的錯",
+    "added": 1676043922.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄡ ㄕˋ ðeɪ ㄉㄜ˙ ㄘㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "都是他們的錯。用來嘲笑或諷刺他人不正視自己的對錯，把什麼事情都怪在別人頭上。",
+            "type": "句"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "超級傳播者",
+    "added": 1675843454.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄠ ㄐㄧˊ ㄔㄨㄢˊ ㄅㄛˋ ㄓㄜˇ",
+        "definitions": [
+          {
+            "def": "傳染病流行時，將疾病傳染給非常多人的人。英語superspreader的意譯。",
+            "type": "名"
+          },
+          {
+            "def": "引申指將不好的事物傳播給很多人的人。如：「在社群網站上如果習慣不經大腦就分享，小心變成假訊息超級傳播者」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "造勢",
+    "added": 1675843055.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗㄠˋ ㄕˋ",
+        "definitions": [
+          {
+            "def": "號召支持者舉辦遊行，為候選人營造聲勢、凝聚支持度。",
+            "type": "動"
+          },
+          {
+            "def": "前項遊行本身。如：「這個候選人選舉期間共辦了十場造勢。」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "87",
+    "added": 1675843052.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄚ ㄑㄧ",
+        "definitions": [
+          {
+            "def": "「白癡」的諧音。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "拍謝",
+    "added": 1675843048.0,
+    "heteronyms": [
+      {
+        "pronunciation": "pháinn-sè",
+        "definitions": [
+          {
+            "def": "抱歉、對不起。台語「歹勢」的通假字。",
+            "type": "嘆"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "霧煞煞",
+    "added": 1675693137.0,
+    "heteronyms": [
+      {
+        "pronunciation": "bū-sà-sà",
+        "definitions": [
+          {
+            "def": "[[一頭霧水]]。台語「霧嗄嗄」的通假字。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "無人機",
+    "added": 1675114487.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨˊ ㄖㄣˊ ㄐㄧ",
+        "definitions": [
+          {
+            "def": "使用遙控器控制的小型四槳直升機，體積小可拿在手上，常用來控制攝影機進行空拍。",
+            "type": "名"
+          },
+          {
+            "def": "任何無人在其中操控、靠操作人員在他處遙控的飛機。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "玩意",
+    "added": 1675114293.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄢˊ ㄧˋ",
+        "definitions": [
+          {
+            "def": "同「玩意兒」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "筆電",
+    "added": 1675114057.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄧˇ ㄉㄧㄢˋ",
+        "definitions": [
+          {
+            "def": "[[筆記型電腦]]。一種附有螢幕與鍵盤且可折疊成書狀、方便攜帶的電腦。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "小火鍋",
+    "added": 1675101034.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄠˇ ㄏㄨㄛˇ ㄍㄨㄛ",
+        "definitions": [
+          {
+            "def": "一種餐廳料理，店家準備一鍋高湯和配菜，由客人自行用店家提供的卡式爐或電磁爐進行煮食。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手孔",
+    "added": 1675064087.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄎㄨㄥˇ",
+        "definitions": [
+          {
+            "def": "在地上，為讓人能伸手到下方進行維護作業的孔洞。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "人孔蓋",
+    "added": 1675064085.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄣˊ ㄎㄨㄥˇ ㄍㄞˋ",
+        "definitions": [
+          {
+            "def": "[[人孔]]上的蓋子。一般為了防止無關人士嘗試進出，會是一整片厚重的金屬製成。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "人孔",
+    "added": 1675064082.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄣˊ ㄎㄨㄥˇ",
+        "definitions": [
+          {
+            "def": "在地上，為讓人能進出下方維護用空間的孔洞。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "喇牙",
+    "added": 1674649319.0,
+    "heteronyms": [
+      {
+        "pronunciation": "lâ-giâ",
+        "definitions": [
+          {
+            "def": "一種大型蜘蛛。台語「蟧蜈」的通假字。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "一份子",
+    "added": 1674296566.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧ ㄈㄣˋ ㄗ˙",
+        "definitions": [
+          {
+            "def": "團體的成員。同「一分子」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "幀數",
+    "added": 1673784147.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄣ ㄕㄨˋ",
+        "definitions": [
+          {
+            "def": "影片中一段時間內的[[畫格]]數量。似「幀率」、「影格率」。較常用於互動式媒體而非靜態觀看的影片。如：「降低遊戲的效能設定可以很有效地提高幀數。」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "影片",
+    "added": 1673783989.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄥˇ ㄆㄧㄢˋ",
+        "definitions": [
+          {
+            "def": "藉由大量的靜止畫面快速播出，來產生出的連續影像。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "影格",
+    "added": 1673783987.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄥˇ ㄍㄜˊ",
+        "definitions": [
+          {
+            "def": "構成[[影片]]的個別靜止畫面。又稱「幀」、「畫格」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "畫格",
+    "added": 1673783984.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄨㄚˋ ㄍㄜˊ",
+        "definitions": [
+          {
+            "def": "構成[[影片]]的個別靜止畫面。又稱「幀」、「影格」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "幀",
+    "added": 1673783982.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄣ",
+        "definitions": [
+          {
+            "def": "構成[[影片]]的個別靜止畫面。又稱「畫格」、「影格」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "嗎",
+    "added": 1673766057.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄚ",
+        "definitions": [
+          {
+            "def": "表達疑問。如：「明天要去吃飯嗎？」"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "內網",
+    "added": 1673651115.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄋㄟˋ ㄨㄤˇ",
+        "definitions": [
+          {
+            "def": "內部網路。在一個組織內部讓內部的電腦能夠互相聯繫，但與外部（即[[網際網路]]）分隔開的網路。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "分鏡",
+    "added": 1673650967.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄣ ㄐㄧㄥˋ",
+        "definitions": [
+          {
+            "def": "以圖像為影視作品打草稿的方式。也稱「分鏡頭」。[英]storyboard",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "打臉",
+    "added": 1673650763.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˇ ㄌㄧㄢˇ",
+        "definitions": [
+          {
+            "def": "提出強烈的反駁，證明對方錯誤而使對方丟臉。如：「打臉縣長！他提出三點籲回歸民意」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "木管",
+    "added": 1673650649.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄨˋ ㄍㄨㄢˇ",
+        "definitions": [
+          {
+            "def": "見「木管樂器」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "工具人",
+    "added": 1673635665.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄥ ㄐㄩˋ ㄖㄣˊ",
+        "definitions": [
+          {
+            "def": "指只被當工具，沒有被充分同理或情感上依然疏遠的人。如：「不用對他那麼好，他只把你當工具人而已」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "維持社交距離",
+    "added": 1673635355.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄟˊ ㄔˊ ㄕㄜˋ ㄐㄧㄠ ㄐㄩˋ ㄌㄧˊ",
+        "definitions": [
+          {
+            "def": "降低傳染病傳播的一種方式。人與人之間物理上維持距離，以降低病毒傳染。為英語maintain social distance的意譯。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "社交距離",
+    "added": 1673635327.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄜˋ ㄐㄧㄠ ㄐㄩˋ ㄌㄧˊ",
+        "definitions": [
+          {
+            "def": "降低傳染病傳播的一種方式。人與人之間物理上維持距離，以降低病毒傳染。為英語social distance的意譯。見「維持社交距離」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "社交安全距離",
+    "added": 1673635251.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄜˋ ㄐㄧㄠ ㄢ ㄑㄩㄢˊ ㄐㄩˋ ㄌㄧˊ",
+        "definitions": [
+          {
+            "def": "見「社交距離」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "深度學習",
+    "added": 1673289588.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄣ ㄉㄨˋ ㄒㄩㄝˊ ㄒㄧˊ",
+        "definitions": [
+          {
+            "def": "英語deep learning的意譯。[[機器學習]]技術的一種，指利用多於三層的神經網路（亦即除了輸入層與輸出層外還有更多「隱藏」的層）進行機器學習的技術。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "機器學習",
+    "added": 1673289296.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧ ㄑㄧˋ ㄒㄩㄝˊ ㄒㄧˊ",
+        "definitions": [
+          {
+            "def": "一種人工智慧技術，利用演算法自動分析大量資訊並進行「學習」，產生出能夠達成過往只有人類能夠進行的工作的工具。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "深偽技術",
+    "added": 1673289204.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄣ ㄨㄟˋ ㄐㄧˋ ㄕㄨˋ",
+        "definitions": [
+          {
+            "def": "見「深偽」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "深偽",
+    "added": 1673288820.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄣ ㄨㄟˋ",
+        "definitions": [
+          {
+            "def": "一種使用機器學習AI將影片或圖片中的臉換成另一張臉的技術。源自英語deepfake，為「深度學習」與「偽裝」二詞合併而成。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "隨身碟",
+    "added": 1673274445.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄙㄨㄟˊ ㄕㄣ ㄉㄧㄝˊ",
+        "definitions": [
+          {
+            "def": "與手指大小相近，用來儲存資料的小型電子裝置。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "USB",
+    "added": 1673274179.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/ˈjuː ɛs biː/",
+        "definitions": [
+          {
+            "def": "Universal Serial Bus（通用序列匯流排）。一種連接硬體裝置間用的協定標準。",
+            "type": "名"
+          },
+          {
+            "def": "[[隨身碟]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "實聯制",
+    "added": 1673273114.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄌㄧㄢˊ ㄓˋ",
+        "definitions": [
+          {
+            "def": "[[實名制]]的變種。必須登記實際聯絡方式才能進入某場所的制度。相較於實名制較為保護個人隱私。\n台灣COVID-19疫情期間，2020年6月「防疫新生活運動」首次提出建議場所實施實聯制以幫助進行接觸者追蹤，後於2021年疫情升溫時要求場所必須實施實聯制，直到[[https://www.cdc.gov.tw/Category/ListContent/EmXemht4IT-IRAPrAnyG9A?uaid=1UL0SLJm0xCr6fmcN-NzAg][2022年4月27日隨進入社區傳染階段後取消]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "實名制",
+    "added": 1673273113.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˊ ㄇㄧㄥˊ ㄓˋ",
+        "definitions": [
+          {
+            "def": "使用某項服務或進入某場所前，必須登記實際姓名（或其他身份識別方式）的制度。如：「中國透過網路服務實名制來監控人民」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "帳密",
+    "added": 1673272952.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄤˋ ㄇㄧˋ",
+        "definitions": [
+          {
+            "def": "[[帳號]]和密碼。如：「註冊使用者之後將會提供臨時帳密，請用臨時帳密登入後設定新密碼並開通帳號」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "帳號",
+    "added": 1673272925.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄤˋ ㄏㄠˋ",
+        "definitions": [
+          {
+            "def": "有多位使用者的系統中，代表其中一個使用者的單位。同「帳戶」。如：「銀行帳號」、「Google帳號」。",
+            "type": "名"
+          },
+          {
+            "def": "登入與識別帳號用的代碼。如：「帳號和密碼要自己保管好」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新冠",
+    "added": 1673015179.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄍㄨㄢˋ",
+        "definitions": [
+          {
+            "def": "「新冠肺炎」的簡稱。新型冠狀病毒。[[COVID-19]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "快篩",
+    "added": 1672925402.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄨㄞˋ ㄕㄞ",
+        "definitions": [
+          {
+            "def": "對疾病進行快速篩檢。",
+            "type": "動"
+          },
+          {
+            "def": "進行快篩所使用的篩檢套組。如：「流感快篩」、「[[新冠]]快篩」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "超商",
+    "added": 1672925295.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄠ ㄕㄤ",
+        "definitions": [
+          {
+            "def": "同「便利商店」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "嚇人",
+    "added": 1672925058.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄚˋ ㄖㄣˊ",
+        "definitions": [
+          {
+            "def": "讓別人感到嚇一跳。如：「你別嚇人了」",
+            "type": "動"
+          },
+          {
+            "def": "令人感到驚嚇的。如：「昨天那場車禍很嚇人」",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "AI",
+    "added": 1672756180.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/ˈeɪ aɪ/",
+        "definitions": [
+          {
+            "def": "人工智慧。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "節奏遊戲",
+    "added": 1672753635.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄝˊ ㄗㄡˋ ㄧㄡˊ ㄒㄧˋ",
+        "definitions": [
+          {
+            "def": "以音樂為主，跟隨節奏做動作的遊戲軟體。又稱「音樂遊戲」、「音遊」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "音樂遊戲",
+    "added": 1672753507.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄣ ㄩㄝˋ ㄧㄡˊ ㄒㄧˋ",
+        "definitions": [
+          {
+            "def": "以音樂為主，跟隨節奏做動作的遊戲軟體。又稱「節奏遊戲」、「音遊」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "音遊",
+    "added": 1672753471.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄣ ㄧㄡˊ",
+        "definitions": [
+          {
+            "def": "[[音樂遊戲]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "虛寶",
+    "added": 1672752977.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄩ ㄅㄠˇ",
+        "definitions": [
+          {
+            "def": "遊戲軟體中虛擬的物品，一般讓玩家使用實際金錢購買。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手遊",
+    "added": 1672752865.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄧㄡˊ",
+        "definitions": [
+          {
+            "def": "手機遊戲。泛指智慧型手機上運行的遊戲軟體。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "營養標示",
+    "added": 1672751744.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄥˊ ㄧㄤˇ ㄅㄧㄠ ㄕˋ",
+        "definitions": [
+          {
+            "def": "依照衛生福利部規定，包裝食品上對其中包含之營養素進行標示的表格。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "登入",
+    "added": 1672747947.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄥ ㄖㄨˋ",
+        "definitions": [
+          {
+            "def": "在有多個使用者的電腦系統上，認證為其中一個使用者並進入代表該使用者的狀態。例如：「登入Google帳號」、「在圖書館電腦登入自己的帳號時，使用完成後要記得[[登出]]，才不會讓陌生人有機可乘」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "登出",
+    "added": 1672747873.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄥ ㄔㄨ",
+        "definitions": [
+          {
+            "def": "從電腦系統內退出，恢復為尚未[[登入]]的狀態。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "傳產",
+    "added": 1672746684.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄨㄢˊ ㄔㄢˇ",
+        "definitions": [
+          {
+            "def": "傳統產業。與「新創」成對比。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "浮水印",
+    "added": 1670320525.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄨˊ ㄕㄨㄟˇ ㄧㄣˋ",
+        "definitions": [
+          {
+            "def": "以數位方式與圖片或文件合併的印記。[英]watermark",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "軟性封城",
+    "added": 1670093148.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄨㄢˇ ㄒㄧㄥˋ ㄈㄥ ㄔㄥˊ",
+        "definitions": [
+          {
+            "def": "[[COVID-19]] 疫情期間，降低非必要人員移動的措施，類似[[封城]]但不完全禁止外出。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "軟封城",
+    "added": 1670093085.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄨㄢˇ ㄈㄥ ㄔㄥˊ",
+        "definitions": [
+          {
+            "def": "同「軟性封城」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "封城",
+    "added": 1670092665.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄥ ㄔㄥˊ",
+        "definitions": [
+          {
+            "def": "封鎖城市。",
+            "type": "動"
+          },
+          {
+            "def": "[[COVID-19]] 疫情時，為避免醫療系統無法負荷所採取的極端措施，藉由宵禁、禁止外出、封鎖國內區域間的邊境等方式來盡可能降低非必要的人員移動，以求控制病毒散播的措施。[英]lockdown",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "蒙塵",
+    "added": 1670092372.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄥˊ ㄔㄣˊ",
+        "definitions": [
+          {
+            "def": "引申比喻名聲等受到損害。如：「在領事館殺害記者之後，王子身為改革者的形象瞬間蒙塵，使外資紛紛逃離。」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "爭議性",
+    "added": 1670092096.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄥ ㄧˋ ㄒㄧㄥˋ",
+        "definitions": [
+          {
+            "def": "會造成爭議的。如：「他任內提出了許多爭議性的法案，結果四年過後沒能連任。」[英]controversial",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "疫後",
+    "added": 1670091848.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧˋ ㄏㄡˋ",
+        "definitions": [
+          {
+            "def": "疫情之後。"
+          },
+          {
+            "def": "(2022年) [[COVID-19]] 疫情控管措施放鬆之後。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "跳錶",
+    "added": 1670091690.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄧㄠˋ ㄅㄧㄠˇ",
+        "definitions": [
+          {
+            "def": "同「跳表」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "上傳",
+    "added": 1670091039.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄤˋ ㄔㄨㄢˊ",
+        "definitions": [
+          {
+            "def": "從本地裝置傳送資料到伺服器上。與「下載」相對應。[英]upload",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "下載",
+    "added": 1670090917.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄚˋ ㄗㄞˇ",
+        "definitions": [
+          {
+            "def": "從伺服器請求資料到本機進行儲存。與「上傳」相對應。[英]download",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "暴走",
+    "added": 1670089792.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄠˋ ㄗㄡˇ",
+        "definitions": [
+          {
+            "def": "失去控制。近似「失控」。源自日語。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "練團",
+    "added": 1670089458.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄧㄢˋ ㄊㄨㄢˊ",
+        "definitions": [
+          {
+            "def": "樂團進行練習。一般用於流行樂團。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手扶梯",
+    "added": 1670089164.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄈㄨˊ ㄊㄧ",
+        "definitions": [
+          {
+            "def": "同「電扶梯」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "RLE",
+    "added": 1670071741.0,
+    "heteronyms": [
+      {
+        "pronunciation": "RLE",
+        "definitions": [
+          {
+            "def": "實際生活經驗 (real life experience)。指進行跨性別評估時，依希望性別實際生活以確定不會後悔的階段。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "超級馬拉松",
+    "added": 1670071669.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄠ ㄐㄧˊ ㄇㄚˇ ㄌㄚ ㄙㄨㄥ",
+        "definitions": [
+          {
+            "def": "超過標準馬拉松長度的長跑賽事。同「超馬」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "超馬",
+    "added": 1670071593.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄠ ㄇㄚˇ",
+        "definitions": [
+          {
+            "def": "[[超級馬拉松]]。超過標準[[馬拉松]]長度（42.195 公里）的長跑賽事。從 50 公里到 100 公里以上的都有。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "造口業",
+    "added": 1670071390.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗㄠˋ ㄎㄡˇ ㄧㄝˋ",
+        "definitions": [
+          {
+            "def": "以口造[[惡業]]。",
+            "type": "動"
+          },
+          {
+            "def": "引申指詛咒人、罵髒話、騙人等。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新創公司",
+    "added": 1670069667.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄔㄨㄤˋ ㄍㄨㄥ ㄙ",
+        "definitions": [
+          {
+            "def": "新創立的公司。同「新創」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新創",
+    "added": 1670069604.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄔㄨㄤˋ",
+        "definitions": [
+          {
+            "def": "新創立的公司。同「新創公司」。[英]startup\n新創公司一般比起既有的公司更具有彈性與創新的精神。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "上探",
+    "added": 1670065655.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄤˋ ㄊㄢˋ",
+        "definitions": [
+          {
+            "def": "用以表達一個數值可能達到的高點。與「下探」相對應。如：「此公司今年股票有望上探50元」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "下探",
+    "added": 1670065363.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄚˋ ㄊㄢˋ",
+        "definitions": [
+          {
+            "def": "用以表達一個數值可能達到的低點。與「上探」相對應。如：「明日氣溫下探10度」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "踩街",
+    "added": 1670064628.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄘㄞˇ ㄐㄧㄝ",
+        "definitions": [
+          {
+            "def": "遊行、嘉年華。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "外送平台",
+    "added": 1670064438.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄞˋ ㄙㄨㄥˋ ㄆㄧㄥˊ ㄊㄞˊ",
+        "definitions": [
+          {
+            "def": "提供外送服務的平台。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "外送",
+    "added": 1670064109.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄞˋ ㄙㄨㄥˋ",
+        "definitions": [
+          {
+            "def": "讓客人以電話、網路、或 app 向餐廳點餐，餐點準備好之後由送貨員帶給客人的服務。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "內用",
+    "added": 1670063989.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄋㄟˋ ㄩㄥˋ",
+        "definitions": [
+          {
+            "def": "在餐廳內用餐。與「外帶」相對應。如：「請問要內用還是外帶？」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "課金",
+    "added": 1669817905.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄜˋ ㄐㄧㄣ",
+        "definitions": [
+          {
+            "def": "在遊戲內花錢購買虛擬商品。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "長新冠",
+    "added": 1669816934.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄤˊ ㄒㄧㄣ ㄍㄨㄢˋ",
+        "definitions": [
+          {
+            "def": "英語Long COVID的意譯。指 [[COVID-19]] 痊癒後常見的後遺症。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新冠肺炎",
+    "added": 1669815397.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄍㄨㄢˋ ㄈㄟˋ ㄧㄢˊ",
+        "definitions": [
+          {
+            "def": "[[COVID-19]]。定名自「新型冠狀病毒所引起的肺炎」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "武漢肺炎",
+    "added": 1669815227.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨˇ ㄏㄢˋ ㄈㄟˋ ㄧㄢˊ",
+        "definitions": [
+          {
+            "def": "COVID-19 疫情初期對「來自武漢的不明原因肺炎」的簡稱。後定名為「COVID-19」或「新冠肺炎」。一說為此詞對中國武漢市有貶義。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "大流行",
+    "added": 1669815143.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˋ ㄌㄧㄡˊ ㄒㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "見「大流行病」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "COVID-19",
+    "added": 1669813651.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/ˈkoʊ.vɪd naɪnˈtin/",
+        "definitions": [
+          {
+            "def": "「2019 年冠狀病毒病」(Coronavirus Disease 2019)。由 SARS-CoV-2 冠狀病毒引起的病症。首先於 2019 年於中國武漢市發現，其後於 2020 年擴散至中國全境，造成世界疫情[[大流行]]。同「武漢肺炎」、「新冠肺炎」，也見「長新冠」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "腦霧",
+    "added": 1669813090.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄋㄠˇ ㄨˋ",
+        "definitions": [
+          {
+            "def": "指大腦思考力、理解能力等下降的現象。造成腦霧的常見因素有睡眠不足、壓力過大、[[COVID-19]] 後遺症等等。英語 brain fog 的意譯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "948794狂",
+    "vogue": true,
+    "added": 1669726279.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄡˇ ㄙˋ ㄅㄚ ㄑㄧ ㄐㄧㄡˇ ㄙˋ ㄎㄨㄤˊ",
+        "definitions": [
+          {
+            "def": "「就是白痴就是狂」。用來諷刺人笨。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "87",
+    "vogue": true,
+    "added": 1669726276.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄚ ㄑㄧ",
+        "definitions": [
+          {
+            "def": "同「白痴」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "北七",
+    "added": 1669726275.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄟˇ ㄑㄧ",
+        "definitions": [
+          {
+            "def": "同「白痴」。台語「[[白痴?lang=nan_TW][白痴]]」的通假字。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "白癡",
+    "added": 1669726273.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄞˊ ㄔ",
+        "definitions": [
+          {
+            "def": "「白痴」的另一種寫法。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "蛤蜊",
+    "added": 1669725100.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄚˊ ㄇㄚˋ",
+        "definitions": [
+          {
+            "def": "蛤蠣。音借自台語「ham-á（[[蚶仔]]）」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "雖",
+    "added": 1669724081.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄙㄨㄟ",
+        "definitions": [
+          {
+            "def": "運氣不好。「衰」的通假字。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "high",
+    "added": 1669723757.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄞ / /haɪ/",
+        "definitions": [
+          {
+            "def": "精神很好的樣子。同「[[嗨?lang=zh_TW#kisaragi_dict][嗨]]」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "嗨",
+    "added": 1669723636.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄞ",
+        "definitions": [
+          {
+            "def": "精神很好的樣子。同「high」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "邊緣人",
+    "added": 1669439377.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄧㄢ ㄩㄢˊ ㄖㄣˊ",
+        "definitions": [
+          {
+            "def": "指不擅於社交的人。貶義。常用於自嘲。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "大俗賣",
+    "added": 1669246782.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˋ ㄙㄨˊ ㄇㄞˋ / tāi sio̍k-bē",
+        "definitions": [
+          {
+            "def": "低價出售。見台語「俗賣」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "車拼",
+    "added": 1669246581.0,
+    "heteronyms": [
+      {
+        "pronunciation": "tshia-piànn / ㄔㄜ ㄆㄧㄣ",
+        "definitions": [
+          {
+            "def": "見台語「捙拚」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "大車拼",
+    "added": 1669246490.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˋ ㄔㄜ ㄆㄧㄣ",
+        "definitions": [
+          {
+            "def": "來自台語「捙拚」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "打拚",
+    "added": 1669246082.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˇ ㄆㄧㄣ",
+        "definitions": [
+          {
+            "def": "努力做事。來自台語「拍拚」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "擲筊",
+    "added": 1669236737.0,
+    "heteronyms": [
+      {
+        "pronunciation": "pua̍h-pue",
+        "definitions": [
+          {
+            "def": "投擲[[筊杯]]進行占卜。台語「跋桮」的借詞。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "揪團",
+    "added": 1669218927.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄡ ㄊㄨㄢˊ",
+        "definitions": [
+          {
+            "def": "相約一群人做一件事情。如：「揪團購物」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "有洋蔥",
+    "vogue": true,
+    "added": 1669203635.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄡˇ ㄧㄤˊ ㄘㄨㄥ",
+        "definitions": [
+          {
+            "def": "會令人想流眼淚的。令人感傷的。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "懶人包",
+    "added": 1669203447.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄢˇ ㄖㄣˊ ㄅㄠ",
+        "definitions": [
+          {
+            "def": "由有志者整理，讓不了解狀況的人能快速了解狀況的說明。如：「○○事件懶人包」、「20XX年投票懶人包」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新興詞",
+    "added": 1669203293.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄒㄧㄥ ㄘˊ",
+        "definitions": [
+          {
+            "def": "一個語言裡新興的詞彙。近似「流行語」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "好康",
+    "added": 1669202910.0,
+    "heteronyms": [
+      {
+        "pronunciation": "hó-khang / ㄏㄠˇ ㄎㄤ",
+        "definitions": [
+          {
+            "def": "好的運氣、好的事情；優惠。台語「好空」的借詞。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ㄍㄧㄥ",
+    "added": 1669047904.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄧㄥ",
+        "definitions": [
+          {
+            "def": "硬撐。挺住。逞強。來自台語「[[弓?lang=nan_TW][弓]]」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "揪",
+    "added": 1669044114.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄡ",
+        "definitions": [
+          {
+            "def": "邀約。來自台語「[[招?lang=nan_TW][招]]」。如：「吃這麼好，怎麼都不揪？」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "世界盃",
+    "added": 1669044040.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˋ ㄐㄧㄝˋ ㄅㄟ",
+        "definitions": [
+          {
+            "def": "世界盃足球賽。由 FIFA（國際足球總會）每四年舉辦的足球賽。也稱「世足」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "世足",
+    "added": 1669043923.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕˋ ㄗㄨˊ",
+        "definitions": [
+          {
+            "def": "世界盃足球賽。由 FIFA（國際足球總會）每四年舉辦的足球賽。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "班距",
+    "added": 1668933876.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄢ ㄐㄩˋ",
+        "definitions": [
+          {
+            "def": "鐵路或公車等大眾運輸工具中，一班車與一班車之間的距離。一般為一班車離站後到下一班車離站的時間。如：「台北捷運文湖線在尖峰時段可以安全地達到90秒的班距，前一班車剛走，下一班車就來了。」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "百百款",
+    "added": 1668916979.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄞˇ ㄅㄞˇ ㄎㄨㄢˇ / pah-pah-khuán",
+        "definitions": [
+          {
+            "def": "各式各樣。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "鑑於",
+    "added": 1668882406.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄢˋ ㄩˊ",
+        "definitions": [
+          {
+            "def": "同「鑒於」。",
+            "type": "助"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "厥為……是賴",
+    "added": 1668880677.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄩㄝˊ ㄨㄟˊ …… ㄕˋ ㄌㄞˋ",
+        "definitions": [
+          {
+            "def": "完全依賴它。\n如：世界人權宣言第二十九條第一款：\n\n#+begin_quote\n「人人對於社會負有義務；個人人格之自由充分發展厥為社會是賴。」\n#+end_quote\n\n參照簡化字版：\n\n#+begin_quote\n「人人对社会负有义务，因为只有在社会中他的个性才可能得到自由和充分的发展。 」\n#+end_quote",
+            "type": "句型"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "衰",
+    "added": 1668749087.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄙㄨㄟ",
+        "definitions": [
+          {
+            "def": "運氣不好。來自台語「[[衰?lang=nan_TW][衰]]」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "hold住",
+    "added": 1668748850.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄡ ㄓㄨˋ",
+        "definitions": [
+          {
+            "def": "把持住。維持控制。來自廣東話。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "紅",
+    "added": 1668622956.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄨㄥˊ",
+        "definitions": [
+          {
+            "def": "流行。參見「走紅」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "網紅",
+    "added": 1668622868.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄨㄤˇ ㄏㄨㄥˊ",
+        "definitions": [
+          {
+            "def": "網路上的名人。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "KOL",
+    "vogue": true,
+    "added": 1668622511.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/keɪ oʊ ɛl/",
+        "definitions": [
+          {
+            "def": "意見領袖。[英]Key opinion leader",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "業配",
+    "added": 1668622483.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄝˋ ㄆㄟˋ",
+        "definitions": [
+          {
+            "def": "業務配合。廠商與媒體合作進行廣告行銷。",
+            "type": "動"
+          },
+          {
+            "def": "廠商與媒體合作所製作出的廣告。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "弱音器",
+    "added": 1668313717.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄨㄛˋ ㄧㄣ ㄑㄧˋ",
+        "definitions": [
+          {
+            "def": "裝在樂器上，讓樂器聲響變弱而改變音色的器具。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "排程",
+    "added": 1668261188.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄆㄞˊ ㄔㄥˊ",
+        "definitions": [
+          {
+            "def": "排定日程或時程。",
+            "type": "動"
+          },
+          {
+            "def": "排定下來的時程。與「日程」近似。在指班表的時候也作「排班」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "LINE",
+    "added": 1668070810.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/laɪn/",
+        "definitions": [
+          {
+            "def": "由 LINE 公司開發、營運的通訊軟體，在日本、台灣、泰國有極高的市佔率。",
+            "type": "名"
+          },
+          {
+            "def": "LINE 平台上的訊息。如：「我把照片直接傳 LINE 給你，你等一下」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "奶酪",
+    "added": 1668070086.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄋㄞˇ ㄌㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "一種呈固體狀的奶類食品的統稱。",
+            "type": "名"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ㄋㄞˇ ㄌㄠˋ",
+        "definitions": [
+          {
+            "def": "「奶酪」的又音。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "智慧型",
+    "added": 1668049177.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓˋ ㄏㄨㄟˋ ㄒㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "內含電腦且可連接網路的。如：「智慧型手錶」、「智慧型手機」",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手表",
+    "added": 1668049072.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄅㄧㄠˇ",
+        "definitions": [
+          {
+            "def": "戴在手上的小時鐘。「手錶」的另一種寫法。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "加值",
+    "added": 1667872011.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄚ ㄓˊ",
+        "definitions": [
+          {
+            "def": "補充金額到儲值卡中。",
+            "type": "動"
+          },
+          {
+            "def": "提升價值。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "發威",
+    "added": 1667871812.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄚ ㄨㄟ",
+        "definitions": [
+          {
+            "def": "發揮威力。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "自小客車",
+    "added": 1667871627.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗˋ ㄒㄧㄠˇ ㄎㄜˋ ㄔㄜ",
+        "definitions": [
+          {
+            "def": "自用的[[小客車]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "小窩",
+    "added": 1667871138.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄠˇ ㄨㄛ",
+        "definitions": [
+          {
+            "def": "「家」的暱稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "吹哨者",
+    "added": 1667870926.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄨㄟ ㄕㄠˋ ㄓㄜˇ",
+        "definitions": [
+          {
+            "def": "從組織內部為了社會公益而流出內情的人。英語whistleblower的意譯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "同溫層",
+    "added": 1667870834.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄨㄥˊ ㄨㄣ ㄘㄥˊ",
+        "definitions": [
+          {
+            "def": "引申為與自己較為相近的群體。「這件事情在我的同溫層有不少討論」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "key",
+    "added": 1667870675.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/ki/",
+        "definitions": [
+          {
+            "def": "鑰匙。如：「出門記得要檢查 key 有沒有帶」",
+            "type": "名"
+          },
+          {
+            "def": "輸入資訊到電腦系統裡。如：「小心不要 key 錯資料了。」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "抖內",
+    "added": 1667869982.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄡˇ ㄋㄟˋ",
+        "definitions": [
+          {
+            "def": "「斗內」的另一種寫法。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "斗內",
+    "added": 1667869802.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄡˇ ㄋㄟˋ",
+        "definitions": [
+          {
+            "def": "捐款贊助。一般用於贊助創作者的場合。英語donate的音譯。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "QR碼",
+    "added": 1667869686.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kju ɑɹ/ ㄇㄚˇ",
+        "definitions": [
+          {
+            "def": "一種二維條碼。同「QR Code」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "QR Code",
+    "added": 1667869221.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kju ɑɹ koʊd/",
+        "definitions": [
+          {
+            "def": "一種二維條碼。Quick Response code 的縮寫。常用來在現實生活中展示網頁連結。由豐田集團旗下電裝公司於 1994 年發佈。亦稱「QR碼」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新品",
+    "added": 1667869156.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄆㄧㄣˇ",
+        "definitions": [
+          {
+            "def": "新的品項。新的商品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "の",
+    "added": 1667868941.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄜ˙",
+        "definitions": [
+          {
+            "def": "同「的」。來自日語的借詞。僅於簡寫或製造日系效果時使用。"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ㄓ",
+        "definitions": [
+          {
+            "def": "同「之」。來自日語的借詞。僅於簡寫或製造日系效果時使用。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ㄉ",
+    "added": 1667868602.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄜ",
+        "definitions": [
+          {
+            "def": "第五個注音符號。"
+          },
+          {
+            "def": "「的」的通假字。非正式場合時，在省打字鍵數、省選字時間時會使用。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "負能量",
+    "added": 1667868572.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄨˋ ㄋㄥˊ ㄌㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "負面的想法。對應「正能量」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "正能量",
+    "added": 1667868541.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄥˋ ㄋㄥˊ ㄌㄧㄤˋ",
+        "definitions": [
+          {
+            "def": "正面的想法。對應「負能量」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "萌",
+    "added": 1667868291.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄥˊ",
+        "definitions": [
+          {
+            "def": "可愛的。源自日語「萌える」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "人道處置",
+    "added": 1667868182.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄖㄣˊ ㄉㄠˋ ㄔㄨˇ ㄓˋ",
+        "definitions": [
+          {
+            "def": "對動物所進行的安樂死。撲殺。也稱作「人道毀滅」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "站台",
+    "added": 1667868069.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄢˋ ㄊㄞˊ",
+        "definitions": [
+          {
+            "def": "站上舞台。",
+            "type": "動"
+          },
+          {
+            "def": "引申指支持在造勢場合上台支持台上的候選人。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "抓漏",
+    "added": 1667868028.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨㄚ ㄌㄡˋ",
+        "definitions": [
+          {
+            "def": "找尋並排除房屋漏水問題。同台語「[[掠漏]]」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "足感心",
+    "added": 1667867929.0,
+    "heteronyms": [
+      {
+        "pronunciation": "tsiok kám-sim",
+        "definitions": [
+          {
+            "def": "非常感動。台語「[[足?lang=nan_TW][足]][[感心?lang=nan_TW][感心]]」的借詞。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "二創",
+    "added": 1667831552.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄦˋ ㄔㄨㄤˋ",
+        "definitions": [
+          {
+            "def": "「二次創作」的簡稱。衍生作品。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "二次創作",
+    "added": 1667831482.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄦˋ ㄘˋ ㄔㄨㄤˋ ㄗㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "一個著作物的衍生作品。",
+            "type": "名"
+          },
+          {
+            "def": "製作衍生作品的動作。如：「進行二次創作」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "蛤",
+    "added": 1667771801.0,
+    "heteronyms": [
+      {
+        "pronunciation": "hânn / ㄏㄚˊ",
+        "definitions": [
+          {
+            "def": "表示疑惑。「啥」的通假字。",
+            "type": "嘆"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "扣打",
+    "added": 1667758317.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄡˋ ㄉㄚˇ",
+        "definitions": [
+          {
+            "def": "可以使用的量。同「額度」。英語「quota」、日語「クオータ」透過台語引入華語的音譯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "踩踏事件",
+    "added": 1667606408.0,
+    "eq-en": "stampede",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄘㄞˇ ㄊㄚˋ ㄕˋ ㄐㄧㄢˋ",
+        "definitions": [
+          {
+            "def": "因人群密度過高，互相擠壓造成窒息傷亡的[[事件]]。[英]Crowd surge。",
+            "type": "名"
+          },
+          {
+            "def": "因人群恐慌而開始互相衝撞、踩踏，造成傷亡的事件。[英]Stampede。",
+            "type": "名"
+          },
+          {
+            "def": "又稱「人踩人事件」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "新增",
+    "added": 1667606407.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄣ ㄗㄥ",
+        "definitions": [
+          {
+            "def": "同「添加」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "啥",
+    "added": 1667606406.0,
+    "heteronyms": [
+      {
+        "pronunciation": "hânn / ㄏㄚˊ",
+        "definitions": [
+          {
+            "def": "表示疑惑。",
+            "type": "嘆"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "凍蒜",
+    "added": 1667606404.0,
+    "heteronyms": [
+      {
+        "pronunciation": "tòng-suán",
+        "definitions": [
+          {
+            "def": "當選。一般用來鼓勵或祝福[[候選人]]當選。為台語「[[當選?lang=nan_TW][當選]]」之通假字。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "嵌入",
+    "added": 1667606403.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄢ ㄖㄨˋ",
+        "definitions": [
+          {
+            "def": "將一個東西包含在另一個東西裡。同英語「embed」。來自日語「嵌入」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "嵌入式",
+    "added": 1667606402.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄢ ㄖㄨˋ ㄕˋ",
+        "definitions": [
+          {
+            "def": "包含在另一個東西裡面的。同英語「embedded」。如：「嵌入式廣告」、「嵌入式系統」",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "嵌入式系統",
+    "added": 1667606401.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄢ ㄖㄨˋ ㄕˋ ㄒㄧˋ ㄊㄨㄥˇ",
+        "definitions": [
+          {
+            "def": "一種具有特定目的與功能的[[電腦]]。參見維基百科：[[https://zh.wikipedia.org/wiki/嵌入式系統][嵌入式系統]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "黑歷史",
+    "added": 1667606400.0,
+    "eq-ja": "黒歴史",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄟ ㄌㄧˋ ㄕˇ",
+        "definitions": [
+          {
+            "def": "不堪回首、回想起會感到羞愧的過往。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "線下",
+    "added": 1667174405.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄢˋ ㄒㄧㄚˋ",
+        "definitions": [
+          {
+            "def": "不在網路上的。面對面的。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "線下聚會",
+    "added": 1667174404.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄢˋ ㄒㄧㄚˋ ㄐㄩˋ ㄏㄨㄟˋ",
+        "definitions": [
+          {
+            "def": "實體、面對面的聚會。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "線上課程",
+    "added": 1667174403.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄢˋ ㄕㄤˋ ㄎㄜˋ ㄔㄥˊ",
+        "definitions": [
+          {
+            "def": "透過網路進行的課程。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "線上",
+    "added": 1667174402.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄢˋ ㄕㄤˋ",
+        "definitions": [
+          {
+            "def": "在網路上、透過網路的。對應「實體」或「線下」。",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "卡",
+    "added": 1667174401.0,
+    "heteronyms": [
+      {
+        "pronunciation": "khê",
+        "definitions": [
+          {
+            "def": "無法動彈。來自台語「㧎」一詞。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "伴手",
+    "added": 1667174400.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄢˋ ㄕㄡˇ",
+        "definitions": [
+          {
+            "def": "亦稱做「伴手禮」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "姦撟",
+    "added": 1666915217.0,
+    "heteronyms": [
+      {
+        "pronunciation": "kàn-kiāu",
+        "definitions": [
+          {
+            "def": "罵。亦寫做「幹譙」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "幹譙",
+    "added": 1666915216.0,
+    "heteronyms": [
+      {
+        "pronunciation": "kàn-kiāu",
+        "definitions": [
+          {
+            "def": "罵。來自台語「姦撟」一詞。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "care",
+    "added": 1666915215.0,
+    "heteronyms": [
+      {
+        "pronunciation": "/kɛ(ə)ɹ/",
+        "definitions": [
+          {
+            "def": "在意。如：「你根本就不care嘛！」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "電子郵件",
+    "added": 1666915214.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄧㄢˋ ㄗˇ ㄧㄡˊ ㄐㄧㄢˋ",
+        "definitions": [
+          {
+            "def": "參見：「[[收件匣]]」、「[[寄件匣]]」、「[[寄件備份]]」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "寄件備份",
+    "added": 1666915213.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧˋ ㄐㄧㄢˋ ㄅㄟˋ ㄈㄣˋ",
+        "definitions": [
+          {
+            "def": "在[[電子郵件]]系統裡，用來儲存已經寄出的信件的資料夾。參見：「[[收件匣]]」、「[[寄件匣]]」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "寄件匣",
+    "added": 1666915212.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧˋ ㄐㄧㄢˋ ㄐㄧㄚˊ",
+        "definitions": [
+          {
+            "def": "在[[電子郵件]]系統裡，儲存準備寄出但尚未寄出的信件的資料夾。參見：「[[收件匣]]」、「[[寄件備份]]」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "收件匣",
+    "added": 1666915211.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡ ㄐㄧㄢˋ ㄐㄧㄚˊ",
+        "definitions": [
+          {
+            "def": "在[[電子郵件]]系統裡，儲存接收到的信件的資料夾。參見：「[[寄件匣]]」、「[[寄件備份]]」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "伴手禮",
+    "added": 1666915210.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄅㄢˋ ㄕㄡˇ ㄌㄧˇ",
+        "definitions": [
+          {
+            "def": "旅遊歸後帶回給親友的禮物。",
+            "type": "名"
+          },
+          {
+            "def": "拜訪他人時待在手邊的禮物。",
+            "type": "名"
+          },
+          {
+            "def": "同「伴手」一詞。如：「春節伴手禮」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "卡式爐",
+    "added": 1666915209.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄚˇ ㄕˋ ㄌㄨˊ",
+        "definitions": [
+          {
+            "def": "一種可攜式的瓦斯爐。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "喬",
+    "added": 1666915208.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄠˊ / tshiâu",
+        "definitions": [
+          {
+            "def": "平衡多方需求進行商討、研議。來自台語「撨」一詞。如：「喬事情」。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "喬事情",
+    "added": 1666915207.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄠˊ ㄕˋ ㄑㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "討論事情。進行交涉。",
+            "type": "動"
+          },
+          {
+            "def": "隱射指暴力談判。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "骰子",
+    "added": 1666915206.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄞˇ ㄗ˙",
+        "definitions": [
+          {
+            "def": "各面皆有標示的多面形物體，用以隨機取得數字。一般為六面。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "親子丼",
+    "added": 1666915204.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄧㄣ ㄗˇ ㄉㄨㄥˋ",
+        "definitions": [
+          {
+            "def": "一種含有雞蛋和雞肉的日式料理。「親」指雞，「子」指雞蛋。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "丼飯",
+    "added": 1666915202.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄥˋ ㄈㄢˋ",
+        "definitions": [
+          {
+            "def": "一種在碗中盛飯後上添上配菜的日式料理。同「丼」。\n讀音引自日語「丼」（どんぶり）。「丼」原指一種碗，而「丼飯」原指裝在其中的飯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "丼",
+    "added": 1666915201.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄨㄥˋ",
+        "definitions": [
+          {
+            "def": "一種在碗中盛飯後上添上配菜的日式料理。同「丼飯」。\n讀音引自日語「丼」（どんぶり）。",
+            "type": "名"
+          }
+        ]
+      },
+      {
+        "pronunciation": "ㄐㄧㄥˇ",
+        "definitions": [
+          {
+            "def": "「井」的異體字。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "友誼",
+    "added": 1666915200.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄡˇ ㄧˊ",
+        "definitions": [
+          {
+            "def": "友好的關係。作為朋友的關係。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  }
+]

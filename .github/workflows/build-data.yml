@@ -1,0 +1,54 @@
+name: Build data
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  "build":
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "pnpm"
+      - name: Install packages
+        run: |
+          pnpm install
+          pip install unihan-etl typing_extensions
+      - name: Set up Emacs
+        run: |
+          sudo add-apt-repository ppa:kelleyk/emacs
+          sudo apt update
+          sudo apt-get install emacs28-nox
+      - uses: emacs-eask/setup-eask@master
+        with:
+          version: "snapshot"
+      - name: Set up SSH
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_SECRET: ${{ secrets.SSH_SECRET }}
+        run: |
+          mkdir -p ~/.ssh
+          printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
+          printenv SSH_SECRET > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Build data files
+        run: |
+          eask install-deps
+          make entries.db.gz
+      - name: Deploy built database
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          make admin.deploy
+        shell: bash
