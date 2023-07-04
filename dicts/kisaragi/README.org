@@ -1,3 +1,7 @@
+* 授權
+
+《如月的現代台灣華語補足典》著作權由我（如月飛羽）以 CC0 釋出，內文見[[./LICENSE][LICENSE]]。
+
 * 補足典
 ** 這些檔案
 =kisaragi_dict.json= 是用 =kisaragi-dict.org= 產生的。這是因為 JSON 實在很難寫。
