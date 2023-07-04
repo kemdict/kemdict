@@ -44,11 +44,13 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - name: Build data files
         run: |
+          cd dicts
           eask install-deps
           make entries.db.gz
       - name: Deploy built database
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
+          cd dicts
           make admin.deploy
         shell: bash
