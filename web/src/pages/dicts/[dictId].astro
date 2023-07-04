@@ -24,15 +24,24 @@ import DictList from "./DictList.svelte";
     <div class="max-w-[22rem]">
       <DictList client:load current={dictId} />
     </div>
-    <div class="prose">
+    <div class="prose flex-1">
       <div class="mb-2 font-bold">收錄字典介紹 -</div>
       <h1>{dict.name}</h1>
       <div set:html={marked.parse(dict.meta.desc_long)} />
       <table>
         <tr>
-          <th>名稱</th>
+          <th class="w-16">名稱</th>
           <td>{dict.name}</td>
         </tr>
+        {
+          dict.meta.extra &&
+            Object.entries(dict.meta.extra).map(([k, v]) => (
+              <tr>
+                <th>{k}</th>
+                <td>{v}</td>
+              </tr>
+            ))
+        }
         <tr>
           <th>作者</th>
           <td>{dict.meta.author}</td>
@@ -45,6 +54,24 @@ import DictList from "./DictList.svelte";
           <th>語言</th>
           <td>{langIdName(dict.lang)}</td>
         </tr>
+        <tr>
+          <th>授權</th>
+          <td><a href={dict.meta.license.url}>{dict.meta.license.name}</a></td>
+        </tr>
+        <tr>
+          <th>來源</th>
+          <td><a href={dict.meta.source}>{dict.meta.source}</a></td>
+        </tr>
+        {
+          dict.meta.original && (
+            <tr>
+              <th>原冊</th>
+              <td>
+                <a href={dict.meta.original}>{dict.meta.original}</a>
+              </td>
+            </tr>
+          )
+        }
       </table>
     </div>
   </div>

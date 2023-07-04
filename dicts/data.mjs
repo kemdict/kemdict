@@ -51,6 +51,12 @@ export const dicts = [
       author: "Unicode聯盟",
       desc_short: "Unicode聯盟所維護的漢字資料庫",
       desc_long: `Unicode聯盟所維護的漢字資料庫，包含筆畫數、部首、簡繁對應等資訊。`,
+      license: {
+        name: "Unicode License",
+        url: "https://www.unicode.org/license.txt",
+      },
+      source: "https://unihan-etl.git-pull.com/",
+      original: "https://unicode.org/charts/unihan.html",
     },
   },
   // ...ilrdf_codes.map((code) => ({
@@ -65,22 +71,42 @@ export const dicts = [
     url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
     lang: "nan_TW",
     meta: {
-      author: "高積煥、陳邦鎮",
+      author: "Ko Chek-hoàn（高積煥）、Tân Pang-tìn（陳邦鎮）",
+      extra: {
+        數位化及編修: "Lîm Bûn-cheng、Tēⁿ Tì-têng、Tân Kim-hoa、Chiúⁿ Ji̍t-êng",
+      },
       year: 1956,
       desc_short: "A Basic Vocabulary For A Beginner In Taiwanese",
-      desc_long: `利用ChhoeTaigi的數位化成果。
-
-https://thak.taigi.info/1956TaioanPehoeKichhooGiku/`,
+      desc_long: `1956年出版的，一套台語教科書的第四本。詳細請參照[ChhoeTaigi 冊tha̍k-á上的資訊](https://thak.taigi.info/1956TaioanPehoeKichhooGiku/)。`,
+      license: {
+        name: "CC BY-SA 4.0",
+        url: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/#8-1956-台灣白話基礎語句",
+      },
+      source: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase",
+      original: "https://thak.taigi.info/1956TaioanPehoeKichhooGiku/",
     },
   },
   {
     id: "kisaragi_dict",
     name: "如月的現代台灣華語補足典",
+    // FIXME
     url: "/dict-kisaragi",
     lang: "zh_TW",
     meta: {
-      desc_short: "TODO",
-      desc_long: ``,
+      desc_short: "Kemdict 的額外華語詞",
+      desc_long: `我記錄台灣華語有在使用但沒被收錄的詞的地方。
+
+不是只有流行語。
+
+來自台語的借詞也會列。
+
+重編本或簡編本已經有的定義不會再重複，只寫它們沒提到的部分。`,
+      license: {
+        name: "CC0",
+        url: "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/LICENSE",
+      },
+      source:
+        "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/kisaragi-dict.org",
     },
   },
   {
@@ -118,14 +144,28 @@ https://thak.taigi.info/1956TaioanPehoeKichhooGiku/`,
   },
   {
     id: "chhoetaigi_taijittoasutian",
-    name: "台日大辭典台語譯本 (1932)",
+    name: "台日大辭典台語譯本",
     url: "https://taigi.fhl.net/dict/search.php?DETAIL=1&LIMIT=id=$1",
     lang: "nan_TW",
     meta: {
-      author: "TODO",
+      author: "小川尚義",
+      extra: {
+        台文翻譯及編修: "Lîm Chùn-io̍k（林俊育）長老",
+      },
       year: 1932,
-      desc_short: "TODO",
-      desc_long: `TODO`,
+      desc_short: "日治時期台灣總督府出版的台語辭典的台譯版",
+      desc_long: `
+《台日大辭典》由日本語言學家小川尚義主編、台灣總督府出版，以日語編寫，記錄了當時的台語。
+
+其後[台語信望愛](https://toj.fhl.net/index.html)執行人 Lîm Chùn-io̍k 長老將其譯為台文，並整理資料、數位化，且資料以 [CC-BY-NC-SA 3.0 台灣](https://creativecommons.org/licenses/by-nc-sa/3.0/tw/) 授權[公開於 GitHub](https://github.com/fhl-net/Lim-Chun-iok_2008_Tai-jip-Tua-su-tian)。
+
+可以參照[ChhoeTaigi 冊tha̍k-á上的介紹](https://thak.taigi.info/1931TaijitToaSutian1/)。`,
+      license: {
+        name: "CC BY-NC-SA 3.0 TW",
+        url: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/#2-1932-台日大辭典台譯版",
+      },
+      source: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/",
+      original: "https://taigi.fhl.net/dict/",
     },
   },
   {
@@ -145,8 +185,18 @@ https://thak.taigi.info/1956TaioanPehoeKichhooGiku/`,
     url: "https://itaigi.tw/k/$1",
     lang: "nan_TW",
     meta: {
-      desc_short: "TODO",
-      desc_long: `TODO`,
+      author: "TODO",
+      desc_short: "萌典的延伸專案，「自己的辭典自己編」",
+      desc_long: `
+> iTaigi 是 g0v 零時政府專案「萌典」的延伸專案，想知道一個詞的台語怎麼說，來這裡查就對了！甚麼都可以查，但不一定查得到，查不到時可以發問，或者自己發明台語講法貢獻給大家，簡單說就是「自己的辭典自己編」。
+
+參見[iTaigi的介紹](https://itaigi.tw/about)。`,
+      license: {
+        name: "CC0",
+        url: "https://itaigi.tw/hokbu",
+      },
+      source: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/",
+      original: "https://itaigi.tw/",
     },
   },
   {

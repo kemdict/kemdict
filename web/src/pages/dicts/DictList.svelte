@@ -16,7 +16,7 @@
 <div class="mr-2">
   <LocalSearchInput bind:filterString />
 </div>
-<ul class="mt-2 space-y-2 overflow-auto lg:max-h-[34rem]">
+<ul class="mt-2 space-y-2 overflow-auto">
   {#each dicts as { id, name, meta }}
     {#if filterString === "" || needle(name, meta.desc_short)
         .toLowerCase()

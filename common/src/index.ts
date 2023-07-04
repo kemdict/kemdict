@@ -43,6 +43,14 @@ export interface Dict {
     year: number;
     desc_short: string;
     desc_long: string;
+    license: {
+      name: string;
+      url: string;
+    };
+    /**
+     * Where I got the data from, like ChhoeTaigiDatabase for iTaigi.
+     */
+    source: string;
   };
 }
 export interface Heteronym {
