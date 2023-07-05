@@ -250,6 +250,18 @@ Hub / USB Hub
 **** ㄇㄨˋ ㄍㄨㄢˇ
 ***** 見「木管樂器」。
 ** etc.
+*** 貴三三
+:PROPERTIES:
+:added:    2023-07-06T02:02:39+0900
+:END:
+**** kuì-sam-sam / kuì-som-som
+***** →[[貴桑桑]]
+*** 貴桑桑
+:PROPERTIES:
+:added:    2023-07-06T01:50:23+0900
+:END:
+**** kuì-sam-sam / kuì-som-som
+***** 形|非常昂貴的。借自台語「[[貴參參][貴參參]]」。
 *** UV
 :PROPERTIES:
 :added:    2023-06-26T02:52:40+0900
