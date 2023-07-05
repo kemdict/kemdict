@@ -1,10 +1,14 @@
 name: Build data
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "dicts/**"
+      # For kisaragi-dict, we commit the JSON together, so this is fine
+      - "!*.org"
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
 
 jobs:
   "build":
