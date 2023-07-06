@@ -86,7 +86,7 @@ import WordList from "$src/components/WordList.svelte";
             return (
               <>
                 <p>目前共有 {titles.length} 條：</p>
-                <WordList words={titles} search={true} client:load />
+                <WordList words={titles} client:load />
               </>
             );
           })()
