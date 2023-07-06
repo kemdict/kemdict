@@ -42,7 +42,7 @@ export interface Dict {
     author?: string;
     year: number;
     desc_short: string;
-    desc_long: string;
+    desc: string;
     license: {
       name: string;
       url: string;

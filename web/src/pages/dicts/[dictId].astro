@@ -78,7 +78,7 @@ import WordList from "$src/components/WordList.svelte";
           }
         </table>
       </div>
-      <div set:html={marked.parse(dict.meta.desc_long)} />
+      <div set:html={marked.parse(dict.meta.desc)} />
       {
         (dictId === "kisaragi_dict" || dictId === "kisaragi_taigi") &&
           (async () => {

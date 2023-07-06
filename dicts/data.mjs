@@ -40,7 +40,7 @@ export const langs = {
 // "xsy",
 // ];
 
-// desc_long is Markdown.
+// desc is Markdown.
 export const dicts = [
   {
     id: "unihan",
@@ -49,7 +49,7 @@ export const dicts = [
     lang: "han",
     meta: {
       author: "Unicode聯盟",
-      desc_long: `Unicode聯盟所維護的漢字資料庫，包含筆畫數、部首、簡繁對應等資訊。`,
+      desc: `Unicode聯盟所維護的漢字資料庫，包含筆畫數、部首、簡繁對應等資訊。`,
       license: {
         name: "Unicode License",
         url: "https://www.unicode.org/license.txt",
@@ -75,7 +75,7 @@ export const dicts = [
         數位化及編修: "Lîm Bûn-cheng、Tēⁿ Tì-têng、Tân Kim-hoa、Chiúⁿ Ji̍t-êng",
       },
       year: 1956,
-      desc_long: `1956年出版的，一套台語教科書的第四本。詳細請參照[ChhoeTaigi 冊tha̍k-á上的資訊](https://thak.taigi.info/1956TaioanPehoeKichhooGiku/)。`,
+      desc: `1956年出版的，一套台語教科書的第四本。詳細請參照[ChhoeTaigi 冊tha̍k-á上的資訊](https://thak.taigi.info/1956TaioanPehoeKichhooGiku/)。`,
       license: {
         name: "CC BY-SA 4.0",
         url: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/#8-1956-台灣白話基礎語句",
@@ -90,7 +90,7 @@ export const dicts = [
     url: "/dicts/kisaragi_dict",
     lang: "zh_TW",
     meta: {
-      desc_long: `Kemdict 的額外華語詞。
+      desc: `Kemdict 的額外華語詞。
 
 我記錄台灣華語有在使用但沒被收錄的詞的地方。
 
@@ -113,7 +113,7 @@ export const dicts = [
     url: "/dicts/kisaragi_taigi",
     lang: "nan_TW",
     meta: {
-      desc_long: `我盡力補充台語沒被定義的詞的地方。`,
+      desc: `我盡力補充台語沒被定義的詞的地方。`,
       license: {
         name: "CC0",
         url: "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/LICENSE",
@@ -129,7 +129,7 @@ export const dicts = [
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      desc_long: `
+      desc: `
 > 主要適用對象：國中、小學生及學習華語人士。
 >
 > 特色：
@@ -153,7 +153,7 @@ export const dicts = [
     meta: {
       author: "教育部",
       // TODO: fill this out
-      desc_long: ``,
+      desc: ``,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "/l/reviseddict_10312.pdf",
@@ -173,7 +173,7 @@ export const dicts = [
         台文翻譯及編修: "Lîm Chùn-io̍k（林俊育）長老",
       },
       year: 1932,
-      desc_long: `
+      desc: `
 《台日大辭典》由日本語言學家小川尚義主編、台灣總督府出版，以日語編寫，記錄了當時的台語。
 
 其後[台語信望愛](https://toj.fhl.net/index.html)執行人 Lîm Chùn-io̍k 長老將其譯為台文，並整理資料、數位化，且資料以 [CC-BY-NC-SA 3.0 台灣](https://creativecommons.org/licenses/by-nc-sa/3.0/tw/) 授權[公開於 GitHub](https://github.com/fhl-net/Lim-Chun-iok_2008_Tai-jip-Tua-su-tian)。
@@ -195,7 +195,7 @@ export const dicts = [
     meta: {
       author: "教育部",
       // TODO: fill this out
-      desc_long: ``,
+      desc: ``,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
@@ -211,7 +211,7 @@ export const dicts = [
     lang: "nan_TW",
     meta: {
       author: "g0v、iTaigi 貢獻者",
-      desc_long: `
+      desc: `
 > iTaigi 是 g0v 零時政府專案「萌典」的延伸專案，想知道一個詞的台語怎麼說，來這裡查就對了！甚麼都可以查，但不一定查得到，查不到時可以發問，或者自己發明台語講法貢獻給大家，簡單說就是「自己的辭典自己編」。
 
 參見[iTaigi的介紹](https://itaigi.tw/about)。`,
@@ -231,7 +231,7 @@ export const dicts = [
     meta: {
       author: "教育部",
       // TODO: fill this out
-      desc_long: ``,
+      desc: ``,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
@@ -249,7 +249,7 @@ export const dicts = [
     meta: {
       author: "教育部",
       // TODO: fill this out
-      desc_long: ``,
+      desc: ``,
       license: {
         name: "CC BY-ND",
         url: "/l/idiomsdict_10409.pdf",
