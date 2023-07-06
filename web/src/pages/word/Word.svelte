@@ -53,8 +53,8 @@
           《{dict.name}》採 CC0 釋出，可無條件隨意複製，隨意利用。
         </p>
         <p>
-          這個定義有問題嗎？<a
-            href="https://github.com/kemdict/kemdict-data/issues">回報問題</a
+          這個定義有問題嗎？<a href="https://github.com/kemdict/kemdict/issues"
+            >回報問題</a
           >
         </p>
       </div>
@@ -134,7 +134,7 @@
           >》版本編號：2015_20230106
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p><a href="/l/reviseddict_10312.pdf">使用說明</a></p>
+        <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
     {:else if dict.id == "dict_concised"}
       <WordDictConcised heteronyms={hets} />
@@ -144,13 +144,13 @@
           >》版本編號：2014_20230112
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p><a href="/l/conciseddict_10312.pdf">使用說明</a></p>
+        <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
     {:else if dict.id == "moedict_twblg"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
       <div class="copyright">
         <p>
-          《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a
+          《<a href={dict.meta.original}>臺灣閩南語常用詞辭典</a
           >》版本編號：20230222
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
@@ -177,7 +177,7 @@
           >》版本編號：2020_20230112
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p><a href="/l/idiomsdict_10409.pdf">使用說明</a></p>
+        <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
     {:else if dict.id.startsWith("ilrdf")}
       {@const lang = dict.id.slice(-3)}

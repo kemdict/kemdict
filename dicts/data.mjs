@@ -49,7 +49,6 @@ export const dicts = [
     lang: "han",
     meta: {
       author: "Unicode聯盟",
-      desc_short: "Unicode聯盟所維護的漢字資料庫",
       desc_long: `Unicode聯盟所維護的漢字資料庫，包含筆畫數、部首、簡繁對應等資訊。`,
       license: {
         name: "Unicode License",
@@ -76,7 +75,6 @@ export const dicts = [
         數位化及編修: "Lîm Bûn-cheng、Tēⁿ Tì-têng、Tân Kim-hoa、Chiúⁿ Ji̍t-êng",
       },
       year: 1956,
-      desc_short: "A Basic Vocabulary For A Beginner In Taiwanese",
       desc_long: `1956年出版的，一套台語教科書的第四本。詳細請參照[ChhoeTaigi 冊tha̍k-á上的資訊](https://thak.taigi.info/1956TaioanPehoeKichhooGiku/)。`,
       license: {
         name: "CC BY-SA 4.0",
@@ -89,12 +87,12 @@ export const dicts = [
   {
     id: "kisaragi_dict",
     name: "如月的現代台灣華語補足典",
-    // FIXME
-    url: "/dict-kisaragi",
+    url: "/dicts/kisaragi_dict",
     lang: "zh_TW",
     meta: {
-      desc_short: "Kemdict 的額外華語詞",
-      desc_long: `我記錄台灣華語有在使用但沒被收錄的詞的地方。
+      desc_long: `Kemdict 的額外華語詞。
+
+我記錄台灣華語有在使用但沒被收錄的詞的地方。
 
 不是只有流行語。
 
@@ -110,14 +108,41 @@ export const dicts = [
     },
   },
   {
+    id: "kisaragi_taigi",
+    name: "如月的台語補足典",
+    url: "/dicts/kisaragi_taigi",
+    lang: "nan_TW",
+    meta: {
+      desc_long: `TODO`,
+      license: {
+        name: "CC0",
+        url: "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/LICENSE",
+      },
+      source:
+        "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/kisaragi-taigi.org",
+    },
+  },
+  {
     id: "dict_concised",
     name: "國語辭典簡編本",
     url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      desc_short: "TODO",
-      desc_long: `TODO`,
+      desc_long: `
+> 主要適用對象：國中、小學生及學習華語人士。
+>
+> 特色：
+>
+> 1. 為一部有聲音及圖片之多媒體辭典，收詞以字詞頻統計結果為依據，釋義行文則採淺白語體編寫。
+> 2. 本辭典所收的字音，參照教育部公布之「國語一字多音審訂表」，並經審音委員會審訂決議。`,
+      license: {
+        name: "CC BY-ND",
+        url: "/l/conciseddict_10312.pdf",
+      },
+      source:
+        "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
+      original: "https://dict.concised.moe.edu.tw/"
     },
   },
   {
@@ -127,19 +152,13 @@ export const dicts = [
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      desc_short: "TODO",
       desc_long: `TODO`,
-    },
-  },
-  {
-    id: "kisaragi_taigi",
-    name: "如月的台語補足典",
-    // TODO
-    url: "/dict-kisaragi",
-    lang: "nan_TW",
-    meta: {
-      desc_short: "TODO",
-      desc_long: `TODO`,
+      license: {
+        name: "CC BY-ND 3.0 TW",
+        url: "/l/reviseddict_10312.pdf",
+      },
+      source: "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
+      original: "https://dict.revised.moe.edu.tw/"
     },
   },
   {
@@ -153,7 +172,6 @@ export const dicts = [
         台文翻譯及編修: "Lîm Chùn-io̍k（林俊育）長老",
       },
       year: 1932,
-      desc_short: "日治時期台灣總督府出版的台語辭典的台譯版",
       desc_long: `
 《台日大辭典》由日本語言學家小川尚義主編、台灣總督府出版，以日語編寫，記錄了當時的台語。
 
@@ -175,8 +193,13 @@ export const dicts = [
     lang: "nan_TW",
     meta: {
       author: "教育部",
-      desc_short: "TODO",
       desc_long: `TODO`,
+      license: {
+        name: "CC BY-ND 3.0 TW",
+        url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
+      },
+      source: "https://github.com/g0v/moedict-data-twblg",
+      original: "https://sutian.moe.edu.tw/"
     },
   },
   {
@@ -185,8 +208,7 @@ export const dicts = [
     url: "https://itaigi.tw/k/$1",
     lang: "nan_TW",
     meta: {
-      author: "TODO",
-      desc_short: "萌典的延伸專案，「自己的辭典自己編」",
+      author: "g0v、iTaigi 貢獻者",
       desc_long: `
 > iTaigi 是 g0v 零時政府專案「萌典」的延伸專案，想知道一個詞的台語怎麼說，來這裡查就對了！甚麼都可以查，但不一定查得到，查不到時可以發問，或者自己發明台語講法貢獻給大家，簡單說就是「自己的辭典自己編」。
 
@@ -206,8 +228,14 @@ export const dicts = [
     lang: "hak_TW",
     meta: {
       author: "教育部",
-      desc_short: "TODO",
       desc_long: `TODO`,
+      license: {
+        name: "CC BY-ND 3.0 TW",
+        url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
+      },
+      source:
+        "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
+      original: "https://hakkadict.moe.edu.tw"
     },
   },
   {
@@ -217,8 +245,14 @@ export const dicts = [
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      desc_short: "TODO",
       desc_long: `TODO`,
+      license: {
+        name: "CC BY-ND",
+        url: "/l/idiomsdict_10409.pdf",
+      },
+      source:
+        "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
+      original: "https://dict.idioms.moe.edu.tw/"
     },
   },
 ];

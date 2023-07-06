@@ -24,7 +24,7 @@
       <li>
         <a href="/dicts/{id}" class="card mr-2 block px-2 py-1">
           <div class="font-bold">{name}</div>
-          <div>{meta.desc_short}</div>
+          <!-- <div>{meta.desc_short || ""}</div> -->
         </a>
       </li>
     {/if}
