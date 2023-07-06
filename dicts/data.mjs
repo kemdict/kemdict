@@ -113,7 +113,7 @@ export const dicts = [
     url: "/dicts/kisaragi_taigi",
     lang: "nan_TW",
     meta: {
-      desc_long: `TODO`,
+      desc_long: `我盡力補充台語沒被定義的詞的地方。`,
       license: {
         name: "CC0",
         url: "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/LICENSE",
@@ -152,7 +152,8 @@ export const dicts = [
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      desc_long: `TODO`,
+      // TODO: fill this out
+      desc_long: ``,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "/l/reviseddict_10312.pdf",
@@ -193,7 +194,8 @@ export const dicts = [
     lang: "nan_TW",
     meta: {
       author: "教育部",
-      desc_long: `TODO`,
+      // TODO: fill this out
+      desc_long: ``,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
@@ -228,7 +230,8 @@ export const dicts = [
     lang: "hak_TW",
     meta: {
       author: "教育部",
-      desc_long: `TODO`,
+      // TODO: fill this out
+      desc_long: ``,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
@@ -245,7 +248,8 @@ export const dicts = [
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      desc_long: `TODO`,
+      // TODO: fill this out
+      desc_long: ``,
       license: {
         name: "CC BY-ND",
         url: "/l/idiomsdict_10409.pdf",
