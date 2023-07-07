@@ -39,6 +39,7 @@ export interface Dict {
   url: string;
   lang: string;
   meta?: {
+    version?: string;
     author?: string;
     year: number;
     desc: string;

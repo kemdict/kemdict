@@ -131,7 +131,7 @@
       <div class="copyright">
         <p>
           《<a href="https://dict.revised.moe.edu.tw/">重編國語辭典修訂本</a
-          >》版本編號：2015_20230106
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href={dict.meta.license.url}>使用說明</a></p>
@@ -141,7 +141,7 @@
       <div class="copyright">
         <p>
           《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a
-          >》版本編號：2014_20230112
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href={dict.meta.license.url}>使用說明</a></p>
@@ -151,7 +151,7 @@
       <div class="copyright">
         <p>
           《<a href={dict.meta.original}>臺灣閩南語常用詞辭典</a
-          >》版本編號：20230222
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p>
@@ -165,7 +165,7 @@
       <div class="copyright">
         <p>
           《<a href="https://hakkadict.moe.edu.tw">臺灣客家語常用詞辭典</a
-          >》版本編號：1100429
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
       </div>
@@ -173,8 +173,8 @@
       <WordDictIdioms heteronyms={hets} />
       <div class="copyright">
         <p>
-          《<a href="https://dict.idioms.moe.edu.tw">成語典</a
-          >》版本編號：2020_20230112
+          《<a href="https://dict.idioms.moe.edu.tw">成語典</a>》版本編號：{dict
+            .meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href={dict.meta.license.url}>使用說明</a></p>
