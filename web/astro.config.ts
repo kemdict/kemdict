@@ -49,6 +49,10 @@ export default defineConfig({
           find: /^\$src\/(.*)/,
           replacement: `${process.cwd()}/src/$1`,
         },
+        {
+          find: /^common$/,
+          replacement: `${process.cwd()}/../common/src`,
+        },
       ],
     },
   },

@@ -53,8 +53,8 @@
           《{dict.name}》採 CC0 釋出，可無條件隨意複製，隨意利用。
         </p>
         <p>
-          這個定義有問題嗎？<a
-            href="https://github.com/kemdict/kemdict-data/issues">回報問題</a
+          這個定義有問題嗎？<a href="https://github.com/kemdict/kemdict/issues"
+            >回報問題</a
           >
         </p>
       </div>
@@ -91,7 +91,7 @@
         <p>
           《{dict.name}》
         </p>
-        <p>原作者：小川尚義</p>
+        <p>原作者：</p>
         <p>台文翻譯kap編修：Lîm Chùn-io̍k（林俊育）長老</p>
         <p>
           <a
@@ -131,27 +131,27 @@
       <div class="copyright">
         <p>
           《<a href="https://dict.revised.moe.edu.tw/">重編國語辭典修訂本</a
-          >》版本編號：2015_20230106
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p><a href="/l/reviseddict_10312.pdf">使用說明</a></p>
+        <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
     {:else if dict.id == "dict_concised"}
       <WordDictConcised heteronyms={hets} />
       <div class="copyright">
         <p>
           《<a href="https://dict.concised.moe.edu.tw">國語辭典簡編本</a
-          >》版本編號：2014_20230112
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p><a href="/l/conciseddict_10312.pdf">使用說明</a></p>
+        <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
     {:else if dict.id == "moedict_twblg"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
       <div class="copyright">
         <p>
-          《<a href="https://twblg.dict.edu.tw">臺灣閩南語常用詞辭典</a
-          >》版本編號：20230222
+          《<a href={dict.meta.original}>臺灣閩南語常用詞辭典</a
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p>
@@ -165,7 +165,7 @@
       <div class="copyright">
         <p>
           《<a href="https://hakkadict.moe.edu.tw">臺灣客家語常用詞辭典</a
-          >》版本編號：1100429
+          >》版本編號：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
       </div>
@@ -173,11 +173,11 @@
       <WordDictIdioms heteronyms={hets} />
       <div class="copyright">
         <p>
-          《<a href="https://dict.idioms.moe.edu.tw">成語典</a
-          >》版本編號：2020_20230112
+          《<a href="https://dict.idioms.moe.edu.tw">成語典</a>》版本編號：{dict
+            .meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p><a href="/l/idiomsdict_10409.pdf">使用說明</a></p>
+        <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
     {:else if dict.id.startsWith("ilrdf")}
       {@const lang = dict.id.slice(-3)}

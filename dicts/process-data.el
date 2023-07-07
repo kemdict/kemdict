@@ -719,7 +719,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
 ;;   ->
 ;;   [{:title "title"
 ;;     :from "dictA"
-;;     :pns {...}
+;;     :lang "lang"
 ;;     :props ...}])
 ;; Also works for entries that are themselves heteronyms
 (defun d:parse-and-shape (dict lang files msg)

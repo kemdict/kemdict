@@ -1,17 +1,3 @@
 ---
-import { DB } from "$src/server/db";
-import MarkdownLayout from "$src/MarkdownLayout.astro";
-import WordList from "$src/components/WordList.svelte";
-
-const titles = await DB.getDictTitles("kisaragi_dict");
-const props = {
-  title: "如月的現代台灣華語補足典 | Kemdict",
-};
+return Astro.redirect("/dicts/kisaragi_dict");
 ---
-
-<MarkdownLayout frontmatter={props}>
-  <h1>字典 — 如月的現代台灣華語補足典</h1>
-  <p>我記錄台灣華語有在使用但沒被收錄的詞的地方。</p>
-  <p>目前共有 {titles.length} 條：</p>
-  <WordList words={titles} search={true} client:load />
-</MarkdownLayout>

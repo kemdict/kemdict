@@ -38,6 +38,20 @@ export interface Dict {
   name: string;
   url: string;
   lang: string;
+  meta?: {
+    version?: string;
+    author?: string;
+    year: number;
+    desc: string;
+    license: {
+      name: string;
+      url: string;
+    };
+    /** Where I got the data from, like ChhoeTaigiDatabase for iTaigi. */
+    source: string;
+    /** The original website */
+    original: string;
+  };
 }
 export interface Heteronym {
   title: string;
