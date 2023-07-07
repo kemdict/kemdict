@@ -18,13 +18,12 @@
 </div>
 <ul class="mt-2 space-y-2 overflow-auto">
   {#each dicts as { id, name, meta }}
-    {#if filterString === "" || needle(name, meta.desc_short)
+    {#if filterString === "" || needle(name, meta.desc)
         .toLowerCase()
         .includes(filterString.toLowerCase())}
       <li>
         <a href="/dicts/{id}" class="card mr-2 block px-2 py-1">
           <div class="font-bold">{name}</div>
-          <!-- <div>{meta.desc_short || ""}</div> -->
         </a>
       </li>
     {/if}
