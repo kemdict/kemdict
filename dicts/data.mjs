@@ -142,7 +142,7 @@ export const dicts = [
       },
       source:
         "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
-      original: "https://dict.concised.moe.edu.tw/"
+      original: "https://dict.concised.moe.edu.tw/",
     },
   },
   {
@@ -158,8 +158,9 @@ export const dicts = [
         name: "CC BY-ND 3.0 TW",
         url: "/l/reviseddict_10312.pdf",
       },
-      source: "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
-      original: "https://dict.revised.moe.edu.tw/"
+      source:
+        "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
+      original: "https://dict.revised.moe.edu.tw/",
     },
   },
   {
@@ -201,7 +202,7 @@ export const dicts = [
         url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
       },
       source: "https://github.com/g0v/moedict-data-twblg",
-      original: "https://sutian.moe.edu.tw/"
+      original: "https://sutian.moe.edu.tw/",
     },
   },
   {
@@ -213,6 +214,10 @@ export const dicts = [
       author: "g0v、iTaigi 貢獻者",
       desc: `
 > iTaigi 是 g0v 零時政府專案「萌典」的延伸專案，想知道一個詞的台語怎麼說，來這裡查就對了！甚麼都可以查，但不一定查得到，查不到時可以發問，或者自己發明台語講法貢獻給大家，簡單說就是「自己的辭典自己編」。
+
+iTaigi 是查詢台語和華語對照的專案，查詢現有字典以外也讓使用者可以貢獻講法到 iTaigi 的資料庫裡，並且貢獻的資料採用 CC0 授權條款釋出至公眾領域。
+
+iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 GitHub](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/blob/master/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv)，Kemdict 則站在巨人的肩膀上，利用了公開後的資料。
 
 參見[iTaigi的介紹](https://itaigi.tw/about)。`,
       license: {
@@ -238,7 +243,7 @@ export const dicts = [
       },
       source:
         "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
-      original: "https://hakkadict.moe.edu.tw"
+      original: "https://hakkadict.moe.edu.tw",
     },
   },
   {
@@ -256,7 +261,7 @@ export const dicts = [
       },
       source:
         "https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/",
-      original: "https://dict.idioms.moe.edu.tw/"
+      original: "https://dict.idioms.moe.edu.tw/",
     },
   },
 ];

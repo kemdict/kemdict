@@ -11,7 +11,7 @@ title: 致謝與授權
 
 《台灣白話基礎語句》(Basic Vocabulary for Colloquial Taiwanese) 屬一系列台語教材的一部分，由 Ko Chek-hoàn（高積煥）、Tân Pang-tìn（陳邦鎮）所著，[台語文記憶計畫](http://ip194097.ntcu.edu.tw/memory/TGB/)記錄後由 ChhoeTaigi 的 Lîm Bûn-cheng、Tēⁿ Tì-têng、Tân Kim-hoa、Chiúⁿ Ji̍t-êng 進行數位化與編修，並以[姓名標示-Sio-kâng方式分享 4.0 國際 (CC BY-SA 4.0) 授權釋出](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase#8-1956-台灣白話基礎語句)。資料也是來自 [ChhoeTaigi 的字詞資料庫](https://github.com/ChhoeTaigi/ChhoeTaigiDatabase)。
 
-[《教育部重編國語辭典》](https://dict.revised.moe.edu.tw/)、[《教育部國語辭典簡編版》](https://dict.concised.moe.edu.tw)、[《教育部成語典》](https://dict.idioms.moe.edu.tw)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html)。原始資料來自[教育部國語辭典公眾授權網](https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html)。
+[《教育部重編國語辭典》](https://dict.revised.moe.edu.tw/)、[《教育部國語辭典簡編本》](https://dict.concised.moe.edu.tw)、[《教育部成語典》](https://dict.idioms.moe.edu.tw)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html)。原始資料來自[教育部國語辭典公眾授權網](https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html)。
 
 [《教育部臺灣閩南語常用詞辭典》](https://twblg.dict.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp)。資料透過[萌典的原始資料檔](https://github.com/g0v/moedict-data-twblg)取得，原始資料為萌典向教育部申請後取得。
 
