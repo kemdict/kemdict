@@ -6,6 +6,11 @@ desc: Kemdict 國語整合典的更新紀錄。
 
 # 版本紀錄
 
+## 1.2.0 (2023-07-08)
+
+- 內部：將[`kemdict/kemdict-data`](https://github.com/kemdict/kemdict-data)合併到主版本庫裡
+- 新功能：可搜尋且完整的收錄字典列表
+
 ## 1.1.1 (2023-06-27)
 
 - 游標停駐在選單上時就開啟選單
