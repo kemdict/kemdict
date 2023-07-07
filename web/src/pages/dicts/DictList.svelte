@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { dicts } from "common";
+  import { dicts, langIdName } from "common";
   dicts.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   let filterString = "";
@@ -17,8 +17,8 @@
   <LocalSearchInput bind:filterString />
 </div>
 <ul class="mt-2 space-y-2 overflow-auto">
-  {#each dicts as { id, name, meta }}
-    {#if filterString === "" || needle(name, meta.desc)
+  {#each dicts as { id, name, meta, lang }}
+    {#if filterString === "" || needle(name, meta.desc, langIdName(lang))
         .toLowerCase()
         .includes(filterString.toLowerCase())}
       <li>
