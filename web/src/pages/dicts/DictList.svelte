@@ -23,7 +23,14 @@
         .includes(filterString.toLowerCase())}
       <li>
         <a href="/dicts/{id}" class="card mr-2 block px-2 py-1">
-          <div class="font-bold">{name}</div>
+          <div>
+            <span class="font-bold">{name}</span>
+            {#if meta.version}
+              <span class="text-secondary-600-300-token text-sm"
+                >{meta.version}</span
+              >
+            {/if}
+          </div>
         </a>
       </li>
     {/if}

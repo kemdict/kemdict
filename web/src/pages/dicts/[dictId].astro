@@ -54,6 +54,10 @@ import WordList from "$src/components/WordList.svelte";
             <td>{dict.meta.year || "-"}</td>
           </tr>
           <tr>
+            <th>版本</th>
+            <td>{dict.meta.version || "-"}</td>
+          </tr>
+          <tr>
             <th>語言</th>
             <td>{langIdName(dict.lang)}</td>
           </tr>
