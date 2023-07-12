@@ -32,6 +32,11 @@ const title = getSearchTitle(mtch, originalQuery);
 const titleMarkup = getSearchTitle(mtch, originalQuery, true);
 ---
 
+<script>
+  import { saveHistory } from "$src/localStorage";
+  saveHistory("search", new URLSearchParams(location.search).get("q")?.trim());
+</script>
+
 <SingleLayout
   title={`${title} - 所有辭典 - ${site.title}`}
   initialMatchSelection={mtch}

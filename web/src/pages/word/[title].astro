@@ -56,6 +56,16 @@ if (requestedLang === false) {
 }
 ---
 
+<script>
+  import { saveHistory } from "$src/localStorage";
+  const url = new URL(location.href);
+  /* import { langs, parseLangParam } from "common"; */
+  /* const langSet = new Set(Object.keys(langs)); */
+  /* const requestedLang = parseLangParam(url.searchParams.get("lang"), langSet); */
+  // FIXME: save language as well. Requires WordList to support it as well
+  saveHistory("word", url.pathname.replace("/word/", ""));
+</script>
+
 {
   heteronyms.length > 0 ? (
     <SingleLayout

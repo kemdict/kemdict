@@ -3,6 +3,8 @@ import { groupByProp, parseQuery, CrossDB } from "common";
 import { spc } from "$src/processing";
 import type { Heteronym, LangId, Mtch } from "common";
 
+import { lPush } from "$src/localStorage";
+
 export async function readDB() {
   const fs = await import("node:fs");
   const Database = (await import("better-sqlite3")).default;

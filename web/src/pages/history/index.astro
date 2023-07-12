@@ -1,0 +1,13 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+
+import WordHistory from "./WordHistory.svelte";
+---
+
+<SingleLayout title="Kemdict">
+  <div class="prose">
+    <h1>歷史紀錄</h1>
+    <p>紀錄只保留在瀏覽器裡，沒有傳到伺服器上。</p>
+  </div>
+  <WordHistory client:load />
+</SingleLayout>
