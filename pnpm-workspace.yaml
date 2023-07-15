@@ -1,4 +1,3 @@
 packages:
-  - "common"
   - "web"
   - "!**/dist"

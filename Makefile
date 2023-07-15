@@ -13,12 +13,9 @@ build:
 dev.web:
 	cd web && make -j4 dev
 
-dev.common:
-	cd common && make -j4 dev
-
 .PHONY: dev
 dev:
-	npx concurrently "make dev.common" "make dev.web"
+	npx concurrently "make dev.web"
 
 dev-pojtl-api:
 	cd pojtl-api && make dev

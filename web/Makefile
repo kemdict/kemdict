@@ -3,10 +3,7 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 .DEFAULT_GOAL := dist
 
-DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro) common
-
-common: ../common
-	cd ../common && $(MAKE) dist
+DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro)
 
 entries.db: ../dicts
 	cd ../dicts && $(MAKE) entries.db
