@@ -645,14 +645,6 @@ An ID of nil means the entries are included but will not be shown
 by default. This is added for assigning extra stroke count
 information."
   (cond
-   ;; For testing on my phone
-   ((getenv "ANDROID_DATA")
-    [("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json")
-     ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
-                                "moedict-data-twblg/dict-twblg-ext.json"))
-     ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-     ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
-     ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")])
    ;; (t
    ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
    (t
@@ -777,7 +769,7 @@ Titles are written to `d:titles:look-up-table'."
             (puthash "from" dict shaped-het)
             (puthash "lang" lang shaped-het)
             ;; Copy some top-level props to each heteronym.
-            (--each '("eq-en" "eq-ja")
+            (--each '("eq-en" "eq-ja" "added")
               (puthash it (gethash it entry) orig-het))
             ;; We can't run d:process-props just yet, as that requires
             ;; the list of all titles to work correctly.

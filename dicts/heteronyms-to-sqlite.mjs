@@ -61,7 +61,7 @@ const db = new Database("entries.db");
  * @returns {any}
  */
 function parse(path) {
-  return JSON.parse(fs.readFileSync(path).toString().normalize("NFD"))
+  return JSON.parse(fs.readFileSync(path).toString().normalize("NFD"));
 }
 
 function stringifyFields(thing) {
@@ -113,6 +113,13 @@ CREATE TABLE links (
   "from" NOT NULL,
   "to" NOT NULL
 );
+
+-- New words, sorted by date/time added
+CREATE TABLE newwords (
+  "title" NOT NULL,
+  "time" NOT NULL,
+  "from" REFERENCES dicts("id")
+);
 `
 );
 
@@ -155,6 +162,7 @@ const EachPT = db.transaction((array, message = "", func) => {
   process.stdout.write("\n");
 });
 
+// langs and dicts
 {
   const langStmt = db.prepare(`
 INSERT INTO
@@ -174,6 +182,7 @@ VALUES
   });
 }
 
+// heteronyms and aliases
 {
   const heteronyms = parse("heteronyms.json").reverse();
   const insertHet = db.prepare(`
@@ -227,6 +236,7 @@ VALUES
   });
 }
 
+// links
 {
   const links = Object.values(parse("links.json"));
   const insertLink = db.prepare(`
@@ -239,6 +249,7 @@ VALUES
   });
 }
 
+// the "han" table
 {
   console.log("Creating table 'han'...");
   db.exec(
@@ -289,4 +300,57 @@ DROP TABLE c;
 VACUUM;
 `
   );
+}
+
+// newwords
+{
+  const hetsWithAddedStmt = db.prepare(`
+-- The "added" field only exist for kisaragi-dict entries
+SELECT
+  heteronyms.title AS 'title',
+  cast(json_tree.value as integer) AS 'time',
+  heteronyms."from" AS 'from'
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE "from" LIKE 'kisaragi%'
+  AND json_tree.key = 'added'
+`);
+  let words = hetsWithAddedStmt.all();
+  for (const f of fs.readdirSync("./ministry-of-education/diff/")) {
+    if (!f.endsWith("added.json")) continue;
+
+    const parts = f.split(" - ");
+    const dictId = parts[0];
+
+    // It would be more correct to check if dictId is present, but
+    // this also works.
+    if (dictId === "dict_mini") continue;
+
+    const addedDate = parts[1] // "2014_20220928-2014_20230112"
+      .split("-")[1] // "2014_20230112"
+      .split("_")[1] // "20230112"
+      // Then add dashes so Node's Date understands it
+      .match(/(....)(..)(..)/)
+      .slice(1, 4)
+      .join("-");
+    // We just assume that they're all arrays of strings.
+    /** @type string[] */
+    const titles = parse(`./ministry-of-education/diff/${f}`);
+    for (const title of titles) {
+      words.push({
+        title: title,
+        // We want seconds, not miliseconds, so divide by 1000
+        time: new Date(addedDate).getTime() / 1000,
+        from: dictId,
+      });
+    }
+    words = words.sort((a, b) => a.time - b.time);
+  }
+  const newWordStmt = db.prepare(`
+INSERT INTO
+  newwords ("title","time","from")
+VALUES
+  (@title,@time,@from)`);
+  EachPT(words, "Creating the new words index: ", (word) => {
+    newWordStmt.run(word);
+  });
 }
