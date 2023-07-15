@@ -6,7 +6,7 @@
 
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { groupByProp } from "common";
-  import { spc, interlinear_annotation } from "$src/processing";
+  import { spc, interlinear_annotation } from "$lib/processing";
 
   function processPn(pn: string) {
     if (dict === "moedict_twblg") {

@@ -23,7 +23,7 @@
     };
   }
   export let heteronyms: HetRevised[];
-  import { spc, radicals_and_strokes } from "$src/processing";
+  import { spc, radicals_and_strokes } from "$lib/processing";
   import { strLen } from "common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 

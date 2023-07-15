@@ -1,6 +1,6 @@
 <script>
   export let heteronyms;
-  import { spc, newline_string_to_ol } from "$src/processing";
+  import { spc, newline_string_to_ol } from "$lib/processing";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
   function markers(str) {

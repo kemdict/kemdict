@@ -50,6 +50,10 @@ export default defineConfig({
           replacement: `${process.cwd()}/src/$1`,
         },
         {
+          find: /^\$lib\/(.*)/,
+          replacement: `${process.cwd()}/src/lib/$1`,
+        },
+        {
           find: /^common$/,
           replacement: `${process.cwd()}/../common/src`,
         },
