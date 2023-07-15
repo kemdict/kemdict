@@ -2,11 +2,10 @@
 const { term } = Astro.props;
 
 const term_ja = Astro.props.term_ja || term;
-const term_en = Astro.props.term_en || term;
+// const term_en = Astro.props.term_en || term;
 
 import Out from "./Out.astro";
 
-import { ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
 import PopupMenu from "./PopupMenu.svelte";
 
 const moedict = Object.entries({

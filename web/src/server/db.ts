@@ -3,8 +3,6 @@ import { groupByProp, parseQuery, CrossDB } from "common";
 import { spc } from "$lib/processing";
 import type { Heteronym, LangId, Mtch } from "common";
 
-import { lPush } from "$src/localStorage";
-
 export async function readDB() {
   const fs = await import("node:fs");
   const Database = (await import("better-sqlite3")).default;
@@ -84,20 +82,19 @@ export async function getHetFromUrl(
   url: URL,
   lang?: string
 ): Promise<
-  [
-    boolean,
-    (
-      | {
-          heteronyms: Heteronym[];
-          mtch: string;
-          query: string;
-          originalQuery: string;
-          langSet: Set<LangId>;
-          langCountObj: Record<LangId, number>;
-        }
-      | string
-    ) // when the first item is false, this is a string
-  ]
+  | [
+      true,
+      {
+        heteronyms: Heteronym[];
+        mtch: string;
+        query: string;
+        originalQuery: string;
+        langSet: Set<LangId>;
+        langCountObj: Record<LangId, number>;
+      }
+    ]
+  // when the first item is false, the second element is a string
+  | [false, string]
 > {
   /** Query text as written in the URL */
   const originalQuery: string | undefined = url.searchParams.get("q")?.trim();

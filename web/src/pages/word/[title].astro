@@ -4,7 +4,6 @@ import { DB } from "$src/server/db";
 import {
   site,
   dictsObj,
-  dicts,
   langs,
   joinLast,
   groupByProp,
@@ -22,7 +21,6 @@ const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = (await DB.getBacklinks(...titles)).sort();
 
 import SingleLayout from "$src/SingleLayout.astro";
-import { Tab, TabGroup } from "@skeletonlabs/skeleton";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import WordList from "$src/components/WordList.svelte";
 import Word from "./Word.svelte";

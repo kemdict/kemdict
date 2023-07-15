@@ -41,6 +41,7 @@ export interface Dict {
   meta?: {
     version?: string;
     author?: string;
+    extra?: Record<string, string>;
     year: number;
     desc: string;
     license: {

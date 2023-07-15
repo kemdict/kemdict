@@ -1,6 +1,6 @@
 ---
 import { getHetFromUrl } from "$src/server/db";
-import { site, dicts, langs, getSearchTitle } from "common";
+import { site, langs, getSearchTitle } from "common";
 
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url);
@@ -16,17 +16,11 @@ const langSet = data.langSet;
 let count = heteronyms.length;
 
 const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
-let currentLang: string =
-  url.searchParams.get("lang") ||
-  (presentLangs[0] && presentLangs[0][0]) ||
-  "zh_TW";
 
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 import WordPreview from "$src/components/WordPreview.svelte";
 import ListLink from "$src/components/ListLink.svelte";
-
-import Results from "./Results.svelte";
 
 const title = getSearchTitle(mtch, originalQuery);
 const titleMarkup = getSearchTitle(mtch, originalQuery, true);
