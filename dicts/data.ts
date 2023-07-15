@@ -1,3 +1,5 @@
+import type { Dict } from "../web/src/lib/common";
+
 export const langs = {
   zh_TW: "華語",
   nan_TW: "台語",
@@ -269,4 +271,4 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
       original: "https://dict.idioms.moe.edu.tw/",
     },
   },
-];
+] as Dict[];

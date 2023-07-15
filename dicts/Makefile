@@ -36,7 +36,7 @@ heteronyms.json: $(DICT_TARGETS) process-data.el .eask node_modules
 	eask eval "(load \"process-data\")"
 
 entries.db: heteronyms.json heteronyms-to-sqlite.mjs
-	node heteronyms-to-sqlite.mjs
+	npx ts-node -O '{"noImplicitAny":false}' heteronyms-to-sqlite.mjs
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db

@@ -1,3 +1,5 @@
+import type { Heteronym } from "../web/src/lib/common";
+
 /**
  * Normalize pronunciation `pn`.
  *
@@ -5,12 +7,9 @@
  *
  * Return a list of normalized strings. This is because some
  * pronunciation strings include multiple pronunciations.
- *
- * @param {string | Record<string,string>} pn
- * @returns Array<string>
  */
-export function pnNormalize(pn) {
-  let p;
+export function pnNormalize(pn: string | Record<string, string>): string[] {
+  let p: string;
   if (typeof pn !== "string") {
     p = pn["zh-Hant"];
   } else {
@@ -36,9 +35,9 @@ export function pnNormalize(pn) {
  * @param {string} pn
  * @returns string
  */
-export function pnToInputForm(pn) {
+export function pnToInputForm(pn: string): string {
   const arr = [...pn.replace("ⁿ", "nn").normalize("NFKD")];
-  return arr.filter((x) => x.codePointAt() < 128).join("");
+  return arr.filter((x) => (x.codePointAt(0) || 999) < 128).join("");
 }
 
 /**
@@ -46,7 +45,7 @@ export function pnToInputForm(pn) {
  * Return them as a map from type to pronunciation.
  * @param {Heteronym} het
  */
-export function pnCollect(het) {
+export function pnCollect(het: Heteronym): Map<string, string> {
   const keys = [
     // kemdict-data-ministry-of-education
     "bopomofo" /* "pinyin" */,
@@ -73,7 +72,7 @@ export function pnCollect(het) {
   /**
    * @type Map<string,string>
    */
-  const ret = new Map([]);
+  const ret: Map<string, string> = new Map([]);
   for (const key of keys) {
     if (het.props[key]) {
       for (const p of pnNormalize(het.props[key])) {

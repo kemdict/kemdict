@@ -43,8 +43,8 @@ import fs from "node:fs";
 import readline from "node:readline";
 import Database from "better-sqlite3";
 
-import { langs, dicts } from "./data.mjs";
-import { pnCollect, pnToInputForm } from "./pn.mjs";
+import { langs, dicts } from "./data";
+import { pnCollect, pnToInputForm } from "./pn";
 
 if (!fs.existsSync("heteronyms.json")) {
   console.log("heteronyms.json should be generated first!");
@@ -57,10 +57,8 @@ const db = new Database("entries.db");
 
 /**
  * Parse the JSON in `path`, with the whole thing normalized to NFD form.
- * @param {string} path
- * @returns {any}
  */
-function parse(path) {
+function parse(path: string): any {
   return JSON.parse(fs.readFileSync(path).toString().normalize("NFD"));
 }
 
@@ -314,7 +312,11 @@ FROM heteronyms, json_tree(heteronyms.props)
 WHERE "from" LIKE 'kisaragi%'
   AND json_tree.key = 'added'
 `);
-  let words = hetsWithAddedStmt.all();
+  let words = hetsWithAddedStmt.all() as Array<{
+    title: string;
+    time: number;
+    from: string;
+  }>;
   for (const f of fs.readdirSync("./ministry-of-education/diff/")) {
     if (!f.endsWith("added.json")) continue;
 
@@ -330,11 +332,14 @@ WHERE "from" LIKE 'kisaragi%'
       .split("_")[1] // "20230112"
       // Then add dashes so Node's Date understands it
       .match(/(....)(..)(..)/)
-      .slice(1, 4)
+      ?.slice(1, 4)
       .join("-");
+    if (!addedDate) {
+      console.log(`Invalid date in ${f}`);
+      continue;
+    }
     // We just assume that they're all arrays of strings.
-    /** @type string[] */
-    const titles = parse(`./ministry-of-education/diff/${f}`);
+    const titles = parse(`./ministry-of-education/diff/${f}`) as string[];
     for (const title of titles) {
       words.push({
         title: title,

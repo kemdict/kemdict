@@ -66,10 +66,7 @@ export type DictId = string;
 export type LangId = string;
 
 // Yes, this works, it is bundled properly.
-import {
-  dicts as origDicts,
-  langs as origLangs,
-} from "../../../dicts/data.mjs";
+import { dicts as origDicts, langs as origLangs } from "../../../dicts/data";
 export const dicts = origDicts as Dict[];
 export const langs = origLangs;
 
