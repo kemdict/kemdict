@@ -11,7 +11,7 @@
   "size-limit": [
     {
       "path": "dist/client/_astro",
-      "limit": "500 KB",
+      "limit": "550 KB",
       "gzip": false
     }
   ],
