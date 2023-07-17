@@ -4,6 +4,7 @@ export interface Props {
   initialInput?: string;
   initialMatchSelection?: string;
   wantHeader?: boolean;
+  wantFooter?: boolean;
   class?: string;
   submitSuffix?: string;
   wide?: boolean;
@@ -14,6 +15,7 @@ const {
   initialInput,
   initialMatchSelection,
   wantHeader = true,
+  wantFooter = true,
   submitSuffix,
 } = Astro.props;
 const klass = Astro.props.class;
@@ -23,7 +25,7 @@ import BaseLayout from "$src/BaseLayout.astro";
 import Header from "$src/components/Header.astro";
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} wantFooter={wantFooter}>
   <Fragment slot="head"><slot name="head" /></Fragment>
   {
     wantHeader && (

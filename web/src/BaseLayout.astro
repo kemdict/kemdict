@@ -3,13 +3,13 @@ import "./skeleton-theme.css";
 import "./src.css";
 
 import Out from "$src/components/Out.astro";
-import { P } from "$src/components/typography";
 import clsx from "clsx";
 
 export interface Props {
   title: string;
+  wantFooter?: boolean;
 }
-const { title } = Astro.props;
+const { title, wantFooter = true } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
 ---
 
@@ -104,26 +104,57 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
     <div class="base">
       <slot />
     </div>
-    <footer
-      class={clsx("py-16 text-center", "text-gray-600 dark:text-stone-100")}
-    >
-      <hr />
-      <P>
-        <Out
-          class="opacity-75 transition hover:opacity-100"
-          href="https://kisaragi-hiu.com"
+    {
+      wantFooter && (
+        <footer
+          class={clsx(
+            "mt-12 px-16 py-8",
+            "bg-surface-800 text-primary-50",
+            "[&_*]:my-2",
+            "[&>h2]:font-bold [&>h2]:opacity-75",
+            "[&_a]:text-primary-400 [&_a:hover]:text-primary-50 [&_a]:transition"
+          )}
         >
-          https://kisaragi-hiu.com
-        </Out>
-      </P>
-      <P>
-        <Out
-          class="opacity-75 transition hover:opacity-100"
-          href="https://kisaragi-hiu.fanbox.cc/"
-        >
-          在 FANBOX 上贊助我一餐飯
-        </Out>
-      </P>
-    </footer>
+          <h1 class="flex items-center text-lg">
+            <img
+              class="mr-2 inline h-10 w-10 rounded-xl shadow"
+              src="/maskable_icon_x128.png"
+            />
+            <span>Kemdict 國語整合典</span>
+          </h1>
+          <div class="flex [&>div]:min-w-[30%]">
+            <div>
+              <p>
+                由
+                <Out class="" href="https://kisaragi-hiu.com">
+                  如月飛羽
+                </Out>
+                所作
+              </p>
+              <p>
+                <Out class="" href="https://kisaragi-hiu.fanbox.cc/">
+                  在 FANBOX 上贊助我一餐飯
+                </Out>
+              </p>
+            </div>
+            <div>
+              <h2>社群</h2>
+              <ul class="">
+                <li>
+                  <Out class="" href="https://github.com/kemdict/kemdict">
+                    GitHub
+                  </Out>
+                </li>
+                <li>
+                  <Out class="" href="https://www.facebook.com/kemdict">
+                    Facebook
+                  </Out>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      )
+    }
   </body>
 </html>

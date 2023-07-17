@@ -36,6 +36,8 @@
     @apply mx-auto my-0 max-w-5xl pt-12;
   }
   body {
+    /* Ensure the footer touches the bottom */
+    @apply flex flex-col justify-between;
     /* Note that these are colors we declared in tailwind.config because
   Skeleton does not have 950 styles yet, and the surface 900 color is
   way too bright. */

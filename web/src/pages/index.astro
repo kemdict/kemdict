@@ -15,7 +15,12 @@ const description =
 const words = await DB.getDictTitles("kisaragi_dict", 15);
 ---
 
-<SingleLayout class="lg:pb-16 lg:pt-32" title={title} wantHeader={false}>
+<SingleLayout
+  class="lg:pb-16 lg:pt-16"
+  title={title}
+  wantHeader={false}
+  wantFooter={true}
+>
   <Fragment slot="head">
     <meta name="description" content={description} />
     <meta name="twitter:card" content="summary" />
