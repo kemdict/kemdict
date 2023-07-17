@@ -14,6 +14,9 @@ importers:
       csvtojson:
         specifier: ^2.0.10
         version: 2.0.10
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@20.4.2)(typescript@5.1.6)
@@ -21,6 +24,9 @@ importers:
       '@types/better-sqlite3':
         specifier: ^7.6.4
         version: 7.6.4
+      '@types/lodash':
+        specifier: ^4.14.195
+        version: 4.14.195
       '@types/node':
         specifier: ^20.4.2
         version: 20.4.2
@@ -88,6 +94,10 @@ packages:
     resolution: {integrity: sha512-dzrRZCYPXIXfSR1/surNbJ/grU3scTaygS0OMzjlGf71i9sc2fGyHPXXiXmEvNIoE0cGwsanEFMVJxPXmco9Eg==}
     dependencies:
       '@types/node': 20.4.2
+    dev: true
+
+  /@types/lodash@4.14.195:
+    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==}
     dev: true
 
   /@types/node@20.4.2:

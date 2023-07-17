@@ -43,6 +43,8 @@ import fs from "node:fs";
 import readline from "node:readline";
 import Database from "better-sqlite3";
 
+import { sortedUniqBy } from "lodash";
+
 import { langs, dicts } from "./data";
 import { pnCollect, pnToInputForm } from "./pn";
 
@@ -350,6 +352,7 @@ WHERE "from" LIKE 'kisaragi%'
     }
     words = words.sort((a, b) => a.time - b.time);
   }
+  words = sortedUniqBy(words, (v) => `${v.title}${v.from}`);
   const newWordStmt = db.prepare(`
 INSERT INTO
   newwords ("title","time","from")

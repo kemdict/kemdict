@@ -5,10 +5,12 @@
   "dependencies": {
     "better-sqlite3": "^7.6.2",
     "csvtojson": "^2.0.10",
+    "lodash": "^4.17.21",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.4",
+    "@types/lodash": "^4.14.195",
     "@types/node": "^20.4.2"
   }
 }
