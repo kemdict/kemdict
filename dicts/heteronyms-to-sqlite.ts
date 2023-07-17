@@ -353,6 +353,7 @@ WHERE "from" LIKE 'kisaragi%'
     words = words.sort((a, b) => a.time - b.time);
   }
   words = sortedUniqBy(words, (v) => `${v.title}${v.from}`);
+  words = words.reverse();
   const newWordStmt = db.prepare(`
 INSERT INTO
   newwords ("title","time","from")
