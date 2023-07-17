@@ -483,6 +483,23 @@ WHERE "to" IN (${escape(titles)})`,
     )) as string[];
   }
 
+  async getNewWords(limit?: number): Promise<string[]> {
+    if (limit) {
+      return (await this.crossDbAll(
+        // HACK: work around a few weird titles
+        `SELECT title FROM newwords WHERE title NOT LIKE '?%' LIMIT ?`,
+        [limit],
+        true
+      )) as string[];
+    } else {
+      return (await this.crossDbAll(
+        `SELECT title FROM newwords WHERE title NOT LIKE '?%'`,
+        [],
+        true
+      )) as string[];
+    }
+  }
+
   async getDictTitles(from: string, limit?: number): Promise<string[]> {
     if (limit) {
       return (await this.crossDbAll(

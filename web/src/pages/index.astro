@@ -12,10 +12,15 @@ const sitename = "Kemdict 國語整合典";
 const description =
   "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 
-const words = await DB.getDictTitles("kisaragi_dict", 15);
+const newWords = await DB.getNewWords(15);
 ---
 
-<SingleLayout class="lg:pb-16 lg:pt-32" title={title} wantHeader={false}>
+<SingleLayout
+  class="lg:pb-16 lg:pt-16"
+  title={title}
+  wantHeader={false}
+  wantFooter={true}
+>
   <Fragment slot="head">
     <meta name="description" content={description} />
     <meta name="twitter:card" content="summary" />
@@ -86,7 +91,7 @@ const words = await DB.getDictTitles("kisaragi_dict", 15);
     </div>
     <div class="ml-1"></div>
     <h3>最近新增的詞</h3>
-    <WordList words={words} />
+    <WordList words={newWords} />
     <div>
       <h3>索引</h3>
       <ul class="ml-1 list-none p-0">

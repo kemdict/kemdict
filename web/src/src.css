@@ -36,6 +36,8 @@
     @apply mx-auto my-0 max-w-5xl pt-12;
   }
   body {
+    /* Ensure the footer touches the bottom */
+    @apply flex flex-col justify-between;
     /* Note that these are colors we declared in tailwind.config because
   Skeleton does not have 950 styles yet, and the surface 900 color is
   way too bright. */
@@ -218,11 +220,11 @@
     }
   }
   .btnColor {
-    @apply bg-surface-200 hover:bg-surface-300 dark:bg-stone-800 dark:hover:bg-stone-700;
+    @apply bg-surface-200 hover:bg-surface-300 dark:bg-surface-900 dark:hover:bg-surface-800;
   }
   .btnBorder {
     @apply border;
-    @apply border-gray-400 bg-gray-200 dark:border-stone-700;
+    @apply border-surface-400 bg-surface-200 dark:border-surface-800;
   }
   .k-btn {
     @apply rounded-md p-1 px-2 text-sm font-bold transition;
@@ -230,8 +232,8 @@
   }
   .k-hlbtn {
     @apply rounded-md p-1 px-2 text-sm font-bold transition;
-    @apply bg-indigo-500 text-indigo-50 hover:bg-indigo-600;
-    @apply dark:bg-indigo-500 dark:hover:bg-indigo-400;
+    @apply bg-primary-500 hover:bg-primary-600 text-black;
+    @apply dark:bg-primary-500 dark:hover:bg-primary-400;
   }
   .link {
     @apply fade text-primary-700 dark:text-primary-500;
