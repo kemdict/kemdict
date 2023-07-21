@@ -6,8 +6,6 @@ import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 
-// TODO: icons with https://github.com/antfu/unplugin-icons
-
 const baseURL = "https://kemdict.com";
 const prod = process.env.NODE_ENV !== "development";
 
@@ -15,6 +13,12 @@ import legacy from "@vitejs/plugin-legacy";
 
 export default defineConfig({
   compressHTML: prod,
+  redirects: to302({
+    "/dict-itaigi": "/dicts/chhoetaigi_itaigi",
+    "/dict-kisaragi": "/dicts/kisaragi_dict",
+    "/dict-moe": "/dicts/dict_concised",
+    "/dict-taijittoasutian": "/dicts/chhoetaigi_taijittoasutian",
+  }),
   site: baseURL,
   integrations: [
     svelte(),
@@ -61,3 +65,17 @@ export default defineConfig({
     },
   },
 });
+
+/**
+ * Ensure `redirects` all use 302 as the status code.
+ *
+ * 301 is IMO a questionable default as it is meant to be permanent,
+ * and is sometimes actually permanent.
+ */
+function to302(redirects: Record<string, string>) {
+  const tmp: Record<string, { status: 302; destination: string }> = {};
+  for (const [k, v] of Object.entries(redirects)) {
+    tmp[k] = { status: 302, destination: v };
+  }
+  return tmp;
+}
