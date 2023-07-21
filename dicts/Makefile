@@ -3,6 +3,11 @@
 
 export LANG=en_US.UTF-8
 
+.PHONY: mark_new
+mark_new:
+	touch heteronyms.json
+	touch entries.db
+
 admin.deploy: entries.db.gz
 	@[ "$$SSH_HOST"x != x ] || (echo 'Please specify $$SSH_HOST'; exit 1)
 	rsync entries.db.gz "$$SSH_HOST:/home/kisaragi/deployed/kemdict.db.gz"
