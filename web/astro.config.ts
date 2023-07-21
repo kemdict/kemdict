@@ -20,6 +20,9 @@ export default defineConfig({
     "/dict-taijittoasutian": "/dicts/chhoetaigi_taijittoasutian",
   }),
   site: baseURL,
+  experimental: {
+    viewTransitions: true,
+  },
   integrations: [
     svelte(),
     mdx(),

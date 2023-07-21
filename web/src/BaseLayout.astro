@@ -5,6 +5,8 @@ import "./src.css";
 import Out from "$src/components/Out.astro";
 import clsx from "clsx";
 
+// import { ViewTransitions } from "astro:transitions";
+
 export interface Props {
   title: string;
   wantFooter?: boolean;
@@ -71,6 +73,14 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
         document.documentElement.classList.remove("dark");
       }
     </script>
+    {
+      /*
+    This is a script that implements and applies a client side router. It's still useful even when the View Transitions spec is not implemented.
+
+    It doesn't seem possible to add a loading indicator with it, though, so I'm still not going to be using it for now. (Client side navigation needs another loading indicator because the browser's indicators aren't in effect.)
+    <ViewTransitions />
+    */
+    }
     <link rel="icon" href="/favicon.ico?v=1" />
     <link
       rel="icon"
