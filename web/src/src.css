@@ -31,10 +31,6 @@
   hr {
     @apply mx-auto my-8 w-[95%];
   }
-  .base {
-    width: 95%;
-    @apply mx-auto my-0 max-w-5xl pt-12;
-  }
   body {
     /* Ensure the footer touches the bottom */
     @apply flex flex-col justify-between;

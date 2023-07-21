@@ -101,56 +101,58 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
         </div>
       )
     }
-    <div class="base">
+    <div class="mx-auto my-0 w-[95%] max-w-5xl pt-12">
       <slot />
     </div>
     {
       wantFooter && (
         <footer
           class={clsx(
-            "mt-12 px-16 py-8",
+            "mt-12 py-8",
             "bg-surface-800 text-primary-50",
             "[&_*]:my-2",
-            "[&>h2]:font-bold [&>h2]:opacity-75",
+            "[&_h2]:font-bold [&_h2]:opacity-75",
             "[&_a]:text-primary-400 [&_a:hover]:text-primary-50 [&_a]:transition"
           )}
         >
-          <h1 class="flex items-center text-lg">
-            <img
-              class="mr-2 inline h-10 w-10 rounded-xl shadow"
-              src="/maskable_icon_x128.png"
-            />
-            <span>Kemdict 國語整合典</span>
-          </h1>
-          <div class="md:flex md:[&>div]:min-w-[30%]">
-            <div>
-              <p>
-                由
-                <Out class="" href="https://kisaragi-hiu.com">
-                  如月飛羽
-                </Out>
-                所作
-              </p>
-              <p>
-                <Out class="" href="https://kisaragi-hiu.fanbox.cc/">
-                  在 FANBOX 上贊助我一餐飯
-                </Out>
-              </p>
-            </div>
-            <div>
-              <h2>社群</h2>
-              <ul class="">
-                <li>
-                  <Out class="" href="https://github.com/kemdict/kemdict">
-                    GitHub
+          <div class="mx-auto w-[95%] max-w-5xl">
+            <h1 class="flex items-center text-lg">
+              <img
+                class="mr-2 inline h-10 w-10 rounded-xl shadow"
+                src="/maskable_icon_x128.png"
+              />
+              <span>Kemdict 國語整合典</span>
+            </h1>
+            <div class="space-y-4 md:flex md:[&>div]:min-w-[30%]">
+              <div>
+                <p>
+                  由
+                  <Out class="" href="https://kisaragi-hiu.com">
+                    如月飛羽
                   </Out>
-                </li>
-                <li>
-                  <Out class="" href="https://www.facebook.com/kemdict">
-                    Facebook
+                  所作
+                </p>
+                <p>
+                  <Out class="" href="https://kisaragi-hiu.fanbox.cc/">
+                    在 FANBOX 上贊助我一餐飯
                   </Out>
-                </li>
-              </ul>
+                </p>
+              </div>
+              <div>
+                <h2>社群</h2>
+                <ul class="">
+                  <li>
+                    <Out class="" href="https://github.com/kemdict/kemdict">
+                      GitHub
+                    </Out>
+                  </li>
+                  <li>
+                    <Out class="" href="https://www.facebook.com/kemdict">
+                      Facebook
+                    </Out>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </footer>
