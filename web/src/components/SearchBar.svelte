@@ -1,5 +1,4 @@
 <script>
-  import { popup, ListBox, ListBoxItem } from "@skeletonlabs/skeleton";
   import { onMount } from "svelte";
   /**
    * Normally we submit the search to `/search`. Use this to make it
@@ -11,9 +10,6 @@
   export let highlightBtn = false;
   export let redirectOnSingleResult = false;
 
-  import PopupMenu from "./PopupMenu.svelte";
-
-  let currentMtch = initialMatchSelection || "prefix";
   const matchTypes = new Map(
     Object.entries({
       prefix: "開頭為",
@@ -44,26 +40,10 @@
 
 <div class="relative mb-2 mt-2">
   <form action="/search{submitSuffix || ''}">
+    {#if redirectOnSingleResult}
+      <input type="hidden" name="r" />
+    {/if}
     <div class="flex space-x-2">
-      <div>
-        <PopupMenu
-          target="combo"
-          btnClass="btn variant-filled h-full w-[10ch] text-sm"
-          closeQuery=".listbox-item"
-          label={matchTypes.get(currentMtch)}
-        >
-          <ListBox>
-            {#each [...matchTypes] as [mtch, name]}
-              <ListBoxItem bind:group={currentMtch} name="m" value={mtch}>
-                {name}
-              </ListBoxItem>
-            {/each}
-          </ListBox>
-        </PopupMenu>
-      </div>
-      {#if redirectOnSingleResult}
-        <input type="hidden" name="r" />
-      {/if}
       <div class="relative flex-grow">
         <input
           id="sbi"
@@ -74,7 +54,7 @@
           class="k-input w-full"
           value={initialInput}
         />
-        <div class="absolute right-2 top-[25%]">
+        <div class="absolute right-2 top-[25%] max-md:hidden">
           <kbd>Ctrl+K</kbd>
         </div>
       </div>
@@ -83,6 +63,23 @@
         type="submit"
         value="搜尋"
       />
+    </div>
+    <div class="mt-4">
+      <h2 class="mb-2 font-bold opacity-75">搜尋方式</h2>
+      <fieldset class="flex max-w-[60%] flex-wrap gap-x-4 gap-y-2">
+        {#each [...matchTypes] as [mtch, name]}
+          <label class="flex items-center space-x-1">
+            <input
+              class="form-radio radio"
+              type="radio"
+              name="m"
+              value={mtch}
+              checked={mtch === initialMatchSelection}
+            />
+            <span>{name}</span>
+          </label>
+        {/each}
+      </fieldset>
     </div>
   </form>
 </div>

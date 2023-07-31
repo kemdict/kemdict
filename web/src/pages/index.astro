@@ -47,7 +47,7 @@ const newWords = await DB.getNewWords(15);
     ></script>
   </Fragment>
   <div>
-    <div class="flex justify-between">
+    <div class="mb-8 mt-12 flex justify-between">
       <h1 class="mb-2">
         <div class="text-6xl font-bold">Kemdict</div>
         <div class="text-2xl font-bold">國語整合典</div>
@@ -56,7 +56,13 @@ const newWords = await DB.getNewWords(15);
         <DarkModeToggle client:load />
       </div>
     </div>
-    <SearchBar highlightBtn={true} redirectOnSingleResult={true} client:load />
+    <div class="bg-surface-300 dark:bg-surface-800 w-full rounded px-4 py-4">
+      <SearchBar
+        highlightBtn={true}
+        redirectOnSingleResult={true}
+        client:load
+      />
+    </div>
   </div>
   <div class="prose">
     <div class="md:flex">

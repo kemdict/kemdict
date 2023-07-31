@@ -93,7 +93,11 @@ export default {
   },
   plugins: [
     require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
+    require("@tailwindcss/forms")({
+      // I'm pretty happy with the way text input is styled, but it
+      // changes if I apply the base changes. Use opt-in style instead.
+      strategy: "class",
+    }),
     ...require("@skeletonlabs/skeleton/tailwind/skeleton.cjs")(),
   ],
 } satisfies Config;
