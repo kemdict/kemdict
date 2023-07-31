@@ -16,6 +16,7 @@
       suffix: "結尾為",
       contains: "包含",
       exact: "完全符合",
+      /* content: "內文包含", */
     })
   );
   onMount(() => {

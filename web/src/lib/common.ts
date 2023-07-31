@@ -135,7 +135,12 @@ export function strLen(str: string): number {
   return [...str].length;
 }
 
-export type Mtch = "prefix" | "suffix" | "contains" | "exact" | string;
+export type Mtch =
+  | "prefix"
+  | "suffix"
+  | "contains"
+  | "exact" /* "content" | */
+  | string;
 
 export function getSearchTitle(
   mtch: Mtch,
@@ -161,6 +166,12 @@ export function getSearchTitle(
     } else {
       ret = `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
     }
+    // } else if (mtch === "content") {
+    //   if (tokens.length === 0) {
+    //     ret = `內文包含「${query}」的詞`;
+    //   } else {
+    //     ret = `內文包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+    //   }
   } else if (mtch === "prefix") {
     if (tokens.length === 0) {
       ret = `開頭符合「${query}」的詞`;
