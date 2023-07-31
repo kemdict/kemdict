@@ -65,6 +65,12 @@ const newWords = await DB.getNewWords(15);
     </div>
   </div>
   <div class="prose">
+    <div>
+      <h3>最近新增的詞</h3>
+      <WordList words={newWords} />
+    </div>
+  </div>
+  <div class="prose">
     <div class="md:flex">
       <div class="w-1/2">
         <h3>前言</h3>
@@ -96,8 +102,6 @@ const newWords = await DB.getNewWords(15);
       </div>
     </div>
     <div class="ml-1"></div>
-    <h3>最近新增的詞</h3>
-    <WordList words={newWords} />
     <div>
       <h3>索引</h3>
       <ul class="ml-1 list-none p-0">
