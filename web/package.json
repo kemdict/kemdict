@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "@astrojs/node": "^5.3.0",
-    "astro": "^2.9.0",
+    "astro": "^2.9.6",
     "better-sqlite3": "^8.4.0",
     "clsx": "^1.2.1",
     "lodash-es": "^4.17.21",
@@ -34,6 +34,7 @@
     "@floating-ui/dom": "^1.4.4",
     "@size-limit/file": "^8.2.6",
     "@skeletonlabs/skeleton": "^1.9.0",
+    "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",
     "@types/better-sqlite3": "^7.6.4",
     "@types/lodash-es": "^4.17.7",
