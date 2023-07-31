@@ -7,88 +7,98 @@ const [success, data] = await getHetFromUrl(url);
 if (!success) {
   return Astro.redirect(data);
 }
+/** The page is /search (without any suffix) */
+const root = data.root;
+
 const heteronyms = data.heteronyms;
 const mtch = data.mtch;
 const originalQuery = data.originalQuery;
 const normalizedQuery = data.query;
 const langSet = data.langSet;
-
-let count = heteronyms.length;
-
-const presentLangs = Object.entries(langs).filter((l) => langSet.has(l[0]));
+const count = heteronyms?.length;
+const presentLangs = Object.entries(langs).filter((l) => langSet?.has(l[0]));
 
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 import WordPreview from "$src/components/WordPreview.svelte";
 import ListLink from "$src/components/ListLink.svelte";
 
-const title = getSearchTitle(mtch, originalQuery);
-const titleMarkup = getSearchTitle(mtch, originalQuery, true);
+const title = mtch && getSearchTitle(mtch, originalQuery);
+const titleMarkup = mtch && getSearchTitle(mtch, originalQuery, true);
 ---
 
 <script>
   import { saveHistory } from "$src/localStorage";
-  saveHistory("search", new URLSearchParams(location.search).get("q")?.trim());
+  const search = new URLSearchParams(location.search).get("q")?.trim();
+  if (search) {
+    saveHistory("search", search);
+  }
 </script>
 
-<SingleLayout
-  title={`${title} - 所有辭典 - ${site.title}`}
-  initialMatchSelection={mtch}
-  initialInput={originalQuery}
->
-  <Fragment slot="head">
-    <meta
-      property="og:image"
-      content={`https://kemdict.com/og-image?title=${title}`}
-    />
-    <meta
-      name="description"
-      content={`在所有收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
-    />
-  </Fragment>
-  {
-    count === 0 ? (
-      <div class="prose">
-        <h1>「{originalQuery}」的搜尋結果</h1>
-        <p>找不到{title}。</p>
-        <hr />
-        <Elsewhere term={originalQuery} />
-      </div>
-    ) : (
-      <>
-        {/* So this... could allow injecting HTML, but only when there are matching entries in the database. If not, this path isn't taken. */}
-        <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
-        <div class="">
-          {presentLangs.map((lang) => {
-            const previewCount = 5;
-            const applicableHeteronyms = heteronyms.filter(
-              (het) => het.lang === lang[0]
-            );
-            return (
-              <div class="mt-4">
-                <h1 class="font-bold">
-                  {lang[1]} ({applicableHeteronyms.length})
-                </h1>
-                <ul class="divide-y divide-gray-300">
-                  <WordPreview
-                    heteronyms={applicableHeteronyms.slice(0, previewCount)}
-                    searchQuery={normalizedQuery}
-                  />
-                  {applicableHeteronyms.length > previewCount && (
-                    <ListLink
-                      href={`/search/${lang[0]}?${url.searchParams.toString()}`}
-                    >
-                      <div class="text-center" slot="heading">
-                        共 {applicableHeteronyms.length} 項結果
-                      </div>
-                    </ListLink>
-                  )}
-                </ul>
-              </div>
-            );
-          })}
+{
+  root ? (
+    <SingleLayout title="搜尋 - ${site.title}" />
+  ) : (
+    <SingleLayout
+      title={`${title} - 所有辭典 - ${site.title}`}
+      initialMatchSelection={mtch}
+      initialInput={originalQuery}
+    >
+      <Fragment slot="head">
+        <meta
+          property="og:image"
+          content={`https://kemdict.com/og-image?title=${title}`}
+        />
+        <meta
+          name="description"
+          content={`在所有收錄辭典中搜尋${title}的結果。 - ${site.oneLineDesc}`}
+        />
+      </Fragment>
+      {count === 0 ? (
+        <div class="prose">
+          <h1>「{originalQuery}」的搜尋結果</h1>
+          <p>找不到{title}。</p>
+          <hr />
+          <Elsewhere term={originalQuery} />
         </div>
-      </>
-    )
-  }
-</SingleLayout>
+      ) : (
+        <>
+          {/* So this... could allow injecting HTML, but only when there are matching entries in the database. If not, this path isn't taken. */}
+          <h1 class="mt-8 text-2xl" set:html={titleMarkup} />
+          <div class="">
+            {presentLangs.map((lang) => {
+              const previewCount = 5;
+              const applicableHeteronyms = heteronyms.filter(
+                (het) => het.lang === lang[0]
+              );
+              return (
+                <div class="mt-4">
+                  <h1 class="font-bold">
+                    {lang[1]} ({applicableHeteronyms.length})
+                  </h1>
+                  <ul class="divide-y divide-gray-300">
+                    <WordPreview
+                      heteronyms={applicableHeteronyms.slice(0, previewCount)}
+                      searchQuery={normalizedQuery}
+                    />
+                    {applicableHeteronyms.length > previewCount && (
+                      <ListLink
+                        href={`/search/${
+                          lang[0]
+                        }?${url.searchParams.toString()}`}
+                      >
+                        <div class="text-center" slot="heading">
+                          共 {applicableHeteronyms.length} 項結果
+                        </div>
+                      </ListLink>
+                    )}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </SingleLayout>
+  )
+}

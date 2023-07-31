@@ -82,6 +82,7 @@ export async function getHetFromUrl(
   url: URL,
   lang?: string
 ): Promise<
+  | [true, { root: true }]
   | [
       true,
       {
@@ -96,6 +97,9 @@ export async function getHetFromUrl(
   // when the first item is false, the second element is a string
   | [false, string]
 > {
+  if (url.search === "") {
+    return [true, { root: true }];
+  }
   /** Query text as written in the URL */
   const originalQuery: string | undefined = url.searchParams.get("q")?.trim();
   /** Unicode normalized query */
@@ -109,7 +113,7 @@ export async function getHetFromUrl(
   const redirectOnSingleResult = url.searchParams.has("r");
   // Invalid: redirect to root
   if (typeof query !== "string" || query.length === 0) {
-    return [false, "/"];
+    return [false, "/search"];
   }
   const parsed = parseQuery(query);
   const { presentLangSet, heteronyms, langCountObj } = await DB.getHeteronyms(
