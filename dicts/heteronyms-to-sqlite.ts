@@ -64,7 +64,7 @@ function parse(path: string): any {
   return JSON.parse(fs.readFileSync(path).toString().normalize("NFD"));
 }
 
-function stringifyFields(thing) {
+function stringifyFields(thing: any) {
   return {
     title: thing.title,
     from: thing.from,
@@ -85,40 +85,40 @@ db.exec(
 PRAGMA user_version = 4;
 
 CREATE TABLE langs (
-  "id" PRIMARY KEY,
-  "name" NOT NULL
+  "id" TEXT PRIMARY KEY,
+  "name" TEXT NOT NULL
 );
 
 CREATE TABLE dicts (
-  "id" PRIMARY KEY,
-  "name" NOT NULL,
-  "lang" REFERENCES langs("id")
+  "id" TEXT PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "lang" TEXT REFERENCES langs("id")
 );
 
 CREATE TABLE heteronyms (
   "id" INTEGER PRIMARY KEY,
-  "title" NOT NULL,
-  "from" REFERENCES dicts("id"),
-  "lang" REFERENCES langs("id"),
-  "props" NOT NULL
+  "title" TEXT NOT NULL,
+  "from" TEXT REFERENCES dicts("id"),
+  "lang" TEXT REFERENCES langs("id"),
+  "props" TEXT NOT NULL
 );
 
 CREATE TABLE aliases (
   "het_id" INTEGER REFERENCES heteronyms("id"),
-  "alias" NOT NULL,
+  "alias" TEXT NOT NULL,
   "exact" INTEGER
 );
 
 CREATE TABLE links (
-  "from" NOT NULL,
-  "to" NOT NULL
+  "from" TEXT NOT NULL,
+  "to" TEXT NOT NULL
 );
 
 -- New words, sorted by date/time added
 CREATE TABLE newwords (
-  "title" NOT NULL,
-  "time" NOT NULL,
-  "from" REFERENCES dicts("id")
+  "title" TEXT NOT NULL,
+  "time" TEXT NOT NULL,
+  "from" TEXT REFERENCES dicts("id")
 );
 `
 );
@@ -164,21 +164,21 @@ const EachPT = db.transaction((array, message = "", func) => {
 
 // langs and dicts
 {
-  const langStmt = db.prepare(`
+  const insertLangStmt = db.prepare(`
 INSERT INTO
   langs ("id", "name")
 VALUES
   (?, ?)`);
-  const dictStmt = db.prepare(`
+  const insertDictStmt = db.prepare(`
 INSERT INTO
   dicts ("id", "name", "lang")
 VALUES
   (@id,@name,@lang)`);
   EachPT(Object.entries(langs), "Preparing langs: ", ([id, name]) => {
-    langStmt.run(id, name);
+    insertLangStmt.run(id, name);
   });
   EachPT(dicts, "Preparing dicts: ", (dict) => {
-    dictStmt.run(dict);
+    insertDictStmt.run(dict);
   });
 }
 
