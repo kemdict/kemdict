@@ -1,8 +1,10 @@
 ---
 import MarkdownLayout from "$src/MarkdownLayout.astro";
 import Out from "$src/components/Out.astro";
-import Ex from "./Ex.astro";
-import W from "./W.astro";
+// Underscore stops them from being routed to.
+// Not documented for some reason.
+import Ex from "./_Ex.astro";
+import W from "./_W.astro";
 
 const props = {
   title: "台語羅馬字簡介 | Kemdict",
