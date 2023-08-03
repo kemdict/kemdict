@@ -14,40 +14,63 @@ export const kemdict = "《Kemdict 國語整合典》";
 - 版本：[{version}](/changelog)
 - 原始碼：[https://github.com/kemdict/kemdict/](https://github.com/kemdict/kemdict/)
 
-如果 Kemdict 有幫助到您，請考慮在 [Fanbox](https://kisaragi-hiu.fanbox.cc/) 或 [BMC](https://www.buymeacoffee.com/kisaragihiu) 贊助我一餐飯。謝謝。
+如果 Kemdict 有幫助到您，請考慮在 [Fanbox](https://kisaragi-hiu.fanbox.cc/) 或 [Buy Me a Coffee](https://www.buymeacoffee.com/kisaragihiu) 贊助我一餐飯。謝謝。
 
-## 已知問題
+---
 
-- [https://github.com/kemdict/kemdict/issues](https://github.com/kemdict/kemdict/issues)
+# FAQ
 
-## {kemdict}的存在意義
+（還沒有人問的時候叫做 *Fully Anticipated Questions*，我覺得大概會有人問的問題。）
+
+## 用詞
+
+- 台語 / 臺灣閩南語 / 福建話 …：我目前傾向「台語」，但也可以理解稱之為「臺灣閩南語」（閩南語這個語言的臺灣分支）的緣由。閩南語整體都是[需要復興的](https://www.speakhokkien.org/hokkien)。
+- 「國語」 / 華語：稱作華語。「[臺灣各固有族群使用之自然語言及臺灣手語](https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0170143)」都是國家語言。在這方面 Kemdict 還需要想辦法包含各族語和臺灣手語。
+- 「國語整合典」：整合各國家語言在一處的字典。
+
+## 其他
+
+- 為何目前沒有包含各原住民族語：我只知道原民會的[原住民族語言線上辭典](https://e-dictionary.ilrdf.org.tw)，而我還沒嘗試向其請求授權。
+- 為何沒有包含臺灣手語：一部分是我還沒找資源，另一部分是我在重新讀國家語言發展法之前忘了它的存在。
+- 台語該用白話字還是教育部臺羅：在 Kemdict 我選擇了一律使用教育部臺羅，但搜尋時也支援傳統白話字。後者只是白話字這個書寫系統的像是[德文正寫法](https://en.wikipedia.org/wiki/German_orthography_reform_of_1996)改革一樣的拼字改革 — 雖然[不是很有足夠共識](https://www.thenewslens.com/article/28741)，但實際使用上應該是新的拼法比較多人會比較熟悉。
+
+---
+# {kemdict}的存在意義
 
 {kemdict}跟其他字典的比較。
 
-### [教育百科](https://pedia.cloud.edu.tw)
+## 個別搜尋各個辭典
+
+Kemdict 基本上是收集其他先進們做的辭典在一個地方的產物。
+
+比起直接使用搜尋引擎，Kemdict 能夠提供收錄字典之間的連結，並且個人認為應該是比較容易搜尋。
+
+## 教育百科 (https://pedia.cloud.edu.tw)
 
 - 我在做 Kemdict 之前不知道教育百科的存在。
 - {kemdict}與教育百科收錄字典不同。教育百科[有收錄](https://pedia.cloud.edu.tw/NavigateWord)國語小字典、國教院辭書（[樂詞網](https://terms.naer.edu.tw)）等，{kemdict}則是有收錄[臺日大辭典台語譯本](/dict-taijittoasutian)。
 - {kemdict}目前缺乏搜尋排序、內文檢索的功能。
 - {kemdict}提供較容易使用的讀音搜尋，例如搜尋 [`gua`](https://kemdict.com/search?q=gua) 會出現台語「原則」(`guân-tsik`，傳統白話字`goân-chek`)、搜尋 [`ㄅㄞˊ`](https://kemdict.com/search?q=ㄅㄞˊ) 會出現所有第一個字讀音是ㄅㄞˊ的詞等。
 
-### 教育部各辭典
+## 教育部各辭典
 
 - {kemdict}可以同時搜尋簡編本跟重編本，不用再煩惱要用哪個
 - 反向連結，亦即可以看到有哪些詞彙定義提到這個詞彙
 
-### ChhoeTaigi
+## ChhoeTaigi
 
-- 我希望同時包含台灣華語、台語和客語的定義
+- 我還希望包含台灣華語、台語和客語的定義。
+- 我希望可以用一個搜尋列直接做所有的搜尋。
 
-### 萌典
+## 萌典
 
-- 沒有萌典就不會有 Kemdict。萌典的資料檔讓試作變得非常簡單，並且是 Kemdict 一切的基礎
-- 萌典的華語資料有好幾年沒更新了
+- 沒有萌典就不會有 Kemdict。萌典的資料檔讓試作變得非常簡單，並且是 Kemdict 一切的基礎。
+- 萌典的華語資料有好幾年沒更新了。
 - 萌典的華語部分只有用重編本，而不包含成語典或簡編本。
 - Kemdict 把同一個詞在所有收錄字典的定義都顯示出來，方便相互參照。
+- 萌典有很實用的其他語言同義詞的參照。
 
-### 維基詞典
+## 維基詞典
 
 - 英文維基詞典其實還蠻不錯的，也包含很多華語、粵語、閩南語等等的定義。但不是每個人都會英文。
 - 維基詞典基本上把閩南語、粵語、華語等等全部都當成「中文」的不同方言。
