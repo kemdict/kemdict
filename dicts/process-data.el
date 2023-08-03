@@ -100,7 +100,8 @@ For example, 1 is 一, 213 is 龜."
 `d:links:linkify-keywords' uses this to avoid replacing links multiple times.")
 
 (defvar d:links nil
-  "A list of link objects.")
+  "A list of link objects.
+Link objects are alists with two keys, `to' and `from'.")
 
 (cl-defun d:links:link-to-word (target
                                 &key
@@ -703,81 +704,6 @@ ORIG-HETS are props that will be used to construct heteronyms."
                  (gethash "id" other))))))
     orig-hets))
 
-;; For entries with heteronyms:
-;;   [{:title "title"
-;;     :heteronyms (...)
-;;     ... ...}
-;;    ...]
-;;   ->
-;;   [{:title "title"
-;;     :from "dictA"
-;;     :lang "lang"
-;;     :props ...}])
-;; Also works for entries that are themselves heteronyms
-(defun d:parse-and-shape (dict lang files msg)
-  "Return heteronyms in FILES.
-DICT is the dictionary ID to associate with them.
-LANG is the language of DICT.
-Titles are written to `d:titles:look-up-table'."
-  (let* ((files (-list files))
-         (raw-dict (with-temp-buffer
-                     (cl-loop for f in files
-                              vconcat
-                              (progn
-                                (erase-buffer)
-                                (insert-file-contents f)
-                                (json-parse-buffer)))))
-         (heteronyms nil)
-         (rep (make-progress-reporter
-               msg
-               0 (length raw-dict) nil
-               ;; 5 percent / 4 seconds
-               5 4))
-         (i 0))
-    (seq-doseq (entry raw-dict)
-      (progress-reporter-update rep i)
-      (cl-incf i)
-      (let ((orig-hets (or (gethash "heteronyms" entry)
-                           (vector entry))))
-        (d::debug "%s - applying het_sort" dict)
-        ;; TODO: maybe we want IDs in the DB as well
-        ;; idea: add 1000000 to IDs from the first dict, 2000000 to
-        ;; IDs from the second, and so on, plus ensuring we don't
-        ;; exceed the maximum allowed word count in this scheme
-        (when (> (length orig-hets) 1)
-          (setq orig-hets (d:sort-orig-hets orig-hets)))
-        (seq-doseq (orig-het orig-hets)
-          (d::debug "%s - processing title" dict)
-          (let* ((shaped-het (make-hash-table :test #'equal))
-                 (title (or (-some-> (gethash "title" entry)
-                              d:process-title)
-                            ;; 臺日大辭典 and 臺灣白話基礎語句
-                            (gethash "kip" orig-het)
-                            ;; unihan
-                            (gethash "char" orig-het))))
-            ;; chhoetaigi_taijittoasutian:
-            ;; work around some incorrectly formatted titles, like
-            ;; "a-a cham-cham" being formatted as "a-acham-cham" in
-            ;; the title field
-            (when (and (equal dict "chhoetaigi_taijittoasutian")
-                       ;; This means we know it's safe to substitude het.kip
-                       (d:latin-only title)
-                       (not (equal (downcase title)
-                                   (downcase (gethash "kip" orig-het)))))
-              (setq title (gethash "kip" orig-het)))
-            (puthash "title" title shaped-het)
-            (puthash "from" dict shaped-het)
-            (puthash "lang" lang shaped-het)
-            ;; Copy some top-level props to each heteronym.
-            (--each '("eq-en" "eq-ja" "added")
-              (puthash it (gethash it entry) orig-het))
-            ;; We can't run d:process-props just yet, as that requires
-            ;; the list of all titles to work correctly.
-            (puthash "props" orig-het shaped-het)
-            (push shaped-het heteronyms)
-            (puthash title t d:titles:look-up-table)))))
-    heteronyms))
-
 (defun d:main ()
   (setq d:links nil)
   (setq d:titles:look-up-table (ht))
@@ -786,17 +712,68 @@ Titles are written to `d:titles:look-up-table'."
            (dict-count (length dictionaries)))
       ;; Step 1
       (cl-loop
-       for (dict lang files) being the elements of dictionaries
+       for (dict lang files)
+       being the elements of dictionaries
        using (index i)
        do
-       (progn
-         (setq heteronyms
-               (nconc (d:parse-and-shape dict lang files
-                                         (format "Collecting heteronyms and titles from %s (%s/%s)..."
-                                                 (or dict files) (1+ i) dict-count))
-                      heteronyms))
+       (let* ((files (-list files))
+              (raw-dict (with-temp-buffer
+                          (cl-loop for f in files
+                                   vconcat
+                                   (progn
+                                     (erase-buffer)
+                                     (insert-file-contents f)
+                                     (json-parse-buffer)))))
+              (rep (make-progress-reporter
+                    (format "Collecting heteronyms and titles from %s (%s/%s)..."
+                            (or dict files) (1+ i) dict-count)
+                    0 (length raw-dict) nil
+                    ;; 5 percent / 4 seconds
+                    5 4))
+              (j 0))
+         (seq-doseq (entry raw-dict)
+           (progress-reporter-update rep j)
+           (cl-incf j)
+           (let ((orig-hets (or (gethash "heteronyms" entry)
+                                (vector entry))))
+             (d::debug "%s - applying het_sort" dict)
+             (when (> (length orig-hets) 1)
+               (setq orig-hets (d:sort-orig-hets orig-hets)))
+             (seq-doseq (orig-het orig-hets)
+               ;; {title,from,lang,props}
+               (let (shaped-het title)
+                 (setq shaped-het (make-hash-table :test #'equal))
+                 (d::debug "%s - processing title" dict)
+                 (setq title (or (-some-> (gethash "title" entry)
+                                   d:process-title)
+                                 ;; 臺日大辭典 and 臺灣白話基礎語句
+                                 (gethash "kip" orig-het)
+                                 ;; unihan
+                                 (gethash "char" orig-het)))
+                 ;; chhoetaigi_taijittoasutian:
+                 ;; work around some incorrectly formatted titles, like
+                 ;; "a-a cham-cham" being formatted as "a-acham-cham" in
+                 ;; the title field
+                 (when (and (equal dict "chhoetaigi_taijittoasutian")
+                            ;; This means we know it's safe to substitude het.kip
+                            (d:latin-only title)
+                            (not (equal (downcase title)
+                                        (downcase (gethash "kip" orig-het)))))
+                   (setq title (gethash "kip" orig-het)))
+                 (puthash "title" title shaped-het)
+                 (puthash "from" dict shaped-het)
+                 (puthash "lang" lang shaped-het)
+                 ;; Copy some top-level props to each heteronym.
+                 (--each '("eq-en" "eq-ja" "added")
+                   (puthash it (gethash it entry) orig-het))
+                 ;; We can't run d:process-props just yet, as that requires
+                 ;; the list of all titles to work correctly.
+                 (puthash "props" orig-het shaped-het)
+                 (push shaped-het heteronyms)
+                 (puthash title t d:titles:look-up-table)))))
          (garbage-collect))))
     (garbage-collect)
+    (setq heteronyms (nreverse heteronyms))
     ;; Step 3
     (cl-loop
      for het being the elements of heteronyms
@@ -832,7 +809,6 @@ Titles are written to `d:titles:look-up-table'."
         (insert (json-encode heteronyms))))
     (message "Done")))
 
-
 (when noninteractive
   (jieba-reset 'big)
   (jieba-add-word "物件" "n")
@@ -844,8 +820,7 @@ Titles are written to `d:titles:look-up-table'."
                  #'d:links:comma-word-list
                  #'d:links:link-to-word
                  #'d:links:linkify-brackets
-                 #'d:process-props
-                 #'d:parse-and-shape)
+                 #'d:process-props)
       comp))
   ;; We're holding all dictionary data in memory, so if this is too
   ;; low we'll be GC'ing all the time without being able to free any
