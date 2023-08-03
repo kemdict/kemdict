@@ -652,7 +652,9 @@ information."
     ;; The order here defines the order they will appear in the word
     ;; pages.
     (--filter
-     (-all? #'file-exists-p (ensure-list (elt it 2)))
+     (and
+      ;; All files of the dictionary exist
+      (-all? #'file-exists-p (ensure-list (elt it 2))))
      '(("unihan" "han" "unihan.json")
        ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")

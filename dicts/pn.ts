@@ -66,6 +66,10 @@ export function pnCollect(het: Heteronym): Map<string, string> {
     // in this repository)
     "poj",
     "kip",
+    "pojInput",
+    "kipInput",
+    "pojInputOthers",
+    "kipInputOthers",
 
     "kMandarin",
   ];

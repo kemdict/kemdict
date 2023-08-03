@@ -26,6 +26,9 @@
 {#each heteronyms as het}
   <h1>{taigiTitle(het)}</h1>
   <Pronunciation>{het.props.kip}</Pronunciation>
+  {#if het.props.kipOthers}
+    <div>其他：{het.props.kipOthers}</div>
+  {/if}
   {#if het.props.def}
     <p class="my-2">{@html process_def(het.props.def)}</p>
     {#if het.props.example}
