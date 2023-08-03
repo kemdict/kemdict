@@ -1,5 +1,69 @@
 [
   {
+    "title": "確診",
+    "added": 1691070586.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄩㄝˋ ㄓㄣˇ",
+        "definitions": [
+          {
+            "def": "2020~2022年間，單獨使用時指確定感染[[COVID-19]]。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "疫情",
+    "added": 1691070324.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧˋ ㄑㄧㄥˊ",
+        "definitions": [
+          {
+            "def": "2020~2022年間，單獨使用時指[[COVID-19]]。如：「因為疫情的關係，現在全國學校都有全校遠距教學的經驗」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "迷因",
+    "added": 1691070008.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄇㄧˊ ㄧㄣ",
+        "definitions": [
+          {
+            "def": "在網路上以微幅修改、複製的方式流傳的笑話。英語meme的音譯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "大咖",
+    "added": 1691069132.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˋ ㄎㄚ",
+        "definitions": [
+          {
+            "def": "位高權重的人。",
+            "type": "名"
+          },
+          {
+            "def": "厲害的人。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "冷笑話",
     "added": 1690897693.0,
     "heteronyms": [
