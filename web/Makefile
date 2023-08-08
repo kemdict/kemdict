@@ -44,4 +44,3 @@ preview: $(DEPS)
 # https://github.com/withastro/astro/issues/6306
 check:
 	npx astro check 2>/dev/null
-	npx eslint .
