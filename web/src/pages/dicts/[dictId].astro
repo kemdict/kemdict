@@ -2,10 +2,7 @@
 const { dictId } = Astro.params;
 import { dictIdToDict, langIdName } from "common";
 import { marked } from "marked";
-marked.use({
-  mangle: false,
-  headerIds: false,
-});
+marked.use();
 
 const dict = dictIdToDict(dictId);
 
