@@ -257,6 +257,7 @@ export function parseQuery(inputQuery: string) {
   }
 }
 
+/** Convert a SearchParserResult to an SQL expr for WHERE. */
 function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
   const operator = mtch === "exact" ? "=" : "LIKE";
   // printfdebug({ parsed });
@@ -281,7 +282,7 @@ function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
       sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
     });
   });
-  // TODO: This will tell SQLite to return heteronyms that are eg.
+  // FIXME: This will tell SQLite to return heteronyms that are eg.
   // both in language A and language B, which is not possible.
   ensureArray(parsed.lang)?.forEach((lang) => {
     exprs.push(`AND lang LIKE '%${lang}%'`);
@@ -423,11 +424,13 @@ export class CrossDB {
    * - "contains": match heteronyms that contain TOKEN
    * - any thing else (including "exact"): match heteronyms exactly
    *
-   * Returns {presentDicts, presentLangSet, heteronyms, langCountObj}
+   * Returns {presentDicts, presentLangSet, heteronyms, langCountObj, parsed}
    */
   async getHeteronyms(
-    parsed: string | SearchParserResult,
+    query: string,
     options?: {
+      /** If true, don't parse `query`. */
+      exactQuery?: boolean;
       mtch?: string;
       langs?: string[] | string;
       limit?: number;
@@ -438,13 +441,13 @@ export class CrossDB {
     heteronyms: Heteronym[];
     langCountObj: Record<LangId, number>;
   }> {
+    const parsed = options.exactQuery
+      ? { text: query.normalize("NFD") }
+      : parseQuery(query.normalize("NFD"));
     // printfdebug({
     //   parsed,
     //   options,
     // });
-    if (typeof parsed === "string") {
-      parsed = { text: parsed.normalize("NFD") };
-    }
     const mtch = options?.mtch || "exact";
     const limit = options?.limit;
     const langs = ensureArray(options?.langs);
@@ -481,6 +484,8 @@ ${limit ? `LIMIT ?` : ""}
       presentLangSet: langSet,
       heteronyms: applicableHets?.map(processHet),
       langCountObj,
+      /** The result of SearchQueryParser */
+      parsed,
     };
   }
 

@@ -16,7 +16,7 @@ const {
   presentDicts: presentDictIds,
   presentLangSet,
   heteronyms,
-} = await DB.getHeteronyms(title);
+} = await DB.getHeteronyms(title, { exactQuery: true });
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = (await DB.getBacklinks(...titles)).sort();
 

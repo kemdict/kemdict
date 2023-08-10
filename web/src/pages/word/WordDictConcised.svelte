@@ -42,7 +42,6 @@
   {#if het.props.def}
     <ol>
       {#each split(processDef(het.props.def)) as d}
-        <!-- TODO: we really need a better way of displaying nested lists. -->
         <li><p class="def">{@html d.replace(/　(\(\d+\))/g, "<br>$1")}</p></li>
       {/each}
     </ol>

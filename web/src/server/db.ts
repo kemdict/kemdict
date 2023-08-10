@@ -115,14 +115,11 @@ export async function getHetFromUrl(
   if (typeof query !== "string" || query.length === 0) {
     return [false, "/search"];
   }
-  const parsed = parseQuery(query);
-  const { presentLangSet, heteronyms, langCountObj } = await DB.getHeteronyms(
-    parsed,
-    {
+  const { presentLangSet, heteronyms, langCountObj, parsed } =
+    await DB.getHeteronyms(query, {
       mtch,
       langs: lang,
-    }
-  );
+    });
   // Redirect if all matched heteronyms belong to the same title
   if (
     redirectOnSingleResult &&

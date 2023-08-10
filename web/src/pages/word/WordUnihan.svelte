@@ -25,7 +25,6 @@
   ];
 </script>
 
-<!-- TODO: sementic variant and other variants -->
 <div class="my-2 space-y-2">
   {#each heteronyms as het}
     <div>
