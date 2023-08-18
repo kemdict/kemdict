@@ -30,10 +30,9 @@ jobs:
           pnpm install
           pip install unihan-etl typing_extensions
       - name: Set up Emacs
-        run: |
-          sudo add-apt-repository ppa:kelleyk/emacs
-          sudo apt update
-          sudo apt-get install emacs28-nox
+        uses: purcell/setup-emacs@master
+        with:
+          version: 29.1
       - uses: emacs-eask/setup-eask@master
         with:
           version: "snapshot"
