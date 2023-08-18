@@ -16,24 +16,24 @@
     }
   ],
   "dependencies": {
-    "@astrojs/node": "^5.3.2",
-    "astro": "^2.10.3",
-    "better-sqlite3": "^8.5.0",
-    "clsx": "^1.2.1",
+    "@astrojs/node": "^5.3.4",
+    "astro": "^2.10.9",
+    "better-sqlite3": "^8.5.1",
+    "clsx": "^2.0.0",
     "lodash-es": "^4.17.21",
-    "marked": "^7.0.1",
-    "satori": "^0.10.2",
+    "marked": "^7.0.3",
+    "satori": "^0.10.3",
     "satori-html": "^0.3.2",
     "search-query-parser": "^1.6.0",
-    "sharp": "^0.32.4"
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
     "@astrojs/mdx": "^0.19.7",
-    "@astrojs/sitemap": "^2.0.1",
+    "@astrojs/sitemap": "^2.0.2",
     "@astrojs/svelte": "^3.1.0",
     "@floating-ui/dom": "^1.5.1",
     "@size-limit/file": "^8.2.6",
-    "@skeletonlabs/skeleton": "^1.11.0",
+    "@skeletonlabs/skeleton": "^1.12.0",
     "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",
     "@types/better-sqlite3": "^7.6.4",
@@ -42,7 +42,7 @@
     "@vitejs/plugin-legacy": "^4.1.1",
     "size-limit": "^8.2.6",
     "sqlstring": "^2.3.3",
-    "svelte": "^4.1.2",
+    "svelte": "^4.2.0",
     "svelte-preprocess": "^5.0.4",
     "tailwindcss": "^3.3.3"
   }
