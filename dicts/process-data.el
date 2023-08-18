@@ -1,16 +1,97 @@
 ;; -*- lexical-binding: t; -*-
 
-;; Package-Requires: ((emacs "28.1"))
+;; Package-Requires: ((emacs "29.1"))
 
 (require 'cl-lib)
 (require 'dash)
-(require 'json)
-(require 'seq)
-(require 's)
-(require 'ol)
 (require 'ht)
+(require 'json)
+(require 'ol)
+(require 's)
+(require 'seq)
+(require 'sqlite)
 (require 'ucs-normalize)
+(require 'parse-time)
+
 (require 'jieba)
+
+(defalias 'd::NFD #'ucs-normalize-NFD-string)
+
+(defun d::dictionaries ()
+  "Return definitions of dictionaries.
+
+The value is a list:
+    [(ID LANG FILE)  ; either this form
+     (ID LANG FILES) ; or this form
+     ...]
+
+An ID of nil means the entries are included but will not be shown
+by default."
+  (cond
+   ;; (t
+   ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
+   (t
+    ;; The order here defines the order they will appear in the word
+    ;; pages.
+    (--filter
+     (and
+      ;; All files of the dictionary exist
+      (-all? #'file-exists-p (ensure-list (elt it 2))))
+     '(("unihan" "han" "unihan.json")
+       ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
+       ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
+       ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+       ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
+       ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
+                                  "moedict-data-twblg/dict-twblg-ext.json"))
+       ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+       ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+       ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+       ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
+       ("ilrdf_ais" "ais" "ilrdf/ais.json")
+       ("ilrdf_ami" "ami" "ilrdf/ami.json")
+       ("ilrdf_bnn" "bnn" "ilrdf/bnn.json")
+       ("ilrdf_ckv" "ckv" "ilrdf/ckv.json")
+       ("ilrdf_dru" "dru" "ilrdf/dru.json")
+       ("ilrdf_pwn" "pwn" "ilrdf/pwn.json")
+       ("ilrdf_pyu" "pyu" "ilrdf/pyu.json")
+       ("ilrdf_ssf" "ssf" "ilrdf/ssf.json")
+       ("ilrdf_sxr" "sxr" "ilrdf/sxr.json")
+       ("ilrdf_tao" "tao" "ilrdf/tao.json")
+       ("ilrdf_tay" "tay" "ilrdf/tay.json")
+       ("ilrdf_trv" "trv" "ilrdf/trv.json")
+       ("ilrdf_sdq" "sdq" "ilrdf/sdq.json")
+       ("ilrdf_tsu" "tsu" "ilrdf/tsu.json")
+       ("ilrdf_xnb" "xnb" "ilrdf/xnb.json")
+       ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
+       ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json"))))))
+
+(defun d::langs ()
+  "Return all languages."
+  (let ((available-codes (->> (d::dictionaries)
+                              (--map (cadr it))
+                              -uniq)))
+    (->> '(("zh_TW" . "華語")
+           ("nan_TW" . "台語")
+           ("hak_TW" . "客語")
+           ("han" . "漢字")
+           ("ais" . "撒奇萊雅語")
+           ("ami" . "阿美語")
+           ("bnn" . "布農語")
+           ("ckv" . "噶瑪蘭語")
+           ("dru" . "魯凱語")
+           ("pwn" . "排灣語")
+           ("pyu" . "卑南語")
+           ("ssf" . "邵語")
+           ("sxr" . "拉阿魯哇語")
+           ("tao" . "雅美語")
+           ("tay" . "泰雅語")
+           ("trv" . "太魯閣語")
+           ("sdq" . "賽德克語")
+           ("tsu" . "鄒語")
+           ("xnb" . "卡那卡那富語")
+           ("xsy" . "賽夏語"))
+         (--filter (member (car it) available-codes)))))
 
 (defconst d:debug? nil)
 
@@ -644,56 +725,6 @@ This is a separate step from shaping."
     (d::hash-prune props nil)
     (d::hash-prune props :null)))
 
-(defun d::dictionaries ()
-  "Return definitions of dictionaries.
-
-The value is a vector:
-    [(ID . FILE) ; either this form
-     (ID . (FILE1 FILE2 ...)) ; or this form
-     ...]
-
-An ID of nil means the entries are included but will not be shown
-by default. This is added for assigning extra stroke count
-information."
-  (cond
-   ;; (t
-   ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
-   (t
-    ;; The order here defines the order they will appear in the word
-    ;; pages.
-    (--filter
-     (and
-      ;; All files of the dictionary exist
-      (-all? #'file-exists-p (ensure-list (elt it 2))))
-     '(("unihan" "han" "unihan.json")
-       ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
-       ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
-       ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
-       ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
-       ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
-                                  "moedict-data-twblg/dict-twblg-ext.json"))
-       ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-       ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
-       ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
-       ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
-       ("ilrdf_ais" "ais" "ilrdf/ais.json")
-       ("ilrdf_ami" "ami" "ilrdf/ami.json")
-       ("ilrdf_bnn" "bnn" "ilrdf/bnn.json")
-       ("ilrdf_ckv" "ckv" "ilrdf/ckv.json")
-       ("ilrdf_dru" "dru" "ilrdf/dru.json")
-       ("ilrdf_pwn" "pwn" "ilrdf/pwn.json")
-       ("ilrdf_pyu" "pyu" "ilrdf/pyu.json")
-       ("ilrdf_ssf" "ssf" "ilrdf/ssf.json")
-       ("ilrdf_sxr" "sxr" "ilrdf/sxr.json")
-       ("ilrdf_tao" "tao" "ilrdf/tao.json")
-       ("ilrdf_tay" "tay" "ilrdf/tay.json")
-       ("ilrdf_trv" "trv" "ilrdf/trv.json")
-       ("ilrdf_sdq" "sdq" "ilrdf/sdq.json")
-       ("ilrdf_tsu" "tsu" "ilrdf/tsu.json")
-       ("ilrdf_xnb" "xnb" "ilrdf/xnb.json")
-       ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
-       ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json"))))))
-
 (defun d:sort-orig-hets (orig-hets)
   "Sort ORIG-HETS according to their het_sort or id keys.
 
@@ -715,6 +746,9 @@ ORIG-HETS are props that will be used to construct heteronyms."
              (or (gethash "het_sort" other)
                  (gethash "id" other))))))
     orig-hets))
+
+(defvar d:db nil
+  "Holds the DB connection.")
 
 (defun d:main ()
   (setq d:links nil)
@@ -799,29 +833,324 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (message "Processing heteronyms (%s/%s)..." (1+ i) total)
          (garbage-collect))
        (ht-update-with! het "props"
-         (lambda (props)
-           (d:process-props
-            props
-            (gethash "title" het)
-            (gethash "from" het))))))
+                        (lambda (props)
+                          (d:process-props
+                           props
+                           (gethash "title" het)
+                           (gethash "from" het))))))
     (garbage-collect)
     ;; Step 4
-    (message "Writing result out to disk...")
-    (let ((json-encoding-pretty-print (not noninteractive))
-          ;; This tells `json-encode' to use the same false / null as
-          ;; `json-parse-buffer''s default, because there are false
-          ;; values from there.
-          (json-false :false)
-          (json-null :null))
-      (setq d:links (-uniq d:links))
-      ;; TODO: we can probably just make a CSV instead.
-      (with-temp-file "links.json"
-        (insert (json-encode d:links)))
-      (with-temp-file "heteronyms.json"
-        (insert (json-encode heteronyms))))
+    (d:db-insert heteronyms (-uniq d:links))
     (message "Done")))
 
-(when noninteractive
+(defun d:db-insert (heteronyms links)
+  "Insert all data into the database."
+  (message "Initializing database...")
+  (d:db-init)
+  (message "Preparing langs and dicts...")
+  (with-sqlite-transaction d:db
+    (cl-loop for (id . name) in (d::langs)
+             do (sqlite-execute
+                 d:db
+                 "INSERT INTO langs (\"id\", \"name\") VALUES (?, ?)"
+                 (list id name)))
+    (cl-loop for (id lang) in (d::dictionaries)
+             do (sqlite-execute
+                 d:db
+                 "INSERT INTO dicts (\"id\", \"lang\") VALUES (?, ?)"
+                 (list id lang)))
+    (message "Preparing langs and dicts...done"))
+  ;; (message "Inserting heteronyms...")
+  (let* (;; This tells `json-encode' to use the same false / null as
+         ;; `json-parse-buffer''s default, because there are false
+         ;; values from there.
+         (json-false :false)
+         (json-null :null)
+         (len (length heteronyms))
+         (rep (make-progress-reporter
+               "Inserting heteronyms..."
+               1 len
+               nil
+               ;; 5 percent / 4 seconds
+               5 4)))
+    (with-sqlite-transaction d:db
+      (cl-loop
+       for het being the elements of heteronyms
+       using (index i)
+       do
+       (progn
+         (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
+         (sqlite-execute
+          d:db
+          "
+INSERT INTO
+  heteronyms (\"title\",\"from\",\"lang\",\"props\")
+VALUES
+  (?,?,?,?)"
+          (list (d::NFD (gethash "title" het))
+                (d::NFD (gethash "from" het))
+                (d::NFD (gethash "lang" het))
+                (d::NFD (json-encode (gethash "props" het)))))
+         ;; SQLite integer primary key is 1-based
+         (let ((het-id (1+ i))
+               (het.title (d::NFD (gethash "title" het)))
+               (het.from (d::NFD (gethash "from" het)))
+               (alias-stmt "
+INSERT INTO
+  aliases (\"het_id\",\"alias\",\"exact\")
+VALUES
+  (?,?,?)"))
+           (sqlite-execute d:db alias-stmt (list het-id het.title 1))
+           (dolist (pn (map-values (d:pn-collect het)))
+             (sqlite-execute d:db alias-stmt (list het-id pn 1))
+             ;; Input versions.
+             ;; - don't duplicate if equal to original
+             ;; - don't bother for some dictionaries)
+             (when (member (gethash "from" het)
+                           '("moedict_twblg"
+                             "chhoetaigi_itaigi"
+                             "chhoetaigi_taioanpehoekichhoogiku"
+                             "chhoetaigi_taijittoasutian"))
+               (let ((input-form (d:pn-to-input-form pn)))
+                 (unless (equal input-form pn)
+                   (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))))))))
+  ;; (message "Inserting links...")
+  (with-sqlite-transaction d:db
+    (let* ((len (length links))
+           (rep (make-progress-reporter
+                 "Inserting links..."
+                 1 len nil
+                 ;; 5 percent / 4 seconds
+                 5 4)))
+      (cl-loop
+       for link being the elements of links
+       using (index i)
+       do
+       (progn
+         (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
+         (sqlite-execute
+          d:db
+          "INSERT INTO links (\"from\",\"to\") VALUES (?,?)"
+          (list (d::NFD (alist-get 'from link))
+                (d::NFD (alist-get 'to link))))))))
+  (message "Calculating the \"han\" table...")
+  (with-sqlite-transaction d:db
+    (sqlite-execute d:db "
+CREATE TABLE a AS
+SELECT DISTINCT
+  title,
+  json_tree.value AS radical
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE json_tree.key = 'radical'
+  AND length(title) = 1;")
+    (sqlite-execute d:db "
+CREATE TABLE b AS
+SELECT DISTINCT
+  title,
+  cast(json_tree.value as integer) AS sc
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE json_tree.key = 'sc'
+  AND length(title) = 1;")
+    (sqlite-execute d:db "
+CREATE TABLE c AS
+SELECT DISTINCT
+  title,
+  cast(json_tree.value as integer) AS nrsc
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE json_tree.key = 'nrsc'
+  AND length(title) = 1;")
+    (sqlite-execute d:db "
+CREATE TABLE han AS
+SELECT DISTINCT
+  heteronyms.title,
+  a.radical,
+  b.sc,
+  c.nrsc
+FROM heteronyms
+LEFT JOIN a ON a.title = heteronyms.title
+LEFT JOIN b ON b.title = heteronyms.title
+LEFT JOIN c ON c.title = heteronyms.title
+WHERE length(heteronyms.title) = 1
+  AND a.radical    IS NOT NULL
+  AND b.sc         IS NOT NULL
+  AND c.nrsc       IS NOT NULL
+ORDER BY b.sc;")
+    (sqlite-execute d:db "DROP TABLE a;")
+    (sqlite-execute d:db "DROP TABLE b;")
+    (sqlite-execute d:db "DROP TABLE c;"))
+  (sqlite-execute d:db "VACUUM")
+  (let ((words
+         ;; The "added" field only exists for kisaragi-dict entries
+         (sqlite-select d:db
+                        "
+SELECT
+  heteronyms.title AS 'title',
+  cast(json_tree.value as integer) AS 'time',
+  heteronyms.\"from\" AS 'from'
+FROM heteronyms, json_tree(heteronyms.props)
+WHERE \"from\" LIKE 'kisaragi%'
+  AND json_tree.key = 'added'
+")))
+    (dolist (f (directory-files
+                "./ministry-of-education/diff/" t "added\\.json$"))
+      (catch 'continue
+        (let* ((parts (s-split " - "
+                               (file-name-nondirectory
+                                (directory-file-name f))))
+               (dict-id (elt parts 0)))
+          ;; It would be more correct to check if dictId is present, but
+          ;; this also works.
+          (when (equal dict-id "dict_mini")
+            (throw 'continue nil))
+          (let* ((added-date
+                  (-some->> (elt parts 1) ; "2014_20220928-2014_20230112"
+                    (s-split "-") ; ("2014_20220928" "2014_20230112")
+                    (nth 1) ; "2014_20230112"
+                    (s-split "_") ; ("2014" "20230112")
+                    (nth 1) ; "20230112"
+                    (s-match (rx (group (= 4 any))
+                                 (group (= 2 any))
+                                 (group (= 2 any))))
+                    cdr ; ("2023" "01" "12")
+                    (s-join "-"))))
+            (unless added-date
+              (message "Invalid date in %s" f)
+              (throw 'continue nil))
+            ;; We assume that they're all arrays of strings.
+            (let ((titles (with-temp-buffer
+                            (insert-file-contents f)
+                            (ucs-normalize-NFD-region (point-min) (point-max))
+                            (goto-char (point-min))
+                            (json-parse-buffer :array-type 'list))))
+              (seq-doseq (title titles)
+                (push
+                 (list title
+                       (-> (format "%sT00:00:00Z" added-date)
+                           parse-iso8601-time-string
+                           (time-convert 'integer))
+                       dict-id)
+                 words)))))))
+    (setq words
+          (let ((-compare-fn
+                 (lambda (a b)
+                   (equal (concat (elt a 0) (elt a 2))
+                          (concat (elt b 0) (elt b 2))))))
+            (->> words
+                 (--sort (< (elt it 1)
+                            (elt other 1)))
+                 -uniq)))
+    (with-sqlite-transaction d:db
+      (pcase-dolist (`(,title ,time ,from) words)
+        (sqlite-execute
+         d:db "
+INSERT INTO
+  newwords (\"title\",\"time\",\"from\")
+VALUES
+  (?,?,?)"
+         (list title time from))))))
+
+(defun d:db-init ()
+  "Create and initialize a new entries.db including its tables."
+  (when (file-exists-p "entries.db")
+    (delete-file "entries.db"))
+  (setq d:db (sqlite-open "entries.db"))
+  (sqlite-pragma d:db "user_version = 4")
+  (sqlite-execute d:db "
+CREATE TABLE langs (
+  \"id\" TEXT PRIMARY KEY,
+  \"name\" TEXT NOT NULL
+);")
+  (sqlite-execute d:db "
+CREATE TABLE dicts (
+  \"id\" TEXT PRIMARY KEY,
+  \"lang\" TEXT REFERENCES langs(\"id\")
+);")
+  (sqlite-execute d:db "
+CREATE TABLE heteronyms (
+  \"id\" INTEGER PRIMARY KEY,
+  \"title\" TEXT NOT NULL,
+  \"from\" TEXT REFERENCES dicts(\"id\"),
+  \"lang\" TEXT REFERENCES langs(\"id\"),
+  \"props\" TEXT NOT NULL
+);")
+  (sqlite-execute d:db "
+CREATE TABLE aliases (
+  \"het_id\" INTEGER REFERENCES heteronyms(\"id\"),
+  \"alias\" TEXT NOT NULL,
+  \"exact\" INTEGER
+);")
+  (sqlite-execute d:db "
+CREATE TABLE links (
+  \"from\" TEXT NOT NULL,
+  \"to\" TEXT NOT NULL
+);")
+  ;; New words, sorted by date/time added
+  (sqlite-execute d:db "
+CREATE TABLE newwords (
+  \"title\" TEXT NOT NULL,
+  \"time\" TEXT NOT NULL,
+  \"from\" TEXT REFERENCES dicts(\"id\")
+);"))
+
+(defun d:pn-normalize (pn)
+  "Normalize pronunciation PN.
+
+If PN is a hash table, get the string from its value for \"zh-Hant\".
+
+Return a list of normalized strings. This is because some
+pronunciation strings include multiple pronunciations."
+  (->> (if (stringp pn)
+           pn
+         (gethash "zh-Hant" pn))
+       d::NFD
+       (s-replace "　" " ")
+       ;; The replacement character, which appears in one entry in
+       ;; itaigi.
+       ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
+       ;; I'm pretty sure it's not supposed to be there.
+       (s-replace "\uFFFD" "")
+       (s-replace "（變）" "/")
+       (s-split "[ \t\n\r]*/[ \t\n\r]*")
+       (--remove (equal it ""))))
+
+(defun d:pn-collect (het)
+  "Collect pronunciations from HET."
+  (let ((keys '(;; kemdict-data-ministry-of-education
+                "bopomofo"
+                ;; "pinyin"
+
+                ;; moedict-twblg
+                "trs"
+                ;; kisaragi-dict
+                "pronunciation"
+
+                ;; hakkadict
+                "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
+
+                ;; chhoetaigi-itaigi (keys are defined in Makefile
+                ;; in this repository)
+                "poj" "kip"
+                "pojInput" "kipInput"
+                "pojInputOthers" "kipInputOthers"
+
+                "kMandarin"))
+        (ret (make-hash-table :test #'equal)))
+    (dolist (key keys)
+      (when-let (value (gethash key (gethash "props" het)))
+        (dolist (p (d:pn-normalize value))
+          (puthash key p ret))))
+    ret))
+
+(defun d:pn-to-input-form (pn)
+  "Normalize PN such that it is searchable with an ASCII keyboard."
+  (->> pn
+       (s-replace "ⁿ" "nn")
+       ucs-normalize-NFKD-string
+       string-to-list
+       (--filter (< it 128))
+       (apply #'string)))
+
+(when t
   (jieba-reset 'big)
   (jieba-add-word "物件" "n")
   (let ((comp (if (and (fboundp #'native-comp-available-p)
@@ -840,6 +1169,17 @@ ORIG-HETS are props that will be used to construct heteronyms."
   (let ((gc-cons-threshold 100000000))
     (d:main))
   (kill-emacs))
+
+(when nil
+  (let ((heteronyms (with-temp-buffer
+                      (erase-buffer)
+                      (insert-file-contents "heteronyms.json")
+                      (json-parse-buffer)))
+        (links (with-temp-buffer
+                 (erase-buffer)
+                 (insert-file-contents "links.json")
+                 (json-parse-buffer :array-type 'list :object-type 'alist))))
+    (d:db-insert heteronyms links)))
 
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc emacs-lisp-package)

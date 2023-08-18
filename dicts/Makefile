@@ -37,11 +37,8 @@ DICT_TARGETS += unihan.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
-heteronyms.json: $(DICT_TARGETS) process-data.el .eask node_modules
+entries.db: $(DICT_TARGETS) process-data.el .eask node_modules
 	eask eval "(load \"process-data\")"
-
-entries.db: heteronyms.json heteronyms-to-sqlite.ts
-	npx ts-node -O '{"noImplicitAny":false}' heteronyms-to-sqlite.ts
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
