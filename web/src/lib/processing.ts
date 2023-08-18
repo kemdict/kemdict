@@ -49,7 +49,7 @@ export function interlinear_annotation(defs: string[]): string {
               first ? "<blockquote><p>" : "</blockquote><blockquote><p>"
             )
             .replace(/\ufffa/g, "</p><p>")
-            .replace(/\ufffb/g, "</p>");
+            .replace(/\ufffb([^\ufffa\ufffb\ufff9]*)/g, "</p><p>$1</p>");
           // This is more "correct" i.r.t. interpreting the characters
           // as marking ruby, but POJ / TL should not be treated or
           // shown as simply pronunciation annotatio for Han
