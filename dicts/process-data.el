@@ -594,6 +594,16 @@ This is a separate step from shaping."
                                           "~"))
                                  (opt " "))
                              d:links:from
+                             str)))
+       (ht-update-with! props "examplePoj"
+         (lambda (str)
+           (s-replace-regexp (rx (opt " ")
+                                 (** 1 4 (or
+                                          "∼"
+                                          "~"))
+                                 (opt " "))
+                             (or (ht-get props "titlePoj")
+                                 d:links:from)
                              str))))
       ("dict_concised"
        (ht-update-with! props "definition"
