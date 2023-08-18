@@ -258,7 +258,13 @@ export function parseQuery(inputQuery: string) {
 }
 
 /** Convert a SearchParserResult to an SQL expr for WHERE. */
-function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
+function parsedQueryToSQL(
+  parsed: SearchParserResult,
+  mtch: Mtch,
+  /** Only search aliases that are exact, ie. be exact also in
+   * tones */
+  exactQuery: boolean
+) {
   const operator = mtch === "exact" ? "=" : "LIKE";
   // printfdebug({ parsed });
   const exprs: string[] = [];
@@ -270,6 +276,8 @@ function parsedQueryToSQL(parsed: SearchParserResult, mtch: Mtch) {
       mtch === "exact"
         ? [text] // disable tokenizing in exact mode
         : parseStringQuery(text);
+    if (mtch === "exact" && exactQuery)
+      exprs.push(`AND aliases.exact IS NOT NULL`);
     tokens.forEach((s, i) => {
       exprs.push(`AND aliases.alias ${operator} ?`);
       sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
@@ -452,7 +460,11 @@ export class CrossDB {
     const limit = options?.limit;
     const langs = ensureArray(options?.langs);
     const hasLangs = langs && langs.length > 0;
-    const { sqlExprs, sqlArgs } = parsedQueryToSQL(parsed, mtch);
+    const { sqlExprs, sqlArgs } = parsedQueryToSQL(
+      parsed,
+      mtch,
+      options.exactQuery
+    );
     const hets = (await this.crossDbAll(
       `
 SELECT DISTINCT title, "from", lang, props, aliases.exact as exact
