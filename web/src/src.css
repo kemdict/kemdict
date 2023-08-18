@@ -210,9 +210,6 @@
     p,
     li {
       @apply prose;
-      @apply prose-a:text-gray-900 dark:prose-a:text-gray-100;
-      @apply hover:prose-a:text-gray-900 dark:hover:prose-a:text-gray-100;
-      @apply hover:prose-a:underline;
     }
     .def {
       @apply mb-2 block;
@@ -235,10 +232,11 @@
     @apply dark:bg-primary-500 dark:hover:bg-primary-400;
   }
   .link {
-    @apply fade text-primary-700 dark:text-primary-500;
-    @apply no-underline;
+    @apply dark:text-surface-100 text-surface-950;
+    @apply fade underline;
+    text-underline-offset: 4px;
     &:hover {
-      @apply text-primary-600 dark:text-primary-400;
+      @apply opacity-75;
     }
   }
 }
