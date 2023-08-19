@@ -894,7 +894,7 @@ VALUES
          ;; SQLite integer primary key is 1-based
          (let ((het-id (1+ i))
                (het.title (d::NFD (gethash "title" het)))
-               (het.from (d::NFD (gethash "from" het)))
+               ;; (het.from (d::NFD (gethash "from" het)))
                (alias-stmt "
 INSERT INTO
   aliases (\"het_id\",\"alias\",\"exact\")
@@ -1150,23 +1150,29 @@ pronunciation strings include multiple pronunciations."
        (--filter (< it 128))
        (apply #'string)))
 
-(defvar d:first-load t)
 (when noninteractive
-  (cond
-   (d:first-load
-    (progn
-      (setq d:first-load nil)
-      (emacs-lisp-native-compile-and-load)))
-   (t
-    (progn
-      (jieba-reset 'big)
-      (jieba-add-word "物件" "n")
-      ;; We're holding all dictionary data in memory, so if this is too
-      ;; low we'll be GC'ing all the time without being able to free any
-      ;; memory.
-      (let ((gc-cons-threshold 100000000))
-        (d:main))
-      (kill-emacs)))))
+  (jieba-reset 'big)
+  (jieba-add-word "物件" "n")
+  (--each '(d:titles:to-look-up-table
+            d:sort-orig-hets d:radical-id-to-char
+            d:process-title d:process-props d:process-def:dict_concised
+            d:pn-to-input-form d:pn-normalize d:pn-collect
+            d:main
+            d:links:簡編本:近義反義 d:links:org-style d:links:linkify-keywords
+            d:links:linkify-first-phrase d:links:linkify-brackets
+            d:links:linkify-arrow d:links:link-to-word d:links:comma-word-list
+            d:latin-only d:hakkadict:pn
+            d:db-insert d:db-init
+            d:cangjie-abc-to-han
+            d::langs d::hash-rename d::hash-prune
+            d::dictionaries)
+    (native-compile it))
+  ;; We're holding all dictionary data in memory, so if this is too
+  ;; low we'll be GC'ing all the time without being able to free any
+  ;; memory.
+  (let ((gc-cons-threshold 100000000))
+    (d:main))
+  (kill-emacs))
 
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc emacs-lisp-package)
