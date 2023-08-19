@@ -24,7 +24,7 @@ build: entries.db
 	touch .eask
 
 node_modules: package.json
-	pnpm install
+	npm install
 
 DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json

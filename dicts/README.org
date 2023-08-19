@@ -55,3 +55,9 @@ entries.db:
   - title, pronunciation
 - table: =links=
   - from, to
+
+* Build
+
+This uses npm, not pnpm, because I just want to install the one dependency and not the dependencies of submodules, and I don't see a way to opt out.
+
+=make entries.db= will just do the right thing. Maybe =npm install= first if you don't want to rely on =npx= automatically downloading the package; I haven't set this up in the Makefile yet.

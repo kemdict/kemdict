@@ -24,10 +24,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-          cache: "pnpm"
+          cache: "npm"
       - name: Install packages
         run: |
-          pnpm install
+          cd dicts
+          npm install
           pip install unihan-etl typing_extensions
       - name: Set up Emacs
         uses: purcell/setup-emacs@master
