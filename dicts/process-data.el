@@ -1150,36 +1150,23 @@ pronunciation strings include multiple pronunciations."
        (--filter (< it 128))
        (apply #'string)))
 
-(when t
-  (jieba-reset 'big)
-  (jieba-add-word "物件" "n")
-  (let ((comp (if (and (fboundp #'native-comp-available-p)
-                       (native-comp-available-p))
-                  #'native-compile
-                #'byte-compile)))
-    (-each (list #'d:main
-                 #'d:links:comma-word-list
-                 #'d:links:link-to-word
-                 #'d:links:linkify-brackets
-                 #'d:process-props)
-      comp))
-  ;; We're holding all dictionary data in memory, so if this is too
-  ;; low we'll be GC'ing all the time without being able to free any
-  ;; memory.
-  (let ((gc-cons-threshold 100000000))
-    (d:main))
-  (kill-emacs))
-
-(when nil
-  (let ((heteronyms (with-temp-buffer
-                      (erase-buffer)
-                      (insert-file-contents "heteronyms.json")
-                      (json-parse-buffer)))
-        (links (with-temp-buffer
-                 (erase-buffer)
-                 (insert-file-contents "links.json")
-                 (json-parse-buffer :array-type 'list :object-type 'alist))))
-    (d:db-insert heteronyms links)))
+(defvar d:first-load t)
+(when noninteractive
+  (cond
+   (d:first-load
+    (progn
+      (setq d:first-load nil)
+      (emacs-lisp-native-compile-and-load)))
+   (t
+    (progn
+      (jieba-reset 'big)
+      (jieba-add-word "物件" "n")
+      ;; We're holding all dictionary data in memory, so if this is too
+      ;; low we'll be GC'ing all the time without being able to free any
+      ;; memory.
+      (let ((gc-cons-threshold 100000000))
+        (d:main))
+      (kill-emacs)))))
 
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc emacs-lisp-package)
