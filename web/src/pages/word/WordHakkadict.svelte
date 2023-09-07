@@ -49,4 +49,7 @@
   {#if het.props.synonyms}
     <p><m>近義詞</m>：{@html het.props.synonyms}</p>
   {/if}
+  {#if het.props.corr_zh}
+    <p><m>對應華語</m>：{@html het.props.corr_zh}</p>
+  {/if}
 {/each}

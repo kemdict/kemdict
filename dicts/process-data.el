@@ -630,6 +630,9 @@ This is a separate step from shaping."
                  "kAccountingNumeric" "kOtherNumeric" "kPrimaryNumeric")
          (ht-remove! props it)))
       ("hakkadict"
+       (ht-update-with! props "corr_zh"
+         (lambda (str)
+           (d:links:link-to-word str)))
        (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
          (ht-update-with! props (format "p_%s" p_name)
            (lambda (str)
