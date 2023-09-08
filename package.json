@@ -1,9 +1,6 @@
 {
   "name": "kemdict",
   "private": true,
-  "scripts": {
-    "preinstall": "npx only-allow pnpm"
-  },
   "devDependencies": {
     "concurrently": "^8.2.1",
     "prettier": "^3.0.3",

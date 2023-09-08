@@ -3,7 +3,7 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 .DEFAULT_GOAL := dist
 
-DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro)
+DEPS := public/l $(wildcard *.js *.mjs *.cjs *.ts *.astro)
 
 entries.db: ../dicts
 	cd ../dicts && $(MAKE) entries.db
@@ -12,7 +12,7 @@ entries.db: ../dicts
 .PHONY: dist
 dist: $(DEPS)
 	npx astro build
-	cp package.json dist/
+	cp package.json pnpm-lock.yaml dist/
 	touch dist/pnpm-workspace.yaml # to mark it as a new root
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 	mkdir -p dist/hack

@@ -66,7 +66,7 @@ export type DictId = string;
 export type LangId = string;
 
 // Yes, this works, it is bundled properly.
-import { dicts as origDicts, langs as origLangs } from "../../../dicts/data";
+import { dicts as origDicts, langs as origLangs } from "../../../dicts/data.ts";
 export const dicts = origDicts as Dict[];
 export const langs = origLangs;
 
@@ -98,7 +98,7 @@ export const dictsObj = dictsToObj(dicts);
 export function groupByProp<T>(
   arr: T[],
   property: string,
-  fallback?: any
+  fallback?: any,
 ): Array<[any, T[]]> {
   function reducer(acc: Record<any, T[]>, elt: T) {
     const key = elt[property];
@@ -145,7 +145,7 @@ export type Mtch =
 export function getSearchTitle(
   mtch: Mtch,
   query: string,
-  markup?: boolean
+  markup?: boolean,
 ): string {
   let ret = "";
   const parsed = parseQuery(query);
@@ -181,7 +181,7 @@ export function getSearchTitle(
       ret = `以${wrap(tokens[0])}開頭、且包含${joinLast(
         tokens.slice(1).map(wrap),
         "、",
-        "及"
+        "及",
       )}的詞`;
     }
   } else if (mtch === "suffix") {
@@ -193,7 +193,7 @@ export function getSearchTitle(
       ret = `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
         tokens.slice(0, -1).map(wrap),
         "、",
-        "及"
+        "及",
       )}的詞`;
     }
   } else {
@@ -263,7 +263,7 @@ function parsedQueryToSQL(
   mtch: Mtch,
   /** Only search aliases that are exact, ie. be exact also in
    * tones */
-  exactQuery: boolean
+  exactQuery: boolean,
 ) {
   const operator = mtch === "exact" ? "=" : "LIKE";
   // printfdebug({ parsed });
@@ -307,13 +307,13 @@ function parsedQueryToSQL(
   ensureArray(parsed.title)?.forEach((title, i, titles) => {
     exprs.push(`AND title ${operator} ?`);
     sqlArgs.push(
-      tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1)
+      tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1),
     );
   });
   ensureArray(parsed.exclude?.title)?.forEach((title, i, titles) => {
     exprs.push(`AND title NOT ${operator} ?`);
     sqlArgs.push(
-      tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1)
+      tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1),
     );
   });
 
@@ -327,7 +327,7 @@ function tokenToLIKEInput(
   token: string,
   mtch: Mtch,
   first = false,
-  last = false
+  last = false,
 ): string {
   let m = mtch;
   if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
@@ -347,7 +347,7 @@ function tokenToLIKEInput(
 export function joinLast(
   strings: string[],
   separator: string = "",
-  lastSeparator: string = separator
+  lastSeparator: string = separator,
 ) {
   let buf = "";
   for (let i = 0; i < strings.length; i++) {
@@ -384,10 +384,10 @@ function processHet(het: Heteronym): Heteronym {
  * on first use; the db instance is reused afterwards.
  */
 export class CrossDB {
-  readonly #runtime: "web" | "rn";
+  readonly #runtime: "bs3" | "bun" | "rn";
   readonly #readDB: () => any;
   #db: any = undefined;
-  constructor(runtime: "web" | "rn", readDB: () => any) {
+  constructor(runtime: "bs3" | "bun" | "rn", readDB: () => any) {
     this.#runtime = runtime;
     this.#readDB = readDB;
   }
@@ -401,14 +401,22 @@ export class CrossDB {
   async crossDbAll(
     source: string,
     args: unknown[] = [],
-    pluck?: boolean
+    pluck?: boolean,
   ): Promise<unknown[]> {
-    if (this.#runtime === "web") {
+    if (this.#runtime === "bs3") {
       const db = await this.getDB();
       // printfdebug({ source, args });
       const stmt = db.prepare(source);
       if (pluck) stmt.pluck(pluck);
       return stmt.all(...args);
+    } else if (this.#runtime === "bun") {
+      const db = await this.getDB();
+      const stmt = db.query(source);
+      if (pluck) {
+        return stmt.values(...args).map((x: unknown[]) => x[0]);
+      } else {
+        return stmt.all(...args);
+      }
     } else {
       const db = await this.getDB();
       return new Promise((resolve) => {
@@ -416,8 +424,8 @@ export class CrossDB {
           tx.executeSql(
             source,
             args as Array<string | number>,
-            (_, resultSet) => resolve(resultSet.rows._array)
-          )
+            (_, resultSet) => resolve(resultSet.rows._array),
+          ),
         );
       });
     }
@@ -442,7 +450,7 @@ export class CrossDB {
       mtch?: string;
       langs?: string[] | string;
       limit?: number;
-    }
+    },
   ): Promise<{
     presentDicts: DictId[];
     presentLangSet: Set<LangId>;
@@ -463,7 +471,7 @@ export class CrossDB {
     const { sqlExprs, sqlArgs } = parsedQueryToSQL(
       parsed,
       mtch,
-      options.exactQuery
+      options.exactQuery,
     );
     const hets = (await this.crossDbAll(
       `
@@ -474,7 +482,7 @@ WHERE "from" IS NOT NULL
 ${sqlExprs}
 ${limit ? `LIMIT ?` : ""}
 `,
-      [...sqlArgs, ...(limit ? [limit] : [])]
+      [...sqlArgs, ...(limit ? [limit] : [])],
     )) as Heteronym[];
     let applicableHets = hets;
     if (hasLangs) {
@@ -507,7 +515,7 @@ ${limit ? `LIMIT ?` : ""}
 SELECT DISTINCT "from" FROM links
 WHERE "to" IN (${escape(titles)})`,
       [],
-      true
+      true,
     )) as string[];
   }
 
@@ -520,7 +528,7 @@ WHERE title NOT LIKE '?%'
 ORDER BY "time" DESC
 LIMIT ?`,
         [limit],
-        true
+        true,
       )) as string[];
     } else {
       return (await this.crossDbAll(
@@ -528,7 +536,7 @@ LIMIT ?`,
 WHERE title NOT LIKE '?%'
 ORDER BY "time" DESC`,
         [],
-        true
+        true,
       )) as string[];
     }
   }
@@ -538,13 +546,13 @@ ORDER BY "time" DESC`,
       return (await this.crossDbAll(
         `SELECT DISTINCT title FROM heteronyms WHERE "from" = ? LIMIT ?`,
         [from, limit],
-        true
+        true,
       )) as string[];
     } else {
       return (await this.crossDbAll(
         `SELECT DISTINCT title FROM heteronyms WHERE "from" = ?`,
         [from],
-        true
+        true,
       )) as string[];
     }
   }
@@ -567,7 +575,7 @@ WHERE length("title") = 1
 GROUP BY title
 HAVING group_concat("from") != 'unihan'
 ORDER BY 'sc';
-`
+`,
     )) as Array<{
       title: string;
       sc: number;
@@ -582,7 +590,7 @@ SELECT initial FROM (
 )
 WHERE dicts != 'unihan'`,
       [],
-      true
+      true,
     )) as string[];
     const pn = (await this.crossDbAll(
       `
@@ -593,7 +601,7 @@ WHERE exact IS NULL -- exact = comes from "title"
 AND "pnInitial" IS NOT NULL
 `,
       [],
-      true
+      true,
     )) as string[];
     const s = new Set(with_stroke.map((x) => x.title));
     const without_stroke: string[] = uniq([...nostroke, ...pn])
@@ -612,7 +620,7 @@ AND "pnInitial" IS NOT NULL
   WHERE radical = ?
   ORDER BY nrsc
 `,
-      [radical]
+      [radical],
     );
   }
 
@@ -623,7 +631,7 @@ AND "pnInitial" IS NOT NULL
     FROM han
     WHERE nrsc = 0
     ORDER BY radical
-`
+`,
     );
   }
 }

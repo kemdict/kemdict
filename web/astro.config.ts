@@ -7,7 +7,7 @@ import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 
 const baseURL = "https://kemdict.com";
-const prod = process.env.NODE_ENV !== "development";
+const prod = import.meta.env.PROD;
 
 import legacy from "@vitejs/plugin-legacy";
 import { purgeCss } from "vite-plugin-tailwind-purgecss";
