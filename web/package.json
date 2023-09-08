@@ -2,6 +2,9 @@
   "name": "kemdict",
   "type": "module",
   "browserslist": "> 0.2%, Firefox ESR",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
@@ -40,13 +43,11 @@
     "@types/node": "^20.5.9",
     "@types/sqlstring": "^2.3.0",
     "@vitejs/plugin-legacy": "^4.1.1",
-    "bun-types": "^0.8.1",
     "size-limit": "^9.0.0",
     "sqlstring": "^2.3.3",
     "svelte": "^4.2.0",
     "svelte-preprocess": "^5.0.4",
     "tailwindcss": "^3.3.3",
-    "terser": "^5.19.4",
     "typescript": "^5.2.2",
     "vite-plugin-tailwind-purgecss": "^0.1.3"
   }

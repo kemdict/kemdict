@@ -21,7 +21,7 @@ dev-pojtl-api:
 	cd pojtl-api && make dev
 
 preview: build
-	cd web && env PORT=5173 bun dist/server/entry.mjs
+	cd web && env PORT=5173 node dist/server/entry.mjs
 
 admin.deploy.kemdict: build
 	@[ "$$ANDROID_DATA"x != x ] && (echo "The database is reduced on Android to make it fit in my phone's RAM for testing. Deploying here would use this reduced database. Exiting."; exit 1)

@@ -66,7 +66,7 @@ export type DictId = string;
 export type LangId = string;
 
 // Yes, this works, it is bundled properly.
-import { dicts as origDicts, langs as origLangs } from "../../../dicts/data.ts";
+import { dicts as origDicts, langs as origLangs } from "../../../dicts/data";
 export const dicts = origDicts as Dict[];
 export const langs = origLangs;
 
@@ -384,10 +384,10 @@ function processHet(het: Heteronym): Heteronym {
  * on first use; the db instance is reused afterwards.
  */
 export class CrossDB {
-  readonly #runtime: "bs3" | "bun" | "rn";
+  readonly #runtime: "web" | "rn";
   readonly #readDB: () => any;
   #db: any = undefined;
-  constructor(runtime: "bs3" | "bun" | "rn", readDB: () => any) {
+  constructor(runtime: "web" | "rn", readDB: () => any) {
     this.#runtime = runtime;
     this.#readDB = readDB;
   }
@@ -401,22 +401,14 @@ export class CrossDB {
   async crossDbAll(
     source: string,
     args: unknown[] = [],
-    pluck?: boolean,
+    pluck?: boolean
   ): Promise<unknown[]> {
-    if (this.#runtime === "bs3") {
+    if (this.#runtime === "web") {
       const db = await this.getDB();
       // printfdebug({ source, args });
       const stmt = db.prepare(source);
       if (pluck) stmt.pluck(pluck);
       return stmt.all(...args);
-    } else if (this.#runtime === "bun") {
-      const db = await this.getDB();
-      const stmt = db.query(source);
-      if (pluck) {
-        return stmt.values(...args).map((x: unknown[]) => x[0]);
-      } else {
-        return stmt.all(...args);
-      }
     } else {
       const db = await this.getDB();
       return new Promise((resolve) => {

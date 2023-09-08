@@ -7,7 +7,7 @@ import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 
 const baseURL = "https://kemdict.com";
-const prod = import.meta.env.PROD;
+const prod = process.env.NODE_ENV !== "development";
 
 import legacy from "@vitejs/plugin-legacy";
 import { purgeCss } from "vite-plugin-tailwind-purgecss";
@@ -45,12 +45,8 @@ export default defineConfig({
     plugins: [legacy(), purgeCss()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
-    // Tell Vite -> Rollup that it's fine if it can't find
-    // "bun:sqlite" as a builtin or installed package. At build time
-    // we're building on Node.
-    build: { rollupOptions: { external: ["bun:sqlite"] } },
     ssr: {
-      // noExternal: [...(prod ? ["sqlstring"] : [])],
+      noExternal: [...(prod ? ["sqlstring"] : [])],
     },
     resolve: {
       alias: [

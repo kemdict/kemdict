@@ -25,6 +25,22 @@ jobs:
   "build":
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # Get dicts/ for kisaragi_dict.json and dicts/data.mjs
+          # We don't need the submodules of dicts/
+          submodules: true
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.1
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -34,19 +50,9 @@ jobs:
           printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
           printenv SSH_SECRET > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          # dicts is not a submodule any more
-          submodules: false
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
       - name: Install packages
         run: |
-          cd web
-          bun install
+          pnpm install
       - name: Build and deploy
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}

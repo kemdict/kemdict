@@ -5,22 +5,17 @@ import type { Heteronym, LangId, Mtch } from "common";
 
 export async function readDB() {
   const fs = await import("node:fs");
-  const Database =
-    typeof Bun !== "undefined"
-      ? (await import("bun:sqlite")).Database
-      : (await import("better-sqlite3")).default;
+  const Database = (await import("better-sqlite3")).default;
   const path = ["../kemdict.db", "./entries.db"].find((f) => fs.existsSync(f));
   if (!path) throw new Error("DB not found!");
   const db = new Database(path, {
     readonly: true,
+    fileMustExist: true,
   });
   return db;
 }
 
-export const DB =
-  typeof Bun !== "undefined"
-    ? new CrossDB("bun", readDB)
-    : new CrossDB("bs3", readDB);
+export const DB = new CrossDB("web", readDB);
 
 /** The data for the initials page. Held indefinitely. */
 let groupedChars: {
