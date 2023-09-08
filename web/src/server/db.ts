@@ -6,12 +6,7 @@ import type { Heteronym, LangId, Mtch } from "common";
 export async function readDB() {
   const fs = await import("node:fs");
   const Database = (await import("better-sqlite3")).default;
-  const path = [
-    "../kemdict.db",
-    "./entries.db",
-    "../dicts/entries.db",
-    "../../dicts/entries.db",
-  ].find((f) => fs.existsSync(f));
+  const path = ["../kemdict.db", "./entries.db"].find((f) => fs.existsSync(f));
   if (!path) throw new Error("DB not found!");
   const db = new Database(path, {
     readonly: true,
@@ -22,13 +17,27 @@ export async function readDB() {
 
 export const DB = new CrossDB("web", readDB);
 
-export const chars = await (async () => {
+/** The data for the initials page. Held indefinitely. */
+let groupedChars: {
+  without_stroke: string[];
+  with_stroke_grouped: [
+    any,
+    {
+      title: string;
+      sc: number;
+    }[],
+  ][][];
+};
+/** Initialize and return `groupedChars`. */
+export async function getGroupedChars() {
+  if (groupedChars) return groupedChars;
   const { with_stroke, without_stroke } = await DB.getChars();
   const with_stroke_grouped = chunk(sortBy(with_stroke, "sc"), 1200).map(
-    (page) => groupByProp(page, "sc")
+    (page) => groupByProp(page, "sc"),
   );
-  return { without_stroke, with_stroke_grouped };
-})();
+  groupedChars = { without_stroke, with_stroke_grouped };
+  return groupedChars;
+}
 
 /** Return the preview text of `het`. */
 export function hetPreview(het: Heteronym) {
@@ -42,7 +51,7 @@ export function hetPreview(het: Heteronym) {
     het.props.def ||
       het.props.defs?.map((x) => x.def).join("") ||
       het.props.example ||
-      het.props.zh
+      het.props.zh,
   );
 }
 
@@ -80,7 +89,7 @@ export function processPn(het: Heteronym) {
  */
 export async function getHetFromUrl(
   url: URL,
-  lang?: string
+  lang?: string,
 ): Promise<
   | [true, { root: true }]
   | [
@@ -92,7 +101,7 @@ export async function getHetFromUrl(
         originalQuery: string;
         langSet: Set<LangId>;
         langCountObj: Record<LangId, number>;
-      }
+      },
     ]
   // when the first item is false, the second element is a string
   | [false, string]
@@ -139,7 +148,7 @@ export async function getHetFromUrl(
       encodeURI(
         heteronyms.length === 1
           ? `/word/${heteronyms[0].title}?lang=${heteronyms[0].lang}`
-          : `/word/${heteronyms[0].title}`
+          : `/word/${heteronyms[0].title}`,
       ),
     ];
   }
