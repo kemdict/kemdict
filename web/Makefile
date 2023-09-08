@@ -38,9 +38,5 @@ preview: $(DEPS)
 	$(MAKE) dist
 	cd dist && bash start
 
-# Currently this will succeed with a go fatal error at the end.
-# That error goes to stderr while Astro's output thankfully goes to
-# stdout.
-# https://github.com/withastro/astro/issues/6306
 check:
-	npx astro check 2>/dev/null
+	npx astro check
