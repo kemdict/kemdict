@@ -10,6 +10,7 @@ const baseURL = "https://kemdict.com";
 const prod = process.env.NODE_ENV !== "development";
 
 import legacy from "@vitejs/plugin-legacy";
+import { purgeCss } from "vite-plugin-tailwind-purgecss";
 
 export default defineConfig({
   compressHTML: prod,
@@ -44,7 +45,7 @@ export default defineConfig({
     port: 5173,
   },
   vite: {
-    plugins: [legacy()],
+    plugins: [legacy(), purgeCss()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
     ssr: {

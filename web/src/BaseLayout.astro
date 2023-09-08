@@ -1,5 +1,4 @@
 ---
-import "./skeleton-theme.css";
 import "./src.css";
 
 import Out from "$src/components/Out.astro";
@@ -54,8 +53,7 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
       id="plausible"
       defer
       data-domain="kemdict.com"
-      src="https://plausible.io/js/script.compat.outbound-links.js"
-    ></script>
+      src="https://plausible.io/js/script.compat.outbound-links.js"></script>
     {
       /* This has to not be type="module", because for some reason
       that causes it to run too late, and a FOUC happens. This also
@@ -97,7 +95,7 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
   </head>
-  <body>
+  <body data-theme="kemdict-theme">
     {
       import.meta.env.DEV && (
         <div class="bg-error-300-600-token text-error-800-100-token absolute w-full text-center font-bold">

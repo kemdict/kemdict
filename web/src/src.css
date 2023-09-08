@@ -1,10 +1,8 @@
-@import "@skeletonlabs/skeleton/styles/partials/tailwind.css";
-@import "@skeletonlabs/skeleton/styles/partials/core.css";
-@import "typography.css";
-/* @import "@skeletonlabs/skeleton/styles/typography.css"; */
-@import "@skeletonlabs/skeleton/styles/partials/elements.css";
-@import "@skeletonlabs/skeleton/styles/partials/variants.css";
 @import "fonts.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Setting borderColor.DEFAULT wouldn't work for dark mode */
 .divide-y {
