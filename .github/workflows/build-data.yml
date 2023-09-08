@@ -21,15 +21,12 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: "16"
-          cache: "npm"
-          cache-dependency-path: "dicts/package-lock.json"
+          bun-version: latest
       - name: Install packages
         run: |
           cd dicts
-          npm install
           pip install unihan-etl typing_extensions
       - name: Set up Emacs
         uses: purcell/setup-emacs@master
