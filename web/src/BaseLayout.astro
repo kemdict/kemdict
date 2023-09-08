@@ -2,7 +2,6 @@
 import "./src.css";
 
 import Out from "$src/components/Out.astro";
-import clsx from "clsx";
 
 // import { ViewTransitions } from "astro:transitions";
 
@@ -115,13 +114,13 @@ const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
     {
       wantFooter && (
         <footer
-          class={clsx(
+          class:list={[
             "mt-12 py-8",
             "bg-surface-800 text-primary-50",
             "[&_*]:my-2",
             "[&_h2]:font-bold [&_h2]:opacity-75",
             "[&_a]:text-primary-400 [&_a:hover]:text-primary-50 [&_a]:transition",
-          )}
+          ]}
         >
           <div class="mx-auto w-[95%] max-w-5xl">
             <h1 class="flex items-center text-lg">

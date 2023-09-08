@@ -20,7 +20,6 @@ const {
 } = Astro.props;
 const klass = Astro.props.class;
 
-import clsx from "clsx";
 import BaseLayout from "$src/BaseLayout.astro";
 import Header from "$src/components/Header.astro";
 ---
@@ -37,7 +36,7 @@ import Header from "$src/components/Header.astro";
       />
     )
   }
-  <div class={clsx(wide ?? "mx-auto max-w-3xl", klass)}>
+  <div class:list={[wide ?? "mx-auto max-w-3xl", klass]}>
     <slot />
   </div>
 </BaseLayout>
