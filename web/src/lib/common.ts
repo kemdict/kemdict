@@ -514,14 +514,19 @@ WHERE "to" IN (${escape(titles)})`,
   async getNewWords(limit?: number): Promise<string[]> {
     if (limit) {
       return (await this.crossDbAll(
-        // HACK: work around a few weird titles
-        `SELECT title FROM newwords WHERE title NOT LIKE '?%' LIMIT ?`,
+        `SELECT title FROM newwords
+-- HACK: work around a few weird titles
+WHERE title NOT LIKE '?%'
+ORDER BY "time" DESC
+LIMIT ?`,
         [limit],
         true
       )) as string[];
     } else {
       return (await this.crossDbAll(
-        `SELECT title FROM newwords WHERE title NOT LIKE '?%'`,
+        `SELECT title FROM newwords
+WHERE title NOT LIKE '?%'
+ORDER BY "time" DESC`,
         [],
         true
       )) as string[];
