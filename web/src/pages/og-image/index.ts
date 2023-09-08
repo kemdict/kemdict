@@ -22,7 +22,7 @@ const SourceSansBold = readFileSync(findFont("SourceSans3-Bold.ttf"));
 
 const makeElemFunc =
   (elem: string) =>
-  (props: any, ...children) => {
+  (props: any, ...children: any[]) => {
     if (typeof props === "string") {
       props = { tw: props };
     }
@@ -34,7 +34,7 @@ const img = makeElemFunc("img");
 
 // <img class="rounded-xl"
 //      src="" width=75 height=75>
-export async function get({ request }: APIContext) {
+export async function GET({ request }: APIContext) {
   const encoded = new URL(request.url).searchParams.get("title");
   const title = encoded && decodeURI(encoded);
   const svg = await satori(
@@ -51,9 +51,9 @@ export async function get({ request }: APIContext) {
           height: "75",
           width: "75",
         }),
-        span({ tw: "font-bold text-4xl ml-2" }, "Kemdict")
+        span({ tw: "font-bold text-4xl ml-2" }, "Kemdict"),
       ),
-      ...(title ? [span("text-6xl mt-8", title)] : [])
+      ...(title ? [span("text-6xl mt-8", title)] : []),
     ),
     {
       width: 1200,
@@ -77,7 +77,7 @@ export async function get({ request }: APIContext) {
           style: "normal",
         },
       ],
-    }
+    },
   );
   const pngBuf = await sharp(Buffer.from(svg)).png().toBuffer();
   return new Response(pngBuf, {
