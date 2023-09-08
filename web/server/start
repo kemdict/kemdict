@@ -1,5 +1,6 @@
 #!/bin/sh
 
-pnpm install --prod
+# Work around PATH weirdness
+npx bun install -p
 node purge-cache.mjs &
-node server/entry.mjs
+npx bun server/entry.mjs

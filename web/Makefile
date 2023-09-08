@@ -3,7 +3,7 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 .DEFAULT_GOAL := dist
 
-DEPS := public/l node_modules $(wildcard *.js *.mjs *.cjs *.ts *.astro)
+DEPS := public/l $(wildcard *.js *.mjs *.cjs *.ts *.astro)
 
 entries.db: ../dicts
 	cd ../dicts && $(MAKE) entries.db
@@ -11,9 +11,14 @@ entries.db: ../dicts
 
 .PHONY: dist
 dist: $(DEPS)
-	npx astro build
+	npx astro build # build with node
 	cp package.json dist/
-	touch dist/pnpm-workspace.yaml # to mark it as a new root
+	# note that `bun install` does not put better-sqlite3 in the right
+	# place, so using bun to install runtime dependencies while using
+	# node as the runtime does not work.
+	# if pnpm:
+	# touch dist/pnpm-workspace.yaml # to mark it as a new root
+	cp bun.lockb dist/
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 	mkdir -p dist/hack
 	find hack/ -type f -not -iname "readme*" -exec cp '{}' dist/hack/ ';'
@@ -27,7 +32,7 @@ public/l: ../dicts
 .PHONY: dev build preview check build-no-data build-with-data
 
 dev: $(DEPS) entries.db
-	npx astro dev
+	bunx --bun astro dev
 
 build-with-data: dist entries.db
 	cp --parents entries.db dist/
