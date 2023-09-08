@@ -1169,7 +1169,7 @@ pronunciation strings include multiple pronunciations."
             d:cangjie-abc-to-han
             d::langs d::hash-rename d::hash-prune
             d::dictionaries)
-    (native-compile it))
+    (byte-compile it))
   ;; We're holding all dictionary data in memory, so if this is too
   ;; low we'll be GC'ing all the time without being able to free any
   ;; memory.
