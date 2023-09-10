@@ -44,7 +44,7 @@ const newWords = await DB.getNewWords(15);
           "query-input": "required name=q",
         },
       })}
-    ></script>
+    />
   </Fragment>
   <div>
     <div class="mb-8 mt-12 flex justify-between">
@@ -66,7 +66,7 @@ const newWords = await DB.getNewWords(15);
   </div>
   <div class="prose">
     <div>
-      <h3>最近新增的詞</h3>
+      <h3><a class="font-bold" href="/newwords">最近新增的詞</a></h3>
       <WordList words={newWords} />
     </div>
   </div>

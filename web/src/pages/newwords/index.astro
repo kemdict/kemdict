@@ -1,0 +1,19 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+import WordList from "$src/components/WordList.svelte";
+import { H1 } from "$src/components/typography";
+import { site } from "common";
+import { DB } from "$src/server/db";
+const newWords = await DB.getNewWords(1000);
+---
+
+<SingleLayout title={`最近新增的詞 - ${site.title}`}>
+  <Fragment slot="head">
+    <meta
+      property="og:image"
+      content="https://kemdict.com/og-image?title=最近新增的詞"
+    />
+  </Fragment>
+  <H1>最近新增的詞</H1>
+  <WordList words={newWords} />
+</SingleLayout>
