@@ -51,6 +51,7 @@ jobs:
           cache-dependency-path: "pnpm-lock.yaml"
       - name: Install packages
         run: |
+          cd web
           pnpm install
       - name: Build and deploy
         env:
