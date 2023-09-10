@@ -1,5 +1,10 @@
 #!/bin/sh
 
-pnpm install --prod
+[ -d node_modules ] || pnpm install --prod
 node purge-cache.mjs &
-node server/entry.mjs
+if npm ls -g bun
+then
+    npx bun server/entry.mjs
+else
+    node server/entry.mjs
+fi

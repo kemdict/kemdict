@@ -48,6 +48,7 @@ export default defineConfig({
     ssr: {
       noExternal: [...(prod ? ["sqlstring"] : [])],
     },
+    build: { rollupOptions: { external: ["bun:sqlite"] } },
     resolve: {
       alias: [
         {
