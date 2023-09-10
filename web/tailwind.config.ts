@@ -31,7 +31,7 @@ export default {
     "./src/**/*.{svelte,md,ts,js,html,astro,mdx}",
     join(
       require.resolve("@skeletonlabs/skeleton"),
-      "../**/*.{html,js,svelte,ts}"
+      "../**/*.{html,js,svelte,ts}",
     ),
   ],
   safelist: ["visible", "invisible"],

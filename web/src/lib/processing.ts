@@ -46,7 +46,7 @@ export function interlinear_annotation(defs: string[]): string {
           defs[i] = defs[i]
             .replace(
               /\ufff9/g,
-              first ? "<blockquote><p>" : "</blockquote><blockquote><p>"
+              first ? "<blockquote><p>" : "</blockquote><blockquote><p>",
             )
             .replace(/\ufffa/g, "</p><p>")
             .replace(/\ufffb([^\ufffa\ufffb\ufff9]*)/g, "</p><p>$1</p>");

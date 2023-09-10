@@ -18,7 +18,7 @@ const req = new Request(
     body: JSON.stringify({
       purge_everything: true,
     }),
-  }
+  },
 );
 fetch(req)
   .then((response) => response.json())

@@ -1,4 +1,3 @@
-pluginSearchDirs: false
 plugins:
   - prettier-plugin-svelte
   - prettier-plugin-astro

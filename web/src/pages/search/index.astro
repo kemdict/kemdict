@@ -69,7 +69,7 @@ const titleMarkup = mtch && getSearchTitle(mtch, originalQuery, true);
             {presentLangs.map((lang) => {
               const previewCount = 5;
               const applicableHeteronyms = heteronyms.filter(
-                (het) => het.lang === lang[0]
+                (het) => het.lang === lang[0],
               );
               return (
                 <div class="mt-4">

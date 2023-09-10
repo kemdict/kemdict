@@ -19,16 +19,23 @@ desc: Kemdict 國語整合典的使用說明。
 ### 搜尋類型
 
 #### 開頭
+
 - `書` → 列出所有以「書」開頭的詞。
 - `gia` → 列出所有以「gia」開頭的詞。無視聲調且包含讀音，但聲調完全符合的會突顯出來。
 - `Kong-ue` → 列出所有以「Kong-ue」開頭的詞。不分大小寫。
 - `giâ` → 列出所有以「giâ」開頭的詞。有指定聲調時不會無視聲調。
 - `我 行` → 列出所有以「我」開頭**且**包含「行」的詞。空白字元可以用來搜尋多個關鍵字。
+
 #### 結尾
+
 - `我 天` → 列出所有以「天」結尾**且**包含「我」的詞。搜尋字詞結尾時，以結尾搜尋的是多個關鍵字中的最後一個。
+
 #### 包含
+
 - `AI` → 列出所有包含「AI」的詞。不分大小寫。
+
 #### 完全符合
+
 - `引` → 列出所有讀音或詞目為「引」的詞。
 - `AI` → 列出所有讀音或詞目為「AI」的詞。有區分大小寫。
 - `水 面` → 列出所有讀音或詞目為「水 面」的詞。用空白字元分詞的功能不適用於完全符合的搜尋模式。
@@ -39,31 +46,48 @@ desc: Kemdict 國語整合典的使用說明。
 
 篩選器前可以加 "-" 來排除它，例如 `-lang:<語言代碼>`。目前暫時無法排除以空白分開的關鍵詞。
 
-<h4 class="text-lg"><code>lang:{"<語言代碼>"}</code></h4>
+<h4 class="text-lg">
+  <code>lang:{"<語言代碼>"}</code>
+</h4>
 
 指定語言。不分大小寫。
 
 語言代碼：
 
-import { langs } from "common"
+import { langs } from "common";
 
 <ul>
-  {Object.entries(langs).map(([id, name]) => (<li>{name}: <code>{id}</code></li>))}
+  {Object.entries(langs).map(([id, name]) => (
+    <li>
+      {name}: <code>{id}</code>
+    </li>
+  ))}
 </ul>
 
-<h4 class="text-lg"><code>from:{"<辭典代碼>"}</code></h4>
+<h4 class="text-lg">
+  <code>from:{"<辭典代碼>"}</code>
+</h4>
 
 指定辭典。不分大小寫。
 
 辭典代碼：
 
-import { dicts } from "common"
+import { dicts } from "common";
 
 <table>
-{dicts.map(({id, name}) => (<tr><td>{name}</td><td><code>{id}</code></td></tr>))}
+  {dicts.map(({ id, name }) => (
+    <tr>
+      <td>{name}</td>
+      <td>
+        <code>{id}</code>
+      </td>
+    </tr>
+  ))}
 </table>
 
-<h4 class="text-lg"><code>title:{"<文字>"}</code></h4>
+<h4 class="text-lg">
+  <code>title:{"<文字>"}</code>
+</h4>
 
 搜尋詞目而不搜尋讀音。
 
