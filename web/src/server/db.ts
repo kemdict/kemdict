@@ -1,5 +1,5 @@
 import { chunk, sortBy, uniqBy } from "lodash-es";
-import { groupByProp, parseQuery, CrossDB } from "common";
+import { groupByProp, CrossDB } from "common";
 import { spc } from "$lib/processing";
 import type { Heteronym, LangId, Mtch } from "common";
 

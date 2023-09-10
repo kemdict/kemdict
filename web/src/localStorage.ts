@@ -1,6 +1,3 @@
-import { localStorageStore } from "@skeletonlabs/skeleton";
-import type { Writable } from "svelte/store";
-
 /**
  * Helpers for storing serializable values in local storage.
  */
