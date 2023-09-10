@@ -1,5 +1,8 @@
 <script lang="ts">
+  export let currentId: string;
+
   import { dicts, langIdName } from "common";
+  import clsx from "clsx";
   dicts.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   let filterString = "";
@@ -22,11 +25,17 @@
         .toLowerCase()
         .includes(filterString.toLowerCase())}
       <li>
-        <a href="/dicts/{id}" class="card mr-2 block px-2 py-1">
+        <a
+          href="/dicts/{id}"
+          class={clsx(
+            "k-card mr-2 block px-2 py-1",
+            id === currentId && "bg-surface-active-token ",
+          )}
+        >
           <div>
             <span class="font-bold">{name}</span>
             {#if meta.version}
-              <span class="text-secondary-600-300-token text-sm"
+              <span class="text-secondary-800-100-token text-sm"
                 >{meta.version}</span
               >
             {/if}

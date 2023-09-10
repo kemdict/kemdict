@@ -224,6 +224,11 @@
     @apply rounded-md p-1 px-2 text-sm font-bold transition;
     @apply btnColor btnBorder;
   }
+  .k-card {
+    @apply rounded transition;
+    @apply bg-surface-300 hover:bg-surface-400;
+    @apply dark:bg-surface-900 dark:hover:bg-surface-800;
+  }
   .k-hlbtn {
     @apply rounded-md p-1 px-2 text-sm font-bold transition;
     @apply bg-primary-500 hover:bg-primary-600 text-black;
