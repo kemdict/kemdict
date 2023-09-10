@@ -456,6 +456,7 @@ export class CrossDB {
     presentLangSet: Set<LangId>;
     heteronyms: Heteronym[];
     langCountObj: Record<LangId, number>;
+    parsed: SearchParserResult;
   }> {
     const parsed = options.exactQuery
       ? { text: query.normalize("NFD") }
