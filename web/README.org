@@ -1,7 +1,4 @@
 * Astro-based frontend
-
-This cannot be built for Cloudflare due to the use of builtin Node modules.
-
 ** Why Astro
 
 SvelteKit provides client-side navigation, however the cost of this is that all components must be sent to the client.
@@ -10,27 +7,47 @@ Astro, on the other hand, allows only sending the components that are actually n
 
 In other words, Astro allows components that only run at build time.
 
-Since I wasn't using client side navigation anyways (disabling it via =data-sveltekit-reload=, in order to leverage CDN cache more), this is a worthwhile trade.
+Since I wasn't using client side navigation anyways (disabling it via =data-sveltekit-reload=, in order to leverage CDN cache more), this is a worthwhile tradeoff.
 
-** Building for Node
+** Using Bun
+
+See [[./bun.org]].
+
+** Execution phases
+
+I think of there as being three execution phases:
+
+- Development time
+- Build time
+- Run time
+  - Request time
+  - Client side
+
+** Building for deployment
+
+#+begin_src shell
+make dist
+#+end_src
+
+The output is in =dist=. Going to this folder then running the =./start= script in there (copied from =server/=) will start the server.
+
+There is also a variant that builds the SQLite database at the same time:
 
 #+begin_src shell
 make build-with-data
 #+end_src
 
-or
+This requires Cask and Emacs.
 
-#+begin_src shell
-make build-no-data
-#+end_src
+The data is only required at run time.
 
-The output is in =dist=.
+** Special folders
 
-The =with-data= variant builds the SQLite database as well; this requires Cask and Emacs.
+=server/= contains files that are copied directly into the deployed server bundle.
 
-The data is always required at runtime, but this allows the code to be updated without having to spend 10+ minutes rebuilding the data unnecessarily.
+=hack/= is a workaround for not having top level await in Svelte; see [[./hack/README.md]].
 
-** Deploying to a server
+** Deployment
 
 Copy the folder to a server, perhaps through =tar= and =scp=:
 
@@ -49,13 +66,11 @@ test -f kemdict && rm -r kemdict
 mv dist kemdict
 #+end_src
 
-Note that =better-sqlite3= currently will fail to install on Node 19 (which the Arch =nodejs= package is on), so you'll have to make sure to use Node 18.
-
 Now run it:
 
 #+begin_src shell
 cd kemdict || exit 1
-env PORT=1234 npm run prod # I've made this task run npm install as well
+env PORT=1234 ./start
 #+end_src
 
 *** Running as a systemd service

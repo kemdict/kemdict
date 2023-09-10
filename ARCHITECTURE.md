@@ -6,7 +6,7 @@ Kemdict is both an alternative interface to several dictionaries, as well as an 
 
 `dicts` is a subproject responsible for turning the raw data into a particular shape, with definitions of the same word from each dictionary being merged into the same object. This is then also turned into an SQLite database for quicker access.
 
-`kisaragi_dict` is an Org Mode file, and it is turned into JSON through Emacs Lisp.
+`dicts/kisaragi` contains the dictionary data for `kisaragi_dict`. They are defined in Org files, and get turned into JSON by [./dicts/kisaragi/generate.el](./dicts/kisaragi/generate.el).
 
 `web` is the frontend, made with Svelte and Astro. It has server side code and is hosted on a server. The server side loads the dictionary data and renders pages for the client.
 
