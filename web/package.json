@@ -12,6 +12,7 @@
       "gzip": false
     }
   ],
+  "trustedDependencies": ["sharp","better-sqlite3"],
   "dependencies": {
     "@astrojs/node": "^6.0.0",
     "astro": "^3.0.10",

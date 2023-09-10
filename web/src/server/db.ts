@@ -9,7 +9,12 @@ export async function readDB() {
     typeof Bun !== "undefined"
       ? (await import("bun:sqlite")).Database
       : (await import("better-sqlite3")).default;
-  const path = ["../kemdict.db", "./entries.db"].find((f) => fs.existsSync(f));
+  const path = [
+    "../kemdict.db",
+    "../dicts/entries.db",
+    "../../dicts/entries.db",
+    "./entries.db",
+  ].find((f) => fs.existsSync(f));
   if (!path) throw new Error("DB not found!");
   const db = new Database(path, {
     readonly: true,
