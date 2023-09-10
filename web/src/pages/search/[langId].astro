@@ -8,6 +8,9 @@ const [success, data] = await getHetFromUrl(url, langId);
 if (!success) {
   return Astro.redirect(data);
 }
+if ("root" in data) {
+  return Astro.redirect("/search");
+}
 const heteronyms = data.heteronyms;
 const mtch = data.mtch;
 const originalQuery = data.originalQuery;

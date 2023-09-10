@@ -101,7 +101,14 @@ export async function getHetFromUrl(
   url: URL,
   lang?: string,
 ): Promise<
-  | [true, { root: true }]
+  | [
+      true,
+      {
+        /** This page has no suffix.
+            Redirect to /search if the page isn't /search. */
+        root: true;
+      },
+    ]
   | [
       true,
       {
