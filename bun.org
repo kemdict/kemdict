@@ -1,0 +1,22 @@
+* Using Bun
+
+This project uses Bun as an opportunity for me to try it out.
+
+There are three phases:
+
+- During development, I'm still using Node and pnpm.
+- During build, I'm also still using Node and pnpm.
+- At runtime, dependencies are installed with pnpm and the server is [[./web/server/start][already run with Bun]].
+
+  There is a run time switch to use =better-sqlite3= in Node and =bun:sqlite= in Bun.
+
+** The package manager
+I wish to use Bun's package manager, both for development and for runtime, because it is faster.
+
+- This requires determining the packages that have postinstall and explicitly granting trust. Right now Bun has no indication, and figuring out which packages have postinstall is left on your own.
+- Other than that there's probably nothing else to change.
+
+** Dev-time and build-time
+Using Bun during both development and build might be desirable, because it provides a nice implementation of macros.
+
+Using Bun just for build possibly speeds up build times, though this doesn't matter much.
