@@ -12,7 +12,7 @@ entries.db: ../dicts
 .PHONY: dist
 dist: $(DEPS)
 	npx astro build
-	cp package.json bun.lockb dist/
+	cp package.json pnpm-lock.yaml dist/
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 	mkdir -p dist/hack
 	find hack/ -type f -not -iname "readme*" -exec cp '{}' dist/hack/ ';'

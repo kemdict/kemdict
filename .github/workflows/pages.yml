@@ -40,18 +40,18 @@ jobs:
           printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
           printenv SSH_SECRET > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v1
+      - uses: pnpm/action-setup@v2
         with:
-          bun-version: "1.0"
-      - name: Set up Node
-        uses: actions/setup-node@v3
+          version: 8.7.4
+      - uses: actions/setup-node@v3
         with:
           node-version: "18"
+          cache: "pnpm"
+          cache-dependency-path: "web/pnpm-lock.yaml"
       - name: Install packages
         run: |
           cd web
-          bun install
+          pnpm install
       - name: Build and deploy
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}

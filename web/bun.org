@@ -4,13 +4,18 @@ This project uses Bun as an opportunity for me to try it out.
 
 There are three phases:
 
-- During development, I'm using Node.
-- During build, I'm also using Node.
-- At runtime, the server is [[./web/server/start][already run with Bun]] if it is installed.
+- During development, I'm using Node and pnpm.
+- During build, I'm also using Node and pnpm.
+- At runtime, dependencies are installed with pnpm and the server is [[./web/server/start][already run with Bun]] if it is installed.
 
   There is a run time switch to use =better-sqlite3= in Node and =bun:sqlite= in Bun.
 
-Packages are already installed with Bun. I switched because it's really fast and seems to work fine.
++Packages are already installed with Bun. I switched because it's really fast and seems to work fine.+
+
+I reverted back to pnpm because:
+
+- Bun doesn't seem to have equivalents of =pnpm outdated= or =pnpm update -L=
+- The server is doing this weird thing where it has no response and I'm trying to go back to a known good state
 
 ** Determining which packages need to be trusted
 Bun does not run package lifecycle hooks unless they are explicitly trusted. However, one may not be aware that a dependency uses lifecycle hooks to install properly, and there is no satisfying way of checking this currently: Bun doesn't provide one, and in other package managers I think you just have to try to install everything and see.
