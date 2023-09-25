@@ -2,9 +2,4 @@
 
 node purge-cache.mjs &
 [ -d node_modules ] || pnpm install --prod
-if npm ls -g bun
-then
-    npx bun server/entry.mjs
-else
-    node server/entry.mjs
-fi
+node server/entry.mjs
