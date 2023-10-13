@@ -123,15 +123,6 @@ by default."
 
 (put 'ht-update-with! 'lisp-indent-function 2)
 
-(defmacro with-syms (symbols &rest body)
-  "Bind SYMBOLS to uninterned symbols, then run BODY."
-  (declare (debug (sexp body))
-           (indent 1))
-  `(let ,(mapcar (lambda (s)
-                   `(,s (make-symbol ,(format "--%s--" (symbol-name s)))))
-                 symbols)
-     ,@body))
-
 (defun d::hash-rename (table from to)
   "Rename the key FROM to TO in TABLE."
   (-when-let (value (ht-get table from))
@@ -140,7 +131,7 @@ by default."
 
 (defun d::hash-prune (table value)
   "Remove all entries in TABLE that are associated with VALUE."
-  (with-syms (dflt)
+  (cl-with-gensyms (dflt)
     (cl-loop for k in (hash-table-keys table)
              when (equal value (gethash k table dflt))
              do (remhash k table))
