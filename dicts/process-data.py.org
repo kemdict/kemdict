@@ -1,0 +1,4 @@
+* Python rewrite of process-data.el
+
+- Editor setup: use ruff (through lsp) and pyright. In Emacs, install both language servers and lsp-pyright, then lsp-mode knows what to do.
+- Formatting: Black, through apheleia.el in Emacs.
