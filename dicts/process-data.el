@@ -872,7 +872,10 @@ ORIG-HETS are props that will be used to construct heteronyms."
        for het being the elements of heteronyms
        using (index i)
        do
-       (progn
+       ;; Ignore heteronyms with an empty title.
+       ;; This happens for a few entries in dict_revised that appear to have
+       ;; empty titles in the JSON.
+       (when (gethash "title" het)
          (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
          (sqlite-execute
           d:db

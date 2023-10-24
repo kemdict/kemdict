@@ -34,8 +34,12 @@ DICT_TARGETS += unihan.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
+# HACK: If an error happens, Emacs might try to print out the list of
+# heteronyms that is in memory, which takes a while and blanks out
+# scrollback since it's like 100000+ entries. By filtering out lines
+# that mention "hash-table" we filter out that garbage.
 entries.db: $(DICT_TARGETS) process-data.el .eask
-	eask eval "(load \"process-data\")"
+	eask eval "(load \"process-data\")" | grep -v hash-table
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
