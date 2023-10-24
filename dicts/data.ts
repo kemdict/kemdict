@@ -130,7 +130,7 @@ export const dicts = [
     url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
     meta: {
-      version: "2014_20230628",
+      version: "2014_20230926",
       author: "教育部",
       desc: `
 > 主要適用對象：國中、小學生及學習華語人士。
@@ -154,7 +154,7 @@ export const dicts = [
     url: "https://dict.revised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
     meta: {
-      version: "2015_20230626",
+      version: "2015_20230928",
       author: "教育部",
       // TODO: fill this out
       desc: ``,
@@ -259,7 +259,7 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      version: "2020_20230629",
+      version: "2020_20230927",
       // TODO: fill this out
       desc: ``,
       license: {
