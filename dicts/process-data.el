@@ -529,59 +529,59 @@ This is a separate step from shaping."
         (d:links:linked nil))
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
-        #'d:links:linkify-brackets))
+                       #'d:links:linkify-brackets))
     (--each '("definition" "source_comment" "典故說明" "用法例句")
       (ht-update-with! props it
-        #'d:links:linkify-keywords))
+                       #'d:links:linkify-keywords))
     (dolist (key '("trs" "poj" "kip"))
       (ht-update-with! props key
-        (lambda (pn)
-          (->> pn
-               ucs-normalize-NFC-string
-               (s-replace "　" " ")
-               s-trim))))
+                       (lambda (pn)
+                         (->> pn
+                              ucs-normalize-NFC-string
+                              (s-replace "　" " ")
+                              s-trim))))
     (dolist (key '("radical" "v_type" "v_pinyin"))
       (ht-update-with! props key
-        #'s-trim))
+                       #'s-trim))
     (dolist (key '("近義同" "近義反"))
       (ht-update-with! props key
-        #'d:links:comma-word-list))
+                       #'d:links:comma-word-list))
     (dolist (key '("antonyms" "synonyms"))
       (ht-update-with! props key
-        (lambda (words)
-          (->>
-           (d:links:linkify-brackets words "【" "】")
-           (s-replace-regexp
-            (rx "[" (group (any "似反")) "]"
-                (group (* any)))
-            (lambda (str)
-              (format
-               "<m>［%s］</m>%s"
-               (match-string 1 str)
-               (d:links:簡編本:近義反義
-                (match-string 2 str)))))))))
+                       (lambda (words)
+                         (->>
+                          (d:links:linkify-brackets words "【" "】")
+                          (s-replace-regexp
+                           (rx "[" (group (any "似反")) "]"
+                               (group (* any)))
+                           (lambda (str)
+                             (format
+                              "<m>［%s］</m>%s"
+                              (match-string 1 str)
+                              (d:links:簡編本:近義反義
+                               (match-string 2 str)))))))))
     (ht-update-with! props "word_ref"
-      #'d:links:link-to-word)
+                     #'d:links:link-to-word)
     (ht-update-with! props "definitions"
-      (lambda (defs)
-        (seq-doseq (def defs)
-          (ht-update-with! def "quote"
-            #'ucs-normalize-NFC-string)
-          (ht-update-with! def "example"
-            (lambda (v)
-              (cond
-               ((stringp v)
-                (ucs-normalize-NFC-string v))
-               ((seqp v)
-                (seq-map #'ucs-normalize-NFC-string v))
-               (t (error "%s: het.props.definitions.example is neither a string or a sequence"
-                         title)))))
-          (ht-update-with! def "def"
-            (lambda (str)
-              (-> str
-                  d:links:linkify-first-phrase
-                  d:links:linkify-brackets
-                  d:links:linkify-keywords))))))
+                     (lambda (defs)
+                       (seq-doseq (def defs)
+                         (ht-update-with! def "quote"
+                                          #'ucs-normalize-NFC-string)
+                         (ht-update-with! def "example"
+                                          (lambda (v)
+                                            (cond
+                                             ((stringp v)
+                                              (ucs-normalize-NFC-string v))
+                                             ((seqp v)
+                                              (seq-map #'ucs-normalize-NFC-string v))
+                                             (t (error "%s: het.props.definitions.example is neither a string or a sequence"
+                                                       title)))))
+                         (ht-update-with! def "def"
+                                          (lambda (str)
+                                            (-> str
+                                                d:links:linkify-first-phrase
+                                                d:links:linkify-brackets
+                                                d:links:linkify-keywords))))))
     ;; Just remove the title prop. It's already in het.title.
     (ht-remove! props "title")
     ;; The length prop is kind of pointless: just use [...str].length.
@@ -607,7 +607,7 @@ This is a separate step from shaping."
          (ht-set! props "nrsc"
                   non-radical-stroke))
        (ht-update-with! props "kCangjie"
-         #'d:cangjie-abc-to-han)
+                        #'d:cangjie-abc-to-han)
        (d::hash-rename props "kCangjie" "cangjie")
        (d::hash-rename props "kDefinition" "defs")
        (d::hash-rename props "kTraditionalVariant" "varT")
@@ -622,90 +622,90 @@ This is a separate step from shaping."
          (ht-remove! props it)))
       ("hakkadict"
        (ht-update-with! props "corr_zh"
-         (lambda (str)
-           (d:links:link-to-word str)))
+                        (lambda (str)
+                          (d:links:link-to-word str)))
        (dolist (p_name '("四縣" "海陸" "大埔" "饒平" "詔安" "南四縣"))
          (ht-update-with! props (format "p_%s" p_name)
-           (lambda (str)
-             (d:hakkadict:pn str p_name)))))
+                          (lambda (str)
+                            (d:hakkadict:pn str p_name)))))
       ((pred (s-prefix? "kisaragi"))
        (ht-update-with! props "definitions"
-         (lambda (defs)
-           (seq-doseq (def defs)
-             (ht-update-with! def "def"
-               (lambda (d)
-                 (->> d
-                      (s-replace "#+begin_quote" "<blockquote>")
-                      (s-replace "#+end_quote" "</blockquote>")
-                      ;; No need to apply linkify-brackets again
-                      d:links:org-style)))))))
+                        (lambda (defs)
+                          (seq-doseq (def defs)
+                            (ht-update-with! def "def"
+                                             (lambda (d)
+                                               (->> d
+                                                    (s-replace "#+begin_quote" "<blockquote>")
+                                                    (s-replace "#+end_quote" "</blockquote>")
+                                                    ;; No need to apply linkify-brackets again
+                                                    d:links:org-style)))))))
       ("chhoetaigi_itaigi"
        (ht-update-with! props "definition"
-         #'d:links:link-to-word))
+                        #'d:links:link-to-word))
       ("chhoetaigi_taioanpehoekichhoogiku"
        (ht-update-with! props "en"
-         (lambda (s)
-           (d:links:comma-word-list s ", ")))
+                        (lambda (s)
+                          (d:links:comma-word-list s ", ")))
        (ht-update-with! props "zh"
-         #'d:links:comma-word-list)
+                        #'d:links:comma-word-list)
        (dolist (key '("examplePOJ" "exampleEn" "exampleZh"))
          (ht-update-with! props key
-           (lambda (example)
-             (-> example
-                 (d:links:linkify-brackets "[“" "”]")
-                 (d:links:linkify-brackets "“[" "]”"))))))
+                          (lambda (example)
+                            (-> example
+                                (d:links:linkify-brackets "[“" "”]")
+                                (d:links:linkify-brackets "“[" "]”"))))))
       ("chhoetaigi_taijittoasutian"
        (ht-update-with! props "definition"
-         (lambda (def)
-           (d:links:linkify-brackets def "[" "]")))
+                        (lambda (def)
+                          (d:links:linkify-brackets def "[" "]")))
        (ht-update-with! props "example"
-         ;; This makes it more readable. Is it a good idea though?
-         ;; Before: "An ~ is red." (in page "apple")
-         ;; After: "An apple is red."
-         (lambda (str)
-           (s-replace-regexp (rx (opt " ")
-                                 (** 1 4 (or
-                                          "∼" ; #x223c, TILDE OPERATOR
-                                          "~"))
-                                 (opt " "))
-                             d:links:from
-                             str)))
+                        ;; This makes it more readable. Is it a good idea though?
+                        ;; Before: "An ~ is red." (in page "apple")
+                        ;; After: "An apple is red."
+                        (lambda (str)
+                          (s-replace-regexp (rx (opt " ")
+                                                (** 1 4 (or
+                                                         "∼" ; #x223c, TILDE OPERATOR
+                                                         "~"))
+                                                (opt " "))
+                                            d:links:from
+                                            str)))
        (ht-update-with! props "examplePoj"
-         (lambda (str)
-           (s-replace-regexp (rx (opt " ")
-                                 (** 1 4 (or
-                                          "∼"
-                                          "~"))
-                                 (opt " "))
-                             (or (ht-get props "titlePoj")
-                                 d:links:from)
-                             str))))
+                        (lambda (str)
+                          (s-replace-regexp (rx (opt " ")
+                                                (** 1 4 (or
+                                                         "∼"
+                                                         "~"))
+                                                (opt " "))
+                                            (or (ht-get props "titlePoj")
+                                                d:links:from)
+                                            str))))
       ("dict_concised"
        (ht-update-with! props "definition"
-         #'d:process-def:dict_concised))
+                        #'d:process-def:dict_concised))
       ("dict_idioms"
        (ht-update-with! props "definition"
-         (lambda (def)
-           ;; There is often an anchor at the end of
-           ;; dict_idioms definitions that's not
-           ;; displayed. Getting rid of it here allows
-           ;; shredding them from the database.
-           (s-replace-regexp "<a name.*" "" def))))
+                        (lambda (def)
+                          ;; There is often an anchor at the end of
+                          ;; dict_idioms definitions that's not
+                          ;; displayed. Getting rid of it here allows
+                          ;; shredding them from the database.
+                          (s-replace-regexp "<a name.*" "" def))))
       ((pred (s-prefix? "ilrdf"))
        (ht-update-with! props "ref"
-         #'d:links:link-to-word)
+                        #'d:links:link-to-word)
        (ht-update-with! props "def"
-         (lambda (str)
-           (->> str
-                (s-replace-regexp
-                 (rx (group (not ">"))
-                     (group (+ (any "a-zA-Z'^:ṟéɨʉ-"))))
-                 (lambda (s)
-                   (concat
-                    (match-string 1 s)
-                    (d:links:link-to-word
-                     (match-string 2 s)))))
-                d:links:linkify-keywords)))))
+                        (lambda (str)
+                          (->> str
+                               (s-replace-regexp
+                                (rx (group (not ">"))
+                                    (group (+ (any "a-zA-Z'^:ṟéɨʉ-"))))
+                                (lambda (s)
+                                  (concat
+                                   (match-string 1 s)
+                                   (d:links:link-to-word
+                                    (match-string 2 s)))))
+                               d:links:linkify-keywords)))))
     (d::hash-rename props "non_radical_stroke_count" "nrsc")
     (d::hash-rename props "stroke_count" "sc")
     (d::hash-rename props "definition" "def")
@@ -1167,7 +1167,8 @@ pronunciation strings include multiple pronunciations."
   ;; We're holding all dictionary data in memory, so if this is too
   ;; low we'll be GC'ing all the time without being able to free any
   ;; memory.
-  (let ((gc-cons-threshold 100000000))
+  (let ((gc-cons-threshold 100000000)
+        (debug-on-error nil))
     (d:main))
   (kill-emacs))
 
