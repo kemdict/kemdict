@@ -51,7 +51,7 @@ jobs:
       - name: Install packages
         run: |
           cd web
-          pnpm install
+          pnpm install --no-frozen-lockfile
       - name: Build and deploy
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
