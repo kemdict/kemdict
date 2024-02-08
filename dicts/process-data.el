@@ -1037,7 +1037,9 @@ WHERE \"from\" LIKE 'kisaragi%'
                             (ucs-normalize-NFD-region (point-min) (point-max))
                             (goto-char (point-min))
                             (json-parse-buffer :array-type 'list))))
-              (seq-doseq (title titles)
+              (d::for (title titles)
+                (when (string-empty-p title)
+                  (throw 'continue nil))
                 (push
                  (list title
                        (-> (format "%sT00:00:00Z" added-date)
