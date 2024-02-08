@@ -17,6 +17,22 @@
 
 (defalias 'd::NFD #'ucs-normalize-NFD-string)
 
+(defmacro d::for (spec &rest body)
+  "Wrapper around `seq-doseq' but with a `catch' blocks around.
+
+A `catch' block called `continue' wraps BODY, and another `catch'
+block called `break' wraps the whole thing, such that
+\(throw \\='`continue' nil) and (throw \\='`continue' nil) works as in
+other programming languages.
+
+VAR and SEQUENCE are as in `seq-doseq', ie. VAR is bound to each
+member of SEQUENCE."
+  (declare (indent 1))
+  `(catch 'break
+     (seq-doseq ,spec
+       (catch 'continue
+         ,@body))))
+
 (defun d::dictionaries ()
   "Return definitions of dictionaries.
 
@@ -750,7 +766,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
   (let* ((heteronyms nil))
     (let* ((dictionaries (d::dictionaries))
            (dict-count (length dictionaries)))
-      ;; Step 1
+      ;; Step 1: collect hets and titles
       (cl-loop
        for (dict lang files)
        being the elements of dictionaries
@@ -779,17 +795,19 @@ ORIG-HETS are props that will be used to construct heteronyms."
              (d::debug "%s - applying het_sort" dict)
              (when (> (length orig-hets) 1)
                (setq orig-hets (d:sort-orig-hets orig-hets)))
-             (seq-doseq (orig-het orig-hets)
+             (d::for (orig-het orig-hets)
                ;; {title,from,lang,props}
-               (let (shaped-het title)
-                 (setq shaped-het (make-hash-table :test #'equal))
-                 (d::debug "%s - processing title" dict)
-                 (setq title (or (-some-> (gethash "title" entry)
-                                   d:process-title)
-                                 ;; 臺日大辭典 and 臺灣白話基礎語句
-                                 (gethash "kip" orig-het)
-                                 ;; unihan
-                                 (gethash "char" orig-het)))
+               (let ((shaped-het (make-hash-table :test #'equal))
+                     (title (or (-some-> (gethash "title" entry)
+                                  d:process-title)
+                                ;; 臺日大辭典 and 臺灣白話基礎語句
+                                (gethash "kip" orig-het)
+                                ;; unihan
+                                (gethash "char" orig-het))))
+                 ;; Skip invalid titles
+                 (when (or (not (stringp title))
+                           (string-empty-p title))
+                   (throw 'continue nil))
                  ;; chhoetaigi_taijittoasutian:
                  ;; work around some incorrectly formatted titles, like
                  ;; "a-a cham-cham" being formatted as "a-acham-cham" in
@@ -814,7 +832,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (garbage-collect))))
     (garbage-collect)
     (setq heteronyms (nreverse heteronyms))
-    ;; Step 3
+    ;; Step 2: do transformations
     (cl-loop
      for het being the elements of heteronyms
      using (index i)
@@ -833,7 +851,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
                            (gethash "title" het)
                            (gethash "from" het))))))
     (garbage-collect)
-    ;; Step 4
+    ;; Step 3: insert them into the database
     (d:db-insert heteronyms (-uniq d:links))
     (message "Done")))
 
