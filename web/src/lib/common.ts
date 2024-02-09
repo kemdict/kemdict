@@ -1,5 +1,6 @@
 import { uniq, escapeRegExp } from "lodash-es";
-import { escape as sqlEscape } from "sqlstring";
+import sqlstring from "sqlstring";
+const sqlEscape = sqlstring.escape;
 
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";

@@ -45,9 +45,6 @@ export default defineConfig({
     plugins: [legacy(), purgeCss()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
-    ssr: {
-      noExternal: [...(prod ? ["sqlstring"] : [])],
-    },
     build: { rollupOptions: { external: ["bun:sqlite"] } },
     resolve: {
       alias: [
