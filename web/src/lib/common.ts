@@ -4,9 +4,9 @@ import { escape as sqlEscape } from "sqlstring";
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 
-// function printfdebug(value: any) {
-//   console.log(JSON.stringify(value, null, 2));
-// }
+export function printfdebug(value: any) {
+  console.log(JSON.stringify(value, null, 2));
+}
 
 /**
  * If `value` is not undefined, return `value` as an array.
