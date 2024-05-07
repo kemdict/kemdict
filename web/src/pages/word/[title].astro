@@ -20,7 +20,13 @@ const {
   presentLangSet,
   heteronyms,
 } = await DB.getHeteronyms(title, { exactQuery: true });
-if (heteronyms.some((het) => het.title !== title)) {
+if (
+  heteronyms.some(
+    (het) =>
+      het.title !== title &&
+      (!het.props || !Object.values(het.props).includes(title)),
+  )
+) {
   console.log("What the fuck? Non-matching heteronyms matched: ", {
     title,
     heteronyms,
