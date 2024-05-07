@@ -1,5 +1,6 @@
 ---
 const started = new Date().toISOString();
+console.log({ started });
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
 import {
@@ -43,14 +44,14 @@ const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
       if (eq_en) term_en = eq_en;
     }
     return [dictsObj[id], hets];
-  }
+  },
 );
 const presentDicts = presentDictIds.map((id) => dictsObj[id]);
 
 const url = Astro.url;
 const requestedLang = parseLangParam(
   url.searchParams.get("lang"),
-  presentLangSet
+  presentLangSet,
 );
 // Invalid -> delete it and try again
 if (requestedLang === false) {
@@ -69,8 +70,8 @@ if (requestedLang === false) {
   saveHistory("word", url.pathname.replace("/word/", ""));
 </script>
 
-<script is:inline define:vars={{ started }}>
-  console.log({ started, ended: new Date().toISOString() });
+<script is:inline>
+  console.log({ ended: new Date().toISOString() });
 </script>
 
 {
@@ -83,7 +84,7 @@ if (requestedLang === false) {
         <meta
           property="og:image"
           content={`https://kemdict.com/og-image?title=${encodeURI(
-            `「${title}」的定義`
+            `「${title}」的定義`,
           )}`}
         />
         <meta
@@ -93,7 +94,7 @@ if (requestedLang === false) {
               .filter((dict) => dict.lang === requestedLang)
               .map((dict) => dict.name),
             "、",
-            "及"
+            "及",
           )}的定義。 - ${site.oneLineDesc}`}
         />
       </Fragment>
@@ -109,7 +110,7 @@ if (requestedLang === false) {
           ([dict, hets]) =>
             requestedLang === dict.lang && (
               <Word groupedHets={[[dict, hets]]} title={title} />
-            )
+            ),
         )}
         <hr />
         <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />
