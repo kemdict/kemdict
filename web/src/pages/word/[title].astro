@@ -1,6 +1,7 @@
 ---
 const started = new Date().toISOString();
-console.log({ started });
+const { title } = Astro.params;
+console.log({ started, title });
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
 import {
@@ -14,7 +15,6 @@ import {
 } from "common";
 import type { Dict, Heteronym } from "common";
 
-const { title } = Astro.params;
 const {
   presentDicts: presentDictIds,
   presentLangSet,
