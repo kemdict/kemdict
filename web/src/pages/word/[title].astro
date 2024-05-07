@@ -1,5 +1,5 @@
 ---
-const now = new Date().toISOString();
+const started = new Date().toISOString();
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
 import {
@@ -69,9 +69,8 @@ if (requestedLang === false) {
   saveHistory("word", url.pathname.replace("/word/", ""));
 </script>
 
-<script is:inline define:vars={{ now }}>
-  const started = now;
-  const ended = new Date().toISOString();
+<script is:inline define:vars={{ started }}>
+  console.log({ started, ended: new Date().toISOString() });
 </script>
 
 {
