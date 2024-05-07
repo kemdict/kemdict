@@ -21,7 +21,7 @@ const {
   heteronyms,
 } = await DB.getHeteronyms(title, { exactQuery: true });
 if (heteronyms.some((het) => het.title !== title)) {
-  printfdebug("What the fuck? Non-matching heteronyms matched: ", {
+  console.log("What the fuck? Non-matching heteronyms matched: ", {
     title,
     heteronyms,
   });
