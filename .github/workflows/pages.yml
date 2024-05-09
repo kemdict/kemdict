@@ -40,7 +40,7 @@ jobs:
           printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
           printenv SSH_SECRET > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
           version: 9.0.6
       - uses: actions/setup-node@v4
