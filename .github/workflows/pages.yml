@@ -42,7 +42,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.7.4
+          version: 9.0.6
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
