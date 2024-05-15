@@ -242,13 +242,12 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
       version: "1110429",
       author: "教育部",
       // TODO: fill this out
-      desc: ``,
+      desc: `教育部的臺灣客家語辭典。2023年教育部整合三部辭典並已更名為《臺灣客語辭典》；Kemdict 尚未更新。`,
       license: {
         name: "CC BY-ND 3.0 TW",
-        url: "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
+        url: "https://hakkadict.moe.edu.tw/directions/答客問/版本授權/",
       },
-      source:
-        "https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=KO93Fb/newsresult_format0?r1=1&searchall=1",
+      source: "https://hakkadict.moe.edu.tw/resource_download/",
       original: "https://hakkadict.moe.edu.tw",
     },
   },
