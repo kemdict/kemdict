@@ -1,10 +1,10 @@
-<script>
-  export let heteronyms;
+<script lang="ts">
+  import type { Heteronym } from "$src/lib/common";
+  export let heteronyms: Heteronym[];
   import { spc, newline_string_to_ol } from "$lib/processing";
   import Pronunciation from "$src/components/Pronunciation.svelte";
 
-  function markers(str) {
-    if (typeof str !== "string") return;
+  function markers(str: string) {
     const alist = [
       [/([^>])?(※)/g, "所取典源尚有疑慮"],
       [/([^>])?(＃)/g, "所取典源與既有成語辭書有所參差"],
@@ -20,13 +20,13 @@ title="${v}"
 href="https://dict.idioms.moe.edu.tw/pageView.jsp?ID=41"
 target="_blank"
 rel="noreferrer"
->$2</a>`
+>$2</a>`,
       );
     }
     return str;
   }
 
-  function nuance(str) {
+  function nuance(str: string) {
     /* Sure... */
     return `<table>${str
       .split("\n")
@@ -45,17 +45,16 @@ rel="noreferrer"
       .join("")}</table>`;
   }
 
-  function source(str) {
+  function source(str: string) {
     return markers(str)
       .split("\n")
       .map((x) =>
-        x.replace(/^\*(\d)\*(.*)/, `$2<sup><a href="#sc$1">$1</a></sup>`)
+        x.replace(/^\*(\d)\*(.*)/, `$2<sup><a href="#sc$1">$1</a></sup>`),
       )
       .join("");
   }
 
-  function source_comment(str) {
-    if (typeof str !== "string") return;
+  function source_comment(str: string) {
     return `<ol>
     ${markers(str)
       .split("\n")
@@ -63,8 +62,8 @@ rel="noreferrer"
         (d, i) =>
           `<li id="sc${i + 1}">${d.replace(
             /^\d+\./,
-            ""
-          )}<a href="#isc">↩</a></li>`
+            "",
+          )}<a href="#isc">↩</a></li>`,
       )
       .join("")}
 </ol>`;
@@ -76,7 +75,9 @@ rel="noreferrer"
   {#if het.props.bopomofo}
     <Pronunciation>{spc(het.props.bopomofo)}</Pronunciation>
   {/if}
-  <p class="def">{@html markers(het.props.def)}</p>
+  {#if het.props.def}
+    <p class="def">{@html markers(het.props.def)}</p>
+  {/if}
   {#if het.props.用法語意說明 || het.props.用法使用類別 || het.props.用法例句}
     <h2>用法</h2>
     <p>{het.props.用法語意說明}</p>
