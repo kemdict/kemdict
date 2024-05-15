@@ -1,0 +1,3 @@
+{
+  "dependencies": { "@emacs-eask/cli": "^0.9.7" }
+}
