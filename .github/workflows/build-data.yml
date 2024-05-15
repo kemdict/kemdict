@@ -35,9 +35,6 @@ jobs:
         uses: purcell/setup-emacs@master
         with:
           version: 29.1
-      - uses: emacs-eask/setup-eask@master
-        with:
-          version: "snapshot"
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -50,7 +47,8 @@ jobs:
       - name: Build data files
         run: |
           cd dicts
-          eask install-deps
+          bun install
+          bunx eask install-deps
           make entries.db.gz
       - name: Deploy built database
         env:
