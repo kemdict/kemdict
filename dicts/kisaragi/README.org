@@ -1,3 +1,7 @@
+* TODOs
+
+- [ ] Simplify the definition schema. This is written by a human (me, I hope it's plural) for humans, so the schema does not need to be as well structured as it is right now. Namely, instead of heteronyms[].definitions[].{def,type}, we should just have heteronyms[].definitions[] where each definition is just a string. This will allow us to have some note that applies to multiple definitions.
+
 * Caveat
 
 這是參考用的說明文件，我還沒確保它完全是正確的。某些部分還沒實作。

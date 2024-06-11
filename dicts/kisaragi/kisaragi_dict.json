@@ -1,5 +1,74 @@
 [
   {
+    "title": "直擊",
+    "added": 1718128647.0,
+    "eq-ja": "直撃",
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓˊ ㄐㄧˊ",
+        "definitions": [
+          {
+            "def": "直接目擊。如：「記者直擊知名董事長現身夜市」\n# I'm totally not influenced by the recent reporting on Jensen Huang's visit",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "約聘人員",
+    "added": 1718128439.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄩㄝˉ ㄆㄧㄣˋ ㄖㄣˊ ㄩㄢˊ",
+        "definitions": [
+          {
+            "def": "以[[約聘]]方式僱用的人。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "約聘",
+    "added": 1718128281.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄩㄝˉ ㄆㄧㄣˋ",
+        "definitions": [
+          {
+            "def": "以非長期的契約進行僱用。",
+            "type": "動"
+          },
+          {
+            "def": "非長期、契約期間到了之後會停止聘用的工作形態。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "繪師",
+    "added": 1718128156.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄨㄟˋ ㄕˉ",
+        "definitions": [
+          {
+            "def": "專門畫圖的人。藝術家。",
+            "type": "名"
+          },
+          {
+            "def": "一張圖畫的作者。如：「這張圖的繪師很有名」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "阻街",
     "added": 1715758264.0,
     "heteronyms": [
