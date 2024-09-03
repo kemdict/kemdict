@@ -1,5 +1,20 @@
 [
   {
+    "title": "缺貨",
+    "added": 1725371866.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄑㄩㄝ ㄏㄨㄛˋ",
+        "definitions": [
+          {
+            "def": "商品數量不足而無法供應。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "直擊",
     "added": 1718128647.0,
     "eq-ja": "直撃",
