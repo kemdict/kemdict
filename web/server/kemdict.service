@@ -1,0 +1,21 @@
+# Service to be filled in
+# Fill this in, copy to ~/.config/systemd/user/, reload-daemon --user
+# Then systemctl enable --now kemdict
+# This will start the constituent services
+
+[Unit]
+Description=An interface for some dictionaries (main)
+
+[Service]
+Type=oneshot
+WorkingDirectory=[dir]
+Environment="CLOUDFLARE_TOKEN=[token]"
+Environment="CLOUDFLARE_ZONE_ID=[id]"
+RemainAfterExit=yes
+# We do this instead of systemd's proper mechanism to control the startup delay
+# The point is one instance should be running while the other is restarting
+ExecStart=sh restart-instances
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

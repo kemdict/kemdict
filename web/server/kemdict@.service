@@ -1,0 +1,19 @@
+# Service to be filled in
+# Fill this in, copy to ~/.config/systemd/user/, reload-daemon --user
+# Then systemctl enable --now kemdict@<port>
+# Pair this with an "upstream" load balancing block in nginx
+
+[Unit]
+Description=An interface for some dictionaries (instances)
+
+[Service]
+Type=exec
+Restart=always
+RestartSec=3
+WorkingDirectory=[dir]
+Environment="PORT=%i"
+ExecStart=sh start
+#MemoryMax=1G
+
+[Install]
+WantedBy=default.target

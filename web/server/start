@@ -1,5 +1,4 @@
 #!/bin/sh
 
-node purge-cache.mjs &
 [ -d node_modules ] || pnpm install --prod
 node server/entry.mjs

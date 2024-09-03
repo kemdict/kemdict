@@ -75,6 +75,8 @@ env PORT=1234 ./start
 
 *** Running as a systemd service
 
+(To be updated: I now use multiple instances and reload sequentially)
+
 Like this, I guess:
 
 #+begin_src systemd

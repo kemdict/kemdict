@@ -1,0 +1,7 @@
+#!/bin/sh
+systemctl restart --user kemdict@8999
+sleep 5 # give it enough time
+systemctl restart --user kemdict@9000
+# Both old instances are dead; both are either already up or starting.
+# So purging cache now won't cause old content to show
+node purge-cache.mjs
