@@ -30,7 +30,10 @@
       class="btn variant-filled">刪除詞彙紀錄</button
     >
     {#if $wordHistory.length > 0}
-      <WordList words={[...$wordHistory].reverse()} search={false}></WordList>
+      <WordList
+        words={[...$wordHistory].map(decodeURIComponent).reverse()}
+        search={false}
+      ></WordList>
     {/if}
   </div>
 
