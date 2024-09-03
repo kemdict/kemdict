@@ -1,4 +1,5 @@
 <script lang="ts">
+  import WordList from "$src/components/WordList.svelte";
   import { lGet } from "$src/localStorage";
   import { localStorageStore } from "@skeletonlabs/skeleton";
   import type { Writable } from "svelte/store";
@@ -29,13 +30,7 @@
       class="btn variant-filled">刪除詞彙紀錄</button
     >
     {#if $wordHistory.length > 0}
-      <ol class="mt-4">
-        {#each [...$wordHistory].reverse() as title}
-          <li>
-            <a class="wordlink" href="/word/{title}">{decodeURI(title)}</a>
-          </li>
-        {/each}
-      </ol>
+      <WordList words={[...$wordHistory].reverse()} search={false}></WordList>
     {/if}
   </div>
 
@@ -49,13 +44,11 @@
       class="btn variant-filled">刪除搜尋紀錄</button
     >
     {#if $searchHistory.length > 0}
-      <ol class="mt-4">
-        {#each [...$searchHistory].reverse() as query}
-          <li>
-            <a class="wordlink" href="/search/?q={query}">{query}</a>
-          </li>
-        {/each}
-      </ol>
+      <WordList
+        words={[...$searchHistory].reverse()}
+        search={false}
+        prefix="/search/?q="
+      ></WordList>
     {/if}
   </div>
 </div>

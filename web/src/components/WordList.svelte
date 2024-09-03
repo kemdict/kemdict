@@ -5,6 +5,8 @@
 
   export let words: string[];
   export let search: boolean = words.length > 20;
+  /** Links link to /word/foo by default; this is the "/word/" part. */
+  export let prefix = "/word/";
 
   let filterString = "";
   import LocalSearchInput from "$src/components/LocalSearchInput.svelte";
@@ -14,7 +16,7 @@
     return word
       .split(filterString)
       .join(
-        `<span class="bg-yellow-400 dark:bg-yellow-800">${filterString}</span>`
+        `<span class="bg-yellow-400 dark:bg-yellow-800">${filterString}</span>`,
       );
   }
 </script>
@@ -29,7 +31,7 @@
           .toLowerCase()
           .includes(filterString.toLowerCase())}
         <li class="mr-2 py-2">
-          <a class="wordlink" href="/word/{word}">
+          <a class="wordlink" href="{prefix}{word}">
             {@html highlight(word, filterString)}
           </a>
         </li>
