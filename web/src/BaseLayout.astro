@@ -11,6 +11,9 @@ export interface Props {
 }
 const { title, wantFooter = true } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname + Astro.url.search, Astro.site);
+
+// Cache for 6 months on the CDN
+Astro.response.headers.set("Cache-Control", "s-maxage=15778463");
 ---
 
 <!-- Yes, this works, actually. -->
