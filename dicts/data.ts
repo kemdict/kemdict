@@ -156,8 +156,7 @@ export const dicts = [
     meta: {
       version: "2015_20240327",
       author: "教育部",
-      // TODO: fill this out
-      desc: ``,
+      desc: `教育部「供研究者使用」的國語辭典。`,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "/l/reviseddict_10312.pdf",
@@ -200,8 +199,7 @@ export const dicts = [
     meta: {
       author: "教育部",
       version: "20230222",
-      // TODO: fill this out
-      desc: ``,
+      desc: `教育部的台語辭典。資料尚需更新至新版。`,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
@@ -241,7 +239,6 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
     meta: {
       version: "1110429",
       author: "教育部",
-      // TODO: fill this out
       desc: `教育部的臺灣客家語辭典。2023年教育部整合三部辭典並已更名為《臺灣客語辭典》；Kemdict 尚未更新。`,
       license: {
         name: "CC BY-ND 3.0 TW",
