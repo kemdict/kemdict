@@ -37,6 +37,7 @@ export function lPush<T>(key: string, value: T) {
  * Save OBJ into a history localStorage.
  * Given a type of, say, "word", this would save into an array under the
  * "wordHistory" key.
+ * This pushes to the end such that the array is sorted old to new.
  */
 export function saveHistory(type: string, obj: any) {
   if (typeof window !== "undefined" && obj) {

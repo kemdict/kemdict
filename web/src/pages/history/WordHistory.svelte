@@ -6,7 +6,7 @@
   const wordHistory: Writable<string[]> = localStorageStore("wordHistory", []);
   const searchHistory: Writable<string[]> = localStorageStore(
     "searchHistory",
-    []
+    [],
   );
   function guardGet(key: string) {
     const value = lGet(key);
@@ -30,7 +30,7 @@
     >
     {#if $wordHistory.length > 0}
       <ol class="mt-4">
-        {#each $wordHistory as title}
+        {#each [...$wordHistory].reverse() as title}
           <li>
             <a class="wordlink" href="/word/{title}">{decodeURI(title)}</a>
           </li>
@@ -50,7 +50,7 @@
     >
     {#if $searchHistory.length > 0}
       <ol class="mt-4">
-        {#each $searchHistory as query}
+        {#each [...$searchHistory].reverse() as query}
           <li>
             <a class="wordlink" href="/search/?q={query}">{query}</a>
           </li>
