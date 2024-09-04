@@ -1,5 +1,65 @@
 [
   {
+    "title": "服務",
+    "added": 1725468127.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄈㄨˊ ㄨˋ",
+        "definitions": [
+          {
+            "def": "主動提供事物供他人利用的流程的抽象概念。 如：「串流服務」、「線上服務」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "串流",
+    "added": 1725467944.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄨㄢˋ ㄌㄧㄡˊ",
+        "definitions": [
+          {
+            "def": "以漸進形式傳輸資料，邊傳輸邊進行利用，而非等待傳輸完成後再進行利用。英語streaming的意譯。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "平臺",
+    "added": 1725467847.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄆㄧㄥˊ ㄊㄞˊ",
+        "definitions": [
+          {
+            "def": "亦指線上服務。如：「影音平臺」、「串流平臺」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "串流平臺",
+    "added": 1725467606.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄔㄨㄢˋ ㄌㄧㄡˊ ㄆㄧㄥˊ ㄊㄞˊ",
+        "definitions": [
+          {
+            "def": "提供影片或音樂即時播放的線上服務。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "互訪",
     "added": 1725375034.0,
     "heteronyms": [
