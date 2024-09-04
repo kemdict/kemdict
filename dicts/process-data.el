@@ -186,6 +186,8 @@ For example, 1 is 一, 213 is 龜."
   "A list of targets that have already been linked.
 
 `d:links:linkify-keywords' uses this to avoid replacing links multiple times.")
+(defvar d:links:lang nil
+  "Used to override the language of a link.")
 
 (defvar d:links nil
   "A list of link objects.
@@ -228,8 +230,14 @@ this:
         (push `((from . ,d:links:from)
                 (to . ,target))
               d:links))
-      (format "<a href=\"/word/%s\">%s</a>"
-              href desc))))
+      (if d:links:lang
+          ;; If the word doesn't exist in the language we ask for here, the word
+          ;; page just removes the query param and does a redirect as if it's
+          ;; not passed in. So this is fine.
+          (format "<a href=\"/word/%s?lang=%s\">%s</a>"
+                  href lang desc)
+        (format "<a href=\"/word/%s\">%s</a>"
+                href desc)))))
 
 (defun d:links:linkify-keywords (str)
   "Extract 5 keywords in STR and attempt to make them links."
@@ -542,7 +550,9 @@ some processing.
 
 This is a separate step from shaping."
   (let ((d:links:from title)
-        (d:links:linked nil))
+        (d:links:linked nil)
+        (d:links:lang (when (equal dict "chhoetaigi_taijittoasutian")
+                        "nan_TW")))
     (dolist (key '("definition" "source_comment" "典故說明"))
       (ht-update-with! props key
         #'d:links:linkify-brackets))
