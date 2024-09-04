@@ -44,13 +44,18 @@ import WordTabs from "./WordTabs.svelte";
 let term_ja = title;
 let term_en = title;
 const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
-  ([id, hets]: [string, Heteronym[]]) => {
+  ([id, hets]) => {
     // Implement the logic for eq-ja / eq-en
     if (id === "kisaragi_dict") {
       const eq_ja = hets.find((het) => het.props["eq-ja"])?.props["eq-ja"];
       if (eq_ja) term_ja = eq_ja;
       const eq_en = hets.find((het) => het.props["eq-en"])?.props["eq-en"];
       if (eq_en) term_en = eq_en;
+    }
+    if (id === undefined) {
+      throw new Error(
+        `Encountered heteronyms with undefined "from" for word ${title}`,
+      );
     }
     return [dictsObj[id], hets];
   },

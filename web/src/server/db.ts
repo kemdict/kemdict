@@ -31,7 +31,7 @@ export const DB =
 let groupedChars: {
   without_stroke: string[];
   with_stroke_grouped: [
-    any,
+    number,
     {
       title: string;
       sc: number;

@@ -38,7 +38,7 @@ export interface Dict {
   id: string;
   name: string;
   url: string;
-  lang: string;
+  lang: LangId;
   meta?: {
     version?: string;
     author?: string;
@@ -87,35 +87,46 @@ function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
 export const dictsObj = dictsToObj(dicts);
 
 /**
- * Return a new array which is `arr` whose objects are grouped by `property`.
+ * Return a new array which is `arr` whose objects are grouped by their values
+ * under `property`.
  *
  * [["value", [...]], ["value2", [...]]]
  *
- * Items without `property` are grouped under `fallback`. (More
- * accurately, they are grouped under the string representation of
- * `fallback`, so eg. `false` and "false" are equivalent.)
+ * If `fallback` is provided, items without `property` are grouped under
+ * `fallback`. Otherwise they are discarded.
  */
-// This is more or less seq-group-by ported over, except the fallback part.
-export function groupByProp<T>(
+export function groupByProp<T, K extends keyof T>(
   arr: T[],
-  property: string,
-  fallback?: any,
-): Array<[any, T[]]> {
-  function reducer(acc: Record<any, T[]>, elt: T) {
-    const key = elt[property];
-    const cell = acc[key];
-    if (cell) {
-      cell.push(elt);
-    } else {
-      if (typeof key === "undefined") {
-        acc[fallback] = [elt];
-      } else {
-        acc[key] = [elt];
-      }
+  property: K,
+): [T[K], T[]][];
+export function groupByProp<T, K extends keyof T, F extends string>(
+  arr: T[],
+  property: K,
+  fallback: F,
+): [F | T[K], T[]][];
+export function groupByProp<T, K extends keyof T, F extends string>(
+  arr: T[],
+  property: K,
+  fallback?: F | undefined,
+): [F | T[K], T[]][] {
+  const map: Map<T[K] | F, T[]> = new Map();
+  for (const elem of arr) {
+    // if key is not undefined, then the item does have the property
+    const key = elem[property];
+    const realKey = key ?? fallback;
+    if (typeof realKey === "undefined") {
+      // the item doesn't have it and there is no fallback
+      // discard the item
+      continue;
     }
-    return acc;
+    const cell = map.get(realKey);
+    if (cell !== undefined) {
+      cell.push(elem);
+    } else {
+      map.set(realKey, [elem]);
+    }
   }
-  return Object.entries(arr.reduce(reducer, {}));
+  return [...map.entries()];
 }
 
 /**
