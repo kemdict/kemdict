@@ -63,13 +63,13 @@ export interface Heteronym {
   exact?: boolean;
 }
 
-export type DictId = string;
-export type LangId = string;
-
 // Yes, this works, it is bundled properly.
 import { dicts as origDicts, langs as origLangs } from "../../../dicts/data.ts";
 export const dicts = origDicts as Dict[];
 export const langs = origLangs;
+
+export type DictId = string;
+export type LangId = keyof typeof origLangs;
 
 export function langIdName(langId: LangId): string {
   return langs[langId];

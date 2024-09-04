@@ -1,6 +1,6 @@
 ---
 import { langs, groupByProp } from "common";
-import type { Dict } from "common";
+import type { Dict, LangId } from "common";
 export interface Props {
   presentDicts: Array<Dict>;
   term?: string;
@@ -19,28 +19,26 @@ const {
       <div class="border border-gray-200 px-2 pb-2 dark:border-stone-700">
         <h2 class="text-center font-bold">目錄</h2>
         <ol class="p-0">
-          {(groupByProp(presentDicts, "lang") as [string, Dict[]][]).map(
-            ([langId, dicts], i) => (
-              <li>
-                <span>{i + 1}. </span>
-                <a class="link" href={`?lang=${langId}`}>
-                  {langs[langId]}
-                </a>
-                <ol class="pl-0">
-                  {dicts.map((dict, j) => (
-                    <li>
-                      <span>
-                        {i + 1}.{j + 1}.
-                      </span>
-                      <a class="link" href={`?lang=${langId}#${dict.id}`}>
-                        {dict.name}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </li>
-            )
-          )}
+          {groupByProp(presentDicts, "lang").map(([langId, dicts], i) => (
+            <li>
+              <span>{i + 1}. </span>
+              <a class="link" href={`?lang=${langId}`}>
+                {langs[langId]}
+              </a>
+              <ol class="pl-0">
+                {dicts.map((dict, j) => (
+                  <li>
+                    <span>
+                      {i + 1}.{j + 1}.
+                    </span>
+                    <a class="link" href={`?lang=${langId}#${dict.id}`}>
+                      {dict.name}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </li>
+          ))}
         </ol>
       </div>
     </div>
