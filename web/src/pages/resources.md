@@ -5,6 +5,7 @@ title: 相關資源 | Kemdict
 
 # 相關資源
 
+- [台語語料庫應用檢索系統](https://tggl.naer.edu.tw/)
 - https://chhoe.taigi.info/
 - https://itaigi.tw/
 - https://moedict.tw/
