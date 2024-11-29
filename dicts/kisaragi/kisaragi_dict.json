@@ -1,5 +1,35 @@
 [
   {
+    "title": "天龍國",
+    "added": 1732865035.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄊㄧㄢ ㄌㄨㄥˊ ㄍㄨㄛˊ",
+        "definitions": [
+          {
+            "def": "台北市的戲稱。有高高在上而與世隔絕的貶義。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "手順",
+    "added": 1732864570.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄕㄡˇ ㄕㄨㄣˋ",
+        "definitions": [
+          {
+            "def": "達成一項目的可遵循的步驟。如：「機台旁的紙條上有手順」。借自日語。\n# 為什麼不用「步驟」或「說明」？別問我，我只是記錄有人這樣講。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "logo",
     "added": 1726820645.0,
     "heteronyms": [
