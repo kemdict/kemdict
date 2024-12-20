@@ -1,5 +1,35 @@
 [
   {
+    "title": "光照治療",
+    "added": 1734671619.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄤ ㄓㄠˋ ㄓˋ ㄌㄧㄠˊ",
+        "definitions": [
+          {
+            "def": "一種利用光線（不論是否為可見光）照射身體組織來進行的治療。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "照光",
+    "added": 1734406239.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄠˋ ㄍㄨㄤ",
+        "definitions": [
+          {
+            "def": "進行[[光照治療]]。如：「照光室」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "天龍國",
     "added": 1732865035.0,
     "heteronyms": [
