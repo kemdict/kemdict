@@ -257,8 +257,7 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
     meta: {
       author: "教育部",
       version: moeDicts.dict_idioms.v,
-      // TODO: fill this out
-      desc: ``,
+      desc: `教育部的成語辭典。`,
       license: {
         name: "CC BY-ND",
         url: "/l/idiomsdict_10409.pdf",
