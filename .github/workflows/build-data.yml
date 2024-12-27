@@ -25,14 +25,16 @@ jobs:
         run: |
           cd dicts
           # 2024-12-27
-          # pip install unihan-etl==0.34.0 typing_extensions
-          pip install unihan-etl typing_extensions
+          # Versions newer than this currently breaks for the set of fields that
+          # I'm asking from it. So just pin it to the last known working
+          # version. For now.
+          pip install unihan-etl==0.34.0 typing_extensions
           # unihan-etl uses Unihan.zip from latest Unicode, but right
           # now does not appear to work with Unihan.zip from Unicode
           # 15.1. It did work with the one from Unicode 15.0, so use
           # that instead.
-          # mkdir -p ~/.cache/unihan_etl/downloads
-          # curl -L https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip > ~/.cache/unihan_etl/downloads/Unihan.zip
+          mkdir -p ~/.cache/unihan_etl/downloads
+          curl -L https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip > ~/.cache/unihan_etl/downloads/Unihan.zip
       - name: Set up Emacs
         uses: purcell/setup-emacs@master
         with:
