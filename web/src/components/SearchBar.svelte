@@ -66,7 +66,7 @@
       />
     </div>
     <div class="mt-4 flex justify-between">
-      <div>
+      <div class="flex-grow">
         <h2 class="mb-2 font-bold opacity-75">搜尋方式</h2>
         <fieldset class="flex max-w-[60%] flex-wrap gap-x-4 gap-y-2">
           {#each [...matchTypes] as [mtch, name]}
