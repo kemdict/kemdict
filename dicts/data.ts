@@ -1,4 +1,5 @@
 import type { Dict } from "../web/src/lib/common";
+import {dicts as moeDicts} from "./ministry-of-education/update"
 
 export const langs = {
   zh_TW: "華語",
@@ -130,7 +131,7 @@ export const dicts = [
     url: "https://dict.concised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
     meta: {
-      version: "2014_20240821",
+      version: moeDicts.dict_concised.v,
       author: "教育部",
       desc: `
 > 主要適用對象：國中、小學生及學習華語人士。
@@ -154,7 +155,7 @@ export const dicts = [
     url: "https://dict.revised.moe.edu.tw/search.jsp?word=$1",
     lang: "zh_TW",
     meta: {
-      version: "2015_20240904",
+      version: moeDicts.dict_revised.v,
       author: "教育部",
       desc: `教育部「供研究者使用」的國語辭典。`,
       license: {
@@ -255,7 +256,7 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
     lang: "zh_TW",
     meta: {
       author: "教育部",
-      version: "2020_20240627",
+      version: moeDicts.dict_idioms.v,
       // TODO: fill this out
       desc: ``,
       license: {
