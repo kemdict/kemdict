@@ -117,8 +117,10 @@ rel="noreferrer"
       <p>{@html markers(het.props.source_reference)}</p>
     {/if}
   {/if}
+  {#if het.props.典故說明}
   <h2>典故說明</h2>
   <p>{@html het.props.典故說明}</p>
+  {/if}
   {#if het.props.書證}
     <h2>書證</h2>
     {@html newline_string_to_ol(het.props.書證)}
