@@ -65,22 +65,27 @@
         value="搜尋"
       />
     </div>
-    <div class="mt-4">
-      <h2 class="mb-2 font-bold opacity-75">搜尋方式</h2>
-      <fieldset class="flex max-w-[60%] flex-wrap gap-x-4 gap-y-2">
-        {#each [...matchTypes] as [mtch, name]}
-          <label class="flex items-center space-x-1">
-            <input
-              class="form-radio radio"
-              type="radio"
-              name="m"
-              value={mtch}
-              checked={mtch === initialMatchSelection}
-            />
-            <span>{name}</span>
-          </label>
-        {/each}
-      </fieldset>
+    <div class="mt-4 flex justify-between">
+      <div>
+        <h2 class="mb-2 font-bold opacity-75">搜尋方式</h2>
+        <fieldset class="flex max-w-[60%] flex-wrap gap-x-4 gap-y-2">
+          {#each [...matchTypes] as [mtch, name]}
+            <label class="flex items-center space-x-1">
+              <input
+                class="form-radio radio"
+                type="radio"
+                name="m"
+                value={mtch}
+                checked={mtch === initialMatchSelection}
+              />
+              <span>{name}</span>
+            </label>
+          {/each}
+        </fieldset>
+      </div>
+      <div>
+        <a class="font-bold opacity-75 underline" href="/history">搜尋與閱讀紀錄</a>
+      </div>
     </div>
   </form>
 </div>
