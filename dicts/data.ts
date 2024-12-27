@@ -1,5 +1,5 @@
 import type { Dict } from "../web/src/lib/common";
-import {dicts as moeDicts} from "./ministry-of-education/update"
+import moeDicts from "./ministry-of-education/versions.json";
 
 export const langs = {
   zh_TW: "華語",
