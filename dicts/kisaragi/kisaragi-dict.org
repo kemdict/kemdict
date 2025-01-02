@@ -1931,9 +1931,3 @@ Hub / USB Hub
 :END:
 **** ㄧㄡˇ ㄧˊ
 ***** 名|友好的關係。作為朋友的關係。
-
-* COMMENT Org setup
-
-# Local Variables:
-# eval: (load (expand-file-name "generate.el") nil t)
-# End:

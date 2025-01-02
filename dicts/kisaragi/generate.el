@@ -132,8 +132,6 @@
                 "\n")
         (message "Generating %s...done" dest)))))
 
-(when (eq major-mode 'org-mode)
-  (add-hook 'after-save-hook #'kisaragi-dict/write nil t))
 (when noninteractive
   (kisaragi-dict/write "kisaragi-dict.org")
   (kisaragi-dict/write "kisaragi-taigi.org"))

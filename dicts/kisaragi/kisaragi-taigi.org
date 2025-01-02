@@ -68,9 +68,3 @@
 贏[[筊?lang=nan_TW#moedict_twblg][筊]]驚食飯
 輸[[筊?lang=nan_TW#moedict_twblg][筊]]驚天光
 #+end_quote
-
-* COMMENT Org setup
-
-# Local Variables:
-# eval: (load (expand-file-name "generate.el") nil t)
-# End:
