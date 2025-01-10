@@ -9,7 +9,6 @@ import sitemap from "@astrojs/sitemap";
 const baseURL = "https://kemdict.com";
 const prod = import.meta.env.PROD;
 
-import legacy from "@vitejs/plugin-legacy";
 import { purgeCss } from "vite-plugin-tailwind-purgecss";
 
 export default defineConfig({
@@ -42,7 +41,7 @@ export default defineConfig({
     port: 5173,
   },
   vite: {
-    plugins: [legacy(), purgeCss()],
+    plugins: [purgeCss()],
     clearScreen: false,
     envPrefix: "KEMDICT_",
     build: { rollupOptions: { external: ["bun:sqlite"] } },
