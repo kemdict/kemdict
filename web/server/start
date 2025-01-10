@@ -1,4 +1,4 @@
 #!/bin/sh
 
 [ -d node_modules ] || pnpm install --prod
-node server/entry.mjs
+bun server/entry.mjs

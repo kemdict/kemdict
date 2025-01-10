@@ -2,13 +2,10 @@ import { chunk, sortBy, uniqBy } from "lodash-es";
 import { groupByProp, CrossDB } from "common";
 import { spc } from "$lib/processing";
 import type { Heteronym, LangId, Mtch } from "common";
+import { Database } from "bun:sqlite";
 
 export async function readDB() {
   const fs = await import("node:fs");
-  const Database =
-    typeof Bun !== "undefined"
-      ? (await import("bun:sqlite")).Database
-      : (await import("better-sqlite3")).default;
   const path = [
     "../kemdict.db",
     "../dicts/entries.db",
