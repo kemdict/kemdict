@@ -5,7 +5,6 @@ const { title } = Astro.params;
 import { uniq } from "lodash-es";
 import { DB } from "$src/server/db";
 import {
-  printfdebug,
   site,
   dictsObj,
   langs,
@@ -20,18 +19,6 @@ const {
   presentLangSet,
   heteronyms,
 } = await DB.getHeteronyms(title, { exactQuery: true });
-if (
-  heteronyms.some(
-    (het) =>
-      het.title !== title &&
-      (!het.props || !Object.values(het.props).includes(title)),
-  )
-) {
-  console.log("What the fuck? Non-matching heteronyms matched: ", {
-    title,
-    heteronyms,
-  });
-}
 const titles = uniq(heteronyms.map((het: Heteronym) => het.title));
 const backlinks = (await DB.getBacklinks(...titles)).sort();
 
