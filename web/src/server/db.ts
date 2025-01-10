@@ -8,6 +8,7 @@ export async function readDB() {
   const fs = await import("node:fs");
   const path = [
     "../kemdict.db",
+    "../entries.db",
     "../dicts/entries.db",
     "../../dicts/entries.db",
     "./entries.db",
