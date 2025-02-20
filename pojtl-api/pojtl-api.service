@@ -1,0 +1,15 @@
+# Sample of the systemd service used to deploy this.
+
+[Unit]
+Description=An interface for POJ / TL conversion
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+WorkingDirectory="<where this code is>"
+Environment="PORT=<port to start service on>"
+ExecStart=make start
+
+[Install]
+WantedBy=default.target
