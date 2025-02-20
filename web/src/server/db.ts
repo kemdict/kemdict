@@ -59,7 +59,8 @@ export function hetPreview(het: Heteronym) {
     het.props.def ||
       het.props.defs?.map((x) => x.def).join("") ||
       het.props.example ||
-      het.props.zh,
+      het.props.zh ||
+      het.props.en,
   );
 }
 
