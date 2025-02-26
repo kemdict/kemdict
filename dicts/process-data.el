@@ -787,6 +787,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
                           (cl-loop for f in files
                                    vconcat
                                    (progn
+                                     (message "JSON parsing %s..." f)
                                      (erase-buffer)
                                      (insert-file-contents f)
                                      (json-parse-buffer)))))
