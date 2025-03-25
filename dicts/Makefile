@@ -52,7 +52,7 @@ unihan.json:
 	# 15.1. It did work with the one from Unicode 15.0, so use
 	# that instead.
 	mkdir -p ~/.cache/unihan_etl/downloads
-	curl -L "https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip > ~/.cache/unihan_etl/downloads/Unihan.zip"
+	curl -L "https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip" > ~/.cache/unihan_etl/downloads/Unihan.zip
 	unihan-etl -F json -d $(abspath unihan.json) -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
