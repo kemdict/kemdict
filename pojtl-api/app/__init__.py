@@ -3,7 +3,7 @@ from kesi import Ku
 from markupsafe import escape
 
 app = Flask(__name__)
-app.logger.setLevel("INFO")
+app.logger.setLevel("ERROR")
 
 
 @app.errorhandler(404)
