@@ -6,89 +6,76 @@ const term_ja = Astro.props.term_ja || term;
 
 import Out from "./Out.astro";
 
-import PopupMenu from "./PopupMenu.svelte";
-
 const moedict = Object.entries({
-  華語: `https://moedict.tw/${term}`,
-  台語: `https://moedict.tw/'${term}`,
-  客語: `https://moedict.tw/:${term}`,
+  華語萌典: `https://moedict.tw/${term}`,
+  台語萌典: `https://moedict.tw/'${term}`,
+  客語萌典: `https://moedict.tw/:${term}`,
   兩岸詞典: `https://moedict.tw/~${term}`,
 });
 
 const wiktionary = Object.entries({
-  中文: `https://zh.wiktionary.org/w/index.php?search=${term}`,
-  英語: `https://en.wiktionary.org/w/index.php?search=${term}`,
-  日語: `https://ja.wiktionary.org/w/index.php?search=${term}`,
+  中文維基詞典: `https://zh.wiktionary.org/w/index.php?search=${term}`,
+  英語維基詞典: `https://en.wiktionary.org/w/index.php?search=${term}`,
+  日語維基詞典: `https://ja.wiktionary.org/w/index.php?search=${term}`,
 });
 ---
 
 <div class="prose prose-a:font-normal mb-4">
   <h3 class="mb-2 mt-0">在其他地方搜尋「{term}」</h3>
-  <ul class="flex list-none flex-wrap space-x-2">
-    <li>
-      <Out href={`https://google.com/search?q=${term}`}>Google</Out>
-    </li>
-    <li>
-      <Out href={`https://zh.wikipedia.org/w/index.php?search=${term}`}>
-        維基百科
-      </Out>
-    </li>
-    <li>
-      <PopupMenu
-        client:load
-        btnClass="link"
-        cardClass="card variant-glass-primary p-2"
-        arrowClass=""
-        closeBtn={true}
-        placement="right"
-        label="維基詞典…"
-      >
-        {
-          wiktionary.map(([label, href]) => (
-            <Out class="block px-4 py-2" href={href}>
-              {label}
-            </Out>
-          ))
-        }
-      </PopupMenu>
-    </li>
-    <li>
-      <PopupMenu
-        client:load
-        btnClass="link"
-        cardClass="card variant-glass-primary p-2"
-        arrowClass=""
-        closeBtn={true}
-        placement="right"
-        label="萌典…"
-      >
-        {
-          moedict.map(([label, href]) => (
-            <Out class="block px-4 py-2" href={href}>
-              {label}
-            </Out>
-          ))
-        }
-      </PopupMenu>
-    </li>
-    <li>
-      <Out
-        href={`https://terms.naer.edu.tw/search/?match_type=phrase&query_op=&query_field=title&query_term=${term}`}
-      >
-        國教院樂詞網
-      </Out>
-    </li>
-    <li>
-      <Out href={`https://www.weblio.jp/content_find?query=${term_ja}`}>
-        Weblio
-      </Out>
-    </li>
-    <li>
-      <Out
-        href={`https://dictionary.goo.ne.jp/freewordsearcher.html?mode=0&kind=all&MT=${term_ja}`}
-      >
-        Goo 辞書
-      </Out>
-    </li>
-  </ul>
+  <div class="[&_ul]:my-0">
+    <ul class="flex list-none flex-wrap space-x-2">
+      <li>
+        <Out href={`https://google.com/search?q=${term}`}>Google</Out>
+      </li>
+      <li>
+        <Out href={`https://duckduckgo.com/?q=${term}`}>Duckduckgo</Out>
+      </li>
+    </ul>
+    <ul class="flex list-none flex-wrap space-x-2">
+      <li>
+        <Out href={`https://zh.wikipedia.org/w/index.php?search=${term}`}>
+          中文維基百科
+        </Out>
+      </li>
+    </ul>
+    <ul class="flex list-none flex-wrap space-x-2">
+      {
+        wiktionary.map(([label, href]) => (
+          <li>
+            <Out href={href}>{label}</Out>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="flex list-none flex-wrap space-x-2">
+      {
+        moedict.map(([label, href]) => (
+          <li>
+            <Out href={href}>{label}</Out>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="flex list-none flex-wrap space-x-2">
+      <li>
+        <Out
+          href={`https://terms.naer.edu.tw/search/?match_type=phrase&query_op=&query_field=title&query_term=${term}`}
+        >
+          國教院樂詞網
+        </Out>
+      </li>
+      <li>
+        <Out href={`https://www.weblio.jp/content_find?query=${term_ja}`}>
+          Weblio
+        </Out>
+      </li>
+      <li>
+        <Out
+          href={`https://dictionary.goo.ne.jp/freewordsearcher.html?mode=0&kind=all&MT=${term_ja}`}
+        >
+          Goo 辞書
+        </Out>
+      </li>
+    </ul>
+  </div>
 </div>
