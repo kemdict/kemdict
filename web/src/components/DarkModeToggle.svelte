@@ -60,7 +60,7 @@
   on:click={rotateDarkMode}
 >
   {#if loading}
-    <div class="h-5 w-5" />
+    <div class="h-5 w-5"></div>
   {:else if isDark}
     <!-- ionicons moon-outline and sunny-outline. -->
     <svg
