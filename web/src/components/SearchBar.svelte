@@ -17,7 +17,7 @@
       contains: "包含",
       exact: "完全符合",
       /* content: "內文包含", */
-    })
+    }),
   );
   onMount(() => {
     window.addEventListener("keydown", (e) => {
@@ -84,7 +84,10 @@
         </fieldset>
       </div>
       <div>
-        <a class="font-bold opacity-75 underline" href="/history">搜尋與閱讀紀錄</a>
+        <a
+          class="whitespace-nowrap font-bold underline opacity-75"
+          href="/history">搜尋與閱讀紀錄</a
+        >
       </div>
     </div>
   </form>

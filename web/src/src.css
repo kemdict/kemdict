@@ -46,16 +46,19 @@
 }
 
 @layer components {
+  .radio:checked {
+    @apply bg-primary-600 dark:bg-primary-600;
+  }
   .k-input {
     @apply h-12;
     @apply px-4;
     @apply text-sm;
-    @apply border border-gray-400 dark:border-stone-500;
+    @apply dark:border-surface-600 border-surface-500 border;
     @apply bg-white/20;
     @apply rounded;
     &:focus {
       @apply outline outline-2 outline-offset-2;
-      @apply outline-gray-300 dark:outline-gray-500;
+      @apply outline-primary-600 dark:outline-primary-500;
     }
   }
   .wordlink {
