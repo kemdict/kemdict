@@ -1,5 +1,327 @@
 [
   {
+    "title": "老街",
+    "added": 1742925236.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄠˇ ㄐㄧㄝˉ",
+        "definitions": [
+          {
+            "def": "舊的商業街道。在臺灣常指20世紀初保留至今或重建成當時狀態的商店街。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "路網",
+    "added": 1742925148.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄨˋ ㄨㄤˇ",
+        "definitions": [
+          {
+            "def": "道路或大衆運輸路線的總稱。由於在地圖上繪製後常呈網狀而得名。見「路網圖」、「營運系統圖」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "路網圖",
+    "added": 1742925115.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄨˋ ㄨㄤˇ ㄊㄨˊ",
+        "definitions": [
+          {
+            "def": "描繪運輸系統的[[路網]]的地圖。同「運輸系統圖」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "營運系統圖",
+    "added": 1742925062.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄥˊ ㄩㄣˋ ㄒㄧˋ ㄊㄨㄥˇ ㄊㄨˊ",
+        "definitions": [
+          {
+            "def": "一種簡略描述大眾運輸系統各路線與車站位置的地圖。同「路網圖」。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "總集篇",
+    "added": 1742925028.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗㄨㄥˇ ㄐㄧˊ ㄆㄧㄢˉ",
+        "definitions": [
+          {
+            "def": "將電視劇集多集內容簡短化、重新編輯而成的作品。常見於動畫影集。借自日語。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "打包",
+    "added": 1742923799.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄉㄚˇ ㄅㄠˉ",
+        "definitions": [
+          {
+            "def": "將東西包裝起來。",
+            "type": "動"
+          },
+          {
+            "def": "在餐廳，將未食用完畢的餐點裝袋以便攜帶離開。常見為店家所提供的服務。如：「不好意思，我吃不完餐點，請幫我打包」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "旅遊景點",
+    "added": 1742923752.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄩˇ ㄧㄡˊ ㄐㄧㄥˇ ㄉㄧㄢˇ",
+        "definitions": [
+          {
+            "def": "適合旅遊時前往的[[景點]]。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "展覽館",
+    "added": 1742923442.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄢˇ ㄌㄢˇ ㄍㄨㄢˇ",
+        "definitions": [
+          {
+            "def": "用來舉辦展覽的場館。如：「南港展覽館」",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "展館",
+    "added": 1742923263.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄢˇ ㄍㄨㄢˇ",
+        "definitions": [
+          {
+            "def": "展覽或展示用的場館。[[展覽館]]的簡寫。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "夜宿",
+    "added": 1742923090.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄧㄝˋ ㄙㄨˋ",
+        "definitions": [
+          {
+            "def": "夜間休息。在某處過夜。如：「夜宿海生館」",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "海生館",
+    "added": 1742922827.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄏㄞˇ ㄕㄥˉ ㄍㄨㄢˇ",
+        "definitions": [
+          {
+            "def": "位於[[屏東]]的國立海洋生物博物館的簡稱。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "螺旋麵包",
+    "added": 1742922745.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄌㄨㄛˊ ㄒㄩㄢˊㄇㄧㄢˋ ㄅㄠˉ",
+        "definitions": [
+          {
+            "def": "一種呈螺旋貝狀的麵包。源自於日本。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "可頌",
+    "added": 1742922649.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄜˇ ㄙㄨㄥˋ",
+        "definitions": [
+          {
+            "def": "一種麵包。法語croissant的音譯。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ㄎㄡˊ",
+    "added": 1740752036.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄎㄡˊ",
+        "definitions": [
+          {
+            "def": "高傲。看不起人。會進行惡性殺價的。借自台語[[khô]]。\n# Example: https://youtu.be/nvw11IcNtCs?t=16m11s",
+            "type": "形"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "掛載點",
+    "added": 1738841013.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄚˋ ㄗㄞˇ ㄉㄧㄢˇ",
+        "definitions": [
+          {
+            "def": "（電腦用語）一個檔案系統掛載後用來存取它的路徑。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "掛載",
+    "added": 1738840841.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄍㄨㄚˋ ㄗㄞˇ",
+        "definitions": [
+          {
+            "def": "在電腦上，一個讓檔案系統的內容可透過某路徑存取的行為。該路徑稱為[[掛載點]]。英語mount的意譯。[反][[卸載]]",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "卸載",
+    "added": 1738840663.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄒㄧㄝˋ ㄗㄞˇ",
+        "definitions": [
+          {
+            "def": "在電腦上，讓電腦不再讓一個檔案系統可由其[[掛載點]]存取。英語unmount的意譯。[反][[掛載]]。",
+            "type": "動"
+          },
+          {
+            "def": "（中國用語）解除安裝。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "截割",
+    "added": 1737138215.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄐㄧㄝˊ ㄍㄜˉ",
+        "definitions": [
+          {
+            "def": "在電腦圖形中，選擇範圍來決定是否彩現。英語clipping的意譯。",
+            "type": "動"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "自選曲",
+    "added": 1737015236.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄗˋ ㄒㄩㄢˇ ㄑㄩˇ",
+        "definitions": [
+          {
+            "def": "音樂比賽中，由參賽者自行選擇，而未由舉辦方直接指定的曲子。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "指定曲",
+    "added": 1737014727.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓˇ ㄉㄧㄥˋ ㄑㄩˇ",
+        "definitions": [
+          {
+            "def": "音樂比賽中，由舉辦方指定給參賽者的曲子。",
+            "type": "名"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "爪",
+    "added": 1736484655.0,
+    "heteronyms": [
+      {
+        "pronunciation": "ㄓㄨㄚˇ",
+        "definitions": [
+          {
+            "def": "臺灣華語一律唸作「ㄓㄨㄚˇ」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "光照治療",
     "added": 1734671619.0,
     "heteronyms": [
@@ -540,7 +862,7 @@
         "pronunciation": "ㄔㄤˊ ㄎㄨˋ",
         "definitions": [
           {
-            "def": "長度超過膝蓋的褲子。[反]短褲",
+            "def": "長度超過膝蓋的褲子。[反][[短褲]]",
             "type": "名"
           }
         ]

@@ -67,7 +67,7 @@ const newWords = await DB.getNewWords(15);
   <div class="prose">
     <div>
       <h3><a class="font-bold" href="/newwords">最近新增的詞</a></h3>
-      <WordList words={newWords} />
+      <WordList words={newWords} etc="/newwords" />
     </div>
   </div>
   <div class="prose">

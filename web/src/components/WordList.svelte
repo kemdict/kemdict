@@ -3,6 +3,7 @@
   // (as stored in database - by date for kisaragi-dict and by (TODO)
   // backlinks ranking for backlinks)
 
+  export let etc: string;
   export let words: string[];
   export let search: boolean = words.length > 20;
   /** Links link to /word/foo by default; this is the "/word/" part. */
@@ -37,5 +38,10 @@
         </li>
       {/if}
     {/each}
+    {#if etc}
+      <li class="mr-2 py-2">
+        <a class="wordlink" href={etc}> ... </a>
+      </li>
+    {/if}
   </ul>
 </div>
