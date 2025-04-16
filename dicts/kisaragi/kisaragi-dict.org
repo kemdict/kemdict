@@ -8,6 +8,7 @@
 * Todo
 
 Add a way to add usage links.
+→ Just add a line like「範例：<link>」
 
 賦權
 串流
@@ -36,35 +37,6 @@ Hub / USB Hub
 同人 (as in "doujin")
 立棋 (流行語)
 
-* Referenced Wiktionary while writing
-需要標清楚CC-BY-SA之後才能放進去
-** 開外掛
-:PROPERTIES:
-:added:    2023-03-26T02:27:28+0900
-:END:
-*** ㄎㄞ ㄨㄞˋ ㄍㄨㄚˋ
-**** 動|使用外掛程式在遊戲內作弊。
-**** 動|作弊。如：「用了單字卡之後，考試時我感覺就好像開外掛一樣，什麼都記得」
-** 擴充功能
-:PROPERTIES:
-:added:    2023-03-26T02:28:06+0900
-:END:
-*** ㄎㄨㄛˋ ㄔㄨㄥ ㄍㄨㄥ ㄋㄥˊ
-**** 名|用來擴充現有軟體功能的程式。[[外掛程式]]。
-** 外掛程式
-:PROPERTIES:
-:added:    2023-03-26T02:27:27+0900
-:END:
-*** ㄨㄞˋ ㄍㄨㄚˋ
-**** 名|用來擴充現有軟體功能的程式。[[擴充功能]]。
-** 外掛
-:PROPERTIES:
-:added:    2023-03-26T02:27:25+0900
-:END:
-*** ㄨㄞˋ ㄍㄨㄚˋ
-**** 形|（電腦）從外部附加在原有的東西上面的。如：「外掛字幕」
-**** 名|用來擴充現有軟體功能的程式。[[外掛程式]]。[[擴充功能]]。
-**** 名|引申指遊戲等軟體內作弊用的外掛程式。如：「開外掛」
 * Words
 ** Covid
 *** 確診
@@ -386,7 +358,7 @@ Hub / USB Hub
 :END:
 **** ㄎㄡˊ
 ***** 形|高傲。看不起人。會進行惡性殺價的。借自台語[[khô]]。
-# Example: https://youtu.be/nvw11IcNtCs?t=16m11s
+範例：[[https://youtu.be/nvw11IcNtCs?t=16m11s][https://youtu.be/nvw11IcNtCs?t=16m11s]]
 *** 掛載點
 :PROPERTIES:
 :added:    2025-02-06T20:23:33+0900
@@ -453,8 +425,8 @@ Hub / USB Hub
 :added:    2024-11-29T16:16:10+0900
 :END:
 **** ㄕㄡˇ ㄕㄨㄣˋ
-***** 名|達成一項目的可遵循的步驟。如：「機台旁的紙條上有手順」。借自日語。
 # 為什麼不用「步驟」或「說明」？別問我，我只是記錄有人這樣講。
+***** 名|達成一項目的可遵循的步驟。如：「機台旁的紙條上有手順」。借自日語。
 *** logo
 :PROPERTIES:
 :added:    2024-09-20T17:24:05+0900
@@ -509,8 +481,8 @@ Hub / USB Hub
 :eq-ja:  直撃
 :END:
 **** ㄓˊ ㄐㄧˊ
-***** 動|直接目擊。如：「記者直擊知名董事長現身夜市」
 # I'm totally not influenced by the recent reporting on Jensen Huang's visit
+***** 動|直接目擊。如：「記者直擊知名董事長現身夜市」
 *** 約聘人員
 :PROPERTIES:
 :added:    2024-06-12T02:53:59+0900
