@@ -10,6 +10,7 @@
   import WordMoedictish from "./WordMoedictish.svelte";
   import WordUnihan from "./WordUnihan.svelte";
   import WordILRDF from "./WordILRDF.svelte";
+  import WordLopof from "./WordLopof.svelte";
 
   import { format } from "common";
 
@@ -179,6 +180,8 @@
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href={dict.meta.license.url}>使用說明</a></p>
       </div>
+    {:else if dict.id.startsWith("lopof")}
+      <WordLopof heteronyms={hets} />
     {:else if dict.id.startsWith("ilrdf")}
       {@const lang = dict.id.slice(-3)}
       <WordILRDF heteronyms={hets} {lang} />

@@ -29,6 +29,7 @@ DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
+DICT_TARGETS += lopof-nan_TW.json lopof-hak_TW.json
 DICT_TARGETS += unihan.json
 
 dicts: $(DICT_TARGETS)
