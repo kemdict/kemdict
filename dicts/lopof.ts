@@ -108,7 +108,7 @@ for (const plant of plantsWithTaigi) {
     } else {
       taigiHet.push({
         title: name.han,
-        poj: name.poj,
+        poj: name.poj.toLowerCase(),
         scientificName: `${plant.title}, ${plant.by}`,
         page: plant.page,
         family: plant.family,
