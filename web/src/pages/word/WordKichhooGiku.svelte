@@ -1,5 +1,5 @@
 <script>
-  export let heteronyms;
+  const { heteronyms } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { toTL } from "$src/hack";
 </script>

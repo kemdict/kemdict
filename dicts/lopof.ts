@@ -118,7 +118,19 @@ for (const plant of plants) {
       family: plant.family,
       indigenous: plant.indigenous,
       where: plant.where,
-      otherNames: Object.groupBy(plant.names.map(nameWithLang), (o) => o.lang),
+      otherNames: Object.groupBy(
+        plant.names
+          .filter(
+            (other) =>
+              !(
+                "poj" in other &&
+                other.poj === name.poj &&
+                other.han === name.han
+              ),
+          )
+          .map(nameWithLang),
+        (o) => o.lang,
+      ),
     });
   }
 }
