@@ -43,6 +43,26 @@ export const langs = {
 // "xsy",
 // ];
 
+// This book has multiple languages. This works around Kemdict assuming a book
+// only defines entries for a single language.
+const lopofMeta = {
+  author: "佐々木舜一",
+  extra: {
+    原位於: "台語文記憶（楊允言教授）",
+    ChhoeTaigi版數位化及編修:
+      "Lîm Bûn-cheng、Tēⁿ Tì-têng、Tân Kim-hoa、Chiúⁿ Ji̍t-êng",
+    完整電子化: "如月飛羽",
+  },
+  year: 1928,
+  desc: `台灣植物學名與諸語言名稱對照列表。`,
+  license: {
+    name: "CC BY-SA 4.0",
+    url: "https://github.com/Taiwanese-Corpus/Syuniti-Sasaki_1928_List-of-Plants-of-Formosa",
+  },
+  source: "https://gitlab.com/kisaragi-hiu/list-of-plants-of-formosa",
+  original: "https://thak.taigi.info/1928TaioanSitbutMialui/",
+};
+
 // desc is Markdown.
 export const dicts = [
   {
@@ -67,6 +87,20 @@ export const dicts = [
   //   url: `https://e-dictionary.ilrdf.org.tw/${code}/search.htm`,
   //   lang: code,
   // })),
+  {
+    id: "lopof-taigi",
+    name: "臺灣植物名彙",
+    url: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
+    lang: "nan_TW",
+    meta: lopofMeta,
+  },
+  {
+    id: "lopof-hakka",
+    name: "臺灣植物名彙",
+    url: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
+    lang: "hak_TW",
+    meta: lopofMeta,
+  },
   {
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",
