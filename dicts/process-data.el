@@ -63,6 +63,7 @@ by default."
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+       ("lopof" "nan_TW" "list-of-plants-of-formosa")
        ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
        ("ilrdf_ais" "ais" "ilrdf/ais.json")
        ("ilrdf_ami" "ami" "ilrdf/ami.json")

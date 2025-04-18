@@ -43,10 +43,8 @@ entries.db.gz: entries.db
 
 # Generate a Taiwanese names index from our digitization result of
 # List of Plants of Formosa.
-lopof.json: list-of-plants-of-formosa/README.org
-	cd list-of-plants-of-formosa
-	bun install
-	$(MAKE) data/plants.sqlite
+lopof-nan_TW.json lopof-hak_TW.json: list-of-plants-of-formosa/data/plants.sqlite
+	bun lopof.ts
 
 unihan.json:
 	# 2024-12-27
@@ -105,5 +103,7 @@ ministry-of-education/package.json:
 ChhoeTaigiDatabase/README.md:
 	git submodule update --init --depth 1 -- ChhoeTaigiDatabase
 
-list-of-plants-of-formosa/README.org:
+# If we don't want to use the committed database and want to generate it again
+# instead, this is the place to do it.
+list-of-plants-of-formosa/data/plants.sqlite:
 	git submodule update --init --depth 1 -- list-of-plants-of-formosa
