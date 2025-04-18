@@ -1,3 +1,8 @@
 {
-  "dependencies": { "@emacs-eask/cli": "^0.9.7" }
+  "dependencies": {
+    "@emacs-eask/cli": "^0.9.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.10"
+  }
 }
