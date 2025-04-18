@@ -41,6 +41,13 @@ entries.db.gz: entries.db
 	gzip --keep --force entries.db
 	touch entries.db.gz
 
+# Generate a Taiwanese names index from our digitization result of
+# List of Plants of Formosa.
+lopof.json: list-of-plants-of-formosa/README.org
+	cd list-of-plants-of-formosa
+	bun install
+	$(MAKE) data/plants.sqlite
+
 unihan.json:
 	# 2024-12-27
 	# Versions newer than this currently breaks for the set of fields that
@@ -97,3 +104,6 @@ ministry-of-education/package.json:
 
 ChhoeTaigiDatabase/README.md:
 	git submodule update --init --depth 1 -- ChhoeTaigiDatabase
+
+list-of-plants-of-formosa/README.org:
+	git submodule update --init --depth 1 -- list-of-plants-of-formosa

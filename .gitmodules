@@ -7,3 +7,6 @@
 [submodule "ChhoeTaigiDatabase"]
 	path = dicts/ChhoeTaigiDatabase
 	url = https://github.com/ChhoeTaigi/ChhoeTaigiDatabase
+[submodule "dicts/list-of-plants-of-formosa"]
+	path = dicts/list-of-plants-of-formosa
+	url = https://gitlab.com/kisaragi-hiu/list-of-plants-of-formosa
