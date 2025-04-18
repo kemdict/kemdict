@@ -33,6 +33,8 @@
       {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
         <!-- FIXME: this only links to the first one. -->
         <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
+      {:else if dict.id.startsWith("lopof")}
+        <Out href={format(dict.url, `${hets[0].props.page}`)}>{dict.name}</Out>
       {:else}
         <Out href={format(dict.url, title)}>{dict.name}</Out>
       {/if}

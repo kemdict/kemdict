@@ -90,7 +90,7 @@ export const dicts = [
   {
     id: "lopof-taigi",
     name: "臺灣植物名彙",
-    url: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
+    url: "https://kisaragi-hiu.com/list-of-plants-of-formosa/plants/#$1",
     lang: "nan_TW",
     displayLangs: ["nan_TW", "hak_TW"],
     meta: lopofMeta,
@@ -98,7 +98,7 @@ export const dicts = [
   {
     id: "lopof-hakka",
     name: "臺灣植物名彙",
-    url: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
+    url: "https://kisaragi-hiu.com/list-of-plants-of-formosa/plants/#$1",
     lang: "hak_TW",
     hidden: true,
     meta: lopofMeta,
