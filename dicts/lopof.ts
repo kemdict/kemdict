@@ -2,7 +2,10 @@
  * List of Plants of Formosa. */
 
 import { Database } from "bun:sqlite";
-import { plantsData } from "./list-of-plants-of-formosa/src/schema.ts";
+import {
+  plantsData,
+  type PlantName,
+} from "./list-of-plants-of-formosa/src/schema.ts";
 import { writeFileSync } from "fs";
 
 const db = new Database("./list-of-plants-of-formosa/data/plants.sqlite", {
@@ -34,36 +37,19 @@ type Lang =
   | "アミー";
 
 /**
- * Return plant objects that have names matching any of `langs`.
- * `langs` is sliced directly into SQL. Do not pass untrusted input.
- * `langs` are the same values as in the database's names.lang column:
- *   - taigi-poj and taigi-han for Taigi
- *   - hakka-poj and hakka-han for Hakka
- *   - ja-kana and ja-romaji for Japanese
- *   - Other indigenous languages haven't been normalized yet
+ * Annotate `name` with language info to better placate TypeScript.
  */
-function plantsWithLang(langs: Lang[]) {
-  return plantsData.parse(
-    db
-      .query(
-        `
-SELECT obj FROM plants
-WHERE plants.title IN (
-  SELECT scientificName
-  FROM names
-  WHERE ${langs.map((l) => `lang = '${l}'`).join(" OR ")}
-)`,
-      )
-      .values()
-      .map((v) => JSON.parse(v[0] as string)),
-  );
 }
 
 // Because kemdict assumes one dictionary is one language, we need different
 // "dictionary" json files for different languages.
 
-const plantsWithTaigi = plantsWithLang(["taigi-poj", "taigi-han"]);
-const plantsWithHakka = plantsWithLang(["hakka-poj", "hakka-han"]);
+const plants = plantsData.parse(
+  db
+    .query(`SELECT obj FROM plants`)
+    .values()
+    .map((v) => JSON.parse(v[0] as string)),
+);
 
 interface HetHakka {
   // han as title, like how we process other sources
@@ -90,7 +76,7 @@ interface HetTaigi {
 
 const hakkaHet: HetHakka[] = [];
 const taigiHet: HetTaigi[] = [];
-for (const plant of plantsWithTaigi) {
+for (const plant of plants) {
   if (!plant) continue;
   if (!plant.names) continue;
   for (const name of plant.names) {
