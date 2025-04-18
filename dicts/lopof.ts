@@ -15,26 +15,23 @@ const db = new Database("./list-of-plants-of-formosa/data/plants.sqlite", {
 });
 
 /**
- * The same values as in the database's names.lang column:
- *   - taigi-poj and taigi-han for Taigi
- *   - hakka-poj and hakka-han for Hakka
- *   - ja-kana and ja-romaji for Japanese
- *   - Other indigenous languages haven't been normalized yet
+ * Replace old Han characters within `str`.
  */
-type Lang =
-  | "ja-kana"
-  | "ja-romaji"
-  | "taigi-poj"
-  | "taigi-han"
-  | "タイヤル"
-  | "パイワン"
-  | "hakka-poj"
-  | "hakka-han"
-  | "サイセツト"
-  | "アミス"
-  | "ヤミー"
-  | "ツオー"
-  | "アミー";
+function normalizeHanCharacters(str: string) {
+  return str
+    .replaceAll("猪", "豬")
+    .replaceAll("脚", "腳")
+    .replaceAll("猫", "貓")
+    .replaceAll("籐", "藤")
+    .replaceAll("蘚", "癬")
+    .replaceAll("鷄", "雞")
+    .replaceAll("囘", "回")
+    .replaceAll("恒", "恆")
+    .replaceAll("𠻳", "嗽")
+    .replaceAll("𣏌", "杞")
+    .replaceAll("覇", "霸")
+    .replaceAll("兎", "兔");
+}
 
 /**
  * Annotate `name` with language info to better placate TypeScript.
@@ -135,5 +132,11 @@ for (const plant of plants) {
   }
 }
 
-writeFileSync("lopof-nan_TW.json", JSON.stringify(taigiHet, null, 2));
-writeFileSync("lopof-hak_TW.json", JSON.stringify(hakkaHet, null, 2));
+writeFileSync(
+  "lopof-nan_TW.json",
+  normalizeHanCharacters(JSON.stringify(taigiHet, null, 2)),
+);
+writeFileSync(
+  "lopof-hak_TW.json",
+  normalizeHanCharacters(JSON.stringify(hakkaHet, null, 2)),
+);
