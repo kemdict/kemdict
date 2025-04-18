@@ -39,6 +39,27 @@ export interface Dict {
   name: string;
   url: string;
   lang: LangId;
+  /**
+   * Language list displayed on dictionary pages instead of `lang`.
+   *
+   * Part of the workaround for Kemdict assuming sources have a single language.
+   * For sources with multiple languages:
+   * - define an entry for each language
+   * - choose one entry and set `displayLangs` to include all of its languages
+   * - for other entries set `hidden` to true
+   */
+  displayLangs?: LangId[];
+  /**
+   * Whether to hide this entry on the dictionary list. The dictionary will also
+   * not get its own description page.
+   *
+   * Part of the workaround for Kemdict assuming sources have a single language.
+   * For sources with multiple languages:
+   * - define an entry for each language
+   * - choose one entry and set `displayLangs` to include all of its languages
+   * - for other entries set `hidden` to true
+   */
+  hidden?: boolean;
   meta?: {
     version?: string;
     author?: string;
@@ -75,7 +96,7 @@ export function langIdName(langId: LangId): string {
   return langs[langId];
 }
 
-export function dictIdToDict(dictId: DictId): Dict {
+export function dictIdToDict(dictId: DictId) {
   return dictsObj[dictId];
 }
 

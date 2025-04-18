@@ -20,7 +20,7 @@
   <LocalSearchInput bind:filterString />
 </div>
 <ul class="mt-2 space-y-2 overflow-auto">
-  {#each dicts as { id, name, meta, lang }}
+  {#each dicts.filter((d) => !d.hidden) as { id, name, meta, lang }}
     {#if filterString === "" || needle(name, meta.desc, langIdName(lang))
         .toLowerCase()
         .includes(filterString.toLowerCase())}

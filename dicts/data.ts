@@ -59,7 +59,7 @@ const lopofMeta = {
     name: "CC BY-SA 4.0",
     url: "https://github.com/Taiwanese-Corpus/Syuniti-Sasaki_1928_List-of-Plants-of-Formosa",
   },
-  source: "https://gitlab.com/kisaragi-hiu/list-of-plants-of-formosa",
+  source: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
   original: "https://thak.taigi.info/1928TaioanSitbutMialui/",
 };
 
@@ -92,6 +92,7 @@ export const dicts = [
     name: "臺灣植物名彙",
     url: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
     lang: "nan_TW",
+    displayLangs: ["nan_TW", "hak_TW"],
     meta: lopofMeta,
   },
   {
@@ -99,6 +100,7 @@ export const dicts = [
     name: "臺灣植物名彙",
     url: "https://kisaragi-hiu.com/list-of-plants-of-formosa",
     lang: "hak_TW",
+    hidden: true,
     meta: lopofMeta,
   },
   {

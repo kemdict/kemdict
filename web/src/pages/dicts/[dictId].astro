@@ -4,7 +4,16 @@ import { dictIdToDict, langIdName } from "common";
 import { marked } from "marked";
 marked.use();
 
+// I don't know how it could be undefined, but if TypeScript says so...
+if (!dictId) {
+  return Astro.redirect("/dicts");
+}
+
 const dict = dictIdToDict(dictId);
+
+if (dict === undefined || dict.hidden) {
+  return Astro.redirect("/dicts");
+}
 
 const title = `收錄字典 - ${dict.name} | Kemdict`;
 
@@ -20,7 +29,7 @@ import WordList from "$src/components/WordList.svelte";
 <BaseLayout title={title}>
   <!-- <Fragment slot="head"></Fragment> -->
   <Header search={true} />
-  <div class="md:flex space-x-4">
+  <div class="space-x-4 md:flex">
     <div class="">
       <DictList client:load currentId={dictId} />
     </div>
@@ -56,7 +65,13 @@ import WordList from "$src/components/WordList.svelte";
           </tr>
           <tr>
             <th>語言</th>
-            <td>{langIdName(dict.lang)}</td>
+            <td
+              >{
+                dict.displayLangs
+                  ? dict.displayLangs.map(langIdName).join("、")
+                  : langIdName(dict.lang)
+              }</td
+            >
           </tr>
           <tr>
             <th>授權</th>
