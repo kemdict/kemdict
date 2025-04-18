@@ -39,6 +39,33 @@ type Lang =
 /**
  * Annotate `name` with language info to better placate TypeScript.
  */
+function nameWithLang(name: PlantName) {
+  if ("romaji" in name) {
+    return {
+      lang: "ja",
+      ...name,
+    };
+  } else if ("hakka" in name && name.hakka) {
+    return {
+      lang: "hakka",
+      ...name,
+    };
+  } else if ("poj" in name) {
+    return {
+      lang: "taigi",
+      ...name,
+    };
+  } else if ("native" in name) {
+    return {
+      lang: name.group,
+      ...name,
+    };
+  } else {
+    return {
+      lang: "note",
+      ...name,
+    };
+  }
 }
 
 // Because kemdict assumes one dictionary is one language, we need different
@@ -61,6 +88,7 @@ interface HetHakka {
   family: string;
   indigenous: boolean;
   where: string | undefined;
+  otherNames: unknown;
 }
 interface HetTaigi {
   // han as title, like how we process other sources
@@ -72,6 +100,7 @@ interface HetTaigi {
   family: string;
   indigenous: boolean;
   where: string | undefined;
+  otherNames: unknown;
 }
 
 const hakkaHet: HetHakka[] = [];
@@ -81,27 +110,16 @@ for (const plant of plants) {
   if (!plant.names) continue;
   for (const name of plant.names) {
     if (!("poj" in name)) continue;
-    if (name.hakka) {
-      hakkaHet.push({
-        title: name.han,
-        poj: name.poj,
-        scientificName: `${plant.title}, ${plant.by}`,
-        page: plant.page,
-        family: plant.family,
-        indigenous: plant.indigenous,
-        where: plant.where,
-      });
-    } else {
-      taigiHet.push({
-        title: name.han,
-        poj: name.poj.toLowerCase(),
-        scientificName: `${plant.title}, ${plant.by}`,
-        page: plant.page,
-        family: plant.family,
-        indigenous: plant.indigenous,
-        where: plant.where,
-      });
-    }
+    (name.hakka ? hakkaHet : taigiHet).push({
+      title: name.han,
+      poj: name.poj.toLowerCase(),
+      scientificName: `${plant.title}, ${plant.by}`,
+      page: plant.page,
+      family: plant.family,
+      indigenous: plant.indigenous,
+      where: plant.where,
+      otherNames: Object.groupBy(plant.names.map(nameWithLang), (o) => o.lang),
+    });
   }
 }
 
