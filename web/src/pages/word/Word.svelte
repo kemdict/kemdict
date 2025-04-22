@@ -94,7 +94,7 @@
         <p>
           《{dict.name}》
         </p>
-        <p>原作者：</p>
+        <p>原作者：{dict.meta.author}</p>
         <p>台文翻譯kap編修：Lîm Chùn-io̍k（林俊育）長老</p>
         <p>
           <a
