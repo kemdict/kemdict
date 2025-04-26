@@ -5,6 +5,7 @@ import svelte from "@astrojs/svelte";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
+import { VitePWA as vitePWA } from "vite-plugin-pwa";
 
 const baseURL = "https://kemdict.com";
 const prod = import.meta.env.PROD;
@@ -41,7 +42,13 @@ export default defineConfig({
     port: 5173,
   },
   vite: {
-    plugins: [purgeCss()],
+    plugins: [
+      purgeCss(),
+      vitePWA({
+        registerType: "autoUpdate",
+        injectRegister: "script-defer",
+      }),
+    ],
     clearScreen: false,
     envPrefix: "KEMDICT_",
     build: { rollupOptions: { external: ["bun:sqlite"] } },

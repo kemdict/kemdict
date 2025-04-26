@@ -27,7 +27,8 @@
     "search-query-parser": "^1.6.0",
     "sharp": "^0.33.3",
     "sqlstring": "^2.3.3",
-    "type-fest": "^4.26.0"
+    "type-fest": "^4.26.0",
+    "vite-plugin-pwa": "^1.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
