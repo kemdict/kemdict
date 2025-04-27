@@ -429,8 +429,6 @@ If NEW-SEPARATOR is non-nil, use it as the new comma; otherwise use \"、\"."
     "poj" "kip"
     "kMandarin"))
 
-;; FIXME: there is one entry in TaijitToaSutian that uses a slash to
-;; indicate multiple different sets of Han characters.
 (defun d:process-title (title)
   "Process TITLE to replace problematic characters, and so on.
 If TITLE is empty, return nil so the call site can decide what to
@@ -769,6 +767,38 @@ ORIG-HETS are props that will be used to construct heteronyms."
                  (gethash "id" other))))))
     orig-hets))
 
+(defun d::split-titles (titles)
+  "Split TITLES, a string, into a list containing titles."
+  ;; Lots of special cases. But there's only 45 entries that this does anything
+  ;; with, so special casing is fine.
+  (pcase titles
+    ("cheh/choeh仔" '("cheh仔" "choeh仔"))
+    ("kiàu-kiàu/kiauh-kiauh叫" '("kiàu-kiàu叫" "kiauh-kiauh叫"))
+    ("sir/su-lài-tah" '("sir-lài-tah" "su-lài-tah"))
+    ("三iān/uán" '("三iān" "三uán"))
+    ("二彼/比" '("二彼" "二比"))
+    ("小辦/扮" '("小辦" "小扮"))
+    ("挽me̍h/mi̍h" '("挽me̍h" "挽mi̍h"))
+    ("揚phòng-phòng/phōng-phōng/pòng-pòng" '("揚phòng-phòng" "揚phōng-phōng/揚pòng-pòng"))
+    ("枯sau/tsuâ" '("枯sau" "枯tsuâ"))
+    ("查bāi/māi" '("查bāi" "查māi"))
+    ("水khiō/khiò" '("水khiō" "查khiò"))
+    ("澹tsiu̍h-tsiu̍h/chiuh-chiuh" '("澹tsiu̍h-tsiu̍h" "澹chiuh-chiuh"))
+    ("爛he̍h/le̍h" '("爛he̍h" "爛le̍h"))
+    ("田phe̍h/phue̍h" '("田phe̍h" "田phue̍h"))
+    ("田tìm/tòm" '("田tìm" "田tòm"))
+    ("田土phe̍h/phue̍h" '("田土phe̍h" "田土phue̍h"))
+    ("相khoeh/kheh" '("相khoeh" "相kheh"))
+    ("相食ànn/ānn" '("相食ànn" "相食ānn"))
+    ("石phè/phuê/phèr" '("石phè" "石phuê/石phèr"))
+    ("緊pia̍k-pia̍k/piak-piak" '("緊pia̍k-pia̍k" "緊piak-piak"))
+    ("草sannh/sah" '("草sannh" "草sah"))
+    ("衝jip/chip" '("衝jip" "衝chip"))
+    ("走sau/sàu" '("走sau" "走sàu"))
+    ("跟tuè/tè" '("跟tuè" "跟tè"))
+    ("雄/狠鬼鬼" '("雄鬼鬼" "狠鬼鬼"))
+    (_ (split-string titles "/"))))
+
 (defvar d:db nil
   "Holds the DB connection.")
 
@@ -810,38 +840,40 @@ ORIG-HETS are props that will be used to construct heteronyms."
                (setq orig-hets (d:sort-orig-hets orig-hets)))
              (d::for (orig-het orig-hets)
                ;; {title,from,lang,props}
-               (let ((shaped-het (make-hash-table :test #'equal))
-                     (title (or (-some-> (gethash "title" entry)
-                                  d:process-title)
-                                ;; 臺日大辭典 and 臺灣白話基礎語句
-                                (gethash "kip" orig-het)
-                                ;; unihan
-                                (gethash "char" orig-het))))
-                 ;; Skip invalid titles
-                 (when (or (not (stringp title))
-                           (string-empty-p title))
-                   (throw 'continue nil))
-                 ;; chhoetaigi_taijittoasutian:
-                 ;; work around some incorrectly formatted titles, like
-                 ;; "a-a cham-cham" being formatted as "a-acham-cham" in
-                 ;; the title field
-                 (when (and (equal dict "chhoetaigi_taijittoasutian")
-                            ;; This means we know it's safe to substitude het.kip
-                            (d:latin-only title)
-                            (not (equal (downcase title)
-                                        (downcase (gethash "kip" orig-het)))))
-                   (setq title (gethash "kip" orig-het)))
-                 (puthash "title" title shaped-het)
-                 (puthash "from" dict shaped-het)
-                 (puthash "lang" lang shaped-het)
-                 ;; Copy some top-level props to each heteronym.
-                 (--each '("eq-en" "eq-ja" "added")
-                   (puthash it (gethash it entry) orig-het))
-                 ;; We can't run d:process-props just yet, as that requires
-                 ;; the list of all titles to work correctly.
-                 (puthash "props" orig-het shaped-het)
-                 (push shaped-het heteronyms)
-                 (puthash title t d:titles:look-up-table)))))
+               (let ((titles (or (-some-> (gethash "title" entry)
+                                   d:process-title)
+                                 ;; 臺日大辭典 and 臺灣白話基礎語句
+                                 (gethash "kip" orig-het)
+                                 ;; unihan
+                                 (gethash "char" orig-het))))
+                 ;; Taijit has some titles that should expand into many words
+                 (d::for (title (d::split-titles titles))
+                   (let ((shaped-het (make-hash-table :test #'equal)))
+                     ;; Skip invalid titles
+                     (when (or (not (stringp title))
+                               (string-empty-p title))
+                       (throw 'continue nil))
+                     ;; chhoetaigi_taijittoasutian:
+                     ;; work around some incorrectly formatted titles, like
+                     ;; "a-a cham-cham" being formatted as "a-acham-cham" in
+                     ;; the title field
+                     (when (and (equal dict "chhoetaigi_taijittoasutian")
+                                ;; This means we know it's safe to substitude het.kip
+                                (d:latin-only title)
+                                (not (equal (downcase title)
+                                            (downcase (gethash "kip" orig-het)))))
+                       (setq title (gethash "kip" orig-het)))
+                     (puthash "title" title shaped-het)
+                     (puthash "from" dict shaped-het)
+                     (puthash "lang" lang shaped-het)
+                     ;; Copy some top-level props to each heteronym.
+                     (--each '("eq-en" "eq-ja" "added")
+                       (puthash it (gethash it entry) orig-het))
+                     ;; We can't run d:process-props just yet, as that requires
+                     ;; the list of all titles to work correctly.
+                     (puthash "props" orig-het shaped-het)
+                     (push shaped-het heteronyms)
+                     (puthash title t d:titles:look-up-table)))))))
          (garbage-collect))))
     (garbage-collect)
     (setq heteronyms (nreverse heteronyms))
