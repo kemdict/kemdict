@@ -10,9 +10,12 @@
 Add a way to add usage links.
 → Just add a line like「範例：<link>」
 
+桮/杯/筶/筊
+聖/順/象, sin2 / siunn7
+笑筊 etc. (done)
+
 賦權
 串流
-聖筊
 新生代
 Q版
 魯蛇
@@ -272,6 +275,24 @@ Hub / USB Hub
 ***** 動|號召支持者舉辦遊行，為候選人營造聲勢、凝聚支持度。
 ***** 名|前項遊行本身。如：「這個候選人選舉期間共辦了十場造勢。」
 ** etc.
+*** 笑筶
+:PROPERTIES:
+:added:    2025-04-28T07:51:44+0900
+:END:
+**** tshiò-pue
+***** →[[笑桮]]
+*** 笑杯
+:PROPERTIES:
+:added:    2025-04-28T07:50:54+0900
+:END:
+**** tshiò-pue
+***** →[[笑桮]]
+*** 笑筊
+:PROPERTIES:
+:added:    2025-04-28T07:49:27+0900
+:END:
+**** tshiò-pue
+***** →[[笑桮]]
 *** 水軍
 :PROPERTIES:
 :added:  2025-04-26T19:44:42+0900
