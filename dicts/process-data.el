@@ -970,7 +970,9 @@ VALUES
                            '("moedict_twblg"
                              "chhoetaigi_itaigi"
                              "chhoetaigi_taioanpehoekichhoogiku"
-                             "chhoetaigi_taijittoasutian"))
+                             "chhoetaigi_taijittoasutian"
+                             "lopof-taigi"
+                             "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
                    (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))))))))
