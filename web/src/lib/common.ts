@@ -101,7 +101,7 @@ export function dictIdToDict(dictId: DictId) {
 }
 
 function dictsToObj(dictionaries: Dict[]): Record<string, Dict> {
-  const tmp = {};
+  const tmp = {} as Record<string, Dict>;
   dictionaries.forEach((dict) => (tmp[dict.id] = dict));
   return tmp;
 }
@@ -491,7 +491,7 @@ export class CrossDB {
     langCountObj: Record<LangId, number>;
     parsed: SearchParserResult;
   }> {
-    const parsed = options.exactQuery
+    const parsed = options?.exactQuery
       ? { text: query.normalize("NFD") }
       : parseQuery(query.normalize("NFD"));
     // printfdebug({
@@ -505,7 +505,7 @@ export class CrossDB {
     const { sqlExprs, sqlArgs } = parsedQueryToSQL(
       parsed,
       mtch,
-      options.exactQuery,
+      options?.exactQuery ?? false,
     );
     const hets = (await this.crossDbAll(
       `
