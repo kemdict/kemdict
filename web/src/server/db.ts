@@ -20,10 +20,7 @@ export async function readDB() {
   return db;
 }
 
-export const DB =
-  typeof Bun !== "undefined"
-    ? new CrossDB("bun", readDB)
-    : new CrossDB("bs3", readDB);
+export const DB = new CrossDB("bun", readDB);
 
 /** The data for the initials page. Held indefinitely. */
 let groupedChars: {

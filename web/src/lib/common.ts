@@ -410,17 +410,17 @@ function processHet(het: Heteronym): Heteronym {
 }
 
 /**
- * Shared DB instance to support both expo-sqlite and better-sqlite3.
+ * Shared DB instance to support multiple database backends.
  *
- * runtime: "web" or "rn" (React Native)
+ * runtime: "bun" or "rn" (React Native)
  * readDB: the function that returns the DB instance. Called once
  * on first use; the db instance is reused afterwards.
  */
 export class CrossDB {
-  readonly #runtime: "bs3" | "bun" | "rn";
+  readonly #runtime: "bun" | "rn";
   readonly #readDB: () => any;
   #db: any = undefined;
-  constructor(runtime: "bs3" | "bun" | "rn", readDB: () => any) {
+  constructor(runtime: "bun" | "rn", readDB: () => any) {
     this.#runtime = runtime;
     this.#readDB = readDB;
   }
@@ -436,13 +436,7 @@ export class CrossDB {
     args: unknown[] = [],
     pluck?: boolean,
   ): Promise<unknown[]> {
-    if (this.#runtime === "bs3") {
-      const db = await this.getDB();
-      // printfdebug({ source, args });
-      const stmt = db.prepare(source);
-      if (pluck) stmt.pluck(pluck);
-      return stmt.all(...args);
-    } else if (this.#runtime === "bun") {
+    if (this.#runtime === "bun") {
       const db = await this.getDB();
       const stmt = db.query(source);
       if (pluck) {
