@@ -91,7 +91,7 @@ export async function getHetFromUrl(
         heteronyms: Heteronym[];
         mtch: string;
         query: string;
-        originalQuery: string;
+        originalQuery: string | undefined;
         langSet: Set<LangId>;
         langCountObj: Record<LangId, number>;
       },

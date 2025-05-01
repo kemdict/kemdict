@@ -1,3 +1,5 @@
+/** Constants, language helpers, dicts/langs */
+
 import { escapeRegExp, chunk, sortBy } from "lodash-es";
 
 // * Helpers

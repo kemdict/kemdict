@@ -4,8 +4,7 @@ import Group from "$src/components/Group.svelte";
 import Pages from "$src/components/Pages.svelte";
 import { H1 } from "$src/components/typography";
 
-import { getGroupedChars } from "$src/server/db";
-import { site, parsePageParam } from "common";
+import { site, parsePageParam, getGroupedChars } from "common";
 
 const { with_stroke_grouped, without_stroke } = await getGroupedChars();
 
