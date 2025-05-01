@@ -1,7 +1,7 @@
-import { chunk, sortBy, uniqBy } from "lodash-es";
-import { groupByProp, CrossDB } from "common";
+import { uniqBy } from "lodash-es";
+import { CrossDB, type Mtch } from "./crossdb";
 import { spc } from "$lib/processing";
-import type { Heteronym, LangId, Mtch } from "common";
+import type { Heteronym, LangId } from "common";
 import { Database } from "bun:sqlite";
 
 export async function readDB() {
@@ -21,28 +21,6 @@ export async function readDB() {
 }
 
 export const DB = new CrossDB("bun", readDB);
-
-/** The data for the initials page. Held indefinitely. */
-let groupedChars: {
-  without_stroke: string[];
-  with_stroke_grouped: [
-    number,
-    {
-      title: string;
-      sc: number;
-    }[],
-  ][][];
-};
-/** Initialize and return `groupedChars`. */
-export async function getGroupedChars() {
-  if (groupedChars) return groupedChars;
-  const { with_stroke, without_stroke } = await DB.getChars();
-  const with_stroke_grouped = chunk(sortBy(with_stroke, "sc"), 1200).map(
-    (page) => groupByProp(page, "sc"),
-  );
-  groupedChars = { without_stroke, with_stroke_grouped };
-  return groupedChars;
-}
 
 /** Return the preview text of `het`. */
 export function hetPreview(het: Heteronym) {
@@ -82,8 +60,9 @@ export function processPn(het: Heteronym) {
     "kip",
     "poj",
   ];
-  let pn: string | undefined =
-    het.props[pron_keys.find((pron) => het.props[pron])];
+  const key = pron_keys.find((pron) => het.props[pron]);
+  if (key === undefined) return "";
+  let pn = het.props[key] as string | undefined;
   if (pn && het.title !== pn) {
     return `（${spc(pn)}）`;
   } else {

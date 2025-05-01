@@ -1,6 +1,7 @@
 ---
 import { getHetFromUrl } from "$src/server/db";
-import { site, langs, getSearchTitle } from "common";
+import { getSearchTitle } from "$src/server/crossdb";
+import { site, langs } from "common";
 
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url);
