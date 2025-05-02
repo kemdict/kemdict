@@ -113,6 +113,7 @@
     @apply dark:prose-blockquote:bg-stone-700;
     @apply dark:prose-blockquote:border-l-surface-800;
     --tw-prose-bullets: "#000";
+    --tw-prose-invert-bullets: "#333";
     :where(ul):not(:where([class~="not-prose"] *)) {
       @apply ml-0 pl-0;
     }
