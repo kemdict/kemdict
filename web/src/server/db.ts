@@ -81,6 +81,12 @@ export async function getHetFromUrl(
   | [
       true,
       {
+        heteronyms: undefined;
+        mtch: undefined;
+        query: undefined;
+        originalQuery: undefined;
+        langSet: undefined;
+        langCountObj: undefined;
         /** This page has no suffix.
             Redirect to /search if the page isn't /search. */
         root: true;
@@ -95,6 +101,7 @@ export async function getHetFromUrl(
         originalQuery: string | undefined;
         langSet: Set<LangId>;
         langCountObj: Record<LangId, number>;
+        root: false;
       },
     ]
   // when the first item is false, the second element is a string
@@ -165,6 +172,7 @@ export async function getHetFromUrl(
   return [
     true,
     {
+      root: false,
       heteronyms: uniqBy(heteronyms, (het) => {
         return (
           het.title +
