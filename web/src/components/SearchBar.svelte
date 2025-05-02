@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { popup } from "@skeletonlabs/skeleton";
   import { clientGetCompletions } from "$src/lib/client";
+  import Loading from "./Loading.svelte";
   /**
    * Normally we submit the search to `/search`. Use this to make it
    * `/search/foo`, for instance.
@@ -66,13 +67,17 @@
         />
         <div class="w-full" data-popup="popupCompletion">
           {#await completions}
-            <p></p>
+            <div class="card variant-filled relative z-20 w-3/4 p-4">
+              <Loading />
+            </div>
           {:then values}
             {#if values.length !== 0}
               <div class="card variant-filled relative z-20 w-3/4 p-4">
                 {#each values as value}
                   <div>
-                    <a class="w-full" href="/word/{value}">{value}</a>
+                    <a class="inline-block w-full py-1" href="/word/{value}"
+                      >{value}</a
+                    >
                   </div>
                 {/each}
               </div>
