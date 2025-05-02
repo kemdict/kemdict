@@ -331,6 +331,19 @@ ${limit ? `LIMIT ?` : ""}
     };
   }
 
+  async getCompletion(prefix: string): Promise<string[]> {
+    const matches = (await this.crossDbAll(
+      `
+SELECT DISTINCT title
+FROM heteronyms
+WHERE title LIKE ? || '%'
+LIMIT 10`,
+      [prefix.replaceAll("%", "%%")],
+      true,
+    )) as string[];
+    return matches;
+  }
+
   async getBacklinks(...titles: string[]): Promise<string[]> {
     return (await this.crossDbAll(
       `
