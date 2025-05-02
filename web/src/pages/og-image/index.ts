@@ -47,7 +47,7 @@ export async function GET({ request }: APIContext) {
         "flex items-center",
         img({
           tw: "rounded-xl",
-          src: "https://kemdict.com/maskable_icon_x192.png",
+          src: "https://kemdict.com/web-app-manifest-192x192.png",
           height: "75",
           width: "75",
         }),
