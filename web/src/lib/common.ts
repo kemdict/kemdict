@@ -1,6 +1,6 @@
 /** Constants, language helpers, dicts/langs */
 
-import { escapeRegExp, chunk, sortBy } from "lodash-es";
+import { escapeRegExp } from "lodash-es";
 
 // * Helpers
 
@@ -89,28 +89,6 @@ export const site = {
   oneLineDesc: "Kemdict 是一個免費且無廣告的辭典搜尋服務。",
   title: "Kemdict",
 };
-
-/** The data for the initials page. Held indefinitely. */
-let groupedChars: {
-  without_stroke: string[];
-  with_stroke_grouped: [
-    number,
-    {
-      title: string;
-      sc: number;
-    }[],
-  ][][];
-};
-/** Initialize and return `groupedChars`. */
-export async function getGroupedChars() {
-  if (groupedChars) return groupedChars;
-  const { with_stroke, without_stroke } = await DB.getChars();
-  const with_stroke_grouped = chunk(sortBy(with_stroke, "sc"), 1200).map(
-    (page) => groupByProp(page, "sc"),
-  );
-  groupedChars = { without_stroke, with_stroke_grouped };
-  return groupedChars;
-}
 
 // * lang / dict
 

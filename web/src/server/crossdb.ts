@@ -433,7 +433,7 @@ AND "pnInitial" IS NOT NULL
   }
 
   async getCharsByRadical(radical: string) {
-    return await this.crossDbAll(
+    return (await this.crossDbAll(
       `
   SELECT DISTINCT
     title,
@@ -443,17 +443,17 @@ AND "pnInitial" IS NOT NULL
   ORDER BY nrsc
 `,
       [radical],
-    );
+    )) as Array<{ title: string; nrsc: string }>;
   }
 
   async getRadicals() {
-    return await this.crossDbAll(
+    return (await this.crossDbAll(
       `
     SELECT DISTINCT radical, sc
     FROM han
     WHERE nrsc = 0
     ORDER BY radical
 `,
-    );
+    )) as Array<{ radical: string; sc: string }>;
   }
 }
