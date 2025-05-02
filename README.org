@@ -13,6 +13,7 @@ Kemdict 整合了多部辭典，提供一次搜尋的功能。
 - iTaigi 華台對照典（透過[[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase][ChhoeTaigi 台語字詞資料庫]]）
 - 台日大辭典台語譯本（透過[[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase][ChhoeTaigi 台語字詞資料庫]]）
 - [[https://mhi.moe.edu.tw/infoList.jsp?ID=2&ID2=1705][台灣白話基礎語句]]（透過[[https://github.com/ChhoeTaigi/ChhoeTaigiDatabase][ChhoeTaigi 台語字詞資料庫]]）
+- [[https://thak.taigi.info/1928TaioanSitbutMialui/][臺灣植物名彙]]（透過[[https://kisaragi-hiu.com/list-of-plants-of-formosa/][我的數位化]]）
 - Unihan（透過 [[https://unihan-etl.git-pull.com/][unihan-etl]]）
 
 我希望整合的辭典：
