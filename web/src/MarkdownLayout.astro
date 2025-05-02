@@ -14,6 +14,13 @@ const { title, date, desc } = Astro.props.frontmatter;
   title={title ?? "Kemdict"}
   class="prose prose-p:my-4 prose-table:my-0 prose-ul:pl-4"
 >
+  {
+    date && (
+      <p class="text-secondary-900 dark:text-secondary-600">
+        最後更新：{`${date}`.slice(0, 10)}
+      </p>
+    )
+  }
   <slot />
   <Fragment slot="head">
     {
