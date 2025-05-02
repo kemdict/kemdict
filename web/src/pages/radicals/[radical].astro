@@ -1,6 +1,5 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
-import Loading from "$src/components/Loading.astro";
 import RadicalChars from "./_RadicalChars.astro";
 import { site } from "common";
 const { radical } = Astro.params as { radical: string };
@@ -18,8 +17,6 @@ const { radical } = Astro.params as { radical: string };
     <h1 class="mt-2">
       部首為「<a href={`/word/${radical}`}>{radical}</a>」的字
     </h1>
-    <RadicalChars radical={radical} server:defer>
-      <Loading slot="fallback" />
-    </RadicalChars>
+    <RadicalChars radical={radical} />
   </div>
 </SingleLayout>
