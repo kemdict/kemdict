@@ -7,10 +7,8 @@ export interface Props {
   wantFooter?: boolean;
   class?: string;
   submitSuffix?: string;
-  wide?: boolean;
 }
 const {
-  wide,
   title,
   initialInput,
   initialMatchSelection,
@@ -36,7 +34,7 @@ import Header from "$src/components/Header.astro";
       />
     )
   }
-  <div class:list={[wide ?? "mx-auto max-w-3xl", klass]}>
+  <div class:list={[klass]}>
     <slot />
   </div>
 </BaseLayout>
