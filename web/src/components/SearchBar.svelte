@@ -69,7 +69,7 @@
             <p></p>
           {:then values}
             {#if values.length !== 0}
-              <div class="card variant-filled isolate w-3/4 p-4">
+              <div class="card variant-filled relative z-20 w-3/4 p-4">
                 {#each values as value}
                   <div>
                     <a class="w-full" href="/word/{value}">{value}</a>
