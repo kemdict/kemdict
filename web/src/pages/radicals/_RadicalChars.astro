@@ -1,0 +1,21 @@
+---
+import { DB } from "$src/server/db";
+import { groupByProp } from "common";
+import Group from "$src/components/Group.svelte";
+
+interface Props {
+  radical: string;
+}
+const { radical } = Astro.props;
+const entries = await DB.getCharsByRadical(radical);
+---
+
+{
+  groupByProp(entries, "nrsc").map(([count, elements]) => (
+    <Group
+      title={`${count} 畫`}
+      elements={elements}
+      template="/search?q=$1&s=prefix"
+    />
+  ))
+}

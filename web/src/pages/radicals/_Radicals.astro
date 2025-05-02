@@ -1,0 +1,13 @@
+---
+import { DB } from "$src/server/db";
+import { groupByProp } from "common";
+import Group from "$src/components/Group.svelte";
+
+const entries = await DB.getRadicals();
+---
+
+{
+  groupByProp(entries, "sc").map(([count, elements]) => (
+    <Group title={`${count} 畫`} elements={elements} template="/radicals/$1" />
+  ))
+}

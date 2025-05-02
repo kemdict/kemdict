@@ -1,12 +1,9 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
-import Group from "$src/components/Group.svelte";
-
-import { DB } from "$src/server/db";
-import { site, groupByProp } from "common";
-
-const { radical } = Astro.params;
-const entries = await DB.getCharsByRadical(radical);
+import Loading from "$src/components/Loading.astro";
+import RadicalChars from "./_RadicalChars.astro";
+import { site } from "common";
+const { radical } = Astro.params as { radical: string };
 ---
 
 <SingleLayout title={`部首為「${radical}」的字 - ${site.title}`}>
@@ -21,14 +18,8 @@ const entries = await DB.getCharsByRadical(radical);
     <h1 class="mt-2">
       部首為「<a href={`/word/${radical}`}>{radical}</a>」的字
     </h1>
-    {
-      groupByProp(entries, "nrsc").map(([count, elements]) => (
-        <Group
-          title={`${count} 畫`}
-          elements={elements}
-          template="/search?q=$1&s=prefix"
-        />
-      ))
-    }
+    <RadicalChars radical={radical} server:defer>
+      <Loading slot="fallback" />
+    </RadicalChars>
   </div>
 </SingleLayout>

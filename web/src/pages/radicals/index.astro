@@ -1,28 +1,19 @@
 ---
 import SingleLayout from "$src/SingleLayout.astro";
-import Group from "$src/components/Group.svelte";
+import Radicals from "./_Radicals.astro";
 import { H1 } from "$src/components/typography";
-
-import { DB } from "$src/server/db";
-import { site, groupByProp } from "common";
-
-const radicals = await DB.getRadicals();
+import { site } from "common";
 ---
 
 <SingleLayout title={`部首索引 - ${site.title}`}>
   <Fragment slot="head">
-    <meta property="og:image" content="https://kemdict.com/og-image?title=部首索引" />
+    <meta
+      property="og:image"
+      content="https://kemdict.com/og-image?title=部首索引"
+    />
   </Fragment>
   <H1>部首索引</H1>
   <div class="prose">
-    {
-      groupByProp(radicals, "sc").map(([count, elements]) => (
-        <Group
-          title={`${count} 畫`}
-          elements={elements}
-          template="/radicals/$1"
-        />
-      ))
-    }
+    <Radicals server:defer />
   </div>
 </SingleLayout>
