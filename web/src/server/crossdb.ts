@@ -331,7 +331,7 @@ ${limit ? `LIMIT ?` : ""}
     };
   }
 
-  async getCompletion(prefix: string): Promise<string[]> {
+  async getPrefixCompletion(prefix: string): Promise<string[]> {
     const matches = (await this.crossDbAll(
       `
 SELECT DISTINCT title
