@@ -16,8 +16,8 @@
     "sharp"
   ],
   "dependencies": {
-    "@astrojs/node": "^9.2.0",
-    "astro": "^5.7.2",
+    "@astrojs/node": "^9.2.1",
+    "astro": "^5.7.10",
     "clsx": "^2.1.1",
     "lodash-es": "^4.17.21",
     "marked": "^12.0.2",
@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.2.4",
-    "@astrojs/sitemap": "^3.3.0",
-    "@astrojs/svelte": "^7.0.10",
+    "@astrojs/mdx": "^4.2.6",
+    "@astrojs/sitemap": "^3.3.1",
+    "@astrojs/svelte": "^7.0.13",
     "@floating-ui/dom": "^1.6.5",
     "@size-limit/file": "^11.1.3",
     "@skeletonlabs/skeleton": "^2.10.0",
