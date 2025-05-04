@@ -37,14 +37,15 @@ function tokenToLIKEInput(
   if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
     m = "contains";
   }
+  const escapedToken = token.replaceAll("%", "%%");
   if (m === "prefix") {
-    return `${token}%`;
+    return `${escapedToken}%`;
   } else if (m === "suffix") {
-    return `%${token}`;
+    return `%${escapedToken}`;
   } else if (m === "contains") {
-    return `%${token}%`;
+    return `%${escapedToken}%`;
   } else {
-    return token;
+    return escapedToken;
   }
 }
 
