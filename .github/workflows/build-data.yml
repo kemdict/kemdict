@@ -47,6 +47,8 @@ jobs:
           cd dicts
           bun install
           bunx eask install-deps
+          # Do this, otherwise Make will try to regenerate them
+          touch lopof-nan_TW.json lopof-hak_TW.json
           make entries.db.gz
       - name: Deploy built database
         env:
