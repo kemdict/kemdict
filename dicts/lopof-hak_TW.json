@@ -1,0 +1,1384 @@
+[
+  {
+    "title": "柏栬樹",
+    "poj": "phak-set-siū",
+    "kip": "phak-set-siū",
+    "scientificName": "Libocedrus macrolepis, Benth. et Hook.",
+    "page": 53,
+    "family": "Cupressaceae",
+    "indigenous": true,
+    "where": "中北部山地",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Syônan-boku",
+          "kana": "セウナンボク"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Siau-lâm",
+          "han": "肖楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "n̂g-bah-chhiū",
+          "han": "黃肉樹"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Ong-giok-siū",
+          "han": "黃肉樹",
+          "han-orig": "黃肉樹（廣東）",
+          "hakka": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "黃肉樹",
+    "poj": "ong-giok-siū",
+    "kip": "ong-giok-siū",
+    "scientificName": "Libocedrus macrolepis, Benth. et Hook.",
+    "page": 53,
+    "family": "Cupressaceae",
+    "indigenous": true,
+    "where": "中北部山地",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Syônan-boku",
+          "kana": "セウナンボク"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Siau-lâm",
+          "han": "肖楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "n̂g-bah-chhiū",
+          "han": "黃肉樹"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Phak-set-siū",
+          "han": "柏栬樹",
+          "han-orig": "柏栬樹（廣東）",
+          "hakka": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "楊梅",
+    "poj": "iông-moâi",
+    "kip": "iông-muâi",
+    "scientificName": "Myrica nagi, Thunb.",
+    "page": 143,
+    "family": "Myricaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Yama-momo",
+          "kana": "ヤマモモ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhiū-m̂",
+          "han": "樹梅"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Ioān-m̂",
+          "han": "椵梅"
+        }
+      ]
+    }
+  },
+  {
+    "title": "雞油",
+    "poj": "khe-iu",
+    "kip": "khe-iu",
+    "scientificName": "Zelkova formosana, Hayata",
+    "page": 151,
+    "family": "Ulmaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Taiwan-keyaki",
+          "kana": "タイワンケヤキ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Koe-iû",
+          "han": "雞油"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Kiyai",
+          "group": "タイヤル"
+        },
+        {
+          "lang": "タイヤル",
+          "native": "Tugebe",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Tyubusa",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Tyubuusu",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "地黃蒲",
+    "poj": "ti-won-pu",
+    "kip": "ti-won-pu",
+    "scientificName": "Aristolochia Shimadai, Hayata",
+    "page": 166,
+    "family": "Aristolochiaceae",
+    "indigenous": true,
+    "where": "北部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Taiwan-umanosuzugusa",
+          "kana": "タイワンウマノスズグサ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Ba̍k-hiuⁿ",
+          "han": "木香"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Tîn-chû",
+          "han": "藤薯"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Wassai",
+          "group": "タイヤル"
+        }
+      ]
+    }
+  },
+  {
+    "title": "細葉楠",
+    "poj": "sèi-iap-nam",
+    "kip": "sèi-iap-nam",
+    "scientificName": "Actinodaphne nantoensis, Hayata",
+    "page": 191,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "中、北部山地",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Nantô-damo",
+          "kana": "ナントウダモ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhàu-sái-lâm",
+          "han": "臭屎楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Sòe-hio̍h-lâm",
+          "han": "細葉楠"
+        }
+      ]
+    }
+  },
+  {
+    "title": "大葉楠",
+    "poj": "tai-iap-nam",
+    "kip": "tai-iap-nam",
+    "scientificName": "Machilus Kusanoi, Hayata",
+    "page": 195,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Ooba-tabu",
+          "kana": "オホバタブ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Tōa-hio̍h-lâm",
+          "han": "大葉楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Lâm-á",
+          "han": "楠仔"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Lâm-zu",
+          "han": "楠仔",
+          "hakka": true
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Kataide",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kazabai",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "楠仔",
+    "poj": "lâm-zu",
+    "kip": "lâm-zu",
+    "scientificName": "Machilus Kusanoi, Hayata",
+    "page": 195,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Ooba-tabu",
+          "kana": "オホバタブ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Tōa-hio̍h-lâm",
+          "han": "大葉楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Lâm-á",
+          "han": "楠仔"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Tai-iap-nam",
+          "han": "大葉楠",
+          "hakka": true
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Kataide",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kazabai",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "細葉楠",
+    "poj": "sèi-iap-nam",
+    "kip": "sèi-iap-nam",
+    "scientificName": "Machilus pseudo-longifolia, Hayata",
+    "page": 195,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "中、北部、東部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Aogusu-modoki",
+          "kana": "アヲグスモドキ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhàu-sái-lâm",
+          "han": "臭屎楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Sòe-hio̍h-lâm",
+          "han": "細葉楠"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kaigai'dd",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "楠仔",
+    "poj": "nam-zu",
+    "kip": "nam-zu",
+    "scientificName": "Phoebe formosana, Hayata",
+    "page": 196,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "中、北部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Taiwan-inugusu",
+          "kana": "タイワンイヌグス"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Uraziro-damo",
+          "kana": "ウラジロダモ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Lâm-á",
+          "han": "楠仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Lâi-tang-chí-lâm",
+          "han": "內冬子楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Hé-thòaⁿ-lâm-á",
+          "han": "火炭楠仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Lāi-thòaⁿ-chí-lâm",
+          "han": "內炭子楠"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Siak-nam",
+          "han": "石楠",
+          "hakka": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "石楠",
+    "poj": "siak-nam",
+    "kip": "siak-nam",
+    "scientificName": "Phoebe formosana, Hayata",
+    "page": 196,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "中、北部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Taiwan-inugusu",
+          "kana": "タイワンイヌグス"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Uraziro-damo",
+          "kana": "ウラジロダモ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Lâm-á",
+          "han": "楠仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Lâi-tang-chí-lâm",
+          "han": "內冬子楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Hé-thòaⁿ-lâm-á",
+          "han": "火炭楠仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Lāi-thòaⁿ-chí-lâm",
+          "han": "內炭子楠"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Nam-zu",
+          "han": "楠仔",
+          "hakka": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "五爪楠",
+    "poj": "ng-chau-nam",
+    "kip": "ng-tsau-nam",
+    "scientificName": "Tetradenia acuto-trinervia, Hayata",
+    "page": 196,
+    "family": "Lauraceae",
+    "indigenous": true,
+    "where": "中、北部山地",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Niitaka-sirodamo",
+          "kana": "ニヒタカシロダモ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Iû-hio̍h-lâm",
+          "han": "油葉楠"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Hiuⁿ-kùi",
+          "han": "香桂"
+        }
+      ]
+    }
+  },
+  {
+    "title": "楓樹",
+    "poj": "phng-siū",
+    "kip": "phng-siū",
+    "scientificName": "Liquidambar formosana, Hance",
+    "page": 210,
+    "family": "Hamamelidaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Hû",
+          "kana": "フウ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Png-á",
+          "han": "楓仔"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Arikuddo",
+          "group": "タイヤル"
+        },
+        {
+          "lang": "タイヤル",
+          "native": "Raga",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kariguruzu",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "香絲樹",
+    "poj": "hiong-si-siū",
+    "kip": "hiong-si-siū",
+    "scientificName": "Acacia confusa, Merrill",
+    "page": 223,
+    "family": "Leguminosae",
+    "indigenous": true,
+    "where": "恆春半島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Sôsi-zyu",
+          "kana": "サウシジユ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Siuⁿ-si-á",
+          "han": "相思仔"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Tyokozi",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "黃豆",
+    "poj": "vōn-thio̍",
+    "kip": "vōn-thio̍",
+    "scientificName": "Glycine max, (Linn.) Merrill",
+    "page": 233,
+    "family": "Leguminosae",
+    "indigenous": false,
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Dai-du",
+          "kana": "ダイヅ",
+          "kana-orig": "タイヅ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhiⁿ-phê-tāu",
+          "han": "青皮豆"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Pe̍h-tāu",
+          "han": "白豆"
+        },
+        {
+          "lang": "taigi",
+          "poj": "O͘-tāu",
+          "han": "烏豆"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Vū-thio̍",
+          "han": "烏豆",
+          "hakka": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "烏豆",
+    "poj": "vū-thio̍",
+    "kip": "vū-thio̍",
+    "scientificName": "Glycine max, (Linn.) Merrill",
+    "page": 233,
+    "family": "Leguminosae",
+    "indigenous": false,
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Dai-du",
+          "kana": "ダイヅ",
+          "kana-orig": "タイヅ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhiⁿ-phê-tāu",
+          "han": "青皮豆"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Pe̍h-tāu",
+          "han": "白豆"
+        },
+        {
+          "lang": "taigi",
+          "poj": "O͘-tāu",
+          "han": "烏豆"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Vōn-thio̍",
+          "han": "黃豆",
+          "hakka": true
+        }
+      ]
+    }
+  },
+  {
+    "title": "九江",
+    "poj": "kiu-kong",
+    "kip": "kiu-kong",
+    "scientificName": "Ormosia formosana, Kanehira",
+    "page": 238,
+    "family": "Leguminosae",
+    "indigenous": true,
+    "where": "中、南部山地",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Benimame-no-ki",
+          "kana": "ベニマメノキ"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Horisya-akamame",
+          "kana": "ホリシヤアカマメ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhiⁿ-kâu-kong-chhiū",
+          "han": "青猴公樹"
+        }
+      ]
+    }
+  },
+  {
+    "title": "米豆",
+    "poj": "mih-thio̍",
+    "kip": "mih-thio̍",
+    "scientificName": "Phaseolus radiatus var. aurea, Prain",
+    "page": 238,
+    "family": "Leguminosae",
+    "indigenous": false,
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Aduki",
+          "kana": "アヅキ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Bí-tāu",
+          "han": "米豆"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Kaeran",
+          "group": "タイヤル"
+        }
+      ]
+    }
+  },
+  {
+    "title": "桶柑",
+    "poj": "tho̍ng-kâm",
+    "kip": "tho̍ng-kâm",
+    "scientificName": "Citrus Tankan, Hayata",
+    "page": 249,
+    "family": "Rutaceae",
+    "indigenous": false,
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Tan-kan",
+          "kana": "タンカン"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Tháng-kam",
+          "han": "桶柑"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Nî-kam",
+          "han": "年柑"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Mudu",
+          "group": "タイヤル"
+        }
+      ]
+    }
+  },
+  {
+    "title": "帽頂",
+    "poj": "mô͘-tan",
+    "kip": "môo-tan",
+    "scientificName": "Mallotus paniculatus, (Lam.) Muell. Arg.",
+    "page": 264,
+    "family": "Euphorbiaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Hozaki-akamegasiwa",
+          "kana": "ホザキアカメガシハ"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Uraziro-akamegasiwa",
+          "kana": "ウラジロアカメガシハ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Pe̍h-pû-á",
+          "han": "白匏仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Pe̍h-hio̍h-á",
+          "han": "白葉仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Pe̍h-pû",
+          "han": "白匏"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Riihanparakoi",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Konobu'zyu",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Tikkau",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "荷樹",
+    "poj": "hò-siū",
+    "kip": "hò-siū",
+    "scientificName": "Schima superba, Gardn. et Champ.",
+    "page": 294,
+    "family": "Camelliaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Taiwan-himetubaki",
+          "kana": "タイワンヒメツバキ",
+          "n.n.": true
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Hò",
+          "han": "荷",
+          "hakka": true
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Ko-poe",
+          "han": "高杯"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Kó-á",
+          "han": "檺仔"
+        }
+      ]
+    }
+  },
+  {
+    "title": "荷",
+    "poj": "hò",
+    "kip": "hò",
+    "scientificName": "Schima superba, Gardn. et Champ.",
+    "page": 294,
+    "family": "Camelliaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Taiwan-himetubaki",
+          "kana": "タイワンヒメツバキ",
+          "n.n.": true
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Hò-siū",
+          "han": "荷樹",
+          "hakka": true
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Ko-poe",
+          "han": "高杯"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Kó-á",
+          "han": "檺仔"
+        }
+      ]
+    }
+  },
+  {
+    "title": "鴨母冇",
+    "poj": "ap-mu-phang",
+    "kip": "ap-mu-phang",
+    "scientificName": "Agalma lutchuense, Nakai",
+    "page": 313,
+    "family": "Araliaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Huka-no-ki",
+          "kana": "フカノキ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Kang-bó͘",
+          "han": "江某"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Kang-bó͘",
+          "han": "江栂"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Ah-bú-chhiū",
+          "han": "鴨母樹"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Ap-mâ-koa̍t",
+          "han": "鴨麻瓜",
+          "hakka": true
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Saaban",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Pazyai",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Zyaka'ppu",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "鴨麻瓜",
+    "poj": "ap-mâ-koa̍t",
+    "kip": "ap-mâ-kua̍t",
+    "scientificName": "Agalma lutchuense, Nakai",
+    "page": 313,
+    "family": "Araliaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Huka-no-ki",
+          "kana": "フカノキ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Kang-bó͘",
+          "han": "江某"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Kang-bó͘",
+          "han": "江栂"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Ah-bú-chhiū",
+          "han": "鴨母樹"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Ap-mu-phang",
+          "han": "鴨母冇",
+          "hakka": true
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Saaban",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Pazyai",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Zyaka'ppu",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "花草",
+    "poj": "fā-tho",
+    "kip": "fā-tho",
+    "scientificName": "Tetrapanax papyrifera, C. Koch",
+    "page": 315,
+    "family": "Araliaceae",
+    "indigenous": true,
+    "where": "北、中、東部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Kami-yatude",
+          "kana": "カミヤツデ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Thong-chháu",
+          "han": "蓪草"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Thong-chháu",
+          "han": "通草"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Hoe-chhó",
+          "han": "花草"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Barahoe",
+          "group": "タイヤル"
+        },
+        {
+          "lang": "タイヤル",
+          "native": "Buroren",
+          "group": "タイヤル"
+        },
+        {
+          "lang": "タイヤル",
+          "native": "Buburin",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Batto",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Mekaran",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Tâgon",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Teneyau",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "紅皮",
+    "poj": "fun-phi",
+    "kip": "fun-phi",
+    "scientificName": "Styrax suberifolium, Hook. et Arn.",
+    "page": 334,
+    "family": "Styracaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Uraziro-egonoki",
+          "kana": "ウラジロエゴノキ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Chhiah-huih-á",
+          "han": "赤血仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "âng-phê",
+          "han": "紅皮"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Hio̍h-ē-pe̍h",
+          "han": "葉下白"
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Biihau",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kazimono",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "鴨舌黃",
+    "poj": "ap-sia̍t-kong",
+    "kip": "ap-sia̍t-kong",
+    "scientificName": "Lippia nodiflora var. sarmentosa, Schauer",
+    "page": 352,
+    "family": "Verbenaceae",
+    "indigenous": true,
+    "where": "全島",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Iwadere-sô",
+          "kana": "イハダレサウ"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Hama-hai",
+          "kana": "ハマハヒ"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Ah-chhùi-poe-hông",
+          "han": "鴨嘴箟黃"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Ah-chi̍h-hông",
+          "han": "鴨舌黃"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Ah-chhùi-hông",
+          "han": "鴨嘴黃"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Hāu-khak-chhì",
+          "han": "鱟壳刺"
+        }
+      ]
+    }
+  },
+  {
+    "title": "烏甜",
+    "poj": "hu-kham",
+    "kip": "hu-kham",
+    "scientificName": "Vitex quinata, (Lam.) F. N. Will.",
+    "page": 353,
+    "family": "Verbenaceae",
+    "indigenous": true,
+    "where": "西部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Oo-ninzinboku",
+          "kana": "オホニンジンボク"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Kawariba-ninzinboku",
+          "kana": "カハリバニンジンボク"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Soaⁿ-po͘-kiuⁿ",
+          "han": "山埔姜"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Môa-á",
+          "han": "蔴仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "O͘-tiⁿ",
+          "han": "烏甜"
+        },
+        {
+          "lang": "taigi",
+          "poj": "O͘-tiⁿ-á",
+          "han": "烏甜仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Pò͘-kiuⁿ",
+          "han": "布姜"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Pu-kiang",
+          "han": "蒲荊",
+          "hakka": true
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Kuburasi",
+          "group": "タイヤル"
+        },
+        {
+          "lang": "タイヤル",
+          "native": "Poorasu",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kaaza'b",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Patti'ttu",
+          "group": "パイワン"
+        }
+      ]
+    }
+  },
+  {
+    "title": "蒲荊",
+    "poj": "pu-kiang",
+    "kip": "pu-kiang",
+    "scientificName": "Vitex quinata, (Lam.) F. N. Will.",
+    "page": 353,
+    "family": "Verbenaceae",
+    "indigenous": true,
+    "where": "西部",
+    "otherNames": {
+      "ja": [
+        {
+          "lang": "ja",
+          "romaji": "Oo-ninzinboku",
+          "kana": "オホニンジンボク"
+        },
+        {
+          "lang": "ja",
+          "romaji": "Kawariba-ninzinboku",
+          "kana": "カハリバニンジンボク"
+        }
+      ],
+      "taigi": [
+        {
+          "lang": "taigi",
+          "poj": "Soaⁿ-po͘-kiuⁿ",
+          "han": "山埔姜"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Môa-á",
+          "han": "蔴仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "O͘-tiⁿ",
+          "han": "烏甜"
+        },
+        {
+          "lang": "taigi",
+          "poj": "O͘-tiⁿ-á",
+          "han": "烏甜仔"
+        },
+        {
+          "lang": "taigi",
+          "poj": "Pò͘-kiuⁿ",
+          "han": "布姜"
+        }
+      ],
+      "hakka": [
+        {
+          "lang": "hakka",
+          "poj": "Hu-kham",
+          "han": "烏甜",
+          "hakka": true
+        }
+      ],
+      "タイヤル": [
+        {
+          "lang": "タイヤル",
+          "native": "Kuburasi",
+          "group": "タイヤル"
+        },
+        {
+          "lang": "タイヤル",
+          "native": "Poorasu",
+          "group": "タイヤル"
+        }
+      ],
+      "パイワン": [
+        {
+          "lang": "パイワン",
+          "native": "Kaaza'b",
+          "group": "パイワン"
+        },
+        {
+          "lang": "パイワン",
+          "native": "Patti'ttu",
+          "group": "パイワン"
+        }
+      ]
+    }
+  }
+]

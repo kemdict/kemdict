@@ -3,6 +3,8 @@
 *.elc
 node_modules
 *.json
+!lopof-hak_TW.json
+!lopof-nan_TW.json
 !package.json
 !package-lock.json
 *.db.br
