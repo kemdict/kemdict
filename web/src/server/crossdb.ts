@@ -347,7 +347,7 @@ ${limit ? `LIMIT ?` : ""}
 SELECT DISTINCT title
 FROM heteronyms
 INNER JOIN aliases ON aliases.het_id = heteronyms.id
-WHERE title LIKE ? || '%' ESCAPE '\\'
+WHERE aliases.alias LIKE ? || '%' ESCAPE '\\'
 LIMIT 10`,
       [escapeLike(prefix)],
       true,
