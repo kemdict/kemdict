@@ -15,6 +15,19 @@ const db = new Database("./list-of-plants-of-formosa/data/plants.sqlite", {
 });
 
 /**
+ * Convert `text` from POJ to TL using our own pojtl-api service.
+ * If the service is down, <strike>god help you</strike> maybe make this
+ * function return the text as-is until it comes back up.
+ */
+async function toTL(text: string) {
+  const response = await fetch("https://pojtl.kemdict.com/toTL", {
+    method: "POST",
+    body: text,
+  });
+  return await response.text();
+}
+
+/**
  * Replace old Han characters within `str`.
  */
 function normalizeHanCharacters(str: string) {
@@ -79,6 +92,7 @@ interface HetHakka {
   // han as title, like how we process other sources
   title: string;
   poj: string;
+  kip: string;
   // scientificName + by whom
   scientificName: string;
   page: number;
@@ -91,6 +105,7 @@ interface HetTaigi {
   // han as title, like how we process other sources
   title: string;
   poj: string;
+  kip: string;
   // scientificName + by whom
   scientificName: string;
   page: number;
@@ -105,11 +120,13 @@ const taigiHet: HetTaigi[] = [];
 for (const plant of plants) {
   if (!plant) continue;
   if (!plant.names) continue;
+  console.write(".");
   for (const name of plant.names) {
     if (!("poj" in name)) continue;
     (name.hakka ? hakkaHet : taigiHet).push({
       title: name.han,
       poj: name.poj.toLowerCase(),
+      kip: await toTL(name.poj.toLowerCase()),
       scientificName: `${plant.title}, ${plant.by}`,
       page: plant.page,
       family: plant.family,

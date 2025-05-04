@@ -35,7 +35,8 @@ DICT_TARGETS += unihan.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
-entries.db: $(DICT_TARGETS) process-data.el .eask
+entries.db: process-data.el .eask
+	make -j4 dicts
 	npx eask eval "(load \"process-data\")"
 
 entries.db.gz: entries.db
