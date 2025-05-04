@@ -37,7 +37,7 @@ function tokenToLIKEInput(
   if ((mtch === "prefix" && !first) || (mtch === "suffix" && !last)) {
     m = "contains";
   }
-  const escapedToken = token.replaceAll("%", "%%");
+  const escapedToken = escapeLike(token);
   if (m === "prefix") {
     return `${escapedToken}%`;
   } else if (m === "suffix") {
@@ -53,6 +53,15 @@ function tokenToLIKEInput(
 // expects it to be doubled instead.
 function escape(thing: any) {
   return sqlEscape(thing).replace("\\'", "''").normalize("NFD");
+}
+
+/**
+ * Escape `str` so that it doesn't contain the wildcard character "%" for LIKE
+ * statements.
+ * Assumes the escape character is the backslash.
+ */
+function escapeLike(str: string) {
+  return str.replaceAll("%", "\\%");
 }
 /**
  * Split `text` on whitespace to be processed later.`
@@ -85,7 +94,7 @@ function parsedQueryToSQL(
    * tones */
   exactQuery: boolean,
 ) {
-  const operator = mtch === "exact" ? "=" : "LIKE";
+  const matcher = mtch === "exact" ? "= ?" : "LIKE ? ESCAPE '\\'";
   // printfdebug({ parsed });
   const exprs: string[] = [];
   const sqlArgs: string[] = [];
@@ -99,39 +108,39 @@ function parsedQueryToSQL(
     if (mtch === "exact" && exactQuery)
       exprs.push(`AND aliases.exact IS NOT NULL`);
     tokens.forEach((s, i) => {
-      exprs.push(`AND aliases.alias ${operator} ?`);
+      exprs.push(`AND aliases.alias ${matcher}`);
       sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
     });
   });
   ensureArray(parsed.exclude?.text as string[] | string)?.forEach((text) => {
     const tokens = parseStringQuery(text);
     tokens.forEach((s, i) => {
-      exprs.push(`AND aliases.alias NOT ${operator} ?`);
+      exprs.push(`AND aliases.alias NOT ${matcher}`);
       sqlArgs.push(tokenToLIKEInput(s, mtch, i === 0, i === tokens.length - 1));
     });
   });
   // FIXME: This will tell SQLite to return heteronyms that are eg.
   // both in language A and language B, which is not possible.
   ensureArray(parsed.lang)?.forEach((lang) => {
-    exprs.push(`AND lang LIKE '%${lang}%'`);
+    exprs.push(`AND lang LIKE '%${escapeLike(lang)}%' ESCAPE '\\'`);
   });
   ensureArray(parsed.exclude?.lang)?.forEach((lang) => {
-    exprs.push(`AND lang NOT LIKE '%${lang}%'`);
+    exprs.push(`AND lang NOT LIKE '%${escapeLike(lang)}%' ESCAPE '\\'`);
   });
   ensureArray(parsed.from)?.forEach((dict) => {
-    exprs.push(`AND "from" LIKE '%${dict}%'`);
+    exprs.push(`AND "from" LIKE '%${escapeLike(dict)}%' ESCAPE '\\'`);
   });
   ensureArray(parsed.exclude?.from)?.forEach((dict) => {
-    exprs.push(`AND "from" NOT LIKE '%${dict}%'`);
+    exprs.push(`AND "from" NOT LIKE '%${escapeLike(dict)}%' ESCAPE '\\'`);
   });
   ensureArray(parsed.title)?.forEach((title, i, titles) => {
-    exprs.push(`AND title ${operator} ?`);
+    exprs.push(`AND title ${matcher}`);
     sqlArgs.push(
       tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1),
     );
   });
   ensureArray(parsed.exclude?.title)?.forEach((title, i, titles) => {
-    exprs.push(`AND title NOT ${operator} ?`);
+    exprs.push(`AND title NOT ${matcher}`);
     sqlArgs.push(
       tokenToLIKEInput(title, mtch, i === 0, i === titles.length - 1),
     );
@@ -337,9 +346,10 @@ ${limit ? `LIMIT ?` : ""}
       `
 SELECT DISTINCT title
 FROM heteronyms
-WHERE title LIKE ? || '%'
+INNER JOIN aliases ON aliases.het_id = heteronyms.id
+WHERE title LIKE ? || '%' ESCAPE '\\'
 LIMIT 10`,
-      [prefix.replaceAll("%", "%%")],
+      [escapeLike(prefix)],
       true,
     )) as string[];
     return matches;
