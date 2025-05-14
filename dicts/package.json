@@ -1,10 +1,12 @@
 {
   "dependencies": {
     "@emacs-eask/cli": "^0.9.7",
+    "js-yaml": "^4.1.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/bun": "^1.2.10",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.14.1"
   }
 }

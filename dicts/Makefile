@@ -30,7 +30,7 @@ DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
 DICT_TARGETS += lopof-nan_TW.json lopof-hak_TW.json
-DICT_TARGETS += unihan.json
+DICT_TARGETS += unihan.json caris-events--invade.json
 
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
@@ -46,6 +46,9 @@ entries.db.gz: entries.db
 # List of Plants of Formosa.
 lopof-nan_TW.json lopof-hak_TW.json: list-of-plants-of-formosa/data/plants.sqlite
 	bun lopof.ts
+
+caris-events--invade.json: caris-events--invade/README.md
+	bun caris-events--invade.ts
 
 unihan.json:
 	# 2024-12-27
@@ -108,3 +111,6 @@ ChhoeTaigiDatabase/README.md:
 # instead, this is the place to do it.
 list-of-plants-of-formosa/data/plants.sqlite:
 	git submodule update --init --depth 1 -- list-of-plants-of-formosa
+
+caris-events--invade/README.md:
+	git submodule update --init --depth 1 -- caris-events--invade

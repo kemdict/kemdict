@@ -10,3 +10,6 @@
 [submodule "dicts/list-of-plants-of-formosa"]
 	path = dicts/list-of-plants-of-formosa
 	url = https://gitlab.com/kisaragi-hiu/list-of-plants-of-formosa
+[submodule "dicts/caris-events--invade"]
+	path = dicts/caris-events--invade
+	url = https://github.com/caris-events/invade.git
