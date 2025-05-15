@@ -38,6 +38,9 @@ importers:
       sharp:
         specifier: ^0.33.3
         version: 0.33.3
+      sql-template-tag:
+        specifier: ^5.2.1
+        version: 5.2.1
       sqlstring:
         specifier: ^2.3.3
         version: 2.3.3
@@ -3372,6 +3375,10 @@ packages:
 
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+
+  sql-template-tag@5.2.1:
+    resolution: {integrity: sha512-lFdvXCOqWhV40A7w4oQVDyuaNFb5yO+dhsHStZzOdtDJWCBWYv4+hhATK5nPpY5v/T1OMVcLMPeN4519qIyb9Q==}
+    engines: {node: '>=14'}
 
   sqlstring@2.3.3:
     resolution: {integrity: sha512-qC9iz2FlN7DQl3+wjwn3802RTyjCx7sDvfQEXchwa6CWOx07/WVfh91gBmQ9fahw8snwGEWU3xGzOt4tFyHLxg==}
@@ -8180,6 +8187,8 @@ snapshots:
   sourcemap-codec@1.4.8: {}
 
   space-separated-tokens@2.0.2: {}
+
+  sql-template-tag@5.2.1: {}
 
   sqlstring@2.3.3: {}
 
