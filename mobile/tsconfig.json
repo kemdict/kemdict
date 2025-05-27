@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "moduleDetection": "force",
+
+    "allowJs": true,
+    "esModuleInterop": true,
+
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "crossdb": ["../web/src/server/crossdb"],
+      "$lib/*": ["../web/src/lib/*"],
+      "common": ["../web/src/lib/common"]
+    }
+  },
+  "include": ["src/**/*", "*.ts", "*.cjs"]
+}
