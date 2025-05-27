@@ -2,8 +2,7 @@
 import { site, parsePageParam, langs } from "common";
 import { chunk } from "lodash-es";
 const { langId } = Astro.params;
-import { getHetFromUrl } from "$src/server/db";
-import { getSearchTitle } from "$src/server/crossdb";
+import { getHetFromUrl, getSearchTitle } from "$src/server/db";
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url, langId);
 if (!success) {
