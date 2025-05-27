@@ -6,12 +6,13 @@ Separate, because the needs are a little different. The mobile version will have
 
 * Pages
 
-- api
-- dicts: dictionaries list and individual dictionary pages
-- history: search and word history
 - initials: initial list index page
 - newwords: new word index page
 - radicals: radical index page, and character index for a given radical
+
+- api
+- dicts: dictionaries list and individual dictionary pages
+- history: search and word history
 - og-image: generate image for the page in question
 - pojtl: article explaining POJ
 - search: search init, search result

@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import IndexPage from "@/components/IndexPage.tsx";
+
+const title = "Kemdict";
 ---
 
-<Layout title="hello">
-  <IndexPage />
+<Layout title={title}>
+  <IndexPage title={title} client:load />
 </Layout>
