@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({ title }: { title: string }) {
+export default function SearchAppBar({ title }: { title?: string }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -63,7 +63,7 @@ export default function SearchAppBar({ title }: { title: string }) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            {title}
+            {title || ""}
           </Typography>
           <Search>
             <SearchIconWrapper>

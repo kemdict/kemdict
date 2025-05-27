@@ -37,6 +37,17 @@ export default function IndexPage({ title }: { title: string }) {
             <ListItemText primary="新詞列表" />
           </ListItemButton>
         </List>
+        <Typography sx={{ mt: 2, mb: 0 }} variant="h6" component="div">
+          測試
+        </Typography>
+        <List dense={false}>
+          <ListItemButton href="/word?word=啥">
+            <ListItemIcon>
+              <DescriptionIcon />
+            </ListItemIcon>
+            <ListItemText primary="「啥」的定義" />
+          </ListItemButton>
+        </List>
       </Container>
     </>
   );
