@@ -66,14 +66,16 @@ function escapeLike(str: string) {
 /**
  * Split `text` on whitespace to be processed later.`
  */
-function parseStringQuery(text: string | string[] | undefined): string[] {
+export function parseStringQuery(
+  text: string | string[] | undefined,
+): string[] {
   if (Array.isArray(text)) {
     return text.join(" ").split(/\s+/);
   } else {
     return text?.split(/\s+/) || [];
   }
 }
-function parseQuery(inputQuery: string) {
+export function parseQuery(inputQuery: string) {
   // FIXME: use alwaysArray
   const result = searchQueryParser.parse(inputQuery, {
     keywords: ["lang", "title", "from"],
@@ -150,67 +152,6 @@ function parsedQueryToSQL(
     sqlExprs: exprs.join("\n").normalize("NFD"),
     sqlArgs: sqlArgs.map((s) => s.normalize("NFD")),
   };
-}
-
-export function getSearchTitle(
-  mtch: Mtch,
-  query: string,
-  markup?: boolean,
-): string {
-  let ret = "";
-  const parsed = parseQuery(query);
-  const tokens = parseStringQuery(parsed.text);
-  function wrap(s: string) {
-    if (markup) {
-      return `「<span class="font-bold">${s}</span>」`;
-    } else {
-      return `「${s}」`;
-    }
-  }
-  if (markup) {
-    query = `<span class="font-bold">${query}</span>`;
-  }
-  if (mtch === "contains") {
-    if (tokens.length === 0) {
-      ret = `符合「${query}」的詞`;
-    } else {
-      ret = `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
-    }
-    // } else if (mtch === "content") {
-    //   if (tokens.length === 0) {
-    //     ret = `內文包含「${query}」的詞`;
-    //   } else {
-    //     ret = `內文包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
-    //   }
-  } else if (mtch === "prefix") {
-    if (tokens.length === 0) {
-      ret = `開頭符合「${query}」的詞`;
-    } else if (tokens.length === 1) {
-      ret = `以${wrap(tokens[0])}開頭的詞`;
-    } else {
-      ret = `以${wrap(tokens[0])}開頭、且包含${joinLast(
-        tokens.slice(1).map(wrap),
-        "、",
-        "及",
-      )}的詞`;
-    }
-  } else if (mtch === "suffix") {
-    if (tokens.length === 0) {
-      ret = `結尾符合「${query}」的詞`;
-    } else if (tokens.length === 1) {
-      ret = `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
-    } else {
-      ret = `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
-        tokens.slice(0, -1).map(wrap),
-        "、",
-        "及",
-      )}的詞`;
-    }
-  } else {
-    ret = `完全符合「${query}」的詞`;
-  }
-
-  return ret;
 }
 
 /**

@@ -1,8 +1,8 @@
 import { uniqBy, chunk, sortBy } from "lodash-es";
-import { CrossDB, type Mtch } from "./crossdb";
+import { CrossDB, parseQuery, parseStringQuery, type Mtch } from "./crossdb";
 import { spc } from "$lib/processing";
 import type { Heteronym, LangId } from "common";
-import { groupByProp } from "common";
+import { groupByProp, joinLast } from "common";
 import { Database } from "bun:sqlite";
 
 export async function readDB() {
@@ -23,6 +23,67 @@ export async function readDB() {
 
 export const DB = new CrossDB("bun", readDB);
 
+export function getSearchTitle(
+  mtch: Mtch,
+  query: string,
+  markup?: boolean,
+): string {
+  let ret = "";
+  const parsed = parseQuery(query);
+  const tokens = parseStringQuery(parsed.text);
+  function wrap(s: string) {
+    if (markup) {
+      return `「<span class="font-bold">${s}</span>」`;
+    } else {
+      return `「${s}」`;
+    }
+  }
+  if (markup) {
+    query = `<span class="font-bold">${query}</span>`;
+  }
+  if (mtch === "contains") {
+    if (tokens.length === 0) {
+      ret = `符合「${query}」的詞`;
+    } else {
+      ret = `包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+    }
+    // } else if (mtch === "content") {
+    //   if (tokens.length === 0) {
+    //     ret = `內文包含「${query}」的詞`;
+    //   } else {
+    //     ret = `內文包含${joinLast(tokens.map(wrap), "、", "及")}的詞`;
+    //   }
+  } else if (mtch === "prefix") {
+    if (tokens.length === 0) {
+      ret = `開頭符合「${query}」的詞`;
+    } else if (tokens.length === 1) {
+      ret = `以${wrap(tokens[0])}開頭的詞`;
+    } else {
+      ret = `以${wrap(tokens[0])}開頭、且包含${joinLast(
+        tokens.slice(1).map(wrap),
+        "、",
+        "及",
+      )}的詞`;
+    }
+  } else if (mtch === "suffix") {
+    if (tokens.length === 0) {
+      ret = `結尾符合「${query}」的詞`;
+    } else if (tokens.length === 1) {
+      ret = `以${wrap(tokens[tokens.length - 1])}結尾的詞`;
+    } else {
+      ret = `以${wrap(tokens[tokens.length - 1])}結尾且包含${joinLast(
+        tokens.slice(0, -1).map(wrap),
+        "、",
+        "及",
+      )}的詞`;
+    }
+  } else {
+    ret = `完全符合「${query}」的詞`;
+  }
+
+  return ret;
+}
+
 /** Return the preview text of `het`. */
 export function hetPreview(het: Heteronym) {
   function strip(html: string | undefined): string {
@@ -33,7 +94,7 @@ export function hetPreview(het: Heteronym) {
   }
   return strip(
     het.props.def ||
-      het.props.defs?.map((x) => x.def).join("") ||
+      het.props.defs?.map((x: any) => x.def).join("") ||
       het.props.example ||
       het.props.zh ||
       het.props.en ||
@@ -81,12 +142,12 @@ export async function getHetFromUrl(
   | [
       true,
       {
-        heteronyms: undefined;
-        mtch: undefined;
-        query: undefined;
-        originalQuery: undefined;
-        langSet: undefined;
-        langCountObj: undefined;
+        heteronyms?: undefined;
+        mtch?: undefined;
+        query?: undefined;
+        originalQuery?: undefined;
+        langSet?: undefined;
+        langCountObj?: undefined;
         /** This page has no suffix.
             Redirect to /search if the page isn't /search. */
         root: true;
