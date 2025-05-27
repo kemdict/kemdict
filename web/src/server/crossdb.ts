@@ -1,6 +1,6 @@
 import { uniq } from "lodash-es";
 import sqlstring from "sqlstring";
-const sqlEscape = sqlstring.escape;
+const sqlEscapeOrig = sqlstring.escape;
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 import sql, { empty } from "sql-template-tag";
@@ -52,17 +52,16 @@ function tokenToLIKEInput(
 
 // sqlstring's escapes single quotes with a backslash, but SQLite
 // expects it to be doubled instead.
-function escape(thing: any) {
-  return sqlEscape(thing).replace("\\'", "''").normalize("NFD");
+function escapeSql(thing: any) {
+  return sqlEscapeOrig(thing).replace("\\'", "''").normalize("NFD");
 }
 
 /**
- * Escape `str` so that it doesn't contain the wildcard character "%" for LIKE
- * statements.
- * Assumes the escape character is the backslash.
+ * Escape `str` so that it doesn't contain the wildcard characters "%" and "_"
+ * for LIKE statements. Assumes the escape character is the backslash.
  */
 function escapeLike(str: string) {
-  return str.replaceAll("%", "\\%");
+  return str.replaceAll("%", "\\%").replaceAll("_", "\\_");
 }
 /**
  * Split `text` on whitespace to be processed later.`
@@ -360,7 +359,7 @@ LIMIT 10`,
     return (await this.crossDbAll(
       `
 SELECT DISTINCT "from" FROM links
-WHERE "to" IN (${escape(titles)})`,
+WHERE "to" IN (${escapeSql(titles)})`,
       [],
       true,
     )) as string[];
