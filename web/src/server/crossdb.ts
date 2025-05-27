@@ -6,7 +6,7 @@ import type { SearchParserResult } from "search-query-parser";
 import sql, { empty } from "sql-template-tag";
 
 import type { LangId, Heteronym, DictId } from "common";
-import { ensureArray, joinLast } from "common";
+import { ensureArray } from "common";
 
 export type Mtch =
   | "prefix"
