@@ -1,5 +1,16 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "crossdb": ["../web/src/server/crossdb"],
+      "$lib/*": ["../web/src/lib/*"],
+      "@/*": ["./src/*"],
+      "common": ["../web/src/lib/common"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
 }
