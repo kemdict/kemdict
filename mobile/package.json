@@ -1,8 +1,19 @@
 {
+  "name": "mobile",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
   "dependencies": {
-    "lodash-es": "^4.17.21",
-    "search-query-parser": "^1.6.0",
-    "sql-template-tag": "^5.2.1",
-    "sqlstring": "^2.3.3"
-  }
+    "@tailwindcss/vite": "^4.1.7",
+    "astro": "^5.8.0",
+    "tailwindcss": "^4.1.7"
+  },
+  "trustedDependencies": [
+    "@tailwindcss/oxide"
+  ]
 }
