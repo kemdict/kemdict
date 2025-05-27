@@ -1,8 +1,8 @@
 2025-05-27T20:54:25+0900
 
-Mobile version.
+Mobile version prototype.
 
-Separate, because the needs are a little different. The mobile version will have the database included, which is impossible for the web version.
+Separate, because the needs are a little different.
 
 * Pages
 
