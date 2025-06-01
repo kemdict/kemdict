@@ -142,6 +142,11 @@ by default."
 
 (put 'ht-update-with! 'lisp-indent-function 2)
 
+(defun d::hash-copy (table from to)
+  "Copy the value of key FROM to TO in TABLE."
+  (-when-let (value (ht-get table from))
+    (ht-set! table to value)))
+
 (defun d::hash-rename (table from to)
   "Rename the key FROM to TO in TABLE."
   (-when-let (value (ht-get table from))
@@ -670,6 +675,8 @@ This is a separate step from shaping."
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_maryknoll1976"
+       ;; Keep a copy that doesn't have markup
+       (d::hash-copy props "zh" "zh-plain")
        (ht-update-with! props "zh"
          #'d:links:comma-word-list))
       ("chhoetaigi_taioanpehoekichhoogiku"
@@ -979,7 +986,12 @@ VALUES
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
-                   (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))))))))
+                   (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))
+             ;; For this dictionary, set the zh version as an alias
+             (when (equal (gethash "from" het)
+                          "chhoetaigi_maryknoll1976")
+               (let ((zh (gethash "zh-plain" (gethash "props" het))))
+                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))))))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
     (let* ((len (length links))
