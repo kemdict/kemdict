@@ -63,6 +63,7 @@ by default."
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+       ("chhoetaigi_maryknoll1976" "nan_TW" "chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json")
        ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
        ("lopof-taigi" "nan_TW" "lopof-nan_TW.json")
        ("lopof-hakka" "hak_TW" "lopof-hak_TW.json")

@@ -124,6 +124,23 @@ export const dicts = [
     },
   },
   {
+    id: "chhoetaigi_maryknoll1976",
+    name: "Maryknoll台英辭典",
+    url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
+    lang: "nan_TW",
+    meta: {
+      author: "Maryknoll Language Service Center",
+      year: 1976,
+      desc: `TODO`,
+      license: {
+        name: "CC BY-SA 3.0",
+        url: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase/#3-1976-Maryknoll台英辭典",
+      },
+      source: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase",
+      original: "",
+    },
+  },
+  {
     id: "kisaragi_dict",
     name: "如月的現代台灣華語補足典",
     url: "/dicts/kisaragi_dict",

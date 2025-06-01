@@ -7,6 +7,7 @@
   import WordITaigi from "./WordITaigi.svelte";
   import WordTaiJit from "./WordTaiJit.svelte";
   import WordKichhooGiku from "./WordKichhooGiku.svelte";
+  import WordMaryknoll from "./WordMaryknoll.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
   import WordUnihan from "./WordUnihan.svelte";
   import WordILRDF from "./WordILRDF.svelte";
@@ -30,7 +31,7 @@
       ></span
     >
     <span>
-      {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
+      {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku", "chhoetaigi_maryknoll1976"].includes(dict.id)}
         <!-- FIXME: this only links to the first one. -->
         <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
       {:else if dict.id.startsWith("lopof")}
@@ -58,6 +59,24 @@
         <p>
           這個定義有問題嗎？<a href="https://github.com/kemdict/kemdict/issues"
             >回報問題</a
+          >
+        </p>
+      </div>
+    {:else if dict.id == "chhoetaigi_maryknoll1976"}
+      <WordMaryknoll heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          《{dict.name}》
+        </p>
+        <p>原作者：Maryknoll Language Service Center</p>
+        <p>
+          <a href={dict?.meta?.license?.url}
+            >以 姓名標示-Sio-kâng方式分享 3.0 國際 (CC BY-SA 4.0) 授權</p
+          >
+        </p>
+        <p>
+          資料來自 <a href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase"
+            >ChhoeTaigi 的字詞資料庫</a
           >
         </p>
       </div>

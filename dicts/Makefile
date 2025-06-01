@@ -29,6 +29,7 @@ DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
+DICT_TARGETS += chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json
 DICT_TARGETS += lopof-nan_TW.json lopof-hak_TW.json
 DICT_TARGETS += unihan.json caris-events--invade.json
 
@@ -95,6 +96,10 @@ chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
 	bun x csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojOthers","pojInput","pojInputOthers","kip","kipOthers","kipInput","kipInputOthers","zh","en","descEn","NounClassifier","例詞POJ","antonym","examplePOJ","exampleEn","exampleZh","參照","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv > "$@"
+
+chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json: ChhoeTaigiDatabase/README.md
+	mkdir -p chhoetaigi
+	bun x csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojInput","kip","kipInput","zh","en","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_MaryknollTaiengSutian.csv > "$@"
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.
