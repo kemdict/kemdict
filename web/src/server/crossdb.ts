@@ -307,7 +307,7 @@ WHERE "to" IN (${escapeSql(titles)})`,
   }
 
   async getNewWords(limit?: number): Promise<string[]> {
-    const query = sql`SELECT title FROM newwords
+    const query = sql`SELECT DISTINCT title FROM newwords
 -- HACK: work around a few weird titles
 WHERE title NOT LIKE '?%'
 ORDER BY "time" DESC
