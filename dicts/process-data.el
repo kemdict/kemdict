@@ -669,6 +669,9 @@ This is a separate step from shaping."
       ("chhoetaigi_itaigi"
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
+      ("chhoetaigi_maryknoll1976"
+       (ht-update-with! props "zh"
+         #'d:links:comma-word-list))
       ("chhoetaigi_taioanpehoekichhoogiku"
        (ht-update-with! props "en"
          (lambda (s)

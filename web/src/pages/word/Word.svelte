@@ -71,7 +71,7 @@
         <p>原作者：Maryknoll Language Service Center</p>
         <p>
           <a href={dict?.meta?.license?.url}
-            >以 姓名標示-Sio-kâng方式分享 3.0 國際 (CC BY-SA 4.0) 授權</p
+            >以 姓名標示-Sio-kâng方式分享 3.0 國際 (CC BY-SA 4.0) 授權</a
           >
         </p>
         <p>

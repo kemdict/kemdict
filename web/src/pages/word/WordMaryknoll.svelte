@@ -11,11 +11,10 @@
   {/if}
   {#if het.props.zh}
     <p>
-      華語：
-      {@html het.props.zh}
+      華語：{@html het.props.zh}
     </p>
   {/if}
   <p class="def">
-    {#if het.props.en}英語：{het.props.en}{/if}
+    {#if het.props.en}{het.props.en}{/if}
   </p>
 {/each}
