@@ -274,6 +274,28 @@ Hub / USB Hub
 ***** 動|號召支持者舉辦遊行，為候選人營造聲勢、凝聚支持度。
 ***** 名|前項遊行本身。如：「這個候選人選舉期間共辦了十場造勢。」
 ** etc.
+*** 馬內
+:PROPERTIES:
+:added:    2025-11-14T01:16:31+0900
+:END:
+**** ㄇㄚˇ ㄋㄟˋ
+***** 名|經紀人。借自日語「マネージャー」。
+***** 名|（cosplay，延伸含義）助手。
+*** 吉古拉
+:PROPERTIES:
+:added:    2025-11-14T01:00:19+0900
+:END:
+# We should respect real conventions that have already developed. This *is* how the word is used in the wild, making this set of Han characters the only correct way of writing it using Han characters.
+# Frustratingly, approximately no one has recorded its sound in POJ/TL. So this is my attempt.
+# Reminder that 4 -> 8 and 8 -> 4 when undergoing sandhi, except for -h sounds where 4 -> 2 and 8 -> 3. But since the only -h sound is the last syllable we don't have to worry about that exception.
+#
+# Some samples:
+#
+# https://youtu.be/TqvoCg6BHUY?&t=6 (tsi̍t-kut-ah)
+# https://youtu.be/TqvoCg6BHUY?&t=7 (sounds like tsi̍t-kut-a̍h?)
+# https://youtu.be/bcCGNmLpEfU?t=125 (sounds more like tsi̍t-kut-ah)
+**** tsi̍t-kut-ah / ㄐㄧˊ ㄍㄨˇ ㄌㄚˉ
+***** 名|一種以魚漿製成的基隆小吃。源自日語竹輪（ちくわ, chikuwa）。
 *** 物販
 :PROPERTIES:
 :added:    2025-10-16T02:21:22+0900
