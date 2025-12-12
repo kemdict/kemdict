@@ -217,5 +217,5 @@
       {@const lang = dict.id.slice(-3)}
       <WordILRDF heteronyms={hets} {lang} />
     {/if}
-  </WordPtsTaigitv>
+  </div>
 {/each}
