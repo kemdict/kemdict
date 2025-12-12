@@ -20,6 +20,8 @@
 
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
+
+  console.log(groupedHets)
 </script>
 
 {#each groupedHets as [dict, hets]}
