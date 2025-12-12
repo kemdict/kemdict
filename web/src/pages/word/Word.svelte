@@ -22,7 +22,7 @@
   export let title: string;
 
     if (title === "演算法")
-    console.log(groupedHets)
+    console.log(JSON.stringify(groupedHets, null, 2))
 </script>
 
 {#each groupedHets as [dict, hets]}
