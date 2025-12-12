@@ -998,8 +998,12 @@ VALUES
              (when (member (gethash "from" het)
                           '("chhoetaigi_maryknoll1976"
                             "pts-taigitv"))
-               (let ((zh (gethash "zh-plain" (gethash "props" het))))
-                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))))))))
+               (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
+                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))
+             (when (member (gethash "from" het)
+                          '("chhoetaigi_maryknoll1976"))
+               (when-let ((en (gethash "en" (gethash "props" het))))
+                 (sqlite-execute d:db alias-stmt (list het-id en nil))))))))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
     (let* ((len (length links))
