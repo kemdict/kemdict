@@ -673,6 +673,8 @@ This is a separate step from shaping."
                       ;; No need to apply linkify-brackets again
                       d:links:org-style)))))))
       ("pts-taigitv"
+       ;; Keep a copy that doesn't have markup
+       (d::hash-copy props "zh" "zh-plain")
        (ht-update-with! props "zh"
          #'d:links:link-to-word))
       ("chhoetaigi_itaigi"
@@ -992,9 +994,10 @@ VALUES
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
                    (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))
-             ;; For this dictionary, set the zh version as an alias
-             (when (equal (gethash "from" het)
-                          "chhoetaigi_maryknoll1976")
+             ;; For these two, set the zh version as an alias
+             (when (member (gethash "from" het)
+                          '("chhoetaigi_maryknoll1976"
+                            "pts-taigitv"))
                (let ((zh (gethash "zh-plain" (gethash "props" het))))
                  (sqlite-execute d:db alias-stmt (list het-id zh nil))))))))))
   ;; (message "Inserting links...")
