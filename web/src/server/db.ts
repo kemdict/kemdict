@@ -121,15 +121,15 @@ export function processPn(het: Heteronym) {
     "p_四縣",
     "kip",
     "poj",
+    "pn",
   ];
   const key = pron_keys.find((pron) => het.props[pron]);
   if (key === undefined) return "";
-  let pn = het.props[key] as string | undefined;
-  if (pn && het.title !== pn) {
-    return `（${spc(pn)}）`;
-  } else {
-    return "";
-  }
+  const value = het.props[key] as string[] | string | undefined;
+  if (value === undefined) return "";
+  const pn = typeof value === "string" ? value : value[0];
+  if (het.title === pn) return "";
+  return `（${spc(pn)}）`;
 }
 
 /**
