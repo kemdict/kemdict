@@ -66,10 +66,11 @@ export function groupByProp<T, K extends keyof T, F extends string>(
 }
 
 /**
- * Format `str` using `template`.
- * $1 in `template` stands for `str`.
+ * Format `thing` using `template`.
+ * $1 in `template` stands for `thing`.
  */
-export function format(template: string, str: string): string {
+export function format(template: string, thing: any): string {
+  const str = `${thing}`
   return str.replace(RegExp(`(${escapeRegExp(str)})`), template);
 }
 
