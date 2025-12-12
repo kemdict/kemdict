@@ -1192,20 +1192,20 @@ pronunciation strings include multiple pronunciations."
               ((hash-table-p pn)
                (gethash "zh-Hant" pn))
               ((listp pn)
-               pn)))))
-  (->> (--map
-        (->> it
-             d::NFD
-             (s-replace "　" " ")
-             ;; The replacement character, which appears in one entry in
-             ;; itaigi.
-             ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
-             ;; I'm pretty sure it's not supposed to be there.
-             (s-replace "\uFFFD" "")
-             (s-replace "（變）" "/")
-             (s-split "[ \t\n\r]*/[ \t\n\r]*")))
-       (-flatten-n 1)
-       (--remove (equal it ""))))
+               pn))))
+    (->> (--map
+          (->> it
+               d::NFD
+               (s-replace "　" " ")
+               ;; The replacement character, which appears in one entry in
+               ;; itaigi.
+               ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
+               ;; I'm pretty sure it's not supposed to be there.
+               (s-replace "\uFFFD" "")
+               (s-replace "（變）" "/")
+               (s-split "[ \t\n\r]*/[ \t\n\r]*")))
+         (-flatten-n 1)
+         (--remove (equal it "")))))
 
 (defun d:pn-collect (het)
   "Collect pronunciations from HET."
