@@ -21,10 +21,8 @@
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
 
-  for (const [dict, hets] of groupedHets) {
-    if (dict === "pts-taigitv")
-    console.log(hets)
-  }
+    if (title === "演算法")
+    console.log(groupedHets)
 </script>
 
 {#each groupedHets as [dict, hets]}
