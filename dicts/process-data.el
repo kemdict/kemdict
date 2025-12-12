@@ -1193,7 +1193,8 @@ pronunciation strings include multiple pronunciations."
                (gethash "zh-Hant" pn))
               ((listp pn)
                pn))))
-    (->> (--map
+    (->> pns
+         (--map
           (->> it
                d::NFD
                (s-replace "　" " ")
