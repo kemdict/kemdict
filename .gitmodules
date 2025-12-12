@@ -13,3 +13,6 @@
 [submodule "dicts/caris-events--invade"]
 	path = dicts/caris-events--invade
 	url = https://github.com/caris-events/invade.git
+[submodule "dicts/pts-taigitv"]
+	path = dicts/pts-taigitv
+	url = https://github.com/kemdict/kemdict-data-pts-taigitv

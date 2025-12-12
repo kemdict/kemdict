@@ -8,6 +8,7 @@
   import WordTaiJit from "./WordTaiJit.svelte";
   import WordKichhooGiku from "./WordKichhooGiku.svelte";
   import WordMaryknoll from "./WordMaryknoll.svelte";
+  import WordPtsTaigitv from "./WordPtsTaigitv.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
   import WordUnihan from "./WordUnihan.svelte";
   import WordILRDF from "./WordILRDF.svelte";
@@ -31,7 +32,7 @@
       ></span
     >
     <span>
-      {#if ["hakkadict", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku", "chhoetaigi_maryknoll1976"].includes(dict.id)}
+      {#if ["hakkadict", "pts-taigitv", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku", "chhoetaigi_maryknoll1976"].includes(dict.id)}
         <!-- FIXME: this only links to the first one. -->
         <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
       {:else if dict.id.startsWith("lopof")}
@@ -134,6 +135,15 @@
           >
         </p>
       </div>
+    {:else if dict.id == "pts-taigitv"}
+      <WordPtsTaigitv heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          <a href="https://taigiwords.taigitv.org.tw">公視《台語新詞辭庫》</a>以
+          <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant">CC BY 4.0</a>
+          條款釋出。
+        </p>
+      </div>
     {:else if dict.id == "chhoetaigi_itaigi"}
       <WordITaigi heteronyms={hets} />
       <div class="copyright">
@@ -207,5 +217,5 @@
       {@const lang = dict.id.slice(-3)}
       <WordILRDF heteronyms={hets} {lang} />
     {/if}
-  </div>
+  </WordPtsTaigitv>
 {/each}

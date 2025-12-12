@@ -25,6 +25,7 @@ build: entries.db
 
 DICT_TARGETS := moedict-data-twblg/dict-twblg.json
 DICT_TARGETS += kisaragi/kisaragi_dict.json
+DICT_TARGETS += pts-taigitv/README.md
 DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
@@ -108,6 +109,9 @@ moedict-data-twblg/dict-twblg.json:
 
 ministry-of-education/package.json:
 	git submodule update --init --depth 1 -- ministry-of-education
+
+pts-taigitv/README.md:
+	git submodule update --init --depth 1 -- pts-taigitv
 
 ChhoeTaigiDatabase/README.md:
 	git submodule update --init --depth 1 -- ChhoeTaigiDatabase

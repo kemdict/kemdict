@@ -58,6 +58,7 @@ by default."
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
+       ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
        ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
                                   "moedict-data-twblg/dict-twblg-ext.json"))
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
@@ -671,6 +672,9 @@ This is a separate step from shaping."
                       (s-replace "#+end_quote" "</blockquote>")
                       ;; No need to apply linkify-brackets again
                       d:links:org-style)))))))
+      ("pts-taigitv"
+       (ht-update-with! props "zh"
+         #'d:links:link-to-word))
       ("chhoetaigi_itaigi"
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
@@ -982,6 +986,7 @@ VALUES
                              "chhoetaigi_itaigi"
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
+                             "pts-taigitv"
                              "lopof-taigi"
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
@@ -1175,22 +1180,31 @@ CREATE TABLE newwords (
 (defun d:pn-normalize (pn)
   "Normalize pronunciation PN.
 
+PN can be a list, string, or hash table.
+
 If PN is a hash table, get the string from its value for \"zh-Hant\".
 
 Return a list of normalized strings. This is because some
 pronunciation strings include multiple pronunciations."
-  (->> (if (stringp pn)
-           pn
-         (gethash "zh-Hant" pn))
-       d::NFD
-       (s-replace "　" " ")
-       ;; The replacement character, which appears in one entry in
-       ;; itaigi.
-       ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
-       ;; I'm pretty sure it's not supposed to be there.
-       (s-replace "\uFFFD" "")
-       (s-replace "（變）" "/")
-       (s-split "[ \t\n\r]*/[ \t\n\r]*")
+  (let ((pns (cond
+              ((stringp pn)
+               (list pn))
+              ((hash-table-p pn)
+               (gethash "zh-Hant" pn))
+              ((listp pn)
+               pn)))))
+  (->> (--map
+        (->> it
+             d::NFD
+             (s-replace "　" " ")
+             ;; The replacement character, which appears in one entry in
+             ;; itaigi.
+             ;; https://itaigi.tw/k/%E5%8D%88%E5%AE%89/
+             ;; I'm pretty sure it's not supposed to be there.
+             (s-replace "\uFFFD" "")
+             (s-replace "（變）" "/")
+             (s-split "[ \t\n\r]*/[ \t\n\r]*")))
+       (-flatten-n 1)
        (--remove (equal it ""))))
 
 (defun d:pn-collect (het)
@@ -1206,6 +1220,9 @@ pronunciation strings include multiple pronunciations."
 
                 ;; hakkadict
                 "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
+
+                ;; what I chose for the pts-taigitv copy
+                "pn"
 
                 ;; chhoetaigi-itaigi (keys are defined in Makefile
                 ;; in this repository)

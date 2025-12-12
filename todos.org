@@ -183,6 +183,11 @@ No longer applicable as we don't use moedict-data anymore.
 | △        | 表另有可互見參酌之其他成語               | 「釋義」欄           |
 | ■        | 表與主要典源內容不同之參考資料有一筆以上 | 「典源」欄           |
 #+end_quote
+* Tags
+:PROPERTIES:
+:created:  2025-12-12T18:27:18+0900
+:END:
+they're actually pretty nice. At least add them to kisaragi-dict?
 * Adding a dictionary
 - kemdict-data: add code to download the raw data at build time
 - kemdict-data: update process-data.el to include the new dictionary in the intermediate json file

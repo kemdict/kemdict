@@ -104,6 +104,23 @@ export const dicts = [
     meta: lopofMeta,
   },
   {
+    id: "pts-taigitv",
+    name: "公視台語新詞辭庫",
+    // I don't have the ID for the new site yet
+    url: "https://www.taigitv.org.tw/taigi-words/$1",
+    lang: "nan_TW",
+    meta: {
+      author: "公視台語台",
+      desc: `公視台語台做的詞庫。`,
+      license: {
+        name: "CC BY 4.0",
+        url: "https://creativecommons.org/licenses/by/4.0/deed.zh-hant",
+      },
+      source: "https://github.com/kemdict/kemdict-data-pts-taigitv",
+      original: "https://taigiwords.taigitv.org.tw/",
+    },
+  },
+  {
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",
     url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
