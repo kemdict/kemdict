@@ -16,6 +16,6 @@
     </div>
   {/if}
   <p class="def">
-    {#if het.props.zh}{het.props.zh}{/if}
+    {#if het.props.zh}{@html het.props.zh}{/if}
   </p>
 {/each}
