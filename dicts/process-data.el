@@ -422,20 +422,6 @@ If NEW-SEPARATOR is non-nil, use it as the new comma; otherwise use \"、\"."
           (equal (d:links:comma-word-list "敵意")
                  "<a href=\"/word/敵意\">敵意</a>")))))
 
-(defconst d::pn-keys
-  '(;; kemdict-data-ministry-of-education
-    "bopomofo" ; "pinyin"
-    ;; moedict-twblg
-    "trs"
-    ;; kisaragi-dict
-    "pronunciation"
-    ;; hakkadict
-    "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
-    ;; chhoetaigi-itaigi (keys are defined in Makefile
-    ;; in this repository)
-    "poj" "kip"
-    "kMandarin"))
-
 (defun d:process-title (title)
   "Process TITLE to replace problematic characters, and so on.
 If TITLE is empty, return nil so the call site can decide what to
