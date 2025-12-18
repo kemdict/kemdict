@@ -1,9 +1,11 @@
-[tool.poetry]
+[project]
 name = "pojtl"
 version = "0.1.0"
 description = ""
-authors = ["Kisaragi Hiu <mail@kisaragi-hiu.com>"]
 readme = "README.md"
+authors = [{ name = "Kisaragi Hiu", email = "mail@kisaragi-hiu.com" }]
+
+[tool.poetry]
 package-mode = false
 
 [tool.poetry.dependencies]
