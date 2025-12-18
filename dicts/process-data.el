@@ -979,17 +979,17 @@ VALUES
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
-                   (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))
-             ;; For these two, set the zh version as an alias
-             (when (member (gethash "from" het)
-                          '("chhoetaigi_maryknoll1976"
-                            "pts-taigitv"))
-               (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
-                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))
-             (when (member (gethash "from" het)
-                          '("chhoetaigi_maryknoll1976"))
-               (when-let ((en (gethash "en" (gethash "props" het))))
-                 (sqlite-execute d:db alias-stmt (list het-id en nil))))))))))
+                   (sqlite-execute d:db alias-stmt (list het-id input-form nil))))))
+           ;; For these two, set the zh version as an alias
+           (when (member (gethash "from" het)
+                        '("chhoetaigi_maryknoll1976"
+                          "pts-taigitv"))
+             (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
+               (sqlite-execute d:db alias-stmt (list het-id zh nil))))
+           (when (member (gethash "from" het)
+                        '("chhoetaigi_maryknoll1976"))
+             (when-let ((en (gethash "en" (gethash "props" het))))
+               (sqlite-execute d:db alias-stmt (list het-id en nil)))))))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
     (let* ((len (length links))
