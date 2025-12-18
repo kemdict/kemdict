@@ -1,5 +1,4 @@
 node_modules/
-*.lock
 _site/
 _data/
 *.js.map
