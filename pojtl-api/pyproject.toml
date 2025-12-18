@@ -4,20 +4,9 @@ version = "0.1.0"
 description = ""
 readme = "README.md"
 authors = [{ name = "Kisaragi Hiu", email = "mail@kisaragi-hiu.com" }]
-
-[tool.poetry]
-package-mode = false
-
-[tool.pyright]
-venvPath = "."
-venv = ".venv"
-
-[tool.poetry.dependencies]
-python = "^3.12"
-flask = "^3.1.2"
-kesi = "^1.6.0"
-gunicorn = "^23.0.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires-python = '>=3.12'
+dependencies = [
+  "flask>=3.1.2",
+  "gunicorn>=23.0.0",
+  "kesi>=1.6.0",
+]

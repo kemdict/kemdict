@@ -1,8 +1,8 @@
 setup:
-	poetry install
+	uv sync
 
 dev:
-	poetry run flask run
+	uv run flask run
 
 start: setup
-	poetry run gunicorn -w 2 "app:app"
+	uv run gunicorn -w 2 "app:app"
