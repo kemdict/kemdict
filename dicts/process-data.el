@@ -847,6 +847,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (seq-doseq (entry raw-dict)
            (progress-reporter-update rep j)
            (cl-incf j)
+           ;; FIXME: we're losing kautian word props here.
            (let ((orig-hets (or (gethash "heteronyms" entry)
                                 (vector entry))))
              (d::debug "%s - applying het_sort" dict)
