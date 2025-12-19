@@ -607,6 +607,9 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("kautian"
+       (ht-update-with! props "def"
+         #'d:links:linkify-keywords))
       ("unihan"
        (ht-set! props "pinyin"
                 (-some-> props
