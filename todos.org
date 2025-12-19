@@ -5,6 +5,7 @@
 
 ** Word properties are currently lost
 ** Links back to original, either via search or with IDs
+** Make sure keyword linking is working
 
 * done
 ** DONE New link style to make texts easier to read
