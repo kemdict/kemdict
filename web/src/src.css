@@ -105,12 +105,13 @@
   }
   .prose {
     @apply dark:prose-invert;
+    @apply dark:prose-p:text-white;
     @apply prose-a:link max-w-none;
     @apply prose-li:pl-1;
     @apply prose-blockquote:not-italic prose-blockquote:my-2 prose-blockquote:py-2 prose-blockquote:font-normal;
-    @apply prose-blockquote:bg-surface-200;
+    @apply prose-blockquote:bg-surface-300;
     @apply prose-blockquote:border-l-surface-400;
-    @apply dark:prose-blockquote:bg-stone-700;
+    @apply dark:prose-blockquote:bg-surface-900;
     @apply dark:prose-blockquote:border-l-surface-800;
     --tw-prose-bullets: "#000";
     --tw-prose-invert-bullets: "#333";

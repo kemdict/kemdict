@@ -1,3 +1,11 @@
+* Kautian
+:PROPERTIES:
+:created:  2025-12-19T09:46:41+0900
+:END:
+
+** Word properties are currently lost
+** Links back to original, either via search or with IDs
+
 * done
 ** DONE New link style to make texts easier to read
 ** DONE 譜系分類法 (=dict_revised=) is broken

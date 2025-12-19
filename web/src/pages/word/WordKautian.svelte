@@ -17,54 +17,31 @@
   }
 </script>
 
-{#each heteronyms as het}
-  <h1>{het.title}</h1>
-  {#if het.props.tl && het.props.tl !== het.title}
-    <Pronunciation>{spc(het.props.tl)}</Pronunciation>
+{JSON.stringify(groupByProp(heteronyms, (het) => het.props.pos))}
+
+<h1>{heteronyms[0].title}</h1>
+
+{#each groupByProp(heteronyms, (het) => het.props.pos, "none") as [pos, hets]}
+  {#if pos !== "none"}
+    <p class="pos">{pos}</p>
   {/if}
-  {#each groupByProp(het.props.defs, "type", "none") as [type, defs]}
-    {#if type !== "none"}
-      <p class="pos">{type}</p>
-    {/if}
-    <ol>
-      {#each defs as def}
-        {#if dict === "kisaragi_dict" || dict === "kisaragi_taigi"}
-          <li>
-            <p class="def">
-              {@html process_def_kisaragi(def.def)}
-            </p>
-            {#if def.example}
-              <p>
-                {def.example}
-              </p>
-            {/if}
-            {#if def.etymology}
-              <p>
-                {@html process_def_kisaragi(def.etymology)}
-              </p>
-            {/if}
-            {#if def.quote}
-              {#each def.quote as quote}
-                <p>{quote}</p>
-              {/each}
-            {/if}
-          </li>
-        {:else if dict == "moedict_twblg"}
-          {#if def.def || def.example || def.quote}
-            <li>
-              {#if def.def}
-                <p class="def">{@html def.def}</p>
-              {/if}
-              {#if def.example}
-                {@html interlinear_annotation(def.example)}
-              {/if}
-              {#if def.quote}
-                {@html interlinear_annotation(def.quote)}
-              {/if}
-            </li>
-          {/if}
-        {/if}
-      {/each}
-    </ol>
-  {/each}
+  <ol>
+    {#each hets as het}
+      {#if het.props.tl && het.props.tl !== het.title}
+        <Pronunciation>{spc(het.props.tl)}</Pronunciation>
+      {/if}
+      <li>
+        <p class="def">
+          {het.props.def}
+        </p>
+        {#each het.props.examples as example}
+          <blockquote>
+            <p>{example.han}</p>
+            <p>{example.tl}</p>
+            <p class="pt-1 opacity-80">({example.zh})</p>
+          </blockquote>
+        {/each}
+      </li>
+    {/each}
+  </ol>
 {/each}
