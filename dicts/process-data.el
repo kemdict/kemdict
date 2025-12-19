@@ -749,6 +749,13 @@ This is a separate step from shaping."
     (d::hash-prune props nil)
     (d::hash-prune props :null)))
 
+(defun d:ensure-number (string-or-number)
+  "Make sure STRING-OR-NUMBER is a number.
+If it is a string, run `string-to-number' on it, otherwise leave it as is."
+  (if (stringp string-or-number)
+      (string-to-number string-or-number)
+    string-or-number))
+
 (defun d:sort-orig-hets (orig-hets)
   "Sort ORIG-HETS according to their het_sort or id keys.
 
@@ -763,10 +770,10 @@ ORIG-HETS are props that will be used to construct heteronyms."
       (sort
        orig-hets
        (lambda (it other)
-         (< (string-to-number
+         (< (d:ensure-number
              (or (gethash "het_sort" it)
                  (gethash "id" it)))
-            (string-to-number
+            (d:ensure-number
              (or (gethash "het_sort" other)
                  (gethash "id" other))))))
     orig-hets))
