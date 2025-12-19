@@ -904,11 +904,11 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (message "Processing heteronyms (%s/%s)..." (1+ i) total)
          (garbage-collect))
        (ht-update-with! het "props"
-                        (lambda (props)
-                          (d:process-props
-                           props
-                           (gethash "title" het)
-                           (gethash "from" het))))))
+         (lambda (props)
+           (d:process-props
+            props
+            (gethash "title" het)
+            (gethash "from" het))))))
     (garbage-collect)
     ;; Step 3: insert them into the database
     (d:db-insert heteronyms (-uniq d:links))
