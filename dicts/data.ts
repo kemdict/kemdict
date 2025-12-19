@@ -263,6 +263,23 @@ export const dicts = [
     },
   },
   {
+    id: "kautian",
+    name: "臺灣台語常用詞辭典",
+    url: "https://sutian.moe.edu.tw/und-hani/tshiau/?lui=tai_su&tsha=$1",
+    lang: "nan_TW",
+    meta: {
+      author: "教育部",
+      version: "20251219",
+      desc: `教育部的台語辭典。`,
+      license: {
+        name: "CC BY-ND 3.0 TW",
+        url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
+      },
+      source: "https://github.com/kemdict/kemdict-data-ministry-of-education",
+      original: "https://sutian.moe.edu.tw/",
+    },
+  },
+  {
     id: "moedict_twblg",
     name: "臺灣閩南語常用詞辭典",
     url: "https://sutian.moe.edu.tw/und-hani/tshiau/?lui=tai_su&tsha=$1",

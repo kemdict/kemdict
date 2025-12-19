@@ -10,6 +10,7 @@
   import WordMaryknoll from "./WordMaryknoll.svelte";
   import WordPtsTaigitv from "./WordPtsTaigitv.svelte";
   import WordMoedictish from "./WordMoedictish.svelte";
+  import WordKautian from "./WordKautian.svelte";
   import WordUnihan from "./WordUnihan.svelte";
   import WordILRDF from "./WordILRDF.svelte";
   import WordLopof from "./WordLopof.svelte";
@@ -140,7 +141,9 @@
       <div class="copyright">
         <p>
           <a href="https://taigiwords.taigitv.org.tw">公視《台語新詞辭庫》</a>以
-          <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant">CC BY 4.0</a>
+          <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant"
+            >CC BY 4.0</a
+          >
           條款釋出。
         </p>
       </div>
@@ -177,6 +180,14 @@
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
         <p><a href={dict.meta.license.url}>使用說明</a></p>
+      </div>
+    {:else if dict.id == "kautian"}
+      <WordKautian heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          《<a href={dict.meta.original}>臺灣台語常用詞辭典</a>》
+        </p>
+        <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
       </div>
     {:else if dict.id == "moedict_twblg"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />

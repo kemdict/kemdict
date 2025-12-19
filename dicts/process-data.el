@@ -59,6 +59,7 @@ by default."
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
+       ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
                                   "moedict-data-twblg/dict-twblg-ext.json"))
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
@@ -965,6 +966,9 @@ INSERT INTO
 VALUES
   (?,?,?)"))
            (sqlite-execute d:db alias-stmt (list het-id het.title 1))
+           ;; This is only used in Kautian
+           (dolist (alt (gethash "alternativeHan" (gethash "props" het)))
+             (sqlite-execute d:db alias-stmt (list het-id alt 1)))
            (dolist (pn (map-values (d:pn-collect het)))
              (sqlite-execute d:db alias-stmt (list het-id pn 1))
              ;; Input versions.
@@ -972,6 +976,7 @@ VALUES
              ;; - don't bother for some dictionaries)
              (when (member (gethash "from" het)
                            '("moedict_twblg"
+                             "kautian"
                              "chhoetaigi_itaigi"
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
@@ -1156,6 +1161,9 @@ CREATE TABLE heteronyms (
   \"lang\" TEXT REFERENCES langs(\"id\"),
   \"props\" TEXT NOT NULL
 );")
+  ;; An example of an inexact alias is removing diacritics to be searchable with
+  ;; an ASCII keyboard. If "góa" is reduced to "goa", matches of the latter is
+  ;; always going to be inexact, therefore the alias itself is inexact.
   (sqlite-execute d:db "
 CREATE TABLE aliases (
   \"het_id\" INTEGER REFERENCES heteronyms(\"id\"),
@@ -1222,6 +1230,11 @@ pronunciation strings include multiple pronunciations."
 
                 ;; what I chose for the pts-taigitv copy
                 "pn"
+                ;; what I chose for kautian
+                "tl"
+                "pnColloquial"
+                "pnAlternative"
+                "pnOtherMerged"
 
                 ;; chhoetaigi-itaigi (keys are defined in Makefile
                 ;; in this repository)
