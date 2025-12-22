@@ -59,7 +59,7 @@ by default."
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
-       ;; FIXME 一【替】 → 一 for titles
+       ;; FIXME 同義詞 etc. aren't included yet
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
                                   "moedict-data-twblg/dict-twblg-ext.json"))
