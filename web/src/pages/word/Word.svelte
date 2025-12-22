@@ -185,7 +185,8 @@
       <WordKautian heteronyms={hets} />
       <div class="copyright">
         <p>
-          《<a href={dict.meta.original}>臺灣台語常用詞辭典</a>》
+          《<a href={dict.meta.original}>臺灣台語常用詞辭典</a
+          >》資料取得日期：{dict.meta.version}
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
       </div>
