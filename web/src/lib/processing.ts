@@ -14,7 +14,10 @@ export function spc(str: string | undefined): string | undefined {
  * Separate lines into ol elements.
  */
 export function newline_string_to_ol(str: undefined): undefined;
-export function newline_string_to_ol(str: string): string {
+export function newline_string_to_ol(str: string): string;
+export function newline_string_to_ol(
+  str: string | undefined,
+): string | undefined {
   if (str) {
     return `<ol>
     ${str
@@ -32,7 +35,9 @@ export function newline_string_to_ol(str: string): string {
  */
 export function interlinear_annotation(defs: undefined): undefined;
 export function interlinear_annotation(defs: string | string[]): string;
-export function interlinear_annotation(defs: string[]): string {
+export function interlinear_annotation(
+  defs: undefined | string | string[],
+): string | undefined {
   if (defs) {
     if (typeof defs === "string") {
       defs = [defs];
@@ -71,7 +76,7 @@ export function radicals_and_strokes(props: {
   radical?: string;
   sc?: string;
 }): string {
-  if (!props.radical && !props.sc) return;
+  if (!props.radical && !props.sc) return "";
   let x = "";
   x += `<div class="mb-4">【`;
   if (props.radical) {

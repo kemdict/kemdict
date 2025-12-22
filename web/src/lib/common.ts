@@ -1,5 +1,4 @@
 /** Constants, language helpers, dicts/langs */
-
 import { escapeRegExp } from "lodash-es";
 
 // * Helpers
@@ -132,11 +131,11 @@ export interface Dict {
    * - for other entries set `hidden` to true
    */
   hidden?: boolean;
-  meta?: {
+  meta: {
     version?: string;
     author?: string;
     extra?: Record<string, string>;
-    year: number;
+    year?: number;
     desc: string;
     license: {
       name: string;
@@ -145,7 +144,7 @@ export interface Dict {
     /** Where I got the data from, like ChhoeTaigiDatabase for iTaigi. */
     source: string;
     /** The original website */
-    original: string;
+    original?: string;
   };
 }
 export interface Heteronym<Props = any> {
@@ -199,14 +198,14 @@ export function parsePageParam(param: string | null, maximum: number) {
   }
 }
 
-export function parseLangParam(param: string | null, langIds: Set<string>) {
+export function parseLangParam<T>(param: string | null, langIds: Set<T>) {
   // Param not present = first lang
   if (param === null) {
     return [...langIds][0];
-  } else if (!langIds.has(param)) {
-    return false;
+  } else if (langIds.has(param as T)) {
+    return param as T;
   } else {
-    return param;
+    return false;
   }
 }
 

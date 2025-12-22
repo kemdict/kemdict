@@ -17,6 +17,10 @@ export interface Props {
 const { href, id } = Astro.props;
 const klass = Astro.props.class;
 const content = await Astro.slots.render("default");
+
+// I don't care that I'm explicitly passing in undefined. Hence the `as`.
 ---
 
-<OutSvelte href={href} class={klass} id={id}>{content.trim()}</OutSvelte>
+<OutSvelte href={href as string} class={klass as string} id={id as string}
+  >{content.trim()}</OutSvelte
+>
