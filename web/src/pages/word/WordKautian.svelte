@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Heteronym } from "common";
-  export let heteronyms: Heteronym[];
+  import type { OutputWord } from "$dicts/ministry-of-education/kautian.ts";
+  let { heteronyms }: { heteronyms: Array<Heteronym<OutputWord>> } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { groupByProp } from "common";
 </script>
@@ -10,7 +11,7 @@
   <Pronunciation>{word.props.tl.main}</Pronunciation>
   <div>異用字：{word.props.han.alt?.join("、")}</div>
   <!-- <div>Tl alt: {JSON.stringify(word.props.tl)}</div> -->
-  {#each groupByProp(word.props.heteronyms, "pos") as [pos, hets]}
+  {#each groupByProp(word.props.heteronyms, "pos", "none") as [pos, hets]}
     {#if pos !== "none"}
       <p class="pos">{pos}</p>
     {/if}
