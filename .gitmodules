@@ -1,9 +1,6 @@
 [submodule "ministry-of-education"]
 	path = dicts/ministry-of-education
 	url = https://github.com/kemdict/kemdict-data-ministry-of-education
-[submodule "moedict-data-twblg"]
-	path = dicts/moedict-data-twblg
-	url = https://github.com/g0v/moedict-data-twblg
 [submodule "ChhoeTaigiDatabase"]
 	path = dicts/ChhoeTaigiDatabase
 	url = https://github.com/ChhoeTaigi/ChhoeTaigiDatabase

@@ -190,20 +190,6 @@
         </p>
         <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
       </div>
-    {:else if dict.id == "moedict_twblg"}
-      <WordMoedictish heteronyms={hets} dict={dict.id} />
-      <div class="copyright">
-        <p>
-          《<a href={dict.meta.original}>臺灣閩南語常用詞辭典</a
-          >》版本編號：{dict.meta.version}
-        </p>
-        <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
-        <p>
-          資料來自<a href="https://github.com/g0v/moedict-data-twblg"
-            >moedict-data-twblg</a
-          >
-        </p>
-      </div>
     {:else if dict.id == "hakkadict"}
       <WordHakkadict heteronyms={hets} />
       <div class="copyright">

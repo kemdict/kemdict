@@ -23,8 +23,7 @@ build: entries.db
 	npx eask install-deps
 	touch .eask
 
-DICT_TARGETS := moedict-data-twblg/dict-twblg.json
-DICT_TARGETS += kisaragi/kisaragi_dict.json
+DICT_TARGETS := kisaragi/kisaragi_dict.json
 DICT_TARGETS += pts-taigitv/README.md
 DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
@@ -104,9 +103,6 @@ chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json: ChhoeTaigiDatabase/README.md
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.
-moedict-data-twblg/dict-twblg.json:
-	git submodule update --init --depth 1 -- moedict-data-twblg
-
 ministry-of-education/package.json:
 	git submodule update --init --depth 1 -- ministry-of-education
 
