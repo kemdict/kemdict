@@ -23,6 +23,7 @@
     "paths": {
       "$src/*": ["src/*"],
       "$lib/*": ["src/lib/*"],
+      "$dicts/*": ["../dicts/*"],
       "common": ["src/lib/common"]
     }
   },

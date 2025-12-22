@@ -148,11 +148,11 @@ export interface Dict {
     original: string;
   };
 }
-export interface Heteronym {
+export interface Heteronym<Props = any> {
   title: string;
   from: string | undefined;
   lang: string;
-  props: any;
+  props: Props;
   exact?: boolean;
 }
 
