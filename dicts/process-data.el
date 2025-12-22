@@ -61,8 +61,6 @@ by default."
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
        ;; FIXME 同義詞 etc. aren't included yet
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
-       ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
-                                  "moedict-data-twblg/dict-twblg-ext.json"))
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
@@ -1016,8 +1014,7 @@ VALUES
              ;; - don't duplicate if equal to original
              ;; - don't bother for some dictionaries)
              (when (member (gethash "from" het)
-                           '("moedict_twblg"
-                             "kautian"
+                           '("kautian"
                              "chhoetaigi_itaigi"
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
@@ -1264,8 +1261,6 @@ pronunciation strings include multiple pronunciations."
                 "bopomofo"
                 ;; "pinyin"
 
-                ;; moedict-twblg
-                "trs"
                 ;; kisaragi-dict
                 "pronunciation"
 

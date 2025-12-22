@@ -58,7 +58,7 @@
 :added:    2023-05-30T01:09:08+0900
 :END:
 *** sio-bê
-**** 很燙的粥。見「[[燒?lang=nan_TW#moedict_twblg][燒]]」、「[[糜?lang=nan_TW#moedict_twblg][糜]]」。
+**** 很燙的粥。見「[[燒?lang=nan_TW#kautian][燒]]」、「[[糜?lang=nan_TW#kautian][糜]]」。
 ** 十八驚
 :PROPERTIES:
 :added:    2023-05-30T01:59:37+0900
@@ -70,7 +70,7 @@
 醫生驚[[治嗽]]
 [[塗水]]驚[[掠漏]]
 [[剃頭店][剃頭]]驚臭頭
-[[總舖師][總舖]]驚食[[晝?lang=nan_TW#moedict_twblg][晝]]
+[[總舖師][總舖]]驚食[[晝?lang=nan_TW#kautian][晝]]
 [[討海人][討海]]驚[[thàu-hong][風透]]
 種田驚[[挲草]]
 [[青盲]]驚[[過溝]]
@@ -79,10 +79,10 @@
 [[契兄]]驚[[掠猴]]
 [[暗間]]驚嬰吼
 [[侗戇]]驚亂走
-[[燒?lang=nan_TW#moedict_twblg][燒]][[糜?lang=nan_TW#moedict_twblg][糜]]驚大嘴
+[[燒?lang=nan_TW#kautian][燒]][[糜?lang=nan_TW#kautian][糜]]驚大嘴
 透早驚[[露水]]
 半暝驚歹鬼
 [[跋筊]]驚人走
-贏[[筊?lang=nan_TW#moedict_twblg][筊]]驚食飯
-輸[[筊?lang=nan_TW#moedict_twblg][筊]]驚天光
+贏[[筊?lang=nan_TW#kautian][筊]]驚食飯
+輸[[筊?lang=nan_TW#kautian][筊]]驚天光
 #+end_quote

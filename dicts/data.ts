@@ -280,23 +280,6 @@ export const dicts = [
     },
   },
   {
-    id: "moedict_twblg",
-    name: "臺灣閩南語常用詞辭典",
-    url: "https://sutian.moe.edu.tw/und-hani/tshiau/?lui=tai_su&tsha=$1",
-    lang: "nan_TW",
-    meta: {
-      author: "教育部",
-      version: "20230222",
-      desc: `教育部的台語辭典。資料尚需更新至新版。`,
-      license: {
-        name: "CC BY-ND 3.0 TW",
-        url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
-      },
-      source: "https://github.com/g0v/moedict-data-twblg",
-      original: "https://sutian.moe.edu.tw/",
-    },
-  },
-  {
     id: "chhoetaigi_itaigi",
     name: "iTaigi 華台對照典",
     url: "https://itaigi.tw/k/$1",

@@ -6,7 +6,7 @@ Kemdict 整合了多部辭典，提供一次搜尋的功能。
 
 - [[如月的現代台灣華語補足典]]
 - 重編國語辭典（透過[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][辭典公眾授權網]]）
-- 臺灣閩南語常用詞辭典（透過[[https://github.com/g0v/moedict-data-twblg][moedict-data-twblg]]）
+- 臺灣閩南語常用詞辭典（透過[[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]）
 - 臺灣客家語常用詞辭典（透過[[https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=dpViqL/newsresult_format0?r1=1&searchall=1][客家語常用詞辭典文字內容下載公告]]）
 - 成語典（透過[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][辭典公眾授權網]]）
 - 國語辭典簡編本（透過[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][辭典公眾授權網]]）
@@ -67,6 +67,6 @@ The output directory is at =web/build=.
 
 教育部重編國語字典著作權為中華民國教育部所有，[[https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html][使用「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」]]。
 
-教育部臺灣閩南語常用詞辭典著作權亦為中華民國教育部所有，[[https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp][使用「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」]]。資料透過 [[https://github.com/g0v/moedict-data-twblg][moedict-data-twblg]] 使用。
+教育部臺灣台語常用詞辭典著作權亦為中華民國教育部所有，[[https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/][使用「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」]]。資料處理位於[[https://github.com/kemdict/kemdict-data-ministry-of-education][kemdict-data-ministry-of-education]]，原先參考[[https://github.com/g0v/moedict-data-twblg][moedict-data-twblg]]。
 
 本專案其餘著作權由我（如月飛羽）以 CC0 釋出，內文見[[./LICENSE-CC0][LICENSE-CC0]]。
