@@ -1250,6 +1250,12 @@ pronunciation strings include multiple pronunciations."
                ;; I'm pretty sure it's not supposed to be there.
                (s-replace "\uFFFD" "")
                (s-replace "（變）" "/")
+               ;; Remove the in-band type tag from kautian.
+               ;; It would be better if we have some way to keep this information.
+               (s-replace "【白】" "")
+               (s-replace "【文】" "")
+               ;; Finally split by the slash, used by multiple dictionaries to
+               ;; denote multiple alternatives
                (s-split "[ \t\n\r]*/[ \t\n\r]*")))
          (-flatten-n 1)
          (--remove (equal it "")))))
