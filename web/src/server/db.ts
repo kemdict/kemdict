@@ -2,6 +2,7 @@ import { uniqBy, chunk, sortBy } from "lodash-es";
 import { CrossDB, parseQuery, parseStringQuery, type Mtch } from "./crossdb";
 import { spc } from "$lib/processing";
 import type { Heteronym, LangId } from "common";
+import type { OutputWord } from "$dicts/ministry-of-education/kautian";
 import { groupByProp, joinLast } from "common";
 import { Database } from "bun:sqlite";
 
@@ -95,6 +96,10 @@ export function hetPreview(het: Heteronym) {
   return strip(
     het.props.def ||
       het.props.defs?.map((x: any) => x.def).join("") ||
+      (het.from === "kautian" &&
+        (het as Heteronym<OutputWord>).props?.heteronyms
+          .map((het) => het.def)
+          .join("")) ||
       het.props.example ||
       het.props.zh ||
       het.props.en ||

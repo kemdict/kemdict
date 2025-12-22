@@ -271,6 +271,7 @@ this:
                 ;; This detection handles "/word/KEY" and <a>KEY</a>
                 ;; FIXME: there are still at least 1000 entries where the href
                 ;; is incorrectly replaced.
+                ;; NOTE: 2025-12-23T05:59:45+0900 What do you mean?!?!
                 (rx (group (not ">"))
                     (literal keyword)
                     (group (not (any "\"" "<"))))
@@ -849,7 +850,6 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (seq-doseq (entry raw-dict)
            (progress-reporter-update rep j)
            (cl-incf j)
-           ;; FIXME: we're losing kautian word props here.
            (let ((orig-hets
                   (or
                    ;; If the original is a structure of heteronyms, just grab
