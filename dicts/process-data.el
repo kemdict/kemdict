@@ -855,7 +855,13 @@ ORIG-HETS are props that will be used to construct heteronyms."
                (setq orig-hets (d:sort-orig-hets orig-hets)))
              (d::for (orig-het orig-hets)
                ;; {title,from,lang,props}
+               ;; Get the main title from original heteronyms
                (let ((titles (or (-some-> (gethash "title" entry)
+                                   d:process-title)
+                                 ;; What I defined kautian to be
+                                 (-some->> entry
+                                   (gethash "han")
+                                   (gethash "main")
                                    d:process-title)
                                  ;; 臺日大辭典 and 臺灣白話基礎語句
                                  (gethash "kip" orig-het)
@@ -978,7 +984,10 @@ VALUES
   (?,?,?)"))
            (sqlite-execute d:db alias-stmt (list het-id het.title 1))
            ;; This is only used in Kautian
-           (dolist (alt (gethash "alternativeHan" (gethash "props" het)))
+           (dolist (alt (-some->> het
+                          (gethash "props")
+                          (gethash "han")
+                          (gethash "alt")))
              (sqlite-execute d:db alias-stmt (list het-id alt 1)))
            (dolist (pn (map-values (d:pn-collect het)))
              (sqlite-execute d:db alias-stmt (list het-id pn 1))
@@ -1227,7 +1236,8 @@ pronunciation strings include multiple pronunciations."
 
 (defun d:pn-collect (het)
   "Collect pronunciations from HET."
-  (let ((keys '(;; kemdict-data-ministry-of-education
+  (let ((props (gethash "props" het))
+        (keys '(;; kemdict-data-ministry-of-education
                 "bopomofo"
                 ;; "pinyin"
 
@@ -1241,11 +1251,6 @@ pronunciation strings include multiple pronunciations."
 
                 ;; what I chose for the pts-taigitv copy
                 "pn"
-                ;; what I chose for kautian
-                "tl"
-                "pnColloquial"
-                "pnAlternative"
-                "pnOtherMerged"
 
                 ;; chhoetaigi-itaigi (keys are defined in Makefile
                 ;; in this repository)
@@ -1256,9 +1261,12 @@ pronunciation strings include multiple pronunciations."
                 "kMandarin"))
         (ret (make-hash-table :test #'equal)))
     (dolist (key keys)
-      (when-let (value (gethash key (gethash "props" het)))
+      (when-let (value (gethash key props))
         (dolist (p (d:pn-normalize value))
           (puthash key p ret))))
+    ;; What I chose for kautian
+    (when-let (tl (gethash "tl" props))
+      (dolist (key '("main" "colloquial" "alt" "otherMerged"))))
     ret))
 
 (defun d:pn-to-input-form (pn)
