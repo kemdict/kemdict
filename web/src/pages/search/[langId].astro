@@ -2,7 +2,12 @@
 import { site, parsePageParam, langs } from "common";
 import type { LangId } from "common";
 import { chunk } from "lodash-es";
-const { langId } = Astro.params;
+// if we're already routed here it has to be defined, right??
+const { langId } = Astro.params as {
+  // Actually langId can be any string, but after getHetFromUrl only when it is
+  // a valid LangId will we continue without redirecting.
+  langId: LangId;
+};
 import { getHetFromUrl, getSearchTitle } from "$src/server/db";
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url, langId);

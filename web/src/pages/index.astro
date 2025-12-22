@@ -30,6 +30,7 @@ const newWords = await DB.getNewWords(15);
     <meta property="og:title" content={title} />
     <meta property="og:type" content="website" />
     <script
+      is:inline
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",

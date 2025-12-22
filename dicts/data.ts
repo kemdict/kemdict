@@ -337,4 +337,5 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
       original: "https://dict.idioms.moe.edu.tw/",
     },
   },
-] as Dict[];
+  // Check the type and show errors, but type the result as Dict[] externally regardless
+] satisfies Dict[] as Dict[];

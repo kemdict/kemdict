@@ -3,7 +3,7 @@
   // (as stored in database - by date for kisaragi-dict and by (TODO)
   // backlinks ranking for backlinks)
 
-  export let etc: string;
+  export let etc: string = undefined;
   export let words: string[];
   export let search: boolean = words.length > 20;
   /** Links link to /word/foo by default; this is the "/word/" part. */
