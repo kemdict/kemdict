@@ -441,6 +441,9 @@ do."
            ;; This has a few uses in itaigi.
            (s-replace "⿸疒哥" "𰣻")
 
+           ;; Get rid of the "替" marker from Kautian.
+           (s-replace "【替】" "")
+
            ;; This is only used once in itaigi:
            ;; https://itaigi.tw/k/%EF%97%AA%E8%8A%B3%E6%B0%B4/
            ;;
