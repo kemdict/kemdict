@@ -165,7 +165,7 @@ export async function getHetFromUrl(
     return [true, { root: true }];
   }
   /** Query text as written in the URL */
-  const originalQuery: string | undefined = url.searchParams.get("q")?.trim();
+  const originalQuery = url.searchParams.get("q")?.trim();
   /** Unicode normalized query */
   const query = originalQuery?.normalize("NFC");
   const mtch: Mtch = url.searchParams.get("m") || "prefix";

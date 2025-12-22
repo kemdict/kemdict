@@ -1,5 +1,6 @@
 ---
 import { site, parsePageParam, langs } from "common";
+import type { LangId } from "common";
 import { chunk } from "lodash-es";
 const { langId } = Astro.params;
 import { getHetFromUrl, getSearchTitle } from "$src/server/db";
@@ -8,20 +9,25 @@ const [success, data] = await getHetFromUrl(url, langId);
 if (!success) {
   return Astro.redirect(data);
 }
-if (data.root) {
+const {
+  root,
+  mtch,
+  heteronyms,
+  originalQuery,
+  query: normalizedQuery,
+  langSet,
+  // We pass langCountObj around because the other option is to pass both
+  // all heteronyms and applicable heteronyms here.
+  langCountObj,
+} = data;
+if (root || !originalQuery) {
   return Astro.redirect("/search");
 }
-const heteronyms = data.heteronyms;
-const mtch = data.mtch;
-const originalQuery = data.originalQuery;
-const normalizedQuery = data.query;
-const langSet = data.langSet;
-// We pass langCountObj around because the other option is to pass both
-// all heteronyms and applicable heteronyms here.
-const langCountObj = data.langCountObj;
 
 // This preserves order as declared in common.
-const langGroups = Object.entries(langs).filter((l) => langSet.has(l[0]));
+const langGroups = Object.entries(langs).filter((l) =>
+  langSet.has(l[0] as LangId),
+);
 const count = heteronyms.length;
 
 // If there are no matching heteronyms specific to this language, try all languages instead.
