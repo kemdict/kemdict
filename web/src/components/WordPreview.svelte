@@ -1,11 +1,34 @@
 <script lang="ts">
   import ListLink from "./ListLink.svelte";
   import type { Heteronym } from "common";
+  import type { OutputWord } from "$dicts/ministry-of-education/kautian";
   import { dictIdToDict } from "common";
-  import { processPn, hetPreview, hetExactMatch } from "$src/server/db";
+  import { processPn, hetExactMatch } from "$src/server/db";
   import clsx from "clsx";
   export let heteronyms: Heteronym[];
   export let searchQuery: string;
+
+  /** Return the preview text of `het`. */
+  export function hetPreview(het: Heteronym) {
+    function strip(html: string | undefined): string {
+      // https://stackoverflow.com/a/822464/6927814
+      // This doesn't have to be perfect. We're not handling untrusted
+      // input either.
+      return html?.replace(/<[^>]*>?/gm, "") || "";
+    }
+    return strip(
+      het.props.def ||
+        het.props.defs?.map((x: any) => x.def).join("") ||
+        (het.from === "kautian" &&
+          (het as Heteronym<OutputWord>).props?.heteronyms
+            .map((het) => het.def)
+            .join("")) ||
+        het.props.example ||
+        het.props.zh ||
+        het.props.en ||
+        het.props.scientificName,
+    );
+  }
 </script>
 
 {#each heteronyms as het}
