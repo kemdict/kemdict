@@ -59,6 +59,7 @@ by default."
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
+       ;; FIXME 一【替】 → 一 for titles
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
                                   "moedict-data-twblg/dict-twblg-ext.json"))
@@ -848,8 +849,25 @@ ORIG-HETS are props that will be used to construct heteronyms."
            (progress-reporter-update rep j)
            (cl-incf j)
            ;; FIXME: we're losing kautian word props here.
-           (let ((orig-hets (or (gethash "heteronyms" entry)
-                                (vector entry))))
+           (let ((orig-hets
+                  (or
+                   ;; If the original is a structure of heteronyms, just grab
+                   ;; the heteronym.
+                   ;;
+                   ;; This works fine for moedict-data-twblg, because it only
+                   ;; keeps "title", "radical", "stroke_count",
+                   ;; "non_radical_stroke_count" on the word, which can be
+                   ;; discarded.
+                   ;;
+                   ;; For kisaragi-dict, we're only putting "added" and "eq-*"
+                   ;; on the word, which we copy to each heteronym, so this is
+                   ;; also fine.
+                   ;;
+                   ;; For kautian, that doesn't work well because there are lots
+                   ;; of data attached to the word.
+                   (and (not (equal dict "kautian"))
+                        (gethash "heteronyms" entry))
+                   (vector entry))))
              (d::debug "%s - applying het_sort" dict)
              (when (> (length orig-hets) 1)
                (setq orig-hets (d:sort-orig-hets orig-hets)))
@@ -984,10 +1002,10 @@ VALUES
   (?,?,?)"))
            (sqlite-execute d:db alias-stmt (list het-id het.title 1))
            ;; This is only used in Kautian
-           (dolist (alt (-some->> het
-                          (gethash "props")
-                          (gethash "han")
-                          (gethash "alt")))
+           (seq-doseq (alt (-some->> het
+                             (gethash "props")
+                             (gethash "han")
+                             (gethash "alt")))
              (sqlite-execute d:db alias-stmt (list het-id alt 1)))
            (dolist (pn (map-values (d:pn-collect het)))
              (sqlite-execute d:db alias-stmt (list het-id pn 1))
@@ -1206,7 +1224,7 @@ CREATE TABLE newwords (
 (defun d:pn-normalize (pn)
   "Normalize pronunciation PN.
 
-PN can be a list, string, or hash table.
+PN can be a list, string, vector, or hash table.
 
 If PN is a hash table, get the string from its value for \"zh-Hant\".
 
@@ -1217,6 +1235,8 @@ pronunciation strings include multiple pronunciations."
                (list pn))
               ((hash-table-p pn)
                (gethash "zh-Hant" pn))
+              ((vectorp pn)
+               (cl-coerce pn 'list))
               ((listp pn)
                pn))))
     (->> pns
@@ -1266,7 +1286,10 @@ pronunciation strings include multiple pronunciations."
           (puthash key p ret))))
     ;; What I chose for kautian
     (when-let (tl (gethash "tl" props))
-      (dolist (key '("main" "colloquial" "alt" "otherMerged"))))
+      (dolist (key '("main" "colloquial" "alt" "otherMerged"))
+        (when-let (value (gethash key props))
+          (dolist (p (d:pn-normalize value))
+            (puthash key p ret)))))
     ret))
 
 (defun d:pn-to-input-form (pn)
