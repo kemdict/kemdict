@@ -6,8 +6,8 @@ import sharp from "sharp";
 /**
  * Find the file path for fontFileName.
  */
-function findFont(fontFileName: string): string | undefined {
-  return [
+function findFont(fontFileName: string): string {
+  const file = [
     `${process.cwd()}/server`, // during development
     `${process.cwd()}/public`, // during development
     process.cwd(), // when deployed, running from dist/
@@ -15,6 +15,8 @@ function findFont(fontFileName: string): string | undefined {
   ]
     .map((d) => `${d}/${fontFileName}`)
     .find((f) => existsSync(f));
+  if (!file) throw new Error(`Font ${fontFileName} required but not found`);
+  return file;
 }
 const openHuninn = readFileSync(findFont("jf-openhuninn-1.1.ttf"));
 const SourceSans = readFileSync(findFont("SourceSans3-Regular.ttf"));

@@ -1,5 +1,6 @@
 ---
-const { title } = Astro.params;
+// if we're already routed here it has to be defined, right??
+const { title } = Astro.params as { title: string };
 // const started = new Date().toISOString();
 // console.log({ started, title });
 import { uniq } from "lodash-es";

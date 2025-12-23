@@ -13,7 +13,7 @@ title: 致謝與授權
 
 [《教育部重編國語辭典》](https://dict.revised.moe.edu.tw/)、[《教育部國語辭典簡編本》](https://dict.concised.moe.edu.tw)、[《教育部成語典》](https://dict.idioms.moe.edu.tw)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html)。原始資料來自[教育部國語辭典公眾授權網](https://language.moe.gov.tw/001/Upload/Files/site_content/M0001/respub/index.html)。
 
-[《教育部臺灣閩南語常用詞辭典》](https://twblg.dict.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://twblg.dict.edu.tw/holodict_new/compile1_6_1.jsp)。資料透過[萌典的原始資料檔](https://github.com/g0v/moedict-data-twblg)取得，原始資料為萌典向教育部申請後取得。
+[《教育部臺灣台語常用詞辭典》](https://sutian.moe.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/)。資料處理位於[kemdict-data-ministry-of-education](https://github.com/kemdict/kemdict-data-ministry-of-education)，原先參考[萌典的原始資料檔](https://github.com/g0v/moedict-data-twblg)。
 
 [《教育部臺灣客家語常用詞辭典》](https://hakkadict.moe.edu.tw/)著作權屬中華民國教育部，[採「創用CC-姓名標示- 禁止改作 3.0 臺灣授權條款」釋出](https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=zXiQtS/description?id=MSA00000041&opt=opt2)。原始資料依說明取自其[訊息公告處](https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=zXiQtS/newsearch?&menuid=gsnews)。
 

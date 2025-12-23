@@ -2,6 +2,7 @@ import { uniqBy, chunk, sortBy } from "lodash-es";
 import { CrossDB, parseQuery, parseStringQuery, type Mtch } from "./crossdb";
 import { spc } from "$lib/processing";
 import type { Heteronym, LangId } from "common";
+import type { OutputWord } from "$dicts/ministry-of-education/kautian";
 import { groupByProp, joinLast } from "common";
 import { Database } from "bun:sqlite";
 
@@ -84,24 +85,6 @@ export function getSearchTitle(
   return ret;
 }
 
-/** Return the preview text of `het`. */
-export function hetPreview(het: Heteronym) {
-  function strip(html: string | undefined): string {
-    // https://stackoverflow.com/a/822464/6927814
-    // This doesn't have to be perfect. We're not handling untrusted
-    // input either.
-    return html?.replace(/<[^>]*>?/gm, "") || "";
-  }
-  return strip(
-    het.props.def ||
-      het.props.defs?.map((x: any) => x.def).join("") ||
-      het.props.example ||
-      het.props.zh ||
-      het.props.en ||
-      het.props.scientificName,
-  );
-}
-
 /**
  * Return true if `het` can be an exact match and `query` matches it
  * exactly.
@@ -122,12 +105,22 @@ export function processPn(het: Heteronym) {
     "kip",
     "poj",
     "pn",
+    "tl",
   ];
   const key = pron_keys.find((pron) => het.props[pron]);
   if (key === undefined) return "";
-  const value = het.props[key] as string[] | string | undefined;
+  const value = het.props[key] as
+    | string[]
+    | string
+    | OutputWord["tl"]
+    | undefined;
   if (value === undefined) return "";
-  const pn = typeof value === "string" ? value : value[0];
+  const pn =
+    typeof value === "string"
+      ? value
+      : Array.isArray(value)
+        ? value[0]
+        : value.main;
   if (het.title === pn) return "";
   return `（${spc(pn)}）`;
 }
@@ -172,7 +165,7 @@ export async function getHetFromUrl(
     return [true, { root: true }];
   }
   /** Query text as written in the URL */
-  const originalQuery: string | undefined = url.searchParams.get("q")?.trim();
+  const originalQuery = url.searchParams.get("q")?.trim();
   /** Unicode normalized query */
   const query = originalQuery?.normalize("NFC");
   const mtch: Mtch = url.searchParams.get("m") || "prefix";

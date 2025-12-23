@@ -263,19 +263,19 @@ export const dicts = [
     },
   },
   {
-    id: "moedict_twblg",
-    name: "臺灣閩南語常用詞辭典",
+    id: "kautian",
+    name: "臺灣台語常用詞辭典",
     url: "https://sutian.moe.edu.tw/und-hani/tshiau/?lui=tai_su&tsha=$1",
     lang: "nan_TW",
     meta: {
       author: "教育部",
-      version: "20230222",
-      desc: `教育部的台語辭典。資料尚需更新至新版。`,
+      version: "20251219",
+      desc: `教育部的台語辭典。`,
       license: {
         name: "CC BY-ND 3.0 TW",
         url: "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
       },
-      source: "https://github.com/g0v/moedict-data-twblg",
+      source: "https://github.com/kemdict/kemdict-data-ministry-of-education",
       original: "https://sutian.moe.edu.tw/",
     },
   },
@@ -337,4 +337,5 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
       original: "https://dict.idioms.moe.edu.tw/",
     },
   },
-] as Dict[];
+  // Check the type and show errors, but type the result as Dict[] externally regardless
+] satisfies Dict[] as Dict[];

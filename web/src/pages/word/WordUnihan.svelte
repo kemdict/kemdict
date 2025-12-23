@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Heteronym } from "common";
   import Out from "$src/components/Out.svelte";
+  import Property from "$src/components/Property.svelte";
   function asHex(char: string) {
     return char.codePointAt(0).toString(16);
   }
@@ -29,44 +30,36 @@
   {#each heteronyms as het}
     <div>
       <div class="my-0">
-        <span>漢字：</span><Out
-          after={false}
-          title="在 GlyphWiki 上查看"
-          href="https://glyphwiki.org/wiki/u{asHex(het.title)}">{het.title}</Out
-        >
+        <Property key="漢字">
+          <Out
+            after={false}
+            title="在 GlyphWiki 上查看"
+            href="https://glyphwiki.org/wiki/u{asHex(het.title)}"
+            >{het.title}</Out
+          >
+        </Property>
       </div>
       {#each keys as { key, name }}
-        {#if het.props[key]}
-          <div class="my-0"><span>{name}：</span>{het.props[key]}</div>
-        {/if}
+        <Property key={name} value={het.props[key]} />
       {/each}
       <div class="my-0">
-        <span>筆畫：</span>共{het.props.sc}畫，部首外共{het.props.nrsc}畫
+        <Property key="筆畫"
+          >共{het.props.sc}畫，部首外共{het.props.nrsc}畫</Property
+        >
       </div>
-      {#if het.props?.varS}
-        <div><span>簡體：</span>{@html chars(het.props?.varS)}</div>
-      {/if}
-      {#if het.props?.varT}
-        <div><span>繁體：</span>{@html chars(het.props?.varT)}</div>
-      {/if}
+      <Property key="簡體" value={het.props?.varS} html={true}></Property>
+      <Property key="繁體" value={het.props?.varT} html={true}></Property>
       {#if het.props?.defs?.length == 1}
-        <div><span>定義：</span>{het.props.defs[0]}</div>
+        <Property key="定義" value={het.props.defs[0]}></Property>
       {:else if het.props?.defs?.length > 1}
-        <div class="flex">
-          <span>定義：</span>
+        <Property key="定義">
           <ul>
             {#each het.props.defs as def}
               <li class="before:opacity-70 before:content-['-_']">{def}</li>
             {/each}
           </ul>
-        </div>
+        </Property>
       {/if}
     </div>
   {/each}
 </div>
-
-<style lang="postcss">
-  span {
-    @apply font-bold text-gray-400;
-  }
-</style>

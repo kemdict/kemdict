@@ -1,6 +1,7 @@
 <script>
   export let heteronyms;
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Property from "$src/components/Property.svelte";
 
   const p_names = ["四縣", "海陸", "大埔", "饒平", "詔安", "南四縣"];
   function process_type(typ) {
@@ -36,20 +37,20 @@
   <h1>{het.title}</h1>
   {#each p_names as p}
     {#if het.props[`p_${p}`]}
-      <Pronunciation>{p}：{het.props[`p_${p}`]}</Pronunciation>
+      <Pronunciation
+        ><Property
+          valueClass="text-lg"
+          key={p}
+          value={het.props[`p_${p}`]}
+        /></Pronunciation
+      >
     {/if}
   {/each}
   {#if het.props.type}
     <p class="pos">{process_type(het.props.type)}</p>
   {/if}
   {@html processDefs(het.props.def)}
-  {#if het.props.antonyms}
-    <p><m>反義詞</m>：{@html het.props.antonyms}</p>
-  {/if}
-  {#if het.props.synonyms}
-    <p><m>近義詞</m>：{@html het.props.synonyms}</p>
-  {/if}
-  {#if het.props.corr_zh}
-    <p><m>對應華語</m>：{@html het.props.corr_zh}</p>
-  {/if}
+  <Property key="反義詞" value={het.props.antonyms} html={true} />
+  <Property key="近義詞" value={het.props.synonyms} html={true} />
+  <Property key="對應華語" value={het.props.corr_zh} html={true} />
 {/each}

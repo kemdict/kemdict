@@ -1,5 +1,4 @@
 /** Constants, language helpers, dicts/langs */
-
 import { escapeRegExp } from "lodash-es";
 
 // * Helpers
@@ -26,6 +25,9 @@ export function ensureArray<T>(value: T[] | T): T[] | undefined {
  * Return a new array which is `arr` whose objects are grouped by their values
  * under `property`.
  *
+ * `property` can also be a function, in which case the value being grouped by
+ * is the return value of the function (accessor(elem) instead of elem[property]).
+ *
  * [["value", [...]], ["value2", [...]]]
  *
  * If `fallback` is provided, items without `property` are grouped under
@@ -35,6 +37,10 @@ export function groupByProp<T, K extends keyof T>(
   arr: T[],
   property: K,
 ): [T[K], T[]][];
+export function groupByProp<T, K extends keyof T>(
+  arr: T[],
+  accessor: (elem: T) => T[K],
+): [T[K], T[]][];
 export function groupByProp<T, K extends keyof T, F extends string>(
   arr: T[],
   property: K,
@@ -42,13 +48,19 @@ export function groupByProp<T, K extends keyof T, F extends string>(
 ): [F | T[K], T[]][];
 export function groupByProp<T, K extends keyof T, F extends string>(
   arr: T[],
-  property: K,
+  accessor: (elem: T) => T[K],
+  fallback: F,
+): [F | T[K], T[]][];
+export function groupByProp<T, K extends keyof T, F extends string>(
+  arr: T[],
+  property: K | ((elem: T) => T[K]),
   fallback?: F | undefined,
 ): [F | T[K], T[]][] {
   const map: Map<T[K] | F, T[]> = new Map();
   for (const elem of arr) {
-    // if key is not undefined, then the item does have the property
-    const key = elem[property];
+    // if key is defined, then the item does have the property
+    const key =
+      typeof property === "function" ? property(elem) : elem[property];
     const realKey = key ?? fallback;
     if (typeof realKey === "undefined") {
       // the item doesn't have it and there is no fallback
@@ -70,7 +82,7 @@ export function groupByProp<T, K extends keyof T, F extends string>(
  * $1 in `template` stands for `thing`.
  */
 export function format(template: string, thing: any): string {
-  const str = `${thing}`
+  const str = `${thing}`;
   return str.replace(RegExp(`(${escapeRegExp(str)})`), template);
 }
 
@@ -119,11 +131,11 @@ export interface Dict {
    * - for other entries set `hidden` to true
    */
   hidden?: boolean;
-  meta?: {
+  meta: {
     version?: string;
     author?: string;
     extra?: Record<string, string>;
-    year: number;
+    year?: number;
     desc: string;
     license: {
       name: string;
@@ -132,14 +144,14 @@ export interface Dict {
     /** Where I got the data from, like ChhoeTaigiDatabase for iTaigi. */
     source: string;
     /** The original website */
-    original: string;
+    original?: string;
   };
 }
-export interface Heteronym {
+export interface Heteronym<Props = any> {
   title: string;
   from: string | undefined;
   lang: string;
-  props: any;
+  props: Props;
   exact?: boolean;
 }
 
@@ -186,14 +198,14 @@ export function parsePageParam(param: string | null, maximum: number) {
   }
 }
 
-export function parseLangParam(param: string | null, langIds: Set<string>) {
+export function parseLangParam<T>(param: string | null, langIds: Set<T>) {
   // Param not present = first lang
   if (param === null) {
     return [...langIds][0];
-  } else if (!langIds.has(param)) {
-    return false;
+  } else if (langIds.has(param as T)) {
+    return param as T;
   } else {
-    return param;
+    return false;
   }
 }
 
