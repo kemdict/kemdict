@@ -1,17 +1,16 @@
 <script>
   const { heteronyms } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Property from "$src/components/Property.svelte";
 </script>
 
 {#each heteronyms as het}
   <h1>{het.title}</h1>
   <Pronunciation>{het.props.kip}</Pronunciation>
-  {#if het.props.kipOthers}
-    <div>其他：{het.props.kipOthers}</div>
-  {/if}
+  <Property key="其他" value={het.props.kipOthers} />
   {#if het.props.zh}
     <p>
-      華語：{@html het.props.zh}
+      <Property key="華語" value={het.props.zh} html={true} />
     </p>
   {/if}
   <p class="def">

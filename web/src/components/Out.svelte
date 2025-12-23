@@ -19,7 +19,7 @@
     after?: boolean;
     title?: string;
     class?: string;
-    id: string;
+    id?: string;
     children: any;
   } = $props();
 </script>
