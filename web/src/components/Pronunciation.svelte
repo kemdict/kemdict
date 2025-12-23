@@ -2,4 +2,4 @@
   export let id: string | undefined = undefined;
 </script>
 
-<div class="text-gray-700 dark:text-gray-300" {id}><slot /></div>
+<div class="my-2 text-gray-800 dark:text-gray-200 text-lg" {id}><slot /></div>

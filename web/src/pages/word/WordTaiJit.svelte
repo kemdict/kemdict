@@ -2,6 +2,7 @@
   import type { Heteronym } from "common";
   export let heteronyms: Heteronym[];
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Property from "$src/components/Property.svelte";
   import { taigiTitle } from "$src/server/db";
   function process_def(def: string | undefined): string {
     if (def) {
@@ -26,9 +27,7 @@
 {#each heteronyms as het}
   <h1>{taigiTitle(het)}</h1>
   <Pronunciation>{het.props.kip}</Pronunciation>
-  {#if het.props.kipOthers}
-    <div>其他：{het.props.kipOthers}</div>
-  {/if}
+  <Property key="其他" value={het.props.kipOthers} />
   {#if het.props.def}
     <p class="my-2">{@html process_def(het.props.def)}</p>
     {#if het.props.example}
