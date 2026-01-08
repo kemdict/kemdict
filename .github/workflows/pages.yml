@@ -41,10 +41,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - uses: pnpm/action-setup@v4
         with:
-          version: 9.0.6
+          version: 10.27.0
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "pnpm"
           cache-dependency-path: "web/pnpm-lock.yaml"
       - name: Install packages
