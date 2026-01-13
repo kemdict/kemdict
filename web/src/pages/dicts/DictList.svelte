@@ -1,11 +1,11 @@
 <script lang="ts">
-  export let currentId: string;
+  const { currentId }: { currentId: string } = $props();
 
   import { dicts, langIdName } from "common";
   import clsx from "clsx";
   dicts.sort((a, b) => (a.name < b.name ? -1 : 1));
 
-  let filterString = "";
+  let filterString = $state("");
   import LocalSearchInput from "$src/components/LocalSearchInput.svelte";
 
   /**
@@ -29,7 +29,7 @@
           href="/dicts/{id}"
           class={clsx(
             "k-card mr-2 block px-2 py-1",
-            id === currentId && "bg-surface-active-token ",
+            id === currentId && "bg-surface-active-token",
           )}
         >
           <div>
