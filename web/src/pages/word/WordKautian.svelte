@@ -8,7 +8,7 @@
 </script>
 
 {#each heteronyms as word}
-  <h1>{word.title}</h1>
+  <h1 id="kautian-word-{word.props.id}">{word.title}</h1>
   <Pronunciation>{word.props.tl.main}</Pronunciation>
   <Property key="異用字" value={word.props.han.alt?.join("、")}></Property>
   <!-- <div>Tl alt: {JSON.stringify(word.props.tl)}</div> -->
@@ -18,7 +18,7 @@
     {/if}
     <ol>
       {#each hets as het}
-        <li>
+        <li id="kautian-het-{het.id}">
           <p class="def">
             {het.def}
           </p>
