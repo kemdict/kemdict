@@ -16,6 +16,11 @@
     return html?.replace(/<[^>]*>?/gm, "") || "";
   }
 
+  /** Add parens onto `str` if it's not empty or undefined. */
+  function parens(str: string | undefined) {
+    return str ? `（${str}）` : undefined;
+  }
+
   /** Return the preview text of `het`. */
   function hetPreview(het: Heteronym) {
     return strip(
@@ -39,7 +44,7 @@
 {#each heteronyms as het}
   <ListLink href="/word/{het.title}?lang={het.lang}#{het.from}">
     <svelte:fragment slot="heading">
-      {het.title}{processPn(het)}
+      {het.title}{parens(processPn(het))}
     </svelte:fragment>
     <svelte:fragment slot="afterHeading">
       {#if hetExactMatch(het, searchQuery)}

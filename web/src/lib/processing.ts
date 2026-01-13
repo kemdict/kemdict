@@ -107,13 +107,13 @@ export function processPn(het: Heteronym) {
     "tl",
   ];
   const key = pron_keys.find((pron) => het.props[pron]);
-  if (key === undefined) return "";
+  if (key === undefined) return;
   const value = het.props[key] as
     | string[]
     | string
     | OutputWord["tl"]
     | undefined;
-  if (value === undefined) return "";
+  if (value === undefined) return;
   const pn =
     typeof value === "string"
       ? value
@@ -121,5 +121,5 @@ export function processPn(het: Heteronym) {
         ? value[0]
         : value.main;
   if (het.title === pn) return "";
-  return `（${spc(pn.replace(/【.】/, ""))}）`;
+  return `${spc(pn.replace(/【.】/, ""))}`;
 }
