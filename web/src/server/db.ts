@@ -93,6 +93,27 @@ export function hetExactMatch(het: Heteronym, query: string | undefined) {
 }
 
 /**
+ * Compare two heteronyms.
+ * `aPn` and `bPn` are precomputed results of `processPn(a)` or `processPn(b)`.
+ * `lang` being "zh_TW" will turn off sorting based on aPn and bPn.
+ */
+function hetLessThan(
+  lang: string | undefined,
+  [a, aPn]: [Heteronym, string | undefined],
+  [b, bPn]: [Heteronym, string | undefined],
+) {
+  if (lang !== "zh_TW") {
+    const aPnOrTitle = (aPn || a.title).toLowerCase();
+    const bPnOrTitle = (bPn || b.title).toLowerCase();
+    if (aPnOrTitle < bPnOrTitle) return -1;
+    if (aPnOrTitle > bPnOrTitle) return 1;
+  }
+  if (a.title < b.title) return -1;
+  if (a.title > b.title) return 1;
+  return 0;
+}
+
+/**
  * Like search/index.astro's load() function.
  */
 export async function getHetFromUrl(
@@ -136,7 +157,11 @@ export async function getHetFromUrl(
   /** Unicode normalized query */
   const query = originalQuery?.normalize("NFC");
   const mtch: Mtch = url.searchParams.get("m") || "prefix";
-  const sort: string = url.searchParams.get("s") || "desc";
+
+  const sort = (url.searchParams.get("s") || "desc") as
+    | "desc"
+    // autocomplete with arbitrary string magic
+    | (string & {});
   /**
    * When this flag is provided, if there is only one match, we
    * redirect to it.
@@ -177,26 +202,20 @@ export async function getHetFromUrl(
   const heteronymsAndPn = heteronyms.map(
     (het) => [het, processPn(het)] as [Heteronym, string | undefined],
   );
+  // Negative -> a comes first
+  // Positive -> b comes first
+  // 0 -> keep
   if (sort === "desc") {
-    // Negative -> a comes first
-    // Positive -> b comes first
-    // 0 -> keep
-    heteronymsAndPn.sort(([a], [b]) => {
-      if (a.exact && a.title === query) return -1;
-      if (b.exact && b.title === query) return 1;
-
-      if (a.title < b.title) return -1;
-      if (a.title > b.title) return 1;
-      return 0;
+    heteronymsAndPn.sort((a, b) => {
+      if (a[0].exact && a[0].title === query) return -1;
+      if (b[0].exact && b[0].title === query) return 1;
+      return hetLessThan(lang, a, b);
     });
   } else {
-    heteronymsAndPn.sort(([a], [b]) => {
-      if (a.exact && a.title === query) return -1;
-      if (b.exact && b.title === query) return 1;
-
-      if (a.title < b.title) return 1;
-      if (a.title > b.title) return -1;
-      return 0;
+    heteronymsAndPn.sort((a, b) => {
+      if (a[0].exact && a[0].title === query) return -1;
+      if (b[0].exact && b[0].title === query) return 1;
+      return -hetLessThan(lang, a, b);
     });
   }
   return [

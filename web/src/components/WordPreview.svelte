@@ -4,7 +4,6 @@
   import type { OutputWord } from "$dicts/ministry-of-education/kautian";
   import { dictIdToDict } from "common";
   import { hetExactMatch } from "$src/server/db";
-  import { processPn } from "$src/lib/processing";
   import clsx from "clsx";
   export let heteronymsAndPn: [Heteronym, string | undefined][];
   export let searchQuery: string;

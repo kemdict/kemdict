@@ -85,7 +85,10 @@ const titleMarkup =
                   </h1>
                   <ul class="divide-y divide-gray-300">
                     <WordPreview
-                      heteronymsAndPn={applicableHeteronyms.slice(0, previewCount)}
+                      heteronymsAndPn={applicableHeteronyms.slice(
+                        0,
+                        previewCount,
+                      )}
                       searchQuery={normalizedQuery}
                     />
                     {applicableHeteronyms.length > previewCount && (
