@@ -25,6 +25,9 @@
           (het as Heteronym<OutputWord>).props?.heteronyms
             .map((het) => het.def)
             .join("")) ||
+        (het.from === "kautian" &&
+          (het as Heteronym<OutputWord>).props?.type === "單字不成詞者" &&
+          "（單字不成詞者 ，無義項）") ||
         het.props.example ||
         het.props.zh ||
         het.props.en ||
