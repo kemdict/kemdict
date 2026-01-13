@@ -13,7 +13,9 @@
     {href}
   >
     <div class="relative">
-      <h2 class="link font-bold hover:no-underline">
+      <h2
+        class="font-bold text-surface-950 underline [text-underline-offset:4px] dark:text-surface-100"
+      >
         <slot name="heading" />
       </h2>
       <slot name="afterHeading" />
