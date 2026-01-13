@@ -47,6 +47,7 @@ const titleMarkup =
     <SingleLayout title={`搜尋 - ${site.title}`} />
   ) : (
     <SingleLayout
+      search={true}
       title={`${title} - 所有辭典 - ${site.title}`}
       initialMatchSelection={mtch}
       initialInput={originalQuery}

@@ -1,5 +1,8 @@
 ---
 export interface Props {
+  /**
+   * Whether this is for a search page. In that case the sort options should be displayed.
+   */
   search?: boolean;
   initialInput?: string;
   initialMatchSelection?: string;
@@ -23,12 +26,12 @@ import SearchBar from "./SearchBar.svelte";
     /* TODO: Include advanced search params, like match type, filters, dictionary, length, etc. in this page. */
   }
   {
-    search && (
+    (
       <SearchBar
         initialInput={initialInput}
         initialMatchSelection={initialMatchSelection}
         submitSuffix={submitSuffix}
-        url={Astro.url}
+        url={search ? Astro.url : undefined}
         client:load
       />
     )

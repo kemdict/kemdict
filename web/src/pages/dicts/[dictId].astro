@@ -28,7 +28,7 @@ import WordList from "$src/components/WordList.svelte";
 
 <BaseLayout title={title}>
   <!-- <Fragment slot="head"></Fragment> -->
-  <Header search={true} />
+  <Header />
   <div class="space-x-4 md:flex">
     <div class="">
       <DictList client:load currentId={dictId} />
