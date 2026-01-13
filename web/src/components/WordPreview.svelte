@@ -9,14 +9,15 @@
   export let heteronyms: Heteronym[];
   export let searchQuery: string;
 
+  function strip(html: string | undefined): string {
+    // https://stackoverflow.com/a/822464/6927814
+    // This doesn't have to be perfect. We're not handling untrusted
+    // input either.
+    return html?.replace(/<[^>]*>?/gm, "") || "";
+  }
+
   /** Return the preview text of `het`. */
-  export function hetPreview(het: Heteronym) {
-    function strip(html: string | undefined): string {
-      // https://stackoverflow.com/a/822464/6927814
-      // This doesn't have to be perfect. We're not handling untrusted
-      // input either.
-      return html?.replace(/<[^>]*>?/gm, "") || "";
-    }
+  function hetPreview(het: Heteronym) {
     return strip(
       het.props.def ||
         het.props.defs?.map((x: any) => x.def).join("") ||
