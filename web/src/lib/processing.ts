@@ -8,7 +8,7 @@ import type { OutputWord } from "$dicts/ministry-of-education/kautian";
  * @returns {string}
  */
 export function spc(str: string | undefined): string | undefined {
-  if (str) {
+  if (str !== undefined) {
     return str.replace(/　/g, " ");
   }
 }
