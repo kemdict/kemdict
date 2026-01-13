@@ -927,13 +927,19 @@ ORIG-HETS are props that will be used to construct heteronyms."
     (cl-loop
      for het being the elements of heteronyms
      using (index i)
-     with total = (length heteronyms)
+     with len = (length heteronyms)
+     with rep = (make-progress-reporter
+                 "Processing heteronyms..."
+                 1 len
+                 nil
+                 ;; 5 percent or 4 seconds
+                 5 4)
      do
      (progn
+       (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
        (when (or (= (1+ i) 1)
                  (= 0 (% (1+ i) 10000))
-                 (= (1+ i) total))
-         (message "Processing heteronyms (%s/%s)..." (1+ i) total)
+                 (= (1+ i) len))
          (garbage-collect))
        (ht-update-with! het "props"
          (lambda (props)
@@ -976,7 +982,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
                "Inserting heteronyms..."
                1 len
                nil
-               ;; 5 percent / 4 seconds
+               ;; 5 percent or 4 seconds
                5 4)))
     (with-sqlite-transaction d:db
       (cl-loop
