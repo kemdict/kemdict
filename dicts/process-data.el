@@ -15,6 +15,11 @@
 
 (require 'jieba)
 
+(defun d::warn (fmt &rest args)
+  "Emit warning with FMT and ARGS in a consistent style.
+FMT and ARGS are passed to `message'."
+  (apply #'message (concat "WARNING: " fmt) args))
+
 (defalias 'd::NFD #'ucs-normalize-NFD-string)
 
 (defmacro d::for (spec &rest body)
@@ -964,6 +969,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (json-false :false)
          (json-null :null)
          (zh-plain-aliases-success nil)
+         (kautian-has-nonexact-aliases nil)
          (len (length heteronyms))
          (rep (make-progress-reporter
                "Inserting heteronyms..."
@@ -995,7 +1001,7 @@ VALUES
          ;; SQLite integer primary key is 1-based
          (let ((het-id (1+ i))
                (het.title (d::NFD (gethash "title" het)))
-               ;; (het.from (d::NFD (gethash "from" het)))
+               (het.from (gethash "from" het))
                (alias-stmt "
 INSERT INTO
   aliases (\"het_id\",\"alias\",\"exact\")
@@ -1013,7 +1019,7 @@ VALUES
              ;; Input versions.
              ;; - don't duplicate if equal to original
              ;; - don't bother for some dictionaries)
-             (when (member (gethash "from" het)
+             (when (member het.from
                            '("kautian"
                              "chhoetaigi_itaigi"
                              "chhoetaigi_taioanpehoekichhoogiku"
@@ -1023,21 +1029,26 @@ VALUES
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
+                   (when (equal het.from "kautian")
+                     (setq kautian-has-nonexact-aliases t))
                    (sqlite-execute d:db alias-stmt (list het-id input-form nil))))))
            ;; For these two, set the zh version as an alias
-           (when (member (gethash "from" het)
+           (when (member het.from
                          '("chhoetaigi_maryknoll1976"
                            "pts-taigitv"))
              (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
                (sqlite-execute d:db alias-stmt (list het-id zh nil))))
-           (when (member (gethash "from" het)
+           ;; Set the English text for these as an alias
+           (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
                (sqlite-execute d:db alias-stmt (list het-id en nil)))))))
+      (unless kautian-has-nonexact-aliases
+        (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success
-        (message "WARNING: zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
+        (d::warn "zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
     (let* ((len (length links))
