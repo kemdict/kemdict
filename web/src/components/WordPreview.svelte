@@ -6,7 +6,7 @@
   import { hetExactMatch } from "$src/server/db";
   import { processPn } from "$src/lib/processing";
   import clsx from "clsx";
-  export let heteronyms: Heteronym[];
+  export let heteronymsAndPn: [Heteronym, string | undefined][];
   export let searchQuery: string;
 
   function strip(html: string | undefined): string {
@@ -41,10 +41,10 @@
   }
 </script>
 
-{#each heteronyms as het}
+{#each heteronymsAndPn as [het, pn]}
   <ListLink href="/word/{het.title}?lang={het.lang}#{het.from}">
     <svelte:fragment slot="heading">
-      {het.title}{parens(processPn(het))}
+      {het.title}{parens(pn)}
     </svelte:fragment>
     <svelte:fragment slot="afterHeading">
       {#if hetExactMatch(het, searchQuery)}

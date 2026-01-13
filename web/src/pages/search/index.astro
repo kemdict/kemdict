@@ -13,13 +13,13 @@ const {
   /** The page is /search (without any suffix) */
   root,
   mtch,
-  heteronyms,
+  heteronymsAndPn,
   originalQuery,
   query: normalizedQuery,
   langSet,
 } = data;
 
-const count = heteronyms?.length;
+const count = heteronymsAndPn?.length;
 const presentLangs = Object.entries(langs).filter((l) =>
   langSet?.has(l[0] as LangId),
 );
@@ -75,8 +75,8 @@ const titleMarkup =
           <div class="">
             {presentLangs.map((lang) => {
               const previewCount = 5;
-              const applicableHeteronyms = heteronyms.filter(
-                (het) => het.lang === lang[0],
+              const applicableHeteronyms = heteronymsAndPn.filter(
+                ([het]) => het.lang === lang[0],
               );
               return (
                 <div class="mt-4">
@@ -85,7 +85,7 @@ const titleMarkup =
                   </h1>
                   <ul class="divide-y divide-gray-300">
                     <WordPreview
-                      heteronyms={applicableHeteronyms.slice(0, previewCount)}
+                      heteronymsAndPn={applicableHeteronyms.slice(0, previewCount)}
                       searchQuery={normalizedQuery}
                     />
                     {applicableHeteronyms.length > previewCount && (

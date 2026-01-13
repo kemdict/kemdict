@@ -102,7 +102,7 @@ export async function getHetFromUrl(
   | [
       true,
       {
-        heteronyms?: undefined;
+        heteronymsAndPn?: undefined;
         mtch?: undefined;
         query?: undefined;
         originalQuery?: undefined;
@@ -116,7 +116,7 @@ export async function getHetFromUrl(
   | [
       true,
       {
-        heteronyms: Heteronym[];
+        heteronymsAndPn: [Heteronym, string | undefined][];
         mtch: string;
         query: string;
         originalQuery: string | undefined;
@@ -174,33 +174,38 @@ export async function getHetFromUrl(
       ),
     ];
   }
+  const heteronymsAndPn = heteronyms.map(
+    (het) => [het, processPn(het)] as [Heteronym, string | undefined],
+  );
   if (sort === "desc") {
     // Negative -> a comes first
     // Positive -> b comes first
     // 0 -> keep
-    heteronyms.sort((a: Heteronym, b: Heteronym) => {
+    heteronymsAndPn.sort(([a], [b]) => {
       if (a.exact && a.title === query) return -1;
       if (b.exact && b.title === query) return 1;
-      return a.title < b.title ? -1 : 1;
+
+      if (a.title < b.title) return -1;
+      if (a.title > b.title) return 1;
+      return 0;
     });
   } else {
-    heteronyms.sort((a: Heteronym, b: Heteronym) => {
+    heteronymsAndPn.sort(([a], [b]) => {
       if (a.exact && a.title === query) return -1;
       if (b.exact && b.title === query) return 1;
-      return a.title > b.title ? -1 : 1;
+
+      if (a.title < b.title) return 1;
+      if (a.title > b.title) return -1;
+      return 0;
     });
   }
   return [
     true,
     {
       root: false,
-      heteronyms: uniqBy(heteronyms, (het) => {
+      heteronymsAndPn: uniqBy(heteronymsAndPn, ([het, pn]) => {
         return (
-          het.title +
-          het.lang +
-          het.from +
-          processPn(het) +
-          `${hetExactMatch(het, query)}`
+          het.title + het.lang + het.from + pn + `${hetExactMatch(het, query)}`
         );
       }),
       mtch,

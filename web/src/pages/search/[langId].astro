@@ -17,7 +17,7 @@ if (!success) {
 const {
   root,
   mtch,
-  heteronyms,
+  heteronymsAndPn,
   originalQuery,
   query: normalizedQuery,
   langSet,
@@ -33,7 +33,7 @@ if (root || !originalQuery) {
 const langGroups = Object.entries(langs).filter((l) =>
   langSet.has(l[0] as LangId),
 );
-const count = heteronyms.length;
+const count = heteronymsAndPn.length;
 
 // If there are no matching heteronyms specific to this language, try all languages instead.
 if (count === 0) {
@@ -42,7 +42,7 @@ if (count === 0) {
 
 // We do the chunking in Javascript and not in SQL because we still need the
 // total number of results
-const chunked = chunk(heteronyms, 50);
+const chunked = chunk(heteronymsAndPn, 50);
 const page = parsePageParam(url.searchParams.get("p"), chunked.length);
 // If "?p" is invalid, delete it and try again
 if (page === false) {
@@ -90,7 +90,7 @@ const titleMarkup = getSearchTitle(mtch, originalQuery, true);
     langId={langId}
     langCountObj={langCountObj}
     currentParamsString={url.searchParams.toString()}
-    heteronyms={chunked[page - 1]}
+    heteronymsAndPn={chunked[page - 1]}
     searchQuery={normalizedQuery}
   />
 </SingleLayout>
