@@ -145,6 +145,7 @@ by default."
 
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
+(setq backtrace-on-error-noninteractive t)
 
 (put 'ht-update-with! 'lisp-indent-function 2)
 
