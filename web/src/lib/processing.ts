@@ -121,5 +121,5 @@ export function processPn(het: Heteronym) {
         ? value[0]
         : value.main;
   if (het.title === pn) return "";
-  return `（${spc(pn)}）`;
+  return `（${spc(pn.replace(/【.】/, ""))}）`;
 }
