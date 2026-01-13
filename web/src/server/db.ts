@@ -207,14 +207,18 @@ export async function getHetFromUrl(
   // 0 -> keep
   if (sort === "desc") {
     heteronymsAndPn.sort((a, b) => {
-      if (a[0].exact && a[0].title === query) return -1;
-      if (b[0].exact && b[0].title === query) return 1;
+      const aExactMatch = hetExactMatch(a[0], query);
+      const bExactMatch = hetExactMatch(b[0], query);
+      if (aExactMatch && !bExactMatch) return -1;
+      if (bExactMatch && !aExactMatch) return 1;
       return hetLessThan(lang, a, b);
     });
   } else {
     heteronymsAndPn.sort((a, b) => {
-      if (a[0].exact && a[0].title === query) return -1;
-      if (b[0].exact && b[0].title === query) return 1;
+      const aExactMatch = hetExactMatch(a[0], query);
+      const bExactMatch = hetExactMatch(b[0], query);
+      if (aExactMatch && !bExactMatch) return -1;
+      if (bExactMatch && !aExactMatch) return 1;
       return -hetLessThan(lang, a, b);
     });
   }
