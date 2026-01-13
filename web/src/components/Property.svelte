@@ -19,7 +19,7 @@
 
 {#if value || children}
   <div class={clsx("mb-4 flex items-baseline", klass)}>
-    <span class="mr-2 bg-surface-400 dark:bg-surface-900 px-2 py-1">{key}</span>
+    <span class="mr-2 colorPropertyKey px-2 py-1">{key}</span>
     <span class={clsx("prose", valueClass)}>
       {#if children}
         {@render children()}

@@ -9,6 +9,10 @@
   @apply divide-gray-300 dark:divide-stone-600;
 }
 
+.colorPropertyKey {
+  @apply bg-surface-400 dark:bg-surface-900;
+}
+
 @layer base {
   html {
     line-height: 1.6;
@@ -53,7 +57,7 @@
     @apply h-12;
     @apply px-4;
     @apply text-sm;
-    @apply dark:border-surface-600 border-surface-500 border;
+    @apply border border-surface-500 dark:border-surface-600;
     @apply bg-white/20;
     @apply rounded;
     &:focus {
@@ -108,7 +112,7 @@
     @apply dark:prose-p:text-white;
     @apply prose-a:link max-w-none;
     @apply prose-li:pl-1;
-    @apply prose-blockquote:not-italic prose-blockquote:my-2 prose-blockquote:py-2 prose-blockquote:font-normal;
+    @apply prose-blockquote:my-2 prose-blockquote:py-2 prose-blockquote:font-normal prose-blockquote:not-italic;
     @apply prose-blockquote:bg-surface-300;
     @apply prose-blockquote:border-l-surface-400;
     @apply dark:prose-blockquote:bg-surface-900;
@@ -236,11 +240,11 @@
   }
   .k-hlbtn {
     @apply rounded-md p-1 px-2 text-sm font-bold transition;
-    @apply bg-primary-500 hover:bg-primary-600 text-black;
+    @apply bg-primary-500 text-black hover:bg-primary-600;
     @apply dark:bg-primary-500 dark:hover:bg-primary-400;
   }
   .link {
-    @apply dark:text-surface-100 text-surface-950;
+    @apply text-surface-950 dark:text-surface-100;
     @apply fade underline;
     text-underline-offset: 4px;
     &:hover {

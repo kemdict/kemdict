@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import clsx from "clsx";
   import { onMount } from "svelte";
   import { popup } from "@skeletonlabs/skeleton";
   import { clientGetCompletions } from "$src/lib/client";
@@ -9,10 +10,23 @@
    */
   export let submitSuffix = "";
   export let initialInput = "";
+  export let url: URL | undefined = undefined;
+  let currentSort = url?.searchParams.get("s");
   $: value = initialInput;
   export let initialMatchSelection = "prefix";
   export let highlightBtn = false;
   export let redirectOnSingleResult = false;
+
+  /** Return a new URL string that is `url` with the `name` param set to `value`. */
+  function withParam(url: URL, name: string, value: string | undefined) {
+    const urlObj = new URL(url);
+    if (value === undefined) {
+      urlObj.searchParams.delete(name);
+    } else {
+      urlObj.searchParams.set(name, value);
+    }
+    return urlObj.toString();
+  }
 
   const matchTypes = new Map(
     Object.entries({
@@ -23,6 +37,12 @@
       /* content: "內文包含", */
     }),
   );
+  const sortTypes = Object.entries({
+    desc: "順序",
+    asc: "倒序",
+    "length-asc": "長到短",
+    "length-desc": "短到長",
+  });
   onMount(() => {
     window.addEventListener("keydown", (e) => {
       // Following the same approach as
@@ -101,7 +121,7 @@
           {#each [...matchTypes] as [mtch, name]}
             <label class="flex items-center space-x-1">
               <input
-                class="form-radio radio"
+                class="radio form-radio"
                 type="radio"
                 name="m"
                 value={mtch}
@@ -111,6 +131,19 @@
             </label>
           {/each}
         </fieldset>
+        {#if url}
+          <div class="mt-4">
+            <span class="colorPropertyKey mr-1 px-2 py-1">排序</span>
+            <span class="inline-flex gap-2">
+              {#each sortTypes as [sort, name]}
+                <a
+                  class={clsx("link", sort === currentSort && "font-bold")}
+                  href={withParam(url, "s", sort)}>{name}</a
+                >
+              {/each}
+            </span>
+          </div>
+        {/if}
       </div>
       <div>
         <a class="whitespace-nowrap font-bold underline" href="/history"

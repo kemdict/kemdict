@@ -93,6 +93,22 @@ export function hetExactMatch(het: Heteronym, query: string | undefined) {
 }
 
 /**
+ * Compare `a` and `b`, sorting the one that is an exact match first.
+ * Returns 0 if they are both exact matches, just like a normal sort function should.
+ */
+function hetMoreExact(
+  query: string,
+  a: [Heteronym, string | undefined],
+  b: [Heteronym, string | undefined],
+) {
+  const aExactMatch = hetExactMatch(a[0], query);
+  const bExactMatch = hetExactMatch(b[0], query);
+  if (aExactMatch && !bExactMatch) return -1;
+  if (bExactMatch && !aExactMatch) return 1;
+  return 0;
+}
+
+/**
  * Compare two heteronyms.
  * `aPn` and `bPn` are precomputed results of `processPn(a)` or `processPn(b)`.
  * `lang` being "zh_TW" will turn off sorting based on aPn and bPn.
@@ -110,6 +126,27 @@ function hetLessThan(
   }
   if (a.title < b.title) return -1;
   if (a.title > b.title) return 1;
+  return 0;
+}
+
+/**
+ * Compare two heteronyms by length.
+ * `aPn` and `bPn` are precomputed results of `processPn(a)` or `processPn(b)`.
+ * `lang` being "zh_TW" will turn off sorting based on aPn and bPn.
+ */
+function hetLengthLessThan(
+  lang: string | undefined,
+  [a, aPn]: [Heteronym, string | undefined],
+  [b, bPn]: [Heteronym, string | undefined],
+) {
+  if (lang !== "zh_TW") {
+    const aPnOrTitle = aPn || a.title;
+    const bPnOrTitle = bPn || b.title;
+    if (aPnOrTitle.length < bPnOrTitle.length) return -1;
+    if (aPnOrTitle.length > bPnOrTitle.length) return 1;
+  }
+  if (a.title.length < b.title.length) return -1;
+  if (a.title.length > b.title.length) return 1;
   return 0;
 }
 
@@ -160,6 +197,8 @@ export async function getHetFromUrl(
 
   const sort = (url.searchParams.get("s") || "desc") as
     | "desc"
+    | "length-desc"
+    | "length-asc"
     // autocomplete with arbitrary string magic
     | (string & {});
   /**
@@ -205,21 +244,21 @@ export async function getHetFromUrl(
   // Negative -> a comes first
   // Positive -> b comes first
   // 0 -> keep
-  if (sort === "desc") {
+  if (sort === "length-desc") {
     heteronymsAndPn.sort((a, b) => {
-      const aExactMatch = hetExactMatch(a[0], query);
-      const bExactMatch = hetExactMatch(b[0], query);
-      if (aExactMatch && !bExactMatch) return -1;
-      if (bExactMatch && !aExactMatch) return 1;
-      return hetLessThan(lang, a, b);
+      return hetMoreExact(query, a, b) || hetLengthLessThan(lang, a, b);
+    });
+  } else if (sort === "length-asc") {
+    heteronymsAndPn.sort((a, b) => {
+      return hetMoreExact(query, a, b) || -hetLengthLessThan(lang, a, b);
+    });
+  } else if (sort === "desc") {
+    heteronymsAndPn.sort((a, b) => {
+      return hetMoreExact(query, a, b) || hetLessThan(lang, a, b);
     });
   } else {
     heteronymsAndPn.sort((a, b) => {
-      const aExactMatch = hetExactMatch(a[0], query);
-      const bExactMatch = hetExactMatch(b[0], query);
-      if (aExactMatch && !bExactMatch) return -1;
-      if (bExactMatch && !aExactMatch) return 1;
-      return -hetLessThan(lang, a, b);
+      return hetMoreExact(query, a, b) || -hetLessThan(lang, a, b);
     });
   }
   return [
