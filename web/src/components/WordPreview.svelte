@@ -46,9 +46,9 @@
         <div
           class={clsx(
             "absolute -top-2 right-2 inline-block",
-            "bg-gradient-to-tl from-purple-500 to-indigo-500",
+            "bg-indigo-700",
             "text-white",
-            "rounded px-2 py-1 text-sm shadow-lg",
+            "rounded px-2 py-1 text-sm shadow-md",
           )}
         >
           完全相符
