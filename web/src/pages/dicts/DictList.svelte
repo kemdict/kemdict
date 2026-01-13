@@ -35,8 +35,13 @@
           <div>
             <span class="font-bold">{name}</span>
             {#if meta.version}
-              <span class="text-secondary-800-100-token text-sm"
-                >{meta.version}</span
+              <span
+                class={clsx(
+                  "text-sm",
+                  id === currentId
+                    ? "text-primary-900"
+                    : "text-secondary-800 dark:text-secondary-100",
+                )}>{meta.version}</span
               >
             {/if}
           </div>
