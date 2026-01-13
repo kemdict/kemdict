@@ -1303,7 +1303,7 @@ pronunciation strings include multiple pronunciations."
     ;; What I chose for kautian
     (when-let (tl (gethash "tl" props))
       (dolist (key '("main" "colloquial" "alt" "otherMerged"))
-        (when-let (value (gethash key props))
+        (when-let (value (gethash key tl))
           (dolist (p (d:pn-normalize value))
             (puthash key p ret)))))
     ret))
