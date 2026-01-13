@@ -926,6 +926,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
          ;; values from there.
          (json-false :false)
          (json-null :null)
+         (zh-plain-aliases-success nil)
          (len (length heteronyms))
          (rep (make-progress-reporter
                "Inserting heteronyms..."
@@ -979,17 +980,21 @@ VALUES
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
-                   (sqlite-execute d:db alias-stmt (list het-id input-form nil)))))
-             ;; For these two, set the zh version as an alias
-             (when (member (gethash "from" het)
-                          '("chhoetaigi_maryknoll1976"
-                            "pts-taigitv"))
-               (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
-                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))
-             (when (member (gethash "from" het)
-                          '("chhoetaigi_maryknoll1976"))
-               (when-let ((en (gethash "en" (gethash "props" het))))
-                 (sqlite-execute d:db alias-stmt (list het-id en nil))))))))))
+                   (sqlite-execute d:db alias-stmt (list het-id input-form nil))))))
+           ;; For these two, set the zh version as an alias
+           (when (member (gethash "from" het)
+                         '("chhoetaigi_maryknoll1976"
+                           "pts-taigitv"))
+             (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
+               (unless zh-plain-aliases-success
+                 (setq zh-plain-aliases-success t))
+               (sqlite-execute d:db alias-stmt (list het-id zh nil))))
+           (when (member (gethash "from" het)
+                         '("chhoetaigi_maryknoll1976"))
+             (when-let ((en (gethash "en" (gethash "props" het))))
+               (sqlite-execute d:db alias-stmt (list het-id en nil)))))))
+      (unless zh-plain-aliases-success
+        (message "WARNING: zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
     (let* ((len (length links))
