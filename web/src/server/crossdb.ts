@@ -239,6 +239,7 @@ export class CrossDB {
     // });
     const mtch = options?.mtch || "exact";
     const limit = options?.limit;
+    /** Input languages */
     const langs = ensureArray(options?.langs);
     const hasLangs = langs && langs.length > 0;
     const { sqlExprs, sqlArgs } = parsedQueryToSQL(
@@ -263,14 +264,18 @@ ${limit ? `LIMIT ?` : ""}
     }
     const dictSet: Set<DictId> = new Set();
     const langSet: Set<LangId> = new Set();
+    // @ts-expect-error
+    // why Record<"a" | "b", Foo> doesn't count {} while
+    // Record<string, Foo> does is beyond me.
     const langCountObj: Record<LangId, number> = {};
     // Across all hets, not just filtered
     for (const het of hets || []) {
       if (het.from) {
         dictSet.add(het.from);
       }
-      langSet.add(het.lang);
-      langCountObj[het.lang] = (langCountObj[het.lang] || 0) + 1;
+      const lang = het.lang as LangId;
+      langSet.add(lang);
+      langCountObj[lang] = (langCountObj[lang] || 0) + 1;
     }
     return {
       presentDicts: [...dictSet],

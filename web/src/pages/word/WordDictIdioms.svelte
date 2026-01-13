@@ -3,6 +3,7 @@
   export let heteronyms: Heteronym[];
   import { spc, newline_string_to_ol } from "$lib/processing";
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Property from "$src/components/Property.svelte";
 
   function markers(str: string) {
     const alist = [
@@ -88,24 +89,22 @@ rel="noreferrer"
     {/if}
   {/if}
   <h2>辨識</h2>
-  {#if het.props.近義同}
-    <p>近義：{@html het.props.近義同}</p>
-  {/if}
-  {#if het.props.近義反}
-    <p>反義：{@html het.props.近義反}</p>
-  {/if}
-  {#if het.props.word_ref}
-    <p>參考詞語：「{@html het.props.word_ref}」</p>
-  {/if}
+  <Property key="近義" value={het.props.近義同} html={true} class="mt-4" />
+  <Property key="反義" value={het.props.近義反} html={true} />
+  <Property key="參考詞語" value={het.props.word_ref} html={true} />
   <p>
     {#if het.props.辨識同}{het.props.辨識同}{/if}
     {#if het.props.辨識異}{het.props.辨識異}{/if}
   </p>
   {#if het.props.辨識例句}
-    {@html nuance(het.props.辨識例句)}
+    <div class="prose">
+      {@html nuance(het.props.辨識例句)}
+    </div>
   {/if}
   {#if het.props.形音辨誤}
-    <p>{het.props.形音辨誤}</p>
+    <div class="prose">
+      <pre>{het.props.形音辨誤}</pre>
+    </div>
   {/if}
   {#if het.props.source_name}
     <h2 id="isc">典源</h2>
@@ -118,8 +117,8 @@ rel="noreferrer"
     {/if}
   {/if}
   {#if het.props.典故說明}
-  <h2>典故說明</h2>
-  <p>{@html het.props.典故說明}</p>
+    <h2>典故說明</h2>
+    <p>{@html het.props.典故說明}</p>
   {/if}
   {#if het.props.書證}
     <h2>書證</h2>

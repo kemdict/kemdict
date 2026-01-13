@@ -6,7 +6,7 @@
   export let baseURL: string | URL = "";
   export let langGroups = [["id", "readablename"]];
   // This is filtered before passed into this component
-  export let heteronyms: Heteronym[] = [];
+  export let heteronymsAndPn: [Heteronym, string | undefined][] = [];
   export let langId: string;
   export let currentParamsString: string;
   export let searchQuery: string;
@@ -38,7 +38,7 @@
         <!-- TODO: client side page navigation -->
         <Pages {baseURL} {url} {activePage} {pageCount} />
         <ul class="divide-y">
-          <WordPreview {heteronyms} {searchQuery} />
+          <WordPreview {heteronymsAndPn} {searchQuery} />
         </ul>
         <Pages {baseURL} {url} {activePage} {pageCount} />
       </svelte:fragment>

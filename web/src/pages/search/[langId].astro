@@ -1,28 +1,39 @@
 ---
 import { site, parsePageParam, langs } from "common";
+import type { LangId } from "common";
 import { chunk } from "lodash-es";
-const { langId } = Astro.params;
+// if we're already routed here it has to be defined, right??
+const { langId } = Astro.params as {
+  // Actually langId can be any string, but after getHetFromUrl only when it is
+  // a valid LangId will we continue without redirecting.
+  langId: LangId;
+};
 import { getHetFromUrl, getSearchTitle } from "$src/server/db";
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url, langId);
 if (!success) {
   return Astro.redirect(data);
 }
-if (data.root) {
+const {
+  root,
+  mtch,
+  heteronymsAndPn,
+  originalQuery,
+  query: normalizedQuery,
+  langSet,
+  // We pass langCountObj around because the other option is to pass both
+  // all heteronyms and applicable heteronyms here.
+  langCountObj,
+} = data;
+if (root || !originalQuery) {
   return Astro.redirect("/search");
 }
-const heteronyms = data.heteronyms;
-const mtch = data.mtch;
-const originalQuery = data.originalQuery;
-const normalizedQuery = data.query;
-const langSet = data.langSet;
-// We pass langCountObj around because the other option is to pass both
-// all heteronyms and applicable heteronyms here.
-const langCountObj = data.langCountObj;
 
 // This preserves order as declared in common.
-const langGroups = Object.entries(langs).filter((l) => langSet.has(l[0]));
-const count = heteronyms.length;
+const langGroups = Object.entries(langs).filter((l) =>
+  langSet.has(l[0] as LangId),
+);
+const count = heteronymsAndPn.length;
 
 // If there are no matching heteronyms specific to this language, try all languages instead.
 if (count === 0) {
@@ -31,7 +42,7 @@ if (count === 0) {
 
 // We do the chunking in Javascript and not in SQL because we still need the
 // total number of results
-const chunked = chunk(heteronyms, 50);
+const chunked = chunk(heteronymsAndPn, 50);
 const page = parsePageParam(url.searchParams.get("p"), chunked.length);
 // If "?p" is invalid, delete it and try again
 if (page === false) {
@@ -79,7 +90,7 @@ const titleMarkup = getSearchTitle(mtch, originalQuery, true);
     langId={langId}
     langCountObj={langCountObj}
     currentParamsString={url.searchParams.toString()}
-    heteronyms={chunked[page - 1]}
+    heteronymsAndPn={chunked[page - 1]}
     searchQuery={normalizedQuery}
   />
 </SingleLayout>

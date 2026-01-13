@@ -57,7 +57,7 @@
             </ListBoxItem>
           {/each}
         </ListBox>
-        <div class="arrow bg-surface-100-800-token" />
+        <div class="arrow bg-surface-100-800-token"></div>
       </div>
     </div>
   {/if}

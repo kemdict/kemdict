@@ -8,18 +8,9 @@
   import { groupByProp } from "common";
   import { spc, interlinear_annotation } from "$lib/processing";
 
-  function processPn(pn: string) {
-    if (dict === "moedict_twblg") {
-      return pn;
-    } else {
-      return pn;
-    }
-  }
-
   const pronunciation_key_mapping = {
     kisaragi_dict: "pronunciation",
     kisaragi_taigi: "pronunciation",
-    moedict_twblg: "trs",
   };
 
   $: pronunciation_key = pronunciation_key_mapping[dict];
@@ -39,7 +30,7 @@
   {#if het.props[pronunciation_key] && het.props[pronunciation_key] !== het.title}
     <Pronunciation
       id={`${dict}--${spc(het.props[pronunciation_key]).replace(" ", "")}`}
-      >{processPn(spc(het.props[pronunciation_key]))}
+      >{spc(het.props[pronunciation_key])}
     </Pronunciation>
   {/if}
   {#if het.props.vogue}
@@ -72,20 +63,6 @@
               {/each}
             {/if}
           </li>
-        {:else if dict == "moedict_twblg"}
-          {#if def.def || def.example || def.quote}
-            <li>
-              {#if def.def}
-                <p class="def">{@html def.def}</p>
-              {/if}
-              {#if def.example}
-                {@html interlinear_annotation(def.example)}
-              {/if}
-              {#if def.quote}
-                {@html interlinear_annotation(def.quote)}
-              {/if}
-            </li>
-          {/if}
         {/if}
       {/each}
     </ol>

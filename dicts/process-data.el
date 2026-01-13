@@ -15,6 +15,11 @@
 
 (require 'jieba)
 
+(defun d::warn (fmt &rest args)
+  "Emit warning with FMT and ARGS in a consistent style.
+FMT and ARGS are passed to `message'."
+  (apply #'message (concat "WARNING: " fmt) args))
+
 (defalias 'd::NFD #'ucs-normalize-NFD-string)
 
 (defmacro d::for (spec &rest body)
@@ -59,8 +64,8 @@ by default."
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
-       ("moedict_twblg" "nan_TW" ("moedict-data-twblg/dict-twblg.json"
-                                  "moedict-data-twblg/dict-twblg-ext.json"))
+       ;; FIXME 同義詞 etc. aren't included yet
+       ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
@@ -140,6 +145,7 @@ by default."
 
 (when load-file-name
   (setq default-directory (file-name-directory load-file-name)))
+(setq backtrace-on-error-noninteractive t)
 
 (put 'ht-update-with! 'lisp-indent-function 2)
 
@@ -271,6 +277,7 @@ this:
                 ;; This detection handles "/word/KEY" and <a>KEY</a>
                 ;; FIXME: there are still at least 1000 entries where the href
                 ;; is incorrectly replaced.
+                ;; NOTE: 2025-12-23T05:59:45+0900 What do you mean?!?!
                 (rx (group (not ">"))
                     (literal keyword)
                     (group (not (any "\"" "<"))))
@@ -439,6 +446,9 @@ do."
            ;; This has a few uses in itaigi.
            (s-replace "⿸疒哥" "𰣻")
 
+           ;; Get rid of the "替" marker from Kautian.
+           (s-replace "【替】" "")
+
            ;; This is only used once in itaigi:
            ;; https://itaigi.tw/k/%EF%97%AA%E8%8A%B3%E6%B0%B4/
            ;;
@@ -606,6 +616,9 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("kautian"
+       (ht-update-with! props "def"
+         #'d:links:linkify-keywords))
       ("unihan"
        (ht-set! props "pinyin"
                 (-some-> props
@@ -748,6 +761,13 @@ This is a separate step from shaping."
     (d::hash-prune props nil)
     (d::hash-prune props :null)))
 
+(defun d:ensure-number (string-or-number)
+  "Make sure STRING-OR-NUMBER is a number.
+If it is a string, run `string-to-number' on it, otherwise leave it as is."
+  (if (stringp string-or-number)
+      (string-to-number string-or-number)
+    string-or-number))
+
 (defun d:sort-orig-hets (orig-hets)
   "Sort ORIG-HETS according to their het_sort or id keys.
 
@@ -762,10 +782,10 @@ ORIG-HETS are props that will be used to construct heteronyms."
       (sort
        orig-hets
        (lambda (it other)
-         (< (string-to-number
+         (< (d:ensure-number
              (or (gethash "het_sort" it)
                  (gethash "id" it)))
-            (string-to-number
+            (d:ensure-number
              (or (gethash "het_sort" other)
                  (gethash "id" other))))))
     orig-hets))
@@ -822,7 +842,6 @@ ORIG-HETS are props that will be used to construct heteronyms."
                           (cl-loop for f in files
                                    vconcat
                                    (progn
-                                     (message "JSON parsing %s..." f)
                                      (erase-buffer)
                                      (insert-file-contents f)
                                      (json-parse-buffer)))))
@@ -836,14 +855,37 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (seq-doseq (entry raw-dict)
            (progress-reporter-update rep j)
            (cl-incf j)
-           (let ((orig-hets (or (gethash "heteronyms" entry)
-                                (vector entry))))
+           (let ((orig-hets
+                  (or
+                   ;; If the original is a structure of heteronyms, just grab
+                   ;; the heteronym.
+                   ;;
+                   ;; This works fine for moedict-data-twblg, because it only
+                   ;; keeps "title", "radical", "stroke_count",
+                   ;; "non_radical_stroke_count" on the word, which can be
+                   ;; discarded.
+                   ;;
+                   ;; For kisaragi-dict, we're only putting "added" and "eq-*"
+                   ;; on the word, which we copy to each heteronym, so this is
+                   ;; also fine.
+                   ;;
+                   ;; For kautian, that doesn't work well because there are lots
+                   ;; of data attached to the word.
+                   (and (not (equal dict "kautian"))
+                        (gethash "heteronyms" entry))
+                   (vector entry))))
              (d::debug "%s - applying het_sort" dict)
              (when (> (length orig-hets) 1)
                (setq orig-hets (d:sort-orig-hets orig-hets)))
              (d::for (orig-het orig-hets)
                ;; {title,from,lang,props}
+               ;; Get the main title from original heteronyms
                (let ((titles (or (-some-> (gethash "title" entry)
+                                   d:process-title)
+                                 ;; What I defined kautian to be
+                                 (-some->> entry
+                                   (gethash "han")
+                                   (gethash "main")
                                    d:process-title)
                                  ;; 臺日大辭典 and 臺灣白話基礎語句
                                  (gethash "kip" orig-het)
@@ -884,20 +926,26 @@ ORIG-HETS are props that will be used to construct heteronyms."
     (cl-loop
      for het being the elements of heteronyms
      using (index i)
-     with total = (length heteronyms)
+     with len = (length heteronyms)
+     with rep = (make-progress-reporter
+                 "Processing heteronyms..."
+                 1 len
+                 nil
+                 ;; 5 percent or 4 seconds
+                 5 4)
      do
      (progn
+       (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
        (when (or (= (1+ i) 1)
                  (= 0 (% (1+ i) 10000))
-                 (= (1+ i) total))
-         (message "Processing heteronyms (%s/%s)..." (1+ i) total)
+                 (= (1+ i) len))
          (garbage-collect))
        (ht-update-with! het "props"
-                        (lambda (props)
-                          (d:process-props
-                           props
-                           (gethash "title" het)
-                           (gethash "from" het))))))
+         (lambda (props)
+           (d:process-props
+            props
+            (gethash "title" het)
+            (gethash "from" het))))))
     (garbage-collect)
     ;; Step 3: insert them into the database
     (d:db-insert heteronyms (-uniq d:links))
@@ -927,12 +975,13 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (json-false :false)
          (json-null :null)
          (zh-plain-aliases-success nil)
+         (kautian-has-nonexact-aliases nil)
          (len (length heteronyms))
          (rep (make-progress-reporter
                "Inserting heteronyms..."
                1 len
                nil
-               ;; 5 percent / 4 seconds
+               ;; 5 percent or 4 seconds
                5 4)))
     (with-sqlite-transaction d:db
       (cl-loop
@@ -958,20 +1007,26 @@ VALUES
          ;; SQLite integer primary key is 1-based
          (let ((het-id (1+ i))
                (het.title (d::NFD (gethash "title" het)))
-               ;; (het.from (d::NFD (gethash "from" het)))
+               (het.from (gethash "from" het))
                (alias-stmt "
 INSERT INTO
   aliases (\"het_id\",\"alias\",\"exact\")
 VALUES
   (?,?,?)"))
            (sqlite-execute d:db alias-stmt (list het-id het.title 1))
+           ;; This is only used in Kautian
+           (seq-doseq (alt (-some->> het
+                             (gethash "props")
+                             (gethash "han")
+                             (gethash "alt")))
+             (sqlite-execute d:db alias-stmt (list het-id alt 1)))
            (dolist (pn (map-values (d:pn-collect het)))
              (sqlite-execute d:db alias-stmt (list het-id pn 1))
              ;; Input versions.
              ;; - don't duplicate if equal to original
              ;; - don't bother for some dictionaries)
-             (when (member (gethash "from" het)
-                           '("moedict_twblg"
+             (when (member het.from
+                           '("kautian"
                              "chhoetaigi_itaigi"
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
@@ -980,21 +1035,26 @@ VALUES
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
                  (unless (equal input-form pn)
+                   (when (equal het.from "kautian")
+                     (setq kautian-has-nonexact-aliases t))
                    (sqlite-execute d:db alias-stmt (list het-id input-form nil))))))
            ;; For these two, set the zh version as an alias
-           (when (member (gethash "from" het)
+           (when (member het.from
                          '("chhoetaigi_maryknoll1976"
                            "pts-taigitv"))
              (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
                (sqlite-execute d:db alias-stmt (list het-id zh nil))))
-           (when (member (gethash "from" het)
+           ;; Set the English text for these as an alias
+           (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
                (sqlite-execute d:db alias-stmt (list het-id en nil)))))))
+      (unless kautian-has-nonexact-aliases
+        (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success
-        (message "WARNING: zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
+        (d::warn "zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
     (let* ((len (length links))
@@ -1156,6 +1216,9 @@ CREATE TABLE heteronyms (
   \"lang\" TEXT REFERENCES langs(\"id\"),
   \"props\" TEXT NOT NULL
 );")
+  ;; An example of an inexact alias is removing diacritics to be searchable with
+  ;; an ASCII keyboard. If "góa" is reduced to "goa", matches of the latter is
+  ;; always going to be inexact, therefore the alias itself is inexact.
   (sqlite-execute d:db "
 CREATE TABLE aliases (
   \"het_id\" INTEGER REFERENCES heteronyms(\"id\"),
@@ -1178,7 +1241,7 @@ CREATE TABLE newwords (
 (defun d:pn-normalize (pn)
   "Normalize pronunciation PN.
 
-PN can be a list, string, or hash table.
+PN can be a list, string, vector, or hash table.
 
 If PN is a hash table, get the string from its value for \"zh-Hant\".
 
@@ -1189,6 +1252,8 @@ pronunciation strings include multiple pronunciations."
                (list pn))
               ((hash-table-p pn)
                (gethash "zh-Hant" pn))
+              ((vectorp pn)
+               (cl-coerce pn 'list))
               ((listp pn)
                pn))))
     (->> pns
@@ -1202,18 +1267,23 @@ pronunciation strings include multiple pronunciations."
                ;; I'm pretty sure it's not supposed to be there.
                (s-replace "\uFFFD" "")
                (s-replace "（變）" "/")
+               ;; Remove the in-band type tag from kautian.
+               ;; It would be better if we have some way to keep this information.
+               (s-replace "【白】" "")
+               (s-replace "【文】" "")
+               ;; Finally split by the slash, used by multiple dictionaries to
+               ;; denote multiple alternatives
                (s-split "[ \t\n\r]*/[ \t\n\r]*")))
          (-flatten-n 1)
          (--remove (equal it "")))))
 
 (defun d:pn-collect (het)
   "Collect pronunciations from HET."
-  (let ((keys '(;; kemdict-data-ministry-of-education
+  (let ((props (gethash "props" het))
+        (keys '(;; kemdict-data-ministry-of-education
                 "bopomofo"
                 ;; "pinyin"
 
-                ;; moedict-twblg
-                "trs"
                 ;; kisaragi-dict
                 "pronunciation"
 
@@ -1232,9 +1302,15 @@ pronunciation strings include multiple pronunciations."
                 "kMandarin"))
         (ret (make-hash-table :test #'equal)))
     (dolist (key keys)
-      (when-let (value (gethash key (gethash "props" het)))
+      (when-let (value (gethash key props))
         (dolist (p (d:pn-normalize value))
           (puthash key p ret))))
+    ;; What I chose for kautian
+    (when-let (tl (gethash "tl" props))
+      (dolist (key '("main" "colloquial" "alt" "otherMerged"))
+        (when-let (value (gethash key tl))
+          (dolist (p (d:pn-normalize value))
+            (puthash key p ret)))))
     ret))
 
 (defun d:pn-to-input-form (pn)

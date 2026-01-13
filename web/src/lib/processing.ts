@@ -1,3 +1,6 @@
+import type { Heteronym } from "common";
+import type { OutputWord } from "$dicts/ministry-of-education/kautian";
+
 /**
  * Normalize spaces in `str`.
  *
@@ -5,7 +8,7 @@
  * @returns {string}
  */
 export function spc(str: string | undefined): string | undefined {
-  if (str) {
+  if (str !== undefined) {
     return str.replace(/　/g, " ");
   }
 }
@@ -14,7 +17,10 @@ export function spc(str: string | undefined): string | undefined {
  * Separate lines into ol elements.
  */
 export function newline_string_to_ol(str: undefined): undefined;
-export function newline_string_to_ol(str: string): string {
+export function newline_string_to_ol(str: string): string;
+export function newline_string_to_ol(
+  str: string | undefined,
+): string | undefined {
   if (str) {
     return `<ol>
     ${str
@@ -32,7 +38,9 @@ export function newline_string_to_ol(str: string): string {
  */
 export function interlinear_annotation(defs: undefined): undefined;
 export function interlinear_annotation(defs: string | string[]): string;
-export function interlinear_annotation(defs: string[]): string {
+export function interlinear_annotation(
+  defs: undefined | string | string[],
+): string | undefined {
   if (defs) {
     if (typeof defs === "string") {
       defs = [defs];
@@ -71,7 +79,7 @@ export function radicals_and_strokes(props: {
   radical?: string;
   sc?: string;
 }): string {
-  if (!props.radical && !props.sc) return;
+  if (!props.radical && !props.sc) return "";
   let x = "";
   x += `<div class="mb-4">【`;
   if (props.radical) {
@@ -82,4 +90,36 @@ export function radicals_and_strokes(props: {
   }
   x += "】</div>";
   return x;
+}
+
+/** Return the "main" pronunciation from `het`. */
+export function processPn(het: Heteronym) {
+  // FIXME: for Hakkadict, it's questionable for me to pick one
+  // dialect out of the six provided.
+  const pron_keys = [
+    "bopomofo",
+    "trs",
+    "pronunciation",
+    "p_四縣",
+    "kip",
+    "poj",
+    "pn",
+    "tl",
+  ];
+  const key = pron_keys.find((pron) => het.props[pron]);
+  if (key === undefined) return;
+  const value = het.props[key] as
+    | string[]
+    | string
+    | OutputWord["tl"]
+    | undefined;
+  if (value === undefined) return;
+  const pn =
+    typeof value === "string"
+      ? value
+      : Array.isArray(value)
+        ? value[0]
+        : value.main;
+  if (het.title === pn) return "";
+  return `${spc(pn.replace(/【.】/, ""))}`;
 }

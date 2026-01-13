@@ -1,30 +1,37 @@
 ---
 import { getHetFromUrl, getSearchTitle } from "$src/server/db";
 import { site, langs } from "common";
+import type { LangId } from "common";
 
 const url = Astro.url;
 const [success, data] = await getHetFromUrl(url);
 if (!success) {
   return Astro.redirect(data);
 }
-/** The page is /search (without any suffix) */
-const root = data.root;
 
-const heteronyms = data.heteronyms;
-const mtch = data.mtch;
-const originalQuery = data.originalQuery;
-const normalizedQuery = data.query;
-const langSet = data.langSet;
-const count = heteronyms?.length;
-const presentLangs = Object.entries(langs).filter((l) => langSet?.has(l[0]));
+const {
+  /** The page is /search (without any suffix) */
+  root,
+  mtch,
+  heteronymsAndPn,
+  originalQuery,
+  query: normalizedQuery,
+  langSet,
+} = data;
+
+const count = heteronymsAndPn?.length;
+const presentLangs = Object.entries(langs).filter((l) =>
+  langSet?.has(l[0] as LangId),
+);
 
 import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 import WordPreview from "$src/components/WordPreview.svelte";
 import ListLink from "$src/components/ListLink.svelte";
 
-const title = mtch && getSearchTitle(mtch, originalQuery);
-const titleMarkup = mtch && getSearchTitle(mtch, originalQuery, true);
+const title = mtch && originalQuery && getSearchTitle(mtch, originalQuery);
+const titleMarkup =
+  mtch && originalQuery && getSearchTitle(mtch, originalQuery, true);
 ---
 
 <script>
@@ -68,8 +75,8 @@ const titleMarkup = mtch && getSearchTitle(mtch, originalQuery, true);
           <div class="">
             {presentLangs.map((lang) => {
               const previewCount = 5;
-              const applicableHeteronyms = heteronyms.filter(
-                (het) => het.lang === lang[0],
+              const applicableHeteronyms = heteronymsAndPn.filter(
+                ([het]) => het.lang === lang[0],
               );
               return (
                 <div class="mt-4">
@@ -78,7 +85,10 @@ const titleMarkup = mtch && getSearchTitle(mtch, originalQuery, true);
                   </h1>
                   <ul class="divide-y divide-gray-300">
                     <WordPreview
-                      heteronyms={applicableHeteronyms.slice(0, previewCount)}
+                      heteronymsAndPn={applicableHeteronyms.slice(
+                        0,
+                        previewCount,
+                      )}
                       searchQuery={normalizedQuery}
                     />
                     {applicableHeteronyms.length > previewCount && (
