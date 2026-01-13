@@ -1,8 +1,7 @@
 import { uniqBy, chunk, sortBy } from "lodash-es";
 import { CrossDB, parseQuery, parseStringQuery, type Mtch } from "./crossdb";
-import { spc } from "$lib/processing";
+import { processPn } from "$lib/processing";
 import type { Heteronym, LangId } from "common";
-import type { OutputWord } from "$dicts/ministry-of-education/kautian";
 import { groupByProp, joinLast } from "common";
 import { Database } from "bun:sqlite";
 
@@ -91,38 +90,6 @@ export function getSearchTitle(
  */
 export function hetExactMatch(het: Heteronym, query: string | undefined) {
   return !!(het.exact && query && het.title === query);
-}
-
-// TODO: rename
-export function processPn(het: Heteronym) {
-  // FIXME: for Hakkadict, it's questionable for me to pick one
-  // dialect out of the six provided.
-  const pron_keys = [
-    "bopomofo",
-    "trs",
-    "pronunciation",
-    "p_四縣",
-    "kip",
-    "poj",
-    "pn",
-    "tl",
-  ];
-  const key = pron_keys.find((pron) => het.props[pron]);
-  if (key === undefined) return "";
-  const value = het.props[key] as
-    | string[]
-    | string
-    | OutputWord["tl"]
-    | undefined;
-  if (value === undefined) return "";
-  const pn =
-    typeof value === "string"
-      ? value
-      : Array.isArray(value)
-        ? value[0]
-        : value.main;
-  if (het.title === pn) return "";
-  return `（${spc(pn)}）`;
 }
 
 /**

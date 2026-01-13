@@ -3,7 +3,8 @@
   import type { Heteronym } from "common";
   import type { OutputWord } from "$dicts/ministry-of-education/kautian";
   import { dictIdToDict } from "common";
-  import { processPn, hetExactMatch } from "$src/server/db";
+  import { hetExactMatch } from "$src/server/db";
+  import { processPn } from "$src/lib/processing";
   import clsx from "clsx";
   export let heteronyms: Heteronym[];
   export let searchQuery: string;

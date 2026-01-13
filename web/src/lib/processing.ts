@@ -1,3 +1,6 @@
+import type { Heteronym } from "common";
+import type { OutputWord } from "$dicts/ministry-of-education/kautian";
+
 /**
  * Normalize spaces in `str`.
  *
@@ -87,4 +90,36 @@ export function radicals_and_strokes(props: {
   }
   x += "】</div>";
   return x;
+}
+
+/** Return the "main" pronunciation from `het`. */
+export function processPn(het: Heteronym) {
+  // FIXME: for Hakkadict, it's questionable for me to pick one
+  // dialect out of the six provided.
+  const pron_keys = [
+    "bopomofo",
+    "trs",
+    "pronunciation",
+    "p_四縣",
+    "kip",
+    "poj",
+    "pn",
+    "tl",
+  ];
+  const key = pron_keys.find((pron) => het.props[pron]);
+  if (key === undefined) return "";
+  const value = het.props[key] as
+    | string[]
+    | string
+    | OutputWord["tl"]
+    | undefined;
+  if (value === undefined) return "";
+  const pn =
+    typeof value === "string"
+      ? value
+      : Array.isArray(value)
+        ? value[0]
+        : value.main;
+  if (het.title === pn) return "";
+  return `（${spc(pn)}）`;
 }
