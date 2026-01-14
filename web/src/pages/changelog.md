@@ -1,10 +1,14 @@
 ---
 layout: $src/MarkdownLayout.astro
 title: 版本紀錄 | Kemdict
-desc: Kemdict 國語整合典的更新紀錄。
+desc: Kemdict 國家語言整合典的更新紀錄。
 ---
 
 # 版本紀錄
+
+## 1.5.1 (2026-01-14)
+
+- 新名稱：《Kemdict 國家語言整合典》。「國語」= 華語的概念基本上不太會變了，所以硬要用不太一樣的定義只有讓 Kemdict 的名稱更難懂。
 
 ## 1.5.0 (2026-01-14)
 

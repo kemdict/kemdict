@@ -7,10 +7,10 @@ import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.svelte";
 import SearchBar from "$src/components/SearchBar.svelte";
 import DarkModeToggle from "$src/components/DarkModeToggle.svelte";
-const title = "Kemdict 國語整合典";
-const sitename = "Kemdict 國語整合典";
+const title = "Kemdict 國家語言整合典";
+const sitename = "Kemdict 國家語言整合典";
 const description =
-  "《Kemdict 國語整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
+  "《Kemdict 國家語言整合典》整合多部辭典，提供一次搜尋的功能。同時包含另一個我拿來記錄教育部沒有收錄的詞的字典。";
 
 const newWords = await DB.getNewWords(15);
 ---
@@ -53,7 +53,7 @@ const newWords = await DB.getNewWords(15);
         <div class="text-6xl font-bold max-md:inline max-md:text-2xl">
           Kemdict
         </div>
-        <div class="text-2xl font-bold max-md:inline">國語整合典</div>
+        <div class="text-2xl font-bold max-md:inline">國家語言整合典</div>
       </h1>
       <div>
         <DarkModeToggle client:load />
@@ -62,7 +62,7 @@ const newWords = await DB.getNewWords(15);
     <div class="pb-4">
       <p>整合搜尋臺灣多個國家語言的多部字典。</p>
     </div>
-    <div class="bg-surface-300 dark:bg-surface-800 w-full rounded px-4 py-4">
+    <div class="w-full rounded bg-surface-300 px-4 py-4 dark:bg-surface-800">
       <SearchBar
         highlightBtn={true}
         redirectOnSingleResult={true}
