@@ -11,6 +11,7 @@
 
 {#each heteronyms as kautianWord, i}
   {@const this單字不成詞 = kautianWord.props.type === "單字不成詞者"}
+  {@const this臺華共同詞 = kautianWord.props.type === "臺華共同詞"}
 
   <div id="kautian-word-{kautianWord.props.id}">
     <!-- 這個是單字不成詞者的話，如果前一個也是那就不要再顯示一次標題 -->
@@ -21,10 +22,14 @@
     <Property key="異用字" value={kautianWord.props.han.alt?.join("、")}
     ></Property>
     <!-- 在有一群單字不成詞的詞目時，只在最後一個顯示無義項的說明 -->
-    {#if this單字不成詞}
-      {@const next單字不成詞 = heteronyms[i + 1]?.props.type === "單字不成詞者"}
+    {#if this單字不成詞 || this臺華共同詞}
+      {@const nextType = heteronyms[i + 1]?.props.type}
+      {@const next單字不成詞 = nextType === "單字不成詞者"}
+      {@const next臺華共同詞 = nextType === "臺華共同詞"}
       {#if !next單字不成詞}
         <p class="def">（單字不成詞者 ，無義項）</p>
+      {:else if !next臺華共同詞}
+        <p class="def">（臺華共同詞，無義項）</p>
       {/if}
     {/if}
     {#if (prev單字不成詞 = this單字不成詞)}{/if}
