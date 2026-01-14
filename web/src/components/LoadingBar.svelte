@@ -4,14 +4,25 @@
   import { navigating } from "$src/stores";
   import { Tween } from "svelte/motion";
   import { cubicOut } from "svelte/easing";
-  const progress = new Tween(0, { duration: 3000, easing: cubicOut });
+  const progress = new Tween(0, {
+    delay: 250,
+    duration: 3000,
+    easing: cubicOut,
+  });
   navigating.subscribe((value) => {
     if (value) {
       progress.set(0, { duration: 0 });
       progress.set(0.6);
     } else {
-      progress.set(0.6, { duration: 0 });
-      progress.set(1, { duration: 1000 });
+      // Don't interpolate (= don't show loading bar) if we got here before the
+      // delay ended
+      // Was previously implemented in commit f5cc2e6a57032df1522f2e3a252e5ce8f2043367
+      if (progress.current === 0) {
+        progress.set(1, { duration: 0 });
+      } else {
+        progress.set(0.6, { duration: 0 });
+        progress.set(1, { duration: 1000 });
+      }
     }
   });
 
