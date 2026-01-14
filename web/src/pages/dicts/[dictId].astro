@@ -26,7 +26,7 @@ import { DB } from "$src/server/db";
 import WordList from "$src/components/WordList.svelte";
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} clientRouter={true}>
   <!-- <Fragment slot="head"></Fragment> -->
   <Header />
   <div class="space-x-4 md:flex">
