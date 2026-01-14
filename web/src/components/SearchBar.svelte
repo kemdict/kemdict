@@ -146,8 +146,9 @@
         {/if}
       </div>
       <div>
-        <a class="whitespace-nowrap font-bold underline" href="/history"
-          >搜尋與閱讀紀錄</a
+        <a
+          class="whitespace-nowrap font-bold underline [text-underline-offset:4px]"
+          href="/history">搜尋與閱讀紀錄</a
         >
       </div>
     </div>
