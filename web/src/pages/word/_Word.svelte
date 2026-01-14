@@ -1,19 +1,19 @@
 <script lang="ts">
   import Out from "$src/components/Out.svelte";
-  import WordDictConcised from "./WordDictConcised.svelte";
-  import WordDictIdioms from "./WordDictIdioms.svelte";
-  import WordDictRevised from "./WordDictRevised.svelte";
-  import WordHakkadict from "./WordHakkadict.svelte";
-  import WordITaigi from "./WordITaigi.svelte";
-  import WordTaiJit from "./WordTaiJit.svelte";
-  import WordKichhooGiku from "./WordKichhooGiku.svelte";
-  import WordMaryknoll from "./WordMaryknoll.svelte";
-  import WordPtsTaigitv from "./WordPtsTaigitv.svelte";
-  import WordMoedictish from "./WordMoedictish.svelte";
-  import WordKautian from "./WordKautian.svelte";
-  import WordUnihan from "./WordUnihan.svelte";
-  import WordILRDF from "./WordILRDF.svelte";
-  import WordLopof from "./WordLopof.svelte";
+  import WordDictConcised from "./_WordDictConcised.svelte";
+  import WordDictIdioms from "./_WordDictIdioms.svelte";
+  import WordDictRevised from "./_WordDictRevised.svelte";
+  import WordHakkadict from "./_WordHakkadict.svelte";
+  import WordITaigi from "./_WordITaigi.svelte";
+  import WordTaiJit from "./_WordTaiJit.svelte";
+  import WordKichhooGiku from "./_WordKichhooGiku.svelte";
+  import WordMaryknoll from "./_WordMaryknoll.svelte";
+  import WordPtsTaigitv from "./_WordPtsTaigitv.svelte";
+  import WordMoedictish from "./_WordMoedictish.svelte";
+  import WordKautian from "./_WordKautian.svelte";
+  import WordUnihan from "./_WordUnihan.svelte";
+  import WordILRDF from "./_WordILRDF.svelte";
+  import WordLopof from "./_WordLopof.svelte";
 
   import { format } from "common";
 

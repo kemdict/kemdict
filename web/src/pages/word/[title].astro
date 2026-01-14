@@ -26,8 +26,8 @@ const backlinks = (await DB.getBacklinks(...titles)).sort();
 import SingleLayout from "$src/SingleLayout.astro";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import WordList from "$src/components/WordList.svelte";
-import Word from "./Word.svelte";
-import WordTabs from "./WordTabs.svelte";
+import Word from "./_Word.svelte";
+import WordTabs from "./_WordTabs.svelte";
 
 let term_ja = title;
 let term_en = title;
