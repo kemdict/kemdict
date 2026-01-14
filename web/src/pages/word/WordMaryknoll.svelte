@@ -14,6 +14,6 @@
     </p>
   {/if}
   <p class="def">
-    {#if het.props.en}{het.props.en}{/if}
+    <Property key="英語" value={het.props.en} />
   </p>
 {/each}
