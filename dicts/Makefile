@@ -12,6 +12,7 @@ admin.deploy: entries.db.gz
 	@[ "$$SSH_HOST"x != x ] || (echo 'Please specify $$SSH_HOST'; exit 1)
 	rsync entries.db.gz "$$SSH_HOST:/home/kisaragi/deployed/kemdict.db.gz"
 	ssh "$$SSH_HOST" bash << HERE
+	  set -euo pipefail
 	  gzip -d -f deployed/kemdict.db.gz
 	  systemctl restart --user kemdict
 	HERE

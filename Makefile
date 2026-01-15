@@ -41,6 +41,7 @@ admin.deploy.kemdict:
 	tar -czf dist.tar.gz -a dist
 	rsync dist.tar.gz "$$SSH_HOST:/home/kisaragi"
 	ssh "$$SSH_HOST" bash << HERE
+	  set -euo pipefail
 	  tar -xf dist.tar.gz
 	  rm dist.tar.gz
 	  mkdir -p deployed
@@ -54,6 +55,7 @@ admin.deploy.pojtl-api:
 	tar -czf pojtl-api.tar.gz -a pojtl-api
 	rsync pojtl-api.tar.gz "$$SSH_HOST:/home/kisaragi"
 	ssh "$$SSH_HOST" bash << HERE
+	  set -euo pipefail
 	  tar -xf pojtl-api.tar.gz
 	  rm pojtl-api.tar.gz
 	  mkdir -p deployed
