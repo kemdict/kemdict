@@ -33,6 +33,14 @@ jobs:
         uses: purcell/setup-emacs@master
         with:
           version: 29.1
+      - name: Build data files
+        run: |
+          cd dicts
+          bun install
+          bunx eask install-deps
+          # Do this, otherwise Make will try to regenerate them
+          touch lopof-nan_TW.json lopof-hak_TW.json
+          make entries.db.gz
       - name: Set up SSH
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -42,14 +50,6 @@ jobs:
           printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
           printenv SSH_SECRET > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-      - name: Build data files
-        run: |
-          cd dicts
-          bun install
-          bunx eask install-deps
-          # Do this, otherwise Make will try to regenerate them
-          touch lopof-nan_TW.json lopof-hak_TW.json
-          make entries.db.gz
       - name: Deploy built database
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}

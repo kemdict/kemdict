@@ -30,15 +30,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-      - name: Set up SSH
-        env:
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          SSH_SECRET: ${{ secrets.SSH_SECRET }}
-        run: |
-          mkdir -p ~/.ssh
-          printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
-          printenv SSH_SECRET > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
       - uses: pnpm/action-setup@v4
         with:
           version: 10.27.0
@@ -51,7 +42,19 @@ jobs:
         run: |
           cd web
           pnpm install
-      - name: Build and deploy
+      - name: Build
+        run: |
+          make build
+      - name: Set up SSH
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_SECRET: ${{ secrets.SSH_SECRET }}
+        run: |
+          mkdir -p ~/.ssh
+          printenv SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
+          printenv SSH_SECRET > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Deploy
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
