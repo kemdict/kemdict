@@ -1,12 +1,3 @@
-* Kautian
-:PROPERTIES:
-:created:  2025-12-19T09:46:41+0900
-:END:
-
-** Word properties are currently lost
-** Links back to original, either via search or with IDs
-** Make sure keyword linking is working
-
 * done
 ** DONE New link style to make texts easier to read
 ** DONE 譜系分類法 (=dict_revised=) is broken
@@ -197,31 +188,6 @@ No longer applicable as we don't use moedict-data anymore.
 :created:  2025-12-12T18:27:18+0900
 :END:
 they're actually pretty nice. At least add them to kisaragi-dict?
-* Adding a dictionary
-- kemdict-data: add code to download the raw data at build time
-- kemdict-data: update process-data.el to include the new dictionary in the intermediate json file
-- kemdict-data: fill in info in data.ts and maybe README
-- update [[file:./web/src/routes/word/\[word\]/+page.svelte][word page]] to use the right component for the new dictionary
-- most likely, write a new word component for the new dictionary
-- update copyright information
-* Testing
-- Does search work?
-  - "a", "a p" (prefix, suffix), "無妨", "zzz", "一"
-  - Language tabs
-  - Pagination
-- Does word page rendering work?
-  - "無妨" (taijit, concised, revised, =moedict_twblg=)
-  - "實聯制" (kisaragi, itaigi)
-- About
-- Initial index + pagination, Radical index
-* Why not make the DB its own service
-
-I'm still not sure, but
-
-- The network latency might be worse than running DB queries regardless of caching
-- More attack vectors (?)
-- Another interface to maintain within the same app
-
 * todos
 ** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
 The existing digitization only includes POJ/KIP and HanLo.

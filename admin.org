@@ -1,0 +1,26 @@
+* Adding a dictionary
+- kemdict-data: add code to download the raw data at build time
+- kemdict-data: update process-data.el to include the new dictionary in the intermediate json file
+- kemdict-data: fill in info in data.ts and maybe README
+- update [[file:./web/src/routes/word/\[word\]/+page.svelte][word page]] to use the right component for the new dictionary
+- most likely, write a new word component for the new dictionary
+- update copyright information
+
+* Testing
+- Does search work?
+  - "a", "a p" (prefix, suffix), "無妨", "zzz", "一"
+  - Language tabs
+  - Pagination
+- Does word page rendering work?
+  - "無妨" (taijit, concised, revised, =moedict_twblg=)
+  - "實聯制" (kisaragi, itaigi)
+- About
+- Initial index + pagination, Radical index
+
+* Why not make the DB its own service
+
+I'm still not sure, but
+
+- The network latency might be worse than running DB queries regardless of caching
+- More attack vectors (?)
+- Another interface to maintain within the same app
