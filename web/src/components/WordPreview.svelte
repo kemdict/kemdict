@@ -27,12 +27,12 @@
         het.props.defs?.map((x: any) => x.def).join("") ||
         (het.from === "kautian" &&
           (het as Heteronym<OutputWord>).props?.heteronyms
-            .map((het) => het.def)
+            ?.map((het) => het.def)
             .join("")) ||
         (het.from === "kautian" &&
           (het as Heteronym<OutputWord>).props?.type === "單字不成詞者" &&
           "（單字不成詞者，無義項）") ||
-      ((het as Heteronym<OutputWord>).props?.type === "臺華共同詞" &&
+        ((het as Heteronym<OutputWord>).props?.type === "臺華共同詞" &&
           "（臺華共同詞，無義項）") ||
         het.props.example ||
         het.props.zh ||

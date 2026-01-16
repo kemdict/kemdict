@@ -34,7 +34,7 @@
     {/if}
     {#if (prev單字不成詞 = this單字不成詞)}{/if}
 
-    {#each groupByProp(kautianWord.props.heteronyms, "pos", "none") as [pos, hets]}
+    {#each groupByProp(kautianWord.props.heteronyms || [], "pos", "none") as [pos, hets]}
       {#if pos !== "none"}
         <p class="pos">{pos}</p>
       {/if}
