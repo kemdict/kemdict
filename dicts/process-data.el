@@ -618,8 +618,10 @@ This is a separate step from shaping."
     (ht-remove! props "length")
     (pcase dict
       ("kautian"
-       (ht-update-with! props "def"
-         #'d:links:linkify-keywords))
+       (ht-update-with! props "heteronyms"
+         (lambda (het)
+           (ht-update-with! het "def"
+             #'d:links:linkify-keywords))))
       ("unihan"
        (ht-set! props "pinyin"
                 (-some-> props
@@ -871,7 +873,8 @@ ORIG-HETS are props that will be used to construct heteronyms."
                    ;; also fine.
                    ;;
                    ;; For kautian, that doesn't work well because there are lots
-                   ;; of data attached to the word.
+                   ;; of data attached to the word, so for kautian each Kemdict
+                   ;; "heteronym" actually corresponds to a Kautian word entry.
                    (and (not (equal dict "kautian"))
                         (gethash "heteronyms" entry))
                    (vector entry))))
