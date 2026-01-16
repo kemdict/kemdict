@@ -55,5 +55,21 @@
         {/each}
       </ol>
     {/each}
+
+    {#if kautianWord.props.tl.dialects}
+      {@const dialects = kautianWord.props.tl.dialects}
+      <Property key="語音差異" class="mt-4">
+        <div>
+          {#each Object.entries(dialects) as [dialect, value]}
+            <div class={"mb-0 flex items-baseline"}>
+              <span class="mr-2 px-2 py-1 font-bold">{dialect}</span>
+              <span class={"prose"}>
+                {value.join("、")}
+              </span>
+            </div>
+          {/each}
+        </div>
+      </Property>
+    {/if}
   </div>
 {/each}
