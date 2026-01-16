@@ -3,6 +3,7 @@
   import type { OutputWord } from "$dicts/ministry-of-education/kautian.ts";
   let { heteronyms }: { heteronyms: Array<Heteronym<OutputWord>> } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Out from "$src/components/Out.svelte";
   import Property from "$src/components/Property.svelte";
   import { uniqBy } from "lodash-es";
 
@@ -116,6 +117,18 @@
         </li>
       {/each}
     </ol>
+
+    {#if kautianWord.props.categories}
+      <Property key="分類">
+        {#each kautianWord.props.categories as { id, title }}
+          <Out
+            after={false}
+            class="mr-1"
+            href="https://sutian.moe.edu.tw/und-hani/hunlui/{id}/">{title}</Out
+          >
+        {/each}
+      </Property>
+    {/if}
 
     {#if kautianWord.props.tl.dialects}
       {@const dialects = kautianWord.props.tl.dialects}
