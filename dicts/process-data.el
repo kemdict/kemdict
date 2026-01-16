@@ -850,47 +850,54 @@ ORIG-HETS are props that will be used to construct heteronyms."
                  (gethash "id" other))))))
     orig-hets))
 
-(defun d::split-titles (titles)
-  "Split TITLES, a string, into a list containing titles."
+(defun d::split-titles (dict titles)
+  "Split TITLES, a string, into a list containing titles.
+DICT is used as context to add special cases for particular
+dictionaries, for example turning off slash splitting for STTI."
   ;; Lots of special cases. But this is fine because the number is low; and
   ;; because it's impossible to automate this reliably, they are too free-form.
-  (pcase titles
-    ;; maryknoll
-    ;; actually for maryknoll this is kind of impossible. There are 5000+ entries
-    ;; there with a paren in it, most (but not all) of which should be split...
-    ("bô-hông, bû-hông" '("bô-hông" "bû-hông"))
-    ("a-bó (a-bú)" '("a-bó" "a-bú"))
-    ("a-iân-suànn (iân-suànn, thih-suànn)" '("a-iân-suànn" "iân-suànn" "thih-suànn"))
-    ("an-hioh-ji̍t (an-sik-ji̍t)" '("an-hioh-ji̍t" "an-sik-ji̍t"))
-    ("a-iân-phiánn (iân-phiánn)" '("a-iân-phiánn" "iân-phiánn"))
-    ;; the rest are from taijit
-    ("cheh/choeh仔" '("cheh仔" "choeh仔"))
-    ("kiàu-kiàu/kiauh-kiauh叫" '("kiàu-kiàu叫" "kiauh-kiauh叫"))
-    ("sir/su-lài-tah" '("sir-lài-tah" "su-lài-tah"))
-    ("三iān/uán" '("三iān" "三uán"))
-    ("二彼/比" '("二彼" "二比"))
-    ("小辦/扮" '("小辦" "小扮"))
-    ("挽me̍h/mi̍h" '("挽me̍h" "挽mi̍h"))
-    ("揚phòng-phòng/phōng-phōng/pòng-pòng" '("揚phòng-phòng" "揚phōng-phōng/揚pòng-pòng"))
-    ("枯sau/tsuâ" '("枯sau" "枯tsuâ"))
-    ("查bāi/māi" '("查bāi" "查māi"))
-    ("水khiō/khiò" '("水khiō" "查khiò"))
-    ("澹tsiu̍h-tsiu̍h/chiuh-chiuh" '("澹tsiu̍h-tsiu̍h" "澹chiuh-chiuh"))
-    ("爛he̍h/le̍h" '("爛he̍h" "爛le̍h"))
-    ("田phe̍h/phue̍h" '("田phe̍h" "田phue̍h"))
-    ("田tìm/tòm" '("田tìm" "田tòm"))
-    ("田土phe̍h/phue̍h" '("田土phe̍h" "田土phue̍h"))
-    ("相khoeh/kheh" '("相khoeh" "相kheh"))
-    ("相食ànn/ānn" '("相食ànn" "相食ānn"))
-    ("石phè/phuê/phèr" '("石phè" "石phuê/石phèr"))
-    ("緊pia̍k-pia̍k/piak-piak" '("緊pia̍k-pia̍k" "緊piak-piak"))
-    ("草sannh/sah" '("草sannh" "草sah"))
-    ("衝jip/chip" '("衝jip" "衝chip"))
-    ("走sau/sàu" '("走sau" "走sàu"))
-    ("跟tuè/tè" '("跟tuè" "跟tè"))
-    ("雄/狠鬼鬼" '("雄鬼鬼" "狠鬼鬼"))
-    ((pred stringp) (split-string titles "/"))
-    (_ (error "Non-string fed into d::split-titles: %S" titles))))
+  (pcase dict
+    ;; disable all splitting
+    ((or "stti-taigi"
+         "stti-hakka")
+     (list titles))
+    (_ (pcase titles
+         ;; maryknoll
+         ;; actually for maryknoll this is kind of impossible. There are 5000+ entries
+         ;; there with a paren in it, most (but not all) of which should be split...
+         ("bô-hông, bû-hông" '("bô-hông" "bû-hông"))
+         ("a-bó (a-bú)" '("a-bó" "a-bú"))
+         ("a-iân-suànn (iân-suànn, thih-suànn)" '("a-iân-suànn" "iân-suànn" "thih-suànn"))
+         ("an-hioh-ji̍t (an-sik-ji̍t)" '("an-hioh-ji̍t" "an-sik-ji̍t"))
+         ("a-iân-phiánn (iân-phiánn)" '("a-iân-phiánn" "iân-phiánn"))
+         ;; the rest are from taijit
+         ("cheh/choeh仔" '("cheh仔" "choeh仔"))
+         ("kiàu-kiàu/kiauh-kiauh叫" '("kiàu-kiàu叫" "kiauh-kiauh叫"))
+         ("sir/su-lài-tah" '("sir-lài-tah" "su-lài-tah"))
+         ("三iān/uán" '("三iān" "三uán"))
+         ("二彼/比" '("二彼" "二比"))
+         ("小辦/扮" '("小辦" "小扮"))
+         ("挽me̍h/mi̍h" '("挽me̍h" "挽mi̍h"))
+         ("揚phòng-phòng/phōng-phōng/pòng-pòng" '("揚phòng-phòng" "揚phōng-phōng/揚pòng-pòng"))
+         ("枯sau/tsuâ" '("枯sau" "枯tsuâ"))
+         ("查bāi/māi" '("查bāi" "查māi"))
+         ("水khiō/khiò" '("水khiō" "查khiò"))
+         ("澹tsiu̍h-tsiu̍h/chiuh-chiuh" '("澹tsiu̍h-tsiu̍h" "澹chiuh-chiuh"))
+         ("爛he̍h/le̍h" '("爛he̍h" "爛le̍h"))
+         ("田phe̍h/phue̍h" '("田phe̍h" "田phue̍h"))
+         ("田tìm/tòm" '("田tìm" "田tòm"))
+         ("田土phe̍h/phue̍h" '("田土phe̍h" "田土phue̍h"))
+         ("相khoeh/kheh" '("相khoeh" "相kheh"))
+         ("相食ànn/ānn" '("相食ànn" "相食ānn"))
+         ("石phè/phuê/phèr" '("石phè" "石phuê/石phèr"))
+         ("緊pia̍k-pia̍k/piak-piak" '("緊pia̍k-pia̍k" "緊piak-piak"))
+         ("草sannh/sah" '("草sannh" "草sah"))
+         ("衝jip/chip" '("衝jip" "衝chip"))
+         ("走sau/sàu" '("走sau" "走sàu"))
+         ("跟tuè/tè" '("跟tuè" "跟tè"))
+         ("雄/狠鬼鬼" '("雄鬼鬼" "狠鬼鬼"))
+         ((pred stringp) (split-string titles "/"))
+         (_ (error "Non-string fed into d::split-titles: %S" titles))))))
 
 (defvar d:db nil
   "Holds the DB connection.")
@@ -976,7 +983,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
                    (d::warn "Saw an entry with an empty main title from %s. Skipping" dict)
                    (throw 'continue nil))
                  ;; Taijit has some titles that should expand into many words
-                 (d::for (title (d::split-titles titles))
+                 (d::for (title (d::split-titles dict titles))
                    (let ((shaped-het (make-hash-table :test #'equal)))
                      ;; Skip invalid titles
                      (when (or (not (stringp title))
