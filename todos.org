@@ -1,4 +1,21 @@
 * done
+** DONE digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
+The existing digitization only includes POJ/KIP and HanLo.
+
+The book uses POJ for Taiwanese (and even includes an introduction to POJ and Taiwanese tones).
+
+Digitize the first pages, then when you get to the entries, write them down in YAML. Use an Emacs command to automate some of it if you want.
+
+Each entry is:
+
+- scientific name (the word(s) after the comma are the name of the person who published the scientific name; this convention is still alive to this day)
+- Japanese name (in Romaji)
+- Taiwanese name「和名の次に本島語即ち福建語及廣東語を挿入し…」(in POJ)
+- Aboriginals name (including which people)
+- Where it's found
+- [category and such]
+
+2026-01-16T22:58:23+0900: this has basically been done for a while now. That feels good to say.
 ** DONE New link style to make texts easier to read
 ** DONE 譜系分類法 (=dict_revised=) is broken
 ** DONE make it possible to turn off pronunciation search
@@ -183,26 +200,18 @@ No longer applicable as we don't use moedict-data anymore.
 | △        | 表另有可互見參酌之其他成語               | 「釋義」欄           |
 | ■        | 表與主要典源內容不同之參考資料有一筆以上 | 「典源」欄           |
 #+end_quote
-* Tags
+* todos
+** TODO [#A] 服務條款、隱私權條款
+** TODO link to share on Twitter, Facebook, or just copy the URL
+** TODO kautian: categories
+** TODO Tags
 :PROPERTIES:
 :created:  2025-12-12T18:27:18+0900
 :END:
 they're actually pretty nice. At least add them to kisaragi-dict?
-* todos
-** digitize [[http://ip194097.ntcu.edu.tw/memory/TGB/thak.asp?id=59&page=1][1928 台灣植物名彙]]
-The existing digitization only includes POJ/KIP and HanLo.
+** TODO internal links should have more information about the destination
+:PROPERTIES:
+:created:  2026-01-16T23:00:23+0900
+:END:
 
-The book uses POJ for Taiwanese (and even includes an introduction to POJ and Taiwanese tones).
-
-Digitize the first pages, then when you get to the entries, write them down in YAML. Use an Emacs command to automate some of it if you want.
-
-Each entry is:
-
-- scientific name (the word(s) after the comma are the name of the person who published the scientific name; this convention is still alive to this day)
-- Japanese name (in Romaji)
-- Taiwanese name「和名の次に本島語即ち福建語及廣東語を挿入し…」(in POJ)
-- Aboriginals name (including which people)
-- Where it's found
-- [category and such]
-** TODO [#A] 服務條款、隱私權條款
-** TODO link to share on Twitter, Facebook, or just copy the URL
+Right now we lose the destination information.
