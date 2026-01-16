@@ -62,15 +62,18 @@ by default."
        ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+       ;; These are primarily for mapping Mandarin words into Taigi or
+       ;; Hakka, so they should probably mainly show on the Mandarin page...
+       ;; yeah that's weird.
+       ("stti-taigi" "zh_TW" "ministry-of-education/stti-taigi.json")
+       ("stti-hakka" "zh_TW" "ministry-of-education/stti-hakka.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
-       ("stti-taigi" "nan_TW" "ministry-of-education/stti-taigi.json")
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
        ("chhoetaigi_maryknoll1976" "nan_TW" "chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json")
-       ("stti-hakka" "hak_TW" "ministry-of-education/stti-hakka.json")
        ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
        ("lopof-taigi" "nan_TW" "lopof-nan_TW.json")
        ("lopof-hakka" "hak_TW" "lopof-hak_TW.json")
@@ -610,6 +613,11 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("stti-taigi"
+       ;; stti-taigi
+       (let ((han (s-split "\n" (ht-get props "han")))
+             (tl (s-split "\n" (ht-get props "tl"))))
+         (ht-update-with! props "han")))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
@@ -914,9 +922,15 @@ ORIG-HETS are props that will be used to construct heteronyms."
                                         (gethash "han")
                                         (gethash "main")
                                         d:process-title))
-                                 (and (equal dict "stti-taigi")
+                                 (and (member dict '("stti-taigi"
+                                                     "stti-hakka"))
+                                      ;; These are primarily for mapping
+                                      ;; Mandarin words into Taigi or Hakka and
+                                      ;; not the other way around (for instance,
+                                      ;; try searching "面殼" on upstream), and
+                                      ;; so this is the better main title...
                                       (-some->> entry
-                                        (gethash "han")
+                                        (gethash "zh")
                                         d:process-title))
                                  ;; 臺日大辭典 and 臺灣白話基礎語句
                                  (gethash "kip" orig-het)
