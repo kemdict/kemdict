@@ -807,9 +807,18 @@ ORIG-HETS are props that will be used to construct heteronyms."
 
 (defun d::split-titles (titles)
   "Split TITLES, a string, into a list containing titles."
-  ;; Lots of special cases. But there's only 45 entries that this does anything
-  ;; with, so special casing is fine.
+  ;; Lots of special cases. But this is fine because the number is low; and
+  ;; because it's impossible to automate this reliably, they are too free-form.
   (pcase titles
+    ;; maryknoll
+    ;; actually for maryknoll this is kind of impossible. There are 5000+ entries
+    ;; there with a paren in it, most (but not all) of which should be split...
+    ("bô-hông, bû-hông" '("bô-hông" "bû-hông"))
+    ("a-bó (a-bú)" '("a-bó" "a-bú"))
+    ("a-iân-suànn (iân-suànn, thih-suànn)" '("a-iân-suànn" "iân-suànn" "thih-suànn"))
+    ("an-hioh-ji̍t (an-sik-ji̍t)" '("an-hioh-ji̍t" "an-sik-ji̍t"))
+    ("a-iân-phiánn (iân-phiánn)" '("a-iân-phiánn" "iân-phiánn"))
+    ;; the rest are from taijit
     ("cheh/choeh仔" '("cheh仔" "choeh仔"))
     ("kiàu-kiàu/kiauh-kiauh叫" '("kiàu-kiàu叫" "kiauh-kiauh叫"))
     ("sir/su-lài-tah" '("sir-lài-tah" "su-lài-tah"))
