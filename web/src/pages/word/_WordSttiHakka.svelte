@@ -25,7 +25,22 @@
       }>
     >;
   } = $props();
-  import Pronunciation from "$src/components/Pronunciation.svelte";
+  const keys = [
+    "四縣詞彙",
+    "四縣音讀",
+    "南四縣詞彙",
+    "南四縣音讀",
+    "海陸詞彙",
+    "海陸音讀",
+    "大埔詞彙",
+    "大埔音讀",
+    "饒平詞彙",
+    "饒平音讀",
+    "饒平腔備註詞彙_卓蘭",
+    "饒平腔備註音讀_卓蘭",
+    "詔安詞彙",
+    "詔安音讀",
+  ] as const;
   import Property from "$src/components/Property.svelte";
 </script>
 
@@ -36,5 +51,8 @@
   <p class="def">
     {het.props.def}
   </p>
-  {JSON.stringify(het.props)}
+  {#each keys as key}
+    <Property {key} value={het.props[key]?.trim().split("\n").join("、")}
+    ></Property>
+  {/each}
 {/each}

@@ -12,7 +12,6 @@
       }>
     >;
   } = $props();
-  import Pronunciation from "$src/components/Pronunciation.svelte";
   import Property from "$src/components/Property.svelte";
 </script>
 
@@ -23,5 +22,13 @@
   <p class="def">
     {het.props.def}
   </p>
-  {JSON.stringify(het.props)}
+  {#if het.props.words}
+    <Property key="台語">
+      <ul class="not-prose">
+        {#each het.props.words as { han, tl }}
+          <li>{han} {tl}</li>
+        {/each}
+      </ul>
+    </Property>
+  {/if}
 {/each}
