@@ -622,7 +622,7 @@ This is a separate step from shaping."
                     ;; unmodified
                     han)))))
          (dolist (key '("wwSynonyms" "wwAntonyms"))
-           (ht-update-with! het key
+           (ht-update-with! props key
              synonym-antonym-link-register))
          (ht-update-with! props "heteronyms"
            (lambda (het)
