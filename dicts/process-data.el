@@ -615,10 +615,24 @@ This is a separate step from shaping."
     (ht-remove! props "length")
     (pcase dict
       ("stti-taigi"
-       ;; stti-taigi
+       ;; stti-taigi's han and tl are newline-delimited lists that together
+       ;; encode a mapping.
+       ;;
+       ;; Rewrite it so that it's { words: [{ han, tl }, { han, tl }] } instead
        (let ((han (s-split "\n" (ht-get props "han")))
              (tl (s-split "\n" (ht-get props "tl"))))
-         (ht-update-with! props "han")))
+         ;; han is ("面具" "" "小鬼仔殼")
+         ;; tl is ("bīn-kū" "bin-khū" "siáu-kuí-á-khak")
+         (unless (equal (length han) (length tl))
+           (error "stti-taigi entry %S has unexpected han/tl setup" props))
+         (let ((words nil))
+           (while (and han tl)
+             (let ((this-han (pop han))
+                   (this-tl (pop tl)))
+               (push (ht ("han" this-han) ("tl" this-tl)) words)))
+           (ht-remove! props "han")
+           (ht-remove! props "tl")
+           (ht-set! props "words" words))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
