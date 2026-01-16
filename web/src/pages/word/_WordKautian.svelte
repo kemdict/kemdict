@@ -4,7 +4,6 @@
   let { heteronyms }: { heteronyms: Array<Heteronym<OutputWord>> } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import Property from "$src/components/Property.svelte";
-  import { groupByProp } from "common";
 
   let prev單字不成詞 = $state(false);
 </script>
@@ -34,27 +33,24 @@
     {/if}
     {#if (prev單字不成詞 = this單字不成詞)}{/if}
 
-    {#each groupByProp(kautianWord.props.heteronyms || [], "pos", "none") as [pos, hets]}
-      {#if pos !== "none"}
-        <p class="pos">{pos}</p>
-      {/if}
-      <ol>
-        {#each hets as kautianHet}
-          <li id="kautian-het-{kautianHet.id}">
-            <p class="def">
-              {kautianHet.def}
-            </p>
-            {#each kautianHet.examples as example}
-              <blockquote>
-                <p>{example.han}</p>
-                <p>{example.tl}</p>
-                <p class="pt-1 opacity-80">({example.zh})</p>
-              </blockquote>
-            {/each}
-          </li>
-        {/each}
-      </ol>
-    {/each}
+    <ol>
+      {#each kautianWord.props.heteronyms as kautianHet}
+        <li id="kautian-het-{kautianHet.id}">
+          <p class="def">
+            {#if kautianHet.pos}<span class="font-bold">{kautianHet.pos}</span>
+            {/if}
+            {kautianHet.def}
+          </p>
+          {#each kautianHet.examples as example}
+            <blockquote>
+              <p>{example.han}</p>
+              <p>{example.tl}</p>
+              <p class="pt-1 opacity-80">({example.zh})</p>
+            </blockquote>
+          {/each}
+        </li>
+      {/each}
+    </ol>
 
     {#if kautianWord.props.tl.dialects}
       {@const dialects = kautianWord.props.tl.dialects}
