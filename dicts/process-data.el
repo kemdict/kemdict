@@ -49,9 +49,9 @@ by default."
   (cond
    ;; (t
    ;;  '(("kautian" "nan_TW" "ministry-of-education/kautian.json")))
-   (t
-    '(("stti-taigi" "zh_TW" "ministry-of-education/stti-taigi.json")
-      ("stti-hakka" "zh_TW" "ministry-of-education/stti-hakka.json")))
+   ;; (t
+   ;;  '(("stti-taigi" "zh_TW" "ministry-of-education/stti-taigi.json")
+   ;;    ("stti-hakka" "zh_TW" "ministry-of-education/stti-hakka.json")))
    (t
     ;; The order here defines the order they will appear in the word
     ;; pages.
