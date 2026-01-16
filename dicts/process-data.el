@@ -1155,7 +1155,7 @@ WHERE \"from\" LIKE 'kisaragi%'
   AND json_tree.key = 'added'
 ")))
     (dolist (f (directory-files
-                "./ministry-of-education/diff/" t "added\\.json$"))
+                "./ministry-of-education/diff/" t "added\\.json\\'"))
       (catch 'continue
         (let* ((parts (s-split " - "
                                (file-name-nondirectory
