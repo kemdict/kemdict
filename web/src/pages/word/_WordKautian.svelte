@@ -33,13 +33,14 @@
     {/if}
     {#if (prev單字不成詞 = this單字不成詞)}{/if}
 
-    <ol>
+    <ol class="space-y-4">
       {#each kautianWord.props.heteronyms as kautianHet}
         <li id="kautian-het-{kautianHet.id}">
           <p class="def">
-            {#if kautianHet.pos}<span class="font-bold">{kautianHet.pos}</span>
-            {/if}
-            {kautianHet.def}
+            {#if kautianHet.pos}<span class="font-bold"
+                >［{kautianHet.pos}］</span
+              >
+            {/if}{kautianHet.def}
           </p>
           {#each kautianHet.examples as example}
             <blockquote>
@@ -48,6 +49,26 @@
               <p class="pt-1 opacity-80">({example.zh})</p>
             </blockquote>
           {/each}
+          <Property key="近義義項" if={kautianHet.hhSynonyms}>
+            {#each kautianHet.hhSynonyms as it}
+              <a href="/word/{it.han}#kautian-het-{it.id}">{it.han}</a>
+            {/each}
+          </Property>
+          <Property key="近義詞目" if={kautianHet.hwSynonyms}>
+            {#each kautianHet.hwSynonyms as it}
+              <a href="/word/{it.han}#kautian-word-{it.id}">{it.han}</a>
+            {/each}
+          </Property>
+          <Property key="反義義項" if={kautianHet.hhAntonyms}>
+            {#each kautianHet.hhAntonyms as it}
+              <a href="/word/{it.han}#kautian-het-{it.id}">{it.han}</a>
+            {/each}
+          </Property>
+          <Property key="反義詞目" if={kautianHet.hwAntonyms}>
+            {#each kautianHet.hwAntonyms as it}
+              <a href="/word/{it.han}#kautian-word-{it.id}">{it.han}</a>
+            {/each}
+          </Property>
         </li>
       {/each}
     </ol>
