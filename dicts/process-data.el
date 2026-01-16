@@ -1020,7 +1020,7 @@ VALUES
                              (gethash "han")
                              (gethash "alt")))
              (sqlite-execute d:db alias-stmt (list het-id alt 1)))
-           (dolist (pn (map-values (d:pn-collect het)))
+           (dolist (pn (d:pn-collect het))
              (sqlite-execute d:db alias-stmt (list het-id pn 1))
              ;; Input versions.
              ;; - don't duplicate if equal to original
@@ -1278,7 +1278,8 @@ pronunciation strings include multiple pronunciations."
          (--remove (equal it "")))))
 
 (defun d:pn-collect (het)
-  "Collect pronunciations from HET."
+  "Collect pronunciations from HET.
+Return a list of pronunciations."
   (let ((props (gethash "props" het))
         (keys '(;; kemdict-data-ministry-of-education
                 "bopomofo"
@@ -1300,18 +1301,46 @@ pronunciation strings include multiple pronunciations."
                 "pojInputOthers" "kipInputOthers"
 
                 "kMandarin"))
-        (ret (make-hash-table :test #'equal)))
+        ;; We use the values as keys to deduplicate as we go.
+        (tbl (make-hash-table :test #'equal)))
     (dolist (key keys)
       (when-let (value (gethash key props))
         (dolist (p (d:pn-normalize value))
-          (puthash key p ret))))
+          (puthash p t tbl))))
     ;; What I chose for kautian
     (when-let (tl (gethash "tl" props))
       (dolist (key '("main" "colloquial" "alt" "otherMerged"))
         (when-let (value (gethash key tl))
           (dolist (p (d:pn-normalize value))
-            (puthash key p ret)))))
-    ret))
+            (puthash p t tbl))))
+      (when-let ((dialects (gethash "dialects" tl)))
+        (dolist (p (->> (map-values dialects)
+                        (-flatten-n 1)
+                        -uniq
+                        d:pn-normalize))
+          (puthash p t tbl))))
+    (map-keys tbl)))
+(ert-deftest d:pn-collect ()
+  (should (equal
+           (d:pn-collect
+            (ht ("props" (ht ("poj" "ji̍t") ("pojInput" "jit8")))))
+           '("ji̍t" "jit8")))
+  (should (equal
+           (d:pn-collect
+            (ht ("props"
+                 (ht ("tl"
+                      (ht ("main̍" "")
+                          ("alt" ["abc" "def"])))))))
+           '("abc" "def")))
+  (should (equal
+           (d:pn-collect
+            (ht ("props"
+                 (ht ("tl"
+                      (ht ("main" "abc")
+                          ("dialects"
+                           (ht ("foo" "1")
+                               ("bar" "2")))))))))
+           '("abc" "1" "2"))))
 
 (defun d:pn-to-input-form (pn)
   "Normalize PN such that it is searchable with an ASCII keyboard."
