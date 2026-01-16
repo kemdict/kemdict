@@ -37,12 +37,16 @@ DICT_TARGETS += unihan.json caris-events--invade.json
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
 
+# * entries.db
+
 entries.db: $(DICT_TARGETS) process-data.el .eask
 	npx eask eval "(load \"process-data\")"
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
 	touch entries.db.gz
+
+# * Processing
 
 # Generate a Taiwanese names index from our digitization result of
 # List of Plants of Formosa.
@@ -101,6 +105,8 @@ chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json: ChhoeTaigiDatabase/README.md
 chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
 	bun x csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojInput","kip","kipInput","zh","en","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_MaryknollTaiengSutian.csv > "$@"
+
+# * Submodules
 
 # Automatic submodule fetching. The specified file is just used to
 # mark whether the submodule has been populated or not.
