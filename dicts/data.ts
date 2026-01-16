@@ -81,6 +81,42 @@ export const dicts = [
       original: "https://unicode.org/charts/unihan.html",
     },
   },
+  {
+    id: "stti-hakka",
+    name: "學科術語對譯查詢（客語）",
+    url: "https://stti.moe.edu.tw/search/?lang=sutgi&searchText=$1",
+    // This is because their entries map one zh_TW to many nan_TW words... I guess?
+    lang: "zh_TW",
+    meta: {
+      author: "教育部",
+      desc: `教育部為營造校園母語學習環境所進行的國中小學科術語對譯工作。`,
+      license: {
+        name: "網站資料開放宣告",
+        url: "https://stti.moe.edu.tw/website-information-opening-announcement/?lang=sudngi",
+      },
+      source: "https://stti.moe.edu.tw/sudngi/file-download/societyData/?lang=sudngi",
+      original: "https://stti.moe.edu.tw/?lang=sudngi",
+    },
+    }
+  },
+  {
+    id: "stti-taigi",
+    name: "學科術語對譯查詢（台語）",
+    url: "https://stti.moe.edu.tw/search/?lang=sutgi&searchText=$1",
+    // This is because their entries map one zh_TW to many nan_TW words... I guess?
+    lang: "zh_TW",
+    meta: {
+      author: "教育部",
+      desc: `教育部為營造校園母語學習環境所進行的國中小學科術語對譯工作。`,
+      license: {
+        name: "網站資料開放宣告",
+        url: "https://stti.moe.edu.tw/website-information-opening-announcement/?lang=sutgi",
+      },
+      source: "https://stti.moe.edu.tw/file-download/newsData/?lang=sutgi",
+      original: "https://stti.moe.edu.tw/?lang=sutgi",
+    },
+    }
+  },
   // ...ilrdf_codes.map((code) => ({
   //   id: `ilrdf_${code}`,
   //   name: `原住民族語言線上辭典（${langs[code]}）`,
