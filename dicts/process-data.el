@@ -908,11 +908,16 @@ ORIG-HETS are props that will be used to construct heteronyms."
                ;; Get the main title from original heteronyms
                (let ((titles (or (-some-> (gethash "title" entry)
                                    d:process-title)
-                                 ;; What I defined kautian to be
-                                 (-some->> entry
-                                   (gethash "han")
-                                   (gethash "main")
-                                   d:process-title)
+                                 (and (equal dict "kautian")
+                                      ;; What I defined kautian to be
+                                      (-some->> entry
+                                        (gethash "han")
+                                        (gethash "main")
+                                        d:process-title))
+                                 (and (equal dict "stti-taigi")
+                                      (-some->> entry
+                                        (gethash "han")
+                                        d:process-title))
                                  ;; 臺日大辭典 and 臺灣白話基礎語句
                                  (gethash "kip" orig-het)
                                  ;; unihan
