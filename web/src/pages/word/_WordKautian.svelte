@@ -4,6 +4,7 @@
   let { heteronyms }: { heteronyms: Array<Heteronym<OutputWord>> } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import Property from "$src/components/Property.svelte";
+  import { uniqBy } from "lodash-es";
 
   let prev單字不成詞 = $state(false);
 
@@ -17,7 +18,9 @@
   ): (T | U)[] | undefined {
     if (a === undefined) return b;
     if (b === undefined) return a;
-    return [...a, ...b].sort((a, b) => (a.han < b.han ? -1 : 1));
+    return uniqBy([...a, ...b], (elem) => elem.han).sort((a, b) =>
+      a.han < b.han ? -1 : 1,
+    );
   }
 </script>
 
