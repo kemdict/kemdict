@@ -50,6 +50,8 @@ An ID of nil means the entries are included but will not be shown
 by default."
   (cond
    ;; (t
+   ;;  '(("kautian" "nan_TW" "ministry-of-education/kautian.json")))
+   ;; (t
    ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
    (t
     ;; The order here defines the order they will appear in the word
@@ -64,7 +66,6 @@ by default."
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
-       ;; FIXME 同義詞 etc. aren't included yet
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
@@ -1256,6 +1257,12 @@ pronunciation strings include multiple pronunciations."
                (cl-coerce pn 'list))
               ((listp pn)
                pn))))
+    (cl-assert
+     (and (listp pns)
+          (-all? #'stringp pns))
+     nil
+     "pn-normalize: pns should end up as a list of strings, instead it was %S"
+     pns)
     (->> pns
          (--map
           (->> it
@@ -1313,12 +1320,13 @@ Return a list of pronunciations."
         (when-let (value (gethash key tl))
           (dolist (p (d:pn-normalize value))
             (puthash p t tbl))))
+      ;; This is an object from the dialect name to an array of strings; the
+      ;; arrays are parsed into vectors in Elisp.
       (when-let ((dialects (gethash "dialects" tl)))
-        (dolist (p (->> (map-values dialects)
-                        (-flatten-n 1)
-                        -uniq
-                        d:pn-normalize))
-          (puthash p t tbl))))
+        ;; We have a list of vectors here.
+        (dolist (vec (map-values dialects))
+          (dolist (p (d:pn-normalize vec))
+            (puthash p t tbl)))))
     (map-keys tbl)))
 (ert-deftest d:pn-collect ()
   (should (equal
