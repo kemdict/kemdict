@@ -618,10 +618,28 @@ This is a separate step from shaping."
     (ht-remove! props "length")
     (pcase dict
       ("kautian"
-       (ht-update-with! props "heteronyms"
-         (lambda (het)
-           (ht-update-with! het "def"
-             #'d:links:linkify-keywords))))
+       (let ((synonym-antonym-link-register
+              (lambda (ref)
+                (ht-update-with! ref "han"
+                  (lambda (han)
+                    ;; Because the link is somewhat complex (depends on if it's
+                    ;; a reference to a Kautian word or Kautian het), it's
+                    ;; better to do it at runtime.
+                    ;; So we call this function for its side effect to register
+                    ;; a link, but don't actually replace it in the value.
+                    (d:links:link-to-word han)
+                    ;; unmodified
+                    han)))))
+         (dolist (key '("wwSynonyms" "wwAntonyms"))
+           (ht-update-with! het key
+             synonym-antonym-link-register))
+         (ht-update-with! props "heteronyms"
+           (lambda (het)
+             (ht-update-with! het "def"
+               #'d:links:linkify-keywords)
+             (dolist (key '("hwSynonyms" "hwAntonyms" "hhSynonyms" "hhAntonyms"))
+               (ht-update-with! het key
+                 synonym-antonym-link-register))))))
       ("unihan"
        (ht-set! props "pinyin"
                 (-some-> props
