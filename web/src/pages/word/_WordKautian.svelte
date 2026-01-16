@@ -7,14 +7,17 @@
 
   let prev單字不成詞 = $state(false);
 
-  /** Join two arrays together and DWIM if any of them is undefined. */
-  function safeAppend<T, U>(
+  /**
+   * Join two arrays together then sort them by the `.han` key.
+   * DWIM if any of them is undefined.
+   */
+  function appendAndSort<T extends { han: string }, U extends { han: string }>(
     a: T[] | undefined,
     b: U[] | undefined,
   ): (T | U)[] | undefined {
     if (a === undefined) return b;
     if (b === undefined) return a;
-    return [...a, ...b];
+    return [...a, ...b].sort((a, b) => (a.han < b.han ? -1 : 1));
   }
 </script>
 
@@ -63,7 +66,7 @@
           {/each}
           {#if kautianHet.hhSynonyms || kautianHet.hwSynonyms}
             <Property key="近義詞">
-              {#each safeAppend(kautianHet.hhSynonyms, kautianHet.hwSynonyms) as it}
+              {#each appendAndSort(kautianHet.hhSynonyms, kautianHet.hwSynonyms) as it}
                 <a
                   class="block"
                   href={"hetId" in it
@@ -75,7 +78,7 @@
           {/if}
           {#if kautianHet.hhAntonyms || kautianHet.hwAntonyms}
             <Property key="反義詞">
-              {#each safeAppend(kautianHet.hhAntonyms, kautianHet.hwAntonyms) as it}
+              {#each appendAndSort(kautianHet.hhAntonyms, kautianHet.hwAntonyms)?.sort( (a, b) => (a.han < b.han ? -1 : 1), ) as it}
                 <a
                   class="block"
                   href={"hetId" in it
