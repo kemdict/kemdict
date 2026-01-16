@@ -88,16 +88,17 @@ export const dicts = [
     // This is because their entries map one zh_TW to many nan_TW words... I guess?
     lang: "zh_TW",
     meta: {
+      version: moeDicts["stti-hakka"].current,
       author: "教育部",
       desc: `教育部為營造校園母語學習環境所進行的國中小學科術語對譯工作。`,
       license: {
         name: "網站資料開放宣告",
         url: "https://stti.moe.edu.tw/website-information-opening-announcement/?lang=sudngi",
       },
-      source: "https://stti.moe.edu.tw/sudngi/file-download/societyData/?lang=sudngi",
+      source:
+        "https://stti.moe.edu.tw/sudngi/file-download/societyData/?lang=sudngi",
       original: "https://stti.moe.edu.tw/?lang=sudngi",
     },
-    }
   },
   {
     id: "stti-taigi",
@@ -106,6 +107,7 @@ export const dicts = [
     // This is because their entries map one zh_TW to many nan_TW words... I guess?
     lang: "zh_TW",
     meta: {
+      version: moeDicts["stti-taigi"].current,
       author: "教育部",
       desc: `教育部為營造校園母語學習環境所進行的國中小學科術語對譯工作。`,
       license: {
@@ -115,7 +117,6 @@ export const dicts = [
       source: "https://stti.moe.edu.tw/file-download/newsData/?lang=sutgi",
       original: "https://stti.moe.edu.tw/?lang=sutgi",
     },
-    }
   },
   // ...ilrdf_codes.map((code) => ({
   //   id: `ilrdf_${code}`,
