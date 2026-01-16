@@ -869,7 +869,8 @@ ORIG-HETS are props that will be used to construct heteronyms."
     ("走sau/sàu" '("走sau" "走sàu"))
     ("跟tuè/tè" '("跟tuè" "跟tè"))
     ("雄/狠鬼鬼" '("雄鬼鬼" "狠鬼鬼"))
-    (_ (split-string titles "/"))))
+    ((pred stringp) (split-string titles "/"))
+    (_ (error "Non-string fed into d::split-titles: %S" titles))))
 
 (defvar d:db nil
   "Holds the DB connection.")
@@ -951,6 +952,9 @@ ORIG-HETS are props that will be used to construct heteronyms."
                                  (gethash "kip" orig-het)
                                  ;; unihan
                                  (gethash "char" orig-het))))
+                 (unless titles
+                   (d::warn "Saw an entry with an empty main title from %s. Skipping" dict)
+                   (throw 'continue nil))
                  ;; Taijit has some titles that should expand into many words
                  (d::for (title (d::split-titles titles))
                    (let ((shaped-het (make-hash-table :test #'equal)))
