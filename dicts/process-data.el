@@ -1122,6 +1122,8 @@ VALUES
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
                              "pts-taigitv"
+                             "stti-taigi"
+                             "stti-hakka"
                              "lopof-taigi"
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
@@ -1141,7 +1143,23 @@ VALUES
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
-               (sqlite-execute d:db alias-stmt (list het-id en nil)))))))
+               (sqlite-execute d:db alias-stmt (list het-id en nil))))
+           ;; For stti-taigi han versions
+           (when (equal het.from "stti-taigi")
+             (when-let (stti-words (-some->> het
+                                     (gethash "props")
+                                     (gethash "words")))
+               (dolist (han (--map (gethash "han" it) stti-words))
+                 (sqlite-execute d:db alias-stmt (list het-id han 1)))))
+           (when (equal het.from "stti-hakka")
+             (let ((props (gethash "props" het)))
+               (dolist (key '("四縣詞彙" "四縣音讀" "南四縣詞彙" "南四縣音讀"
+                              "海陸詞彙" "海陸音讀" "大埔詞彙" "大埔音讀"
+                              "饒平詞彙" "饒平音讀"
+                              "饒平腔備註詞彙_卓蘭" "饒平腔備註音讀_卓蘭"
+                              "詔安詞彙" "詔安音讀"))
+                 (when-let ((value (gethash key props)))
+                   (sqlite-execute d:db alias-stmt (list het-id value 1)))))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success
@@ -1381,22 +1399,15 @@ Return a list of pronunciations."
         (keys '(;; kemdict-data-ministry-of-education
                 "bopomofo"
                 ;; "pinyin"
-
-                ;; kisaragi-dict
-                "pronunciation"
-
+                "pronunciation" ; kisaragi-dict
                 ;; hakkadict
                 "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
-
-                ;; what I chose for the pts-taigitv copy
-                "pn"
-
+                "pn" ; what I chose for the pts-taigitv copy
                 ;; chhoetaigi-itaigi (keys are defined in Makefile
                 ;; in this repository)
                 "poj" "kip"
                 "pojInput" "kipInput"
                 "pojInputOthers" "kipInputOthers"
-
                 "kMandarin"))
         ;; We use the values as keys to deduplicate as we go.
         (tbl (make-hash-table :test #'equal)))
@@ -1404,6 +1415,12 @@ Return a list of pronunciations."
       (when-let (value (gethash key props))
         (dolist (p (d:pn-normalize value))
           (puthash p t tbl))))
+    ;; That's a list of {han: string, tl: string} hash tables
+    (when-let (stti-words (gethash "words" props))
+      (dolist (p (->> stti-words
+                      (--map (gethash "tl" it))
+                      d:pn-normalize))
+        (puthash p t tbl)))
     ;; What I chose for kautian
     (when-let (tl (gethash "tl" props))
       (dolist (key '("main" "colloquial" "alt" "otherMerged"))
