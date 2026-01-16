@@ -33,6 +33,24 @@
     <Pronunciation>{kautianWord.props.tl.main}</Pronunciation>
     <Property key="異用字" value={kautianWord.props.han.alt?.join("、")}
     ></Property>
+    {#if kautianWord.props.wwSynonyms}
+      <Property key="近義詞">
+        {#each kautianWord.props.wwSynonyms as it}
+          <a class="block" href="/word/{it.han}#kautian-word-{it.wordId}"
+            >{it.han}</a
+          >
+        {/each}
+      </Property>
+    {/if}
+    {#if kautianWord.props.wwAntonyms}
+      <Property key="反義詞">
+        {#each kautianWord.props.wwAntonyms as it}
+          <a class="block" href="/word/{it.han}#kautian-word-{it.wordId}"
+            >{it.han}</a
+          >
+        {/each}
+      </Property>
+    {/if}
     <!-- 在有一群單字不成詞之類的詞目時，只在最後一個顯示無義項的說明 -->
     {#if thisType === "單字不成詞者" || thisType === "臺華共同詞" || thisType === "近反義詞不單列詞目者"}
       {@const nextType = heteronyms[i + 1]?.props.type}
