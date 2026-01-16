@@ -652,7 +652,7 @@ This is a separate step from shaping."
                (setq prev-han this-han)))
            (ht-remove! props "han")
            (ht-remove! props "tl")
-           (ht-set! props "words" words))))
+           (ht-set! props "words" (nreverse words)))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
