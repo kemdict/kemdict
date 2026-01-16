@@ -1,8 +1,8 @@
 * Adding a dictionary
-- kemdict-data: add code to download the raw data at build time
-- kemdict-data: update process-data.el to include the new dictionary in the intermediate json file
-- kemdict-data: fill in info in data.ts and maybe README
-- update [[file:./web/src/routes/word/\[word\]/+page.svelte][word page]] to use the right component for the new dictionary
+- dicts: add code to Makefile to download the raw data at build time
+- dicts: update process-data.el to include the new dictionary in the intermediate json file
+- dicts: fill in info in data.ts and maybe README
+- update [[file:./web/src/pages/word/\[title\].astro][word page]] to use the right component for the new dictionary
 - most likely, write a new word component for the new dictionary
 - update copyright information
 
