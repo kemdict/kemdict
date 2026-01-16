@@ -48,7 +48,7 @@
           <a
             class="block"
             href="/word/{it.han}?lang=nan_TW#kautian-word-{it.wordId}"
-            >{it.han}</Property
+            >{it.han}</a
           >
         {/each}
       </Property>
