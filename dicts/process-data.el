@@ -13,8 +13,6 @@
 (require 'ucs-normalize)
 (require 'parse-time)
 
-(require 'jieba)
-
 (defun d::warn (fmt &rest args)
   "Emit warning with FMT and ARGS in a consistent style.
 FMT and ARGS are passed to `message'."
@@ -118,13 +116,6 @@ by default."
            ("xnb" . "卡那卡那富語")
            ("xsy" . "賽夏語"))
          (--filter (member (car it) available-codes)))))
-
-(defconst d:debug? nil)
-
-(defmacro d::debug (fmt &rest args)
-  "Pass FMT and ARGS to `message' if `d:debug?' is non-nil."
-  (when d:debug?
-    `(message ,fmt ,@args)))
 
 (defconst d:abc-han-ht
   (ht (?a "日") (?b "月") (?c "金") (?d "木") (?e "水") (?f "火")
@@ -896,7 +887,6 @@ ORIG-HETS are props that will be used to construct heteronyms."
                    (and (not (equal dict "kautian"))
                         (gethash "heteronyms" entry))
                    (vector entry))))
-             (d::debug "%s - applying het_sort" dict)
              (when (> (length orig-hets) 1)
                (setq orig-hets (d:sort-orig-hets orig-hets)))
              (d::for (orig-het orig-hets)
@@ -1381,6 +1371,7 @@ Return a list of pronunciations."
        (apply #'string)))
 
 (when noninteractive
+  (require 'jieba)
   (jieba-reset 'big)
   (jieba-add-word "物件" "n")
   (--each '(d:titles:to-look-up-table
