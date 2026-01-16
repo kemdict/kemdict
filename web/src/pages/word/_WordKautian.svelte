@@ -120,12 +120,19 @@
 
     {#if kautianWord.props.categories}
       <Property key="分類">
-        {#each kautianWord.props.categories as { id, title }}
-          <Out
-            after={false}
-            class="mr-1"
-            href="https://sutian.moe.edu.tw/und-hani/hunlui/{id}/">{title}</Out
-          >
+        {#each kautianWord.props.categories as { id, title, huliok }}
+          {#if id}
+            <Out
+              after={false}
+              class="mr-1"
+              href={huliok
+                ? `https://sutian.moe.edu.tw/und-hani/hunlui/${id}/`
+                : `https://sutian.moe.edu.tw/und-hani/huliok/${id}/`}
+              >{title}</Out
+            >
+          {:else}
+            <span class="mr-1">{title}</span>
+          {/if}
         {/each}
       </Property>
     {/if}
