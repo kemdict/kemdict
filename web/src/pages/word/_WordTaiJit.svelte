@@ -31,13 +31,15 @@
   {#if het.props.def}
     <p class="my-2">{@html process_def(het.props.def)}</p>
     {#if het.props.example}
-      <blockquote>
-        <ul class="list-disc pl-2">
-          {#each splitExample(het.props.example) as ex}
-            <li>{ex}</li>
-          {/each}
-        </ul>
-      </blockquote>
+      <div class="prose">
+        <blockquote class="prose">
+          <ul class="pl-2">
+            {#each splitExample(het.props.example) as ex}
+              <li>{ex}</li>
+            {/each}
+          </ul>
+        </blockquote>
+      </div>
     {/if}
   {:else}
     <p class="my-2">{@html process_def(het.props.example)}</p>

@@ -199,9 +199,6 @@
         @apply mt-2;
       }
     }
-    li:first-child {
-      @apply mt-0;
-    }
     /* m for Mark. The "例" "英" "反" sort of marker */
     m {
       @apply inline-block pl-1 font-bold;
