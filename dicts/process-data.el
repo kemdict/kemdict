@@ -619,17 +619,37 @@ This is a separate step from shaping."
        ;; encode a mapping.
        ;;
        ;; Rewrite it so that it's { words: [{ han, tl }, { han, tl }] } instead
-       (let ((han (s-split "\n" (ht-get props "han")))
-             (tl (s-split "\n" (ht-get props "tl"))))
+       (let* ((han (s-split "\n" (ht-get props "han")))
+              (tl (s-split "\n" (ht-get props "tl")))
+              (han-length (length han))
+              (tl-length (length tl)))
          ;; han is ("面具" "" "小鬼仔殼")
          ;; tl is ("bīn-kū" "bin-khū" "siáu-kuí-á-khak")
-         (unless (equal (length han) (length tl))
-           (error "stti-taigi entry %S has unexpected han/tl setup" props))
-         (let ((words nil))
-           (while (and han tl)
-             (let ((this-han (pop han))
-                   (this-tl (pop tl)))
-               (push (ht ("han" this-han) ("tl" this-tl)) words)))
+         (let ((words nil)
+               (prev-han nil))
+           (dotimes (i (max han-length tl-length))
+             ;; han is empty -> use previous han
+             ;; han is one too small (han is nil) ->
+             ;;   if the tl is empty, just skip
+             ;;   otherwise add one entry using the previous han
+             ;; han is one too big (tl is nil) -> ignore it
+             (let ((this-han (elt han i))
+                   (this-tl (elt tl i)))
+               (cond ((s-blank? this-han)
+                      (unless (s-blank? this-tl)
+                        (unless prev-han
+                          (d::warn "stti-taigi entry appears to start with newline. han: %S, tl: %S"
+                                   han tl))
+                        (push (ht ("han" prev-han)
+                                  ("tl" this-tl))
+                              words)))
+                     ((s-blank? this-tl)
+                      nil)
+                     (t
+                      (push (ht ("han" this-han)
+                                ("tl" this-tl))
+                            words)))
+               (setq prev-han this-han)))
            (ht-remove! props "han")
            (ht-remove! props "tl")
            (ht-set! props "words" words))))
