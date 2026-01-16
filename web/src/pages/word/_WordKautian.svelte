@@ -45,8 +45,10 @@
     {#if kautianWord.props.wwAntonyms}
       <Property key="反義詞">
         {#each kautianWord.props.wwAntonyms as it}
-          <a class="block" href="/word/{it.han}#kautian-word-{it.wordId}"
-            >{it.han}</a
+          <a
+            class="block"
+            href="/word/{it.han}?lang=nan_TW#kautian-word-{it.wordId}"
+            >{it.han}</Property
           >
         {/each}
       </Property>
@@ -88,8 +90,9 @@
                 <a
                   class="block"
                   href={"hetId" in it
-                    ? `/word/${it.han}#kautian-het-${it.hetId}`
-                    : `/word/${it.han}#kautian-word-${it.wordId}`}>{it.han}</a
+                    ? `/word/${it.han}?lang=nan_TW#kautian-het-${it.hetId}`
+                    : `/word/${it.han}?lang=nan_TW#kautian-word-${it.wordId}`}
+                  >{it.han}</a
                 >
               {/each}
             </Property>
@@ -100,8 +103,9 @@
                 <a
                   class="block"
                   href={"hetId" in it
-                    ? `/word/${it.han}#kautian-het-${it.hetId}`
-                    : `/word/${it.han}#kautian-word-${it.wordId}`}>{it.han}</a
+                    ? `/word/${it.han}?lang=nan_TW#kautian-het-${it.hetId}`
+                    : `/word/${it.han}?lang=nan_TW#kautian-word-${it.wordId}`}
+                  >{it.han}</a
                 >
               {/each}
             </Property>
