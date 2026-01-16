@@ -6,11 +6,21 @@
   import Property from "$src/components/Property.svelte";
 
   let prev單字不成詞 = $state(false);
+
+  /** Join two arrays together and DWIM if any of them is undefined. */
+  function safeAppend<T, U>(
+    a: T[] | undefined,
+    b: U[] | undefined,
+  ): (T | U)[] | undefined {
+    if (a === undefined) return b;
+    if (b === undefined) return a;
+    return [...a, ...b];
+  }
 </script>
 
 {#each heteronyms as kautianWord, i}
+  {@const thisType = kautianWord.props.type}
   {@const this單字不成詞 = kautianWord.props.type === "單字不成詞者"}
-  {@const this臺華共同詞 = kautianWord.props.type === "臺華共同詞"}
 
   <div id="kautian-word-{kautianWord.props.id}">
     <!-- 這個是單字不成詞者的話，如果前一個也是那就不要再顯示一次標題 -->
@@ -20,15 +30,17 @@
     <Pronunciation>{kautianWord.props.tl.main}</Pronunciation>
     <Property key="異用字" value={kautianWord.props.han.alt?.join("、")}
     ></Property>
-    <!-- 在有一群單字不成詞的詞目時，只在最後一個顯示無義項的說明 -->
-    {#if this單字不成詞 || this臺華共同詞}
+    <!-- 在有一群單字不成詞之類的詞目時，只在最後一個顯示無義項的說明 -->
+    {#if thisType === "單字不成詞者" || thisType === "臺華共同詞" || thisType === "近反義詞不單列詞目者"}
       {@const nextType = heteronyms[i + 1]?.props.type}
-      {@const next單字不成詞 = nextType === "單字不成詞者"}
-      {@const next臺華共同詞 = nextType === "臺華共同詞"}
-      {#if !next單字不成詞}
-        <p class="def">（單字不成詞者 ，無義項）</p>
-      {:else if !next臺華共同詞}
-        <p class="def">（臺華共同詞，無義項）</p>
+      {#if thisType !== nextType}
+        {#if thisType === "單字不成詞者"}
+          <p class="def">（單字不成詞者 ，無義項）</p>
+        {:else if thisType === "臺華共同詞"}
+          <p class="def">（臺華共同詞，無義項）</p>
+        {:else if thisType === "近反義詞不單列詞目者"}
+          <p class="def">（近反義詞不單列詞目）</p>
+        {/if}
       {/if}
     {/if}
     {#if (prev單字不成詞 = this單字不成詞)}{/if}
@@ -49,26 +61,30 @@
               <p class="pt-1 opacity-80">({example.zh})</p>
             </blockquote>
           {/each}
-          <Property key="近義義項" if={kautianHet.hhSynonyms}>
-            {#each kautianHet.hhSynonyms as it}
-              <a href="/word/{it.han}#kautian-het-{it.id}">{it.han}</a>
-            {/each}
-          </Property>
-          <Property key="近義詞目" if={kautianHet.hwSynonyms}>
-            {#each kautianHet.hwSynonyms as it}
-              <a href="/word/{it.han}#kautian-word-{it.id}">{it.han}</a>
-            {/each}
-          </Property>
-          <Property key="反義義項" if={kautianHet.hhAntonyms}>
-            {#each kautianHet.hhAntonyms as it}
-              <a href="/word/{it.han}#kautian-het-{it.id}">{it.han}</a>
-            {/each}
-          </Property>
-          <Property key="反義詞目" if={kautianHet.hwAntonyms}>
-            {#each kautianHet.hwAntonyms as it}
-              <a href="/word/{it.han}#kautian-word-{it.id}">{it.han}</a>
-            {/each}
-          </Property>
+          {#if kautianHet.hhSynonyms || kautianHet.hwSynonyms}
+            <Property key="近義詞">
+              {#each safeAppend(kautianHet.hhSynonyms, kautianHet.hwSynonyms) as it}
+                <a
+                  class="block"
+                  href={"hetId" in it
+                    ? `/word/${it.han}#kautian-het-${it.hetId}`
+                    : `/word/${it.han}#kautian-word-${it.wordId}`}>{it.han}</a
+                >
+              {/each}
+            </Property>
+          {/if}
+          {#if kautianHet.hhAntonyms || kautianHet.hwAntonyms}
+            <Property key="反義詞">
+              {#each safeAppend(kautianHet.hhAntonyms, kautianHet.hwAntonyms) as it}
+                <a
+                  class="block"
+                  href={"hetId" in it
+                    ? `/word/${it.han}#kautian-het-${it.hetId}`
+                    : `/word/${it.han}#kautian-word-${it.wordId}`}>{it.han}</a
+                >
+              {/each}
+            </Property>
+          {/if}
         </li>
       {/each}
     </ol>
