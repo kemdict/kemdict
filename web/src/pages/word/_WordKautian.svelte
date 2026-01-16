@@ -73,7 +73,7 @@
             {#if kautianHet.pos}<span class="font-bold"
                 >［{kautianHet.pos}］</span
               >
-            {/if}{kautianHet.def}
+            {/if}{@html kautianHet.def}
           </p>
           {#each kautianHet.examples as example}
             <blockquote>
