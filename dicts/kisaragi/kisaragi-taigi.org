@@ -3,6 +3,12 @@
 我記錄台語有在使用但沒被收錄的詞的地方。
 
 * Words
+** 轉型正義
+:PROPERTIES:
+:added:    2026-01-21T23:27:58+0900
+:END:
+*** tsuán-hîng tsìng-gī
+**** 名|轉型正義。社會對於過去所發生的大規模人權侵害進行的彌補過程。譯自英語transitional justice。
 ** 逃過死劫
 :PROPERTIES:
 :added:    2025-05-31T10:11:50+0900
