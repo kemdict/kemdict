@@ -13,6 +13,15 @@ const moedict = Object.entries({
   兩岸詞典: `https://moedict.tw/~${term}`,
 });
 
+const chhoetaigi = Object.entries({
+  "ChhoeTaigi（台語白話字）": `https://chhoe.taigi.info/s?s=kt&f=e&lmjf=pu&lmj=${term}`
+  "ChhoeTaigi（台語教部羅）": `https://chhoe.taigi.info/s?s=kt&f=e&lmjf=ku&lmj=${term}`
+  "ChhoeTaigi（台語漢羅）": `https://chhoe.taigi.info/s?s=kt&f=e&hj=${term}`
+  "ChhoeTaigi（對應華語）": `https://chhoe.taigi.info/s?s=kt&f=e&tb=${term}`
+  "ChhoeTaigi（對應日語）": `https://chhoe.taigi.info/s?s=kt&f=e&jb=${term}`
+  "ChhoeTaigi（對應英語）": `https://chhoe.taigi.info/s?s=kt&f=e&eb=${term}`
+})
+
 const wiktionary = Object.entries({
   中文維基詞典: `https://zh.wiktionary.org/w/index.php?search=${term}`,
   英語維基詞典: `https://en.wiktionary.org/w/index.php?search=${term}`,
@@ -41,6 +50,15 @@ const wiktionary = Object.entries({
     <ul class="flex list-none flex-wrap space-x-2">
       {
         wiktionary.map(([label, href]) => (
+          <li>
+            <Out href={href}>{label}</Out>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="flex list-none flex-wrap space-x-2">
+      {
+        chhoetaigi.map(([label, href]) => (
           <li>
             <Out href={href}>{label}</Out>
           </li>
