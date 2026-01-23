@@ -1247,7 +1247,8 @@ CREATE TABLE heteronyms (
 CREATE TABLE aliases (
   \"het_id\" INTEGER REFERENCES heteronyms(\"id\"),
   \"alias\" TEXT NOT NULL,
-  \"exact\" INTEGER
+  \"exact\" INTEGER,
+  PRIMARY KEY (het_id, alias, exact) ON CONFLICT REPLACE
 );")
   (sqlite-execute d:db "
 CREATE TABLE links (
