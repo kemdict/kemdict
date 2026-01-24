@@ -1046,6 +1046,13 @@ VALUES
              (sqlite-execute d:db alias-stmt (list het-id alt 1)))
            (dolist (pn (d:pn-collect het))
              (sqlite-execute d:db alias-stmt (list het-id pn 1))
+             ;; TODO: searching lopof-hakka entries with THRS. Would require
+             ;; adding THRS equivalents as aliases.
+             ;; Add different variants of THRS. These are considered to be exact.
+             (when (equal het.from "hakkadict")
+               (dolist (variant (d:pn-thrs-variants pn))
+                 (unless (equal variant pn)
+                   (sqlite-execute d:db alias-stmt (list het-id variant 1)))))
              ;; Input versions.
              ;; - don't duplicate if equal to original
              ;; - don't bother for some dictionaries)
@@ -1382,6 +1389,27 @@ Return a list of pronunciations."
        string-to-list
        (--filter (< it 128))
        (apply #'string)))
+
+(defun d:pn-thrs-variants (thrs)
+  "Take THRS and return all its possible variants.
+For example, writing ngyun instead of ngiun."
+  ;; 2026-01-24T21:49:03+0900: I want to do this to make it possible to search
+  ;; Hakka as written in 劉丁衡's 客家語文讀本（下冊）, which I'd guess it's
+  ;; using an older version of THRS. I can't support all of them though, it
+  ;; writes 四 (xi or si) as "ci", and if I make "ci" an alias for "xi" it will
+  ;; mess too many things up.
+  (let ((ret (make-hash-table :test #'equal))
+        (replacements
+         ;; replace new system with "old", aliased system
+         ;; "ts" is not in the new system, so c->ts can be added;
+         ;; "c" is, so x->c cannot.
+         '(("ngi" . "ngy")
+           ("c" . "ts"))))
+    (pcase-dolist (`(,from . ,to) replacements)
+      (puthash (s-replace from to thrs) t ret))
+    (hash-table-keys ret)))
+
+(d:pn-thrs-variants "ngiun")
 
 (when noninteractive
   (require 'jieba)
