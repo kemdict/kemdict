@@ -1404,9 +1404,13 @@ For example, writing ngyun instead of ngiun."
          ;; "ts" is not in the new system, so c->ts can be added;
          ;; "c" is, so x->c cannot.
          '(("ngi" . "ngy")
-           ("c" . "ts"))))
+           ("c" . "ts")
+           ;; Some older systems write eg. "yu" instead of "iu", like the
+           ;; 客家語教學手冊(宜蘭縣政府,by 林鳳英) from 2004 (ISBN 9789570172119) that
+           ;; I'm borrowing from a library right now.
+           ("^i" . "y"))))
     (pcase-dolist (`(,from . ,to) replacements)
-      (puthash (s-replace from to thrs) t ret))
+      (puthash (s-replace-regexp from to thrs) t ret))
     (hash-table-keys ret)))
 
 (d:pn-thrs-variants "ngiun")
