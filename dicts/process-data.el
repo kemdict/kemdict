@@ -63,7 +63,7 @@ by default."
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
-       ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20250928T154651Z.json")
+       ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
