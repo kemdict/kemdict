@@ -1,6 +1,12 @@
 * Adding a dictionary
+- Is it from our Ministry of Education? If so you might want to put the processing in dicts/ministry-of-education.
 - dicts: add code to Makefile to download the raw data at build time
 - dicts: update process-data.el to include the new dictionary in the intermediate json file
+  - Put it into d::dictionaries
+  - If there is a =title= prop, then that's the main title.
+    Otherwise, go to Step 1, find the place where we "get the main title from the original heteronyms", and write code to extract the main title.
+  - Check if there's any processing you need to do with its props
+  - Check aliases, is there anything that needs to be done for =pn-collect=?
 - dicts: fill in info in data.ts and maybe README
 - update [[file:./web/src/pages/word/\[title\].astro][word page]] to use the right component for the new dictionary
 - most likely, write a new word component for the new dictionary

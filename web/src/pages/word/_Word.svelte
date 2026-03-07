@@ -14,6 +14,8 @@
   import WordUnihan from "./_WordUnihan.svelte";
   import WordILRDF from "./_WordILRDF.svelte";
   import WordLopof from "./_WordLopof.svelte";
+  import WordSttiTaigi from "./_WordSttiTaigi.svelte";
+  import WordSttiHakka from "./_WordSttiHakka.svelte";
 
   import { format } from "common";
 
@@ -51,6 +53,20 @@
           {dict.name}
           <a href="https://www.unicode.org/license.txt">© Unicode, Inc.</a>
         </p>
+      </div>
+    {:else if dict.id.startsWith("stti-")}
+      <!-- Split them here so the types in there are easier to deal with -->
+      {#if dict.id === "stti-taigi"}
+        <WordSttiTaigi heteronyms={hets} />
+      {:else}
+        <WordSttiHakka heteronyms={hets} />
+      {/if}
+      <div class="copyright">
+        <p>
+          《<a href={dict.meta.original}>學科術語對譯查詢</a>》資料版本：{dict
+            .meta.version}
+        </p>
+        <p>© 中華民國教育部 (Ministry of Education, R.O.C.)</p>
       </div>
     {:else if dict.id === "kisaragi_dict" || dict.id === "kisaragi_taigi"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
