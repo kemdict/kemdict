@@ -278,6 +278,20 @@ Hub / USB Hub
 ***** 動|號召支持者舉辦遊行，為候選人營造聲勢、凝聚支持度。
 ***** 名|前項遊行本身。如：「這個候選人選舉期間共辦了十場造勢。」
 ** etc.
+*** 超市
+:PROPERTIES:
+:added:    2026-03-07T12:06:14+0900
+:END:
+# why on earth is this word not included in MOE dictionaries
+# who on earth uses 超級市場 in writing or speech
+**** ㄔㄠ ㄐㄧˊ ㄕˋ ㄔㄤˇ
+***** 名|[[超級市場]]。
+*** 亞超
+:PROPERTIES:
+:added:    2026-03-07T12:01:43+0900
+:END:
+**** ㄧㄚˇ ㄔㄠ
+***** 名|亞洲超市。在歐洲、澳洲、美洲等地以亞洲（實際上多為東亞、東南亞）商品為主題的超市。
 *** 按鍵發話
 :PROPERTIES:
 :added:    2026-01-15T01:27:20+0900
