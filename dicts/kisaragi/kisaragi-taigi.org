@@ -3,6 +3,14 @@
 我記錄台語有在使用但沒被收錄的詞的地方。
 
 * Words
+** 移除
+:PROPERTIES:
+:added:    2026-03-30T20:03:05+0900
+:END:
+*** î-tû
+**** 動|將設備從暫時安裝的位置撤除。如：「移除起落架」
+https://taigitube.com/search?query=%E7%A7%BB%E9%99%A4&v=mYZ5vu46PpE&t=0
+**** 動|[[刪除?lang=zh_TW][刪除]]。
 ** 鮫鰳
 :PROPERTIES:
 :added:    2026-02-17T18:02:39+0900
