@@ -50,7 +50,8 @@ by default."
    ;; (t
    ;;  '(("kautian" "nan_TW" "ministry-of-education/kautian.json")))
    ;; (t
-   ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
+   ;;  '(("stti-taigi" "zh_TW" "ministry-of-education/stti-taigi.json")
+   ;;    ("stti-hakka" "zh_TW" "ministry-of-education/stti-hakka.json")))
    (t
     ;; The order here defines the order they will appear in the word
     ;; pages.
@@ -62,6 +63,11 @@ by default."
        ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
        ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+       ;; These are primarily for mapping Mandarin words into Taigi or
+       ;; Hakka, so they should probably mainly show on the Mandarin page...
+       ;; yeah that's weird.
+       ("stti-taigi" "zh_TW" "ministry-of-education/stti-taigi.json")
+       ("stti-hakka" "zh_TW" "ministry-of-education/stti-hakka.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
@@ -608,6 +614,45 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("stti-taigi"
+       ;; stti-taigi's han and tl are newline-delimited lists that together
+       ;; encode a mapping.
+       ;;
+       ;; Rewrite it so that it's { words: [{ han, tl }, { han, tl }] } instead
+       (let* ((han (s-split "\n" (ht-get props "han")))
+              (tl (s-split "\n" (ht-get props "tl")))
+              (han-length (length han))
+              (tl-length (length tl)))
+         ;; han is ("面具" "" "小鬼仔殼")
+         ;; tl is ("bīn-kū" "bin-khū" "siáu-kuí-á-khak")
+         (let ((words nil)
+               (prev-han nil))
+           (dotimes (i (max han-length tl-length))
+             ;; han is empty -> use previous han
+             ;; han is one too small (han is nil) ->
+             ;;   if the tl is empty, just skip
+             ;;   otherwise add one entry using the previous han
+             ;; han is one too big (tl is nil) -> ignore it
+             (let ((this-han (elt han i))
+                   (this-tl (elt tl i)))
+               (cond ((s-blank? this-han)
+                      (unless (s-blank? this-tl)
+                        (unless prev-han
+                          (d::warn "stti-taigi entry appears to start with newline. han: %S, tl: %S"
+                                   han tl))
+                        (push (ht ("han" prev-han)
+                                  ("tl" this-tl))
+                              words)))
+                     ((s-blank? this-tl)
+                      nil)
+                     (t
+                      (push (ht ("han" this-han)
+                                ("tl" this-tl))
+                            words)))
+               (setq prev-han this-han)))
+           (ht-remove! props "han")
+           (ht-remove! props "tl")
+           (ht-set! props "words" (nreverse words)))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
@@ -805,46 +850,54 @@ ORIG-HETS are props that will be used to construct heteronyms."
                  (gethash "id" other))))))
     orig-hets))
 
-(defun d::split-titles (titles)
-  "Split TITLES, a string, into a list containing titles."
+(defun d::split-titles (dict titles)
+  "Split TITLES, a string, into a list containing titles.
+DICT is used as context to add special cases for particular
+dictionaries, for example turning off slash splitting for STTI."
   ;; Lots of special cases. But this is fine because the number is low; and
   ;; because it's impossible to automate this reliably, they are too free-form.
-  (pcase titles
-    ;; maryknoll
-    ;; actually for maryknoll this is kind of impossible. There are 5000+ entries
-    ;; there with a paren in it, most (but not all) of which should be split...
-    ("bô-hông, bû-hông" '("bô-hông" "bû-hông"))
-    ("a-bó (a-bú)" '("a-bó" "a-bú"))
-    ("a-iân-suànn (iân-suànn, thih-suànn)" '("a-iân-suànn" "iân-suànn" "thih-suànn"))
-    ("an-hioh-ji̍t (an-sik-ji̍t)" '("an-hioh-ji̍t" "an-sik-ji̍t"))
-    ("a-iân-phiánn (iân-phiánn)" '("a-iân-phiánn" "iân-phiánn"))
-    ;; the rest are from taijit
-    ("cheh/choeh仔" '("cheh仔" "choeh仔"))
-    ("kiàu-kiàu/kiauh-kiauh叫" '("kiàu-kiàu叫" "kiauh-kiauh叫"))
-    ("sir/su-lài-tah" '("sir-lài-tah" "su-lài-tah"))
-    ("三iān/uán" '("三iān" "三uán"))
-    ("二彼/比" '("二彼" "二比"))
-    ("小辦/扮" '("小辦" "小扮"))
-    ("挽me̍h/mi̍h" '("挽me̍h" "挽mi̍h"))
-    ("揚phòng-phòng/phōng-phōng/pòng-pòng" '("揚phòng-phòng" "揚phōng-phōng/揚pòng-pòng"))
-    ("枯sau/tsuâ" '("枯sau" "枯tsuâ"))
-    ("查bāi/māi" '("查bāi" "查māi"))
-    ("水khiō/khiò" '("水khiō" "查khiò"))
-    ("澹tsiu̍h-tsiu̍h/chiuh-chiuh" '("澹tsiu̍h-tsiu̍h" "澹chiuh-chiuh"))
-    ("爛he̍h/le̍h" '("爛he̍h" "爛le̍h"))
-    ("田phe̍h/phue̍h" '("田phe̍h" "田phue̍h"))
-    ("田tìm/tòm" '("田tìm" "田tòm"))
-    ("田土phe̍h/phue̍h" '("田土phe̍h" "田土phue̍h"))
-    ("相khoeh/kheh" '("相khoeh" "相kheh"))
-    ("相食ànn/ānn" '("相食ànn" "相食ānn"))
-    ("石phè/phuê/phèr" '("石phè" "石phuê/石phèr"))
-    ("緊pia̍k-pia̍k/piak-piak" '("緊pia̍k-pia̍k" "緊piak-piak"))
-    ("草sannh/sah" '("草sannh" "草sah"))
-    ("衝jip/chip" '("衝jip" "衝chip"))
-    ("走sau/sàu" '("走sau" "走sàu"))
-    ("跟tuè/tè" '("跟tuè" "跟tè"))
-    ("雄/狠鬼鬼" '("雄鬼鬼" "狠鬼鬼"))
-    (_ (split-string titles "/"))))
+  (pcase dict
+    ;; disable all splitting
+    ((or "stti-taigi"
+         "stti-hakka")
+     (list titles))
+    (_ (pcase titles
+         ;; maryknoll
+         ;; actually for maryknoll this is kind of impossible. There are 5000+ entries
+         ;; there with a paren in it, most (but not all) of which should be split...
+         ("bô-hông, bû-hông" '("bô-hông" "bû-hông"))
+         ("a-bó (a-bú)" '("a-bó" "a-bú"))
+         ("a-iân-suànn (iân-suànn, thih-suànn)" '("a-iân-suànn" "iân-suànn" "thih-suànn"))
+         ("an-hioh-ji̍t (an-sik-ji̍t)" '("an-hioh-ji̍t" "an-sik-ji̍t"))
+         ("a-iân-phiánn (iân-phiánn)" '("a-iân-phiánn" "iân-phiánn"))
+         ;; the rest are from taijit
+         ("cheh/choeh仔" '("cheh仔" "choeh仔"))
+         ("kiàu-kiàu/kiauh-kiauh叫" '("kiàu-kiàu叫" "kiauh-kiauh叫"))
+         ("sir/su-lài-tah" '("sir-lài-tah" "su-lài-tah"))
+         ("三iān/uán" '("三iān" "三uán"))
+         ("二彼/比" '("二彼" "二比"))
+         ("小辦/扮" '("小辦" "小扮"))
+         ("挽me̍h/mi̍h" '("挽me̍h" "挽mi̍h"))
+         ("揚phòng-phòng/phōng-phōng/pòng-pòng" '("揚phòng-phòng" "揚phōng-phōng/揚pòng-pòng"))
+         ("枯sau/tsuâ" '("枯sau" "枯tsuâ"))
+         ("查bāi/māi" '("查bāi" "查māi"))
+         ("水khiō/khiò" '("水khiō" "查khiò"))
+         ("澹tsiu̍h-tsiu̍h/chiuh-chiuh" '("澹tsiu̍h-tsiu̍h" "澹chiuh-chiuh"))
+         ("爛he̍h/le̍h" '("爛he̍h" "爛le̍h"))
+         ("田phe̍h/phue̍h" '("田phe̍h" "田phue̍h"))
+         ("田tìm/tòm" '("田tìm" "田tòm"))
+         ("田土phe̍h/phue̍h" '("田土phe̍h" "田土phue̍h"))
+         ("相khoeh/kheh" '("相khoeh" "相kheh"))
+         ("相食ànn/ānn" '("相食ànn" "相食ānn"))
+         ("石phè/phuê/phèr" '("石phè" "石phuê/石phèr"))
+         ("緊pia̍k-pia̍k/piak-piak" '("緊pia̍k-pia̍k" "緊piak-piak"))
+         ("草sannh/sah" '("草sannh" "草sah"))
+         ("衝jip/chip" '("衝jip" "衝chip"))
+         ("走sau/sàu" '("走sau" "走sàu"))
+         ("跟tuè/tè" '("跟tuè" "跟tè"))
+         ("雄/狠鬼鬼" '("雄鬼鬼" "狠鬼鬼"))
+         ((pred stringp) (split-string titles "/"))
+         (_ (error "Non-string fed into d::split-titles: %S" titles))))))
 
 (defvar d:db nil
   "Holds the DB connection.")
@@ -906,17 +959,31 @@ ORIG-HETS are props that will be used to construct heteronyms."
                ;; Get the main title from original heteronyms
                (let ((titles (or (-some-> (gethash "title" entry)
                                    d:process-title)
-                                 ;; What I defined kautian to be
-                                 (-some->> entry
-                                   (gethash "han")
-                                   (gethash "main")
-                                   d:process-title)
+                                 (and (equal dict "kautian")
+                                      ;; What I defined kautian to be
+                                      (-some->> entry
+                                        (gethash "han")
+                                        (gethash "main")
+                                        d:process-title))
+                                 (and (member dict '("stti-taigi"
+                                                     "stti-hakka"))
+                                      ;; These are primarily for mapping
+                                      ;; Mandarin words into Taigi or Hakka and
+                                      ;; not the other way around (for instance,
+                                      ;; try searching "面殼" on upstream), and
+                                      ;; so this is the better main title...
+                                      (-some->> entry
+                                        (gethash "zh")
+                                        d:process-title))
                                  ;; 臺日大辭典 and 臺灣白話基礎語句
                                  (gethash "kip" orig-het)
                                  ;; unihan
                                  (gethash "char" orig-het))))
+                 (unless titles
+                   (d::warn "Saw an entry with an empty main title from %s. Skipping" dict)
+                   (throw 'continue nil))
                  ;; Taijit has some titles that should expand into many words
-                 (d::for (title (d::split-titles titles))
+                 (d::for (title (d::split-titles dict titles))
                    (let ((shaped-het (make-hash-table :test #'equal)))
                      ;; Skip invalid titles
                      (when (or (not (stringp title))
@@ -1062,6 +1129,8 @@ VALUES
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
                              "pts-taigitv"
+                             "stti-taigi"
+                             "stti-hakka"
                              "lopof-taigi"
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
@@ -1081,7 +1150,23 @@ VALUES
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
-               (sqlite-execute d:db alias-stmt (list het-id en nil)))))))
+               (sqlite-execute d:db alias-stmt (list het-id en nil))))
+           ;; For stti-taigi han versions
+           (when (equal het.from "stti-taigi")
+             (when-let (stti-words (-some->> het
+                                     (gethash "props")
+                                     (gethash "words")))
+               (dolist (han (--map (gethash "han" it) stti-words))
+                 (sqlite-execute d:db alias-stmt (list het-id han 1)))))
+           (when (equal het.from "stti-hakka")
+             (let ((props (gethash "props" het)))
+               (dolist (key '("四縣詞彙" "四縣音讀" "南四縣詞彙" "南四縣音讀"
+                              "海陸詞彙" "海陸音讀" "大埔詞彙" "大埔音讀"
+                              "饒平詞彙" "饒平音讀"
+                              "饒平腔備註詞彙_卓蘭" "饒平腔備註音讀_卓蘭"
+                              "詔安詞彙" "詔安音讀"))
+                 (when-let ((value (gethash key props)))
+                   (sqlite-execute d:db alias-stmt (list het-id value 1)))))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success
@@ -1322,22 +1407,15 @@ Return a list of pronunciations."
         (keys '(;; kemdict-data-ministry-of-education
                 "bopomofo"
                 ;; "pinyin"
-
-                ;; kisaragi-dict
-                "pronunciation"
-
+                "pronunciation" ; kisaragi-dict
                 ;; hakkadict
                 "p_四縣" "p_海陸" "p_大埔" "p_饒平" "p_詔安" "p_南四縣"
-
-                ;; what I chose for the pts-taigitv copy
-                "pn"
-
+                "pn" ; what I chose for the pts-taigitv copy
                 ;; chhoetaigi-itaigi (keys are defined in Makefile
                 ;; in this repository)
                 "poj" "kip"
                 "pojInput" "kipInput"
                 "pojInputOthers" "kipInputOthers"
-
                 "kMandarin"))
         ;; We use the values as keys to deduplicate as we go.
         (tbl (make-hash-table :test #'equal)))
@@ -1345,6 +1423,12 @@ Return a list of pronunciations."
       (when-let (value (gethash key props))
         (dolist (p (d:pn-normalize value))
           (puthash p t tbl))))
+    ;; That's a list of {han: string, tl: string} hash tables
+    (when-let (stti-words (gethash "words" props))
+      (dolist (p (->> stti-words
+                      (--map (gethash "tl" it))
+                      d:pn-normalize))
+        (puthash p t tbl)))
     ;; What I chose for kautian
     (when-let (tl (gethash "tl" props))
       (dolist (key '("main" "colloquial" "alt" "otherMerged"))
