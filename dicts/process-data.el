@@ -1085,7 +1085,7 @@ VALUES
            (when (equal het.from "pts-taigitv")
              (when-let ((tags (gethash "tags" (gethash "props" het))))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
-               (dolist (tag tags)
+               (d::for (tag tags)
                  (let ((tag-str
                         ;; tag.title should be guaranteed to exist by the scraper
                         (concat "#" (gethash "title" tag))))
