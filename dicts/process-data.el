@@ -1081,7 +1081,15 @@ VALUES
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
-               (sqlite-execute d:db alias-stmt (list het-id en nil)))))))
+               (sqlite-execute d:db alias-stmt (list het-id en nil))))
+           (when (equal het.from "pts-taigitv")
+             (when-let ((tags (gethash "tags" (gethash "props" het))))
+               ;; HACK HACK HACK tag matching should be its own system, not aliases
+               (dolist (tag tags)
+                 (let ((tag-str
+                        ;; tag.title should be guaranteed to exist by the scraper
+                        (concat "#" (gethash "title" tag))))
+                   (sqlite-execute d:db alias-stmt (list het-id tag-str nil)))))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success

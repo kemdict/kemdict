@@ -11,7 +11,8 @@
   {#if het.props?.tags}
     <div class="flex gap-2 flex-wrap">
       {#each het.props.tags as tag}
-        <a href={`https://taigiwords.taigitv.org.tw/zh_tw/dic?orbithashtag=${tag.title}`}>#{tag.title}</a>
+        <!-- <a href={`https://taigiwords.taigitv.org.tw/zh_tw/dic?orbithashtag=${tag.title}`}>#{tag.title}</a> -->
+        <a href={`/search?q=${tag.title}&m=exact`}>#{tag.title}</a>
       {/each}
     </div>
   {/if}
