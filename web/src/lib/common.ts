@@ -227,3 +227,8 @@ export function joinLast(
   }
   return buf;
 }
+
+export interface Completion {
+  matches: string[];
+  type: "word" | "search";
+}

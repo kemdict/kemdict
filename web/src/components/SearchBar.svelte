@@ -91,12 +91,16 @@
               <Loading />
             </div>
           {:then values}
-            {#if values.length !== 0}
+            {@const type = values.type}
+            {#if values.matches.length !== 0}
               <div class="card variant-filled relative z-20 w-3/4 p-4">
-                {#each values as value}
+                {#each values.matches as value}
                   <div>
-                    <a class="inline-block w-full py-1" href="/word/{value}"
-                      >{value}</a
+                    <a
+                      class="inline-block w-full py-1"
+                      href={type === "word"
+                        ? `/word/${value}`
+                        : `/search?q=${encodeURIComponent(value)}`}>{value}</a
                     >
                   </div>
                 {/each}

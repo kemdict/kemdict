@@ -5,7 +5,7 @@ import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 import sql, { empty } from "sql-template-tag";
 
-import type { LangId, Heteronym, DictId } from "common";
+import type { LangId, Heteronym, DictId, Completion } from "common";
 import { ensureArray } from "common";
 
 export type Mtch =
@@ -287,18 +287,39 @@ ${limit ? `LIMIT ?` : ""}
     };
   }
 
-  async getPrefixCompletion(prefix: string): Promise<string[]> {
-    const matches = (await this.crossDbAll(
-      `
+  /** Get completion for `prefix`.
+   * If `prefix` starts with "#", results are tags and not words.
+   * Returns:
+   *   matches: string[] of completions
+   *   type: word or search (for tags)
+   */
+  async getPrefixCompletion(prefix: string): Promise<Completion> {
+    if (prefix.startsWith("#")) {
+      const matches = (await this.crossDbAll(
+        `
+SELECT DISTINCT alias
+FROM aliases
+WHERE alias LIKE ? || '%' ESCAPE '\\'
+LIMIT 10
+`,
+        [escapeLike(prefix)],
+        true,
+      )) as string[];
+      return { matches, type: "search" };
+    } else {
+      const matches = (await this.crossDbAll(
+        `
 SELECT DISTINCT title
 FROM heteronyms
 INNER JOIN aliases ON aliases.het_id = heteronyms.id
 WHERE aliases.alias LIKE ? || '%' ESCAPE '\\'
-LIMIT 10`,
-      [escapeLike(prefix)],
-      true,
-    )) as string[];
-    return matches;
+LIMIT 10
+`,
+        [escapeLike(prefix)],
+        true,
+      )) as string[];
+      return { matches, type: "word" };
+    }
   }
 
   async getBacklinks(...titles: string[]): Promise<string[]> {

@@ -9,8 +9,8 @@ export const GET: APIRoute = async ({ params }) => {
     });
   }
 
-  const matches = await DB.getPrefixCompletion(prefix);
-  return new Response(JSON.stringify(matches), {
+  const completion = await DB.getPrefixCompletion(decodeURIComponent(prefix));
+  return new Response(JSON.stringify(completion), {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
