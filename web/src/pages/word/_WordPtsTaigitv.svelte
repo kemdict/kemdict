@@ -9,12 +9,12 @@
     <Pronunciation>{pn}</Pronunciation>
   {/each}
   {#if het.props?.tags}
-    <div class="flex gap-2 flex-wrap">
+    <Property key="標籤">
       {#each het.props.tags as tag}
         <!-- <a href={`https://taigiwords.taigitv.org.tw/zh_tw/dic?orbithashtag=${tag.title}`}>#{tag.title}</a> -->
-        <a href={`/search?q=%23${tag.title}&m=exact`}>#{tag.title}</a>
+        <a class="mr-1" href={`/search?q=%23${tag.title}&m=exact`}>#{tag.title}</a>
       {/each}
-    </div>
+    </Property>
   {/if}
   <p class="def">
     {#if het.props.zh}{@html het.props.zh}{/if}
