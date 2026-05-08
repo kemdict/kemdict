@@ -37,6 +37,13 @@
    (org-element-interpret-data
     (org-element-property :title elem))))
 
+(defun kisaragi-dict/elem-tags (elem)
+  "Return the tags of ELEM."
+  ;; I want "no tags" to be an empty-but-present array in JSON, not null or an
+  ;; empty object
+  (or (org-element-property :tags elem)
+      []))
+
 (defun kisaragi-dict/timestamp-to-unix (timestamp)
   "Convert TIMESTAMP (in yyyy-mm-ddThh:mm:ssZ) to unix time."
   (float-time (parse-iso8601-time-string timestamp)))
@@ -48,10 +55,7 @@
      (cdr it)
      (list
       (cons "title" kisaragi-dict/current-title)
-      (cons "vogue" (->> elem
-                         (org-element-property :tags)
-                         (member "vogue")
-                         d/to-bool))
+      (cons "tags" (kisaragi-dict/elem-tags elem))
       ;; Use unix time so it's easier to compare
       (cons "added" (-> (org-element-property :ADDED elem)
                         parse-iso8601-time-string
@@ -65,6 +69,7 @@
              collect
              ;; pronunciation
              (list (cons "pronunciation" (kisaragi-dict/elem-title het))
+                   (cons "tags" (kisaragi-dict/elem-tags het))
                    (cons "definitions"
                          (cl-loop
                           for definition in (org-element-contents het)
