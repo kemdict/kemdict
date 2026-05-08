@@ -73,7 +73,7 @@
   {/each}
 {/each}
 
-{#if het.props?.wordTags.length > 0}
+{#if heteronyms[0]?.props?.wordTags.length > 0}
   <div class="flex gap-2 flex-wrap">
     {#each het.props.wordTags as tag}
       <a href={`/search?q=%23${tag}&m=exact`}>#{tag}</a>
