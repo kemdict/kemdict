@@ -935,9 +935,15 @@ ORIG-HETS are props that will be used to construct heteronyms."
                      (puthash "title" title shaped-het)
                      (puthash "from" dict shaped-het)
                      (puthash "lang" lang shaped-het)
-                     ;; Copy some top-level props to each heteronym.
+                     ;; Because we store kisaragi-dict heteronyms as individual
+                     ;; rows in the database, we have nowhere to put word-level
+                     ;; props. Copy them (and tags) to props as a workaround.
                      (--each '("eq-en" "eq-ja" "added")
                        (puthash it (gethash it entry) orig-het))
+                     ;; There are both word-level and heteronym-level tags, so
+                     ;; it needs a different key.
+                     (puthash "wordTags"
+                              (gethash "tags" entry) orig-het)
                      ;; We can't run d:process-props just yet, as that requires
                      ;; the list of all titles to work correctly.
                      (puthash "props" orig-het shaped-het)
@@ -1085,7 +1091,9 @@ VALUES
            (when (member het.from '("pts-taigitv"
                                     "kisaragi_dict"
                                     "kisaragi_taigi"))
-             (when-let ((tags (gethash "tags" (gethash "props" het))))
+             (when-let ((tags (append
+                               (gethash "wordTags" (gethash "props" het))
+                               (gethash "tags" (gethash "props" het)))))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
                (d::for (tag tags)
                  (when-let
