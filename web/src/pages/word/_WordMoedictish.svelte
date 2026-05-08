@@ -33,7 +33,7 @@
       >{spc(het.props[pronunciation_key])}
     </Pronunciation>
   {/if}
-  {#if het.props?.tags?.length > 0}
+  {#if het.props?.tags}
     <div class="flex gap-2 flex-wrap">
       {#each het.props.tags as tag}
         <a href={`/search?q=%23${tag}&m=exact`}>#{tag}</a>
@@ -73,7 +73,7 @@
   {/each}
 {/each}
 
-{#if heteronyms[0]?.props?.wordTags?.length > 0}
+{#if heteronyms[0]?.props?.wordTags}
   <div class="flex gap-2 flex-wrap">
     {#each heteronyms[0].props.wordTags as tag}
       <a href={`/search?q=%23${tag}&m=exact`}>#{tag}</a>

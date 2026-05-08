@@ -39,10 +39,7 @@
 
 (defun kisaragi-dict/elem-tags (elem)
   "Return the tags of ELEM."
-  ;; I want "no tags" to be an empty-but-present array in JSON, not null or an
-  ;; empty object
-  (or (org-element-property :tags elem)
-      []))
+  (org-element-property :tags elem))
 
 (defun kisaragi-dict/timestamp-to-unix (timestamp)
   "Convert TIMESTAMP (in yyyy-mm-ddThh:mm:ssZ) to unix time."
