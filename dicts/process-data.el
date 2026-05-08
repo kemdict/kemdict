@@ -1082,14 +1082,26 @@ VALUES
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
                (sqlite-execute d:db alias-stmt (list het-id en nil))))
-           (when (equal het.from "pts-taigitv")
+           (when (member het.from '("pts-taigitv"
+                                    "kisaragi_dict"
+                                    "kisaragi_taigi"))
              (when-let ((tags (gethash "tags" (gethash "props" het))))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
                (d::for (tag tags)
-                 (let ((tag-str
-                        ;; tag.title should be guaranteed to exist by the scraper
-                        (concat "#" (gethash "title" tag))))
-                   (sqlite-execute d:db alias-stmt (list het-id tag-str nil)))))))))
+                 (when-let
+                     ((tag-str
+                       (cond ((hash-table-p tag)
+                              ;; tag.title should be guaranteed to exist by the scraper
+                              (gethash "title" tag))
+                             ((stringp tag)
+                              tag)
+                             (t (d::warn
+                                 "Unexpected tag format! Heteronym %S from dict %S, tag %S"
+                                 het
+                                 het.from
+                                 tag)
+                                nil))))
+                   (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil)))))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success
@@ -1160,7 +1172,7 @@ ORDER BY b.sc;")
     (sqlite-execute d:db "DROP TABLE c;"))
   (sqlite-execute d:db "VACUUM")
   (let ((words
-         ;; The "added" field only exists for kisaragi-dict entries
+         ;; The "added" field only exists for kisaragi_dict entries
          (sqlite-select d:db
                         "
 SELECT
