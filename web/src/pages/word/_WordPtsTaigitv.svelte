@@ -1,6 +1,7 @@
 <script>
   const { heteronyms } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Property from "$src/components/Property.svelte";
 </script>
 
 {#each heteronyms as het}

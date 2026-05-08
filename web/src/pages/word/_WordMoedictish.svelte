@@ -4,6 +4,7 @@
   export let heteronyms: Heteronym[];
   export let dict: string;
 
+  import Property from "$src/components/Property.svelte";
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import { groupByProp } from "common";
   import { spc, interlinear_annotation } from "$lib/processing";
