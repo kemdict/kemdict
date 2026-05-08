@@ -111,7 +111,7 @@ if (requestedLang === false) {
         {groupedHets.map(
           ([dict, hets]) =>
             requestedLang === dict.lang && (
-              <Word client:load groupedHets={[[dict, hets]]} title={title} />
+              <Word groupedHets={[[dict, hets]]} title={title} />
             ),
         )}
         <hr />
