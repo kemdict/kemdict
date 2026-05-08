@@ -1091,7 +1091,7 @@ VALUES
            (when (member het.from '("pts-taigitv"
                                     "kisaragi_dict"
                                     "kisaragi_taigi"))
-             (when-let ((tags (append
+             (when-let ((tags (seq-concatenate
                                (gethash "wordTags" (gethash "props" het))
                                (gethash "tags" (gethash "props" het)))))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
