@@ -33,8 +33,12 @@
       >{spc(het.props[pronunciation_key])}
     </Pronunciation>
   {/if}
-  {#if het.props.vogue}
-    <div class="text-gray-700 dark:text-gray-300">（流行語）</div>
+  {#if het.props?.tags}
+    <div class="flex gap-2 flex-wrap">
+      {#each het.props.tags as tag}
+        <a href={`/search?q=%23${tag.title}&m=exact`}>#{tag.title}</a>
+      {/each}
+    </div>
   {/if}
   {#each groupByProp(het.props.defs, "type", "none") as [type, defs]}
     {#if type !== "none"}
