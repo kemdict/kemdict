@@ -1092,6 +1092,7 @@ VALUES
                                     "kisaragi_dict"
                                     "kisaragi_taigi"))
              (when-let ((tags (seq-concatenate
+                               'vector
                                (gethash "wordTags" (gethash "props" het))
                                (gethash "tags" (gethash "props" het)))))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
