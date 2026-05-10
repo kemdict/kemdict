@@ -39,7 +39,7 @@
           {#if deleter}
             <button
               onclick={deleter(word)}
-              class="variant-filled btn py-1">☓</button>
+              class="variant-filled btn px-2 py-1">☓</button>
           {/if}
         </li>
       {/if}
