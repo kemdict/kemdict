@@ -6,6 +6,7 @@
 
   // both are encoded
   const favorites: Writable<string[]> = localStorageStore("favorites", []);
+  const loading = !globalThis.location
   const word =
     globalThis.location?.href &&
     new URL(globalThis.location?.href).pathname.replace("/word/", "");
@@ -22,7 +23,7 @@
 </script>
 
 <button
-  class="text-lg btn-icon btnColor btnBorder"
-  disabled={!globalThis.location}
-  onclick={toggle}>{#if starred}★{:else}☆{/if}</button
+  class="text-lg btn p-1 btnColor btnBorder"
+  disabled={!loading}
+  onclick={toggle}>{#if loading}　{:else if starred}★{:else}☆{/if}</button
 >
