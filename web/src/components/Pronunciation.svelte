@@ -5,6 +5,7 @@
   }
 
   let { id = undefined, children }: Props = $props();
+  let Pn: HTMLDivElement;
 </script>
 
-<div onclick={(e: Event) => navigator.clipboard.writeText(e.target.innerText)} class="my-2 text-gray-800 dark:text-gray-200 text-lg" {id}>{@render children?.()}</div>
+<div bind:this={Pn} onclick={() => navigator.clipboard.writeText(Pn.innerText)} class="my-2 text-gray-800 dark:text-gray-200 text-lg" {id}>{@render children?.()}</div>
