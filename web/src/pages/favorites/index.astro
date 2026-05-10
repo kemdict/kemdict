@@ -1,0 +1,13 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+
+import Favorites from "./_Favorites.svelte";
+---
+
+<SingleLayout title="Kemdict">
+  <div class="prose">
+    <h1>收藏項目</h1>
+    <p>收藏資訊只保留在瀏覽器裡，沒有傳到伺服器上。</p>
+  </div>
+  <Favorites client:load />
+</SingleLayout>
