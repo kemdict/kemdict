@@ -1,5 +1,4 @@
 <script lang="ts">
-  import clsx from "clsx";
   import { onMount } from "svelte";
   import { popup } from "@skeletonlabs/skeleton";
   import { clientGetCompletions } from "$src/lib/client";
@@ -141,7 +140,7 @@
             <span class="inline-flex gap-2">
               {#each sortTypes as [sort, name]}
                 <a
-                  class={clsx("link", sort === currentSort && "font-bold")}
+                  class={["link", sort === currentSort && "font-bold"]}
                   href={withParam(url, "s", sort)}>{name}</a
                 >
               {/each}

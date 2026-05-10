@@ -1,5 +1,4 @@
 <script lang="ts">
-  import clsx from "clsx";
   /*
    * Like Out.astro but usable in Svelte.
    *
@@ -28,7 +27,7 @@
   {href}
   {id}
   {title}
-  class={clsx(after && "after:content-['°']", klass)}
+  class={[after && "after:content-['°']", klass]}
   target="_blank"
   rel="noreferrer">{@render children()}</a
 >

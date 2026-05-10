@@ -1,5 +1,4 @@
 <script lang="ts">
-  import clsx from "clsx";
   const props: {
     key: string;
     value?: string | undefined;
@@ -27,9 +26,9 @@
 
 {#if ifValue}
   {#if value || children}
-    <div class={clsx("mb-4 flex items-baseline", klass)}>
+    <div class={["mb-4 flex items-baseline", klass]}>
       <span class="colorPropertyKey mr-2 px-2 py-1">{key}</span>
-      <span class={clsx("prose", valueClass)}>
+      <span class={["prose", valueClass]}>
         {#if children}
           {@render children()}
         {:else}

@@ -2,7 +2,6 @@
   const { currentId }: { currentId: string } = $props();
 
   import { dicts, langIdName } from "common";
-  import clsx from "clsx";
   dicts.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   let filterString = $state("");
@@ -27,21 +26,21 @@
       <li>
         <a
           href="/dicts/{id}"
-          class={clsx(
+          class={[
             "k-card mr-2 block px-2 py-1",
             id === currentId && "bg-surface-active-token",
-          )}
+          ]}
         >
           <div>
             <span class="font-bold">{name}</span>
             {#if meta.version}
               <span
-                class={clsx(
+                class={[
                   "text-sm",
                   id === currentId
                     ? "text-primary-900"
                     : "text-secondary-800 dark:text-secondary-100",
-                )}>{meta.version}</span
+                ]}>{meta.version}</span
               >
             {/if}
           </div>

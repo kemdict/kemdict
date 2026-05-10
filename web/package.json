@@ -18,7 +18,6 @@
   "dependencies": {
     "@astrojs/node": "^9.5.1",
     "astro": "^5.16.9",
-    "clsx": "^2.1.1",
     "lodash-es": "^4.17.22",
     "marked": "^12.0.2",
     "postcss-import": "^16.1.1",

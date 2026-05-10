@@ -4,7 +4,6 @@
   import type { OutputWord } from "$dicts/ministry-of-education/kautian";
   import { dictIdToDict } from "common";
   import { hetExactMatch } from "$src/server/db";
-  import clsx from "clsx";
   export let heteronymsAndPn: [Heteronym, string | undefined][];
   export let searchQuery: string;
 
@@ -50,12 +49,12 @@
     <svelte:fragment slot="afterHeading">
       {#if hetExactMatch(het, searchQuery)}
         <div
-          class={clsx(
+          class={[
             "absolute -top-2 right-2 inline-block",
             "bg-indigo-700",
             "text-white",
             "rounded px-2 py-1 text-sm shadow-md",
-          )}
+          ]}
         >
           完全相符
         </div>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import clsx from "clsx";
   // First implemented in commit 61c0b09cae476c41b8c117960fefd2b4da8c1c02
   import { navigating } from "$src/stores";
   import { Tween } from "svelte/motion";
@@ -36,10 +35,10 @@
 
 <div class="fixed left-0 right-0 top-0 h-1">
   <div
-    class={clsx(
+    class={[
       "progress bg-surface-800-100-token h-1",
       $navigating && "animate-pulse",
-    )}
+    ]}
     style="--width:{progress.current * 100}%;--opacity:{progressToOpacity(
       progress.current,
     )}%"

@@ -1,6 +1,5 @@
 <script>
   import { range } from "lodash-es";
-  import clsx from "clsx";
   // Current active page
   export let activePage = 1;
   // Total page count
@@ -52,11 +51,11 @@
     >
   `;
 
-  const a = clsx(
+  const a = [
     "inline-flex items-center justify-center",
     "rounded-full",
     "min-h-[2em] min-w-[2em]"
-  );
+  ];
   const disabled = "opacity-50";
   const hover = "hover:bg-gray-100 hover:dark:bg-stone-800";
 </script>
@@ -64,33 +63,33 @@
 {#if pageCount > 1}
   <div class="flex flex-wrap items-center justify-center space-x-2">
     {#if activePage === 1}
-      <span class={clsx(a, disabled)}>
+      <span class={[a, disabled]}>
         {@html chevron_back_outline}
       </span>
     {:else}
-      <a class={clsx(a, hover)} href={linkToPage(activePage - 1)}>
+      <a class={[a, hover]} href={linkToPage(activePage - 1)}>
         {@html chevron_back_outline}
       </a>
     {/if}
     {#each currentDisplayedPages(activePage) as page}
       <a
-        class={clsx(
+        class={[
           a,
           hover,
           page === activePage && [
             "bg-surface-200 dark:bg-surface-900",
             "hover:bg-surface-300 hover:dark:bg-surface-800",
           ]
-        )}
+        ]}
         href={linkToPage(page)}>{page}</a
       >
     {/each}
     {#if activePage === pageCount}
-      <span class={clsx(a, disabled)}>
+      <span class={[a, disabled]}>
         {@html chevron_forward_outline}
       </span>
     {:else}
-      <a class={clsx(a, hover)} href={linkToPage(activePage + 1)}>
+      <a class={[a, hover]} href={linkToPage(activePage + 1)}>
         {@html chevron_forward_outline}
       </a>
     {/if}
