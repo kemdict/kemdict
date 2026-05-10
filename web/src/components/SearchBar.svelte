@@ -153,6 +153,10 @@
           class="whitespace-nowrap font-bold underline [text-underline-offset:4px]"
           href="/history">搜尋與閱讀紀錄</a
         >
+        <a
+          class="whitespace-nowrap font-bold underline [text-underline-offset:4px]"
+          href="/favorites">收藏</a
+        >
       </div>
     </div>
   </form>
