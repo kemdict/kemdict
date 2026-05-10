@@ -110,7 +110,7 @@ if (requestedLang === false) {
           currentParamString={url.searchParams.toString()}
         />
         <div class="relative">
-          <div class="top-0 right-0"><Star client:load /></div>
+          <div class="absolute top-0 right-0"><Star client:load /></div>
           {groupedHets.map(
             ([dict, hets]) =>
               requestedLang === dict.lang && (
