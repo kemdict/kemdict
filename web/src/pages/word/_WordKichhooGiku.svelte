@@ -2,7 +2,7 @@
   const { heteronyms } = $props();
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import Property from "$src/components/Property.svelte";
-  import { toTL } from "$src/hack";
+  import { toTL } from "$src/pojtl";
 </script>
 
 {#each heteronyms as het}
@@ -15,7 +15,7 @@
   </p>
   {#if het.props.examplePOJ || het.props.exampleEn || het.props.exampleZh}
     <blockquote>
-      {#if het.props.examplePOJ}{@html toTL(het.props.examplePOJ)}<br />{/if}
+      {#if het.props.examplePOJ}{@html await toTL(het.props.examplePOJ)}<br />{/if}
       {#if het.props.exampleEn}{@html het.props.exampleEn}<br />{/if}
       {#if het.props.exampleZh}{@html het.props.exampleZh}{/if}
     </blockquote>
