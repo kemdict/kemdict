@@ -10,14 +10,15 @@
     globalThis.location?.href &&
     new URL(globalThis.location?.href).pathname.replace("/word/", "");
 
-  function addHandler() {
-    $favorites.push(word)
-  }
-  function removeHandler() {
-    // word and words in the array are both encoded
-    $favorites = $favorites.filter((val) => val !== word)
-  }
   let starred = $derived($favorites.includes(word))
+  function toggle() {
+    if (starred) {
+      // word and words in the array are both encoded
+      $favorites = $favorites.filter((val) => val !== word)
+    } else {
+      $favorites.push(word)
+    }
+  }
 </script>
 
 <div>
@@ -25,6 +26,6 @@
 <button
   class="text-lg"
   disabled={!globalThis.location}
-  onclick={starred ? removeHandler : addHandler}>{#if starred}★{:else}☆{/if}</button
+  onclick={toggle}>{#if starred}★{:else}☆{/if}</button
 >
 </div>
