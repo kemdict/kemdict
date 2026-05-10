@@ -21,11 +21,8 @@
   }
 </script>
 
-<div>
-  starred: {starred}, disabled: {!globalThis.location}
 <button
   class="text-lg btn-icon variant-soft-surface"
   disabled={!globalThis.location}
   onclick={toggle}>{#if starred}★{:else}☆{/if}</button
 >
-</div>
