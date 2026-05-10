@@ -20,8 +20,11 @@
   let starred = $derived($favorites.includes(word))
 </script>
 
+<div>
+  starred: {starred}, disabled: {!globalThis.location}
 <button
   class="text-lg"
   disabled={!globalThis.location}
-  onclick={starred ? removeHandler : addHandler}>{#if starred}★{:else}☆{/if}}</button
+  onclick={starred ? removeHandler : addHandler}>{#if starred}★{:else}☆{/if}</button
 >
+</div>
