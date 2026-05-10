@@ -24,7 +24,7 @@
 
 <!-- ionicons star (filled) and star-outline -->
 <button
-  class="btnColor btnBorder btn p-1 text-lg"
+  class="btnColor btnBorder btn-icon p-1 text-lg"
   disabled={loading}
   onclick={toggle}
   type="button"
