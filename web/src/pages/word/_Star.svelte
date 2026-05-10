@@ -6,7 +6,9 @@
 
   // both are encoded
   const favorites: Writable<string[]> = localStorageStore("favorites", []);
-  const word = (new URL(globalThis.location?.href)).pathname.replace("/word/", "")
+  const word =
+    globalThis.location?.href &&
+    new URL(globalThis.location?.href).pathname.replace("/word/", "");
 
   function addHandler() {
     $favorites.push(word)
