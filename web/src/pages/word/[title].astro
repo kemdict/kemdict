@@ -28,6 +28,7 @@ import Elsewhere from "$src/components/Elsewhere.astro";
 import WordList from "$src/components/WordList.svelte";
 import Word from "./_Word.svelte";
 import WordTabs from "./_WordTabs.svelte";
+import Star from "./_Star.svelte";
 
 let term_ja = title;
 let term_en = title;
@@ -108,12 +109,15 @@ if (requestedLang === false) {
           requestedLang={requestedLang}
           currentParamString={url.searchParams.toString()}
         />
-        {groupedHets.map(
-          ([dict, hets]) =>
-            requestedLang === dict.lang && (
-              <Word groupedHets={[[dict, hets]]} title={title} />
-            ),
-        )}
+        <div class="relative">
+          <div class="top-0 right-0"><Star client:load /></div>
+          {groupedHets.map(
+            ([dict, hets]) =>
+              requestedLang === dict.lang && (
+                <Word groupedHets={[[dict, hets]]} title={title} />
+              ),
+          )}
+        </div>
         <hr />
         <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />
         {backlinks.length > 0 && (
