@@ -23,5 +23,5 @@
 <button
   class="text-lg"
   disabled={!globalThis.location}
-  onclick={starred ? removeHandler : addHandler}>{starred ? "★" : "☆"}</button
+  onclick={starred ? removeHandler : addHandler}>{#if starred}★{:else}☆{/if}}</button
 >
