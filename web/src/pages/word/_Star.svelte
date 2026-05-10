@@ -27,6 +27,14 @@
   class="btnColor btnBorder btn p-1 text-lg"
   disabled={!loading}
   onclick={toggle}
+  type="button"
+  title={loading ? "收藏" : starred ? "將詞彙從收藏中移除" : "將詞彙加入收藏"}
+  aria-label={loading
+    ? "收藏"
+    : starred
+      ? "將詞彙從收藏中移除"
+      : "將詞彙加入收藏"}
+  aria-checked={starred}
   >{#if loading}
     <div class="h-5 w-5"></div>
   {:else if starred}<svg
