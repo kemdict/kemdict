@@ -6,7 +6,7 @@
 
   // both are encoded
   const favorites: Writable<string[]> = localStorageStore("favorites", []);
-  const loading = $derived(!globalThis.location);
+  const loading = !globalThis.location;
   const word =
     globalThis.location?.href &&
     new URL(globalThis.location?.href).pathname.replace("/word/", "");
@@ -25,7 +25,7 @@
 <!-- ionicons star (filled) and star-outline -->
 <button
   class="btnColor btnBorder btn p-1 text-lg"
-  disabled={!loading}
+  disabled={loading}
   onclick={toggle}
   type="button"
   title={loading ? "收藏" : starred ? "將詞彙從收藏中移除" : "將詞彙加入收藏"}
