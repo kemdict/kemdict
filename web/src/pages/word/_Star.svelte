@@ -16,7 +16,7 @@
       // word and words in the array are both encoded
       $favorites = $favorites.filter((val) => val !== word)
     } else {
-      $favorites.push(word)
+      $favorites = [word, ...$favorites]
     }
   }
 </script>
@@ -24,7 +24,7 @@
 <div>
   starred: {starred}, disabled: {!globalThis.location}
 <button
-  class="text-lg"
+  class="text-lg btn-icon variant-soft-surface"
   disabled={!globalThis.location}
   onclick={toggle}>{#if starred}★{:else}☆{/if}</button
 >
