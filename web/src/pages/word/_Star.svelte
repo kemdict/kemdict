@@ -22,7 +22,7 @@
 </script>
 
 <button
-  class="text-lg btn-icon variant-soft-surface"
+  class="text-lg btn-icon variant-ghost-surface"
   disabled={!globalThis.location}
   onclick={toggle}>{#if starred}★{:else}☆{/if}</button
 >
