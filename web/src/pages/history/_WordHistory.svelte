@@ -52,6 +52,9 @@
       <WordList
         words={[...$wordHistory].map(decodeURIComponent).reverse()}
         search={false}
+        deleter={(word) => {
+          $wordHistory = $wordHistory.filter((val) => decodeURIComponent(val) !== word)
+        }}
       ></WordList>
     {/if}
   </div>
@@ -87,6 +90,9 @@
         words={[...$searchHistory].reverse()}
         search={false}
         prefix="/search/?q="
+        deleter={(word) => {
+          $searchHistory = $searchHistory.filter((val) => val !== word)
+        }}
       ></WordList>
     {/if}
   </div>

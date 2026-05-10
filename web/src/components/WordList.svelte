@@ -4,6 +4,7 @@
   // backlinks ranking for backlinks)
 
   export let etc: string | undefined = undefined;
+  export let deleter: (word: string) => void = undefined;
   export let words: string[];
   export let search: boolean = words.length > 20;
   /** Links link to /word/foo by default; this is the "/word/" part. */
@@ -35,6 +36,11 @@
           <a class="wordlink" href="{prefix}{word}">
             {@html highlight(word, filterString)}
           </a>
+          {#if deleter}
+            <button
+              onclick={deleter(word)}
+              class="variant-filled btn">☓</button>
+          {/if}
         </li>
       {/if}
     {/each}
