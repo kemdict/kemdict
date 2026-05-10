@@ -6,7 +6,7 @@
 
   // both are encoded
   const favorites: Writable<string[]> = localStorageStore("favorites", []);
-  let loading = !globalThis.location;
+  const loading = $derived(!globalThis.location);
   const word =
     globalThis.location?.href &&
     new URL(globalThis.location?.href).pathname.replace("/word/", "");
