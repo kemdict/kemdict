@@ -11,6 +11,9 @@ importers:
       '@astrojs/node':
         specifier: ^9.5.1
         version: 9.5.1(astro@5.16.9(@types/node@20.19.30)(jiti@1.21.7)(rollup@2.79.2)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2))
+      '@kemdict/kesi':
+        specifier: ^0.1.0
+        version: 0.1.0
       astro:
         specifier: ^5.16.9
         version: 5.16.9(@types/node@20.19.30)(jiti@1.21.7)(rollup@2.79.2)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2)
@@ -1173,6 +1176,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@kemdict/kesi@0.1.0':
+    resolution: {integrity: sha512-UPq7CZ6su+j6eGmSlaAzDAWam7kYiFjLz5MYNuZA2F+POCIdIr4U7vU1id3YVB7o4s6iwZyUxzc2CXa3Yc33BQ==}
 
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
@@ -5299,6 +5305,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@kemdict/kesi@0.1.0': {}
 
   '@mdx-js/mdx@3.1.1':
     dependencies:

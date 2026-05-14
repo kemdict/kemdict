@@ -15,7 +15,7 @@
   </p>
   {#if het.props.examplePOJ || het.props.exampleEn || het.props.exampleZh}
     <blockquote>
-      {#if het.props.examplePOJ}{@html await toTL(het.props.examplePOJ)}<br />{/if}
+      {#if het.props.examplePOJ}{@html toTL(het.props.examplePOJ)}<br />{/if}
       {#if het.props.exampleEn}{@html het.props.exampleEn}<br />{/if}
       {#if het.props.exampleZh}{@html het.props.exampleZh}{/if}
     </blockquote>
