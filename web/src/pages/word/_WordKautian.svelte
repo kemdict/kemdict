@@ -7,7 +7,8 @@
   import Property from "$src/components/Property.svelte";
   import { uniqBy } from "lodash-es";
 
-  let prev單字不成詞 = $state(false);
+  // HACK we're using this like a local variable (and it should not be reactive)
+  let prev單字不成詞 = false;
 
   /**
    * Join two arrays together then sort them by the `.han` key.
