@@ -1,13 +1,16 @@
 <script lang="ts">
   export let text: string;
   export let href: string;
-  $: active =
-    globalThis?.location?.href !== undefined &&
-    new URL(location.href).pathname === href;
+  export let pathname: string | undefined = undefined;
+  $: active = pathname
+    ? pathname === href
+    : globalThis?.location?.href !== undefined &&
+      new URL(location.href).pathname === href;
 
   console.log({
     active,
     href,
+    pathname,
     locationHrefPathname:
       globalThis?.location?.href !== undefined &&
       new URL(location.href).pathname,

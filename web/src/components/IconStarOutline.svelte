@@ -1,3 +1,7 @@
+<script lang="ts">
+  const { active = false } = $props();
+</script>
+
 <!-- ionicons: star-outline -->
 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"
   ><path
@@ -5,6 +9,6 @@
     fill="none"
     stroke="currentColor"
     stroke-linejoin="round"
-    stroke-width="32"
+    stroke-width={active ? 50 : 32}
   /></svg
 >

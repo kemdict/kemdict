@@ -6,24 +6,28 @@
   import IconSearchOutline from "$src/components/IconSearchOutline.svelte";
   import IconHistory from "$src/components/IconHistory.svelte";
 
-  const { class: klass } = $props();
+  interface Props {
+    class: string;
+    pathname: string;
+  }
+  const { class: klass, pathname }: Props = $props();
 </script>
 
 <div class={klass}>
-  <NavBarButton href="/" text="首頁">
+  <NavBarButton {pathname} href="/" text="首頁">
     <IconHome slot="active" />
     <IconHomeOutline slot="normal" />
   </NavBarButton>
-  <NavBarButton href="/search" text="搜尋">
-    <IconSearchOutline slot="active" />
+  <NavBarButton {pathname} href="/search" text="搜尋">
+    <IconSearchOutline active={true} slot="active" />
     <IconSearchOutline slot="normal" />
   </NavBarButton>
-  <NavBarButton href="/favorites" text="收藏">
-    <IconStarOutline slot="active" />
+  <NavBarButton {pathname} href="/favorites" text="收藏">
+    <IconStarOutline active={true} slot="active" />
     <IconStarOutline slot="normal" />
   </NavBarButton>
-  <NavBarButton href="/history" text="紀錄">
-    <IconHistory slot="active" />
+  <NavBarButton {pathname} href="/history" text="紀錄">
+    <IconHistory active={true} slot="active" />
     <IconHistory slot="normal" />
   </NavBarButton>
 </div>
