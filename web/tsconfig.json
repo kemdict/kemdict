@@ -19,13 +19,12 @@
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "paths": {
-      "$src/*": ["src/*"],
-      "$lib/*": ["src/lib/*"],
+      "$src/*": ["./src/*"],
+      "$lib/*": ["./src/lib/*"],
       "$dicts/*": ["../dicts/*"],
-      "common": ["src/lib/common"]
+      "common": ["./src/lib/common"]
     }
   },
-  "include": ["src/**/*", "*.ts", "*.cjs"]
+  "include": ["./src/**/*", "*.ts", "*.cjs"]
 }
