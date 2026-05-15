@@ -62,7 +62,9 @@ const newWords = await DB.getNewWords(15);
     <div class="pb-4">
       <p>整合搜尋臺灣多個國家語言的多部字典。</p>
     </div>
-    <div class="w-full rounded bg-surface-300 px-4 py-4 dark:bg-surface-800">
+    <div
+      class="w-full rounded bg-surface-300 px-4 py-4 shadow dark:bg-surface-950"
+    >
       <SearchBar
         highlightBtn={true}
         redirectOnSingleResult={true}

@@ -35,10 +35,9 @@
   body {
     /* Ensure the footer touches the bottom */
     @apply flex flex-col justify-between;
-    /* Note that these are colors we declared in tailwind.config because
-  Skeleton does not have 950 styles yet, and the surface 900 color is
-  way too bright. */
-    @apply bg-surface-50 dark:bg-surface-950;
+    /* Note that these are colors we declared in tailwind.config.
+       * The surface-900 color is way too bright. */
+    @apply bg-surface-50 dark:bg-surface-990;
     @apply dark:text-white;
     @apply relative;
     min-height: 100vh;
