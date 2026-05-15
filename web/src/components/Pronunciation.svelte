@@ -5,7 +5,7 @@
   }
 
   let { id = undefined, children }: Props = $props();
-  let Pn: HTMLDivElement;
+  let Pn: HTMLButtonElement;
 </script>
 
-<div bind:this={Pn} onclick={() => navigator.clipboard.writeText(Pn.innerText)} class="my-2 text-gray-800 dark:text-gray-200 text-lg" {id}>{@render children?.()}</div>
+<button title="複製" bind:this={Pn} onclick={() => navigator.clipboard.writeText(Pn.innerText)} class="hover:opacity-75 active:opacity-90 fade cursor-pointer my-2 text-gray-800 dark:text-gray-200 text-lg" {id}>{@render children?.()}</button>
