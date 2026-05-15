@@ -3,7 +3,7 @@
   export let heteronyms: Heteronym[];
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import Property from "$src/components/Property.svelte";
-  import { taigiTitle } from "$src/server/db";
+  import { taigiTitle } from "common";
   function process_def(def: string | undefined): string {
     if (def) {
       let x = "<ol>";

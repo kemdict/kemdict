@@ -232,3 +232,16 @@ export interface Completion {
   matches: string[];
   type: "word" | "search";
 }
+
+/**
+ * Append the POJ version of a heteronym to the title if applicable.
+ */
+export function taigiTitle(het: Heteronym): string {
+  // title is set to kip in the dicts Makefile;
+  // Show POJ in title if they're not equal.
+  if (het.props.titlePoj && het.title !== het.props.titlePoj) {
+    return `${het.title} (${het.props.titlePoj})`;
+  } else {
+    return het.title;
+  }
+}
