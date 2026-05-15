@@ -4,6 +4,8 @@ import "./src.css";
 import Out from "$src/components/Out.astro";
 import LoadingBar from "$src/components/LoadingBar.svelte";
 
+import NavBar from "$src/components/NavBar.svelte";
+
 import { ClientRouter } from "astro:transitions";
 
 export interface Props {
@@ -120,6 +122,14 @@ Astro.response.headers.set("Cache-Control", "s-maxage=15778463");
     }
     <div class="mx-auto my-0 w-[95%] max-w-5xl pt-12">
       <slot />
+    </div>
+    <div
+      class="fixed bottom-0 z-10 h-20 w-full bg-surface-400 dark:bg-surface-900 md:hidden"
+    >
+      <NavBar
+        client:load
+        class="mx-auto my-0 grid h-full w-[95%] max-w-5xl grid-cols-4"
+      />
     </div>
     {
       wantFooter && (
