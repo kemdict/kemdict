@@ -34,7 +34,6 @@
     : starred
       ? "將詞彙從收藏中移除"
       : "將詞彙加入收藏"}
-  aria-checked={starred}
   >{#if loading}
     {"　"}
   {:else if starred}★{:else}☆{/if}</button
