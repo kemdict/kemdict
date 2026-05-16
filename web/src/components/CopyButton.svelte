@@ -5,7 +5,7 @@
     getstr: () => string;
     label: string;
   }
-  const { disabled, getstr, label } = $props();
+  const { disabled, getstr, label }: Props = $props();
 </script>
 
 <button
