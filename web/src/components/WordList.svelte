@@ -4,7 +4,6 @@
   // backlinks ranking for backlinks)
 
   export let etc: string | undefined = undefined;
-  export let deleter: (word: string) => void = undefined;
   export let words: string[];
   export let search: boolean = words.length > 20;
   /** Links link to /word/foo by default; this is the "/word/" part. */
@@ -36,31 +35,6 @@
           <a class="wordlink" href="{prefix}{word}">
             {@html highlight(word, filterString)}
           </a>
-          {#if deleter}
-            <!-- ionicons close-outline -->
-            <button onclick={deleter(word)} class="variant-filled btn px-2 py-1"
-              ><svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                width="512"
-                height="512"
-                viewBox="0 0 512 512"
-                ><line
-                  x1="368"
-                  y1="368"
-                  x2="144"
-                  y2="144"
-                  style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-                /><line
-                  x1="368"
-                  y1="144"
-                  x2="144"
-                  y2="368"
-                  style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-                /></svg
-              ></button
-            >
-          {/if}
         </li>
       {/if}
     {/each}

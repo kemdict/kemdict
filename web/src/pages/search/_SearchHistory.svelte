@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WordList from "$src/components/WordList.svelte";
+  import VerticalWordList from "$src/components/VerticalWordList.svelte";
   import { localStorageStore } from "@skeletonlabs/skeleton";
   import type { Writable } from "svelte/store";
   const searchHistory: Writable<string[]> = localStorageStore(
@@ -29,14 +29,14 @@
       />
     </div>
     {#if $searchHistory.length > 0}
-      <WordList
+      <VerticalWordList
         words={[...$searchHistory].reverse()}
         search={false}
         prefix="/search/?q="
         deleter={(word) => {
           $searchHistory = $searchHistory.filter((val) => val !== word);
         }}
-      ></WordList>
+      ></VerticalWordList>
     {/if}
   </div>
 </div>
