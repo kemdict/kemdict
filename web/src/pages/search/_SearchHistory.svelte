@@ -2,36 +2,39 @@
   import VerticalWordList from "$src/components/VerticalWordList.svelte";
   import { localStorageStore } from "@skeletonlabs/skeleton";
   import type { Writable } from "svelte/store";
-  const wordHistory: Writable<string[]> = localStorageStore("wordHistory", []);
+  const searchHistory: Writable<string[]> = localStorageStore(
+    "searchHistory",
+    [],
+  );
   import CopyButton from "$src/components/CopyButton.svelte";
 </script>
 
 <div class="sm:mt-4 sm:grid sm:grid-cols-2">
   <div>
-    <h2 class="mb-2 text-xl font-bold max-sm:mt-4">詞彙紀錄</h2>
+    <h2 class="mb-2 text-xl font-bold max-sm:mt-8">搜尋紀錄</h2>
     <p class="mb-2">紀錄只保留在瀏覽器裡，沒有傳到伺服器上。</p>
     <div class="mb-2 space-x-1">
       <button
-        disabled={$wordHistory.length === 0}
+        disabled={$searchHistory.length === 0}
         onclick={() => {
-          $wordHistory = [];
+          $searchHistory = [];
         }}
-        class="variant-filled btn">刪除詞彙紀錄</button
+        class="variant-filled btn">刪除搜尋紀錄</button
       >
       <CopyButton
-        disabled={$wordHistory.length === 0}
-        label="匯出詞彙紀錄"
-        getstr={() => JSON.stringify($wordHistory.map((str) => decodeURI(str)))}
+        disabled={$searchHistory.length === 0}
+        label="匯出搜尋紀錄"
+        getstr={() =>
+          JSON.stringify($searchHistory.map((str) => decodeURI(str)))}
       />
     </div>
-    {#if $wordHistory.length > 0}
+    {#if $searchHistory.length > 0}
       <VerticalWordList
-        words={[...$wordHistory].map(decodeURIComponent).reverse()}
+        words={[...$searchHistory].reverse()}
         search={false}
+        prefix="/search/?q="
         deleter={(word) => {
-          $wordHistory = $wordHistory.filter(
-            (val) => decodeURIComponent(val) !== word,
-          );
+          $searchHistory = $searchHistory.filter((val) => val !== word);
         }}
       ></VerticalWordList>
     {/if}

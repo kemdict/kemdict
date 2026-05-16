@@ -3,6 +3,7 @@ export const prerender = false;
 
 import { DB } from "$src/server/db";
 
+import Out from "$src/components/Out.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.svelte";
 import SearchBar from "$src/components/SearchBar.svelte";
@@ -19,7 +20,7 @@ const newWords = await DB.getNewWords(15);
   class="lg:pb-16 lg:pt-16"
   title={title}
   wantHeader={false}
-  wantFooter={true}
+  wantFooter={false}
 >
   <Fragment slot="head">
     <meta name="description" content={description} />
@@ -49,12 +50,18 @@ const newWords = await DB.getNewWords(15);
   </Fragment>
   <div>
     <div class="mb-0 flex justify-between md:mb-4 md:mt-12">
-      <h1 class="mb-2">
-        <div class="text-6xl font-bold max-md:inline max-md:text-2xl">
-          Kemdict
-        </div>
-        <div class="text-2xl font-bold max-md:inline">國家語言整合典</div>
-      </h1>
+      <div class="flex items-center">
+        <img
+          class="mr-2 inline h-24 w-24 rounded-xl shadow"
+          src="/web-app-manifest-192x192.png"
+        />
+        <h1 class="mb-2">
+          <div class="text-6xl font-bold max-md:inline max-md:text-2xl">
+            Kemdict
+          </div>
+          <div class="text-2xl font-bold max-md:inline">國家語言整合典</div>
+        </h1>
+      </div>
       <div>
         <DarkModeToggle client:load />
       </div>
@@ -78,7 +85,7 @@ const newWords = await DB.getNewWords(15);
       <WordList words={newWords} etc="/newwords" />
     </div>
   </div>
-  <div class="prose">
+  <div class="prose pb-8">
     <div class="md:flex">
       <div class="w-1/2">
         <h3>前言</h3>
@@ -100,6 +107,9 @@ const newWords = await DB.getNewWords(15);
               <a href="/finances">財務</a>
             </p>
           </li>
+          <li>
+            <p><a href="usage">使用說明</a></p>
+          </li>
         </ul>
       </div>
       <div>
@@ -115,25 +125,52 @@ const newWords = await DB.getNewWords(15);
             <p><a href="resources">相關資源</a></p>
           </li>
           <li>
-            <p><a href="usage">使用說明</a></p>
+            <p><a href="why">為什麼我做了 Kemdict</a></p>
           </li>
         </ul>
       </div>
     </div>
     <div class="ml-1"></div>
-    <div>
-      <h3>索引</h3>
-      <ul class="ml-1 list-none p-0">
-        <li>
-          <p><a href="initials">首字索引</a></p>
-        </li>
-        <li>
-          <p><a href="radicals">部首索引</a></p>
-        </li>
-        <li>
-          <p><a href="dicts">收錄字典</a></p>
-        </li>
-      </ul>
+    <div class="md:flex">
+      <div class="w-1/2">
+        <h3>索引</h3>
+        <ul class="ml-1 list-none p-0">
+          <li>
+            <p><a href="initials">首字索引</a></p>
+          </li>
+          <li>
+            <p><a href="radicals">部首索引</a></p>
+          </li>
+          <li>
+            <p><a href="dicts">收錄字典</a></p>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <ul class="ml-1 list-none p-0">
+          <li>
+            <p>
+              <a href="https://github.com/kemdict/kemdict/">GitHub 上的原始碼</a
+              >
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="https://www.threads.com/@kemdict">Threads</a>、<a
+                href="https://twitter.com/kemdict">Twitter</a
+              >、<a href="https://www.facebook.com/kemdict">Facebook</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              由<a href="https://kisaragi-hiu.com">如月飛羽</a>所做 —
+              <Out class="" href="https://buymeacoffee.com/kisaragihiu">
+                到 Buy Me a Coffee 贊助我
+              </Out>
+            </p>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </SingleLayout>

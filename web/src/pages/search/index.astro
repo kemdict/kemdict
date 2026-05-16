@@ -28,6 +28,7 @@ import Elsewhere from "$src/components/Elsewhere.astro";
 import SingleLayout from "$src/SingleLayout.astro";
 import WordPreview from "$src/components/WordPreview.svelte";
 import ListLink from "$src/components/ListLink.svelte";
+import SearchHistory from "./_SearchHistory.svelte";
 
 const title = mtch && originalQuery && getSearchTitle(mtch, originalQuery);
 const titleMarkup =
@@ -44,7 +45,11 @@ const titleMarkup =
 
 {
   root ? (
-    <SingleLayout title={`搜尋 - ${site.title}`} />
+    <SingleLayout title={`搜尋 - ${site.title}`}>
+      <!-- Focus search field by default in the generic search page -->
+      <script>document.getElementById("sbi").focus()</script>
+      <SearchHistory client:load />
+    </SingleLayout>
   ) : (
     <SingleLayout
       search={true}
