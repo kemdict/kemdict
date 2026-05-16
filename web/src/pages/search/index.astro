@@ -46,6 +46,8 @@ const titleMarkup =
 {
   root ? (
     <SingleLayout title={`搜尋 - ${site.title}`}>
+      <!-- Focus search field by default in the generic search page -->
+      <script>document.getElementById("sbi").focus()</script>
       <SearchHistory client:load />
     </SingleLayout>
   ) : (
