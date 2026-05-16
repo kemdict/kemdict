@@ -6,7 +6,7 @@
     "searchHistory",
     [],
   );
-  let copySearch: HTMLButtonElement;
+  import CopyButton from "$src/components/CopyButton.svelte";
 </script>
 
 <div class="sm:mt-4 sm:grid sm:grid-cols-2">
@@ -21,21 +21,12 @@
         }}
         class="variant-filled btn">刪除搜尋紀錄</button
       >
-      <button
-        bind:this={copySearch}
+      <CopyButton
         disabled={$searchHistory.length === 0}
-        onclick={() => {
-          navigator.clipboard.writeText(
-            JSON.stringify($searchHistory.map((str) => decodeURI(str))),
-          );
-          const oldInnerText = copySearch.innerText;
-          copySearch.innerText = "已複製！";
-          setTimeout(() => {
-            copySearch.innerText = oldInnerText;
-          }, 1000);
-        }}
-        class="variant-filled btn">匯出搜尋紀錄</button
-      >
+        label="匯出搜尋紀錄"
+        getstr={() =>
+          JSON.stringify($searchHistory.map((str) => decodeURI(str)))}
+      />
     </div>
     {#if $searchHistory.length > 0}
       <WordList

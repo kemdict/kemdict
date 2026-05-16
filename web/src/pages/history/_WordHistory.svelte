@@ -3,7 +3,7 @@
   import { localStorageStore } from "@skeletonlabs/skeleton";
   import type { Writable } from "svelte/store";
   const wordHistory: Writable<string[]> = localStorageStore("wordHistory", []);
-  let copyWords: HTMLButtonElement;
+  import CopyButton from "$src/components/CopyButton.svelte";
 </script>
 
 <div class="sm:mt-4 sm:grid sm:grid-cols-2">
@@ -18,21 +18,11 @@
         }}
         class="variant-filled btn">刪除詞彙紀錄</button
       >
-      <button
-        bind:this={copyWords}
+      <CopyButton
         disabled={$wordHistory.length === 0}
-        onclick={() => {
-          navigator.clipboard.writeText(
-            JSON.stringify($wordHistory.map((str) => decodeURI(str))),
-          );
-          const oldInnerText = copyWords.innerText;
-          copyWords.innerText = "已複製！";
-          setTimeout(() => {
-            copyWords.innerText = oldInnerText;
-          }, 1000);
-        }}
-        class="variant-filled btn">匯出詞彙紀錄</button
-      >
+        label="匯出詞彙紀錄"
+        getstr={() => JSON.stringify($wordHistory.map((str) => decodeURI(str)))}
+      />
     </div>
     {#if $wordHistory.length > 0}
       <WordList
