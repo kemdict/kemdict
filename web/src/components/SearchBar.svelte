@@ -148,10 +148,14 @@
           </div>
         {/if}
       </div>
-      <div>
+      <div class="max-md:hidden">
         <a
           class="whitespace-nowrap font-bold underline [text-underline-offset:4px]"
-          href="/history">搜尋與閱讀紀錄</a
+          href="/search">搜尋紀錄</a
+        >
+        <a
+          class="whitespace-nowrap font-bold underline [text-underline-offset:4px]"
+          href="/history">閱讀紀錄</a
         >
         <a
           class="whitespace-nowrap font-bold underline [text-underline-offset:4px]"
