@@ -19,6 +19,7 @@
 <div class="sm:mt-4 sm:grid sm:grid-cols-2">
   <div>
     <h2 class="mb-2 text-xl font-bold max-sm:mt-4">收藏項目</h2>
+    <p class="mb-2">收藏資訊只保留在瀏覽器裡，沒有傳到伺服器上。</p>
     <div class="mb-2 space-x-1">
       <button
         bind:this={copyFavorites}
@@ -41,7 +42,9 @@
         words={[...$favorites].map(decodeURIComponent).reverse()}
         search={false}
         deleter={(word) => {
-          $favorites = $favorites.filter((val) => decodeURIComponent(val) !== word)
+          $favorites = $favorites.filter(
+            (val) => decodeURIComponent(val) !== word,
+          );
         }}
       ></WordList>
     {/if}
