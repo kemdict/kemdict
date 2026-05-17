@@ -310,7 +310,7 @@ LIMIT 10
     } else if (prefix.startsWith("from:")) {
       const matches = (await this.crossDbAll(
         `
-SELECT DISTINCT is
+SELECT DISTINCT id
 FROM dicts
 WHERE id LIKE ? || '%' ESCAPE '\\'
 LIMIT 10
