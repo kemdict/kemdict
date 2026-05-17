@@ -60,7 +60,7 @@
       }
     });
   });
-  $: completions = clientGetCompletions(value);
+  $: completionsPromise = clientGetCompletions(value);
 </script>
 
 <div class="relative mb-2 mt-2">
@@ -85,22 +85,34 @@
           }}
         />
         <div class="w-full" data-popup="popupCompletion">
-          {#await completions}
+          {#await completionsPromise}
             <div class="card variant-filled relative z-20 w-3/4 p-4">
               <Loading />
             </div>
-          {:then values}
-            {@const type = values.type}
-            {#if values.matches.length !== 0}
+          {:then completions}
+            {@const type = completions.type}
+            {#if completions.matches.length !== 0}
               <div class="card variant-filled relative z-20 w-3/4 p-4">
-                {#each values.matches as value}
+                {#each completions.matches as compl}
+                  {@const klass = "inline-block w-full py-1"}
                   <div>
-                    <a
-                      class="inline-block w-full py-1"
-                      href={type === "word"
-                        ? `/word/${value}`
-                        : `/search?q=${encodeURIComponent(value)}`}>{value}</a
-                    >
+                    {@if type === "word"}
+                      <a
+                        class={klass}
+                        href={`/word/${compl}`}>{compl}</a
+                      >
+                    {:else if type === "search"}
+                      <a
+                        class={klass}
+                        href={`/search?q=${encodeURIComponent(compl)}`}>{compl}</a
+                      >
+                    {:else if type === "dict"}
+                      <button
+                        class={klass}
+                        onclick={() => value = compl}>{compl}</button
+                      >
+                    {:else}
+                    {/if}
                   </div>
                 {/each}
               </div>

@@ -230,7 +230,7 @@ export function joinLast(
 
 export interface Completion {
   matches: string[];
-  type: "word" | "search";
+  type: "word" | "search" | "dict";
 }
 
 /**

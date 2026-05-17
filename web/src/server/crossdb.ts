@@ -287,7 +287,8 @@ ${limit ? `LIMIT ?` : ""}
     };
   }
 
-  /** Get completion for `prefix`.
+  /**
+   * Get completion for `prefix`.
    * If `prefix` starts with "#", results are tags and not words.
    * Returns:
    *   matches: string[] of completions
@@ -306,6 +307,18 @@ LIMIT 10
         true,
       )) as string[];
       return { matches, type: "search" };
+    } else if (prefix.startsWith("from:")) {
+      const matches = (await this.crossDbAll(
+        `
+SELECT DISTINCT is
+FROM dicts
+WHERE id LIKE ? || '%' ESCAPE '\\'
+LIMIT 10
+`,
+        [escapeLike(prefix)],
+        true,
+      )) as string[];
+      return { matches, type: "dict" };
     } else {
       const matches = (await this.crossDbAll(
         `
