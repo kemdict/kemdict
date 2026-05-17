@@ -112,6 +112,7 @@
                         onclick={() => value = compl}>{compl}</button
                       >
                     {:else}
+                      <div class={[klass, "text-red-400"]}>{compl} (這個補完項目的type是錯的 (this is a bug))</div>
                     {/if}
                   </div>
                 {/each}
