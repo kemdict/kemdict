@@ -96,7 +96,7 @@
                 {#each completions.matches as compl}
                   {@const klass = "inline-block w-full py-1"}
                   <div>
-                    {@if type === "word"}
+                    {#if type === "word"}
                       <a
                         class={klass}
                         href={`/word/${compl}`}>{compl}</a
