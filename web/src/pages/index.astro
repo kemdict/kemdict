@@ -8,6 +8,8 @@ import SingleLayout from "$src/SingleLayout.astro";
 import WordList from "$src/components/WordList.svelte";
 import SearchBar from "$src/components/SearchBar.svelte";
 import DarkModeToggle from "$src/components/DarkModeToggle.svelte";
+import UserBox from "$src/components/UserBox.svelte";
+
 const title = "Kemdict 國家語言整合典";
 const sitename = "Kemdict 國家語言整合典";
 const description =
@@ -52,7 +54,7 @@ const newWords = await DB.getNewWords(15);
     <div class="mb-0 flex justify-between md:mb-4 md:mt-12">
       <div class="flex items-center">
         <img
-          class="max-md:hidden mr-2 inline h-24 w-24 rounded-xl shadow"
+          class="mr-2 inline h-24 w-24 rounded-xl shadow max-md:hidden"
           src="/web-app-manifest-192x192.png"
         />
         <h1 class="mb-2">
@@ -63,6 +65,7 @@ const newWords = await DB.getNewWords(15);
         </h1>
       </div>
       <div>
+        <UserBox client:load />
         <DarkModeToggle client:load />
       </div>
     </div>
