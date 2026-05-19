@@ -34,3 +34,7 @@ This was harder an hour ago because I hadn't quite grasped that better-auth isn'
 ** convex auth + convex
 Surely, /surely/ we can make things work in vanilla JS?
 … this is the worst option. No. Even if it works for vanilla JS how are we going to hook it up to Svelte's state?
+
+* current implementation
+
+github and better auth's secret and (local) url are just sitting in .env.local on this machine. (This is also why I want to use Convex.)
