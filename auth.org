@@ -1,0 +1,36 @@
+#+title: Implementing auth and persistent data
+#+created: 2026-05-20T08:41:29+0900
+
+* Auth provider
+I want to use better-auth as the auth provider.
+Convex Auth would be great but it only supports React, apparently not even vanilla JS.
+Clerk and WorkOS seem too much to me.
+
+* Database
+My hope is to use Convex, which solves synchrnoization and a bunch of other stuff for us.
+
+I have difficulties integrating better-auth and convex though. How do I make the login button redirect to Convex instead of to my server? And how do Convex deployments work? etc.
+
+It would be best if we can use Convex.
+
+For now I have auth working with better-auth (using GitHub - GitHub OAuth is so easy to set up, no wonder why even stuff not quite developer oriented like bowlroll would support it), but the way the runtime database is managed, initialized, persisted, etc. is still just a mess. This is why I want to use Convex.
+
+* Ways forward
+I'm extremely sleepy right now and really should /not/ have tried dive into implementing this right after sorting out tabs, so I'm writing out the current status like a how fucking model keeps its context.
+
+** better-auth + sqlite
+We could just use better-auth + sqlite, then we have to
+
+- automate initialization
+- automate migrations
+- make sure we don't accidentally delete the runtime database on the main server
+- figure out how environment secrets should be synced
+
+** better-auth + convex
+We would need to figure out how to get Convex working with better-auth (login button should redirect to convex; the better-auth instance should be running in convex)
+
+This was harder an hour ago because I hadn't quite grasped that better-auth isn't a hosted service, or two hours ago when I hadn't quite grasped that Convex is its own execution environment. But it should be doable, especially compared to dealing with all the edge cases with rawdogging sqlite ourselves.
+
+** convex auth + convex
+Surely, /surely/ we can make things work in vanilla JS?
+… this is the worst option. No. Even if it works for vanilla JS how are we going to hook it up to Svelte's state?
