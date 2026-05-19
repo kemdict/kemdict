@@ -21,7 +21,7 @@ build: entries.db
 .PHONY: build
 
 .eask: Eask
-	npx eask install-deps
+	npx @emacs-eask/cli install-deps
 	touch .eask
 
 DICT_TARGETS := kisaragi/kisaragi_dict.json
@@ -40,7 +40,7 @@ dicts: $(DICT_TARGETS)
 # * entries.db
 
 entries.db: $(DICT_TARGETS) process-data.el .eask
-	npx eask eval "(load \"process-data\")"
+	npx @emacs-eask/cli eval "(load \"process-data\")"
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
@@ -71,7 +71,7 @@ unihan.json:
 	unihan-etl -F json -d $(abspath unihan.json) -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
-	npx eask eval "(load \"kisaragi/generate\")"
+	npx @emacs-eask/cli eval "(load \"kisaragi/generate\")"
 
 # - HanLoTaibunPoj -> title, because I've assumed that each entry has
 #   a main title and I need to pick one. It's not an ideal assumption.
