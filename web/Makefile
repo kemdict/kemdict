@@ -37,3 +37,8 @@ preview: $(DEPS)
 
 check:
 	bunx astro check
+
+auth.generate:
+	bunx --bun auth generate
+auth.migrate:
+	bunx --bun auth migrate

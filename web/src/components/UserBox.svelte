@@ -8,7 +8,7 @@
 </script>
 
 {#if loading}
-  <div class={klass}></div>
+  <div class={["w-5", klass]}></div>
 {:else if $session.data}
   <button
     class={klass}
@@ -31,6 +31,6 @@
       authClient.signIn.social({ provider: "github" });
     }}
   >
-    sign in with google
+    sign in with github
   </button>
 {/if}
