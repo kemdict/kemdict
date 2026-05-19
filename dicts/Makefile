@@ -21,8 +21,7 @@ build: entries.db
 .PHONY: build
 
 .eask: Eask
-	npx @emacs-eask/cli install-deps
-	touch .eask
+	npx @emacs-eask/cli install-deps && touch .eask
 
 DICT_TARGETS := kisaragi/kisaragi_dict.json
 DICT_TARGETS += pts-taigitv/README.md
