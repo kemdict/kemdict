@@ -17,8 +17,6 @@
   ],
   "dependencies": {
     "@astrojs/node": "^10.1.1",
-    "@auth/core": "0.37.0",
-    "@convex-dev/auth": "^0.0.92",
     "@kemdict/kesi": "^0.1.0",
     "astro": "^6.3.3",
     "convex": "^1.39.1",
