@@ -6,15 +6,6 @@
     ? pathname === href
     : globalThis?.location?.href !== undefined &&
       new URL(location.href).pathname === href;
-
-  console.log({
-    active,
-    href,
-    pathname,
-    locationHrefPathname:
-      globalThis?.location?.href !== undefined &&
-      new URL(location.href).pathname,
-  });
 </script>
 
 <a {href} class="flex flex-col items-center justify-center gap-1 text-center">
