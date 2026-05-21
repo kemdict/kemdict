@@ -315,7 +315,7 @@ FROM dicts
 WHERE id LIKE ? || '%' ESCAPE '\\'
 LIMIT 10
 `,
-        [escapeLike(prefix)],
+        [escapeLike(prefix.slice(5 /* "from:".length */))],
         true,
       )) as string[];
       return { matches, type: "dict" };
