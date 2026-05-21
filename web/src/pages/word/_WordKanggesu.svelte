@@ -7,6 +7,11 @@
 {#each heteronyms as het}
   <h1>{het.title}</h1>
   <Pronunciation>{het.props.kip}</Pronunciation>
+  {#if het.props.memo}
+    <p class="def">
+      {@html het.props.memo}
+    </p>
+  {/if}
   {#if het.props.mainTypeName}
     {@const tag = het.props.mainTypeName}
     <Property key="工藝類別">
@@ -21,11 +26,6 @@
   {/if}
   {#if het.props.zh}
     <Property key="華語" value={het.props.zh} html={true} />
-  {/if}
-  {#if het.props.memo}
-    <p class="def">
-      {@html het.props.memo}
-    </p>
   {/if}
   {#if het.props.provider}
     <Property key="資料來源" value={het.props.provider} />
