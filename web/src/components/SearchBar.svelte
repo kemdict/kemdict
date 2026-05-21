@@ -97,22 +97,22 @@
                   {@const klass = "inline-block w-full py-1"}
                   <div>
                     {#if type === "word"}
-                      <a
-                        class={klass}
-                        href={`/word/${compl}`}>{compl}</a
-                      >
+                      <a class={klass} href={`/word/${compl}`}>{compl}</a>
                     {:else if type === "search"}
                       <a
                         class={klass}
-                        href={`/search?q=${encodeURIComponent(compl)}`}>{compl}</a
+                        href={`/search?q=${encodeURIComponent(compl)}`}
+                        >{compl}</a
                       >
                     {:else if type === "dict"}
-                      <button
-                        class={klass}
-                        onclick={() => value = compl}>{compl}</button
+                      {@const withPrefix = "from:" + compl}
+                      <button class={klass} onclick={() => (value = withPrefix)}
+                        >{withPrefix}</button
                       >
                     {:else}
-                      <div class={[klass, "text-red-400"]}>{compl} (這個補完項目的type是錯的 (this is a bug))</div>
+                      <div class={[klass, "text-red-400"]}>
+                        {compl} (這個補完項目的type是錯的 (this is a bug))
+                      </div>
                     {/if}
                   </div>
                 {/each}
