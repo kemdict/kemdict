@@ -308,16 +308,29 @@ LIMIT 10
       )) as string[];
       return { matches, type: "search" };
     } else if (prefix.startsWith("from:")) {
-      const matches = (await this.crossDbAll(
-        `
+      const idPrefix = prefix.slice(5 /* "from:".length */);
+      const matches = (
+        idPrefix
+          ? await this.crossDbAll(
+              `
 SELECT DISTINCT id
 FROM dicts
 WHERE id LIKE ? || '%' ESCAPE '\\'
 LIMIT 10
 `,
-        [escapeLike(prefix.slice(5 /* "from:".length */))],
-        true,
-      )) as string[];
+              [escapeLike(idPrefix)],
+              true,
+            )
+          : await this.crossDbAll(
+              `
+SELECT DISTINCT id
+FROM dicts
+LIMIT 10
+`,
+              [],
+              true,
+            )
+      ) as string[];
       return { matches, type: "dict" };
     } else {
       const matches = (await this.crossDbAll(
