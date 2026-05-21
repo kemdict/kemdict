@@ -24,8 +24,9 @@ preview: build
 	cd web && env PORT=5173 node dist/server/entry.mjs
 
 admin.deploy.kemdict:
+	@set -e
 	@[ "$$ANDROID_DATA"x != x ] && (echo "The database is reduced on Android to make it fit in my phone's RAM for testing. Deploying here would use this reduced database. Exiting."; exit 1)
-	@[ "$$SSH_HOST"x == x ] && (echo 'Please specify $$SSH_HOST'; exit 1)
+	@[ "$$SSH_HOST"x = x ] && (echo 'Please specify $$SSH_HOST'; exit 1)
 	cd web
 
 	# Still have to figure out a way to dostinguish between missing DB
@@ -51,6 +52,7 @@ admin.deploy.kemdict:
 	HERE
 
 admin.deploy.pojtl-api:
+	@set -e
 	@[ "$$SSH_HOST"x != x ] || (echo 'Please specify $$SSH_HOST'; exit 1)
 	tar -czf pojtl-api.tar.gz -a pojtl-api
 	rsync pojtl-api.tar.gz "$$SSH_HOST:/home/kisaragi"
