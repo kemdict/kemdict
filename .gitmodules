@@ -13,3 +13,6 @@
 [submodule "dicts/pts-taigitv"]
 	path = dicts/pts-taigitv
 	url = https://github.com/kemdict/kemdict-data-pts-taigitv
+[submodule "dicts/kanggesu-data"]
+	path = dicts/kanggesu-data
+	url = https://github.com/taigikeyboard/kanggesu-data

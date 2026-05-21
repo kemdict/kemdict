@@ -33,6 +33,7 @@ DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json
 DICT_TARGETS += lopof-nan_TW.json lopof-hak_TW.json
 DICT_TARGETS += unihan.json caris-events--invade.json
+DICT_TARGETS += kanggesu-data/README.md
 
 dicts: $(DICT_TARGETS)
 .PHONY: dicts
@@ -112,6 +113,9 @@ chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json: ChhoeTaigiDatabase/README.md
 # mark whether the submodule has been populated or not.
 ministry-of-education/package.json:
 	git submodule update --init --depth 1 -- ministry-of-education
+
+kanggesu-data/README.md:
+	git submodule update --init --depth 1 -- kanggesu-data
 
 pts-taigitv/README.md:
 	git submodule update --init --depth 1 -- pts-taigitv

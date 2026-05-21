@@ -104,6 +104,26 @@ export const dicts = [
     meta: lopofMeta,
   },
   {
+    id: "kanggesu",
+    name: "臺灣台語工藝詞庫",
+    url: "https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite?id=$1",
+    lang: "nan_TW",
+    meta: {
+      author: "國立臺灣工藝研究發展中心",
+      desc: `
+由社團法人臺灣工藝聯盟總會基於工藝文化保存理念主動發起，並邀集工藝相關組織及從業人員共同推動，針對 11 項工藝類別，由資深工藝家就其專業領域中，涉及品名、工具、材料、工序、技法與設備等之專有名詞，進行臺灣台語用字與發音之考究，並彙整而成之工藝詞庫。
+
+（改寫自其[關於頁面](https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite/About)）
+`,
+      license: {
+        name: "CC-BY-NC-ND",
+        url: "https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite/ImageLicense",
+      },
+      source: "https://github.com/taigikeyboard/kanggesu-data",
+      original: "https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite",
+    },
+  },
+  {
     id: "pts-taigitv",
     name: "公視台語新詞辭庫",
     // I don't have the ID for the new site yet

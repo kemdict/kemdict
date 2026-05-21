@@ -64,6 +64,7 @@ by default."
        ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
        ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
        ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
+       ("kanggesu" "nan_TW" "kanggesu-data/data/scrape-20251210.json")
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
@@ -546,6 +547,7 @@ some processing.
 This is a separate step from shaping."
   (let ((d:links:from title)
         (d:links:linked nil)
+        ;; this is the language the dict is written in
         (d:links:lang (when (equal dict "chhoetaigi_taijittoasutian")
                         "nan_TW")))
     (dolist (key '("definition" "source_comment" "典故說明"))
@@ -687,6 +689,17 @@ This is a separate step from shaping."
                       ;; No need to apply linkify-brackets again
                       d:links:org-style)))))))
       ("pts-taigitv"
+       ;; Keep a copy that doesn't have markup
+       (d::hash-copy props "zh" "zh-plain")
+       (ht-update-with! props "zh"
+         #'d:links:link-to-word))
+      ("kanggesu"
+       (d::hash-rename props "entriesBaseId" "id")
+       (d::hash-rename props "chineseCharacters" "zh")
+       (d::hash-rename props "romanizationSystem" "kip")
+       (d::hash-rename props "taiwaneseCharacters" "title")
+       (ht-update-with! props "memo"
+         #'d:links:linkify-keywords)
        ;; Keep a copy that doesn't have markup
        (d::hash-copy props "zh" "zh-plain")
        (ht-update-with! props "zh"
@@ -908,6 +921,10 @@ ORIG-HETS are props that will be used to construct heteronyms."
                                    (gethash "han")
                                    (gethash "main")
                                    d:process-title)
+                                 ;; kanggesu
+                                 (-some->> entry
+                                   (gethash "taiwaneseCharacters")
+                                   d:process-title)
                                  ;; 臺日大辭典 and 臺灣白話基礎語句
                                  (gethash "kip" orig-het)
                                  ;; unihan
@@ -1065,6 +1082,7 @@ VALUES
                              "chhoetaigi_taioanpehoekichhoogiku"
                              "chhoetaigi_taijittoasutian"
                              "pts-taigitv"
+                             "kanggesu"
                              "lopof-taigi"
                              "lopof-hakka"))
                (let ((input-form (d:pn-to-input-form pn)))
@@ -1072,9 +1090,10 @@ VALUES
                    (when (equal het.from "kautian")
                      (setq kautian-has-nonexact-aliases t))
                    (sqlite-execute d:db alias-stmt (list het-id input-form nil))))))
-           ;; For these two, set the zh version as an alias
+           ;; For these, set the zh version as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"
+                           "kanggesu"
                            "pts-taigitv"))
              (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
                (unless zh-plain-aliases-success
@@ -1086,12 +1105,23 @@ VALUES
              (when-let ((en (gethash "en" (gethash "props" het))))
                (sqlite-execute d:db alias-stmt (list het-id en nil))))
            (when (member het.from '("pts-taigitv"
+                                    "kanggesu"
                                     "kisaragi_dict"
                                     "kisaragi_taigi"))
              (when-let ((tags (seq-concatenate
                                'vector
-                               (gethash "wordTags" (gethash "props" het))
-                               (gethash "tags" (gethash "props" het)))))
+                               (->> (gethash "props" het)
+                                    (gethash "wordTags"))
+                               (->> (gethash "props" het)
+                                    (gethash "tags"))
+                               ;; kanggesu 工藝類別
+                               (->> (gethash "props" het)
+                                    (gethash "mainTypeName")
+                                    list)
+                               ;; kanggesu 子類別
+                               (->> (gethash "props" het)
+                                    (gethash "childTypeName")
+                                    list))))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
                (d::for (tag tags)
                  (when-let
@@ -1107,7 +1137,8 @@ VALUES
                                  het.from
                                  tag)
                                 nil))))
-                   (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil)))))))))
+                   (unless (member tag-str '("其他"))
+                     (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil))))))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless zh-plain-aliases-success

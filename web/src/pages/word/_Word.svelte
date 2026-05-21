@@ -9,6 +9,7 @@
   import WordKichhooGiku from "./_WordKichhooGiku.svelte";
   import WordMaryknoll from "./_WordMaryknoll.svelte";
   import WordPtsTaigitv from "./_WordPtsTaigitv.svelte";
+  import WordKanggesu from "./_WordKanggesu.svelte";
   import WordMoedictish from "./_WordMoedictish.svelte";
   import WordKautian from "./_WordKautian.svelte";
   import WordUnihan from "./_WordUnihan.svelte";
@@ -33,7 +34,7 @@
       ></span
     >
     <span>
-      {#if ["hakkadict", "pts-taigitv", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku", "chhoetaigi_maryknoll1976"].includes(dict.id)}
+      {#if ["hakkadict", "kanggesu", "pts-taigitv", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku", "chhoetaigi_maryknoll1976"].includes(dict.id)}
         <!-- FIXME: this only links to the first one. -->
         <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
       {:else if dict.id.startsWith("lopof")}
@@ -134,6 +135,15 @@
             href="https://github.com/fhl-net/Lim-Chun-iok_2008_Tai-jip-Tua-su-tian"
             >台文版原 GitHub 儲存庫</a
           >
+        </p>
+      </div>
+    {:else if dict.id == "kanggesu"}
+      <WordKanggesu heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          <a href="https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite"
+            >《臺灣台語工藝詞庫》</a
+          > © 國立臺灣工藝研究發展中心
         </p>
       </div>
     {:else if dict.id == "pts-taigitv"}
