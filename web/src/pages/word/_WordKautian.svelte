@@ -123,7 +123,7 @@
           {/if}
           {#if kautianHet.hhAntonyms || kautianHet.hwAntonyms}
             <Property key="反義詞">
-              {#each appendAndSort(kautianHet.hhAntonyms, kautianHet.hwAntonyms)?.sort( (a, b) => (a.han < b.han ? -1 : 1), ) as it}
+              {#each appendAndSort(kautianHet.hhAntonyms, kautianHet.hwAntonyms) as it}
                 <a
                   class="block"
                   href={"hetId" in it
