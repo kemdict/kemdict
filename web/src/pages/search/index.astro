@@ -46,7 +46,7 @@ const titleMarkup =
 {
   root ? (
     <SingleLayout title={`搜尋 - ${site.title}`}>
-      <!-- Focus search field by default in the generic search page -->
+      {/* Focus search field by default in the generic search page */}
       <script>document.getElementById("sbi").focus()</script>
       <SearchHistory client:load />
     </SingleLayout>
@@ -97,18 +97,23 @@ const titleMarkup =
                       )}
                       searchQuery={normalizedQuery}
                     />
-                    {applicableHeteronyms.length > previewCount && (
-                      <ListLink
-                        href={`/search/${
-                          lang[0]
-                        }?${url.searchParams.toString()}`}
-                      >
-                        <div class="text-center" slot="heading">
-                          共 {applicableHeteronyms.length} 項結果
-                        </div>
-                      </ListLink>
-                    )}
                   </ul>
+                  {applicableHeteronyms.length > previewCount && (
+                    <a
+                      href={`/search/${lang[0]}?${url.searchParams.toString()}`}
+                      class:list={[
+                        "block rounded transition",
+                        "hover:bg-surface-100 dark:hover:bg-stone-800",
+                        "-mx-1 my-2 p-1",
+                      ]}
+                    >
+                      <div class="relative">
+                        <h2 class="text-center font-bold text-surface-950 underline [text-underline-offset:4px] dark:text-surface-100">
+                          共 {applicableHeteronyms.length} 項結果
+                        </h2>
+                      </div>
+                    </a>
+                  )}
                 </div>
               );
             })}
