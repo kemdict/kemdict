@@ -3,7 +3,22 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 
 .DEFAULT_GOAL := dist
 
-DEPS := public/l $(wildcard *.js *.mjs *.cjs *.ts *.astro)
+# NOTE this avoids having to clone that repository which is pretty big (since it
+# contains raw data for the dictionaries)
+../dicts/ministry-of-education/%:
+	mkdir -p "$(dir $@)"
+	curl -L "https://github.com/kemdict/kemdict-data-ministry-of-education/raw/refs/heads/main/$(patsubst ../dicts/%,%,$@)" > "$@"
+
+MOE_DEPS := public/l $(addprefix ../dicts/ministry-of-education/,versions.ts kautian.ts)
+
+# We had committed these to this repository so this one can feel free to depend
+# on the submodule (as we don't need to run it in CI)
+public/l:
+	cd ../dicts && $(MAKE) ministry-of-education/package.json
+	mkdir -p public/l/
+	cp ../dicts/ministry-of-education/license/* public/l/
+
+DEPS := $(MOE_DEPS) $(wildcard *.js *.mjs *.cjs *.ts *.astro)
 
 entries.db: ../dicts
 	cd ../dicts && $(MAKE) entries.db
@@ -15,11 +30,6 @@ dist: $(DEPS)
 	cp package.json pnpm-lock.yaml dist/
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 	npx size-limit
-
-public/l: ../dicts
-	cd ../dicts && $(MAKE) ministry-of-education/package.json
-	mkdir -p public/l/
-	cp ../dicts/ministry-of-education/license/* public/l/
 
 .PHONY: dev build preview check build-no-data build-with-data
 
