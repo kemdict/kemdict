@@ -700,9 +700,6 @@ This is a separate step from shaping."
        (ht-update-with! props "zh"
          #'d:links:comma-word-list))
       ("chhoetaigi_taioanpehoekichhoogiku"
-       (ht-update-with! props "en"
-         (lambda (s)
-           (d:links:comma-word-list s ", ")))
        (ht-update-with! props "zh"
          #'d:links:comma-word-list)
        (dolist (key '("examplePOJ" "exampleEn" "exampleZh"))
