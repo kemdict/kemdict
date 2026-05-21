@@ -94,7 +94,7 @@
             {#if completions.matches.length !== 0}
               <div class="card variant-filled relative z-20 w-3/4 p-4">
                 {#each completions.matches as compl}
-                  {@const klass = "inline-block w-full py-1"}
+                  {@const klass = "inline-block w-full py-1 text-left"}
                   <div>
                     {#if type === "word"}
                       <a class={klass} href={`/word/${compl}`}>{compl}</a>
