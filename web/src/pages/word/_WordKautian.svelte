@@ -7,8 +7,27 @@
   import Property from "$src/components/Property.svelte";
   import { uniqBy } from "lodash-es";
 
-  // HACK we're using this like a local variable (and it should not be reactive)
-  let prev單字不成詞 = false;
+  function processHeteronyms(heteronyms: Array<Heteronym<OutputWord>>) {
+    const result: Array<Heteronym<OutputWord>> = [];
+    // Compute the props we need regarding next/previous items in the data first
+    let prev單字不成詞 = false;
+    for (let i = 0; i < heteronyms.length; i++) {
+      const kautianWord = heteronyms[i];
+      const nextType = heteronyms[i + 1]?.props.type;
+      const this單字不成詞 = kautianWord.props.type === "單字不成詞者";
+      result.push({
+        ...kautianWord,
+        props: {
+          nextType,
+          this單字不成詞,
+          prev單字不成詞,
+          ...kautianWord.props,
+        },
+      });
+      prev單字不成詞 = this單字不成詞;
+    }
+    return result;
+  }
 
   /**
    * Join two arrays together then sort them by the `.han` key.
@@ -26,9 +45,10 @@
   }
 </script>
 
-{#each heteronyms as kautianWord, i}
+{#each processHeteronyms(heteronyms) as kautianWord, i}
   {@const thisType = kautianWord.props.type}
   {@const this單字不成詞 = kautianWord.props.type === "單字不成詞者"}
+  {@const prev單字不成詞 = kautianWord.props.prev單字不成詞}
 
   <div id="kautian-word-{kautianWord.props.id}">
     <!-- 這個是單字不成詞者的話，如果前一個也是那就不要再顯示一次標題 -->
@@ -60,7 +80,7 @@
     {/if}
     <!-- 在有一群單字不成詞之類的詞目時，只在最後一個顯示無義項的說明 -->
     {#if thisType === "單字不成詞者" || thisType === "臺華共同詞" || thisType === "近反義詞不單列詞目者"}
-      {@const nextType = heteronyms[i + 1]?.props.type}
+      {@const nextType = kautianWord.props.nextType}
       {#if thisType !== nextType}
         {#if thisType === "單字不成詞者"}
           <p class="def">（單字不成詞者 ，無義項）</p>
@@ -71,7 +91,6 @@
         {/if}
       {/if}
     {/if}
-    {#if (prev單字不成詞 = this單字不成詞)}{/if}
 
     <ol class="space-y-4">
       {#each kautianWord.props.heteronyms as kautianHet}
