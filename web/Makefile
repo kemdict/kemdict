@@ -7,7 +7,7 @@ export KEMDICT_VERSION=$(shell git describe --tags --always)
 # contains raw data for the dictionaries)
 ../dicts/ministry-of-education/%:
 	mkdir -p "$(dir $@)"
-	curl -L "https://github.com/kemdict/kemdict-data-ministry-of-education/raw/refs/heads/main/$(patsubst ../dicts/%,%,$@)" > "$@"
+	curl -L "https://github.com/kemdict/kemdict-data-ministry-of-education/raw/refs/heads/main/$(patsubst ../dicts/ministry-of-education/%,%,$@)" > "$@"
 
 MOE_DEPS := public/l $(addprefix ../dicts/ministry-of-education/,versions.ts kautian.ts)
 
