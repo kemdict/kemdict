@@ -34,6 +34,7 @@
         ((het as Heteronym<OutputWord>).props?.type === "臺華共同詞" &&
           "（臺華共同詞，無義項）") ||
         het.props.example ||
+        het.props.memo ||
         het.props.zh ||
         het.props.en ||
         het.props.scientificName,
