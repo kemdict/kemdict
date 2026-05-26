@@ -18,7 +18,7 @@
   "dependencies": {
     "@astrojs/node": "^10.1.1",
     "@kemdict/kesi": "^0.1.0",
-    "astro": "^6.3.3",
+    "astro": "^6.3.8",
     "lodash-es": "^4.17.22",
     "marked": "^12.0.2",
     "postcss-import": "^16.1.1",
@@ -34,8 +34,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/mdx": "^5.0.6",
-    "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/svelte": "^8.1.1",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^8.1.2",
     "@floating-ui/dom": "^1.7.4",
     "@size-limit/file": "^11.2.0",
     "@skeletonlabs/skeleton": "^2.11.0",
