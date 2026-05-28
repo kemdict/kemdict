@@ -58,18 +58,15 @@ caris-events--invade.json: caris-events--invade/README.md
 	bun caris-events--invade.ts
 
 unihan.json:
-	# 2024-12-27
-	# Versions newer than this currently breaks for the set of fields that
-	# I'm asking from it. So just pin it to the last known working
+	# 2024-12-27, 2026-05-29
+	# unihan-etl versions newer than 0.34.0 currently breaks for the set of
+	# fields that I'm asking from it. So just pin it to the last known working
 	# version. For now.
-	# pip install unihan-etl==0.34.0 # this is done in CI
-	# unihan-etl uses Unihan.zip from latest Unicode, but right
-	# now does not appear to work with Unihan.zip from Unicode
-	# 15.1. It did work with the one from Unicode 15.0, so use
+	# The pinning is now done with uv.
+	# This version of unihan-etl did not appear to work with Unihan.zip from
+	# Unicode 15.1 or later. It did work with the one from Unicode 15.0, so use
 	# that instead.
-	mkdir -p ~/.cache/unihan_etl/downloads
-	curl -L "https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip" > ~/.cache/unihan_etl/downloads/Unihan.zip
-	unihan-etl -F json -d $(abspath unihan.json) -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
+	uv run unihan-etl --source "https://www.unicode.org/Public/15.0.0/ucd/Unihan.zip" -F json -d $(abspath unihan.json) -f kAccountingNumeric kCangjie kCompatibilityVariant kDefinition kMandarin kOtherNumeric kPhonetic kPrimaryNumeric kRSUnicode kSemanticVariant kSimplifiedVariant kSpecializedSemanticVariant kTotalStrokes kTraditionalVariant kZVariant
 
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
 	npx eask eval "(load \"kisaragi/generate\")"

@@ -21,23 +21,21 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - name: Install packages
-        run: |
-          cd dicts
-          # 2024-12-27
-          # Versions newer than this currently breaks for the set of fields that
-          # I'm asking from it. So just pin it to the last known working
-          # version. For now.
-          pip install unihan-etl==0.34.0 typing_extensions
+      - name: Set up uv
+        uses: astral-sh/setup-uv@main
       - name: Set up Emacs
         uses: purcell/setup-emacs@master
         with:
           version: 29.1
+      - name: Install packages
+        run: |
+          cd dicts
+          uv sync
+          bun install
+          bunx eask install-deps
       - name: Build data files
         run: |
           cd dicts
-          bun install
-          bunx eask install-deps
           # Do this, otherwise Make will try to regenerate them
           touch lopof-nan_TW.json lopof-hak_TW.json
           make entries.db.gz
