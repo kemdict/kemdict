@@ -163,7 +163,9 @@ export const dicts = [
   {
     id: "chhoetaigi_maryknoll1976",
     name: "Maryknoll台英辭典",
-    url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
+    // The IDs from the version of ChhoeTaigiDatabase we're using are no longer
+    // the same IDs used by ChhoeTaigi for this dictionary, so we have to use a search.
+    url: "https://chhoe.taigi.info/s?s=koo&d=MaryknollTaiengSutian&f=e&ku=$1",
     lang: "nan_TW",
     meta: {
       author: "Maryknoll Language Service Center",

@@ -34,7 +34,7 @@
       ></span
     >
     <span>
-      {#if ["hakkadict", "kanggesu", "pts-taigitv", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku", "chhoetaigi_maryknoll1976"].includes(dict.id)}
+      {#if ["hakkadict", "kanggesu", "pts-taigitv", "chhoetaigi_taijittoasutian", "chhoetaigi_taioanpehoekichhoogiku"].includes(dict.id)}
         <!-- FIXME: this only links to the first one. -->
         <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
       {:else if dict.id.startsWith("lopof")}
