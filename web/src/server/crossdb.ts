@@ -157,15 +157,15 @@ function parsedQueryToSQL(
 /**
  * Shared DB instance to support multiple database backends.
  *
- * runtime: "bun" or "rn" (React Native)
+ * runtime: only "bun" for now
  * readDB: the function that returns the DB instance. Called once
  * on first use; the db instance is reused afterwards.
  */
 export class CrossDB {
-  readonly #runtime: "bun" | "rn";
+  readonly #runtime: "bun";
   readonly #readDB: () => any;
   #db: any = undefined;
-  constructor(runtime: "bun" | "rn", readDB: () => any) {
+  constructor(runtime: "bun", readDB: () => any) {
     this.#runtime = runtime;
     this.#readDB = readDB;
   }
@@ -181,25 +181,17 @@ export class CrossDB {
     args: unknown[] = [],
     pluck?: boolean,
   ): Promise<unknown[]> {
-    if (this.#runtime === "bun") {
-      const db = await this.getDB();
-      const stmt = db.query(source);
-      if (pluck) {
-        return stmt.values(...args).map((x: unknown[]) => x[0]);
-      } else {
-        return stmt.all(...args);
-      }
+    if (this.#runtime !== "bun") {
+      throw new Error(
+        'sqlite runtimes other than "bun" are currently not supported',
+      );
+    }
+    const db = await this.getDB();
+    const stmt = db.query(source);
+    if (pluck) {
+      return stmt.values(...args).map((x: unknown[]) => x[0]);
     } else {
-      const db = await this.getDB();
-      return new Promise((resolve) => {
-        db.transaction((tx) =>
-          tx.executeSql(
-            source,
-            args as Array<string | number>,
-            (_, resultSet) => resolve(resultSet.rows._array),
-          ),
-        );
-      });
+      return stmt.all(...args);
     }
   }
 
