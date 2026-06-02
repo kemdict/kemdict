@@ -3,9 +3,8 @@ import { CrossDB, parseQuery, parseStringQuery, type Mtch } from "./crossdb";
 import { processPn } from "$lib/processing";
 import type { Heteronym, LangId } from "common";
 import { groupByProp, joinLast } from "common";
-import { Database } from "bun:sqlite";
 
-export async function readDB() {
+async function readDB() {
   const fs = await import("node:fs");
   const path = [
     "../kemdict.db",
@@ -15,13 +14,23 @@ export async function readDB() {
     "./entries.db",
   ].find((f) => fs.existsSync(f));
   if (!path) throw new Error("DB not found!");
-  const db = new Database(path, {
-    readonly: true,
-  });
-  return db;
+
+  if ("Bun" in globalThis) {
+    const { Database } = await import("bun:sqlite");
+    const db = new Database(path, {
+      readonly: true,
+    });
+    return db;
+  } else {
+    const { DatabaseSync } = await import("node:sqlite");
+    const db = new DatabaseSync(path, {
+      readOnly: true,
+    });
+    return db;
+  }
 }
 
-export const DB = new CrossDB("bun", readDB);
+export const DB = new CrossDB("Bun" in globalThis ? "bun" : "node", readDB);
 
 export function getSearchTitle(
   mtch: Mtch,

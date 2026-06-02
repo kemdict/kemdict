@@ -162,10 +162,10 @@ function parsedQueryToSQL(
  * on first use; the db instance is reused afterwards.
  */
 export class CrossDB {
-  readonly #runtime: "bun";
+  readonly #runtime: "bun" | "node";
   readonly #readDB: () => any;
   #db: any = undefined;
-  constructor(runtime: "bun", readDB: () => any) {
+  constructor(runtime: "bun" | "node", readDB: () => any) {
     this.#runtime = runtime;
     this.#readDB = readDB;
   }
@@ -178,20 +178,33 @@ export class CrossDB {
   }
   async crossDbAll(
     source: string,
-    args: unknown[] = [],
+    args: any[] = [],
     pluck?: boolean,
   ): Promise<unknown[]> {
-    if (this.#runtime !== "bun") {
+    if (this.#runtime === "bun") {
+      const db = (await this.getDB()) as import("bun:sqlite").Database;
+      const stmt = db.query(source);
+      if (pluck) {
+        return stmt.values(...args).map((x: unknown[]) => x[0]);
+      } else {
+        return stmt.all(...args);
+      }
+    } else if (this.#runtime === "node") {
+      const db = (await this.getDB()) as import("node:sqlite").DatabaseSync;
+      const stmt = db.prepare(source);
+      if (pluck) {
+        // node:sqlite does not have a .values that returns an array of arrays.
+        // The next best thing is grabbing one value from the object, assuming
+        // that the statement does not produce multiple values for each returned
+        // object.
+        return stmt.all(...args).map((x) => Object.values(x)[0]);
+      } else {
+        return stmt.all(...args);
+      }
+    } else {
       throw new Error(
         'sqlite runtimes other than "bun" are currently not supported',
       );
-    }
-    const db = await this.getDB();
-    const stmt = db.query(source);
-    if (pluck) {
-      return stmt.values(...args).map((x: unknown[]) => x[0]);
-    } else {
-      return stmt.all(...args);
     }
   }
 
