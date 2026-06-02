@@ -1,6 +1,4 @@
 import { uniq } from "lodash-es";
-import sqlstring from "sqlstring";
-const sqlEscapeOrig = sqlstring.escape;
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 import sql, { empty } from "sql-template-tag";
@@ -48,12 +46,6 @@ function tokenToLIKEInput(
   } else {
     return escapedToken;
   }
-}
-
-// sqlstring's escapes single quotes with a backslash, but SQLite
-// expects it to be doubled instead.
-function escapeSql(thing: any) {
-  return sqlEscapeOrig(thing).replace("\\'", "''").normalize("NFD");
 }
 
 /**
@@ -362,8 +354,8 @@ LIMIT 10
     return (await this.crossDbAll(
       `
 SELECT DISTINCT "from" FROM links
-WHERE "to" IN (${escapeSql(titles)})`,
-      [],
+WHERE "to" IN (${titles.map(() => "?").join(",")})`,
+      titles,
       true,
     )) as string[];
   }
