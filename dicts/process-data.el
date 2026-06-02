@@ -1131,6 +1131,8 @@ VALUES
                               (gethash "title" tag))
                              ((stringp tag)
                               tag)
+                             ;; just ignore it if it is nil
+                             ((null tag) nil)
                              (t (d::warn
                                  "Unexpected tag format! Heteronym %S from dict %S, tag %S"
                                  het
@@ -1207,7 +1209,7 @@ ORDER BY b.sc;")
     (sqlite-execute d:db "DROP TABLE a;")
     (sqlite-execute d:db "DROP TABLE b;")
     (sqlite-execute d:db "DROP TABLE c;"))
-  (sqlite-execute d:db "VACUUM")
+  (message "Calculating new words...")
   (let ((words
          ;; The "added" field only exists for kisaragi_dict entries
          (sqlite-select d:db
@@ -1278,7 +1280,14 @@ INSERT INTO
   newwords (\"title\",\"time\",\"from\")
 VALUES
   (?,?,?)"
-         (list title time from))))))
+         (list title time from)))))
+  (message "Creating indicies...")
+  ;; This cuts backlinks lookup from 50ms to 0.1ms on MF-PC
+  (sqlite-execute d:db "CREATE INDEX idx_links_reverse ON links('to', 'from');")
+  ;; this cuts word page exact getHeteronyms down from like 140ms to 0.2ms on MF-PC
+  (sqlite-execute d:db "CREATE INDEX idx_aliases_exact ON aliases(alias, exact);")
+  (message "Vacuuming...")
+  (sqlite-execute d:db "VACUUM"))
 
 (defun d:db-init ()
   "Create and initialize a new entries.db including its tables."

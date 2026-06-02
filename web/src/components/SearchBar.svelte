@@ -3,18 +3,36 @@
   import { popup } from "@skeletonlabs/skeleton";
   import { clientGetCompletions } from "$src/lib/client";
   import Loading from "./Loading.svelte";
+  import type { Mtch } from "$src/server/crossdb";
+
+  interface Props {
+    /**
+     * Normally we submit the search to `/search`. Use this to make it
+     * `/search/foo`, for instance.
+     */
+    submitSuffix: string;
+    initialInput: string;
+    url: URL | undefined;
+    initialMatchSelection: Mtch;
+    highlightBtn: boolean;
+    redirectOnSingleResult: boolean;
+  }
+
+  const {
+    submitSuffix = "",
+    initialInput = "",
+    url,
+    initialMatchSelection = "prefix",
+    highlightBtn = false,
+    redirectOnSingleResult = false,
+  }: Props = $props();
+
   /**
    * Normally we submit the search to `/search`. Use this to make it
    * `/search/foo`, for instance.
    */
-  export let submitSuffix = "";
-  export let initialInput = "";
-  export let url: URL | undefined = undefined;
-  let currentSort = url?.searchParams.get("s");
-  $: value = initialInput;
-  export let initialMatchSelection = "prefix";
-  export let highlightBtn = false;
-  export let redirectOnSingleResult = false;
+  let currentSort = $derived(url?.searchParams.get("s"));
+  let value = $derived(initialInput);
 
   /** Return a new URL string that is `url` with the `name` param set to `value`. */
   function withParam(url: URL, name: string, value: string | undefined) {
@@ -60,7 +78,7 @@
       }
     });
   });
-  $: completionsPromise = clientGetCompletions(value);
+  let completionsPromise = $derived(clientGetCompletions(value));
 </script>
 
 <div class="relative mb-2 mt-2">

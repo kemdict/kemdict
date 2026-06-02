@@ -1,6 +1,4 @@
 import { uniq } from "lodash-es";
-import sqlstring from "sqlstring";
-const sqlEscapeOrig = sqlstring.escape;
 import searchQueryParser from "search-query-parser";
 import type { SearchParserResult } from "search-query-parser";
 import sql, { empty } from "sql-template-tag";
@@ -48,12 +46,6 @@ function tokenToLIKEInput(
   } else {
     return escapedToken;
   }
-}
-
-// sqlstring's escapes single quotes with a backslash, but SQLite
-// expects it to be doubled instead.
-function escapeSql(thing: any) {
-  return sqlEscapeOrig(thing).replace("\\'", "''").normalize("NFD");
 }
 
 /**
@@ -181,13 +173,15 @@ export class CrossDB {
     args: any[] = [],
     pluck?: boolean,
   ): Promise<unknown[]> {
+    let before = import.meta.env.DEV ? performance.now() : 0;
+    let ret;
     if (this.#runtime === "bun") {
       const db = (await this.getDB()) as import("bun:sqlite").Database;
       const stmt = db.query(source);
       if (pluck) {
-        return stmt.values(...args).map((x: unknown[]) => x[0]);
+        ret = stmt.values(...args).map((x: unknown[]) => x[0]);
       } else {
-        return stmt.all(...args);
+        ret = stmt.all(...args);
       }
     } else if (this.#runtime === "node") {
       const db = (await this.getDB()) as import("node:sqlite").DatabaseSync;
@@ -197,15 +191,20 @@ export class CrossDB {
         // The next best thing is grabbing one value from the object, assuming
         // that the statement does not produce multiple values for each returned
         // object.
-        return stmt.all(...args).map((x) => Object.values(x)[0]);
+        ret = stmt.all(...args).map((x) => Object.values(x)[0]);
       } else {
-        return stmt.all(...args);
+        ret = stmt.all(...args);
       }
     } else {
       throw new Error(
         'sqlite runtimes other than "bun" are currently not supported',
       );
     }
+    if (import.meta.env.DEV) {
+      const duration = performance.now() - before;
+      console.log({ sql: source, duration: `${duration}ms` });
+    }
+    return ret;
   }
 
   /**
@@ -357,8 +356,8 @@ LIMIT 10
     return (await this.crossDbAll(
       `
 SELECT DISTINCT "from" FROM links
-WHERE "to" IN (${escapeSql(titles)})`,
-      [],
+WHERE "to" IN (${titles.map(() => "?").join(",")})`,
+      titles,
       true,
     )) as string[];
   }
