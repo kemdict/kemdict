@@ -108,7 +108,17 @@ export const site = {
 export interface Dict {
   id: string;
   name: string;
+  /**
+   * The URL of the dictionary.
+   * This is actually a template, where $1 is replaced with the entry's title,
+   * page, or id according to `urlProp`.
+   */
   url: string;
+  /**
+   * What kind of prop the URL template should be filled with.
+   * undefined is the same as "title".
+   */
+  urlProp?: "id" | "page" | "title" | undefined;
   lang: LangId;
   /**
    * Language list displayed on dictionary pages instead of `lang`.

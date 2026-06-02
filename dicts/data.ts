@@ -91,6 +91,7 @@ export const dicts = [
     id: "lopof-taigi",
     name: "臺灣植物名彙",
     url: "https://kisaragi-hiu.com/list-of-plants-of-formosa/plants/#$1",
+    urlProp: "page",
     lang: "nan_TW",
     displayLangs: ["nan_TW", "hak_TW"],
     meta: lopofMeta,
@@ -99,6 +100,7 @@ export const dicts = [
     id: "lopof-hakka",
     name: "臺灣植物名彙",
     url: "https://kisaragi-hiu.com/list-of-plants-of-formosa/plants/#$1",
+    urlProp: "page",
     lang: "hak_TW",
     hidden: true,
     meta: lopofMeta,
@@ -107,6 +109,7 @@ export const dicts = [
     id: "kanggesu",
     name: "臺灣台語工藝詞庫",
     url: "https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite?id=$1",
+    urlProp: "id",
     lang: "nan_TW",
     meta: {
       author: "國立臺灣工藝研究發展中心",
@@ -128,6 +131,7 @@ export const dicts = [
     name: "公視台語新詞辭庫",
     // I don't have the ID for the new site yet
     url: "https://www.taigitv.org.tw/taigi-words/$1",
+    urlProp: "id",
     lang: "nan_TW",
     meta: {
       author: "公視台語台",
@@ -144,6 +148,7 @@ export const dicts = [
     id: "chhoetaigi_taioanpehoekichhoogiku",
     name: "台灣白話基礎語句",
     url: "https://chhoe.taigi.info/TaioanPehoeKichhooGiku/$1",
+    urlProp: "id",
     lang: "nan_TW",
     meta: {
       author: "Ko Chek-hoàn（高積煥）、Tân Pang-tìn（陳邦鎮）",
@@ -263,6 +268,7 @@ export const dicts = [
     id: "chhoetaigi_taijittoasutian",
     name: "台日大辭典台語譯本",
     url: "https://taigi.fhl.net/dict/search.php?DETAIL=1&LIMIT=id=$1",
+    urlProp: "id",
     lang: "nan_TW",
     meta: {
       author: "小川尚義",
@@ -328,6 +334,7 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
     id: "hakkadict",
     name: "臺灣客家語常用詞辭典",
     url: 'https://hakkadict.moe.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dalldb&s=id="$1".&searchmode=basic',
+    urlProp: "id",
     lang: "hak_TW",
     meta: {
       version: "1110429",
