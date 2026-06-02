@@ -1,7 +1,10 @@
 <script lang="ts">
-  export let title: string | undefined;
-  export let elements = [];
-  export let template = "$1";
+  interface Props {
+    title?: string | undefined;
+    elements?: Array<{ title?: string; radical?: string }>;
+    template?: string;
+  }
+  const { title, elements = [], template = "$1" }: Props = $props();
   import { format } from "common";
 </script>
 

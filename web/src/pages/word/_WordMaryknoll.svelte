@@ -9,11 +9,11 @@
   <Pronunciation>{het.props.kip}</Pronunciation>
   <Property key="其他" value={het.props.kipOthers} />
   {#if het.props.zh}
-    <p>
+    <div>
       <Property key="華語" value={het.props.zh} html={true} />
-    </p>
+    </div>
   {/if}
-  <p class="def">
+  <div class="def">
     <Property key="英語" value={het.props.en} />
-  </p>
+  </div>
 {/each}
