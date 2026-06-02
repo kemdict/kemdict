@@ -47,15 +47,15 @@
       // Following the same approach as
       // kit.svelte.dev/src/lib/search/SearchBox.svelte, with some hints
       // from MDN's page about navigator.platform
-      let modifier = "ctrlKey";
+      let modifier: "ctrlKey" | "metaKey" = "ctrlKey";
       if (
         navigator.platform.indexOf("Mac") === 0 ||
-        navigator.platform === "iPhone"
+        (navigator.platform as string) === "iPhone"
       ) {
         modifier = "metaKey";
       }
       if (e.key === "k" && e[modifier]) {
-        document.getElementById("sbi").focus();
+        document.getElementById("sbi")?.focus();
         e.preventDefault();
       }
     });
