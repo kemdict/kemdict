@@ -173,7 +173,7 @@ export class CrossDB {
     args: any[] = [],
     pluck?: boolean,
   ): Promise<unknown[]> {
-    let before = performance.now();
+    let before = import.meta.env.DEV ? performance.now() : 0;
     let ret;
     if (this.#runtime === "bun") {
       const db = (await this.getDB()) as import("bun:sqlite").Database;
@@ -200,8 +200,10 @@ export class CrossDB {
         'sqlite runtimes other than "bun" are currently not supported',
       );
     }
-    const duration = performance.now() - before;
-    console.log({ sql: source, duration: `${duration}ms` });
+    if (import.meta.env.DEV) {
+      const duration = performance.now() - before;
+      console.log({ sql: source, duration: `${duration}ms` });
+    }
     return ret;
   }
 
