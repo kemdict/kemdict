@@ -46,4 +46,5 @@ preview: $(DEPS)
 	cd dist && bash start
 
 check:
+	bunx sv check
 	bunx astro check
