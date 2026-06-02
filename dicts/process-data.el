@@ -1131,6 +1131,8 @@ VALUES
                               (gethash "title" tag))
                              ((stringp tag)
                               tag)
+                             ;; just ignore it if it is nil
+                             ((null tag) nil)
                              (t (d::warn
                                  "Unexpected tag format! Heteronym %S from dict %S, tag %S"
                                  het
