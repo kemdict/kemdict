@@ -12,29 +12,8 @@
   import Star from "./_Star.svelte";
 
   export let presentLangs: string[] = [];
-  export let requestedLang: string = "";
   export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
-  export let currentParamString: string;
-  const currentParams = new URLSearchParams(currentParamString);
-
-  function paramsToString(langId: string) {
-    if (currentParams) {
-      currentParams.set("lang", langId);
-    }
-    return "?" + currentParams.toString();
-  }
-
-  let currentTab = requestedLang;
-  const url =
-    "document" in globalThis
-      ? new URL(globalThis.document.location.href)
-      : undefined;
-
-  $: ((lang) => {
-    (url?.searchParams.set("lang", lang),
-      globalThis.window?.history.pushState(undefined, "", url));
-  })(currentTab);
 </script>
 
 <div>

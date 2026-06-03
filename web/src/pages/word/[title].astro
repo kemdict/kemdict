@@ -50,13 +50,12 @@ const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
 const presentDicts = presentDictIds.map((id) => dictsObj[id]);
 
 const url = Astro.url;
-const requestedLang = parseLangParam(
-  url.searchParams.get("lang"),
-  presentLangSet,
-);
-// Invalid -> delete it and try again
-if (requestedLang === false) {
+const lang = url.searchParams.get("lang");
+// we now put all languages in one page
+// unfortunately we don't have access to url.hash here
+if (lang) {
   url.searchParams.delete("lang");
+  url.hash = lang;
   return Astro.redirect(url);
 }
 ---
@@ -102,9 +101,7 @@ if (requestedLang === false) {
           client:load
           {title}
           {groupedHets}
-          {requestedLang}
           presentLangs={[...presentLangSet]}
-          currentParamString={url.searchParams.toString()}
         />
         <hr />
         <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />

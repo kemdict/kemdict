@@ -43,7 +43,7 @@
 </script>
 
 {#each heteronymsAndPn as [het, pn]}
-  <ListLink href="/word/{het.title}?lang={het.lang}#{het.from}">
+  <ListLink href="/word/{het.title}#{het.from}">
     <svelte:fragment slot="heading">
       {het.title}{parens(pn)}
     </svelte:fragment>
