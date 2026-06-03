@@ -10,7 +10,7 @@
     return names
       ?.map(
         (name) =>
-          `<a href="/word/${name.han}?lang=${lang}">${name.poj}/${name.han}</a>`,
+          `<a href="/word/${name.han}#lang-${lang}">${name.poj}/${name.han}</a>`,
       )
       .join("<br/>");
   }

@@ -22,7 +22,7 @@
 *** î-tû
 **** 動|將設備從暫時安裝的位置撤除。如：「移除起落架」
 https://taigitube.com/search?query=%E7%A7%BB%E9%99%A4&v=mYZ5vu46PpE&t=0
-**** 動|[[刪除?lang=zh_TW][刪除]]。
+**** 動|[[刪除#lang-zh_TW][刪除]]。
 ** 鮫鰳
 :PROPERTIES:
 :added:    2026-02-17T18:02:39+0900
@@ -102,7 +102,7 @@ https://taigitube.com/search?query=%E7%A7%BB%E9%99%A4&v=mYZ5vu46PpE&t=0
 :added:    2023-05-30T01:09:08+0900
 :END:
 *** sio-bê
-**** 很燙的粥。見「[[燒?lang=nan_TW#kautian][燒]]」、「[[糜?lang=nan_TW#kautian][糜]]」。
+**** 很燙的粥。見「[[燒#kautian][燒]]」、「[[糜#kautian][糜]]」。
 ** 十八驚
 :PROPERTIES:
 :added:    2023-05-30T01:59:37+0900
@@ -114,7 +114,7 @@ https://taigitube.com/search?query=%E7%A7%BB%E9%99%A4&v=mYZ5vu46PpE&t=0
 醫生驚[[治嗽]]
 [[塗水]]驚[[掠漏]]
 [[剃頭店][剃頭]]驚臭頭
-[[總舖師][總舖]]驚食[[晝?lang=nan_TW#kautian][晝]]
+[[總舖師][總舖]]驚食[[晝#kautian][晝]]
 [[討海人][討海]]驚[[thàu-hong][風透]]
 種田驚[[挲草]]
 [[青盲]]驚[[過溝]]
@@ -123,10 +123,10 @@ https://taigitube.com/search?query=%E7%A7%BB%E9%99%A4&v=mYZ5vu46PpE&t=0
 [[契兄]]驚[[掠猴]]
 [[暗間]]驚嬰吼
 [[侗戇]]驚亂走
-[[燒?lang=nan_TW#kautian][燒]][[糜?lang=nan_TW#kautian][糜]]驚大嘴
+[[燒#kautian][燒]][[糜#kautian][糜]]驚大嘴
 透早驚[[露水]]
 半暝驚歹鬼
 [[跋筊]]驚人走
-贏[[筊?lang=nan_TW#kautian][筊]]驚食飯
-輸[[筊?lang=nan_TW#kautian][筊]]驚天光
+贏[[筊#kautian][筊]]驚食飯
+輸[[筊#kautian][筊]]驚天光
 #+end_quote

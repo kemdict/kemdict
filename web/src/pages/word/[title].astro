@@ -14,6 +14,7 @@ import {
   parseLangParam,
 } from "common";
 import type { Dict, Heteronym } from "common";
+import Star from "./_Star.svelte";
 
 const {
   presentDicts: presentDictIds,
@@ -26,7 +27,7 @@ const backlinks = (await DB.getBacklinks(...titles)).sort();
 import SingleLayout from "$src/SingleLayout.astro";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import WordList from "$src/components/WordList.svelte";
-import WordTabs from "./_WordTabs.svelte";
+import Lang from "./_Lang.svelte";
 
 let term_ja = title;
 let term_en = title;
@@ -50,13 +51,12 @@ const groupedHets: [Dict, Heteronym[]][] = groupByProp(heteronyms, "from").map(
 const presentDicts = presentDictIds.map((id) => dictsObj[id]);
 
 const url = Astro.url;
-const requestedLang = parseLangParam(
-  url.searchParams.get("lang"),
-  presentLangSet,
-);
-// Invalid -> delete it and try again
-if (requestedLang === false) {
+const lang = url.searchParams.get("lang");
+// we now put all languages in one page
+// unfortunately we don't have access to url.hash here
+if (lang) {
   url.searchParams.delete("lang");
+  url.hash = `lang-${lang}`;
   return Astro.redirect(url);
 }
 ---
@@ -98,14 +98,16 @@ if (requestedLang === false) {
         />
       </Fragment>
       <div class="">
-        <WordTabs
-          client:load
-          {title}
-          {groupedHets}
-          {requestedLang}
-          presentLangs={[...presentLangSet]}
-          currentParamString={url.searchParams.toString()}
-        />
+        <div class="relative">
+          <div class="absolute right-0 top-0 text-right">
+            <Star client:load />
+          </div>
+          {/* a page title, like Wiktionary (unlike Weblio) */}
+          <h1 class="mb-4 text-2xl font-bold">{title}</h1>
+          {[...presentLangSet].map((langId) => (
+            <Lang client:load langId={langId} {title} {groupedHets} />
+          ))}
+        </div>
         <hr />
         <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />
         {backlinks.length > 0 && (

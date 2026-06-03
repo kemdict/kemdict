@@ -72,7 +72,7 @@
         {#each kautianWord.props.wwAntonyms as it}
           <a
             class="block"
-            href="/word/{it.han}?lang=nan_TW#kautian-word-{it.wordId}"
+            href="/word/{it.han}#kautian-word-{it.wordId}"
             >{it.han}</a
           >
         {/each}
@@ -114,8 +114,8 @@
                 <a
                   class="block"
                   href={"hetId" in it
-                    ? `/word/${it.han}?lang=nan_TW#kautian-het-${it.hetId}`
-                    : `/word/${it.han}?lang=nan_TW#kautian-word-${it.wordId}`}
+                    ? `/word/${it.han}#kautian-het-${it.hetId}`
+                    : `/word/${it.han}#kautian-word-${it.wordId}`}
                   >{it.han}</a
                 >
               {/each}
@@ -127,8 +127,8 @@
                 <a
                   class="block"
                   href={"hetId" in it
-                    ? `/word/${it.han}?lang=nan_TW#kautian-het-${it.hetId}`
-                    : `/word/${it.han}?lang=nan_TW#kautian-word-${it.wordId}`}
+                    ? `/word/${it.han}#kautian-het-${it.hetId}`
+                    : `/word/${it.han}#kautian-word-${it.wordId}`}
                   >{it.han}</a
                 >
               {/each}
