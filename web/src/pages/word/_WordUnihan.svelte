@@ -3,7 +3,7 @@
   import Out from "$src/components/Out.svelte";
   import Property from "$src/components/Property.svelte";
   function asHex(char: string) {
-    return char.codePointAt(0).toString(16);
+    return char.codePointAt(0)?.toString(16);
   }
   function ucsToString(ucs: string) {
     const hex = ucs.slice(2); // "U+1234" -> "1234"
@@ -14,7 +14,7 @@
     return characters
       .map((c) => {
         const str = ucsToString(c);
-        return `<a href="/word/${str}">${str}</a>`;
+        return `<span><a href="/word/${str}">${str}</a> (${c})</span>`;
       })
       .join("、");
   }
@@ -47,8 +47,10 @@
           >共{het.props.sc}畫，部首外共{het.props.nrsc}畫</Property
         >
       </div>
-      <Property key="簡體" value={het.props?.varS} html={true}></Property>
-      <Property key="繁體" value={het.props?.varT} html={true}></Property>
+      <Property key="簡體" value={chars(het.props?.varS)} html={true}
+      ></Property>
+      <Property key="繁體" value={chars(het.props?.varT)} html={true}
+      ></Property>
       {#if het.props?.defs?.length == 1}
         {het.props.defs[0]}
       {:else if het.props?.defs?.length > 1}
