@@ -9,10 +9,10 @@
   <h1>{het.title}</h1>
   <Pronunciation>{het.props.kip}</Pronunciation>
   <Property key="其他" value={het.props.kipOthers} />
-  <p class="def">
+  <div class="def">
     <Property key="華語" value={het.props.zh} html={true} />
     <Property key="英語" value={het.props.en} />
-  </p>
+  </div>
   {#if het.props.examplePOJ || het.props.exampleEn || het.props.exampleZh}
     <blockquote>
       {#if het.props.examplePOJ}{@html toTL(het.props.examplePOJ)}<br />{/if}
