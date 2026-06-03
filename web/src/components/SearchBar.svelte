@@ -104,15 +104,17 @@
         />
         <div class="w-full" data-popup="popupCompletion">
           {#await completionsPromise}
-            <div class="card variant-filled relative z-20 w-3/4 p-4">
+            <div class="card variant-filled relative z-20 w-full md:w-3/4 p-4">
               <Loading />
             </div>
           {:then completions}
             {@const type = completions.type}
             {#if completions.matches.length !== 0}
-              <div class="card variant-filled relative z-20 w-3/4 p-4">
+              <div
+                class="card variant-filled relative z-20 w-full md:w-3/4 p-4"
+              >
                 {#each completions.matches as compl}
-                  {@const klass = "inline-block w-full py-1 text-left"}
+                  {@const klass = "inline-block w-full py-1 text-left truncate"}
                   <div>
                     {#if type === "word"}
                       <a class={klass} href={`/word/${compl}`}>{compl}</a>
