@@ -1,10 +1,20 @@
 * Adding a dictionary
-- dicts: add code to Makefile to download the raw data at build time
-- dicts: update process-data.el to include the new dictionary in the intermediate json file
-- dicts: fill in info in data.ts and maybe README
-- update [[file:./web/src/pages/word/\[title\].astro][word page]] to use the right component for the new dictionary
-- most likely, write a new word component for the new dictionary
-- update copyright information
+
+See commit [[https://github.com/kemdict/kemdict/commit/7c1a703][7c1a703]] for an example.
+
+- dicts
+  - add code to Makefile to download the raw data at build time
+  - update process-data.el:
+    - declare the new dictionary
+    - linkify fields if needed
+    - consider which aliases need to be added
+    - maybe index tags
+  - fill in info in data.ts and maybe README
+- web
+  - most likely, write a new word component for the new dictionary
+  - Update _Word.svelte to dispatch word rendering to that new component
+  - Make sure the heading linking style is correct (declared in data.ts)
+  - Include copyright information in word footer
 
 * Testing
 - Does search work?
