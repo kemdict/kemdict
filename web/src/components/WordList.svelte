@@ -32,7 +32,7 @@
           .toLowerCase()
           .includes(filterString.toLowerCase())}
         <li class="mr-2 py-2">
-          <a class="wordlink" href="{prefix}{word}">
+          <a class="wordlink" href="{prefix}{encodeURIComponent(word)}">
             {@html highlight(word, filterString)}
           </a>
         </li>
