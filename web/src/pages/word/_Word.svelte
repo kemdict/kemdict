@@ -25,7 +25,7 @@
 </script>
 
 {#each groupedHets as [dict, hets]}
-  <div id={dict.id} class="dict">
+  <div id={dict.id} class="dict scroll-m-[75px]">
     <span
       ><a
         class="hover:link dark:gray-500 text-gray-400"
