@@ -12,7 +12,7 @@
       .join("")
       .replace(/;/g, "；")
       .replace(/没/g, "沒") // typo (IMO)
-      .replace(/a href="(\/word\/.*?)"/g, `a href="$1?lang=${lang}"`)
+      .replace(/a href="(\/word\/.*?)"/g, `a href="$1#lang-${lang}"`)
       .replace(RegExp(`([ .])(${title})([ .])`, "ig"), `$1<b>$2</b>$3`);
     buf += "</ol>";
     return buf;

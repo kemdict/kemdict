@@ -242,7 +242,7 @@ this:
           ;; If the word doesn't exist in the language we ask for here, the word
           ;; page just removes the query param and does a redirect as if it's
           ;; not passed in. So this is fine.
-          (format "<a href=\"/word/%s?lang=%s\">%s</a>"
+          (format "<a href=\"/word/%s#lang-%s\">%s</a>"
                   href d:links:lang desc)
         (format "<a href=\"/word/%s\">%s</a>"
                 href desc)))))

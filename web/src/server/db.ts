@@ -242,7 +242,7 @@ export async function getHetFromUrl(
       false,
       encodeURI(
         heteronyms.length === 1
-          ? `/word/${heteronyms[0].title}?lang=${heteronyms[0].lang}`
+          ? `/word/${heteronyms[0].title}?#lang-${heteronyms[0].lang}`
           : `/word/${heteronyms[0].title}`,
       ),
     ];

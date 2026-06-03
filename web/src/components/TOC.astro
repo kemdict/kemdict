@@ -22,7 +22,7 @@ const {
           {groupByProp(presentDicts, "lang").map(([langId, dicts], i) => (
             <li>
               <span>{i + 1}. </span>
-              <a class="link" href={`?lang=${langId}`}>
+              <a class="link" href={`#lang-${langId}`}>
                 {langs[langId]}
               </a>
               <ol class="pl-0">
@@ -31,7 +31,7 @@ const {
                     <span>
                       {i + 1}.{j + 1}.
                     </span>
-                    <a class="link" href={`?lang=${langId}#${dict.id}`}>
+                    <a class="link" href={`#${dict.id}`}>
                       {dict.name}
                     </a>
                   </li>
