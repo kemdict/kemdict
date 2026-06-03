@@ -50,15 +50,13 @@
       <Property key="簡體" value={het.props?.varS} html={true}></Property>
       <Property key="繁體" value={het.props?.varT} html={true}></Property>
       {#if het.props?.defs?.length == 1}
-        <Property key="定義" value={het.props.defs[0]}></Property>
+        {het.props.defs[0]}
       {:else if het.props?.defs?.length > 1}
-        <Property key="定義">
-          <ul>
-            {#each het.props.defs as def}
-              <li class="before:opacity-70 before:content-['-_']">{def}</li>
-            {/each}
-          </ul>
-        </Property>
+        <ul class="pl-4 list-disc">
+          {#each het.props.defs as def}
+            <li>{def}</li>
+          {/each}
+        </ul>
       {/if}
     </div>
   {/each}
