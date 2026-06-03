@@ -73,6 +73,7 @@ export const dicts = [
     meta: {
       author: "Unicode聯盟",
       desc: `Unicode聯盟所維護的漢字資料庫，包含筆畫數、部首、簡繁對應等資訊。`,
+      version: "15.0",
       license: {
         name: "Unicode License",
         url: "https://www.unicode.org/license.txt",
