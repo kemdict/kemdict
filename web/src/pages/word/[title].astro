@@ -55,7 +55,7 @@ const lang = url.searchParams.get("lang");
 // unfortunately we don't have access to url.hash here
 if (lang) {
   url.searchParams.delete("lang");
-  url.hash = lang;
+  url.hash = `lang-${lang}`;
   return Astro.redirect(url);
 }
 ---

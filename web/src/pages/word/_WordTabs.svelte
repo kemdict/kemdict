@@ -30,7 +30,7 @@
   </div>
   {#each presentLangs as thisLang}
     <div class="mb-4 group">
-      <h1 id={thisLang} class="font-serif text-2xl">
+      <h1 id="lang-{thisLang}" class="font-serif text-2xl">
         <button
           class="w-full text-left"
           on:click={(e) => {
