@@ -10,7 +10,8 @@
     const codePoint = Number.parseInt(hex, 16);
     return String.fromCodePoint(codePoint);
   }
-  function chars(characters: string[]) {
+  function chars(characters: string[] | undefined) {
+    if (!characters) return;
     return characters
       .map((c) => {
         const str = ucsToString(c);
