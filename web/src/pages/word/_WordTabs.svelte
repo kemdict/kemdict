@@ -1,6 +1,19 @@
 <script lang="ts">
+  import {
+    popup,
+    Tab,
+    TabGroup,
+    ListBox,
+    ListBoxItem,
+  } from "@skeletonlabs/skeleton";
+  import { langs } from "common";
+  import type { Dict, LangId, Heteronym } from "common";
+  import Word from "./_Word.svelte";
+  import Star from "./_Star.svelte";
+
   export let presentLangs: string[] = [];
-  export let requestedLang: string;
+  export let requestedLang: string = "";
+  export let groupedHets: [Dict, Heteronym[]][];
   export let title: string;
   export let currentParamString: string;
   const currentParams = new URLSearchParams(currentParamString);
@@ -12,22 +25,22 @@
     return "?" + currentParams.toString();
   }
 
-  import {
-    popup,
-    Tab,
-    TabGroup,
-    ListBox,
-    ListBoxItem,
-  } from "@skeletonlabs/skeleton";
-  import { langs } from "common";
+  let currentTab = requestedLang;
+  const url =
+    "document" in globalThis
+      ? new URL(globalThis.document.location.href)
+      : undefined;
+
+  $: ((lang) => {
+    (url?.searchParams.set("lang", lang),
+      globalThis.window?.history.pushState(undefined, "", url));
+  })(currentTab);
 </script>
 
 <TabGroup padding="">
   {#each presentLangs.slice(0, 7) as langId}
-    <Tab group={requestedLang} name={langId} value={langId}>
-      <a class="block px-4 py-2" href="/word/{title}{paramsToString(langId)}"
-        >{langs[langId]}</a
-      >
+    <Tab bind:group={currentTab} name={langId} value={langId}>
+      <div class="block px-4 py-2">{langs[langId as LangId]}</div>
     </Tab>
   {/each}
   {#if presentLangs.length > 7}
@@ -43,7 +56,7 @@
           closeQuery: ".listbox-item",
         }}
         >{presentLangs.indexOf(requestedLang) >= 7
-          ? langs[requestedLang]
+          ? langs[requestedLang as LangId]
           : ""}…</button
       >
       <div class="card z-10 p-4 shadow-xl" data-popup="popupLangs">
@@ -61,4 +74,16 @@
       </div>
     </div>
   {/if}
+  <svelte:fragment slot="panel">
+    <div class="relative">
+      <div class="absolute right-0 top-0">
+        <Star />
+      </div>
+      {#each groupedHets as [dict, hets]}
+        {#if currentTab === dict.lang}
+          <Word groupedHets={[[dict, hets]]} {title} />
+        {/if}
+      {/each}
+    </div>
+  </svelte:fragment>
 </TabGroup>

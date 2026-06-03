@@ -208,6 +208,7 @@ export function parsePageParam(param: string | null, maximum: number) {
   }
 }
 
+/** Return language based on the raw value of the ?lang param. */
 export function parseLangParam<T>(param: string | null, langIds: Set<T>) {
   // Param not present = first lang
   if (param === null) {

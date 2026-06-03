@@ -26,9 +26,7 @@ const backlinks = (await DB.getBacklinks(...titles)).sort();
 import SingleLayout from "$src/SingleLayout.astro";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import WordList from "$src/components/WordList.svelte";
-import Word from "./_Word.svelte";
 import WordTabs from "./_WordTabs.svelte";
-import Star from "./_Star.svelte";
 
 let term_ja = title;
 let term_en = title;
@@ -92,10 +90,8 @@ if (requestedLang === false) {
         />
         <meta
           name="description"
-          content={`「${title}」在${langs[requestedLang]}的意思。來自${joinLast(
-            presentDicts
-              .filter((dict) => dict.lang === requestedLang)
-              .map((dict) => dict.name),
+          content={`「${title}」的意思。來自${joinLast(
+            presentDicts.map((dict) => dict.name),
             "、",
             "及",
           )}的定義。 - ${site.oneLineDesc}`}
@@ -104,22 +100,12 @@ if (requestedLang === false) {
       <div class="">
         <WordTabs
           client:load
-          title={title}
+          {title}
+          {groupedHets}
+          {requestedLang}
           presentLangs={[...presentLangSet]}
-          requestedLang={requestedLang}
           currentParamString={url.searchParams.toString()}
         />
-        <div class="relative">
-          <div class="absolute right-0 top-0">
-            <Star client:load />
-          </div>
-          {groupedHets.map(
-            ([dict, hets]) =>
-              requestedLang === dict.lang && (
-                <Word client:load groupedHets={[[dict, hets]]} title={title} />
-              ),
-          )}
-        </div>
         <hr />
         <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />
         {backlinks.length > 0 && (
