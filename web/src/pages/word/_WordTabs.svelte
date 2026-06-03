@@ -37,22 +37,40 @@
   })(currentTab);
 </script>
 
-<TabGroup padding="">
+<div>
+  <div>語言</div>
   {#each presentLangs as langId}
-    <Tab bind:group={currentTab} name={langId} value={langId}>
+    <div>
       <div class="block px-4 py-2">{langs[langId as LangId]}</div>
-    </Tab>
-  {/each}
-  <svelte:fragment slot="panel">
-    <div class="relative">
-      <div class="absolute right-0 top-0">
-        <Star />
-      </div>
-      {#each groupedHets as [dict, hets]}
-        {#if currentTab === dict.lang}
-          <Word groupedHets={[[dict, hets]]} {title} />
-        {/if}
-      {/each}
     </div>
-  </svelte:fragment>
-</TabGroup>
+  {/each}
+</div>
+<div class="relative">
+  <div class="text-right">
+    <Star />
+  </div>
+  {#each presentLangs as thisLang}
+    <div class="mb-4 group">
+      <h1 id={thisLang} class="font-serif text-2xl">
+        <button
+          class="w-full text-left"
+          on:click={(e) => {
+            (
+              e.target as HTMLButtonElement
+            ).parentElement?.parentElement?.classList.toggle("collapsed");
+          }}
+        >
+          {langs[thisLang as LangId]}
+        </button>
+      </h1>
+      <hr class="w-full my-2 border-surface-600 dark:border-surface-900" />
+      <div class="group-[.collapsed]:hidden">
+        {#each groupedHets as [dict, hets]}
+          {#if thisLang === dict.lang}
+            <Word groupedHets={[[dict, hets]]} {title} />
+          {/if}
+        {/each}
+      </div>
+    </div>
+  {/each}
+</div>
