@@ -47,7 +47,7 @@ const page = parsePageParam(url.searchParams.get("p"), chunked.length);
 // If "?p" is invalid, delete it and try again
 if (page === false) {
   url.searchParams.delete("p");
-  return Astro.redirect(url);
+  return Astro.redirect(`${url.pathname}${url.search}`);
 }
 
 import SingleLayout from "$src/SingleLayout.astro";

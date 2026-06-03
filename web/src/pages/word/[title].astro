@@ -56,8 +56,9 @@ const lang = url.searchParams.get("lang");
 // unfortunately we don't have access to url.hash here
 if (lang) {
   url.searchParams.delete("lang");
-  url.hash = `lang-${lang}`;
-  return Astro.redirect(url);
+  // if we redirect to `url` (after setting url.hash) that would redirect to the
+  // internal (behind reverse proxy) url instead of redirecting to the public url.
+  return Astro.redirect(`${url.pathname}${url.search}#lang-${lang}`);
 }
 ---
 
