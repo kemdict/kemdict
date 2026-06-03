@@ -1,0 +1,26 @@
+---
+import SingleLayout from "$src/SingleLayout.astro";
+import { H1 } from "$src/components/typography";
+import WordList from "$src/components/WordList.svelte";
+import { site } from "common";
+import { getTags } from "$src/server/db";
+
+const tags = await getTags();
+---
+
+<SingleLayout title={`標籤索引 - ${site.title}`}>
+  <Fragment slot="head">
+    <meta
+      property="og:image"
+      content="https://kemdict.com/og-image?title=標籤索引"
+    />
+  </Fragment>
+  <H1>標籤索引</H1>
+  <p class="mb-4">
+    這些標籤是 Kemdict
+    從各收錄字典裡搜集來的標籤。部分標籤或分類可能還沒有支援。
+  </p>
+  <div class="prose mb-4">
+    <WordList prefix={"/search?q="} words={tags} client:load />
+  </div>
+</SingleLayout>

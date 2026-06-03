@@ -309,3 +309,11 @@ export async function getGroupedChars() {
   groupedChars = { without_stroke, with_stroke_grouped };
   return groupedChars;
 }
+
+export async function getTags() {
+  return (await DB.crossDbAll(
+    `select distinct alias from aliases where alias like '#%'`,
+    [],
+    true,
+  )) as string[];
+}
