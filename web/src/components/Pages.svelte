@@ -54,7 +54,7 @@
   const a = [
     "inline-flex items-center justify-center",
     "rounded-full",
-    "min-h-[2em] min-w-[2em]"
+    "min-h-[2em] min-w-[2em]",
   ];
   const disabled = "opacity-50";
   const hover = "hover:bg-gray-100 hover:dark:bg-stone-800";
@@ -79,7 +79,7 @@
           page === activePage && [
             "bg-surface-200 dark:bg-surface-900",
             "hover:bg-surface-300 hover:dark:bg-surface-800",
-          ]
+          ],
         ]}
         href={linkToPage(page)}>{page}</a
       >

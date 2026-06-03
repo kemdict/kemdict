@@ -15,13 +15,11 @@
     html?: boolean;
     children?: any;
   } = $props();
-  const {
-    key,value,class: klass, valueClass, html, children
-  } = props;
+  const { key, value, class: klass, valueClass, html, children } = props;
 
   // We have to do this instead of destructuring to distinguish between
   // passing undefined and not passing this.
-  const ifValue = "if" in props ? props.if : true
+  const ifValue = "if" in props ? props.if : true;
 </script>
 
 {#if ifValue}
