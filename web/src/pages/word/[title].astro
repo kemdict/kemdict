@@ -14,6 +14,7 @@ import {
   parseLangParam,
 } from "common";
 import type { Dict, Heteronym } from "common";
+import Star from "./_Star.svelte";
 
 const {
   presentDicts: presentDictIds,
@@ -26,7 +27,7 @@ const backlinks = (await DB.getBacklinks(...titles)).sort();
 import SingleLayout from "$src/SingleLayout.astro";
 import Elsewhere from "$src/components/Elsewhere.astro";
 import WordList from "$src/components/WordList.svelte";
-import WordTabs from "./_WordTabs.svelte";
+import Lang from "./_Lang.svelte";
 
 let term_ja = title;
 let term_en = title;
@@ -97,12 +98,14 @@ if (lang) {
         />
       </Fragment>
       <div class="">
-        <WordTabs
-          client:load
-          {title}
-          {groupedHets}
-          presentLangs={[...presentLangSet]}
-        />
+        <div class="relative">
+          <div class="text-right">
+            <Star client:load />
+          </div>
+          {[...presentLangSet].map((langId) => (
+            <Lang client:load langId={langId} {title} {groupedHets} />
+          ))}
+        </div>
         <hr />
         <Elsewhere term={title} term_ja={term_ja} term_en={term_en} />
         {backlinks.length > 0 && (
