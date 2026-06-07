@@ -4,7 +4,7 @@
   import Pronunciation from "$src/components/Pronunciation.svelte";
   import Property from "$src/components/Property.svelte";
   import { taigiTitle } from "common";
-  function process_def(def: string | undefined): string {
+  function process_def(def: string | undefined): string | undefined {
     if (def) {
       let x = "<ol>";
       for (const d of def.split(/\n/)) {

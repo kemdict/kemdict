@@ -68,6 +68,7 @@ by default."
        ("kautian" "nan_TW" "ministry-of-education/kautian.json")
        ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
        ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+       ("chhoetaigi_taihoa" "nan_TW" "chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json")
        ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
        ("chhoetaigi_maryknoll1976" "nan_TW" "chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json")
        ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
@@ -707,6 +708,21 @@ This is a separate step from shaping."
       ("chhoetaigi_itaigi"
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
+      ("chhoetaigi_taihoa"
+       (d::hash-copy props "zh" "zh-plain")
+       (ht-update-with! props "zh"
+         #'d:links:link-to-word)
+       ;; The "others" prop would be better known as "alternative", since they
+       ;; never contain multiple alternatives. (try searching
+       ;;   "pojInputOthers": "[^\n]*[^ \na-zA-Z0-9-][^\n]*",$
+       ;; for example.)
+       (dolist (prop '("pojOthers" "pojInputOthers" "kipOthers" "kipInputOthers"))
+         (ht-update-with! props prop
+           (lambda (str)
+             ;; For some reason id 44348 kong-bîng (光明) has a star in its
+             ;; Others field: *kng-bêng, *kng-beng5, *kng-bîng, *kng-bing5
+             ;; I do not know what this means.
+             (s-replace "*" "" str)))))
       ("chhoetaigi_maryknoll1976"
        ;; Keep a copy that doesn't have markup
        (d::hash-copy props "zh" "zh-plain")
@@ -1094,7 +1110,8 @@ VALUES
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"
                            "kanggesu"
-                           "pts-taigitv"))
+                           "pts-taigitv"
+                           "chhoetaigi_taihoa"))
              (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
@@ -1398,9 +1415,10 @@ Return a list of pronunciations."
                 ;; what I chose for the pts-taigitv copy
                 "pn"
 
-                ;; chhoetaigi-itaigi (keys are defined in Makefile
-                ;; in this repository)
+                ;; chhoetaigi_itaigi, chhoetaigi_taihoa
+                ;; (keys are defined in Makefile in this repository)
                 "poj" "kip"
+                "pojOthers" "kipOthers"
                 "pojInput" "kipInput"
                 "pojInputOthers" "kipInputOthers"
 

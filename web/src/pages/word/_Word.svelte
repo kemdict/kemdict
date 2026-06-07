@@ -4,17 +4,18 @@
   import WordDictIdioms from "./_WordDictIdioms.svelte";
   import WordDictRevised from "./_WordDictRevised.svelte";
   import WordHakkadict from "./_WordHakkadict.svelte";
-  import WordITaigi from "./_WordITaigi.svelte";
-  import WordTaiJit from "./_WordTaiJit.svelte";
-  import WordKichhooGiku from "./_WordKichhooGiku.svelte";
-  import WordMaryknoll from "./_WordMaryknoll.svelte";
-  import WordPtsTaigitv from "./_WordPtsTaigitv.svelte";
-  import WordKanggesu from "./_WordKanggesu.svelte";
-  import WordMoedictish from "./_WordMoedictish.svelte";
-  import WordKautian from "./_WordKautian.svelte";
-  import WordUnihan from "./_WordUnihan.svelte";
   import WordILRDF from "./_WordILRDF.svelte";
+  import WordITaigi from "./_WordITaigi.svelte";
+  import WordKanggesu from "./_WordKanggesu.svelte";
+  import WordKautian from "./_WordKautian.svelte";
+  import WordKichhooGiku from "./_WordKichhooGiku.svelte";
   import WordLopof from "./_WordLopof.svelte";
+  import WordMaryknoll from "./_WordMaryknoll.svelte";
+  import WordMoedictish from "./_WordMoedictish.svelte";
+  import WordPtsTaigitv from "./_WordPtsTaigitv.svelte";
+  import WordTaihoa from "./_WordTaihoa.svelte";
+  import WordTaiJit from "./_WordTaiJit.svelte";
+  import WordUnihan from "./_WordUnihan.svelte";
 
   import { format } from "common";
 
@@ -164,6 +165,26 @@
           《{dict.name}》資料取自
           <a href="https://itaigi.tw/">iTaigi</a>，採
           <a href="https://itaigi.tw/hokbu">CC0</a> 釋出。
+        </p>
+        <p>
+          資料來自 <a href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase"
+            >ChhoeTaigi 的字詞資料庫</a
+          >。
+        </p>
+      </div>
+    {:else if dict.id == "chhoetaigi_taihoa"}
+      <WordTaihoa heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          《{dict.name}》採
+          <a
+            href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase#1-2002-台華線頂對照典"
+            >CC BY-SA 4.0</a
+          > 公開授權。
+        </p>
+        <p>
+          感謝 Iûⁿ Ún-giân（楊允言）教授提供資料予 ChhoeTaigi 計畫公開授權，使
+          Kemdict 得以利用。
         </p>
         <p>
           資料來自 <a href="https://github.com/ChhoeTaigi/ChhoeTaigiDatabase"

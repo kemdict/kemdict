@@ -28,6 +28,7 @@ DICT_TARGETS := kisaragi/kisaragi_dict.json
 DICT_TARGETS += pts-taigitv/README.md
 DICT_TARGETS += ministry-of-education/package.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json
+DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaijitToaSutian.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json
 DICT_TARGETS += chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json
@@ -71,7 +72,7 @@ unihan.json:
 kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .eask
 	npx eask eval "(load \"kisaragi/generate\")"
 
-# - HanLoTaibunPoj -> title, because I've assumed that each entry has
+# - HanLoTaibunKip -> title, because I've assumed that each entry has
 #   a main title and I need to pick one. It's not an ideal assumption.
 # - HuaBun -> definition, again because of Kemdict's assumptions.
 # - The original header is (without the newline):
@@ -80,6 +81,16 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ea
 chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
 	bun x csvtojson --headers='["id","poj","pojInput","kip","kipInput","titlePoj","title","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
+
+# - HanLoTaibunKip -> title;
+# Same assumption as for iTaigi.
+# - The original header is (without the newline):
+#     "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers",
+#     "HanLoTaibunPoj","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers",
+#     "HanLoTaibunKip","HoaBun"
+chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json: ChhoeTaigiDatabase/README.md
+	mkdir -p chhoetaigi
+	bun x csvtojson --headers='["id","poj","pojOthers","pojInput","pojInputOthers","titlePoj","kip","kipOthers","kipInput","kipInputOthers","title","zh"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaihoaSoanntengTuichiautian.csv > "$@"
 
 # Original header:
 # "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","HanLoTaibunPoj","KaisoehHanLoPoj","LekuHanLoPoj","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"
