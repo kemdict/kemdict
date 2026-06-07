@@ -345,7 +345,7 @@ iTaigi 資料由 iTaigi 團隊提供給 ChhoeTaigi 後[由 ChhoeTaigi 公開於 
       year: 2002,
       desc: `《台文華文線頂辭典》，mā叫做《台華線頂對照典》猶是《台文中文辭典》，是一个方便用者做台語kap華語互相翻譯ê辭典。
 
-Mā 請參考 <https://taigi.fhl.net/dic_un/>、<https://mhi.moe.edu.tw/resource/TSMhiResource-001111/> kap <https://taigi.page/posts/%E5%8F%B0%E6%96%87%E4%B8%AD%E6%96%87%E8%BE%AD%E5%85%B8-%E5%8F%B0%E6%96%87-%E8%8F%AF%E6%96%87%E7%B7%9A%E9%A0%82%E8%BE%AD%E5%85%B8-%E5%8F%B0%E8%8F%AF%E5%B0%8D%E6%87%89%E7%B6%9C%E5%90%88%E5%A4%A7%E8%BE%AD%E5%85%B8-%E4%B8%89%E7%B6%B2%E7%AB%99%E6%9C%89%E5%AF%A1%E8%A9%9E%E6%AF%8B%E6%98%AF%E5%8F%B0%E8%AA%9E/>。`,
+請參考[Archive.org保存ê說明](https://web.archive.org/web/20180926102320/http://ip194097.ntcu.edu.tw/ungian/soannteng/chil/Taihoa.asp)、[信望愛ê台華對應綜合大辭典查詢](https://taigi.fhl.net/dic_un/)，猶閣有[教育部本土語言資源網ê說明](https://mhi.moe.edu.tw/resource/TSMhiResource-001111/)。Mā 請參考[潘科元先生ê這篇文章](https://taigi.page/posts/%E5%8F%B0%E6%96%87%E4%B8%AD%E6%96%87%E8%BE%AD%E5%85%B8-%E5%8F%B0%E6%96%87-%E8%8F%AF%E6%96%87%E7%B7%9A%E9%A0%82%E8%BE%AD%E5%85%B8-%E5%8F%B0%E8%8F%AF%E5%B0%8D%E6%87%89%E7%B6%9C%E5%90%88%E5%A4%A7%E8%BE%AD%E5%85%B8-%E4%B8%89%E7%B6%B2%E7%AB%99%E6%9C%89%E5%AF%A1%E8%A9%9E%E6%AF%8B%E6%98%AF%E5%8F%B0%E8%AA%9E/)。`,
       license: {
         name: "CC BY-SA 4.0",
         url: "https://github.com/ChhoeTaigi/ChhoeTaigiDatabase#1-2002-台華線頂對照典",
