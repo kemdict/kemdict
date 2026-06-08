@@ -15,7 +15,7 @@
 <div class={["mb-4 group", collapsed && "collapsed"]}>
   <h1 id="lang-{langId}" class="font-serif text-2xl scroll-m-[75px]">
     <button
-      class="w-full text-left"
+      class="w-full text-left flex gap-x-1"
       onclick={() => {
         collapsed = !collapsed;
       }}
@@ -23,8 +23,37 @@
       <!-- either right = collapsed, down = expanded (current state) -->
       <!-- or down = collapsed, up = expanded (what it'll do) -->
       <!-- For up/down, up = collapsed is quite weird and rare. -->
-      <span class="opacity-50"
-        >{#if collapsed}⮞{:else}⮟{/if}</span
+      <span class="opacity-75 inline-flex items-center"
+        >{#if collapsed}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="chevron-down-outline"
+            class="ionicon inline size-4"
+            viewBox="0 0 512 512"
+            ><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="48"
+              d="M112 184l144 144 144-144"
+            /></svg
+          >
+        {:else}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon inline size-4"
+            viewBox="0 0 512 512"
+            ><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="48"
+              d="M112 328l144-144 144 144"
+            /></svg
+          >
+        {/if}</span
       >
       {langs[langId]}
     </button>
