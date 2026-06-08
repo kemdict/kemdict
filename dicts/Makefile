@@ -44,6 +44,9 @@ dicts: $(DICT_TARGETS)
 entries.db: $(DICT_TARGETS) process-data.el .eask
 	npx eask eval "(load \"process-data\")"
 
+props: entries.db
+	bun genProps.ts && touch props
+
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
 	touch entries.db.gz

@@ -21,6 +21,13 @@ export function ensureArray<T>(value: T[] | T): T[] | undefined {
   }
 }
 
+/** Return if all of `items` have the same value when run through `extractor`. */
+export function sameBy<T>(extractor: (item: T) => any, items: T[]) {
+  if (items.length === 0) return true;
+  const first = extractor(items[0]);
+  return items.every((item) => extractor(item) === first);
+}
+
 /**
  * Return a new array which is `arr` whose objects are grouped by their values
  * under `property`.
