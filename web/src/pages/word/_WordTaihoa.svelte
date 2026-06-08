@@ -32,7 +32,7 @@
     {#if i === 0}
       <Property
         key="華語"
-        value={heteronyms.map((het) => het.props.zh).join("、")}
+        value={heteronyms.map((het) => het.props.zh).join("；")}
         html={true}
       ></Property>
     {/if}
