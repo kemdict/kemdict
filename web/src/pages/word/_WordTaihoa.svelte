@@ -22,11 +22,11 @@
   {#if i === 0 || !safeToMerge}
     <h1>{taigiTitle(het)}</h1>
     <Pronunciation>{het.props.kip}</Pronunciation>
-  {/if}
-  {#if het.props.kipOthers}
-    <Property key="其他講法">
-      <Pronunciation>{het.props.kipOthers}</Pronunciation>
-    </Property>
+    {#if het.props.kipOthers}
+      <Property key="其他講法">
+        <Pronunciation>{het.props.kipOthers}</Pronunciation>
+      </Property>
+    {/if}
   {/if}
   {#if safeToMerge}
     {#if i === 0}
