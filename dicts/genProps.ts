@@ -19,7 +19,7 @@ for (let i = 0; i < dicts.length; i++) {
   await writeFile(
     `props/${dict}.ts`,
     JsonToTS(propsObjs, {
-      rootName: "Props",
+      rootName: "HetProps",
       export: true,
     }).join("\n"),
   );

@@ -5,7 +5,7 @@
     "": {
       "dependencies": {
         "@emacs-eask/cli": "^0.9.7",
-        "@kemdict/json-to-ts": "^0.1.0",
+        "@kemdict/json-to-ts": "^0.1.1",
         "js-yaml": "^4.1.0",
         "zod": "^3.24.3",
       },
@@ -19,7 +19,7 @@
   "packages": {
     "@emacs-eask/cli": ["@emacs-eask/cli@0.9.9", "", { "dependencies": { "which": "4.0.0", "yargs": "17.7.2" }, "bin": { "eask": "eask" } }, "sha512-tPqQ23626xRHE1uap1d/KVVqfQeyBpimOEVo35dRWavaxT5KIxDI1xfnNxIgoICW9EKoexQK4XyWdf1tSsD/hQ=="],
 
-    "@kemdict/json-to-ts": ["@kemdict/json-to-ts@0.1.0", "", { "dependencies": { "pluralize": "8.0.0" } }, "sha512-MHcB+A39/tddipiR7CS6flpuAZTb2G+WQBujs3K9a54IJMZKYFM1AweXKCP0WZIMZs61uPkDEoveLK0kySzq2g=="],
+    "@kemdict/json-to-ts": ["@kemdict/json-to-ts@0.1.1", "", { "dependencies": { "pluralize": "^8.0.0" } }, "sha512-QRZogV34TLHqsD8LytXE0a2Xx7SKpGK5YJ1jD0/GDD08VpZ7e2XLqG7rFp6M1GkkKAk00nll9chOa+Nrwg7Uaw=="],
 
     "@types/bun": ["@types/bun@1.3.14", "", { "dependencies": { "bun-types": "1.3.14" } }, "sha512-h1hFqFVcvAvD9j9K7ZW7vd82aSA+rTdznZa+5bwvCwqSB1jmmfLcbIWhOLx1/+boy/xmjgCs/OMUL8hRJSmnPw=="],
 

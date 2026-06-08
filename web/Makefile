@@ -34,6 +34,7 @@ dist: $(DEPS)
 .PHONY: dev build preview check build-no-data build-with-data
 
 dev: $(DEPS) entries.db
+	cd ../dicts && $(MAKE) props
 	bunx --bun astro dev
 
 build-with-data: dist entries.db
