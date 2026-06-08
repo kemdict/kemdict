@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "@emacs-eask/cli": "^0.9.7",
+    "@kemdict/json-to-ts": "^0.1.0",
     "js-yaml": "^4.1.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/bun": "^1.2.10",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^22.14.1",
-    "json-to-ts": "^2.1.0"
+    "@types/node": "^22.14.1"
   }
 }
