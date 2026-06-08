@@ -840,6 +840,8 @@ ORIG-HETS are props that will be used to construct heteronyms."
     ;; actually for maryknoll this is kind of impossible. There are 5000+ entries
     ;; there with a paren in it, most (but not all) of which should be split...
     ("bô-hông, bû-hông" '("bô-hông" "bû-hông"))
+    ("biān-kū, biān-khū" '("biān-kū" "biān-khū"))
+    ("bông-bīn-tō, ho̍k-bīn-tō" (s-split ", " "biān-kū, biān-khū"))
     ("a-bó (a-bú)" '("a-bó" "a-bú"))
     ("a-iân-suànn (iân-suànn, thih-suànn)" '("a-iân-suànn" "iân-suànn" "thih-suànn"))
     ("an-hioh-ji̍t (an-sik-ji̍t)" '("an-hioh-ji̍t" "an-sik-ji̍t"))
