@@ -37,12 +37,8 @@
   <h1>{het.title}</h1>
   {#each p_names as p}
     {#if het.props[`p_${p}`]}
-      <Pronunciation
-        ><Property
-          valueClass="text-lg"
-          key={p}
-          value={het.props[`p_${p}`]}
-        /></Pronunciation
+      <Property valueClass="text-lg" key={p}
+        ><Pronunciation>{het.props[`p_${p}`]}</Pronunciation></Property
       >
     {/if}
   {/each}
