@@ -51,7 +51,7 @@ export default defineConfig({
     ],
     clearScreen: false,
     envPrefix: "KEMDICT_",
-    build: { rollupOptions: { external: ["bun:sqlite"] } },
+    build: { rollupOptions: { external: ["bun:sqlite"] }, cssMinify: false },
     resolve: {
       alias: [
         {
