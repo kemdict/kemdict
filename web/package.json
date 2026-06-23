@@ -16,9 +16,9 @@
     "sharp"
   ],
   "dependencies": {
-    "@astrojs/node": "^10.1.1",
+    "@astrojs/node": "^11.0.0",
     "@kemdict/kesi": "^0.1.0",
-    "astro": "^6.3.8",
+    "astro": "^7.0.2",
     "lodash-es": "^4.17.22",
     "marked": "^12.0.2",
     "postcss-import": "^16.1.1",
@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/mdx": "^7.0.0",
     "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/svelte": "^8.1.2",
+    "@astrojs/svelte": "^9.0.0",
     "@floating-ui/dom": "^1.7.4",
     "@size-limit/file": "^11.2.0",
     "@skeletonlabs/skeleton": "^2.11.0",
@@ -46,10 +46,10 @@
     "@types/node": "^25.9.1",
     "@types/sqlstring": "^2.3.2",
     "size-limit": "^11.2.0",
-    "svelte": "^5.46.4",
-    "svelte-check": "^4.4.8",
+    "svelte": "^5.56.4",
+    "svelte-check": "^4.7.0",
     "tailwindcss": "^3.4.19",
-    "terser": "^5.46.0",
+    "terser": "^5.48.0",
     "typescript": "^6.0.0",
     "vite-plugin-tailwind-purgecss": "^0.3.5"
   }
