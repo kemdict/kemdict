@@ -10,8 +10,6 @@ import { VitePWA as vitePWA } from "vite-plugin-pwa";
 const baseURL = "https://kemdict.com";
 const prod = import.meta.env.PROD;
 
-import { purgeCss } from "vite-plugin-tailwind-purgecss";
-
 export default defineConfig({
   compressHTML: prod,
   redirects: to302({
@@ -43,7 +41,6 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      purgeCss(),
       vitePWA({
         registerType: "autoUpdate",
         injectRegister: "script-defer",
