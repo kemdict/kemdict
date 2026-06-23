@@ -48,7 +48,12 @@ export default defineConfig({
     ],
     clearScreen: false,
     envPrefix: "KEMDICT_",
-    build: { rollupOptions: { external: ["bun:sqlite"] }, cssMinify: false },
+    css: {
+      lightningcss: {
+        errorRecovery: true,
+      },
+    },
+    build: { rollupOptions: { external: ["bun:sqlite"] } },
     resolve: {
       alias: [
         {
