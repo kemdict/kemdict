@@ -298,7 +298,7 @@ export const dicts = [
     lang: "nan_TW",
     meta: {
       author: "教育部",
-      version: "20251219",
+      version: moeDicts.kautian.current,
       desc: `教育部的台語辭典。`,
       license: {
         name: "CC BY-ND 3.0 TW",
