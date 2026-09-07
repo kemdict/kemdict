@@ -24,18 +24,18 @@ const props = {
       <Out
         href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
       >
-        臺灣閩南語羅馬字拼音方案
+        臺灣台語羅馬字拼音方案
       </Out>及<Out
         href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
       >
-        臺灣閩南語羅馬字拼音方案使用手冊
+        臺灣台語羅馬字拼音方案使用手冊
       </Out>
     </li>
     <li>
       <Out
         href="https://sutian.moe.edu.tw/zh-hant/piantsip/tailo-phiautsu-suatbing/"
       >
-        教育部臺灣閩南語常用詞辭典 - 臺羅標注說明
+        教育部臺灣台語常用詞辭典 - 臺羅標注說明
       </Out>
     </li>
     <li>
@@ -51,11 +51,11 @@ const props = {
     確切的定義請見<Out
       href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
     >
-      臺灣閩南語羅馬字拼音方案
+      臺灣台語羅馬字拼音方案
     </Out>及<Out
       href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
     >
-      臺灣閩南語羅馬字拼音方案使用手冊
+      臺灣台語羅馬字拼音方案使用手冊
     </Out>，在此試著列出傳統白話字與教育部羅馬字的差別：
   </p>
   <table>
@@ -105,6 +105,17 @@ const props = {
     <thead>
       <tr>
         <td></td>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+        <th>8</th>
+      </tr>
+      <tr>
+        <td>傳統名</td>
         <th>陰平</th>
         <th>陰上</th>
         <th>陰去</th>
@@ -116,6 +127,17 @@ const props = {
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td>音調</td>
+        <th>高</th>
+        <th>下降</th>
+        <th>低</th>
+        <th>*</th>
+        <th>上升</th>
+        <th>-</th>
+        <th>中</th>
+        <th>*</th>
+      </tr>
       <tr>
         <th>符號</th>
         <td>無</td>
@@ -140,63 +162,66 @@ const props = {
       </tr>
     </tbody>
   </table>
-  <ol class="mt-4">
+  <ul class="mt-4">
     <li>
       <p>
-        陰平的音由高調開始並持平。<br />
-        <Ex><W>a 阿</W></Ex>
+        1: 高。<Ex><W>a 阿</W></Ex>
       </p>
     </li>
     <li>
       <p>
-        陰上的音調由高調開始並快速下降，音尾較弱。<br />
-        <Ex><W>bí 米</W></Ex>
+        2: 下降。如華語四聲。<Ex><W>bí 米</W></Ex>
       </p>
     </li>
     <li>
       <p>
-        陰去的音調由低調開始並拉長，音尾較弱。<br />
-        <Ex><W>ì 意</W></Ex>
+        3: 低。<Ex><W>ì 意</W></Ex>
       </p>
     </li>
     <li>
       <p>
-        陰入的音調從中調開始快速地下降一些，音尾快速停止氣息。<br />
-        與陰平同無符號，但字尾為短音字 h、k、t、p 時屬陰入。<br />
-        <Ex><W>kip 急</W></Ex>
+        5: 上揚。如華語二聲。<Ex><W>âng 紅</W></Ex>
       </p>
     </li>
     <li>
       <p>
-        陽平的音調由低調開始並漸漸上升。<br />
-        <Ex><W>âng 紅</W></Ex>
+        7: 中平。<Ex><W>ōo 芋</W></Ex>
       </p>
     </li>
-    <li><p>陽上的發音與符號皆與陰平相同，因此八音實際上只有七音。</p></li>
+  </ul>
+  <p>第六調的發音與符號皆與第一調相同，因此八音實際上只有七音。</p>
+  <p>
+    第四調與第八調僅適用於 -p -t -k 或 -h 結尾的音節。-p -t -k -h
+    結尾的音節便是傳統所稱入聲，因此第四調與第八調傳統稱作陰<b>入</b>與陽<b
+      >入</b
+    >。入聲音節皆會短促停止。
+  </p>
+  <ul class="mt-4">
     <li>
       <p>
-        陽去的音調由中調開始並持平、拉長。<br />
-        <Ex><W>ōo 芋</W></Ex>
+        4: 中。<Ex><W>kip 急</W></Ex>
       </p>
     </li>
     <li>
       <p>
-        陽入的音調如同陰平，但音尾快速停止氣息。<br />
-        <Ex><W>ji̍t 日</W></Ex>
+        8: 高。<Ex><W>ji̍t 日</W></Ex>
       </p>
     </li>
-  </ol>
+  </ul>
   <h2 id="sandhi">變調</h2>
   <p>
     除了詞尾的字以外每個字都會變調一次。這是聽的時候判斷哪裡斷詞的一個可以用的依據。
   </p>
   <p>規則大致如下：</p>
   <ul class="mt-4">
-    <li>4 → 8 → 3</li>
-    <li>8 → 4 → 2</li>
-    <li>5 → 3 → 2 → 1 → 7 → 3 (泉/北部)</li>
-    <li>5 → 7 → 3 → 2 → 1 → 7 (漳/南部)</li>
+    <li>-p, -t, -k: 4 ↔ 8</li>
+    <li>-h: 4 → 2</li>
+    <li>-h: 8 → 3</li>
+    <li>漳/南部: 5 → 7</li>
+    <li>泉/北部: 5 → 3</li>
+    <li>7 → 3 → 2 → 1 → 7 → …</li>
   </ul>
+  <p>一個音節只會變調一次。</p>
   <p>來源：</p>
   <ul>
     <li>
