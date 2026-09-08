@@ -13,40 +13,6 @@ const props = {
 
 <MarkdownLayout frontmatter={props}>
   <h1>台語羅馬字簡介</h1>
-  <h2>相關資源</h2>
-  <ul>
-    <li>
-      <Out href="https://www.speakhokkien.org/oh-thak-oh-sia">
-        講福建話運動 - 用十分鐘學讀學寫福建文
-      </Out>
-    </li>
-    <li>
-      <Out
-        href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
-      >
-        臺灣台語羅馬字拼音方案
-      </Out>及<Out
-        href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
-      >
-        臺灣台語羅馬字拼音方案使用手冊
-      </Out>
-    </li>
-    <li>
-      <Out
-        href="https://sutian.moe.edu.tw/zh-hant/piantsip/tailo-phiautsu-suatbing/"
-      >
-        教育部臺灣台語常用詞辭典 - 臺羅標注說明
-      </Out>
-    </li>
-    <li>
-      <Out
-        href="https://kisaragi-hiu.com/list-of-plants-of-formosa/text/#tones"
-      >
-        《臺灣植物名彙》凡例
-      </Out>之六（鼻音與八音段落一大部分是由此翻譯而來的）
-    </li>
-  </ul>
-  <h2>字母</h2>
   <p>
     確切的定義請見<Out
       href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
@@ -56,8 +22,8 @@ const props = {
       href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
     >
       臺灣台語羅馬字拼音方案使用手冊
-    </Out>，在此試著列出傳統白話字與教育部羅馬字的差別：
-  </p>
+    </Out>
+  </p><p>在此先試著列出傳統白話字與教育部羅馬字的差別：</p>
   <table>
     <tr>
       <th>POJ</th>
@@ -82,25 +48,70 @@ const props = {
       <td>oo</td>
     </tr>
   </table>
-  <h2>鼻音</h2>
+  <h2>音節</h2>
+  <p>一字一音節，以連字符（"-"）表同詞。</p>
   <p>
-    鼻音指聲音有通過鼻腔的音。可以分成兩種，一種是聲音只通過鼻腔的，另一種則是聲音同時通過鼻腔和口腔的。
+    一個音節分五部分：聲母（頭子音）、韻頭、韻腹、韻尾、聲調。一個音節一定有韻腹。
   </p>
+  <h2>頭子音</h2>
+  <p>共 17 個可做頭子音的音素（若包含無字音的情況則有 18 個）：</p>
   <ul>
     <li>
+      <p>p ph b</p>
       <p>
-        只通過鼻腔的鼻音有 m、n、ng，無特殊記號。<br />
+        注意台語使用與 IPA 相同方式來標記有聲子音、無聲子音與送氣音
+        (b/p/ph)。也就是說，華語拼音的 b/p 對應到的是台語的 p/ph，華語的ㄅ是 p
+        而ㄆ是 ph。以下 t/th、g/k/kh 也同理。
+      </p>
+    </li>
+    <li><p>t th</p></li>
+    <li><p>k kh g</p></li>
+    <li>
+      <p>ts tsh j</p><p>tsh 同樣表示「送氣的 ts」。ts/tsh 同注音ㄗ/ㄘ。</p>
+      <p>
+        j 是 <a href="https://zh.wikipedia.org/wiki/濁齒齦塞擦音">[d͡z]</a>，是
+        ts 對應的有聲子音。華語同樣沒有這個音，華語的ㄐㄧ對應的是 tsi 不是 ji。
+      </p>
+      <p>傳統白話字使用 ch/chh 而非 ts/tsh。</p>
+    </li>
+    <li><p>m n ng</p></li>
+    <li>
+      <p>l h s</p>
+    </li>
+  </ul>
+  <h2>尾子音</h2>
+  <ul>
+    <li>
+      <p>-p, -t, -k, -h</p><p>
+        這種音節會驟停。以 -p -t -k -h 結尾的音節也被稱作入聲的音節。<br />
+        <Ex><W>li̍p 入</W>、<W>ti̍t 直</W>、<W>kok 國</W>、<W>peh 伯</W></Ex>
+      </p>
+      <p>
+        -h
+        除了標記喉塞音結尾以外，亦有標示高調輕讀音節、標記無聲調字、借第四調標記中降調這幾種用途。參考：<a
+          href="https://www.facebook.com/share/p/1DdaASnGZk/"
+          >《失控的台語課 HOAT.09》</a
+        >
+      </p>
+    </li>
+    <li>
+      <p>
+        -m -n -ng<br />
         <Ex><W>im 音</W>、<W>an 安</W>、<W>âng 紅</W></Ex>
       </p>
     </li>
-    <li>
-      <p>
-        同時通過鼻腔和口腔的鼻音在字尾寫nn（白話字寫ⁿ）。<br />
-        <Ex><W>kiunn 薑</W>、<W>koann 官</W>、<W>siunn 箱</W></Ex>
-      </p>
-    </li>
   </ul>
-  <h2>八音</h2>
+  <h2>母音</h2>
+  <p>單母音：a e i oo o u (er ir ee) ann enn inn onn</p>
+  <p>
+    複合母音：ai au ia io iu ua ue ui iau uai ainn iann iaunn iunn uann uainn
+    uinn ioo irinn uee ionn
+  </p>
+  <p>
+    TODO: separate less-used ones, structure, explain (esp. ones different from
+    literal appearance)
+  </p>
+  <h2>八音（聲調）</h2>
   <table class="table-fixed">
     <thead>
       <tr>
@@ -132,11 +143,11 @@ const props = {
         <th>高</th>
         <th>下降</th>
         <th>低</th>
-        <th>*</th>
+        <th>中降*</th>
         <th>上升</th>
         <th>-</th>
         <th>中</th>
-        <th>*</th>
+        <th>高*</th>
       </tr>
       <tr>
         <th>符號</th>
@@ -222,8 +233,26 @@ const props = {
     <li>7 → 3 → 2 → 1 → 7 → …</li>
   </ul>
   <p>一個音節只會變調一次。</p>
-  <p>來源：</p>
+  <h2>參考</h2>
   <ul>
+    <li>
+      <Out
+        href="https://web.archive.org/web/20200807222250/https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/151609.pdf"
+      >
+        臺灣台語羅馬字拼音方案
+      </Out>及<Out
+        href="https://web.archive.org/web/20221022090115/https://language.moe.gov.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh_1081017.pdf"
+      >
+        臺灣台語羅馬字拼音方案使用手冊
+      </Out>
+    </li>
+    <li>
+      <Out
+        href="https://sutian.moe.edu.tw/zh-hant/piantsip/tailo-phiautsu-suatbing/"
+      >
+        教育部臺灣台語常用詞辭典 - 臺羅標注說明
+      </Out>
+    </li>
     <li>
       <Out href="https://zh.wikibooks.org/zh-tw/臺灣話/聲調">
         維基教科書 - 台灣話/聲調
@@ -235,6 +264,18 @@ const props = {
       >
         Wikimedia Commons - Taiwanese Hokkien tones.svg
       </Out>
+    </li>
+    <li>
+      <Out href="https://www.speakhokkien.org/oh-thak-oh-sia">
+        講福建話運動 - 用十分鐘學讀學寫福建文
+      </Out>
+    </li>
+    <li>
+      <Out
+        href="https://kisaragi-hiu.com/list-of-plants-of-formosa/text/#tones"
+      >
+        《臺灣植物名彙》凡例
+      </Out>之六（鼻音與八音段落一大部分是由此翻譯而來的）
     </li>
   </ul>
 </MarkdownLayout>
