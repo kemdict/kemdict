@@ -27,7 +27,7 @@ entries.db: ../dicts
 .PHONY: dist
 dist: $(DEPS)
 	npx astro build
-	cp package.json pnpm-lock.yaml dist/
+	cp package.json pnpm-lock.yaml pnpm-workspace.yaml dist/
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 	npx size-limit
 
