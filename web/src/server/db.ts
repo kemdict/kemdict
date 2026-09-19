@@ -103,7 +103,7 @@ export function hetExactMatch(het: Heteronym, query: string | undefined) {
 
 /**
  * Compare `a` and `b`, sorting the one that is an exact match first.
- * Returns 0 if they are both exact matches, just like a normal sort function should.
+ * If both are exact or both are not exact, return 0 to leave their order unchanged.
  */
 function hetMoreExact(
   query: string,
@@ -114,6 +114,33 @@ function hetMoreExact(
   const bExactMatch = hetExactMatch(b[0], query);
   if (aExactMatch && !bExactMatch) return -1;
   if (bExactMatch && !aExactMatch) return 1;
+  return 0;
+}
+
+/**
+ * Compare `a` and `b`, sorting the one that is prefixed or suffixed by `needle` first.
+ * `mtch` decides whether to check prefix or suffix. If `mtch` is neither
+ * `prefix` nor `suffix`, then 0 is returned.
+ * If both are prefixed or both are not, return 0 to leave their order unchanged.
+ */
+function hetMorePrefixedOrSuffixed(
+  needle: string,
+  mtch: Mtch,
+  a: [Heteronym, string | undefined],
+  b: [Heteronym, string | undefined],
+) {
+  if (mtch === "prefix") {
+    const aPrefixed = a[0].title.startsWith(needle);
+    const bPrefixed = b[0].title.startsWith(needle);
+    if (aPrefixed && !bPrefixed) return -1;
+    if (bPrefixed && !aPrefixed) return 1;
+  } else if (mtch === "suffix") {
+    const aSuffixed = a[0].title.endsWith(needle);
+    const bSuffixed = b[0].title.endsWith(needle);
+    if (aSuffixed && !bSuffixed) return -1;
+    if (bSuffixed && !aSuffixed) return 1;
+  }
+
   return 0;
 }
 
@@ -255,19 +282,35 @@ export async function getHetFromUrl(
   // 0 -> keep
   if (sort === "length-desc") {
     heteronymsAndPn.sort((a, b) => {
-      return hetMoreExact(query, a, b) || hetLengthLessThan(lang, a, b);
+      return (
+        hetMoreExact(query, a, b) ||
+        hetMorePrefixedOrSuffixed(query, mtch, a, b) ||
+        hetLengthLessThan(lang, a, b)
+      );
     });
   } else if (sort === "length-asc") {
     heteronymsAndPn.sort((a, b) => {
-      return hetMoreExact(query, a, b) || -hetLengthLessThan(lang, a, b);
+      return (
+        hetMoreExact(query, a, b) ||
+        hetMorePrefixedOrSuffixed(query, mtch, a, b) ||
+        -hetLengthLessThan(lang, a, b)
+      );
     });
   } else if (sort === "desc") {
     heteronymsAndPn.sort((a, b) => {
-      return hetMoreExact(query, a, b) || hetLessThan(lang, a, b);
+      return (
+        hetMoreExact(query, a, b) ||
+        hetMorePrefixedOrSuffixed(query, mtch, a, b) ||
+        hetLessThan(lang, a, b)
+      );
     });
   } else {
     heteronymsAndPn.sort((a, b) => {
-      return hetMoreExact(query, a, b) || -hetLessThan(lang, a, b);
+      return (
+        hetMoreExact(query, a, b) ||
+        hetMorePrefixedOrSuffixed(query, mtch, a, b) ||
+        -hetLessThan(lang, a, b)
+      );
     });
   }
   return [
