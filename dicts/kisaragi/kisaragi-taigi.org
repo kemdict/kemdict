@@ -3,6 +3,27 @@
 我記錄台語有在使用但沒被收錄的詞的地方。
 
 * Words
+** Tâi-Gí-Tō
+https://tai5gi2to7.blogspot.com/2025/08/blog-post_80.html
+*** 攄鼠
+:PROPERTIES:
+:added:    2026-10-05T22:32:31+0900
+:END:
+**** lu-tshí
+***** 滑鼠。
+https://tai5gi2to7.blogspot.com/2025/08/blog-post_80.html
+*** 正齒
+:PROPERTIES:
+:added:    2026-10-05T22:31:10+0900
+:END:
+**** tsiànn-khí
+***** 滑鼠[[右鍵]]。
+*** 倒齒
+:PROPERTIES:
+:added:    2026-10-05T22:27:28+0900
+:END:
+**** tò-khí
+***** 滑鼠[[左鍵]]。
 ** 遠端
 :PROPERTIES:
 :added:    2026-03-30T21:25:08+0900
