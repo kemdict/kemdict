@@ -29,6 +29,7 @@ dist: $(DEPS)
 	npx astro build
 	cp package.json pnpm-lock.yaml pnpm-workspace.yaml dist/
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
+	sed -i s%../dist/server/entry.mjs%./server/entry.mjs% dist/index.ts
 	npx size-limit
 
 .PHONY: dev build preview check build-no-data build-with-data

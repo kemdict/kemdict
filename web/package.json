@@ -12,13 +12,15 @@
       "brotli": false
     }
   ],
-  "trustedDependencies": [
-    "sharp"
-  ],
+  "trustedDependencies": ["sharp"],
   "dependencies": {
     "@astrojs/node": "^11.1.6",
+    "@fastify/middie": "^9.3.4",
+    "@fastify/static": "^10.1.5",
     "@kemdict/kesi": "^0.1.0",
     "astro": "^7.3.3",
+    "effect": "^4.0.1",
+    "fastify": "^5.12.5",
     "lodash-es": "^4.17.22",
     "marked": "^12.0.2",
     "postcss-import": "^16.1.1",
