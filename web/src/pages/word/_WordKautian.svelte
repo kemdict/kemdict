@@ -56,6 +56,9 @@
       <h1>{kautianWord.title}</h1>
     {/if}
     <Pronunciation>{kautianWord.props.tl.main}</Pronunciation>
+    <Property key="俗唸作" value={kautianWord.props.tl.colloquial?.join("、")}></Property>
+    <Property key="又唸作" value={kautianWord.props.tl.alt?.join("、")}></Property>
+    <Property key="合音唸作" value={kautianWord.props.tl.otherMerged?.join("、")}></Property>
     <Property key="異用字" value={kautianWord.props.han.alt?.join("、")}
     ></Property>
     {#if kautianWord.props.wwSynonyms}
