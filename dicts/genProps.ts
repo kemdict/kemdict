@@ -1,4 +1,4 @@
-import JsonToTS from "../../json-to-ts/src/index.ts";
+import JsonToTS from "@kemdict/json-to-ts";
 import { Database } from "bun:sqlite";
 import { writeFile, mkdir } from "node:fs/promises";
 
