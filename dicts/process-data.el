@@ -184,6 +184,13 @@ For example, 1 is 一, 213 is 龜."
 
 ;;;; Shaped-hets
 
+;; Passing this as a global variable allows it to not be captured by the
+;; debugger when an error happens.
+(defvar d:shaped-hets nil
+  "A list of all shaped-hets to insert into the database.
+Shaped heteronyms are the items after our processing and have the shape
+{title,from,lang,props}.")
+
 (defun d::shaped-het-prop-delete (shaped-het key)
   "Delete KEY from the props of SHAPED-HET.
 This edits SHAPED-HET and also returns it.
@@ -896,141 +903,145 @@ ORIG-HETS are props that will be used to construct heteronyms."
 (defun d:main ()
   (setq d:links nil)
   (setq d:titles:look-up-table (ht))
-  (let* ((heteronyms nil))
-    (let* ((dictionaries (d::dictionaries))
-           (dict-count (length dictionaries)))
-      ;; Step 1: collect hets and titles
-      (cl-loop
-       for (dict lang files)
-       being the elements of dictionaries
-       using (index i)
-       do
-       (let* ((files (-list files))
-              (raw-dict (with-temp-buffer
-                          (cl-loop for f in files
-                                   vconcat
-                                   (progn
-                                     (erase-buffer)
-                                     (insert-file-contents f)
-                                     (json-parse-buffer)))))
-              (rep (make-progress-reporter
-                    (format "Collecting heteronyms and titles from %s (%s/%s)..."
-                            (or dict files) (1+ i) dict-count)
-                    0 (length raw-dict) nil
-                    ;; 5 percent / 4 seconds
-                    5 4))
-              (j 0))
-         (seq-doseq (entry raw-dict)
-           (progress-reporter-update rep j)
-           (cl-incf j)
-           (let ((orig-hets
-                  (or
-                   ;; If the original is a structure of heteronyms, just grab
-                   ;; the heteronym.
-                   ;;
-                   ;; This works fine for moedict-data-twblg, because it only
-                   ;; keeps "title", "radical", "stroke_count",
-                   ;; "non_radical_stroke_count" on the word, which can be
-                   ;; discarded.
-                   ;;
-                   ;; For kisaragi-dict, we're only putting "added" and "eq-*"
-                   ;; on the word, which we copy to each heteronym, so this is
-                   ;; also fine.
-                   ;;
-                   ;; For kautian, that doesn't work well because there are lots
-                   ;; of data attached to the word, so for kautian each Kemdict
-                   ;; "heteronym" actually corresponds to a Kautian word entry.
-                   (and (not (equal dict "kautian"))
-                        (gethash "heteronyms" entry))
-                   (vector entry))))
-             (when (> (length orig-hets) 1)
-               (setq orig-hets (d:sort-orig-hets orig-hets)))
-             (d::for (orig-het orig-hets)
-               ;; {title,from,lang,props}
-               ;; Get the main title from original heteronyms
-               (let ((titles (or (-some-> (gethash "title" entry)
-                                   d:process-title)
-                                 ;; What I defined kautian to be
-                                 (-some->> entry
-                                   (gethash "han")
-                                   (gethash "main")
-                                   d:process-title)
-                                 ;; kanggesu
-                                 (-some->> entry
-                                   (gethash "taiwaneseCharacters")
-                                   d:process-title)
-                                 ;; 臺日大辭典 and 臺灣白話基礎語句
-                                 (gethash "kip" orig-het)
-                                 ;; unihan
-                                 (gethash "char" orig-het))))
-                 ;; Taijit has some titles that should expand into many words
-                 (d::for (title (d::split-titles titles))
-                   (let ((shaped-het (make-hash-table :test #'equal)))
-                     ;; Skip invalid titles
-                     (when (or (not (stringp title))
-                               (string-empty-p title))
-                       (throw 'continue nil))
-                     ;; chhoetaigi_taijittoasutian:
-                     ;; work around some incorrectly formatted titles, like
-                     ;; "a-a cham-cham" being formatted as "a-acham-cham" in
-                     ;; the title field
-                     (when (and (equal dict "chhoetaigi_taijittoasutian")
-                                ;; This means we know it's safe to substitude het.kip
-                                (d:latin-only title)
-                                (not (equal (downcase title)
-                                            (downcase (gethash "kip" orig-het)))))
-                       (setq title (gethash "kip" orig-het)))
-                     (puthash "title" title shaped-het)
-                     (puthash "from" dict shaped-het)
-                     (puthash "lang" lang shaped-het)
-                     ;; Because we store kisaragi-dict heteronyms as individual
-                     ;; rows in the database, we have nowhere to put word-level
-                     ;; props. Copy them (and tags) to props as a workaround.
-                     (--each '("eq-en" "eq-ja" "added")
-                       (puthash it (gethash it entry) orig-het))
-                     ;; There are both word-level and heteronym-level tags, so
-                     ;; it needs a different key.
-                     (puthash "wordTags"
-                              (gethash "tags" entry) orig-het)
-                     ;; We can't run d:process-props just yet, as that requires
-                     ;; the list of all titles to work correctly.
-                     (puthash "props" orig-het shaped-het)
-                     (push shaped-het heteronyms)
-                     (puthash title t d:titles:look-up-table)))))))
-         (garbage-collect))))
-    (garbage-collect)
-    (setq heteronyms (nreverse heteronyms))
-    ;; Step 2: do transformations
+  (let* ((dictionaries (d::dictionaries))
+         (dict-count (length dictionaries)))
+    ;; Step 1: collect hets and titles
     (cl-loop
-     for het being the elements of heteronyms
+     for (dict lang files)
+     being the elements of dictionaries
      using (index i)
-     with len = (length heteronyms)
-     with rep = (make-progress-reporter
-                 "Processing heteronyms..."
-                 1 len
-                 nil
-                 ;; 5 percent or 4 seconds
-                 5 4)
      do
-     (progn
-       (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
-       (when (or (= (1+ i) 1)
-                 (= 0 (% (1+ i) 10000))
-                 (= (1+ i) len))
-         (garbage-collect))
-       (ht-update-with! het "props"
-         (lambda (props)
-           (d:process-props
-            props
-            (gethash "title" het)
-            (gethash "from" het))))))
-    (garbage-collect)
-    ;; Step 3: insert them into the database
-    (d:db-insert heteronyms (-uniq d:links))
-    (message "Done")))
+     (let* ((files (-list files))
+            (raw-dict (with-temp-buffer
+                        (cl-loop for f in files
+                                 vconcat
+                                 (progn
+                                   (erase-buffer)
+                                   (insert-file-contents f)
+                                   (json-parse-buffer)))))
+            (rep (make-progress-reporter
+                  (format "Collecting heteronyms and titles from %s (%s/%s)..."
+                          (or dict files) (1+ i) dict-count)
+                  0 (length raw-dict) nil
+                  ;; 5 percent / 4 seconds
+                  5 4))
+            (j 0))
+       (seq-doseq (entry raw-dict)
+         (progress-reporter-update rep j)
+         (cl-incf j)
+         (let ((orig-hets
+                (or
+                 ;; If the original is a structure of heteronyms, just grab
+                 ;; the heteronym.
+                 ;;
+                 ;; This works fine for moedict-data-twblg, because it only
+                 ;; keeps "title", "radical", "stroke_count",
+                 ;; "non_radical_stroke_count" on the word, which can be
+                 ;; discarded.
+                 ;;
+                 ;; For kisaragi-dict, we're only putting "added" and "eq-*"
+                 ;; on the word, which we copy to each heteronym, so this is
+                 ;; also fine.
+                 ;;
+                 ;; For kautian, that doesn't work well because there are lots
+                 ;; of data attached to the word, so for kautian each Kemdict
+                 ;; "heteronym" actually corresponds to a Kautian word entry.
+                 (and (not (equal dict "kautian"))
+                      (gethash "heteronyms" entry))
+                 (vector entry))))
+           (when (> (length orig-hets) 1)
+             (setq orig-hets (d:sort-orig-hets orig-hets)))
+           (d::for (orig-het orig-hets)
+             ;; {title,from,lang,props}
+             ;; Get the main title from original heteronyms
+             (let ((titles (or (-some-> (gethash "title" entry)
+                                 d:process-title)
+                               ;; What I defined kautian to be
+                               (-some->> entry
+                                 (gethash "han")
+                                 (gethash "main")
+                                 d:process-title)
+                               ;; kanggesu
+                               (-some->> entry
+                                 (gethash "taiwaneseCharacters")
+                                 d:process-title)
+                               ;; 臺日大辭典 and 臺灣白話基礎語句
+                               (gethash "kip" orig-het)
+                               ;; unihan
+                               (gethash "char" orig-het))))
+               ;; Taijit has some titles that should expand into many words
+               (d::for (title (d::split-titles titles))
+                 (let ((shaped-het (make-hash-table :test #'equal)))
+                   ;; Skip invalid titles
+                   (when (or (not (stringp title))
+                             (string-empty-p title))
+                     (throw 'continue nil))
+                   ;; chhoetaigi_taijittoasutian:
+                   ;; work around some incorrectly formatted titles, like
+                   ;; "a-a cham-cham" being formatted as "a-acham-cham" in
+                   ;; the title field
+                   (when (and (equal dict "chhoetaigi_taijittoasutian")
+                              ;; This means we know it's safe to substitude het.kip
+                              (d:latin-only title)
+                              (not (equal (downcase title)
+                                          (downcase (gethash "kip" orig-het)))))
+                     (setq title (gethash "kip" orig-het)))
+                   (puthash "title" title shaped-het)
+                   (puthash "from" dict shaped-het)
+                   (puthash "lang" lang shaped-het)
+                   ;; Because we store kisaragi-dict heteronyms as individual
+                   ;; rows in the database, we have nowhere to put word-level
+                   ;; props. Copy them (and tags) to props as a workaround.
+                   (--each '("eq-en" "eq-ja" "added")
+                     (puthash it (gethash it entry) orig-het))
+                   ;; There are both word-level and heteronym-level tags, so
+                   ;; it needs a different key.
+                   (puthash "wordTags"
+                            (gethash "tags" entry) orig-het)
+                   ;; We can't run d:process-props just yet, as that requires
+                   ;; the list of all titles to work correctly.
+                   (puthash "props" orig-het shaped-het)
+                   (push shaped-het d:shaped-hets)
+                   (puthash title t d:titles:look-up-table)))))))
+       (garbage-collect))))
+  (garbage-collect)
+  (setq d:shaped-hets (nreverse d:shaped-hets))
+  ;; Step 2: do transformations
+  (cl-loop
+   for het being the elements of d:shaped-hets
+   using (index i)
+   with len = (length d:shaped-hets)
+   with rep = (make-progress-reporter
+               "Processing heteronyms..."
+               1 len
+               nil
+               ;; 5 percent or 4 seconds
+               5 4)
+   do
+   (progn
+     (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
+     (when (or (= (1+ i) 1)
+               (= 0 (% (1+ i) 10000))
+               (= (1+ i) len))
+       (garbage-collect))
+     (ht-update-with! het "props"
+       (lambda (props)
+         (d:process-props
+          props
+          (gethash "title" het)
+          (gethash "from" het))))))
+  (garbage-collect)
+  (setq d:links (-uniq d:links))
+  ;; Step 3: insert them into the database
+  (d:db-insert)
+  (message "Done"))
 
-(defun d:db-insert (heteronyms links)
-  "Insert all data into the database."
+(defun d:db-insert ()
+  "Insert all data into the database.
+This de facto takes two inputs: `d:shaped-hets' and `d:links', which
+need to be set up beforehand. This function wants them passed via global
+variables and not arguments because otherwise the debugger would try to
+put the full value into the backtrace."
   (message "Initializing database...")
   (d:db-init)
   (message "Preparing langs and dicts...")
@@ -1055,7 +1066,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (zh-plain-aliases-success nil)
          (def-plain-aliases-success nil)
          (kautian-has-nonexact-aliases nil)
-         (len (length heteronyms))
+         (len (length d:shaped-hets))
          (rep (make-progress-reporter
                "Inserting heteronyms..."
                1 len
@@ -1064,7 +1075,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
                5 4)))
     (with-sqlite-transaction d:db
       (cl-loop
-       for het being the elements of heteronyms
+       for het being the elements of d:shaped-hets
        using (index i)
        do
        ;; Ignore heteronyms with an empty title.
@@ -1200,14 +1211,14 @@ VALUES
         (d::warn "zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
   ;; (message "Inserting links...")
   (with-sqlite-transaction d:db
-    (let* ((len (length links))
+    (let* ((len (length d:links))
            (rep (make-progress-reporter
                  "Inserting links..."
                  1 len nil
                  ;; 5 percent / 4 seconds
                  5 4)))
       (cl-loop
-       for link being the elements of links
+       for link being the elements of d:links
        using (index i)
        do
        (progn
@@ -1557,7 +1568,7 @@ For example, writing ngyun instead of ngiun."
   ;; low we'll be GC'ing all the time without being able to free any
   ;; memory.
   (let ((gc-cons-threshold 100000000)
-        (debug-on-error nil))
+        (debug-on-error t))
     (d:main))
   (kill-emacs))
 
