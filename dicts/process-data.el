@@ -1131,21 +1131,21 @@ VALUES
                            "kanggesu"
                            "pts-taigitv"
                            "chhoetaigi_taihoa"))
-             (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
+             (-when-let (zh (gethash "zh-plain" (gethash "props" het)))
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
                (sqlite-execute d:db alias-stmt (list het-id zh nil))
                (d::shaped-het-prop-delete het "zh-plain")))
            (prog1 'definitions
              (when (equal het.from "kautian")
-               (when-let ((def-plain (gethash "def-plain" (gethash "props" het))))
+               (-when-let (def-plain (gethash "def-plain" (gethash "props" het)))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
                  (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
                  (d::shaped-het-prop-delete het "def-plain")))
              ;; Set definitions for these as an alias
              (when (member het.from '("chhoetaigi_itaigi"))
-               (when-let ((def-plain (gethash "definition-plain" (gethash "props" het))))
+               (-when-let (def-plain (gethash "definition-plain" (gethash "props" het)))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
                  (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
@@ -1153,13 +1153,13 @@ VALUES
            ;; Set the English text for these as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
-             (when-let ((en (gethash "en" (gethash "props" het))))
+             (-when-let (en (gethash "en" (gethash "props" het)))
                (sqlite-execute d:db alias-stmt (list het-id en nil))))
            (when (member het.from '("pts-taigitv"
                                     "kanggesu"
                                     "kisaragi_dict"
                                     "kisaragi_taigi"))
-             (when-let ((tags (seq-concatenate
+             (-when-let (tags (seq-concatenate
                                'vector
                                (->> (gethash "props" het)
                                     (gethash "wordTags"))
@@ -1172,24 +1172,24 @@ VALUES
                                ;; kanggesu 子類別
                                (->> (gethash "props" het)
                                     (gethash "childTypeName")
-                                    list))))
+                                    list)))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
                (d::for (tag tags)
-                 (when-let
-                     ((tag-str
-                       (cond ((hash-table-p tag)
-                              ;; tag.title should be guaranteed to exist by the scraper
-                              (gethash "title" tag))
-                             ((stringp tag)
-                              tag)
-                             ;; just ignore it if it is nil
-                             ((null tag) nil)
-                             (t (d::warn
-                                 "Unexpected tag format! Heteronym %S from dict %S, tag %S"
-                                 het
-                                 het.from
-                                 tag)
-                                nil))))
+                 (-when-let
+                     (tag-str
+                      (cond ((hash-table-p tag)
+                             ;; tag.title should be guaranteed to exist by the scraper
+                             (gethash "title" tag))
+                            ((stringp tag)
+                             tag)
+                            ;; just ignore it if it is nil
+                            ((null tag) nil)
+                            (t (d::warn
+                                "Unexpected tag format! Heteronym %S from dict %S, tag %S"
+                                het
+                                het.from
+                                tag)
+                               nil)))
                    (unless (member tag-str '("其他"))
                      (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil))))))))
          (sqlite-execute
@@ -1473,18 +1473,18 @@ Return a list of pronunciations."
         ;; We use the values as keys to deduplicate as we go.
         (tbl (make-hash-table :test #'equal)))
     (dolist (key keys)
-      (when-let (value (gethash key props))
+      (-when-let (value (gethash key props))
         (dolist (p (d:pn-normalize value))
           (puthash p t tbl))))
     ;; What I chose for kautian
-    (when-let (tl (gethash "tl" props))
+    (-when-let (tl (gethash "tl" props))
       (dolist (key '("main" "colloquial" "alt" "otherMerged"))
-        (when-let (value (gethash key tl))
+        (-when-let (value (gethash key tl))
           (dolist (p (d:pn-normalize value))
             (puthash p t tbl))))
       ;; This is an object from the dialect name to an array of strings; the
       ;; arrays are parsed into vectors in Elisp.
-      (when-let ((dialects (gethash "dialects" tl)))
+      (-when-let (dialects (gethash "dialects" tl))
         ;; We have a list of vectors here.
         (dolist (vec (map-values dialects))
           (dolist (p (d:pn-normalize vec))
