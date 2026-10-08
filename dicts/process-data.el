@@ -1128,14 +1128,14 @@ VALUES
                (when-let ((def-plain (gethash "def-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
-                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))
+                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil))))
              ;; Set definitions for these as an alias
              ;; Set the English text for these as an alias
              (when (member het.from '("chhoetaigi_itaigi"))
                (when-let ((def-plain (gethash "definition-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
-                 (sqlite-execute d:db alias-stmt (list het-id zh nil)))))
+                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil)))))
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
