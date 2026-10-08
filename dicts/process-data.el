@@ -996,8 +996,8 @@ ORIG-HETS are props that will be used to construct heteronyms."
                    ;; props. Copy them (and tags) to props as a workaround.
                    (--each '("eq-en" "eq-ja" "added")
                      (puthash it (gethash it entry) orig-het))
-                   ;; There are both word-level and heteronym-level tags, so
-                   ;; it needs a different key.
+                   ;; for kisaragi-*: There are both word-level and
+                   ;; heteronym-level tags, so it needs a different key.
                    (puthash "wordTags"
                             (gethash "tags" entry) orig-het)
                    ;; We can't run d:process-props just yet, as that requires
