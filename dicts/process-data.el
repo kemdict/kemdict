@@ -1544,8 +1544,6 @@ For example, writing ngyun instead of ngiun."
       (puthash (s-replace-regexp from to thrs) t ret))
     (hash-table-keys ret)))
 
-(d:pn-thrs-variants "ngiun")
-
 (when noninteractive
   (require 'jieba)
   (jieba-reset 'big)
