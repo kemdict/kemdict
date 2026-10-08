@@ -199,7 +199,8 @@ SHAPED-HET is a heteronym after processing, the thing that gets inserted
 into the database, with the shape of {title,from,lang,props}."
   (ht-update-with! shaped-het "props"
     (lambda (props)
-      (ht-remove! props key)))
+      (ht-remove! props key)
+      props))
   shaped-het)
 
 ;;;; Links
