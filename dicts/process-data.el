@@ -36,6 +36,17 @@ member of SEQUENCE."
        (catch 'continue
          ,@body))))
 
+(defun d::posthet-prop-delete (posthet key)
+  "Delete KEY from the props of POSTHET.
+This edits POSTHET and also returns it.
+
+POSTHET is a heteronym after processing, the thing that gets inserted
+into the database, with the shape of {title,from,lang,props}."
+  (ht-update-with! posthet "props"
+    (lambda (props)
+      (ht-remove! props key)))
+  posthet)
+
 (defun d::dictionaries ()
   "Return definitions of dictionaries.
 
@@ -1112,27 +1123,21 @@ VALUES
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
                (sqlite-execute d:db alias-stmt (list het-id zh nil))
-               (ht-update-with! het "props"
-                 (lambda (it)
-                   (ht-remove! it "zh-plain")))))
+               (d::posthet-prop-delete het "zh-plain")))
            (prog1 'definitions
              (when (equal het.from "kautian")
                (when-let ((def-plain (gethash "def-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
                  (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
-                 (ht-update-with! het "props"
-                   (lambda (it)
-                     (ht-remove! it "def-plain")))))
+                 (d::posthet-prop-delete het "def-plain")))
              ;; Set definitions for these as an alias
              (when (member het.from '("chhoetaigi_itaigi"))
                (when-let ((def-plain (gethash "definition-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
                  (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
-                 (ht-update-with! het "props"
-                   (lambda (it)
-                     (ht-remove! it "definition-plain"))))))
+                 (d::posthet-prop-delete het "definition-plain"))))
            ;; Set the English text for these as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
