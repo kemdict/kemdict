@@ -632,6 +632,8 @@ This is a separate step from shaping."
          (ht-update-with! props "heteronyms"
            (lambda (hets)
              (seq-doseq (het hets)
+               ;; Keep a copy that doesn't have markup
+               (d::hash-copy props "def" "def-plain")
                (ht-update-with! het "def"
                  #'d:links:linkify-keywords)
                (dolist (key '("hwSynonyms" "hwAntonyms" "hhSynonyms" "hhAntonyms"))
@@ -706,6 +708,8 @@ This is a separate step from shaping."
        (ht-update-with! props "zh"
          #'d:links:link-to-word))
       ("chhoetaigi_itaigi"
+       ;; Keep a copy that doesn't have markup
+       (d::hash-copy props "definition" "definition-plain")
        (ht-update-with! props "definition"
          #'d:links:link-to-word))
       ("chhoetaigi_taihoa"
@@ -1037,6 +1041,7 @@ ORIG-HETS are props that will be used to construct heteronyms."
          (json-false :false)
          (json-null :null)
          (zh-plain-aliases-success nil)
+         (def-plain-aliases-success nil)
          (kautian-has-nonexact-aliases nil)
          (len (length heteronyms))
          (rep (make-progress-reporter
@@ -1118,7 +1123,19 @@ VALUES
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
                (sqlite-execute d:db alias-stmt (list het-id zh nil))))
-           ;; Set the English text for these as an alias
+           (prog1 'definitions
+             (when (equal het.from "kautian")
+               (when-let ((def-plain (gethash "def-plain" (gethash "props" het))))
+                 (unless def-plain-aliases-success
+                   (setq def-plain-aliases-success t))
+                 (sqlite-execute d:db alias-stmt (list het-id zh nil))))
+             ;; Set definitions for these as an alias
+             ;; Set the English text for these as an alias
+             (when (member het.from '("chhoetaigi_itaigi"))
+               (when-let ((def-plain (gethash "definition-plain" (gethash "props" het))))
+                 (unless def-plain-aliases-success
+                   (setq def-plain-aliases-success t))
+                 (sqlite-execute d:db alias-stmt (list het-id zh nil)))))
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
@@ -1162,6 +1179,8 @@ VALUES
                      (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil))))))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
+      (unless def-plain-aliases-success
+        (d::warn "def-plain aliases are not present"))
       (unless zh-plain-aliases-success
         (d::warn "zh-plain aliases from pts-taigitv and chhoetaigi_maryknoll1976 are not present"))))
   ;; (message "Inserting links...")
