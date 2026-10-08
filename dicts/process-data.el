@@ -1060,17 +1060,6 @@ ORIG-HETS are props that will be used to construct heteronyms."
        ;; empty titles in the JSON.
        (when (gethash "title" het)
          (progress-reporter-update rep (1+ i) (format "(%s/%s)" (1+ i) len))
-         (sqlite-execute
-          d:db
-          "
-INSERT INTO
-  heteronyms (\"title\",\"from\",\"lang\",\"props\")
-VALUES
-  (?,?,?,?)"
-          (list (d::NFD (gethash "title" het))
-                (d::NFD (gethash "from" het))
-                (d::NFD (gethash "lang" het))
-                (d::NFD (json-encode (gethash "props" het)))))
          ;; SQLite integer primary key is 1-based
          (let ((het-id (1+ i))
                (het.title (d::NFD (gethash "title" het)))
@@ -1122,20 +1111,29 @@ VALUES
              (when-let ((zh (gethash "zh-plain" (gethash "props" het))))
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
-               (sqlite-execute d:db alias-stmt (list het-id zh nil))))
+               (sqlite-execute d:db alias-stmt (list het-id zh nil))
+               (ht-update-with! het "props"
+                 (lambda (it)
+                   (ht-remove! it "zh-plain")))))
            (prog1 'definitions
              (when (equal het.from "kautian")
                (when-let ((def-plain (gethash "def-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
-                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil))))
+                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
+                 (ht-update-with! het "props"
+                   (lambda (it)
+                     (ht-remove! it "def-plain")))))
              ;; Set definitions for these as an alias
-             ;; Set the English text for these as an alias
              (when (member het.from '("chhoetaigi_itaigi"))
                (when-let ((def-plain (gethash "definition-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
-                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil)))))
+                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
+                 (ht-update-with! het "props"
+                   (lambda (it)
+                     (ht-remove! it "definition-plain"))))))
+           ;; Set the English text for these as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (when-let ((en (gethash "en" (gethash "props" het))))
@@ -1176,7 +1174,18 @@ VALUES
                                  tag)
                                 nil))))
                    (unless (member tag-str '("其他"))
-                     (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil))))))))))
+                     (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil))))))))
+         (sqlite-execute
+          d:db
+          "
+INSERT INTO
+  heteronyms (\"title\",\"from\",\"lang\",\"props\")
+VALUES
+  (?,?,?,?)"
+          (list (d::NFD (gethash "title" het))
+                (d::NFD (gethash "from" het))
+                (d::NFD (gethash "lang" het))
+                (d::NFD (json-encode (gethash "props" het)))))))
       (unless kautian-has-nonexact-aliases
         (d::warn "kautian only has exact aliases, are the TL/POJ text extracted properly?"))
       (unless def-plain-aliases-success
