@@ -57,51 +57,46 @@ The value is a list:
 
 An ID of nil means the entries are included but will not be shown
 by default."
-  (cond
-   ;; (t
-   ;;  '(("kautian" "nan_TW" "ministry-of-education/kautian.json")))
-   ;; (t
-   ;;  '(("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")))
-   (t
-    ;; The order here defines the order they will appear in the word
-    ;; pages.
-    (--filter
-     (and
-      ;; All files of the dictionary exist
-      (-all? #'file-exists-p (ensure-list (elt it 2))))
-     '(("unihan" "han" "unihan.json")
-       ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
-       ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
-       ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
-       ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
-       ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
-       ("kanggesu" "nan_TW" "kanggesu-data/data/scrape-20251210.json")
-       ("kautian" "nan_TW" "ministry-of-education/kautian.json")
-       ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
-       ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
-       ("chhoetaigi_taihoa" "nan_TW" "chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json")
-       ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
-       ("chhoetaigi_maryknoll1976" "nan_TW" "chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json")
-       ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
-       ("lopof-taigi" "nan_TW" "lopof-nan_TW.json")
-       ("lopof-hakka" "hak_TW" "lopof-hak_TW.json")
-       ("ilrdf_ais" "ais" "ilrdf/ais.json")
-       ("ilrdf_ami" "ami" "ilrdf/ami.json")
-       ("ilrdf_bnn" "bnn" "ilrdf/bnn.json")
-       ("ilrdf_ckv" "ckv" "ilrdf/ckv.json")
-       ("ilrdf_dru" "dru" "ilrdf/dru.json")
-       ("ilrdf_pwn" "pwn" "ilrdf/pwn.json")
-       ("ilrdf_pyu" "pyu" "ilrdf/pyu.json")
-       ("ilrdf_ssf" "ssf" "ilrdf/ssf.json")
-       ("ilrdf_sxr" "sxr" "ilrdf/sxr.json")
-       ("ilrdf_tao" "tao" "ilrdf/tao.json")
-       ("ilrdf_tay" "tay" "ilrdf/tay.json")
-       ("ilrdf_trv" "trv" "ilrdf/trv.json")
-       ("ilrdf_sdq" "sdq" "ilrdf/sdq.json")
-       ("ilrdf_tsu" "tsu" "ilrdf/tsu.json")
-       ("ilrdf_xnb" "xnb" "ilrdf/xnb.json")
-       ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
-       ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json"))))))
+  ;; The order here defines the order they will appear in the word
+  ;; pages.
+  (->> '(("unihan" "han" "unihan.json")
+         ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
+         ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
+         ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+         ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
+         ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
+         ("kanggesu" "nan_TW" "kanggesu-data/data/scrape-20251210.json")
+         ("kautian" "nan_TW" "ministry-of-education/kautian.json")
+         ("chhoetaigi_taijittoasutian" "nan_TW" "chhoetaigi/ChhoeTaigi_TaijitToaSutian.json")
+         ("chhoetaigi_itaigi" "nan_TW" "chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json")
+         ("chhoetaigi_taihoa" "nan_TW" "chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json")
+         ("chhoetaigi_taioanpehoekichhoogiku" "nan_TW" "chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json")
+         ("chhoetaigi_maryknoll1976" "nan_TW" "chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json")
+         ("hakkadict" "hak_TW" "ministry-of-education/hakkadict.json")
+         ("lopof-taigi" "nan_TW" "lopof-nan_TW.json")
+         ("lopof-hakka" "hak_TW" "lopof-hak_TW.json")
+         ("ilrdf_ais" "ais" "ilrdf/ais.json")
+         ("ilrdf_ami" "ami" "ilrdf/ami.json")
+         ("ilrdf_bnn" "bnn" "ilrdf/bnn.json")
+         ("ilrdf_ckv" "ckv" "ilrdf/ckv.json")
+         ("ilrdf_dru" "dru" "ilrdf/dru.json")
+         ("ilrdf_pwn" "pwn" "ilrdf/pwn.json")
+         ("ilrdf_pyu" "pyu" "ilrdf/pyu.json")
+         ("ilrdf_ssf" "ssf" "ilrdf/ssf.json")
+         ("ilrdf_sxr" "sxr" "ilrdf/sxr.json")
+         ("ilrdf_tao" "tao" "ilrdf/tao.json")
+         ("ilrdf_tay" "tay" "ilrdf/tay.json")
+         ("ilrdf_trv" "trv" "ilrdf/trv.json")
+         ("ilrdf_sdq" "sdq" "ilrdf/sdq.json")
+         ("ilrdf_tsu" "tsu" "ilrdf/tsu.json")
+         ("ilrdf_xnb" "xnb" "ilrdf/xnb.json")
+         ("ilrdf_xsy" "xsy" "ilrdf/xsy.json")
+         ("dict_idioms" "zh_TW" "ministry-of-education/dict_idioms.json"))
+       (--filter
+        (and
+         ;; (equal "pts-taigitv" (elt it 0))
+         ;; All files of the dictionary exist
+         (-all? #'file-exists-p (ensure-list (elt it 2)))))))
 
 (defun d::langs ()
   "Return all languages."
