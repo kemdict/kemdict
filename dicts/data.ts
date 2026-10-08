@@ -120,7 +120,7 @@ export const dicts = [
 （改寫自其[關於頁面](https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite/About)）
 `,
       license: {
-        name: "CC-BY-NC-ND",
+        name: "Unknown",
         url: "https://kanggesu.ntcri.gov.tw/NTCRI_TaigiWebSite/ImageLicense",
       },
       source: "https://github.com/taigikeyboard/kanggesu-data",
