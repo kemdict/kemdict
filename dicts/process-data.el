@@ -324,7 +324,7 @@ this:
     (->> str
          (s-replace-regexp
           (rx "→"
-              (group (+ any))
+              (group (+ anychar))
               (or "。" eol))
           (lambda (str)
             (format
@@ -340,7 +340,7 @@ this:
     (->> str
          (s-replace-regexp
           (rx bos
-              (group (+? any))
+              (group (+? anychar))
               (group (or "，" "。")))
           (lambda (str)
             (concat
@@ -366,10 +366,10 @@ this:
           (if (and open close)
               (rx
                (group (literal open))
-               (group (*? any))
+               (group (*? anychar))
                (group (literal close)))
             (rx (group (any "「【"))
-                (group (*? any))
+                (group (*? anychar))
                 (group (any "」】"))))
           (lambda (str)
             (concat
@@ -476,7 +476,7 @@ do."
            ;; Work around chhoetaigi_taijittoasutian entries like
            ;; "(**裝)模做樣". I don't think the title is supposed to
            ;; be like that.
-           (s-replace-regexp (rx "(**" (group (+ any)) ")")
+           (s-replace-regexp (rx "(**" (group (+ anychar)) ")")
                              "\\1")
            (s-replace-regexp (rx (any "[" "]"))
                              "")))))
@@ -488,7 +488,7 @@ do."
          d:links:comma-word-list
          (s-replace-regexp
           (rx (group digit ".")
-              (group (+? any))
+              (group (+? anychar))
               (group (or (+ " ") eos)))
           (lambda (s)
             (save-match-data
@@ -523,7 +523,7 @@ do."
        d:links:linkify-arrow
        (s-replace-regexp
         (rx (group "相對於")
-            (group (*? any))
+            (group (*? anychar))
             (group "而言"))
         (lambda (str)
           (concat
@@ -596,7 +596,7 @@ This is a separate step from shaping."
            (d:links:linkify-brackets words "【" "】")
            (s-replace-regexp
             (rx "[" (group (any "似反")) "]"
-                (group (* any)))
+                (group (* anychar)))
             (lambda (str)
               (format
                "<m>［%s］</m>%s"
@@ -1303,9 +1303,9 @@ WHERE \"from\" LIKE 'kisaragi%'
                     (nth 1) ; "2014_20230112"
                     (s-split "_") ; ("2014" "20230112")
                     (nth 1) ; "20230112"
-                    (s-match (rx (group (= 4 any))
-                                 (group (= 2 any))
-                                 (group (= 2 any))))
+                    (s-match (rx (group (= 4 anychar))
+                                 (group (= 2 anychar))
+                                 (group (= 2 anychar))))
                     cdr ; ("2023" "01" "12")
                     (s-join "-"))))
             (unless added-date
