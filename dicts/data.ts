@@ -209,6 +209,21 @@ export const dicts = [
     },
   },
   {
+    id: "caris-events--invade",
+    name: "笨他侵略 - 中國侵略性詞彙字典",
+    url: "https://invade.tw/v/$1",
+    lang: "zh_TW",
+    meta: {
+      desc: `一個記錄中國侵略性詞彙的字典，即最有引起反感的中國用語。`,
+      license: {
+        name: "CC0",
+        url: "https://github.com/caris-events/invade#%E5%85%A7%E5%AE%B9%E6%8E%88%E6%AC%8A",
+      },
+      source: "https://github.com/caris-events/invade",
+      original: "https://github.com/caris-events/invade",
+    },
+  },
+  {
     id: "kisaragi_taigi",
     name: "如月的台語補足典",
     url: "/dicts/kisaragi_taigi",
