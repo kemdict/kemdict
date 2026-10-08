@@ -1038,6 +1038,22 @@ ORIG-HETS are props that will be used to construct heteronyms."
   (d:db-insert)
   (message "Done"))
 
+(defun d:db-insert-alias (db id title exact)
+  "Insert an alias into DB.
+The alias is made up of ID, TITLE, and EXACT.
+EXACT does not have to be 1 or nil like how we store it in the DB. Any
+non-nil value will be converted to 1 before inserting."
+  (let ((alias-stmt "
+INSERT INTO
+  aliases (\"het_id\",\"alias\",\"exact\")
+VALUES
+  (?,?,?)"))
+    (sqlite-execute db alias-stmt
+                    (list id
+                          title
+                          ;; non-nil is represented as 1 in the db
+                          (and exact 1)))))
+
 (defun d:db-insert ()
   "Insert all data into the database.
 This de facto takes two inputs: `d:shaped-hets' and `d:links', which
@@ -1088,28 +1104,23 @@ put the full value into the backtrace."
          ;; SQLite integer primary key is 1-based
          (let ((het-id (1+ i))
                (het.title (d::NFD (gethash "title" het)))
-               (het.from (gethash "from" het))
-               (alias-stmt "
-INSERT INTO
-  aliases (\"het_id\",\"alias\",\"exact\")
-VALUES
-  (?,?,?)"))
-           (sqlite-execute d:db alias-stmt (list het-id het.title 1))
+               (het.from (gethash "from" het)))
+           (d:db-insert-alias d:db het-id het.title t)
            ;; This is only used in Kautian
            (seq-doseq (alt (-some->> het
                              (gethash "props")
                              (gethash "han")
                              (gethash "alt")))
-             (sqlite-execute d:db alias-stmt (list het-id alt 1)))
+             (d:db-insert-alias d:db het-id alt t))
            (dolist (pn (d:pn-collect het))
-             (sqlite-execute d:db alias-stmt (list het-id pn 1))
+             (sqlite-execute d:db het-id pn t)
              ;; TODO: searching lopof-hakka entries with THRS. Would require
              ;; adding THRS equivalents as aliases.
              ;; Add different variants of THRS. These are considered to be exact.
              (when (equal het.from "hakkadict")
                (dolist (variant (d:pn-thrs-variants pn))
                  (unless (equal variant pn)
-                   (sqlite-execute d:db alias-stmt (list het-id variant 1)))))
+                   (sqlite-execute d:db het-id variant t))))
              ;; Input versions.
              ;; - don't duplicate if equal to original
              ;; - don't bother for some dictionaries)
@@ -1126,7 +1137,7 @@ VALUES
                  (unless (equal input-form pn)
                    (when (equal het.from "kautian")
                      (setq kautian-has-nonexact-aliases t))
-                   (sqlite-execute d:db alias-stmt (list het-id input-form nil))))))
+                   (sqlite-execute d:db het-id input-form nil)))))
            ;; For these, set the zh version as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"
@@ -1136,27 +1147,27 @@ VALUES
              (-when-let (zh (gethash "zh-plain" (gethash "props" het)))
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
-               (sqlite-execute d:db alias-stmt (list het-id zh nil))
+               (sqlite-execute d:db het-id zh nil)
                (d::shaped-het-prop-delete het "zh-plain")))
            (prog1 'definitions
              (when (equal het.from "kautian")
                (-when-let (def-plain (gethash "def-plain" (gethash "props" het)))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
-                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
+                 (sqlite-execute d:db het-id def-plain nil)
                  (d::shaped-het-prop-delete het "def-plain")))
              ;; Set definitions for these as an alias
              (when (member het.from '("chhoetaigi_itaigi"))
                (-when-let (def-plain (gethash "definition-plain" (gethash "props" het)))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
-                 (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
+                 (sqlite-execute d:db het-id def-plain nil)
                  (d::shaped-het-prop-delete het "definition-plain"))))
            ;; Set the English text for these as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
              (-when-let (en (gethash "en" (gethash "props" het)))
-               (sqlite-execute d:db alias-stmt (list het-id en nil))))
+               (sqlite-execute d:db het-id en nil)))
            (when (member het.from '("pts-taigitv"
                                     "kanggesu"
                                     "kisaragi_dict"
@@ -1193,7 +1204,7 @@ VALUES
                                 tag)
                                nil)))
                    (unless (member tag-str '("其他"))
-                     (sqlite-execute d:db alias-stmt (list het-id (concat "#" tag-str) nil))))))))
+                     (sqlite-execute d:db het-id (concat "#" tag-str) nil)))))))
          (sqlite-execute
           d:db
           "
