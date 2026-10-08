@@ -36,17 +36,6 @@ member of SEQUENCE."
        (catch 'continue
          ,@body))))
 
-(defun d::posthet-prop-delete (posthet key)
-  "Delete KEY from the props of POSTHET.
-This edits POSTHET and also returns it.
-
-POSTHET is a heteronym after processing, the thing that gets inserted
-into the database, with the shape of {title,from,lang,props}."
-  (ht-update-with! posthet "props"
-    (lambda (props)
-      (ht-remove! props key)))
-  posthet)
-
 (defun d::dictionaries ()
   "Return definitions of dictionaries.
 
@@ -192,6 +181,21 @@ For example, 1 is 一, 213 is 龜."
     (seq-doseq (title titles)
       (puthash title t lut))
     lut))
+
+;;;; Shaped-hets
+
+(defun d::shaped-het-prop-delete (shaped-het key)
+  "Delete KEY from the props of SHAPED-HET.
+This edits SHAPED-HET and also returns it.
+
+SHAPED-HET is a heteronym after processing, the thing that gets inserted
+into the database, with the shape of {title,from,lang,props}."
+  (ht-update-with! shaped-het "props"
+    (lambda (props)
+      (ht-remove! props key)))
+  shaped-het)
+
+;;;; Links
 
 (defvar d:links:from nil
   "Used to mark where links are coming from to register to the links table.")
@@ -428,6 +432,8 @@ If NEW-SEPARATOR is non-nil, use it as the new comma; otherwise use \"、\"."
           ;; Should also work for a single word
           (equal (d:links:comma-word-list "敵意")
                  "<a href=\"/word/敵意\">敵意</a>")))))
+
+;;;; Etc.
 
 (defun d:process-title (title)
   "Process TITLE to replace problematic characters, and so on.
@@ -1118,21 +1124,21 @@ VALUES
                (unless zh-plain-aliases-success
                  (setq zh-plain-aliases-success t))
                (sqlite-execute d:db alias-stmt (list het-id zh nil))
-               (d::posthet-prop-delete het "zh-plain")))
+               (d::shaped-het-prop-delete het "zh-plain")))
            (prog1 'definitions
              (when (equal het.from "kautian")
                (when-let ((def-plain (gethash "def-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
                  (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
-                 (d::posthet-prop-delete het "def-plain")))
+                 (d::shaped-het-prop-delete het "def-plain")))
              ;; Set definitions for these as an alias
              (when (member het.from '("chhoetaigi_itaigi"))
                (when-let ((def-plain (gethash "definition-plain" (gethash "props" het))))
                  (unless def-plain-aliases-success
                    (setq def-plain-aliases-success t))
                  (sqlite-execute d:db alias-stmt (list het-id def-plain nil))
-                 (d::posthet-prop-delete het "definition-plain"))))
+                 (d::shaped-het-prop-delete het "definition-plain"))))
            ;; Set the English text for these as an alias
            (when (member het.from
                          '("chhoetaigi_maryknoll1976"))
