@@ -12,6 +12,7 @@
 (require 'sqlite)
 (require 'ucs-normalize)
 (require 'parse-time)
+(require 'ert)
 
 (defun d::warn (fmt &rest args)
   "Emit warning with FMT and ARGS in a consistent style.
@@ -1549,20 +1550,6 @@ For example, writing ngyun instead of ngiun."
   (require 'jieba)
   (jieba-reset 'big)
   (jieba-add-word "物件" "n")
-  (--each '(d:titles:to-look-up-table
-            d:sort-orig-hets d:radical-id-to-char
-            d:process-title d:process-props d:process-def:dict_concised
-            d:pn-to-input-form d:pn-normalize d:pn-collect
-            d:main
-            d:links:簡編本:近義反義 d:links:org-style d:links:linkify-keywords
-            d:links:linkify-first-phrase d:links:linkify-brackets
-            d:links:linkify-arrow d:links:link-to-word d:links:comma-word-list
-            d:latin-only d:hakkadict:pn
-            d:db-insert d:db-init
-            d:cangjie-abc-to-han
-            d::langs d::hash-rename d::hash-prune
-            d::dictionaries)
-    (byte-compile it))
   ;; We're holding all dictionary data in memory, so if this is too
   ;; low we'll be GC'ing all the time without being able to free any
   ;; memory.

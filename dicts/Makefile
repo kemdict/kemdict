@@ -42,6 +42,7 @@ dicts: $(DICT_TARGETS)
 # * entries.db
 
 entries.db: $(DICT_TARGETS) process-data.el .eask
+	npx eask compile process-data.el
 	npx eask eval "(load \"process-data\")"
 
 props: entries.db
