@@ -24,8 +24,10 @@
       {#each het.props.examples as example}
         <div>
           <h3>◉ {example.words.join("、")}</h3>
-          <Property key="台灣華語" value={example.correct}></Property>
-          <Property key="中國華語" value={example.incorrect}></Property>
+          <Property key="台灣華語" value={example.correct} html={true}
+          ></Property>
+          <Property key="中國華語" value={example.incorrect} html={true}
+          ></Property>
         </div>
       {/each}
     </div>

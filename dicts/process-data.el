@@ -360,18 +360,6 @@ this:
           (equal (d:links:linkify-first-phrase "b。")
                  "b。")))))
 
-(defun d:links:remove-brackets (str open close)
-  "Remove brackets from STR."
-  (when str
-    (->> str
-         (s-replace-regexp
-          (rx
-           (group (literal open))
-           (group (*? anychar))
-           (group (literal close)))
-          (lambda (str)
-            (match-string 2 str))))))
-
 (defun d:links:linkify-brackets (str &optional open close)
   "Create links in STR for all brackets."
   (when str
@@ -653,7 +641,11 @@ This is a separate step from shaping."
                (ht-update-with! ex key
                  (lambda (it)
                    (->> it
-                        (d:links:remove-brackets "{{" "}}")
+                        (s-replace-regexp
+                         (rx "{{" (group (*? anychar)) "}}")
+                         (lambda (str)
+                           (format "<u>%s</u>"
+                                   (match-string 1 str))))
                         d:links:org-style))))))))
       ("kautian"
        (let ((refs-link-register
