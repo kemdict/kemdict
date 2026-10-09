@@ -53,6 +53,7 @@ by default."
          ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
          ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
          ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
+         ("caris-events--invade" "zh_CN" "caris-events--invade.json")
          ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
          ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
          ("kanggesu" "nan_TW" "kanggesu-data/data/scrape-20251210.json")
@@ -224,12 +225,16 @@ Link objects are alists with two keys, `to' and `from'.")
 (cl-defun d:links:link-to-word (target
                                 &key
                                 (desc target)
-                                (href target))
+                                (href target)
+                                (fallback nil))
   "Create an HTML link with DESC to TARGET when appropriate.
 
 Just return DESC if TARGET does not exist in
 `d:titles:look-up-table', or if DESC already looks like an HTML
 link.
+
+If FALLBACK is a format string (default just \"%s\"), then DESC is
+formatted with it when we would otherwise just return DESC.
 
 If HREF is a string, the HTML will link to HREF instead. This is
 useful for creating links to \"/word/word#heading\" while still
@@ -249,7 +254,8 @@ this:
                      (and (gethash (concat target "。") d:titles:look-up-table)
                           (setq period t))))
             (s-contains? "<a" desc t))
-        desc
+        (or (and fallback (format fallback desc))
+            desc)
       (when period
         (setq target (concat target "。")
               href (concat href "。")))
@@ -359,8 +365,13 @@ this:
           (equal (d:links:linkify-first-phrase "b。")
                  "b。")))))
 
-(defun d:links:linkify-brackets (str &optional open close)
-  "Create links in STR for all brackets."
+
+(defun d:links:linkify-brackets (str &optional open close delete fallback)
+  "Create links in STR for all brackets.
+If DELETE, do not keep the brackets.
+
+FALLBACK is passed to `d:links:link-to-word', and provides a way to
+specify a different format when the link isn\\='t created."
   (when str
     (->> str
          (s-replace-regexp
@@ -374,11 +385,17 @@ this:
                 (group (*? anychar))
                 (group (any "」】"))))
           (lambda (str)
-            (concat
-             (match-string 1 str)
-             (d:links:link-to-word
-              (match-string 2 str))
-             (match-string 3 str)))))))
+            (if delete
+                (d:links:link-to-word
+                 (match-string 2 str)
+                 :fallback fallback)
+              (concat
+               (match-string 1 str)
+               (d:links:link-to-word
+                (match-string 2 str)
+                :fallback fallback)
+               (match-string 3 str))))))))
+
 
 (ert-deftest d:links:linkify-brackets ()
   (should
@@ -387,7 +404,12 @@ this:
      (and (equal (d:links:linkify-brackets "「a」、「b」")
                  "「<a href=\"/word/a\">a</a>」、「b」")
           (equal (d:links:linkify-brackets "a, b")
-                 "a, b")))))
+                 "a, b"))))
+  (should
+   (let ((d:titles:look-up-table
+          (d:titles:to-look-up-table (list "a" "b"))))
+     (-> (d:links:linkify-brackets "abc[[a]]ghi{{b}}" "{{" "}}")
+         (d:links:linkify-brackets "[[" "]]")))))
 
 (defun d:links:org-style (str)
   "Linkify Org-style links in STR."
@@ -632,6 +654,16 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("caris-events--invade"
+       (ht-update-with! props "examples"
+         (lambda (exs)
+           (seq-doseq (ex exs)
+             (dolist (key '("correct" "incorrect"))
+               (ht-update-with! ex key
+                 (lambda (it)
+                   (-> it
+                       (d:links:linkify-brackets "{{" "}}" t "<span class=\"uu\">%s</span>")
+                       (d:links:linkify-brackets "[[" "]]" t)))))))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
@@ -963,6 +995,9 @@ ORIG-HETS are props that will be used to construct heteronyms."
                                  (gethash "han")
                                  (gethash "main")
                                  d:process-title)
+                               ;; caris-events--invade
+                               (-some->> entry
+                                 (gethash "word"))
                                ;; kanggesu
                                (-some->> entry
                                  (gethash "taiwaneseCharacters")
@@ -1190,10 +1225,17 @@ put the full value into the backtrace."
                          '("chhoetaigi_maryknoll1976"))
              (-when-let (en (gethash "en" (gethash "props" het)))
                (d:db-insert-alias d:db het-id en nil)))
+           (when (equal het.from "caris-events--invade")
+             (seq-doseq (example (-some->> het
+                                   (gethash "props")
+                                   (gethash "examples")))
+               (seq-doseq (word (gethash "words" example))
+                 (d:db-insert-alias d:db het-id word nil))))
            (when (member het.from '("pts-taigitv"
                                     "kanggesu"
                                     "kisaragi_dict"
-                                    "kisaragi_taigi"))
+                                    "kisaragi_taigi"
+                                    "caris-events--invade"))
              (-when-let (tags (seq-concatenate
                                'vector
                                (->> (gethash "props" het)
@@ -1207,6 +1249,10 @@ put the full value into the backtrace."
                                ;; kanggesu 子類別
                                (->> (gethash "props" het)
                                     (gethash "childTypeName")
+                                    list)
+                               ;; caris-events--invade category
+                               (->> (gethash "props" het)
+                                    (gethash "category")
                                     list)))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
                (d::for (tag tags)

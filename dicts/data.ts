@@ -3,6 +3,7 @@ import { dicts as moeDicts } from "./ministry-of-education/versions.ts";
 
 export const langs = {
   zh_TW: "華語",
+  zh_CN: "華語（中國）",
   nan_TW: "台語",
   hak_TW: "客語",
   han: "漢字",
@@ -206,6 +207,21 @@ export const dicts = [
       },
       source:
         "https://github.com/kemdict/kemdict/blob/main/dicts/kisaragi/kisaragi-dict.org",
+    },
+  },
+  {
+    id: "caris-events--invade",
+    name: "侵略性詞彙字典",
+    url: "https://invade.tw/v/$1",
+    lang: "zh_CN",
+    meta: {
+      desc: `一個記錄中國用語的字典，稱為侵略性詞彙即最有引起反感的中國用語。`,
+      license: {
+        name: "CC0",
+        url: "https://github.com/caris-events/invade#%E5%85%A7%E5%AE%B9%E6%8E%88%E6%AC%8A",
+      },
+      source: "https://github.com/caris-events/invade",
+      original: "https://github.com/caris-events/invade",
     },
   },
   {
