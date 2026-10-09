@@ -25,7 +25,9 @@
 {#if ifValue}
   {#if value || children}
     <div class={["mb-2 flex items-baseline", klass]}>
-      <span class="colorPropertyKey mr-2 px-2 py-1">{key}</span>
+      <span class="colorPropertyKey mr-2 px-2 py-1 text-nowrap text-sm"
+        >{key}</span
+      >
       <span class={["prose", valueClass]}>
         {#if children}
           {@render children()}
