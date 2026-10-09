@@ -964,6 +964,9 @@ ORIG-HETS are props that will be used to construct heteronyms."
                                  (gethash "han")
                                  (gethash "main")
                                  d:process-title)
+                               ;; caris-events--invade
+                               (-some->> entry
+                                 (gethash "word"))
                                ;; kanggesu
                                (-some->> entry
                                  (gethash "taiwaneseCharacters")
