@@ -360,6 +360,18 @@ this:
           (equal (d:links:linkify-first-phrase "b。")
                  "b。")))))
 
+(defun d:links:remove-brackets (str open close)
+  "Remove brackets from STR."
+  (when str
+    (->> str
+         (s-replace-regexp
+          (rx
+           (group (literal open))
+           (group (*? anychar))
+           (group (literal close)))
+          (lambda (str)
+            (match-string 2 str))))))
+
 (defun d:links:linkify-brackets (str &optional open close)
   "Create links in STR for all brackets."
   (when str
@@ -633,6 +645,15 @@ This is a separate step from shaping."
     ;; The length prop is kind of pointless: just use [...str].length.
     (ht-remove! props "length")
     (pcase dict
+      ("caris-events--invade"
+       (ht-update-with! props "examples"
+         (lambda (exs)
+           (dolist (key '("correct" "incorrect"))
+             (ht-update-with! exs key
+               (lambda (it)
+                 (->> it
+                      d:links:org-style
+                      (d:links:remove-brackets "{{" "}}"))))))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
