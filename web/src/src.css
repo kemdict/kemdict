@@ -183,7 +183,7 @@
       @apply font-bold;
     }
     h2 {
-      @apply mt-4 text-2xl;
+      @apply mt-4 text-xl;
       font-weight: 400;
     }
     h3 {
