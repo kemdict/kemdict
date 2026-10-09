@@ -204,6 +204,12 @@
     .pos {
       @apply mt-2 block font-bold;
     }
+    .uu {
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-underline-offset: 4px;
+      @apply decoration-secondary-700 dark:decoration-secondary-800;
+    }
     /* This makes up for the mt-2 in .pos if .pos is not present. */
     :not(.pos) + ol,
     :not(.pos) + .def {

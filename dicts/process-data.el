@@ -225,12 +225,16 @@ Link objects are alists with two keys, `to' and `from'.")
 (cl-defun d:links:link-to-word (target
                                 &key
                                 (desc target)
-                                (href target))
+                                (href target)
+                                (fallback nil))
   "Create an HTML link with DESC to TARGET when appropriate.
 
 Just return DESC if TARGET does not exist in
 `d:titles:look-up-table', or if DESC already looks like an HTML
 link.
+
+If FALLBACK is a format string (default just \"%s\"), then DESC is
+formatted with it when we would otherwise just return DESC.
 
 If HREF is a string, the HTML will link to HREF instead. This is
 useful for creating links to \"/word/word#heading\" while still
@@ -250,7 +254,8 @@ this:
                      (and (gethash (concat target "。") d:titles:look-up-table)
                           (setq period t))))
             (s-contains? "<a" desc t))
-        desc
+        (or (and fallback (format fallback desc))
+            desc)
       (when period
         (setq target (concat target "。")
               href (concat href "。")))
@@ -360,9 +365,13 @@ this:
           (equal (d:links:linkify-first-phrase "b。")
                  "b。")))))
 
-(defun d:links:linkify-brackets (str &optional open close delete)
+
+(defun d:links:linkify-brackets (str &optional open close delete fallback)
   "Create links in STR for all brackets.
-If DELETE, do not keep the brackets."
+If DELETE, do not keep the brackets.
+
+FALLBACK is passed to `d:links:link-to-word', and provides a way to
+specify a different format when the link isn\\='t created."
   (when str
     (->> str
          (s-replace-regexp
@@ -378,12 +387,15 @@ If DELETE, do not keep the brackets."
           (lambda (str)
             (if delete
                 (d:links:link-to-word
-                 (match-string 2 str))
+                 (match-string 2 str)
+                 :fallback fallback)
               (concat
                (match-string 1 str)
                (d:links:link-to-word
-                (match-string 2 str))
+                (match-string 2 str)
+                :fallback fallback)
                (match-string 3 str))))))))
+
 
 (ert-deftest d:links:linkify-brackets ()
   (should
@@ -392,7 +404,12 @@ If DELETE, do not keep the brackets."
      (and (equal (d:links:linkify-brackets "「a」、「b」")
                  "「<a href=\"/word/a\">a</a>」、「b」")
           (equal (d:links:linkify-brackets "a, b")
-                 "a, b")))))
+                 "a, b"))))
+  (should
+   (let ((d:titles:look-up-table
+          (d:titles:to-look-up-table (list "a" "b"))))
+     (-> (d:links:linkify-brackets "abc[[a]]ghi{{b}}" "{{" "}}")
+         (d:links:linkify-brackets "[[" "]]")))))
 
 (defun d:links:org-style (str)
   "Linkify Org-style links in STR."
@@ -645,7 +662,7 @@ This is a separate step from shaping."
                (ht-update-with! ex key
                  (lambda (it)
                    (-> it
-                       (d:links:linkify-brackets "{{" "}}" t)
+                       (d:links:linkify-brackets "{{" "}}" t "<span class=\"uu\">%s</span>")
                        (d:links:linkify-brackets "[[" "]]" t)))))))))
       ("kautian"
        (let ((refs-link-register
