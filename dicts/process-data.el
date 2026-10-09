@@ -53,7 +53,7 @@ by default."
          ("kisaragi_dict" "zh_TW" "kisaragi/kisaragi_dict.json")
          ("dict_concised" "zh_TW" "ministry-of-education/dict_concised.json")
          ("dict_revised" "zh_TW" "ministry-of-education/dict_revised.json")
-         ("caris-events--invade" "zh_TW" "caris-events--invade.json")
+         ("caris-events--invade" "zh_CN" "caris-events--invade.json")
          ("kisaragi_taigi" "nan_TW" "kisaragi/kisaragi_taigi.json")
          ("pts-taigitv" "nan_TW" "pts-taigitv/data/scrape-20260304T140059Z.json")
          ("kanggesu" "nan_TW" "kanggesu-data/data/scrape-20251210.json")

@@ -3,6 +3,7 @@ import { dicts as moeDicts } from "./ministry-of-education/versions.ts";
 
 export const langs = {
   zh_TW: "華語",
+  zh_CN: "華語（中國）",
   nan_TW: "台語",
   hak_TW: "客語",
   han: "漢字",
@@ -212,7 +213,7 @@ export const dicts = [
     id: "caris-events--invade",
     name: "侵略性詞彙字典",
     url: "https://invade.tw/v/$1",
-    lang: "zh_TW",
+    lang: "zh_CN",
     meta: {
       desc: `一個記錄中國用語的字典，稱為侵略性詞彙即最有引起反感的中國用語。`,
       license: {
