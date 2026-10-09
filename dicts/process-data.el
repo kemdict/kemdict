@@ -360,8 +360,9 @@ this:
           (equal (d:links:linkify-first-phrase "b。")
                  "b。")))))
 
-(defun d:links:linkify-brackets (str &optional open close)
-  "Create links in STR for all brackets."
+(defun d:links:linkify-brackets (str &optional open close delete)
+  "Create links in STR for all brackets.
+If DELETE, do not keep the brackets."
   (when str
     (->> str
          (s-replace-regexp
@@ -375,11 +376,14 @@ this:
                 (group (*? anychar))
                 (group (any "」】"))))
           (lambda (str)
-            (concat
-             (match-string 1 str)
-             (d:links:link-to-word
-              (match-string 2 str))
-             (match-string 3 str)))))))
+            (if delete
+                (d:links:link-to-word
+                 (match-string 2 str))
+              (concat
+               (match-string 1 str)
+               (d:links:link-to-word
+                (match-string 2 str))
+               (match-string 3 str))))))))
 
 (ert-deftest d:links:linkify-brackets ()
   (should
@@ -640,13 +644,9 @@ This is a separate step from shaping."
              (dolist (key '("correct" "incorrect"))
                (ht-update-with! ex key
                  (lambda (it)
-                   (->> it
-                        (s-replace-regexp
-                         (rx "{{" (group (*? anychar)) "}}")
-                         (lambda (str)
-                           (format "<u>%s</u>"
-                                   (match-string 1 str))))
-                        d:links:org-style))))))))
+                   (-> it
+                       (d:links:linkify-brackets "{{" "}}" t)
+                       (d:links:linkify-brackets "[[" "]]" t)))))))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
