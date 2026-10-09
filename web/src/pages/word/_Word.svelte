@@ -5,6 +5,7 @@
   import WordDictRevised from "./_WordDictRevised.svelte";
   import WordHakkadict from "./_WordHakkadict.svelte";
   import WordILRDF from "./_WordILRDF.svelte";
+  import WordInvade from "./_WordInvade.svelte";
   import WordITaigi from "./_WordITaigi.svelte";
   import WordKanggesu from "./_WordKanggesu.svelte";
   import WordKautian from "./_WordKautian.svelte";
@@ -53,6 +54,21 @@
           {dict.name}
           <a href="https://www.unicode.org/license.txt">© Unicode, Inc.</a>
         </p>
+      </div>
+    {:else if dict.id === "caris-events--invade"}
+      <WordInvade heteronyms={hets} />
+      <div class="copyright">
+        <p>
+          《{dict.name}》
+        </p>
+        <p>此字典提供現代流入台灣的中國用語的方便查詢。</p>
+        <p>
+          上游原始碼：<a
+            class="text-nowrap"
+            href="https://github.com/caris-events/invade">caris-events/invade</a
+          >。
+        </p>
+        <p>上游以 CC0 釋出文字內容。</p>
       </div>
     {:else if dict.id === "kisaragi_dict" || dict.id === "kisaragi_taigi"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
