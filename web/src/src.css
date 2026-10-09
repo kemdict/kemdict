@@ -10,7 +10,8 @@
 }
 
 .colorPropertyKey {
-  @apply bg-surface-400 dark:bg-surface-900;
+  @apply bg-surface-400 text-surface-950;
+  @apply dark:bg-surface-900 dark:text-surface-300;
 }
 
 @layer base {
@@ -177,19 +178,17 @@
     transition-duration: 250ms;
     transition-timing-function: ease-in-out;
     overflow: hidden;
-    h1,
-    h2,
-    h3 {
-      @apply font-bold;
-    }
     h1 {
       @apply mt-10 text-2xl first:mt-4;
+      @apply font-bold;
     }
     h2 {
       @apply mt-4 text-2xl;
+      font-weight: 400;
     }
     h3 {
-      @apply mb-0 mt-2;
+      @apply mb-2 mt-2;
+      font-weight: 500;
     }
     ol {
       padding-left: 1.5rem;
