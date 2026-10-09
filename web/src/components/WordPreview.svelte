@@ -6,6 +6,7 @@
   import { hetExactMatch } from "$src/server/db";
   export let heteronymsAndPn: [Heteronym, string | undefined][];
   export let searchQuery: string;
+  import { Option, pipe } from "effect";
 
   function strip(html: string | undefined): string {
     // https://stackoverflow.com/a/822464/6927814
@@ -37,7 +38,20 @@
         het.props.memo ||
         het.props.zh ||
         het.props.en ||
-        het.props.scientificName,
+        het.props.scientificName ||
+        (het.from === "caris-events--invade" &&
+          pipe(
+            Option.fromNullishOr(
+              (
+                het as Heteronym<{ examples: Array<{ words: string[] }> }>
+              ).props.examples
+                ?.map((it) => it.words.join("、"))
+                .join("；"),
+            ),
+            Option.map((it) => `台灣華語：${it}`),
+            // for some reason getOrUndefined cannot be called in a pipe?
+            Option.getOrElse(() => undefined),
+          )),
     );
   }
 </script>
