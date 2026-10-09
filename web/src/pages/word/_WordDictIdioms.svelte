@@ -88,7 +88,9 @@ rel="noreferrer"
       <p>{@html newline_string_to_ol(het.props.用法例句)}</p>
     {/if}
   {/if}
-  <h2>辨識</h2>
+  {#if het.props.近義同 || het.props.近義反 || het.props.word_ref || het.props.辨識同 || het.props.辨識異 || het.props.辨識例句 || het.props.形音辨誤}
+    <h2>辨識</h2>
+  {/if}
   <Property key="近義" value={het.props.近義同} html={true} class="mt-4" />
   <Property key="反義" value={het.props.近義反} html={true} />
   <Property key="參考詞語" value={het.props.word_ref} html={true} />
