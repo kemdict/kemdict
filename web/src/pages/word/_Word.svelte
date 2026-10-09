@@ -59,7 +59,7 @@
       <WordInvade heteronyms={hets} />
       <div class="copyright">
         <p>
-          《{dict.name}》
+          笨他侵略《{dict.name}》
         </p>
         <p>此字典提供現代流入台灣的中國用語的方便查詢。</p>
         <p>
