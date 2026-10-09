@@ -648,12 +648,13 @@ This is a separate step from shaping."
       ("caris-events--invade"
        (ht-update-with! props "examples"
          (lambda (exs)
-           (dolist (key '("correct" "incorrect"))
-             (ht-update-with! exs key
-               (lambda (it)
-                 (->> it
-                      d:links:org-style
-                      (d:links:remove-brackets "{{" "}}"))))))))
+           (seq-doseq (ex exs)
+             (dolist (key '("correct" "incorrect"))
+               (ht-update-with! ex key
+                 (lambda (it)
+                   (->> it
+                        d:links:org-style
+                        (d:links:remove-brackets "{{" "}}")))))))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
