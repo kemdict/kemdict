@@ -1215,6 +1215,12 @@ put the full value into the backtrace."
                          '("chhoetaigi_maryknoll1976"))
              (-when-let (en (gethash "en" (gethash "props" het)))
                (d:db-insert-alias d:db het-id en nil)))
+           (when (equal het.from "caris-events--invade")
+             (seq-doseq (example (-some->> het
+                                   (gethash "props")
+                                   (gethash "examples")))
+               (seq-doseq (word (gethash "words" example))
+                 (d:db-insert-alias d:db het-id word nil))))
            (when (member het.from '("pts-taigitv"
                                     "kanggesu"
                                     "kisaragi_dict"
