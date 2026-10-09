@@ -63,12 +63,12 @@
         </p>
         <p>此字典提供現代流入台灣的中國用語的方便查詢。</p>
         <p>
-          上游原始碼：<a
+          原始碼：<a
             class="text-nowrap"
             href="https://github.com/caris-events/invade">caris-events/invade</a
           >。
         </p>
-        <p>上游以 CC0 釋出文字內容。</p>
+        <p>來源以 CC0 釋出文字內容。</p>
       </div>
     {:else if dict.id === "kisaragi_dict" || dict.id === "kisaragi_taigi"}
       <WordMoedictish heteronyms={hets} dict={dict.id} />
