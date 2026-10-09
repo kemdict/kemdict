@@ -9,6 +9,7 @@ const wordFiles = words.map((w) => `${vocabDir}/${w}.yml`);
 const word = z.object({
   word: z.string(),
   bopomofo: z.string().nullable(),
+  deprecation: z.optional(z.string()),
   category: z.enum([
     "ADJECTIVE",
     "ADVERB",
