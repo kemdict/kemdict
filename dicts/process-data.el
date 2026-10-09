@@ -1234,7 +1234,8 @@ put the full value into the backtrace."
            (when (member het.from '("pts-taigitv"
                                     "kanggesu"
                                     "kisaragi_dict"
-                                    "kisaragi_taigi"))
+                                    "kisaragi_taigi"
+                                    "caris-events--invade"))
              (-when-let (tags (seq-concatenate
                                'vector
                                (->> (gethash "props" het)
@@ -1248,6 +1249,10 @@ put the full value into the backtrace."
                                ;; kanggesu 子類別
                                (->> (gethash "props" het)
                                     (gethash "childTypeName")
+                                    list)
+                               ;; caris-events--invade category
+                               (->> (gethash "props" het)
+                                    (gethash "category")
                                     list)))
                ;; HACK HACK HACK tag matching should be its own system, not aliases
                (d::for (tag tags)

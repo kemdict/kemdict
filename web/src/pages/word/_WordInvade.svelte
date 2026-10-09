@@ -8,8 +8,20 @@
 {#each heteronyms as het}
   <h1>{het.title}</h1>
   <Pronunciation>{het.props.bopomofo}</Pronunciation>
-  <Property key="分類" value={het.props.category}></Property>
-  <Property key="粗俗" value={het.props.explicit}></Property>
+  {#if het.props.category}
+    <Property key="分類">
+      <a href={`/search?q=%23${het.props.category}&m=exact`}
+        >{het.props.category}</a
+      >
+    </Property>
+  {/if}
+  {#if het.props.explicit}
+    <Property key="粗俗">
+      <a href={`/search?q=%23${het.props.explicit}&m=exact`}
+        >{het.props.explicit}</a
+      >
+    </Property>
+  {/if}
   {#if het.props.description}
     <p class="def">{het.props.description}</p>
   {/if}
