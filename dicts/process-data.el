@@ -653,8 +653,8 @@ This is a separate step from shaping."
                (ht-update-with! ex key
                  (lambda (it)
                    (->> it
-                        d:links:org-style
-                        (d:links:remove-brackets "{{" "}}")))))))))
+                        (d:links:remove-brackets "{{" "}}")
+                        d:links:org-style))))))))
       ("kautian"
        (let ((refs-link-register
               (lambda (refs)
