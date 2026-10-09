@@ -13,6 +13,11 @@
   {#if het.props.description}
     <p class="def">{het.props.description}</p>
   {/if}
+  {#if het.props.notice}
+    <div class="text-sm text-secondary-900 dark:text-secondary-600">
+      🛈 {het.props.notice}
+    </div>
+  {/if}
   {#if het.props.examples}
     <h2 class="mb-2">用法與例句</h2>
     <div class="divide-y">

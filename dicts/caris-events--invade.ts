@@ -33,6 +33,7 @@ const word = z.object({
   ]),
   explicit: z.enum(["LANGUAGE", "SEXUAL"]).nullable(),
   description: z.optional(z.string()).nullable(),
+  notice: z.optional(z.string()).nullable(),
   examples: z.array(
     z.object({
       words: z.array(z.string()),
