@@ -1431,6 +1431,8 @@ VALUES
   (sqlite-execute d:db "CREATE INDEX idx_links_reverse ON links('to', 'from');")
   ;; this cuts word page exact getHeteronyms down from like 140ms to 0.2ms on MF-PC
   (sqlite-execute d:db "CREATE INDEX idx_aliases_exact ON aliases(alias, exact);")
+  ;; uniqueness index only used during build
+  (sqlite-execute d:db "DROP INDEX idx_tmp_aliases_id_alias;")
   (message "Vacuuming...")
   (sqlite-execute d:db "VACUUM"))
 
@@ -1465,9 +1467,13 @@ CREATE TABLE heteronyms (
 CREATE TABLE aliases (
   \"het_id\" INTEGER REFERENCES heteronyms(\"id\"),
   \"alias\" TEXT NOT NULL,
-  \"exact\" INTEGER,
-  PRIMARY KEY (het_id, alias)
+  \"exact\" INTEGER
 );")
+  ;; To save space, I want to drop this index afterwards since it has no use
+  ;; after the initial build.
+  (sqlite-execute d:db "
+CREATE UNIQUE INDEX idx_tmp_aliases_id_alias ON aliases(het_id, alias);
+")
   (sqlite-execute d:db "
 CREATE TABLE links (
   \"from\" TEXT NOT NULL,
