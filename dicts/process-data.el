@@ -1233,6 +1233,7 @@ put the full value into the backtrace."
                  (d:db-insert-alias d:db het-id word nil))))
            (when (member het.from '("pts-taigitv"
                                     "kanggesu"
+                                    "kautian"
                                     "kisaragi_dict"
                                     "kisaragi_taigi"
                                     "caris-events--invade"))
@@ -1242,6 +1243,11 @@ put the full value into the backtrace."
                                     (gethash "wordTags"))
                                (->> (gethash "props" het)
                                     (gethash "tags"))
+                               (->> (gethash "props" het)
+                                    (gethash "categories")
+                                    (seq-map
+                                     (lambda (it)
+                                       (gethash "title" het))))
                                ;; kanggesu 工藝類別
                                (->> (gethash "props" het)
                                     (gethash "mainTypeName")
