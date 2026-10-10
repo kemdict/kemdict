@@ -6,7 +6,7 @@ import {
   plantsData,
   type PlantName,
 } from "./list-of-plants-of-formosa/src/schema.ts";
-import { writeFileSync } from "fs";
+import { writeFileSync } from "node:fs";
 
 const db = new DatabaseSync("./list-of-plants-of-formosa/data/plants.sqlite", {
   readOnly: true,
@@ -119,7 +119,7 @@ const taigiHet: HetTaigi[] = [];
 for (const plant of plants) {
   if (!plant) continue;
   if (!plant.names) continue;
-  console.write(".");
+  process.stdout.write(".");
   for (const name of plant.names) {
     if (!("poj" in name)) continue;
     (name.hakka ? hakkaHet : taigiHet).push({
