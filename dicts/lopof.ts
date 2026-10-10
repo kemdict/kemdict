@@ -1,17 +1,16 @@
 /** Generate a Taiwanese names index from our digitization result of
  * List of Plants of Formosa. */
 
-import { Database } from "bun:sqlite";
+import { DatabaseSync } from "node:sqlite";
 import {
   plantsData,
   type PlantName,
 } from "./list-of-plants-of-formosa/src/schema.ts";
 import { writeFileSync } from "fs";
 
-const db = new Database("./list-of-plants-of-formosa/data/plants.sqlite", {
-  readonly: true,
-  strict: true,
-  create: false,
+const db = new DatabaseSync("./list-of-plants-of-formosa/data/plants.sqlite", {
+  readOnly: true,
+  returnArrays: true,
 });
 
 /**
@@ -83,8 +82,8 @@ function nameWithLang(name: PlantName) {
 
 const plants = plantsData.parse(
   db
-    .query(`SELECT obj FROM plants`)
-    .values()
+    .prepare(`SELECT obj FROM plants`)
+    .all()
     .map((v) => JSON.parse(v[0] as string)),
 );
 

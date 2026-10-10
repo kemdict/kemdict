@@ -46,7 +46,7 @@ entries.db: $(DICT_TARGETS) process-data.el .eask
 	npx eask eval "(load \"process-data\")"
 
 props: entries.db
-	bun genProps.ts && touch props
+	node genProps.ts && touch props
 
 entries.db.gz: entries.db
 	gzip --keep --force entries.db
@@ -57,10 +57,10 @@ entries.db.gz: entries.db
 # Generate a Taiwanese names index from our digitization result of
 # List of Plants of Formosa.
 lopof-nan_TW.json lopof-hak_TW.json: list-of-plants-of-formosa/data/plants.sqlite
-	bun lopof.ts
+	node lopof.ts
 
 caris-events--invade.json: caris-events--invade/README.md
-	bun caris-events--invade.ts
+	node caris-events--invade.ts
 
 unihan.json:
 	# 2024-12-27, 2026-05-29
@@ -84,7 +84,7 @@ kisaragi/kisaragi_dict.json: kisaragi/kisaragi-dict.org kisaragi/generate.el .ea
 #     "HanLoTaibunPoj","HanLoTaibunKip","HoaBun","DataProvidedBy"
 chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	bun x csvtojson --headers='["id","poj","pojInput","kip","kipInput","titlePoj","title","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
+	npx csvtojson --headers='["id","poj","pojInput","kip","kipInput","titlePoj","title","definition","DataProvidedBy"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_iTaigiHoataiTuichiautian.csv > "$@"
 
 # - HanLoTaibunKip -> title;
 # Same assumption as for iTaigi.
@@ -94,7 +94,7 @@ chhoetaigi/ChhoeTaigi_iTaigiHoataiTuichiautian.json: ChhoeTaigiDatabase/README.m
 #     "HanLoTaibunKip","HoaBun"
 chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	bun x csvtojson --headers='["id","poj","pojOthers","pojInput","pojInputOthers","titlePoj","kip","kipOthers","kipInput","kipInputOthers","title","zh"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaihoaSoanntengTuichiautian.csv > "$@"
+	npx csvtojson --headers='["id","poj","pojOthers","pojInput","pojInputOthers","titlePoj","kip","kipOthers","kipInput","kipInputOthers","title","zh"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaihoaSoanntengTuichiautian.csv > "$@"
 
 # Original header:
 # "DictWordID","PojUnicode","PojUnicodeOthers","PojInput","PojInputOthers","HanLoTaibunPoj","KaisoehHanLoPoj","LekuHanLoPoj","KipUnicode","KipUnicodeOthers","KipInput","KipInputOthers","HanLoTaibunKip","KaisoehHanLoKip","LekuHanLoKip","PageNumber","GoanchhehPoochhiongChuliau"
@@ -103,7 +103,7 @@ chhoetaigi/ChhoeTaigi_TaihoaSoanntengTuichiautian.json: ChhoeTaigiDatabase/READM
 # LekuHanLoKip -> example
 chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	bun x csvtojson --ignoreColumns='/Page|Goanchheh/' --headers='["id","poj","pojOthers","pojInput","pojInputOthers","titlePoj","definitionPoj","examplePoj","kip","kipOthers","kipInput","kipInputOthers","title","definition","example","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Page|Goanchheh/' --headers='["id","poj","pojOthers","pojInput","pojInputOthers","titlePoj","definitionPoj","examplePoj","kip","kipOthers","kipInput","kipInputOthers","title","definition","example","PageNumber","GoanchhehPoochhiongChuliau"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaijitToaSutian.csv > "$@"
 
 # 1956 台灣白話基礎語句
 # Original header:
@@ -113,11 +113,11 @@ chhoetaigi/ChhoeTaigi_TaijitToaSutian.json: ChhoeTaigiDatabase/README.md
 # process-data.
 chhoetaigi/ChhoeTaigi_TaioanPehoeKichhooGiku.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	bun x csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojOthers","pojInput","pojInputOthers","kip","kipOthers","kipInput","kipInputOthers","zh","en","descEn","NounClassifier","例詞POJ","antonym","examplePOJ","exampleEn","exampleZh","參照","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv > "$@"
+	npx csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojOthers","pojInput","pojInputOthers","kip","kipOthers","kipInput","kipInputOthers","zh","en","descEn","NounClassifier","例詞POJ","antonym","examplePOJ","exampleEn","exampleZh","參照","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_TaioanPehoeKichhooGiku.csv > "$@"
 
 chhoetaigi/ChhoeTaigi_MaryknollTaiengSutian.json: ChhoeTaigiDatabase/README.md
 	mkdir -p chhoetaigi
-	bun x csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojInput","kip","kipInput","zh","en","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_MaryknollTaiengSutian.csv > "$@"
+	npx csvtojson --ignoreColumns='/Page/' --headers='["id","poj","pojInput","kip","kipInput","zh","en","PageNumber"]' ChhoeTaigiDatabase/ChhoeTaigiDatabase/ChhoeTaigi_MaryknollTaiengSutian.csv > "$@"
 
 # * Submodules
 

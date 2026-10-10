@@ -14,6 +14,9 @@ importers:
       '@kemdict/json-to-ts':
         specifier: ^0.1.1
         version: 0.1.1
+      csvtojson:
+        specifier: ^2.0.14
+        version: 2.0.14
       js-yaml:
         specifier: ^4.1.0
         version: 4.3.2
@@ -77,6 +80,11 @@ packages:
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
 
+  csvtojson@2.0.14:
+    resolution: {integrity: sha512-F7NNvhhDyob7OsuEGRsH0FM1aqLs/WYITyza3l+hTEEmOK9sGPBlYQZwlVG0ezCojXYpE17lhS5qL6BCOZSPyA==}
+    engines: {node: '>=8.0.0'}
+    hasBin: true
+
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
 
@@ -99,6 +107,9 @@ packages:
   js-yaml@4.3.2:
     resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
     hasBin: true
+
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
@@ -195,6 +206,10 @@ snapshots:
 
   color-name@1.1.4: {}
 
+  csvtojson@2.0.14:
+    dependencies:
+      lodash: 4.18.1
+
   emoji-regex@8.0.0: {}
 
   escalade@3.2.0: {}
@@ -208,6 +223,8 @@ snapshots:
   js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
+
+  lodash@4.18.1: {}
 
   pluralize@8.0.0: {}
 
