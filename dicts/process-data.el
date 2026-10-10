@@ -1244,10 +1244,7 @@ put the full value into the backtrace."
                                (->> (gethash "props" het)
                                     (gethash "tags"))
                                (->> (gethash "props" het)
-                                    (gethash "categories")
-                                    (seq-map
-                                     (lambda (it)
-                                       (gethash "title" het))))
+                                    (gethash "categories"))
                                ;; kanggesu 工藝類別
                                (->> (gethash "props" het)
                                     (gethash "mainTypeName")
