@@ -136,6 +136,12 @@
       }
       dd {
         @apply mb-2 ml-6;
+        ul {
+          @apply my-0;
+          li {
+            @apply my-0;
+          }
+        }
       }
     }
     :where(table):not(:where([class~="not-prose"] *)) {
