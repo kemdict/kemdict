@@ -36,14 +36,32 @@
       ></span
     >
     <span>
-      {#if dict.urlProp === "id"}
-        <!-- FIXME: this only links to the first one. -->
-        <Out href={format(dict.url, hets[0].props.id)}>{dict.name}</Out>
-      {:else if dict.urlProp === "page"}
-        <Out href={format(dict.url, `${hets[0].props.page}`)}>{dict.name}</Out>
-      {:else}
-        <Out href={format(dict.url, title)}>{dict.name}</Out>
-      {/if}
+      {dict.name}
+    </span>
+    <span>
+      <Out
+        title="在原字典開啟"
+        href={dict.urlProp === "id"
+          ? format(dict.url, hets[0].props.id)
+          : dict.urlProp === "page"
+            ? // FIXME: this only links to the first one.
+              format(dict.url, `${hets[0].props.page}`)
+            : format(dict.url, title)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          class="ionicon size-4 inline hover:link dark:gray-500 text-gray-400"
+          ><path
+            d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48M336 64h112v112M224 288 440 72"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32px"
+          /></svg
+        >
+      </Out>
     </span>
   </div>
   <div class="word">
