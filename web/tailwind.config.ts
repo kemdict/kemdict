@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { skeleton } from "@skeletonlabs/tw-plugin";
 
 const cjkFallbackSans = [
+  "'GenKiGothic2 TW'",
   "'Noto Sans CJK TC'",
   "'Noto Sans TC'",
   "'jf-openhuninn'",
