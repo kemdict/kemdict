@@ -48,6 +48,7 @@
     {/each}
   {:else}
     <!-- Some entries have definition fields that ended up in the example field instead -->
+    <!-- See: a-a tsam-tsam, https://github.com/kemdict/kemdict/commit/6cf6304258922caac985fe1820177b86358def4d -->
     <ol class="my-2">
       {#each splitDef(het.props.example) as [_n, def]}
         <li>
