@@ -1,8 +1,20 @@
 diff --git a/src/styles.js b/src/styles.js
-index f563dab594c7541150fdfc790301375aff2b2ceb..e66713f6c3861d69ae676eb432c063e2a479ac47 100644
+index f563dab594c7541150fdfc790301375aff2b2ceb..8d174dbfb3d08a8d8c103077ce35e60766550eac 100644
 --- a/src/styles.js
 +++ b/src/styles.js
-@@ -238,8 +238,8 @@ let defaultModifiers = {
+@@ -158,11 +158,7 @@ let defaultModifiers = {
+           marginTop: em(16, 14),
+           marginBottom: em(16, 14),
+         },
+-        dt: {
+-          marginTop: em(16, 14),
+-        },
+         dd: {
+-          marginTop: em(4, 14),
+           paddingInlineStart: em(22, 14),
+         },
+         hr: {
+@@ -238,8 +234,8 @@ let defaultModifiers = {
          fontSize: rem(16),
          lineHeight: round(28 / 16),
          p: {
@@ -13,7 +25,55 @@ index f563dab594c7541150fdfc790301375aff2b2ceb..e66713f6c3861d69ae676eb432c063e2
          },
          '[class~="lead"]': {
            fontSize: em(20, 16),
-@@ -1411,16 +1411,10 @@ module.exports = {
+@@ -363,11 +359,7 @@ let defaultModifiers = {
+           marginTop: em(20, 16),
+           marginBottom: em(20, 16),
+         },
+-        dt: {
+-          marginTop: em(20, 16),
+-        },
+         dd: {
+-          marginTop: em(8, 16),
+           paddingInlineStart: em(26, 16),
+         },
+         hr: {
+@@ -568,11 +560,7 @@ let defaultModifiers = {
+           marginTop: em(24, 18),
+           marginBottom: em(24, 18),
+         },
+-        dt: {
+-          marginTop: em(24, 18),
+-        },
+         dd: {
+-          marginTop: em(12, 18),
+           paddingInlineStart: em(28, 18),
+         },
+         hr: {
+@@ -773,11 +761,7 @@ let defaultModifiers = {
+           marginTop: em(24, 20),
+           marginBottom: em(24, 20),
+         },
+-        dt: {
+-          marginTop: em(24, 20),
+-        },
+         dd: {
+-          marginTop: em(12, 20),
+           paddingInlineStart: em(32, 20),
+         },
+         hr: {
+@@ -978,11 +962,7 @@ let defaultModifiers = {
+           marginTop: em(32, 24),
+           marginBottom: em(32, 24),
+         },
+-        dt: {
+-          marginTop: em(32, 24),
+-        },
+         dd: {
+-          marginTop: em(12, 24),
+           paddingInlineStart: em(38, 24),
+         },
+         hr: {
+@@ -1411,16 +1391,10 @@ module.exports = {
      css: [
        {
          color: 'var(--tw-prose-body)',
@@ -30,7 +90,7 @@ index f563dab594c7541150fdfc790301375aff2b2ceb..e66713f6c3861d69ae676eb432c063e2
          strong: {
            color: 'var(--tw-prose-bold)',
            fontWeight: '600',
-@@ -1483,18 +1477,8 @@ module.exports = {
+@@ -1483,18 +1457,8 @@ module.exports = {
            borderTopWidth: '1px',
          },
          blockquote: {
