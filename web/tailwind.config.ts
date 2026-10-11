@@ -41,6 +41,7 @@ export default {
         "Source Sans Pro",
         "Roboto",
         "Segoe UI",
+        "Noto Sans",
         ...cjkFallbackSans,
         ...cjkFallbackSerif,
         "sans-serif",
