@@ -619,14 +619,11 @@ This is a separate step from shaping."
           (->>
            (d:links:linkify-brackets words "【" "】")
            (s-replace-regexp
-            (rx "[" (group (any "似反")) "]"
+            (rx "[" (any "似反") "]"
                 (group (* anychar)))
             (lambda (str)
-              (format
-               "<m>［%s］</m>%s"
-               (match-string 1 str)
-               (d:links:簡編本:近義反義
-                (match-string 2 str)))))))))
+              (d:links:簡編本:近義反義
+               (match-string 1 str))))))))
     (ht-update-with! props "word_ref"
       #'d:links:link-to-word)
     (ht-update-with! props "definitions"

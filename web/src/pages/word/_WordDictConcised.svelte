@@ -14,6 +14,7 @@
   import { spc, radicals_and_strokes } from "$lib/processing";
   import { strLen } from "common";
   import Pronunciation from "$src/components/Pronunciation.svelte";
+  import Property from "$src/components/Property.svelte";
 
   function split(str: string): string[] {
     // Some lines contain just a Tab. Get rid of them.
@@ -46,10 +47,6 @@
       {/each}
     </ol>
   {/if}
-  {#if het.props.antonyms}
-    <p>{@html het.props.antonyms}</p>
-  {/if}
-  {#if het.props.synonyms}
-    <p>{@html het.props.synonyms}</p>
-  {/if}
+  <Property key="反" html={true} value={het.props.antonyms}></Property>
+  <Property key="似" html={true} value={het.props.synonyms}></Property>
 {/each}
