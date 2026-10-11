@@ -110,7 +110,7 @@
   .prose {
     @apply dark:prose-invert;
     @apply dark:prose-p:text-white;
-    @apply prose-a:link max-w-none;
+    @apply prose-a:link;
     @apply prose-li:pl-1;
     @apply prose-blockquote:my-2 prose-blockquote:py-2 prose-blockquote:font-normal prose-blockquote:not-italic;
     @apply prose-blockquote:bg-surface-300;
