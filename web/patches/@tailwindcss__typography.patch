@@ -1,0 +1,31 @@
+diff --git a/src/styles.js b/src/styles.js
+index f563dab594c7541150fdfc790301375aff2b2ceb..931706cfdaf0b4b27709fec8346ae4b16e62153a 100644
+--- a/src/styles.js
++++ b/src/styles.js
+@@ -238,8 +238,8 @@ let defaultModifiers = {
+         fontSize: rem(16),
+         lineHeight: round(28 / 16),
+         p: {
+-          marginTop: em(20, 16),
+-          marginBottom: em(20, 16),
++          marginTop: "0.25em",
++          marginBottom: "0.25em",
+         },
+         '[class~="lead"]': {
+           fontSize: em(20, 16),
+@@ -1489,12 +1489,13 @@ module.exports = {
+           borderInlineStartWidth: '0.25rem',
+           borderInlineStartColor: 'var(--tw-prose-quote-borders)',
+           quotes: '"\\201C""\\201D""\\2018""\\2019"',
++          p: { marginTop: "0", marginBottom: "0" },
+         },
+         'blockquote p:first-of-type::before': {
+-          content: 'open-quote',
++          content: 'none',
+         },
+         'blockquote p:last-of-type::after': {
+-          content: 'close-quote',
++          content: 'none',
+         },
+         h1: {
+           color: 'var(--tw-prose-headings)',

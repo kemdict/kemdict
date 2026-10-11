@@ -5,3 +5,5 @@ onlyBuiltDependencies:
   - esbuild
   - sharp
   - svelte-preprocess
+patchedDependencies:
+  '@tailwindcss/typography': patches/@tailwindcss__typography.patch

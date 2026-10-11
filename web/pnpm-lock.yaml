@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@tailwindcss/typography': a5b8c33a819fb375012826ce256605d8a09195b85c8717d789a9a7a5933bb9a4
+
 importers:
 
   .:
@@ -89,7 +92,7 @@ importers:
         version: 0.5.10(tailwindcss@3.4.19(yaml@2.8.2))
       '@tailwindcss/typography':
         specifier: ^0.5.19
-        version: 0.5.19(tailwindcss@3.4.19(yaml@2.8.2))
+        version: 0.5.19(patch_hash=a5b8c33a819fb375012826ce256605d8a09195b85c8717d789a9a7a5933bb9a4)(tailwindcss@3.4.19(yaml@2.8.2))
       '@types/bun':
         specifier: ^1.3.14
         version: 1.3.14
@@ -5834,7 +5837,7 @@ snapshots:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.4.19(yaml@2.8.2)
 
-  '@tailwindcss/typography@0.5.19(tailwindcss@3.4.19(yaml@2.8.2))':
+  '@tailwindcss/typography@0.5.19(patch_hash=a5b8c33a819fb375012826ce256605d8a09195b85c8717d789a9a7a5933bb9a4)(tailwindcss@3.4.19(yaml@2.8.2))':
     dependencies:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.19(yaml@2.8.2)
