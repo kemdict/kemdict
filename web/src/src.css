@@ -24,12 +24,6 @@
   rt {
     font-size: 70%;
   }
-  blockquote {
-    @apply rounded px-3 py-1;
-    & + blockquote {
-      @apply mt-2;
-    }
-  }
   hr {
     @apply mx-auto my-8 w-[95%];
   }

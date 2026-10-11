@@ -58,7 +58,6 @@ export default {
         DEFAULT: {
           css: {
             blockquote: {
-              borderRadius: "unset",
               marginLeft: "0rem",
               marginTop: "0.5rem",
               marginBottom: "0.5rem",
