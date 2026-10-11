@@ -63,7 +63,7 @@ export default {
               marginBottom: "0.5rem",
               paddingTop: "0",
               paddingBottom: "0",
-              paddingLeft: "1rem",
+              paddingLeft: "0.5rem",
             },
           },
         },

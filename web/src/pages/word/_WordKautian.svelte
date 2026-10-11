@@ -129,7 +129,7 @@
             <blockquote>
               <p>{example.han}</p>
               <p>{example.tl}</p>
-              <p class="pt-1 opacity-80">({example.zh})</p>
+              <p class="opacity-80">{example.zh}</p>
             </blockquote>
           {/each}
           {#if kautianHet.hhSynonyms || kautianHet.hwSynonyms}

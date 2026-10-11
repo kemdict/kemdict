@@ -216,6 +216,11 @@
     p,
     li {
       @apply prose;
+      blockquote {
+        p {
+          @apply text-sm;
+        }
+      }
     }
     .def {
       @apply mb-2 block;
