@@ -47,6 +47,6 @@
       {/each}
     </ol>
   {/if}
-  <Property key="反" html={true} value={het.props.antonyms}></Property>
-  <Property key="似" html={true} value={het.props.synonyms}></Property>
+  <Property key="反義詞" html={true} value={het.props.antonyms}></Property>
+  <Property key="近義詞" html={true} value={het.props.synonyms}></Property>
 {/each}
