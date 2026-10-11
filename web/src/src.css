@@ -243,8 +243,9 @@
     @apply dark:bg-primary-500 dark:hover:bg-primary-400;
   }
   .link {
-    @apply text-surface-950 dark:text-surface-100;
-    @apply fade underline;
+    @apply underline;
+    @apply fade;
+    @apply dark:text-blue-400;
     text-underline-offset: 4px;
     &:hover {
       @apply opacity-75;
