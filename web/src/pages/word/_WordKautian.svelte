@@ -84,6 +84,24 @@
         {/each}
       </Property>
     {/if}
+    {#if kautianWord.props.categories}
+      <Property key="分類">
+        {#each kautianWord.props.categories as { id, title, huliok }}
+          {#if id}
+            <Out
+              class="mr-1"
+              href={huliok
+                ? `https://sutian.moe.edu.tw/und-hani/hunlui/${id}/`
+                : `https://sutian.moe.edu.tw/und-hani/huliok/${id}/`}
+              >{title}</Out
+            >
+          {:else}
+            <span class="mr-1">{title}</span>
+          {/if}
+        {/each}
+      </Property>
+    {/if}
+
     <!-- 在有一群單字不成詞之類的詞目時，只在最後一個顯示無義項的說明 -->
     {#if thisType === "單字不成詞者" || thisType === "臺華共同詞" || thisType === "近反義詞不單列詞目者"}
       {@const nextType = kautianWord.props.nextType}
@@ -141,24 +159,6 @@
         </li>
       {/each}
     </ol>
-
-    {#if kautianWord.props.categories}
-      <Property key="分類">
-        {#each kautianWord.props.categories as { id, title, huliok }}
-          {#if id}
-            <Out
-              class="mr-1"
-              href={huliok
-                ? `https://sutian.moe.edu.tw/und-hani/hunlui/${id}/`
-                : `https://sutian.moe.edu.tw/und-hani/huliok/${id}/`}
-              >{title}</Out
-            >
-          {:else}
-            <span class="mr-1">{title}</span>
-          {/if}
-        {/each}
-      </Property>
-    {/if}
 
     {#if kautianWord.props.tl.dialects}
       {@const dialects = kautianWord.props.tl.dialects}
