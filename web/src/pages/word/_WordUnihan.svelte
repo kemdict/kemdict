@@ -33,7 +33,6 @@
       <div class="my-0">
         <Property key="漢字">
           <Out
-            after={false}
             title="在 GlyphWiki 上查看"
             href="https://glyphwiki.org/wiki/u{asHex(het.title)}"
             >{het.title}</Out

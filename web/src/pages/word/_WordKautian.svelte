@@ -56,9 +56,14 @@
       <h1>{kautianWord.title}</h1>
     {/if}
     <Pronunciation>{kautianWord.props.tl.main}</Pronunciation>
-    <Property key="俗唸作" value={kautianWord.props.tl.colloquial?.join("、")}></Property>
-    <Property key="又唸作" value={kautianWord.props.tl.alt?.join("、")}></Property>
-    <Property key="合音唸作" value={kautianWord.props.tl.otherMerged?.join("、")}></Property>
+    <Property key="俗唸作" value={kautianWord.props.tl.colloquial?.join("、")}
+    ></Property>
+    <Property key="又唸作" value={kautianWord.props.tl.alt?.join("、")}
+    ></Property>
+    <Property
+      key="合音唸作"
+      value={kautianWord.props.tl.otherMerged?.join("、")}
+    ></Property>
     <Property key="異用字" value={kautianWord.props.han.alt?.join("、")}
     ></Property>
     {#if kautianWord.props.wwSynonyms}
@@ -73,9 +78,7 @@
     {#if kautianWord.props.wwAntonyms}
       <Property key="反義詞">
         {#each kautianWord.props.wwAntonyms as it}
-          <a
-            class="block"
-            href="/word/{it.han}#kautian-word-{it.wordId}"
+          <a class="block" href="/word/{it.han}#kautian-word-{it.wordId}"
             >{it.han}</a
           >
         {/each}
@@ -118,8 +121,7 @@
                   class="block"
                   href={"hetId" in it
                     ? `/word/${it.han}#kautian-het-${it.hetId}`
-                    : `/word/${it.han}#kautian-word-${it.wordId}`}
-                  >{it.han}</a
+                    : `/word/${it.han}#kautian-word-${it.wordId}`}>{it.han}</a
                 >
               {/each}
             </Property>
@@ -131,8 +133,7 @@
                   class="block"
                   href={"hetId" in it
                     ? `/word/${it.han}#kautian-het-${it.hetId}`
-                    : `/word/${it.han}#kautian-word-${it.wordId}`}
-                  >{it.han}</a
+                    : `/word/${it.han}#kautian-word-${it.wordId}`}>{it.han}</a
                 >
               {/each}
             </Property>
@@ -146,7 +147,6 @@
         {#each kautianWord.props.categories as { id, title, huliok }}
           {#if id}
             <Out
-              after={false}
               class="mr-1"
               href={huliok
                 ? `https://sutian.moe.edu.tw/und-hani/hunlui/${id}/`

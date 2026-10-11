@@ -8,14 +8,12 @@
    */
   let {
     href,
-    after = true,
     title,
     class: klass = "link",
     id,
     children,
   }: {
     href?: string;
-    after?: boolean;
     title?: string;
     class?: string;
     id?: string;
@@ -23,11 +21,6 @@
   } = $props();
 </script>
 
-<a
-  {href}
-  {id}
-  {title}
-  class={[after && "after:content-['°']", klass]}
-  target="_blank"
-  rel="noreferrer">{@render children()}</a
+<a {href} {id} {title} class={klass} target="_blank" rel="noreferrer"
+  >{@render children()}</a
 >
