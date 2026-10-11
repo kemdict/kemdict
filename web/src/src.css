@@ -10,8 +10,8 @@
 }
 
 .colorPropertyKey {
-  @apply bg-surface-400 text-surface-950;
-  @apply dark:bg-surface-900 dark:text-surface-300;
+  @apply text-surface-950;
+  @apply dark:text-surface-400;
 }
 
 @layer base {
