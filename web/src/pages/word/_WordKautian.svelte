@@ -51,11 +51,11 @@
   {@const prev單字不成詞 = kautianWord.props.prev單字不成詞}
 
   <div id="kautian-word-{kautianWord.props.id}">
-    <!-- 這個是單字不成詞者的話，如果前一個也是那就不要再顯示一次標題 -->
+    <!-- 這個是單字不成詞者的話，如果前一個也是那就不要再顯示一次漢字/羅馬字 -->
     {#if !this單字不成詞 || !prev單字不成詞}
       <h1>{kautianWord.title}</h1>
+      <Pronunciation>{kautianWord.props.tl.main}</Pronunciation>
     {/if}
-    <Pronunciation>{kautianWord.props.tl.main}</Pronunciation>
     <Property key="俗唸作" value={kautianWord.props.tl.colloquial?.join("、")}
     ></Property>
     <Property key="又唸作" value={kautianWord.props.tl.alt?.join("、")}
