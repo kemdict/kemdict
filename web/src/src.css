@@ -107,7 +107,7 @@
     @apply prose-a:link;
     @apply prose-li:pl-1;
     @apply prose-blockquote:border-l;
-    @apply prose-blockquote:border-l-surface-300;
+    @apply prose-blockquote:border-l-surface-400;
     @apply dark:prose-blockquote:border-l-surface-900;
     --tw-prose-bullets: "#000";
     --tw-prose-invert-bullets: "#333";
@@ -239,7 +239,7 @@
   .link {
     @apply underline;
     @apply fade;
-    @apply dark:text-blue-400;
+    @apply text-blue-600 dark:text-blue-400;
     text-underline-offset: 4px;
     &:hover {
       @apply opacity-75;
