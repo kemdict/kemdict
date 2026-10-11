@@ -112,11 +112,9 @@
     @apply dark:prose-p:text-white;
     @apply prose-a:link;
     @apply prose-li:pl-1;
-    @apply prose-blockquote:my-2 prose-blockquote:py-2 prose-blockquote:font-normal prose-blockquote:not-italic;
-    @apply prose-blockquote:bg-surface-300;
-    @apply prose-blockquote:border-l-surface-400;
-    @apply dark:prose-blockquote:bg-surface-900;
-    @apply dark:prose-blockquote:border-l-surface-800;
+    @apply prose-blockquote:border-l;
+    @apply prose-blockquote:border-l-surface-300;
+    @apply dark:prose-blockquote:border-l-surface-900;
     --tw-prose-bullets: "#000";
     --tw-prose-invert-bullets: "#333";
     :where(ul):not(:where([class~="not-prose"] *)) {

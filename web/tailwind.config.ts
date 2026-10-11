@@ -54,6 +54,21 @@ export default {
       mono: ["monospace"],
     },
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            blockquote: {
+              borderRadius: "unset",
+              marginLeft: "0rem",
+              marginTop: "0.5rem",
+              marginBottom: "0.5rem",
+              paddingTop: "0",
+              paddingBottom: "0",
+              paddingLeft: "1.5rem",
+            },
+          },
+        },
+      },
       colors: {
         surface: {
           50: "#f7f4fa",
