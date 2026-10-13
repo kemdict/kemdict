@@ -28,6 +28,7 @@ entries.db: ../dicts
 dist: $(DEPS)
 	npx astro build
 	cp package.json pnpm-lock.yaml pnpm-workspace.yaml dist/
+	sed -z -i 's/patchedDependencies:\n[^\n]*//' -s dist/{pnpm-lock.yaml,pnpm-workspace.yaml}
 	find server/ -type f -not -iname "readme*" -exec cp '{}' dist/ ';'
 	sed -i s%../dist/server/entry.mjs%./server/entry.mjs% dist/index.ts
 	npx size-limit
