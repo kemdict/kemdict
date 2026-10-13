@@ -29,18 +29,12 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v5
+      - uses: pnpm/setup@v3
         with:
-          version: 12.4.2
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "24"
-          cache: "pnpm"
-          cache-dependency-path: "web/pnpm-lock.yaml"
-      - name: Install packages
-        run: |
-          cd web
-          pnpm install
+          version: ^12.0.0
+          runtime: node@24
+          working-directory: web
+          cache: true
       - name: Build
         run: |
           make build
