@@ -9,7 +9,6 @@
   import { Option, pipe } from "effect";
 
   function strip(html: string | undefined): string {
-    console.log(`type: ${typeof html}, value: ${html}`);
     if (html) {
       // https://stackoverflow.com/a/822464/6927814
       // This doesn't have to be perfect. We're not handling untrusted
@@ -55,7 +54,8 @@
             Option.map((it) => `台灣華語：${it}`),
             // for some reason getOrUndefined cannot be called in a pipe?
             Option.getOrElse(() => undefined),
-          )),
+          )) ||
+        undefined,
     );
   }
 </script>
