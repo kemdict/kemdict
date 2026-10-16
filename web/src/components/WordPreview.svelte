@@ -9,10 +9,14 @@
   import { Option, pipe } from "effect";
 
   function strip(html: string | undefined): string {
-    // https://stackoverflow.com/a/822464/6927814
-    // This doesn't have to be perfect. We're not handling untrusted
-    // input either.
-    return html?.replace(/<[^>]*>?/gm, "") || "";
+    console.log(`type: ${typeof html}, value: ${html}`);
+    if (html) {
+      // https://stackoverflow.com/a/822464/6927814
+      // This doesn't have to be perfect. We're not handling untrusted
+      // input either.
+      return html.replace(/<[^>]*>?/gm, "");
+    }
+    return "";
   }
 
   /** Add parens onto `str` if it's not empty or undefined. */
